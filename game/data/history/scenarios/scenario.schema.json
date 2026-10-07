@@ -1,6 +1,6 @@
 {
   "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "title":"九州策剧本清单",
+  "title":"终端三国剧本清单",
   "type":"object",
   "required":["schema_version","id","name","start_date","map"],
   "oneOf":[{"required":["data_files"]},{"required":["patch"]}],

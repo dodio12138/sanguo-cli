@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jiuzhou.local/schema/mod-manifest.schema.json",
-  "title": "九州策 Mod 清单",
+  "title": "终端三国 Mod 清单",
   "type": "object",
   "required": ["id","name","version","game_version"],
   "properties": {

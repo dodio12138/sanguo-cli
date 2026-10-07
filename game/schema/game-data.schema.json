@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jiuzhou.local/schema/game-data.schema.json",
-  "title": "九州策组合游戏数据",
+  "title": "终端三国组合游戏数据",
   "type": "object",
   "required": ["scenario", "map", "forces", "cities", "officers", "armies", "rules", "commandCatalog"],
   "properties": {
