@@ -61,7 +61,7 @@ window.DataLoader = class DataLoader {
   }
   async loadScenario(id){if(id==="200_guandu")return this.validate(structuredClone(this.scenarioBase||await this.load()));if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load()),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.validate(base);}
   async discoverMods(data){
-    // 浏览器不能枚举目录；注册表决定启用的 Mod 及加载顺序。
+    // 浏览器不能枚举目录；注册表决定启用的模组及加载顺序。
     this.modReports=[];this.patchOwners.clear();
     let registry;try{registry=await this.fetchJson("mods/registry.json")}catch(error){this.modReports.push({id:"registry",status:"missing",errors:[error.message]});return}
     let settings={};try{settings=JSON.parse(localStorage.getItem("sanguo.mod.settings.v1")||"{}")||{}}catch{}const mods=[...(registry.mods||[])].map(mod=>({...mod,...(settings[mod.id]||{})})).sort((a,b)=>(a.load_order||0)-(b.load_order||0));
@@ -74,7 +74,7 @@ window.DataLoader = class DataLoader {
         const paths=manifest.patches?.length?manifest.patches:["data.patch.json"];
         for(const file of paths){const patch=await this.fetchJson(`mods/${mod.id}/${file}`);report.patches.push(file);this.applyPatch(data,patch,{modId:mod.id,report});}
         report.status="loaded";this.sources.push(`mod:${mod.id}`);
-      }catch(error){report.status="error";report.errors.push(error.message);this.warnings.push(`Mod ${mod.id} 未加载：${error.message}`)}
+      }catch(error){report.status="error";report.errors.push(error.message);this.warnings.push(`模组 ${mod.id} 未加载：${error.message}`)}
     }
   }
   validateModManifest(manifest,expectedId){const errors=[];for(const key of ["id","name","version","game_version"])if(!manifest?.[key])errors.push(`$.${key}: 缺少必填字段`);if(manifest?.id&&!/^[a-z0-9][a-z0-9_-]*$/.test(manifest.id))errors.push("$.id: 只允许小写字母、数字、下划线和连字号");if(manifest?.id&&manifest.id!==expectedId)errors.push(`$.id: ${manifest.id} 与注册表 ${expectedId} 不一致`);if(manifest?.patches&&!Array.isArray(manifest.patches))errors.push("$.patches: 必须是数组");return errors}
