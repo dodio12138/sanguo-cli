@@ -1,0 +1,11 @@
+import fs from "node:fs";
+import vm from "node:vm";
+const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8"),script=fs.readFileSync(new URL("../js/ui/terminal-select.js",import.meta.url),"utf8"),css=fs.readFileSync(new URL("../css/ui-polish.css",import.meta.url),"utf8");
+const selects=(html.match(/<select\b/g)||[]).length;
+if(selects<3)throw new Error("没有覆盖主要静态下拉框");
+for(const token of ["terminal-select-button","terminal-select-list","selectedIndex","dispatchEvent(new Event(\"change\"","MutationObserver","removeAttribute(\"title\")"])if(!script.includes(token))throw new Error(`自绘下拉或原生提示替换缺少：${token}`);
+if(!script.includes("desiredHeight=Math.min(260,list.querySelectorAll(\"button\").length*30+8)")||!script.includes("placement(rect,desiredHeight,window.visualViewport?.height||window.innerHeight)")||!script.includes("refresh:select=>"))throw new Error("下拉选项没有动态同步或使用视口空间计算方向");
+const sandbox={window:{innerHeight:800},document:{querySelectorAll:()=>[],addEventListener:()=>{},body:{}},MutationObserver:class{observe(){}}};vm.runInNewContext(script,sandbox);const place=sandbox.window.TerminalSelect.placement;if(!place({top:660,bottom:690},120,800).openUp)throw new Error("底部控件的下拉项未改为向上弹出");if(place({top:20,bottom:50},120,800).openUp)throw new Error("顶部控件错误地向上弹出");
+if(!css.includes(".terminal-select-native")||!css.includes("clip-path: inset(50%)")||!css.includes(".terminal-select-list[hidden]"))throw new Error("原生 select 未被视觉隐藏或自绘选项样式不完整");
+if(!css.includes(".terminal-select-button i { height: 100%; min-height: 28px; align-self: stretch; display: grid; place-items: center;")||!css.includes(".terminal-select-button i::after { content: \"\"; position: absolute; left: 50%; top: 50%;"))throw new Error("下拉箭头没有按选择框图标区垂直居中");
+console.log(`终端选择器通过：${selects} 个静态下拉 + 动态下拉自动替换 / 原生 title 自动移除`);

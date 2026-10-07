@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "armies": [
+    {"id":"cao_central","name":"中军","force":"cao","city":"xuchang","commander":"曹操","soldiers":18000,"units":{"infantry":10000,"cavalry":5000,"archers":3000},"morale":88,"training":78},
+    {"id":"cao_west","name":"虎豹营","force":"cao","city":"luoyang","commander":"夏侯惇","soldiers":9000,"units":{"infantry":3000,"cavalry":5000,"archers":1000},"morale":82,"training":84},
+    {"id":"yuan_vanguard","name":"河北先锋","force":"yuan","city":"ye","commander":"颜良","soldiers":24000,"units":{"infantry":15000,"cavalry":7000,"archers":2000},"morale":79,"training":72},
+    {"id":"liu_left","name":"左将军本队","force":"liu","city":"xiapi","commander":"刘备","soldiers":8000,"units":{"infantry":5500,"cavalry":1000,"archers":1500},"morale":91,"training":76},
+    {"id":"sun_jiangdong","name":"江东军","force":"sun","city":"jianye","commander":"孙策","soldiers":13000,"units":{"infantry":7000,"cavalry":2500,"archers":3500},"morale":90,"training":82},
+    {"id":"liu_biao_jingzhou","name":"荆州军","force":"liu_biao","city":"xiangyang","commander":"文聘","soldiers":12000,"units":{"infantry":7500,"cavalry":1500,"archers":3000},"morale":78,"training":74},
+    {"id":"liu_zhang_shu","name":"益州军","force":"liu_zhang","city":"chengdu","commander":"张任","soldiers":11000,"units":{"infantry":8000,"cavalry":1000,"archers":2000},"morale":76,"training":68,"supply":90,"stance":"驻扎"},
+    {"id":"zhang_lu_hanzhong","name":"汉中守军","force":"zhang_lu","city":"hanzhong","commander":"杨任","soldiers":7000,"units":{"infantry":4800,"cavalry":700,"archers":1500},"morale":78,"training":66,"supply":88,"stance":"驻扎"},
+    {"id":"ma_teng_liangzhou","name":"西凉铁骑","force":"ma_teng","city":"tianshui","commander":"马超","soldiers":8500,"units":{"infantry":2500,"cavalry":5200,"archers":800},"morale":86,"training":78,"supply":85,"stance":"驻扎"},
+    {"id":"han_sui_anding","name":"金城军","force":"han_sui","city":"anding","commander":"韩遂","soldiers":6500,"units":{"infantry":3500,"cavalry":2300,"archers":700},"morale":76,"training":72,"supply":82,"stance":"驻扎"},
+    {"id":"gongsun_du_liaodong","name":"辽东军","force":"gongsun_du","city":"xiangping","commander":"公孙度","soldiers":5200,"units":{"infantry":3500,"cavalry":1200,"archers":500},"morale":74,"training":65,"supply":88,"stance":"驻扎"}
+  ]
+}

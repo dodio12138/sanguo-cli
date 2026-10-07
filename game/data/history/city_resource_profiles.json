@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "basis_fields": ["commandery", "census_year", "census_population", "resource_region"],
+  "methodology": "郡国人口优先采用《后汉书·郡国志》永和五年（140）口数；原表缺载时采用《汉书》元始二年（2）口数。游戏人口是分配到战略节点的战时编户估算，不等同于整郡口数。",
+  "historical_basis": {
+    "xuchang":["颍川郡",140,1436513,"central"],"chenliu":["陈留郡",140,869433,"central"],"luoyang":["河南尹",140,1010827,"central"],"ye":["魏郡",140,695660,"north"],"beiping":["右北平郡",140,53475,"north"],
+    "baima":["东郡",140,603393,"central"],"guandu":["颍川郡",140,1436513,"central"],"mengjin":["河南尹",140,1010827,"central"],"xiapi":["下邳国",140,611083,"xuzhou"],"xinye":["南阳郡",140,2439618,"jingzhou"],
+    "xiangyang":["南郡",140,747604,"jingzhou"],"xiakou":["江夏郡",140,265464,"jingzhou"],"jianye":["丹阳郡",140,630545,"jiangdong"],"shouchun":["九江郡",140,432426,"huainan"],"xiliang":["武威郡",140,34226,"northwest"],
+    "jincheng":["金城郡",140,18947,"northwest"],"daixian":["代郡",140,20123,"north"],"xiangping":["辽东郡",2,272539,"liaodong"],"jinyang":["太原郡",140,200124,"north"],"nanpi":["勃海郡",140,1106500,"north"],
+    "pingyuan":["平原郡",140,1002658,"north"],"beihai":["北海国",140,853604,"north"],"anding":["安定郡",140,29060,"northwest"],"tianshui":["汉阳郡",140,130138,"northwest"],"hongnong":["弘农郡",140,199113,"central"],
+    "changan":["京兆尹及三辅",140,523860,"central"],"wan":["南阳郡",140,2439618,"jingzhou"],"puyang":["东郡",140,603393,"central"],"qiao":["沛国",140,1251393,"central"],"shangyong":["汉中郡",140,267402,"jingzhou"],
+    "hanzhong":["汉中郡",140,267402,"yizhou"],"zitong":["广汉郡",140,509438,"yizhou"],"chengdu":["蜀郡",140,1350476,"yizhou"],"yongan":["巴郡",140,1086049,"yizhou"],"jiangzhou":["巴郡",140,1086049,"yizhou"],
+    "jianing":["益州郡",140,110802,"yizhou"],"yunnan":["益州郡",140,110802,"yizhou"],"jiangling":["南郡",140,747604,"jingzhou"],"wuling":["武陵郡",140,250913,"jingzhou"],"changsha":["长沙郡",140,1059372,"jingzhou"],
+    "lingling":["零陵郡",140,1001578,"jingzhou"],"guiyang":["桂阳郡",140,501403,"jingzhou"],"lujiang":["庐江郡",140,424683,"huainan"],"chaisang":["豫章郡",140,1668906,"jiangdong"],"wu":["吴郡",140,700782,"jiangdong"],
+    "tongguan":["弘农郡",140,199113,"central"],"hangu":["河南尹",140,1010827,"central"],"hulao":["河南尹",140,1010827,"central"],"wuguan":["南阳郡",140,2439618,"jingzhou"],"jianmen":["广汉郡",140,509438,"yizhou"],
+    "yangping":["汉中郡",140,267402,"yizhou"],"yiling":["南郡",140,747604,"jingzhou"],"yanjin":["东郡",140,603393,"central"],"pukou":["庐江郡",140,424683,"huainan"],"lelang":["乐浪郡",140,257050,"liaodong"],
+    "ji":["广阳郡",140,280600,"north"],"shangdang":["上党郡",140,127403,"north"],"henei":["河内郡",140,801558,"central"],"linzi":["齐国",140,491765,"north"],"langya":["琅邪国",140,570967,"xuzhou"],
+    "pengcheng":["彭城国",140,493027,"xuzhou"],"xiaopei":["沛国",140,1251393,"xuzhou"],"runan":["汝南郡",140,2100788,"central"],"guangling":["广陵郡",140,410190,"xuzhou"],"hefei":["九江郡",140,432426,"huainan"],
+    "longxi":["陇西郡",140,29637,"northwest"],"langzhong":["巴郡",140,1086049,"yizhou"],"badong":["巴郡",140,1086049,"yizhou"],"fuling":["巴郡",140,1086049,"yizhou"],"kuaiji":["会稽郡",140,481196,"jiangdong"],
+    "yuzhang":["豫章郡",140,1668906,"jiangdong"],"jianan":["会稽郡",140,481196,"jiangdong"],"jiaozhi":["交趾郡",2,746237,"jiaozhou"],"cangwu":["苍梧郡",140,466975,"jiaozhou"],"panyu":["南海郡",140,250282,"jiaozhou"]
+  },
+  "storage_by_level": {"1":10000,"2":18000,"3":28000,"4":40000,"5":52000},
+  "type_storage": {"pass":7000,"ford":8000,"port":30000},
+  "scenarios": {
+    "190_coalition": {
+      "default":{"population":1.08,"garrison":0.82,"agriculture":2,"commerce":1,"order":3,"food_stock":0.82,"gold_stock":1.0},
+      "regions":{"north":{"population":1.12},"central":{"population":1.15},"xuzhou":{"population":1.18},"jingzhou":{"population":1.06},"jiangdong":{"population":0.90,"agriculture":-2,"commerce":-3},"huainan":{"population":1.05},"northwest":{"population":1.08},"yizhou":{"population":1.02},"liaodong":{"population":1.04},"jiaozhou":{"population":1.0}},
+      "cities":{"luoyang":{"population":1.55,"garrison":1.8,"commerce":10,"order":-8},"changan":{"population":1.25,"garrison":1.25},"xuchang":{"population":0.92,"garrison":0.55,"commerce":-6},"ye":{"population":1.10,"garrison":0.82},"jianye":{"population":0.78,"commerce":-7},"wu":{"population":0.90}}
+    },
+    "200_guandu": {
+      "default":{"population":1.0,"garrison":1.0,"agriculture":0,"commerce":0,"order":0,"food_stock":0.74,"gold_stock":1.0},
+      "regions":{},"cities":{}
+    },
+    "208_red_cliffs": {
+      "default":{"population":0.96,"garrison":1.08,"agriculture":1,"commerce":1,"order":2,"food_stock":0.68,"gold_stock":0.95},
+      "regions":{"north":{"population":0.92,"order":4},"central":{"population":0.88,"order":3},"xuzhou":{"population":0.78,"agriculture":-2,"order":1},"jingzhou":{"population":0.92,"garrison":1.2,"order":0},"jiangdong":{"population":1.12,"garrison":1.16,"agriculture":4,"commerce":5,"order":5,"food_stock":0.82,"gold_stock":1.12},"huainan":{"population":0.9,"garrison":1.2},"northwest":{"population":0.85,"order":1},"yizhou":{"population":1.06,"agriculture":3,"order":5,"food_stock":0.84},"liaodong":{"population":1.02,"order":4},"jiaozhou":{"population":1.04,"agriculture":3,"commerce":3,"order":4,"food_stock":0.8}},
+      "cities":{"xuchang":{"population":1.05,"garrison":1.25,"commerce":6,"order":7},"luoyang":{"population":0.62,"garrison":0.85,"commerce":-8,"order":-4},"ye":{"population":0.86,"garrison":1.2},"runan":{"population":0.75,"agriculture":-4},"xiangyang":{"population":0.84,"garrison":1.55,"order":-5},"jiangling":{"population":0.88,"garrison":1.45,"order":-4},"xiakou":{"population":0.82,"garrison":1.5,"order":-4},"chaisang":{"population":1.16,"garrison":1.7,"commerce":6},"jianye":{"population":1.18,"garrison":1.35,"commerce":8},"changsha":{"population":1.08,"agriculture":5}}
+    }
+  }
+}

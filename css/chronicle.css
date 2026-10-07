@@ -1,0 +1,10 @@
+.dialog-tools{float:right;display:flex;gap:8px;align-items:center;margin-top:-3px}
+.dialog-tools button{float:none;border:1px solid var(--line);padding:3px 8px;color:var(--green);background:#172016;font:10px var(--mono)}
+.dialog-tools button[hidden]{display:none}
+.chronicle-history{max-height:calc(90vh - 48px);overflow:auto;overscroll-behavior:contain}
+.chronicle-entry{margin:8px 0;padding:12px 14px;border:1px solid var(--line-dim);border-left:3px solid var(--amber);background:linear-gradient(110deg,#171e15,#0b100c);}
+.chronicle-entry header{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px;color:var(--amber);font:12px serif}
+.chronicle-entry header small{color:var(--muted);font:9px var(--mono)}
+.chronicle-entry p{margin:0;color:#d4cfaa;font:15px/1.9 "Songti SC","Noto Serif CJK SC",serif;letter-spacing:.04em;white-space:pre-wrap}
+.chronicle-entry .chronicle-error{margin-top:7px;color:var(--red);font:10px var(--mono)}
+.chronicle-entry.pending p{color:var(--muted);font-size:11px}

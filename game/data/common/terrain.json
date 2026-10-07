@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "terrains": {
+    "plains": { "name": "平原", "color": "#68724e", "move_cost": 1, "defence": 0, "supply": 1.0 },
+    "forest": { "name": "林地", "color": "#3f5942", "move_cost": 2, "defence": 0.15, "supply": 0.8 },
+    "hills": { "name": "丘陵", "color": "#6c664a", "move_cost": 2, "defence": 0.20, "supply": 0.7 },
+    "mountain": { "name": "山地", "color": "#4d5044", "move_cost": 3, "defence": 0.35, "supply": 0.4 },
+    "river": { "name": "河流（线状）", "color": "#4e9dc2", "move_cost": 2, "defence": -0.10, "supply": 0.6, "overlay": true },
+    "marsh": { "name": "泽地", "color": "#526359", "move_cost": 3, "defence": -0.05, "supply": 0.3 },
+    "desert": { "name": "荒漠", "color": "#927f55", "move_cost": 2, "defence": -0.05, "supply": 0.15 },
+    "grassland": { "name": "草原", "color": "#71805a", "move_cost": 1, "defence": 0, "supply": 0.65 },
+    "plateau": { "name": "高原", "color": "#706b52", "move_cost": 2, "defence": 0.20, "supply": 0.35 },
+    "basin": { "name": "盆地", "color": "#586f48", "move_cost": 1, "defence": 0.05, "supply": 0.90 },
+    "ocean": { "name": "海洋", "color": "#263f49", "move_cost": 99, "defence": 0, "supply": 0 }
+  }
+}

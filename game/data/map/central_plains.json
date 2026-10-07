@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "china_40x32",
+  "grid": { "type": "square", "width": 40, "height": 32 },
+  "layers": ["terrain", "political", "province", "commandery", "supply"],
+  "coordinate_origin": "north_west",
+  "projection_note": "Expanded square strategic grid arranged from the supplied historical-game map reference; relative location layout only, not a surveying map.",
+  "reference_image": "spring.jpg.png",
+  "grid_lines": "only_between_different_terrain_or_map_colors"
+}

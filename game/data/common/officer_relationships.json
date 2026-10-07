@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "relationships": [
+    {"type":"clan","members":["曹操","曹仁","曹洪","曹纯"]},
+    {"type":"clan","members":["夏侯惇","夏侯渊"]},
+    {"type":"sworn","members":["刘备","关羽","张飞"]},
+    {"type":"parent_child","members":["孙坚","孙策"]},
+    {"type":"parent_child","members":["孙坚","孙权"]},
+    {"type":"siblings","members":["孙策","孙权"]},
+    {"type":"parent_child","members":["袁绍","袁谭"]},
+    {"type":"parent_child","members":["袁绍","袁熙"]},
+    {"type":"parent_child","members":["袁绍","袁尚"]},
+    {"type":"parent_child","members":["刘表","刘琦"]},
+    {"type":"parent_child","members":["刘表","刘琮"]},
+    {"type":"siblings","members":["诸葛亮","诸葛瑾"]},
+    {"type":"siblings","members":["司马懿","司马朗"]}
+  ]
+}

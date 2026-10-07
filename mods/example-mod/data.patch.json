@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "orders": {"max_player_orders_per_turn": 12}
+  }
+}

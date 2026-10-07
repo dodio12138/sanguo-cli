@@ -1,0 +1,22 @@
+globalThis.window=globalThis;
+if(typeof globalThis.CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
+await import("../js/data/offline-data.generated.js");
+await import("../js/core/rule-engine.js");
+await import("../js/core/game-state.js");
+await import("../js/core/ai-bridge.js");
+await import("../js/core/ai-controller.js");
+
+const state=new GameState(structuredClone(globalThis.SANGUO_DATA),{playerForceId:"cao"}),player="cao",graph=state.data.rules.city_graph;
+const target=state.data.cities.find(city=>city.force!==player&&city.force!=="neutral"&&(graph[city.id]||[]).some(id=>state.data.cities.find(item=>item.id===id)?.force===player));
+if(!target)throw new Error("测试数据没有相邻敌方据点");
+const home=state.data.cities.find(city=>city.force===player&&(graph[city.id]||[]).includes(target.id)),army=state.data.armies.find(item=>item.force===player);
+if(!home||!army)throw new Error("测试数据缺少本方边城或军团");
+army.city=home.id;army.soldiers=24000;army.units={infantry:24000};army.supply=100;army.morale=100;army.training=100;delete army.route;delete army.siegeTarget;target.garrison=1000;target.level=1;state.intelligence.cities[target.id]=2;state.controlMode="delegate";
+const bridge=new AIBridge(state),controller=new AIController(state,bridge);await controller.connect({name:"规则测试军师",generate:async()=>({message:"本旬处理军务",commands:[]})});
+const assessment=controller.militaryAssessment();if(!assessment.canExpand||assessment.recommended?.targetId!==target.id)throw new Error(`未识别可行军机：${JSON.stringify(assessment)}`);
+const first=await controller.plan();if(!state.orders.some(order=>order.type==="declare_war"&&order.forceIds.includes(target.force)))throw new Error("AI 遗漏可行目标的宣战前置命令");
+state.orders=[];state.diplomacy.wars=[target.force];state.turn++;
+const second=await controller.plan();if(!state.orders.some(order=>["move","forced_march"].includes(order.type)&&order.cityIds.includes(target.id)))throw new Error("宣战后 AI 未调用战争计划推进目标");
+state.intelligence.cities[target.id]=3;const scout=bridge.call("submit_command",{command_id:"scout_city",target_ids:[target.id]});home.level=5;const fortify=bridge.call("submit_command",{command_id:"fortify",target_ids:[home.id]});
+if(scout.queued||scout.error!=="city_intelligence_already_maxed"||fortify.queued||fortify.error!=="city_defense_already_maxed")throw new Error("无效重复侦察/满级城防未被拦截");
+console.log(`AI 军务优先测试通过：${target.name} 首旬宣战、次旬推进；满级侦察/城防重复命令已拦截`);

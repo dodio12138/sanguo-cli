@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"九州策剧本清单",
+  "type":"object",
+  "required":["schema_version","id","name","start_date","map"],
+  "oneOf":[{"required":["data_files"]},{"required":["patch"]}],
+  "properties":{
+    "schema_version":{"type":"integer","minimum":2},
+    "id":{"type":"string"},
+    "name":{"type":"string"},
+    "start_date":{"type":"string","pattern":"^[0-9]{3,4}-[0-9]{2}-[0-9]{2}$"},
+    "map":{"type":"string"},
+    "default_player_force":{"type":"string"},
+    "playable_forces":{"type":"array","items":{"type":"string"}},
+    "data_files":{"type":"object","required":["forces","cities","officers","armies"],"additionalProperties":{"type":"string"}},
+    "patch":{"type":"object","required":["forces","city_forces","officer_assignments","armies"]},
+    "description":{"type":"string"}
+  }
+}

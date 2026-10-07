@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "id": "200_guandu",
+  "name": "官渡风云",
+  "start_date": "200-01-01",
+  "default_player_force": "cao",
+  "player_force": "cao",
+  "playable_forces": ["cao", "yuan", "liu", "sun", "liu_biao", "liu_zhang", "zhang_lu", "ma_teng", "han_sui", "gongsun_du"],
+  "map": "china_40x32",
+  "data_files": {
+    "forces": "game/data/history/forces/200_guandu.json",
+    "cities": "game/data/history/cities/200_guandu.json",
+    "city_resources": "game/data/history/city_resource_profiles.json",
+    "administrative_divisions": "game/data/history/administrative_divisions.json",
+    "officers": "game/data/history/officers/200_guandu.json",
+    "armies": "game/data/history/armies/200_guandu.json"
+  },
+  "description": "建安五年官渡战争初期；人物势力按公元200年前后校正。"
+  ,"historical_brief":"曹操控制献帝与河南诸郡，袁绍据河北而兵粮占优；刘备、孙策与刘表仍各有立足之地。官渡一线的粮道、用人和决断将改变北方归属。"
+  ,"force_briefs":{"cao":"据有汉廷与中原要地，正面对上兵势更盛的袁绍；善用谋臣、稳住官渡和粮道是关键。","yuan":"河北四州与兵粮雄厚，幕府人才济济；但内部意见和南下补给线都需要统合。","liu":"寄寓徐州，拥有刘关张与一批追随者；必须在强邻夹缝中保存机动与人望。","sun":"孙策已定江东，部将精锐、长江为屏；北进淮南会拉长战线。","liu_biao":"据荆州要冲，物产与人口充足；稳住襄阳、江陵和长江中游是立身之本。","liu_zhang":"承接刘焉留下的益州基业，蜀道险固、腹地富庶，但与汉中张鲁关系紧张。","zhang_lu":"扼守汉中与阳平关，山道易守难攻；需经营汉中粮源并防备益州与关中方向。","ma_teng":"据凉州东部，骑兵善战却远离中原；经营关中通道并防范韩遂是首要难题。","han_sui":"盘踞安定一带，熟悉西北羌胡与山川；力量有限，宜审慎处理与马腾的盟争。","gongsun_du":"远据辽东襄平，边地自立、远离中原主战场；稳固辽东并把握北方变局。"}
+  ,"objectives":{"cao":"守住官渡与许昌粮道，击退袁绍主力","yuan":"越过黄河压迫许昌，结束河北幕府内耗","liu":"保全徐州基业，争取盟友与可持续的后方","sun":"守稳江东、整合沿江据点，再择机北上","liu_biao":"稳固荆襄与江陵，不让中原战火吞没荆州","liu_zhang":"维系益州统一并防住汉中门户","zhang_lu":"扼守阳平关、维持汉中独立","ma_teng":"巩固凉州东部并争取进入关中","han_sui":"稳住安定与西北盟友关系，避免两线受敌","gongsun_du":"保全辽东与边境通道，待中原形势明朗"}
+}
