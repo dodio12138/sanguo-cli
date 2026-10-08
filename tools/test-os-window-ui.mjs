@@ -1,6 +1,7 @@
 import fs from "node:fs";
 
 const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=fs.readFileSync(new URL("js/ui/app.js",root),"utf8");
+const polishCss=fs.readFileSync(new URL("css/ui-polish.css",root),"utf8");
 if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
 for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
 if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
@@ -24,4 +25,5 @@ if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
 if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
 if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto 34px 0")||!css.includes("height:max-content;max-height:calc(100vh - 42px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
+if(!appSource.includes('tooltip.setAttribute("popover","manual")')||!appSource.includes("tooltip.showPopover()")||!polishCss.includes("height: max-content"))throw new Error("菜单条目提示框没有进入浏览器顶层");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

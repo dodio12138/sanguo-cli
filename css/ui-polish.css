@@ -111,7 +111,10 @@ button:disabled { opacity: .38; cursor: not-allowed !important; filter: grayscal
 .ui-tooltip {
   position: fixed;
   z-index: 250;
+  inset: auto;
+  margin: 0;
   width: max-content;
+  height: max-content;
   max-width: min(220px, calc(100vw - 24px));
   max-height: min(120px, calc(100vh - 24px));
   overflow: auto;
