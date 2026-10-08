@@ -283,6 +283,21 @@ dialog.os-dialog-window>.dialog-content{border-top:1px solid #303a2d;background:
 
 body>.app-shell>footer{display:none}
 
+/* Every enabled button gets the same unmistakable retro desktop feedback. */
+button:not(:disabled){
+  transition:filter .09s ease,outline-color .09s ease,background-color .09s ease,color .09s ease,border-color .09s ease;
+}
+button:not(:disabled):hover{
+  outline:1px dotted #ead27c;
+  outline-offset:-2px;
+  filter:brightness(1.32) saturate(1.08);
+}
+button:not(:disabled):active{
+  outline-style:solid;
+  filter:brightness(.76) saturate(.9);
+  box-shadow:inset 1px 1px 2px #020402cc!important;
+}
+
 @media(max-width:1250px) and (min-width:1001px){
   .game-started #resourcePanel{top:6px;height:74px}
   .game-started .turn-display{left:12px;top:88px;width:220px;height:174px}
