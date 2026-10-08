@@ -29,16 +29,14 @@ body.game-started{
 .game-started .topbar{
   flex:0 0 50px;
   z-index:2000;
-  grid-template-columns:1fr auto 1fr;
+  grid-template-columns:1fr auto;
   border-width:0 0 1px;
   padding:5px 14px;
-  background:linear-gradient(#1b251b,#0d140f);
+  background:#111a13;
   box-shadow:0 3px 14px #000a,inset 0 1px #5d684c66;
 }
 .game-started .topbar .brand-mark{width:32px;height:32px;font-size:20px}
 .game-started .topbar .brand h1{font:700 17px/1 serif;letter-spacing:.16em}
-.game-started .turn-display{display:flex;align-items:center;gap:9px;border:0;padding:0 22px}
-.game-started .turn-display span,.game-started .turn-display strong{display:inline;margin:0}
 .game-started .resources b{display:inline;margin:0 0 0 4px;font-size:11px}
 
 /* The existing navigation becomes an application dock. */
@@ -103,6 +101,7 @@ body.game-started{
 
 .game-started .terminal-card{padding:0}
 .game-started .terminal-card>.card-title,
+.game-started .turn-display>.card-title,
 .game-started .map-column>.map-toolbar{
   flex:0 0 27px;
   min-height:27px;
@@ -110,14 +109,14 @@ body.game-started{
   padding:3px 5px 3px 8px;
   border:0;
   border-bottom:1px solid #5e684d;
-  background:linear-gradient(90deg,#6d5d30,#343c25 70%,#232d20);
+  background:#3b472b;
   color:#f1d981;
   cursor:grab;
   user-select:none;
   touch-action:none;
 }
 .game-started .os-window.is-active>.card-title,
-.game-started .os-window.is-active>.map-toolbar{background:linear-gradient(90deg,#9a7c37,#46512e 72%,#273423)}
+.game-started .os-window.is-active>.map-toolbar{background:#69572d}
 .game-started .terminal-card>.card-title:before{content:"■";color:#d4b95e;font-size:7px}
 .game-started .terminal-card>.card-title+*{min-height:0}
 .game-started .faction-card>.ruler-row,.game-started .faction-card>.stat-grid{margin-inline:8px}
@@ -156,13 +155,22 @@ body.game-started{
 .os-window.is-maximized>.os-window-resize{display:none}
 
 /* Default desktop composition; positions are user-draggable and persisted. */
-.game-started #factionPanel{left:14px;top:16px;width:238px;height:205px}
-.game-started #selectionRailPanel{left:14px;top:238px;width:250px;height:300px}
-.game-started #forcesRailPanel{left:13px;bottom:58px;width:245px;height:210px}
-.game-started .map-column{left:275px;right:326px;top:28px;bottom:68px;min-width:410px;min-height:340px}
-.game-started #commandsRailPanel{right:16px;top:16px;width:300px;height:320px}
-.game-started #ordersRailPanel{right:26px;top:352px;width:286px;height:218px}
-.game-started #situationRailPanel{right:15px;bottom:58px;width:305px;height:178px}
+.game-started .turn-display{left:14px;top:14px;width:242px;height:90px;padding:0;text-align:left}
+.game-started .turn-display>.card-title{display:flex;align-items:center;color:#f1d981;font-size:11px}
+.game-started .turn-display>.card-title:before{content:"◆";margin-right:6px;color:#d4b95e;font-size:7px}
+.game-started .turn-display .os-window-buttons{display:flex}
+.os-calendar-body{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;align-items:center;gap:4px 10px;flex:1;padding:9px 11px;background:#0b120d}
+.os-calendar-body #eraLabel{color:#9da58b;font-size:9px}
+.os-calendar-body #dateLabel{grid-column:1/-1;grid-row:2;color:#e0c873;font:700 18px/1.1 serif;letter-spacing:.05em}
+.os-calendar-body .status-dot{grid-column:2;grid-row:1;color:var(--green);font-size:8px;white-space:nowrap}
+.game-started #factionPanel{left:14px;top:116px;width:242px;height:180px}
+.game-started #selectionRailPanel{left:14px;top:308px;width:250px;height:200px}
+.game-started #selectionRailPanel .selection-panel{flex:1;overflow:auto;padding-bottom:8px}
+.game-started #forcesRailPanel{left:13px;top:520px;width:245px;height:170px}
+.game-started .map-column{left:276px;right:326px;top:18px;bottom:58px;min-width:410px;min-height:340px}
+.game-started #commandsRailPanel{right:16px;top:14px;width:300px;height:280px}
+.game-started #ordersRailPanel{right:26px;top:306px;width:286px;height:190px}
+.game-started #situationRailPanel{right:15px;top:508px;width:305px;height:170px}
 
 .game-started .map-column .layer-tabs{display:flex;align-items:center;min-width:0;overflow:hidden}
 .os-map-caption{display:flex;align-items:center;align-self:stretch;gap:5px;flex:none;margin:-3px 5px -3px -8px;border-right:1px solid #766a3e;padding:0 9px;color:#ffe08a;font-size:9px;white-space:nowrap}
@@ -198,7 +206,7 @@ body.game-started{
 .os-desktop-shortcut:hover{border-color:#6a7457;background:#253021aa;color:#f0dd92}
 .os-desktop-shortcut i{display:grid;place-items:center;width:30px;height:28px;margin:0 auto 4px;border:1px solid #77815f;background:#1a251b;color:#d0b65b;font:16px serif;box-shadow:2px 2px #050805}
 
-.os-task-strip{display:flex;align-items:center;gap:3px;margin-left:5px;border-left:1px solid #47513e;padding-left:5px}
+.os-task-strip{display:flex;align-items:center;gap:3px;max-width:min(44vw,620px);margin-left:5px;border-left:1px solid #47513e;padding-left:5px;overflow-x:auto;scrollbar-width:thin}
 .os-task-button{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .os-task-button.is-minimized{color:#69705f!important}
 .os-clock{align-self:center;margin:0 5px 0 auto;border-left:1px solid #47513e;padding-left:9px;color:#aeb59a;font-size:8px;white-space:nowrap}
@@ -210,25 +218,26 @@ dialog{
   background:linear-gradient(145deg,#172017,#0a100c 72%)!important;
   box-shadow:3px 4px 0 #030503,14px 18px 48px #000d,inset 1px 1px #9aa47b33!important;
 }
-dialog>.dialog-title{background:linear-gradient(90deg,#8f7434,#354128 72%,#202b1e);cursor:grab;user-select:none;touch-action:none}
+dialog>.dialog-title{background:#4b4f2b;cursor:grab;user-select:none;touch-action:none}
+dialog[open]:focus-within>.dialog-title{background:#69572d}
 dialog.os-dialog-dragging{opacity:.93}
 
 /* Start menu as a centered boot window. */
 .start-screen{background-color:#0c140e;background-image:linear-gradient(90deg,#1d291f55 1px,transparent 1px),linear-gradient(#1d291f44 1px,transparent 1px),radial-gradient(circle at 50% 42%,#263321,#080d0a 70%);background-size:28px 28px,28px 28px,auto}
 .start-terminal.main-menu{border:1px solid #747e5e;box-shadow:4px 5px 0 #050805,18px 24px 60px #000c,inset 1px 1px #b7bd9040}
-.main-menu .menu-header{min-height:68px;padding:9px 16px;background:linear-gradient(90deg,#8f7434,#354128 72%,#202b1e);border-bottom:1px solid #8e966f}
+.main-menu .menu-header{min-height:68px;padding:9px 16px;background:#4b4f2b;border-bottom:1px solid #8e966f}
 .main-menu .menu-header .brand-mark{width:42px;height:42px;font-size:25px;background:#111811}
 
 body>.app-shell>footer{display:none}
 
 @media(max-width:1100px){
-  .game-started .map-column{left:245px;right:290px}
+  .game-started .map-column{left:266px;right:290px}
   .game-started #commandsRailPanel{width:270px}
   .game-started #ordersRailPanel{width:260px}
   .game-started #situationRailPanel{width:274px}
 }
 @media(max-width:820px){
-  .game-started .topbar{grid-template-columns:1fr auto}.game-started .resources{display:none}
+  .game-started .topbar{grid-template-columns:1fr}.game-started .resources{display:none}
   .game-started .workspace{overflow:auto;padding:7px 7px 54px}
   .game-started .os-window{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:180px;margin-bottom:8px;transform:none!important}
   .game-started .map-column{min-height:440px}

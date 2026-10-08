@@ -1,6 +1,7 @@
 (() => {
   const $=id=>document.getElementById(id),storageKey="sanguo.os-window-layout.v1";
   const definitions=[
+    {selector:".turn-display",id:"calendarWindow",title:"历法",icon:"历",handle:".card-title"},
     {selector:".map-column",id:"mapWindow",title:"战略舆图",icon:"图",handle:".map-toolbar"},
     {selector:"#factionPanel",id:"factionPanel",title:"己方势力",icon:"君",handle:".card-title"},
     {selector:"#selectionRailPanel",id:"selectionRailPanel",title:"选中区域",icon:"选",handle:".card-title"},
@@ -100,9 +101,9 @@
 
   function initialize(){
     const windows=[];
-    for(const definition of definitions){const window=document.querySelector(definition.selector),handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;if(definition.id==="mapWindow"){const caption=document.createElement("span");caption.className="os-map-caption";caption.textContent=definition.title;handle.prepend(caption)}addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
+    for(const definition of definitions){const window=document.querySelector(definition.selector);if(definition.id==="calendarWindow")document.querySelector(".workspace")?.prepend(window);const handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;if(definition.id==="mapWindow"){const caption=document.createElement("span");caption.className="os-map-caption";caption.textContent=definition.title;handle.prepend(caption)}addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
     createDesktopShortcuts(windows);createTaskStrip(windows);bindDialogs();
-    const map=windows[0];if(map)focusWindow(map);
+    const map=windows.find(window=>window.dataset.windowId==="mapWindow");if(map)focusWindow(map);
     addEventListener("resize",()=>{if(isCompact())windows.forEach(window=>{window.style.removeProperty("left");window.style.removeProperty("top");window.style.removeProperty("right");window.style.removeProperty("bottom");window.style.removeProperty("width");window.style.removeProperty("height")})});
     window.SanguoDesktop={reset(){localStorage.removeItem(storageKey);location.reload()},windows};
   }
