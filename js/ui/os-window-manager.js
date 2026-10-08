@@ -27,12 +27,12 @@
   function remember(window){
     if(isCompact()||window.classList.contains("is-maximized"))return;
     const workspace=document.querySelector(".workspace"),box=window.getBoundingClientRect(),host=workspace.getBoundingClientRect();
-    layout[window.dataset.windowId]={left:Math.round(box.left-host.left),top:Math.round(box.top-host.top),width:Math.round(box.width),height:Math.round(box.height),minimized:window.classList.contains("is-minimized")};save();
+    layout[window.dataset.windowId]={...(layout[window.dataset.windowId]||{}),left:Math.round(box.left-host.left),top:Math.round(box.top-host.top),width:Math.round(box.width),height:Math.round(box.height),minimized:window.classList.contains("is-minimized"),closed:window.classList.contains("is-closed"),maximized:window.classList.contains("is-maximized")};save();
   }
 
   function restorePosition(window){
     const saved=layout[window.dataset.windowId];if(!saved||isCompact())return;
-    if(saved.minimized)window.classList.add("is-minimized");
+    window.classList.toggle("is-minimized",!!saved.minimized);window.classList.toggle("is-closed",!!saved.closed);window.classList.toggle("is-maximized",!!saved.maximized);
     const hasGeometry=["left","top","width","height"].some(key=>Number.isFinite(saved[key]));if(!hasGeometry)return;
     window.dataset.userPositioned="true";
     for(const key of ["left","top","width","height"])if(Number.isFinite(saved[key]))window.style[key]=`${saved[key]}px`;
@@ -40,7 +40,7 @@
   }
 
   function constrainWindow(window){
-    if(isCompact()||!document.body.classList.contains("game-started")||window.classList.contains("is-maximized"))return;
+    if(isCompact()||!document.body.classList.contains("game-started")||window.classList.contains("is-maximized")||window.classList.contains("is-minimized")||window.classList.contains("is-closed"))return;
     const workspace=document.querySelector(".workspace"),host=workspace?.getBoundingClientRect();if(!host)return;
     const box=window.getBoundingClientRect(),safeHeight=Math.max(140,host.height-46),width=Math.min(box.width,host.width),height=Math.min(box.height,safeHeight);
     window.style.width=`${Math.round(width)}px`;window.style.height=`${Math.round(height)}px`;window.style.right="auto";window.style.bottom="auto";
@@ -60,17 +60,17 @@
   }
 
   function closeWindow(window){
-    window.classList.remove("is-minimized","is-maximized","is-active");window.classList.add("is-closed");updateTasks();
+    window.classList.remove("is-minimized","is-maximized","is-active");window.classList.add("is-closed");const state=layout[window.dataset.windowId]||{};Object.assign(state,{closed:true,minimized:false,maximized:false});layout[window.dataset.windowId]=state;save();updateTasks();
   }
 
   function openWindow(window){
-    window.classList.remove("is-minimized","is-closed");const state=layout[window.dataset.windowId]||{};state.minimized=false;layout[window.dataset.windowId]=state;save();focusWindow(window);updateTasks();
+    window.classList.remove("is-minimized","is-closed");const state=layout[window.dataset.windowId]||{};Object.assign(state,{closed:false,minimized:false});layout[window.dataset.windowId]=state;save();focusWindow(window);updateTasks();
   }
 
   function toggleMaximize(window){
     window.classList.toggle("is-maximized");
     if(window.classList.contains("is-minimized"))window.classList.remove("is-minimized");
-    focusWindow(window);updateTasks();requestAnimationFrame(()=>dispatchEvent(new Event("resize")));
+    const state=layout[window.dataset.windowId]||{};Object.assign(state,{maximized:window.classList.contains("is-maximized"),minimized:false,closed:false});layout[window.dataset.windowId]=state;save();focusWindow(window);updateTasks();requestAnimationFrame(()=>dispatchEvent(new Event("resize")));
   }
 
   function addControls(window,handle){
@@ -78,6 +78,7 @@
     const minimize=document.createElement("button");minimize.type="button";minimize.className="os-window-button";minimize.title="最小化";minimize.textContent="_";
     const maximize=document.createElement("button");maximize.type="button";maximize.className="os-window-button";maximize.title="最大化";maximize.textContent="□";
     const close=document.createElement("button");close.type="button";close.className="os-window-button os-window-close";close.title="关闭";close.textContent="×";
+    minimize.setAttribute("aria-label",`最小化${titleOf(window)}`);maximize.setAttribute("aria-label",`最大化或还原${titleOf(window)}`);close.setAttribute("aria-label",`关闭${titleOf(window)}`);
     for(const button of [minimize,maximize,close])button.addEventListener("pointerdown",event=>event.stopPropagation());
     minimize.onclick=()=>toggleMinimize(window);maximize.onclick=()=>toggleMaximize(window);close.onclick=()=>closeWindow(window);controls.append(minimize,maximize,close);handle.append(controls);
   }
@@ -107,10 +108,19 @@
     window.addEventListener("pointerdown",()=>focusWindow(window));
   }
 
-  function createSystemMenu(){
+  function arrangeWindows(windows,mode){
+    if(mode==="reset"){localStorage.removeItem(storageKey);location.reload();return}
+    if(isCompact())return;
+    const workspace=document.querySelector(".workspace"),host=workspace.getBoundingClientRect(),targets=windows.filter(window=>!window.classList.contains("is-closed"));
+    if(mode==="minimize"||mode==="map"){for(const window of windows){const keep=mode==="map"&&window.dataset.windowId==="mapWindow";window.classList.toggle("is-minimized",!keep);window.classList.remove("is-closed");const state=layout[window.dataset.windowId]||{};Object.assign(state,{minimized:!keep,closed:false});layout[window.dataset.windowId]=state;if(keep)focusWindow(window)}save();updateTasks();return}
+    const visible=targets.length?targets:windows,areaHeight=Math.max(320,host.height-46),mapWindow=visible.find(window=>window.dataset.windowId==="mapWindow"),sideWindows=visible.filter(window=>window!==mapWindow),mapWidth=mapWindow?Math.max(410,Math.round(host.width*.56)):0,sideColumns=host.width>=1200?2:1,sideRows=Math.max(1,Math.ceil(sideWindows.length/sideColumns));
+    visible.forEach((window,index)=>{window.classList.remove("is-minimized","is-maximized","is-closed");window.dataset.userPositioned="true";window.style.right="auto";window.style.bottom="auto";if(mode==="cascade"){window.style.left=`${18+index*28}px`;window.style.top=`${14+index*24}px`;window.style.width=`${Math.min(window.classList.contains("map-column")?620:360,host.width-36-index*28)}px`;window.style.height=`${Math.min(window.classList.contains("map-column")?470:260,areaHeight-28-index*24)}px`}else if(window===mapWindow){window.style.left="4px";window.style.top="4px";window.style.width=`${mapWidth-8}px`;window.style.height=`${areaHeight-8}px`}else{const sideIndex=sideWindows.indexOf(window),column=sideIndex%sideColumns,row=Math.floor(sideIndex/sideColumns),availableWidth=host.width-mapWidth,width=Math.floor(availableWidth/sideColumns),height=Math.floor(areaHeight/sideRows);window.style.left=`${mapWidth+column*width+4}px`;window.style.top=`${row*height+4}px`;window.style.width=`${Math.max(180,width-8)}px`;window.style.height=`${Math.max(76,height-8)}px`}remember(window)});updateTasks();dispatchEvent(new Event("resize"));
+  }
+
+  function createSystemMenu(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;
     const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("aria-label","应用菜单");
-    [...dock.querySelectorAll(":scope > button")].forEach(button=>menu.append(button));const utilities=dock.querySelector(":scope > .nav-end");if(utilities)menu.append(utilities);document.body.append(menu);
+    [...dock.querySelectorAll(":scope > button")].forEach(button=>menu.append(button));const utilities=dock.querySelector(":scope > .nav-end");if(utilities)menu.append(utilities);for(const [action,label] of [["map","仅显示舆图"],["minimize","全部最小化"],["cascade","层叠窗口"],["tile","平铺窗口"],["reset","恢复默认布局"]]){const button=document.createElement("button");button.type="button";button.className="os-layout-action";button.dataset.layoutAction=action;button.textContent=label;button.onclick=()=>arrangeWindows(windows,action);menu.append(button)}document.body.append(menu);
     const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="漢";launcher.title="三国";launcher.setAttribute("aria-label","打开三国菜单");launcher.setAttribute("aria-expanded","false");launcher.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;launcher.setAttribute("aria-expanded",String(!menu.hidden))};dock.prepend(launcher);
     menu.addEventListener("click",event=>{if(event.target.closest("button")){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});document.addEventListener("pointerdown",event=>{if(!menu.hidden&&!menu.contains(event.target)&&event.target!==launcher){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});
   }
@@ -131,7 +141,13 @@
   }
 
   function bindDialogs(){
-    document.querySelectorAll("dialog").forEach(dialog=>{dialog.classList.add("os-dialog-window");const handle=dialog.querySelector(":scope > .dialog-title");if(!handle)return;handle.addEventListener("pointerdown",event=>{if(event.button!==0||event.target.closest("button")||isCompact())return;const box=dialog.getBoundingClientRect(),offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;dialog.style.margin="0";dialog.style.left=`${box.left}px`;dialog.style.top=`${box.top}px`;dialog.classList.add("os-dialog-dragging");handle.setPointerCapture(event.pointerId);const move=moveEvent=>{dialog.style.left=`${clamp(moveEvent.clientX-offsetX,0,innerWidth-dialog.offsetWidth)}px`;dialog.style.top=`${clamp(moveEvent.clientY-offsetY,0,innerHeight-dialog.offsetHeight)}px`};const end=()=>{dialog.classList.remove("os-dialog-dragging");handle.removeEventListener("pointermove",move)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true})})});
+    const managedIds=new Set(["helpDialog","detailDialog","resourceDetailDialog","reportDialog","chronicleDialog","battleReportDialog","ledgerDialog","commandDialog","plannerDialog","modToolsDialog","aiDialog","saveManagerDialog","gameSettingsDialog"]),tasks=new Map;
+    const syncTask=dialog=>{const button=tasks.get(dialog);if(!button)return;button.hidden=!dialog.open&&!dialog.classList.contains("is-dialog-minimized");button.classList.toggle("is-minimized",dialog.classList.contains("is-dialog-minimized"))};
+    const minimize=dialog=>{dialog.classList.add("is-dialog-minimized");if(dialog.open)dialog.close();syncTask(dialog)};
+    const restore=dialog=>{dialog.classList.remove("is-dialog-minimized");if(!dialog.open)dialog.showModal();syncTask(dialog)};
+    const maximize=dialog=>{dialog.classList.toggle("os-dialog-maximized");if(dialog.classList.contains("os-dialog-maximized")){dialog.style.removeProperty("left");dialog.style.removeProperty("top");dialog.style.removeProperty("margin")}else dialog.style.margin="auto"};
+    document.querySelectorAll("dialog").forEach(dialog=>{dialog.classList.add("os-dialog-window");const handle=dialog.querySelector(":scope > .dialog-title");if(!handle)return;const managed=managedIds.has(dialog.id);if(managed){dialog.classList.add("os-managed-dialog");const controls=document.createElement("span");controls.className="os-dialog-buttons";const min=document.createElement("button"),max=document.createElement("button");min.type=max.type="button";min.textContent="_";max.textContent="□";min.title="最小化";max.title="最大化或还原";min.setAttribute("aria-label","最小化窗口");max.setAttribute("aria-label","最大化或还原窗口");min.onclick=()=>minimize(dialog);max.onclick=()=>maximize(dialog);controls.append(min,max);const close=handle.querySelector("[data-close],#closeHelp,button:last-child"),anchor=close?.parentElement===handle?close:handle.querySelector(":scope > .dialog-tools");handle.insertBefore(controls,anchor||null);if(close)close.addEventListener("click",()=>dialog.classList.remove("is-dialog-minimized"));if(taskStrip){const task=document.createElement("button");task.type="button";task.className="os-task-button os-dialog-task";task.textContent=dialog.querySelector(":scope > .dialog-title > span:not(.dialog-tools)")?.textContent?.trim()||handle.childNodes[0]?.textContent?.trim()||"窗口";task.hidden=true;task.onclick=()=>dialog.open?minimize(dialog):restore(dialog);taskStrip.append(task);tasks.set(dialog,task)}handle.addEventListener("dblclick",event=>{if(!event.target.closest("button"))maximize(dialog)});dialog.addEventListener("close",()=>syncTask(dialog));new MutationObserver(()=>syncTask(dialog)).observe(dialog,{attributes:true,attributeFilter:["open"]})}
+      handle.addEventListener("pointerdown",event=>{if(event.button!==0||event.target.closest("button")||isCompact()||dialog.classList.contains("os-dialog-maximized"))return;const box=dialog.getBoundingClientRect(),offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;dialog.style.margin="0";dialog.style.left=`${box.left}px`;dialog.style.top=`${box.top}px`;dialog.classList.add("os-dialog-dragging");handle.setPointerCapture(event.pointerId);const move=moveEvent=>{const maxX=Math.max(0,innerWidth-dialog.offsetWidth),maxY=Math.max(0,innerHeight-dialog.offsetHeight),rawX=clamp(moveEvent.clientX-offsetX,0,maxX),rawY=clamp(moveEvent.clientY-offsetY,0,maxY),x=snapValue(rawX,[0,maxX]),y=snapValue(rawY,[0,maxY]);dialog.style.left=`${x.value}px`;dialog.style.top=`${y.value}px`;dialog.classList.toggle("is-snapping",x.snapped||y.snapped)};const end=()=>{dialog.classList.remove("os-dialog-dragging","is-snapping");handle.removeEventListener("pointermove",move)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true})})});
   }
 
   function renderCalendar(){
@@ -145,13 +161,13 @@
   function initialize(){
     const windows=[];
     for(const definition of definitions){const window=document.querySelector(definition.selector);if(definition.id==="calendarWindow")document.querySelector(".workspace")?.prepend(window);const handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;if(definition.id==="mapWindow"){const caption=document.createElement("span");caption.className="os-map-caption";caption.textContent=definition.title;handle.prepend(caption)}addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
-    createSystemMenu();createTaskStrip(windows);bindDialogs();renderCalendar();
+    createSystemMenu(windows);createTaskStrip(windows);bindDialogs();renderCalendar();
     const dateLabel=$("dateLabel");if(dateLabel)new MutationObserver(renderCalendar).observe(dateLabel,{childList:true,characterData:true,subtree:true});
-    const map=windows.find(window=>window.dataset.windowId==="mapWindow");if(map)focusWindow(map);
+    const map=windows.find(window=>window.dataset.windowId==="mapWindow"),focusTarget=map&&!map.classList.contains("is-minimized")&&!map.classList.contains("is-closed")?map:windows.find(window=>!window.classList.contains("is-minimized")&&!window.classList.contains("is-closed"));if(focusTarget)focusWindow(focusTarget);
     let wasCompact=isCompact();const clearGeometry=window=>{for(const key of ["left","top","right","bottom","width","height"])window.style.removeProperty(key)};
-    const adapt=()=>{const compact=isCompact();if(compact)windows.forEach(clearGeometry);else{if(wasCompact)windows.forEach(window=>window.dataset.userPositioned&&restorePosition(window));windows.forEach(window=>window.dataset.userPositioned?constrainWindow(window):clearGeometry(window))}wasCompact=compact};
-    addEventListener("resize",adapt);new MutationObserver(()=>requestAnimationFrame(adapt)).observe(document.body,{attributes:true,attributeFilter:["class"]});
-    window.SanguoDesktop={reset(){localStorage.removeItem(storageKey);location.reload()},windows};
+    const adapt=()=>{const compact=isCompact();if(compact)windows.forEach(clearGeometry);else{if(wasCompact)windows.forEach(window=>window.dataset.userPositioned&&restorePosition(window));windows.forEach(window=>{if(!window.dataset.userPositioned)clearGeometry(window);constrainWindow(window)})}wasCompact=compact};
+    addEventListener("resize",adapt);addEventListener("sanguo-game-ready",adapt,{once:true});new MutationObserver(()=>requestAnimationFrame(adapt)).observe(document.body,{attributes:true,attributeFilter:["class"]});requestAnimationFrame(adapt);
+    window.SanguoDesktop={reset(){arrangeWindows(windows,"reset")},arrange:mode=>arrangeWindows(windows,mode),windows};
   }
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initialize,{once:true});else initialize();

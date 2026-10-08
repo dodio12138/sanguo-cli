@@ -11,7 +11,8 @@ for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-win
 if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
 if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
 if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar-tray"))throw new Error("缺少合并军令区或历法托盘图标");
-if(!source.includes('state.minimized=false')||!source.includes('?openWindow(window):toggleMinimize(window)'))throw new Error("窗口任务按钮未实现最小化切换或历法恢复状态未持久化");
+if(!source.includes('minimized:false')||!source.includes('?openWindow(window):toggleMinimize(window)'))throw new Error("窗口任务按钮未实现最小化切换或历法恢复状态未持久化");
+if(!source.includes('closed:true')||!source.includes('maximized:window.classList.contains("is-maximized")')||!source.includes("function arrangeWindows"))throw new Error("窗口关闭、最大化状态或整理功能未持久化");
 if(!source.includes("candidates,distance=5"))throw new Error("窗口吸附距离不是 5px");
 if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resourceWindow.classList.contains("is-minimized")'))throw new Error("府库资源条未实现最小化切换");
 if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
@@ -19,4 +20,6 @@ if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-m
 if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
 if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("图例未独立或天下大势与旬报未合并分页");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
+if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
+if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

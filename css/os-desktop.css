@@ -161,7 +161,8 @@ body.game-started{
 /* Default desktop composition; positions are user-draggable and persisted. */
 .game-started #resourcePanel{left:12px;top:6px;width:220px;height:74px}
 .resource-window-body{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1;padding:7px;background:#0b120d}
-.resource-window-body>span{display:grid;grid-template-columns:19px 1fr;align-items:center;border:1px solid #47523e;background:#121b13;min-width:0}
+.resource-window-body>button{display:grid;grid-template-columns:19px 1fr;align-items:center;min-width:0;border:1px solid #47523e;padding:0;background:#121b13;color:inherit;cursor:pointer}
+.resource-window-body>button:hover,.resource-window-body>button:focus-visible{border-color:#b39a57;background:#1b271b;outline:1px dotted #e1ca78;outline-offset:-2px}
 .resource-window-body i{display:grid;place-items:center;align-self:stretch;border-right:1px solid #47523e;background:#293525;color:#d8bd68;font:normal 9px serif}
 .resource-window-body b{overflow:hidden;padding:0 4px;color:#cfd6ae;font-size:9px;text-align:right;text-overflow:ellipsis}
 .game-started .turn-display{left:129px;top:96px;width:220px;min-width:0;height:174px;padding:0;text-align:left}
@@ -238,6 +239,7 @@ dialog{
 dialog>.dialog-title{background:#4b4f2b;cursor:grab;user-select:none;touch-action:none}
 dialog[open]:focus-within>.dialog-title{background:#69572d}
 dialog.os-dialog-dragging{opacity:.93}
+dialog.os-dialog-window.is-snapping{outline:1px dotted #e1ca78;outline-offset:-4px}
 dialog.os-dialog-window{
   border:1px solid!important;
   border-color:var(--window-highlight) #30382d #30382d var(--window-highlight)!important;
@@ -246,6 +248,13 @@ dialog.os-dialog-window{
   background:#111911!important;
   box-shadow:2px 2px 0 #020302,10px 14px 36px #000b,inset 1px 1px #727d61!important;
 }
+dialog.os-managed-dialog{resize:both;overflow:hidden;min-width:300px;min-height:160px}
+dialog.os-managed-dialog.os-dialog-maximized{position:fixed!important;inset:8px 10px 44px!important;width:auto!important;max-width:none!important;height:auto!important;max-height:none!important;margin:0!important;resize:none}
+dialog.os-managed-dialog.os-dialog-maximized>.dialog-content{max-height:none!important;height:calc(100% - 24px);overflow:auto}
+dialog.os-managed-dialog.is-dialog-minimized{display:none!important}
+.os-dialog-buttons{display:flex;align-items:center;gap:2px;margin-left:auto}
+dialog.os-dialog-window>.dialog-title .os-dialog-buttons button{display:grid;place-items:center;width:16px;height:15px;border:1px solid;border-color:#d6d8c8 #3d4339 #3d4339 #d6d8c8;padding:0;background:#aeb19f;color:#151914;font:700 10px/1 sans-serif;cursor:pointer}
+.os-dialog-task[hidden]{display:none!important}
 dialog.os-dialog-window::backdrop{background:#020502b8}
 dialog.os-dialog-window>.dialog-title{
   display:flex;align-items:center;min-height:22px;margin:0 0 2px;padding:3px 4px;border:0;background:#4b4f2b;color:#f0dfa0;font:700 9px/1 var(--mono);letter-spacing:.04em;cursor:grab;
@@ -291,4 +300,5 @@ body>.app-shell>footer{display:none}
   .game-started .map-column{min-height:440px}
   .game-started .left-rail,.game-started .right-rail{display:contents}
   .game-started .main-nav{overflow:visible}.os-task-strip{display:none}.os-resource-tray{margin-left:auto}.os-clock{display:block}
+  dialog.os-managed-dialog{resize:none;max-width:94vw;max-height:90vh}
 }

@@ -7,10 +7,10 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20260929-46">
   <link rel="stylesheet" href="css/observer.css?v=20261005-04">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20260930-78">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261008-11">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261005-01">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-06">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-11">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
 </head>
@@ -61,9 +61,9 @@
       <section id="resourcePanel" class="terminal-card resource-window" aria-label="势力资源">
         <div class="card-title"><span>府库</span></div>
         <div class="resource-window-body">
-          <span><i>金</i><b id="goldValue">12,480</b></span>
-          <span><i>粮</i><b id="foodValue">38,600</b></span>
-          <span><i>望</i><b id="prestigeValue">276</b></span>
+          <button type="button" data-resource-detail="gold" aria-label="查看金钱收支"><i>金</i><b id="goldValue">12,480</b></button>
+          <button type="button" data-resource-detail="food" aria-label="查看粮食收支"><i>粮</i><b id="foodValue">38,600</b></button>
+          <button type="button" data-resource-detail="prestige" aria-label="查看府库与势力明细"><i>望</i><b id="prestigeValue">276</b></button>
         </div>
       </section>
       <aside class="left-rail">
@@ -151,12 +151,17 @@
     <div class="dialog-content settings-grid"><label>观察者推进速度<select id="gameObserverSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="gameConfirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
   </dialog>
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
-    <div class="dialog-title"><span>结束当前旬</span></div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
+    <div class="dialog-title"><span>结束当前旬</span></div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
   </dialog>
   <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
   <dialog id="helpDialog">
     <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
-    <div class="dialog-content"><p>点击地图选择据点，再从左右两侧查看情报或下达命令。</p><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
+    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每回合做什么</h3><p>查看府库与局势，安排任命或军事行动，将命令加入队列，再结束当前回合统一结算。</p><button id="openTurnMapButton" type="button">查看可视化回合流程</button></section><section><h3>快捷操作</h3><p>F1～F5 切换舆图；回车查看所选城市；O 打开城市命令；M 规划行军；B 查看战报；Ctrl/⌘+S 保存。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
+  </dialog>
+
+  <dialog id="resourceDetailDialog" class="wide-dialog resource-detail-dialog">
+    <div class="dialog-title"><span>府库收支</span><button data-close="resourceDetailDialog">×</button></div>
+    <div id="resourceDetailContent" class="dialog-content resource-detail-content"></div>
   </dialog>
 
   <dialog id="detailDialog" class="wide-dialog">
@@ -224,6 +229,7 @@
       <small id="turnBriefingDate" class="briefing-date"></small>
       <h2>上一旬回顾</h2>
       <section><h3>已下达命令</h3><div id="turnBriefingOrders"></div></section>
+      <section><h3>府库与兵民变化</h3><div id="turnBriefingResources"></div></section>
       <section><h3>命令反馈</h3><div id="turnBriefingFeedback"></div></section>
       <section><h3>相关军事行动</h3><div id="turnBriefingMilitary"></div></section>
     </div>
@@ -261,15 +267,15 @@
   <script src="js/data/game-data.js?v=20260928-16"></script>
   <script src="js/data/offline-data.generated.js?v=20260930-78"></script>
   <script src="js/core/data-loader.js?v=20260930-78"></script>
-  <script src="js/core/rule-engine.js?v=20260930-78"></script>
+  <script src="js/core/rule-engine.js?v=20261008-11"></script>
   <script src="js/core/ai-bridge.js?v=20260929-46"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/game-state.js?v=20261005-05"></script>
+  <script src="js/core/game-state.js?v=20261008-11"></script>
   <script src="js/ui/map-view.js?v=20260930-78"></script>
   <script src="js/ui/terminal-select.js?v=20260929-66"></script>
   <script src="js/ui/command-planner.js?v=20260930-78"></script>
-  <script src="js/ui/app.js?v=20261008-04"></script>
-  <script src="js/ui/os-window-manager.js?v=20261008-06"></script>
+  <script src="js/ui/app.js?v=20261008-11"></script>
+  <script src="js/ui/os-window-manager.js?v=20261008-11"></script>
 </body>
 </html>
