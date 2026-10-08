@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=fs.readFileSync(new URL("js/ui/app.js",root),"utf8");
 const polishCss=fs.readFileSync(new URL("css/ui-polish.css",root),"utf8");
+const buttonCss=fs.readFileSync(new URL("css/button-states.css",root),"utf8"),hierarchyCss=fs.readFileSync(new URL("css/hierarchy.css",root),"utf8"),styleCss=fs.readFileSync(new URL("css/style.css",root),"utf8");
 if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
 for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
 if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
@@ -32,5 +33,9 @@ if(!source.includes('legacyPresetKey="sanguo.os-window-preset.v1"')||!source.inc
 if(!source.includes("function captureDialogPreset")||!source.includes("function reopenPresetDialog")||!source.includes("dialogs=captureDialogPreset()")||!source.includes('state.id==="ledgerDialog"&&state.kind')||!appSource.includes('$("ledgerDialog").dataset.panelKind=kind'))throw new Error("版面预设没有包含情报等资料面板");
 if(!source.includes('makeSubmenu=(label,name,tip)')||!source.includes('makeSubmenu("档案与情报","archives"')||!source.includes('makeSubmenu("存档与读档","saves"')||!source.includes('makeSubmenu("窗口版面","layout"')||!source.includes('makeSubmenu("版面预设","presets"')||!css.includes(".os-start-submenu"))throw new Error("漢菜单没有整理为分类二级菜单");
 if(!source.includes('makeSubmenu=(label,name,tip)')||!source.includes("if(!button.dataset.tip)button.dataset.tip=")||!source.includes('button.dataset.tip=tip')||!source.includes('button.dataset.tip=tip;button.textContent=label'))throw new Error("漢菜单按钮没有完整的悬浮说明");
-if(!css.includes("button:not(:disabled):hover")||!css.includes("filter:brightness(1.32)")||css.includes("outline:1px dotted #ead27c"))throw new Error("按钮缺少全局 hover 提亮反馈或错误加入了描边");
+if(!html.includes("css/button-states.css?v=20261009-01")||html.indexOf("css/button-states.css")<html.indexOf("css/os-desktop.css")||!buttonCss.includes("button:not(:disabled):hover")||!buttonCss.includes("background:var(--control-hover-background)!important")||!buttonCss.includes("outline:1px dotted var(--button-hover-outline)!important"))throw new Error("按钮缺少统一的 hover 变色与虚线反馈，或交互样式表加载顺序错误");
+for(const legacyCss of [css,polishCss,hierarchyCss,styleCss]){
+  if(/(?:button|command-choice|start-choice|event-choice|map-legend-item|city-officer-card|city-army-card|office-slot|office-appoint-button)[^{}]*:hover/.test(legacyCss))throw new Error("按钮 hover 样式仍散落在非交互样式表中");
+  if(/(?:button|start-choice|advisor-button|office-slot|war-plan-actions|archive-tools|save-slot|os-preset-row)[^{}]*:disabled/.test(legacyCss))throw new Error("按钮 disabled 样式仍散落在非交互样式表中");
+}
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
