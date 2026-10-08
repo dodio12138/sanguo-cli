@@ -159,12 +159,12 @@ body.game-started{
 .game-started .os-window.is-closed{display:none!important}
 
 /* Default desktop composition; positions are user-draggable and persisted. */
-.game-started #resourcePanel{left:12px;top:8px;width:220px;height:86px}
+.game-started #resourcePanel{left:12px;top:6px;width:220px;height:74px}
 .resource-window-body{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1;padding:7px;background:#0b120d}
 .resource-window-body>span{display:grid;grid-template-columns:19px 1fr;align-items:center;border:1px solid #47523e;background:#121b13;min-width:0}
 .resource-window-body i{display:grid;place-items:center;align-self:stretch;border-right:1px solid #47523e;background:#293525;color:#d8bd68;font:normal 9px serif}
 .resource-window-body b{overflow:hidden;padding:0 4px;color:#cfd6ae;font-size:9px;text-align:right;text-overflow:ellipsis}
-.game-started .turn-display{left:12px;top:102px;width:220px;min-width:0;height:194px;padding:0;text-align:left}
+.game-started .turn-display{left:129px;top:96px;width:220px;min-width:0;height:174px;padding:0;text-align:left}
 .game-started .turn-display>.card-title{display:flex;align-items:center;color:#f1d981;font-size:9px}
 .game-started .turn-display>.card-title:before{content:"◆";margin-right:6px;color:#d4b95e;font-size:7px}
 .game-started .turn-display .os-window-buttons{display:flex}
@@ -178,14 +178,14 @@ body.game-started{
 .game-started .os-calendar-day{display:grid;place-items:center;min-width:0;border-right:1px dotted #a1a493;border-bottom:1px dotted #a1a493;color:#4e5548;font:9px/1 var(--mono)}
 .game-started .os-calendar-day:nth-child(7n){border-right:0}.game-started .os-calendar-day.is-empty{color:transparent}.game-started .os-calendar-day.is-current{margin:1px;background:#304832;color:#f5e7aa;outline:1px dotted #e6dda9;outline-offset:-2px;font-weight:700}
 .os-calendar-body .status-dot{align-self:stretch;border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;padding:3px 5px;background:#b6b9a7;color:#263d29;font-size:8px;white-space:nowrap}
-.game-started #factionPanel{left:12px;top:304px;width:220px;height:108px}
+.game-started #factionPanel{left:445px;top:610px;width:243px;height:144px}
 .game-started #factionPanel{overflow:auto}
-.game-started #selectionRailPanel{left:12px;top:420px;width:224px;height:108px}
+.game-started #selectionRailPanel{left:0;top:285px;width:337px;height:265px}
 .game-started #selectionRailPanel .selection-panel{flex:1;overflow:auto;padding-bottom:8px}
-.game-started #forcesRailPanel{left:12px;top:536px;width:220px;height:104px}
-.game-started .map-column{left:244px;right:278px;top:10px;bottom:48px;min-width:410px;min-height:320px}
-.game-started #commandsRailPanel{right:12px;top:8px;width:254px;height:382px}
-.game-started #situationRailPanel{right:12px;top:398px;width:254px;height:242px}
+.game-started #forcesRailPanel{left:40px;top:563px;width:277px;height:191px}
+.game-started .map-column{left:361px;right:auto;top:104px;bottom:auto;width:485px;height:500px;min-width:410px;min-height:320px}
+.game-started #commandsRailPanel{left:auto;right:30px;top:57px;width:276px;height:413px}
+.game-started #situationRailPanel{left:auto;right:80px;top:494px;width:254px;height:222px}
 .orders-pane{display:flex;flex:0 0 144px;flex-direction:column;min-height:100px;margin-top:5px;border-top:1px solid #4b563f;background:#0a100b;overflow:hidden}
 .orders-pane-title{display:flex;align-items:center;justify-content:space-between;flex:0 0 21px;padding:3px 8px;border-bottom:1px solid #303a2d;background:#172117;color:#d7bd69;font-size:8px}
 .orders-pane-title small{color:#8d927b;font-size:7px}.orders-pane-title b{color:#d7bd69}
@@ -201,7 +201,7 @@ body.game-started{
 .game-started .map-column .map-footer{min-height:24px;padding:3px 7px;background:#0a100b;border-top:1px solid #3c4635}
 .game-started .map-tooltip{max-width:200px;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 
-.os-start-button{flex:none;min-width:58px!important;border-color:#87916e!important;background:#2d3929!important;color:#f0d983!important;font-weight:700!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
+.os-start-button{display:grid!important;place-items:center;flex:none;width:26px;min-width:26px!important;height:26px;border-color:#87916e!important;padding:0!important;background:#2d3929!important;color:#f0d983!important;font:700 15px/1 serif!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
 .os-start-button[aria-expanded="true"]{box-shadow:inset 1px 1px #080b08,inset -1px -1px #899171}
 .os-start-menu{position:fixed;z-index:9000;left:8px;bottom:43px;display:grid;grid-template-columns:repeat(2,minmax(106px,1fr));gap:2px;width:246px;border:1px solid #87916e;padding:5px 5px 5px 27px;background:#192218;box-shadow:2px 3px 0 #030503,10px 14px 32px #000c,inset 1px 1px #b5bc98}
 .os-start-menu[hidden]{display:none}.os-start-menu:before{content:"三 国";position:absolute;inset:5px auto 5px 5px;width:17px;padding-top:7px;background:#3d4d37;color:#bfc79e;font:700 10px/1.45 serif;text-align:center}
@@ -237,18 +237,15 @@ dialog.os-dialog-dragging{opacity:.93}
 
 body>.app-shell>footer{display:none}
 
-@media(max-width:1100px){
-  .game-started .map-column{left:242px;right:270px}
-  .game-started #commandsRailPanel,.game-started #situationRailPanel{width:250px}
-}
-@media(max-height:800px) and (min-width:1001px){
+@media(max-width:1250px) and (min-width:1001px){
   .game-started #resourcePanel{top:6px;height:74px}
-  .game-started .turn-display{top:88px;height:174px}
-  .game-started #factionPanel{top:270px;height:92px}
-  .game-started #selectionRailPanel{top:370px;height:92px}
-  .game-started #forcesRailPanel{top:470px;height:88px}
-  .game-started #commandsRailPanel{top:6px;height:322px}
-  .game-started #situationRailPanel{top:336px;height:222px}
+  .game-started .turn-display{left:12px;top:88px;width:220px;height:174px}
+  .game-started #factionPanel{left:12px;top:270px;width:220px;height:92px}
+  .game-started #selectionRailPanel{left:12px;top:370px;width:224px;height:92px}
+  .game-started #forcesRailPanel{left:12px;top:470px;width:220px;height:88px}
+  .game-started .map-column{left:242px;right:270px;top:10px;bottom:48px;width:auto;height:auto}
+  .game-started #commandsRailPanel{left:auto;right:12px;top:6px;width:250px;height:322px}
+  .game-started #situationRailPanel{left:auto;right:12px;top:336px;width:250px;height:222px}
   .orders-pane{flex-basis:118px}
   .os-calendar-days{min-height:68px}
 }

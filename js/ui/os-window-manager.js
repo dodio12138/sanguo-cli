@@ -110,7 +110,7 @@
     const dock=document.querySelector(".main-nav");if(!dock)return;
     const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("aria-label","应用菜单");
     [...dock.querySelectorAll(":scope > button")].forEach(button=>menu.append(button));const utilities=dock.querySelector(":scope > .nav-end");if(utilities)menu.append(utilities);document.body.append(menu);
-    const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="三国";launcher.setAttribute("aria-expanded","false");launcher.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;launcher.setAttribute("aria-expanded",String(!menu.hidden))};dock.prepend(launcher);
+    const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="漢";launcher.title="三国";launcher.setAttribute("aria-label","打开三国菜单");launcher.setAttribute("aria-expanded","false");launcher.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;launcher.setAttribute("aria-expanded",String(!menu.hidden))};dock.prepend(launcher);
     menu.addEventListener("click",event=>{if(event.target.closest("button")){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});document.addEventListener("pointerdown",event=>{if(!menu.hidden&&!menu.contains(event.target)&&event.target!==launcher){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});
   }
 
