@@ -36,13 +36,13 @@ const responsesTool={type:"function",name:"submit_command",description:"提出�
 const chatTool={type:"function",function:{name:"submit_command",description:responsesTool.description,parameters:commandSchema}};
 const instructions=["你是《终端三国》的军师。只根据提供的可见情报规划当前一旬，并优先服从 context.instruction 中的玩家意图。","先读 context.gameRules、recentReports 和 reportIndex：报告的 executed 是实际下达命令，events 是结算结果；失败、被阻断或原地踏步时先解决原因，不要盲目重复。reportIndex 覆盖本局所有已结算旬，recentReports 提供最近三旬细节。","再读 memory.outcomes：queued=false 表示建议在入队时已被规则拒绝，必须依据 error 与 targetIds 改换命令或目标；不得对同一目标连续重试相同失败命令。城市 defenseAtMaximum=true 时不要再使用 city_defense 或 fortify；情报 intelligenceAtMaximum=true 时不要再侦察该城市或军团。","军事优先：activeSieges 是己方已遭围城的据点，先解围/补防。若 militaryAssessment.canExpand 为真且没有急迫威胁，本旬必须投入至少一项军务：无战争则向推荐目标势力宣战，已有战争则派可用军团向推荐目标推进。避免把本旬命令额度全部用于侦察、农商或城防。","军事前置：目标为敌方城市时，未宣战不得下令进入；先对目标势力使用 declare_war，再移动。若同旬同时提交，必须先提交宣战再提交移动；如已有未完成宣战命令，不要重复下令。","征兵 recruit_troops 是从势力资源在己方城市增加城市守军；补员 reinforce 是从军团所在己方城市守军补充指定军团。按缺口对象选择，不能互换。","‘已规划前往’不等于已抵达。结合军团当前位置、路线、驻扎/行军状态、战败标志和最近报告确认推进；被拒绝的移动不要机械重下。","参考 strategy、warPlan、defensePlan 与 memory 保持多旬策略连贯；来袭威胁高于扩张建议。不得臆造 ID；命令 ID 和目标 ID 必须来自上下文。不得把低等级情报当成确定事实。上下文中的完整 commands 目录含所有命令说明，不要把同名命令或相似命令混为一谈。","最多提出 6 条互不重复、资源可承受的命令。需要下令时调用 submit_command；最后用简短中文说明本旬战略。玩家会在浏览器中审核或自动排队，工具调用本身不会直接修改游戏状态。"].join("\n");
 
-for(let i=0;i<instructions.length;i++)instructions[i]=instructions[i].replaceAll("终端三国","<<<三国");
+const brandedInstructions=instructions.replaceAll("终端三国","<<<三国");
 
 async function requestUpstream(context){
   if(!apiKey)throw Object.assign(new Error("网关尚未配置 AI_API_KEY，请编辑项目根目录的 .env"),{status:503});
   const isDeepSeek=provider==="deepseek";
   const endpoint=isDeepSeek?`${baseUrl}/chat/completions`:`${baseUrl}/responses`;
-  const body=isDeepSeek?{model,thinking:{type:"disabled"},max_tokens:900,messages:[{role:"system",content:instructions},{role:"user",content:`当前可见游戏状态：\n${JSON.stringify(context)}`}],tools:[chatTool],tool_choice:"auto",parallel_tool_calls:true}:{model,instructions,input:`当前可见游戏状态：\n${JSON.stringify(context)}`,tools:[responsesTool],tool_choice:"auto",parallel_tool_calls:true};
+  const body=isDeepSeek?{model,thinking:{type:"disabled"},max_tokens:900,messages:[{role:"system",content:brandedInstructions},{role:"user",content:`当前可见游戏状态：\n${JSON.stringify(context)}`}],tools:[chatTool],tool_choice:"auto",parallel_tool_calls:true}:{model,instructions:brandedInstructions,input:`当前可见游戏状态：\n${JSON.stringify(context)}`,tools:[responsesTool],tool_choice:"auto",parallel_tool_calls:true};
   const upstream=await fetch(endpoint,{method:"POST",headers:{authorization:`Bearer ${apiKey}`,"content-type":"application/json"},body:JSON.stringify(body),signal:AbortSignal.timeout(90_000)});
   const requestId=upstream.headers.get("x-request-id")||null,payload=await upstream.json().catch(()=>({}));
   if(!upstream.ok){const error=new Error(payload.error?.message||`${provider} API 响应 ${upstream.status}`);error.status=upstream.status;error.requestId=requestId;throw error}
