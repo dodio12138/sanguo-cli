@@ -184,9 +184,11 @@ body.game-started{
 .game-started #selectionRailPanel .selection-panel{flex:1;overflow:auto;padding-bottom:8px}
 .game-started #forcesRailPanel{left:12px;top:536px;width:220px;height:104px}
 .game-started .map-column{left:244px;right:278px;top:10px;bottom:48px;min-width:410px;min-height:320px}
-.game-started #commandsRailPanel{right:12px;top:8px;width:254px;height:226px}
-.game-started #ordersRailPanel{right:12px;top:242px;width:254px;height:148px}
+.game-started #commandsRailPanel{right:12px;top:8px;width:254px;height:382px}
 .game-started #situationRailPanel{right:12px;top:398px;width:254px;height:242px}
+.orders-pane{display:flex;flex:0 0 144px;flex-direction:column;min-height:100px;margin-top:5px;border-top:1px solid #4b563f;background:#0a100b;overflow:hidden}
+.orders-pane-title{display:flex;align-items:center;justify-content:space-between;flex:0 0 21px;padding:3px 8px;border-bottom:1px solid #303a2d;background:#172117;color:#d7bd69;font-size:8px}
+.orders-pane-title small{color:#8d927b;font-size:7px}.orders-pane-title b{color:#d7bd69}
 
 .game-started .map-column .layer-tabs{display:flex;align-items:center;min-width:0;overflow:hidden}
 .os-map-caption{display:flex;align-items:center;align-self:stretch;gap:5px;flex:none;margin:-3px 5px -3px -8px;border-right:1px solid #766a3e;padding:0 9px;color:#ffe08a;font-size:9px;white-space:nowrap}
@@ -210,6 +212,9 @@ body.game-started{
 .os-task-button{flex:1 1 74px;max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-color:#485440!important;background:#151d15!important;text-align:left}
 .os-task-button.is-minimized{color:#69705f!important}
 .os-task-button.is-closed{color:#555d4f!important}.os-task-button[data-task-window="resourcePanel"]{display:none}
+.os-task-button[data-task-window="calendarWindow"]{display:none}
+.os-calendar-tray{position:relative;display:grid;place-items:end center;flex:none;width:24px;height:24px;border:1px solid #66705a;padding:7px 2px 2px;background:#c3c5b5;color:#263026;font:700 8px/1 var(--mono);cursor:pointer;box-shadow:inset 1px 1px #f0f0df,inset -1px -1px #343b31}
+.os-calendar-tray:before{content:"";position:absolute;inset:2px 2px auto;height:5px;background:#536746}.os-calendar-tray[hidden]{display:none}
 .os-resource-tray{display:flex;flex:none;gap:5px;border:1px solid #4f5a47;padding:4px 6px;background:#111811;color:#b5bc9b;font-size:7px;cursor:pointer;white-space:nowrap;box-shadow:inset 1px 1px #080b08,inset -1px -1px #6c755d}.os-resource-tray b{color:#dbc36f;font-weight:400}
 .os-clock{align-self:center;margin:0 3px 0 0;border:1px solid #4f5a47;padding:4px 6px;background:#111811;color:#aeb59a;font-size:7px;white-space:nowrap}
 
@@ -234,7 +239,7 @@ body>.app-shell>footer{display:none}
 
 @media(max-width:1100px){
   .game-started .map-column{left:242px;right:270px}
-  .game-started #commandsRailPanel,.game-started #ordersRailPanel,.game-started #situationRailPanel{width:250px}
+  .game-started #commandsRailPanel,.game-started #situationRailPanel{width:250px}
 }
 @media(max-height:800px) and (min-width:1001px){
   .game-started #resourcePanel{top:6px;height:74px}
@@ -242,9 +247,9 @@ body>.app-shell>footer{display:none}
   .game-started #factionPanel{top:270px;height:92px}
   .game-started #selectionRailPanel{top:370px;height:92px}
   .game-started #forcesRailPanel{top:470px;height:88px}
-  .game-started #commandsRailPanel{top:6px;height:192px}
-  .game-started #ordersRailPanel{top:206px;height:122px}
+  .game-started #commandsRailPanel{top:6px;height:322px}
   .game-started #situationRailPanel{top:336px;height:222px}
+  .orders-pane{flex-basis:118px}
   .os-calendar-days{min-height:68px}
 }
 @media(max-width:1000px){

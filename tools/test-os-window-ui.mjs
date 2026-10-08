@@ -2,11 +2,13 @@ import fs from "node:fs";
 
 const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8");
 if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
-for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","ordersRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
+for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
+if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
 for(const feature of ["bindDrag","addResizeGrip","toggleMinimize","toggleMaximize","closeWindow","createSystemMenu","createTaskStrip","bindDialogs"])if(!source.includes(`function ${feature}`))throw new Error(`窗口管理器缺少 ${feature}`);
 if(!source.includes("snapValue")||!source.includes("function snapWindow")||!source.includes("is-snapping")||!source.includes("moveEvent.altKey"))throw new Error("缺少窗口磁性吸附");
 if(!css.includes("body,body *{-webkit-user-select:none;user-select:none}")||!css.includes('input,textarea,[contenteditable="true"]'))throw new Error("缺少界面文字防误选样式");
 for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-window.is-maximized",".os-window.is-closed",".os-window-resize",".os-start-menu",".os-task-strip",".os-resource-tray"])if(!css.includes(selector))throw new Error(`桌面样式缺少 ${selector}`);
 if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
 if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
-console.log("桌面窗口界面通过：9 个窗口 / 复古月历 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
+if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar-tray"))throw new Error("缺少合并军令区或历法托盘图标");
+console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

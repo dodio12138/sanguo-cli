@@ -105,7 +105,7 @@
       </section>
 
       <aside class="right-rail">
-        <nav class="rail-tabs" aria-label="军令侧栏分组"><button class="active" data-rail-tab="commandsRailPanel">下达命令</button><button data-rail-tab="ordersRailPanel">本旬军令</button><button data-rail-tab="situationRailPanel">战局态势</button></nav>
+        <nav class="rail-tabs" aria-label="军令侧栏分组"><button class="active" data-rail-tab="commandsRailPanel">军令</button><button data-rail-tab="situationRailPanel">战局态势</button></nav>
         <section id="commandsRailPanel" data-rail-panel class="terminal-card command-card">
           <div class="card-title"><span>军令</span></div>
           <div class="terminal-log" id="terminalLog" aria-live="polite">
@@ -117,12 +117,11 @@
           </form>
           <div class="control-mode"><label for="controlMode">控制</label><select id="controlMode"><option value="manual">纯手动</option><option value="assist">军师辅助</option><option value="delegate">军师托管</option></select><span id="aiConnectionState">军师未连接</span><button id="aiSettingsButton">设置</button></div>
           <button id="askAdvisorButton" class="advisor-button" disabled>请军师筹划本旬</button>
-        </section>
-
-        <section id="ordersRailPanel" data-rail-panel class="terminal-card order-card" hidden>
-          <div class="card-title"><span>本旬命令</span><small><b id="orderCount">0</b> / 8</small></div>
-          <div id="orderQueue" class="order-queue"><p class="empty">尚无待执行命令</p></div>
-          <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">结束本旬 ▷</button></div>
+          <section id="ordersRailPanel" class="orders-pane order-card">
+            <div class="orders-pane-title"><span>本旬命令</span><small><b id="orderCount">0</b> / 8</small></div>
+            <div id="orderQueue" class="order-queue"><p class="empty">尚无待执行命令</p></div>
+            <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">结束本旬 ▷</button></div>
+          </section>
         </section>
 
         <section id="situationRailPanel" data-rail-panel class="terminal-card legend-card" hidden>
