@@ -192,8 +192,6 @@ body.game-started{
 .game-started .world-tabs button.active{border-color:#59634e;background:#273322;color:#e5cf7c;box-shadow:inset 1px 1px #77806444}
 .world-tab-panel,.legend-window-body{flex:1;min-height:0;overflow:auto;padding:7px 8px}
 .world-tab-panel[hidden]{display:none!important}
-.situation-panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;border-bottom:1px dotted #414b3b;padding-bottom:4px;color:#aeb59a;font-size:8px}
-.situation-panel-heading small{color:#d7bd69;font-size:8px}
 .game-started .legend-window-body>.legend,.game-started .world-forces-panel>#forceList{margin:0}
 .game-started .world-report-panel>.campaign-objective,.game-started .world-report-panel>.turn-report{margin:0 0 7px;padding:6px;line-height:1.55;overflow-wrap:anywhere}
 .game-started .world-report-panel>.turn-report{border:1px solid #303a2d;background:#0a100b;color:#929983}

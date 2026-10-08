@@ -8,7 +8,7 @@
     {selector:"#selectionRailPanel",id:"selectionRailPanel",title:"选中区域",icon:"选",handle:".card-title"},
     {selector:"#forcesRailPanel",id:"forcesRailPanel",title:"天下大势",icon:"势",handle:".card-title"},
     {selector:"#commandsRailPanel",id:"commandsRailPanel",title:"军令",icon:"令",handle:".card-title"},
-    {selector:"#situationRailPanel",id:"situationRailPanel",title:"战局态势",icon:"报",handle:".card-title"}
+    {selector:"#situationRailPanel",id:"situationRailPanel",title:"图例",icon:"例",handle:".card-title"}
   ];
   let topZ=100,layout={};
   try{layout=JSON.parse(localStorage.getItem(storageKey)||"{}")||{}}catch{}

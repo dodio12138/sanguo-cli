@@ -20,6 +20,7 @@ if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!
 if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0"))throw new Error("底部任务栏或漢菜单未贴合视口边缘");
 if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
 if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("图例未独立或天下大势与旬报未合并分页");
+if(html.includes("舆图图例")||html.includes("situation-panel-heading")||!html.includes('<span>图例</span><small id="layerName">地形</small>')||!source.includes('id:"situationRailPanel",title:"图例",icon:"例"'))throw new Error("图例窗口存在重复标题或窗口名称未统一");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
