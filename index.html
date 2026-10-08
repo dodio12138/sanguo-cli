@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/ui-polish.css?v=20260930-78">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261005-01">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-03">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-04">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
 </head>
@@ -145,9 +145,9 @@
     <div class="dialog-content settings-grid"><label>观察者推进速度<select id="gameObserverSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="gameConfirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
   </dialog>
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
-    <div class="dialog-title">结束当前旬</div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
+    <div class="dialog-title"><span>结束当前旬</span></div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
   </dialog>
-  <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title">覆盖本地存档？</div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
+  <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
   <dialog id="helpDialog">
     <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
     <div class="dialog-content"><p>点击地图选择据点，再从左右两侧查看情报或下达命令。</p><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
@@ -201,12 +201,15 @@
   </dialog>
 
   <dialog id="eventDialog" class="event-dialog">
-    <div class="event-seal">策</div>
-    <small id="eventKind">历史事件</small>
-    <h2 id="eventTitle">天下有变</h2>
-    <p id="eventText"></p>
-    <div id="eventLocation" class="event-location"></div>
-    <div id="eventChoices" class="event-choices"></div>
+    <div class="dialog-title"><span>天下事件</span></div>
+    <div class="event-window-body">
+      <div class="event-seal">策</div>
+      <small id="eventKind">历史事件</small>
+      <h2 id="eventTitle">天下有变</h2>
+      <p id="eventText"></p>
+      <div id="eventLocation" class="event-location"></div>
+      <div id="eventChoices" class="event-choices"></div>
+    </div>
   </dialog>
 
   <dialog id="turnBriefingDialog" class="turn-briefing-dialog">
@@ -235,11 +238,14 @@
   </dialog>
 
   <dialog id="gameOverDialog" class="game-over-dialog">
-    <div class="game-over-seal" id="gameOverSeal">統</div>
-    <h2 id="gameOverTitle">天下归定</h2>
-    <p id="gameOverText"></p>
-    <div id="gameOverStats" class="game-over-stats"></div>
-    <button id="restartGame">重新开局</button>
+    <div class="dialog-title"><span>战局终了</span></div>
+    <div class="game-over-window-body">
+      <div class="game-over-seal" id="gameOverSeal">統</div>
+      <h2 id="gameOverTitle">天下归定</h2>
+      <p id="gameOverText"></p>
+      <div id="gameOverStats" class="game-over-stats"></div>
+      <button id="restartGame">重新开局</button>
+    </div>
   </dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -258,6 +264,6 @@
   <script src="js/ui/terminal-select.js?v=20260929-66"></script>
   <script src="js/ui/command-planner.js?v=20260930-78"></script>
   <script src="js/ui/app.js?v=20261008-02"></script>
-  <script src="js/ui/os-window-manager.js?v=20261008-05"></script>
+  <script src="js/ui/os-window-manager.js?v=20261008-06"></script>
 </body>
 </html>
