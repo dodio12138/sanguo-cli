@@ -14,5 +14,6 @@ if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar
 if(!source.includes('state.minimized=false')||!source.includes('?openWindow(window):toggleMinimize(window)'))throw new Error("窗口任务按钮未实现最小化切换或历法恢复状态未持久化");
 if(!source.includes("candidates,distance=5"))throw new Error("窗口吸附距离不是 5px");
 if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resourceWindow.classList.contains("is-minimized")'))throw new Error("府库资源条未实现最小化切换");
+if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

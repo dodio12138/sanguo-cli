@@ -32,10 +32,11 @@
 
   function restorePosition(window){
     const saved=layout[window.dataset.windowId];if(!saved||isCompact())return;
+    if(saved.minimized)window.classList.add("is-minimized");
+    const hasGeometry=["left","top","width","height"].some(key=>Number.isFinite(saved[key]));if(!hasGeometry)return;
     window.dataset.userPositioned="true";
     for(const key of ["left","top","width","height"])if(Number.isFinite(saved[key]))window.style[key]=`${saved[key]}px`;
     window.style.right="auto";window.style.bottom="auto";
-    if(saved.minimized)window.classList.add("is-minimized");
   }
 
   function constrainWindow(window){
