@@ -179,7 +179,7 @@ dialog.diplomacy-ledger { width: min(900px, 94vw); max-width: min(900px, 94vw); 
 .diplomacy-network-legend span::before { content: ""; display: inline-block; width: 15px; margin-right: 4px; border-top: 2px solid currentColor; vertical-align: 2px; }
 .diplomacy-network-map { display: block; width: 100%; max-height: 52vh; min-height: 310px; }
 .diplomacy-edge { stroke: #697061; stroke-width: 1; opacity: .13; transition: opacity .15s, stroke-width .15s; }
-.diplomacy-edge.is-player-edge { opacity: .48; stroke-width: 1.4; }
+.diplomacy-edge.is-center-edge { opacity: .48; stroke-width: 1.4; }
 .diplomacy-edge.relation-war,.diplomacy-network-legend .relation-war { stroke: #c75a4c; color: #c75a4c; opacity: .9; stroke-width: 2.2; }
 .diplomacy-edge.relation-alliance,.diplomacy-network-legend .relation-alliance { stroke: #66a96b; color: #66a96b; opacity: .8; stroke-width: 2; }
 .diplomacy-edge.relation-truce,.diplomacy-network-legend .relation-truce { stroke: #d0b768; color: #d0b768; opacity: .7; stroke-dasharray: 6 4; }
@@ -191,7 +191,7 @@ dialog.diplomacy-ledger { width: min(900px, 94vw); max-width: min(900px, 94vw); 
 .diplomacy-node circle { fill: color-mix(in srgb, var(--force-color) 64%, #111 36%); stroke: #a4aa91; stroke-width: 1.2; filter: drop-shadow(2px 3px 2px #000b); transition: stroke-width .15s, filter .15s; }
 .diplomacy-node text { fill: #f2edcf; font: 700 10px var(--mono); text-anchor: middle; pointer-events: none; paint-order: stroke; stroke: #101410; stroke-width: 2px; }
 .diplomacy-node:hover circle,.diplomacy-node:focus-visible circle,.diplomacy-node.is-selected circle { stroke: #ffe39a; stroke-width: 3; filter: drop-shadow(0 0 5px #d8bd6577); }
-.diplomacy-node.is-player circle { stroke: #ffe39a; }
+.diplomacy-node.is-player circle,.diplomacy-node.is-center circle { stroke: #ffe39a; }
 .diplomacy-focus { border-top: 1px solid #3b4637; padding: 7px 8px 8px; background: #0c120d; }
 .diplomacy-focus[hidden] { display: none; }
 .diplomacy-focus header { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
