@@ -48,9 +48,6 @@
           <span class="status-dot">● 筹划阶段</span>
         </div>
       </section>
-      <div class="resources" aria-label="势力资源">
-        <span>金 <b id="goldValue">12,480</b></span><span>粮 <b id="foodValue">38,600</b></span><span>威望 <b id="prestigeValue">276</b></span>
-      </div>
     </header>
 
     <nav class="main-nav panel-line" aria-label="主菜单">
@@ -60,6 +57,14 @@
     </nav>
 
     <main class="workspace">
+      <section id="resourcePanel" class="terminal-card resource-window" aria-label="势力资源">
+        <div class="card-title"><span>府库</span></div>
+        <div class="resource-window-body">
+          <span><i>金</i><b id="goldValue">12,480</b></span>
+          <span><i>粮</i><b id="foodValue">38,600</b></span>
+          <span><i>望</i><b id="prestigeValue">276</b></span>
+        </div>
+      </section>
       <aside class="left-rail">
         <nav class="rail-tabs" aria-label="战略侧栏分组"><button class="active" data-rail-tab="factionPanel">我方</button><button data-rail-tab="selectionRailPanel">所选</button><button data-rail-tab="forcesRailPanel">群雄</button></nav>
         <section id="factionPanel" data-rail-panel class="terminal-card faction-card">

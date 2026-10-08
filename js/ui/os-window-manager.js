@@ -1,6 +1,7 @@
 (() => {
   const $=id=>document.getElementById(id),storageKey="sanguo.os-window-layout.v2";
   const definitions=[
+    {selector:"#resourcePanel",id:"resourcePanel",title:"府库",icon:"库",handle:".card-title"},
     {selector:".turn-display",id:"calendarWindow",title:"历法",icon:"历",handle:".card-title"},
     {selector:".map-column",id:"mapWindow",title:"战略舆图",icon:"图",handle:".map-toolbar"},
     {selector:"#factionPanel",id:"factionPanel",title:"己方势力",icon:"君",handle:".card-title"},
@@ -51,6 +52,14 @@
     if(!state.minimized)focusWindow(window);
   }
 
+  function closeWindow(window){
+    window.classList.remove("is-minimized","is-maximized","is-active");window.classList.add("is-closed");updateTasks();
+  }
+
+  function openWindow(window){
+    window.classList.remove("is-minimized","is-closed");focusWindow(window);updateTasks();
+  }
+
   function toggleMaximize(window){
     window.classList.toggle("is-maximized");
     if(window.classList.contains("is-minimized"))window.classList.remove("is-minimized");
@@ -61,15 +70,16 @@
     const controls=document.createElement("span");controls.className="os-window-buttons";
     const minimize=document.createElement("button");minimize.type="button";minimize.className="os-window-button";minimize.title="最小化";minimize.textContent="_";
     const maximize=document.createElement("button");maximize.type="button";maximize.className="os-window-button";maximize.title="最大化";maximize.textContent="□";
-    minimize.addEventListener("pointerdown",event=>event.stopPropagation());maximize.addEventListener("pointerdown",event=>event.stopPropagation());
-    minimize.onclick=()=>toggleMinimize(window);maximize.onclick=()=>toggleMaximize(window);controls.append(minimize,maximize);handle.append(controls);
+    const close=document.createElement("button");close.type="button";close.className="os-window-button os-window-close";close.title="关闭";close.textContent="×";
+    for(const button of [minimize,maximize,close])button.addEventListener("pointerdown",event=>event.stopPropagation());
+    minimize.onclick=()=>toggleMinimize(window);maximize.onclick=()=>toggleMaximize(window);close.onclick=()=>closeWindow(window);controls.append(minimize,maximize,close);handle.append(controls);
   }
 
   function addResizeGrip(window){
     const grip=document.createElement("span");grip.className="os-window-resize";grip.setAttribute("aria-hidden","true");window.append(grip);
     grip.addEventListener("pointerdown",event=>{
       if(event.button!==0||isCompact()||window.classList.contains("is-maximized"))return;
-      event.stopPropagation();focusWindow(window);const startX=event.clientX,startY=event.clientY,startWidth=window.offsetWidth,startHeight=window.offsetHeight,minWidth=window.classList.contains("map-column")?410:210,minHeight=window.classList.contains("map-column")?320:140;
+      event.stopPropagation();focusWindow(window);const startX=event.clientX,startY=event.clientY,startWidth=window.offsetWidth,startHeight=window.offsetHeight,minWidth=window.classList.contains("map-column")?410:180,minHeight=window.classList.contains("map-column")?320:76;
       window.style.right="auto";window.style.bottom="auto";grip.setPointerCapture(event.pointerId);
       const move=moveEvent=>{const host=document.querySelector(".workspace").getBoundingClientRect(),box=window.getBoundingClientRect(),maxWidth=Math.max(minWidth,host.right-box.left),maxHeight=Math.max(minHeight,host.bottom-box.top-46);window.style.width=`${clamp(startWidth+moveEvent.clientX-startX,minWidth,maxWidth)}px`;window.style.height=`${clamp(startHeight+moveEvent.clientY-startY,minHeight,maxHeight)}px`;if(window.classList.contains("map-column"))dispatchEvent(new Event("resize"))};
       const end=()=>{grip.removeEventListener("pointermove",move);remember(window);dispatchEvent(new Event("resize"))};grip.addEventListener("pointermove",move);grip.addEventListener("pointerup",end,{once:true});grip.addEventListener("pointercancel",end,{once:true});
@@ -90,20 +100,24 @@
     window.addEventListener("pointerdown",()=>focusWindow(window));
   }
 
-  function createDesktopShortcuts(windows){
-    const box=document.createElement("nav");box.className="os-desktop-shortcuts";box.setAttribute("aria-label","桌面快捷入口");
-    for(const window of windows.slice(0,5)){const button=document.createElement("button");button.type="button";button.className="os-desktop-shortcut";button.innerHTML=`<i>${window.dataset.windowIcon}</i>${titleOf(window)}`;button.onclick=()=>{window.classList.remove("is-minimized");focusWindow(window);updateTasks()};box.append(button)}
-    document.querySelector(".workspace")?.append(box);
+  function createSystemMenu(){
+    const dock=document.querySelector(".main-nav");if(!dock)return;
+    const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("aria-label","应用菜单");
+    [...dock.querySelectorAll(":scope > button")].forEach(button=>menu.append(button));const utilities=dock.querySelector(":scope > .nav-end");if(utilities)menu.append(utilities);document.body.append(menu);
+    const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="三国";launcher.setAttribute("aria-expanded","false");launcher.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;launcher.setAttribute("aria-expanded",String(!menu.hidden))};dock.prepend(launcher);
+    menu.addEventListener("click",event=>{if(event.target.closest("button")){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});document.addEventListener("pointerdown",event=>{if(!menu.hidden&&!menu.contains(event.target)&&event.target!==launcher){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});
   }
 
   let taskStrip;
   function updateTasks(){
-    if(!taskStrip)return;taskStrip.querySelectorAll("[data-task-window]").forEach(button=>{const window=document.querySelector(`[data-window-id="${button.dataset.taskWindow}"]`);button.classList.toggle("is-minimized",window?.classList.contains("is-minimized"))});
+    if(!taskStrip)return;taskStrip.querySelectorAll("[data-task-window]").forEach(button=>{const window=document.querySelector(`[data-window-id="${button.dataset.taskWindow}"]`);button.classList.toggle("is-minimized",window?.classList.contains("is-minimized"));button.classList.toggle("is-closed",window?.classList.contains("is-closed"))});
   }
   function createTaskStrip(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;taskStrip=document.createElement("span");taskStrip.className="os-task-strip";
-    for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>{if(window.classList.contains("is-minimized"))window.classList.remove("is-minimized");focusWindow(window);updateTasks()};taskStrip.append(button)}
+    for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>openWindow(window);taskStrip.append(button)}
+    const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="打开府库";const syncTray=()=>{tray.innerHTML=`金 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　望 <b>${$("prestigeValue")?.textContent||"—"}</b>`};syncTray();for(const id of ["goldValue","foodValue","prestigeValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>resourceWindow&&openWindow(resourceWindow);
     const clock=document.createElement("time");clock.className="os-clock";const tick=()=>{const now=new Date();clock.textContent=now.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})};tick();setInterval(tick,30000);dock.append(taskStrip,clock);updateTasks();
+    dock.insertBefore(tray,clock);
   }
 
   function bindDialogs(){
@@ -120,7 +134,7 @@
   function initialize(){
     const windows=[];
     for(const definition of definitions){const window=document.querySelector(definition.selector);if(definition.id==="calendarWindow")document.querySelector(".workspace")?.prepend(window);const handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;if(definition.id==="mapWindow"){const caption=document.createElement("span");caption.className="os-map-caption";caption.textContent=definition.title;handle.prepend(caption)}addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
-    createDesktopShortcuts(windows);createTaskStrip(windows);bindDialogs();renderCalendar();
+    createSystemMenu();createTaskStrip(windows);bindDialogs();renderCalendar();
     const dateLabel=$("dateLabel");if(dateLabel)new MutationObserver(renderCalendar).observe(dateLabel,{childList:true,characterData:true,subtree:true});
     const map=windows.find(window=>window.dataset.windowId==="mapWindow");if(map)focusWindow(map);
     let wasCompact=isCompact();const clearGeometry=window=>{for(const key of ["left","top","right","bottom","width","height"])window.style.removeProperty(key)};
