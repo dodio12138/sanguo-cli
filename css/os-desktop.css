@@ -12,6 +12,10 @@
   --taskbar:#111811;
 }
 
+/* UI chrome should drag and click like a desktop, without accidental text selection. */
+body,body *{-webkit-user-select:none;user-select:none}
+input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
+
 body.game-started{
   background-color:var(--desktop);
   background-image:

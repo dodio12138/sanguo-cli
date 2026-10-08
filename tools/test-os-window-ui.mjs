@@ -5,6 +5,7 @@ if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager
 for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","ordersRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
 for(const feature of ["bindDrag","addResizeGrip","toggleMinimize","toggleMaximize","closeWindow","createSystemMenu","createTaskStrip","bindDialogs"])if(!source.includes(`function ${feature}`))throw new Error(`窗口管理器缺少 ${feature}`);
 if(!source.includes("snapValue")||!source.includes("function snapWindow")||!source.includes("is-snapping")||!source.includes("moveEvent.altKey"))throw new Error("缺少窗口磁性吸附");
+if(!css.includes("body,body *{-webkit-user-select:none;user-select:none}")||!css.includes('input,textarea,[contenteditable="true"]'))throw new Error("缺少界面文字防误选样式");
 for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-window.is-maximized",".os-window.is-closed",".os-window-resize",".os-start-menu",".os-task-strip",".os-resource-tray"])if(!css.includes(selector))throw new Error(`桌面样式缺少 ${selector}`);
 if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
 if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
