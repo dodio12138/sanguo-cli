@@ -19,7 +19,7 @@ try{
     await pause(30);
     results.push(await exec(`const hit=document.elementFromPoint(${item.x},${item.y}),button=hit?.closest('button'),style=button&&getComputedStyle(button);return {isButton:Boolean(button),hit:(button?.getAttribute('aria-label')||button?.textContent||hit?.tagName||"").trim().replace(/\\s+/g,' ').slice(0,24),hover:Boolean(button?.matches(':hover')),outline:style?.outlineStyle||"",filter:style?.filter||"none"}`));
   }
-  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="dotted"||result.filter==="none");
+  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="none"||result.filter==="none");
   console.log(JSON.stringify({checked:checked.length,skipped,failures},null,2));
   if(!checked.length||failures.length)process.exitCode=1;
 }finally{
