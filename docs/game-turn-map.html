@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>&lt;&lt;&lt;三国 · 回合流程图</title>
+  <style>
+    :root{--bg:#09100b;--panel:#111a13;--panel2:#172219;--line:#667353;--dim:#8d967a;--text:#e4dfbc;--gold:#ddc56f;--green:#91b879;--red:#cb7668;--blue:#7fa6a4;--shadow:#020503}
+    *{box-sizing:border-box}html,body{margin:0;min-width:1080px;min-height:100%;background:var(--bg);color:var(--text);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}body{background-image:linear-gradient(90deg,#53604812 1px,transparent 1px),linear-gradient(#5360480e 1px,transparent 1px),radial-gradient(circle at 50% 30%,#263522 0,transparent 58%);background-size:24px 24px,24px 24px,auto;padding:24px}.sheet{position:relative;width:calc(100vw - 48px);max-width:1500px;min-width:1032px;min-height:920px;margin:auto;border:1px solid #84906d;padding:22px 26px 28px;background:#0b120ddd;box-shadow:5px 6px 0 var(--shadow),18px 24px 70px #000c,inset 1px 1px #aeb78a33}.sheet:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,#0002 4px)}header{position:relative;display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #59644c;padding:0 4px 15px}h1{margin:0;color:var(--gold);font:700 27px/1.1 serif;letter-spacing:.12em}header p{margin:6px 0 0;color:var(--dim);font-size:12px}header .seal{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--gold);color:var(--gold);font:28px serif;box-shadow:inset 0 0 13px #c3a84d25}.legend{display:flex;gap:15px;color:var(--dim);font-size:11px}.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;border:1px solid #ffffff44}.loop{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:30px}.node{position:relative;min-height:200px;border:1px solid var(--line);padding:0 12px 12px;background:linear-gradient(145deg,#172119,#0c130e);box-shadow:2px 3px 0 var(--shadow),8px 10px 22px #0008}.node:after{content:"";position:absolute;top:50%;right:-23px;width:22px;border-top:2px solid #78855f}.node:before{content:"▶";position:absolute;z-index:2;top:calc(50% - 8px);right:-27px;color:var(--gold);font-size:13px}.node:last-child:after,.node:last-child:before{display:none}.node-title{display:flex;align-items:center;gap:8px;height:34px;margin:0 -12px 10px;padding:0 9px;background:#46522f;color:#ffe799;font-size:13px;font-weight:700}.node-title b{display:grid;place-items:center;width:20px;height:20px;border:1px solid #d8cc8c;color:#f6e39a;font-size:10px}.node ul{margin:0;padding-left:17px;color:#b9bea2;font-size:11px;line-height:1.65}.node li+li{margin-top:3px}.node strong{color:var(--text)}.plan{border-color:#8d7641}.resolve{border-color:#577a50}.event{border-color:#8b554a}.output{border-color:#597777}.return-arrow{position:absolute;z-index:0;left:8.2%;right:8.2%;top:236px;height:36px;border:2px solid #59644c;border-top:0;border-radius:0 0 22px 22px}.return-arrow:before{content:"▲";position:absolute;left:-7px;top:-8px;color:var(--gold);font-size:13px}.return-arrow span{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:0 8px;background:#0b120d;color:#899478;font-size:10px}.resolution{position:relative;margin:74px auto 0;border:1px solid #526149;padding:13px 13px 12px;background:#0d160f}.resolution h2,.branch h2{display:flex;align-items:center;gap:8px;margin:0 0 12px;color:var(--gold);font-size:13px}.resolution h2:before,.branch h2:before{content:"■";font-size:7px}.phases{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}.phase{position:relative;min-height:92px;border:1px solid #3f4c3a;padding:8px;background:#121c14}.phase:not(:last-child):after{content:"›";position:absolute;right:-7px;top:35px;z-index:2;color:var(--gold);font-size:17px}.phase b{display:block;margin-bottom:5px;color:#d6c36e;font-size:11px}.phase span{color:#9ca58b;font-size:9px;line-height:1.5}.branches{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;margin-top:14px}.branch{border:1px solid #4a5742;padding:12px;background:#0f1811}.branch ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}.branch li{border-left:2px solid #596a4e;padding:5px 7px;background:#151f16;color:#aeb69b;font-size:10px;line-height:1.45}.branch li b{display:block;color:#e0d9aa;font-size:10px}.branch.mode li:nth-child(2){border-left-color:#738e65}.branch.mode li:nth-child(3){border-left-color:#9a8549}.branch.mode li:nth-child(4){border-left-color:#667f80}.branch.event-path li{border-left-color:#8b554a}.branch.persist li{border-left-color:#597777}.foot{display:grid;grid-template-columns:1fr auto;align-items:center;margin-top:14px;border-top:1px dotted #505c48;padding-top:10px;color:#747e6b;font-size:10px}.foot strong{color:#b5bd9d}.badge{border:1px solid #5b674f;padding:5px 8px;color:#aeb799;background:#111912}.tip{color:#ccb863}.node.player .node-title{background:#5b552d}.node.resolve .node-title{background:#354e32}.node.event .node-title{background:#593a32}.node.output .node-title{background:#36504d}@media print{body{padding:0;background:#fff}.sheet{box-shadow:none}}
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <div><h1>&lt;&lt;&lt;三国 · 每回合发生了什么</h1><p>从观察局势、编排命令，到全局结算、事件抉择，再回到下一回合</p></div>
+      <div class="legend"><span><i style="background:#5b552d"></i>玩家阶段</span><span><i style="background:#354e32"></i>系统结算</span><span><i style="background:#593a32"></i>事件分支</span><span><i style="background:#36504d"></i>结果输出</span></div>
+      <div class="seal">漢</div>
+    </header>
+
+    <section class="loop" aria-label="主回合流程">
+      <article class="node player"><h2 class="node-title"><b>01</b>观察局势</h2><ul><li>查看<strong>地图、资源、天下态势</strong></li><li>选择城池、军团或人物</li><li>阅读上一回合简报与预警</li><li>判断内政、军事和外交目标</li></ul></article>
+      <article class="node player plan"><h2 class="node-title"><b>02</b>规划与下令</h2><ul><li>手动下令，或让军师提出建议</li><li>从命令簿选择目标与执行者</li><li>命令加入本回合队列，最多 8 条</li><li>可撤销、调整，再确认结束回合</li></ul></article>
+      <article class="node resolve"><h2 class="node-title"><b>03</b>统一结算</h2><ul><li>所有势力在同一次结算中行动</li><li>先更新经济、外交与战略系统</li><li>再执行玩家命令和诸侯决策</li><li>最后处理战斗、补给与人物变化</li></ul></article>
+      <article class="node event"><h2 class="node-title"><b>04</b>事件与胜负</h2><ul><li>检查历史事件或地方事件</li><li>有选项时暂停流程，等待玩家抉择</li><li>检查势力灭亡、胜利或失败</li><li>观察模式则持续演进直到统一</li></ul></article>
+      <article class="node output"><h2 class="node-title"><b>05</b>生成结果</h2><ul><li>更新地图、资源、军队和人物</li><li>生成旬报、日志与回合简报</li><li>推进日期并自动保存当前槽位</li><li>无终局时进入下一回合</li></ul></article>
+    </section>
+    <div class="return-arrow"><span>下一回合：重新观察变化后的天下</span></div>
+
+    <section class="resolution" aria-label="统一结算内部顺序">
+      <h2>统一结算内部顺序（代码实际执行次序）</h2>
+      <div class="phases">
+        <div class="phase"><b>① 经济</b><span>税收、粮食收成、军费、人口、城内储备</span></div>
+        <div class="phase"><b>② 天下系统</b><span>战略政策、补给路线、外交、附庸与联盟</span></div>
+        <div class="phase"><b>③ 玩家命令</b><span>逐条验证并执行队列中的命令</span></div>
+        <div class="phase"><b>④ 行政恢复</b><span>官署效果、补员、训练、休整与士气恢复</span></div>
+        <div class="phase"><b>⑤ 诸侯决策</b><span>各势力发展、编军、驰援、进攻与宣战</span></div>
+        <div class="phase"><b>⑥ 战争移动</b><span>攻城结算、军团行军、接战与城市易手</span></div>
+        <div class="phase"><b>⑦ 补给人物</b><span>消耗军粮、补给惩罚、忠诚和人物流动</span></div>
+        <div class="phase"><b>⑧ 事件终局</b><span>阶段评议、随机事件、势力灭亡与胜负</span></div>
+      </div>
+    </section>
+
+    <section class="branches">
+      <article class="branch mode"><h2>玩家可以怎样参与</h2><ul><li><b>纯手动</b>玩家自己规划并提交全部命令</li><li><b>军师辅助</b>军师给建议，玩家决定是否加入</li><li><b>军师托管</b>结束回合前由军师自动补充命令</li><li><b>观察模式</b>不控制势力，自动或单步观看演进</li></ul></article>
+      <article class="branch event-path"><h2>事件分支</h2><ul><li><b>即时事件</b>效果直接写入资源、城池或军团</li><li><b>抉择事件</b>弹出事件窗口，选择后继续简报</li><li><b>历史事件优先</b>满足条件时优先于普通随机事件</li><li><b>阶段评议</b>定期汇总霸主、据点和国力排名</li></ul></article>
+      <article class="branch persist"><h2>报告与保存</h2><ul><li><b>旬报</b>记录命令、阶段结果和相关事件</li><li><b>回合简报</b>突出我方反馈与军事变化</li><li><b>史官</b>可选生成月度本方纪事与季度天下纪事</li><li><b>自动保存</b>结算和浏览器刷新都会保存当前战局</li></ul></article>
+    </section>
+
+    <footer class="foot"><span><strong>阅读顺序：</strong>先看上方 01→05 主循环，再看中部结算细节；下方是控制模式、事件和存档三条支线。</span><span class="badge">依据当前 feature/os-window-ui 代码整理</span></footer>
+  </main>
+</body>
+</html>
