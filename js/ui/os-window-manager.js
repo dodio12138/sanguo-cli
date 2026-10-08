@@ -17,6 +17,7 @@
   const isCompact=()=>matchMedia("(max-width:1000px)").matches;
   const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(layout))}catch{}}
   const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+  const snapValue=(value,candidates,distance=12)=>{let result=value,best=distance+1;for(const candidate of candidates){const delta=Math.abs(value-candidate);if(delta<=distance&&delta<best){result=candidate;best=delta}}return {value:result,snapped:best<=distance}};
   const titleOf=window=>window.dataset.windowTitle||"窗口";
 
   function focusWindow(window){
@@ -44,6 +45,12 @@
     const box=window.getBoundingClientRect(),safeHeight=Math.max(140,host.height-46),width=Math.min(box.width,host.width),height=Math.min(box.height,safeHeight);
     window.style.width=`${Math.round(width)}px`;window.style.height=`${Math.round(height)}px`;window.style.right="auto";window.style.bottom="auto";
     window.style.left=`${Math.round(clamp(box.left-host.left,0,Math.max(0,host.width-width)))}px`;window.style.top=`${Math.round(clamp(box.top-host.top,0,Math.max(0,safeHeight-height)))}px`;
+  }
+
+  function snapWindow(window,host=document.querySelector(".workspace")?.getBoundingClientRect()){
+    if(!host)return false;const box=window.getBoundingClientRect(),maxX=Math.max(0,host.width-box.width),maxY=Math.max(0,host.height-box.height-46),left=clamp(box.left-host.left,0,maxX),top=clamp(box.top-host.top,0,maxY),xCandidates=[0,maxX],yCandidates=[0,maxY];
+    document.querySelectorAll(".os-window:not(.is-minimized):not(.is-closed):not(.is-maximized)").forEach(other=>{if(other===window)return;const rect=other.getBoundingClientRect(),otherLeft=rect.left-host.left,otherTop=rect.top-host.top;xCandidates.push(otherLeft,rect.right-host.left,otherLeft-box.width,rect.right-host.left-box.width);yCandidates.push(otherTop,rect.bottom-host.top,otherTop-box.height,rect.bottom-host.top-box.height)});
+    const nextX=snapValue(left,xCandidates),nextY=snapValue(top,yCandidates);window.style.left=`${clamp(nextX.value,0,maxX)}px`;window.style.top=`${clamp(nextY.value,0,maxY)}px`;return nextX.snapped||nextY.snapped;
   }
 
   function toggleMinimize(window){
@@ -94,8 +101,8 @@
       focusWindow(window);const workspace=document.querySelector(".workspace"),host=workspace.getBoundingClientRect(),box=window.getBoundingClientRect(),offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;
       window.dataset.userPositioned="true";
       window.style.left=`${box.left-host.left}px`;window.style.top=`${box.top-host.top}px`;window.style.right="auto";window.style.bottom="auto";handle.setPointerCapture(event.pointerId);
-      const move=moveEvent=>{const maxX=Math.max(0,host.width-window.offsetWidth),maxY=Math.max(0,host.height-window.offsetHeight-46);window.style.left=`${clamp(moveEvent.clientX-host.left-offsetX,0,maxX)}px`;window.style.top=`${clamp(moveEvent.clientY-host.top-offsetY,0,maxY)}px`};
-      const end=()=>{handle.removeEventListener("pointermove",move);remember(window)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true});
+      const move=moveEvent=>{const maxX=Math.max(0,host.width-window.offsetWidth),maxY=Math.max(0,host.height-window.offsetHeight-46);window.style.left=`${clamp(moveEvent.clientX-host.left-offsetX,0,maxX)}px`;window.style.top=`${clamp(moveEvent.clientY-host.top-offsetY,0,maxY)}px`;window.classList.toggle("is-snapping",!moveEvent.altKey&&snapWindow(window,host))};
+      const end=endEvent=>{if(!endEvent.altKey)snapWindow(window,host);window.classList.remove("is-snapping");handle.removeEventListener("pointermove",move);remember(window)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true});
     });
     window.addEventListener("pointerdown",()=>focusWindow(window));
   }
