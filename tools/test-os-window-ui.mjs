@@ -22,4 +22,5 @@ if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab=
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
+if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
