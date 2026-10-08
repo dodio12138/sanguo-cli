@@ -63,7 +63,7 @@
   }
 
   function openWindow(window){
-    window.classList.remove("is-minimized","is-closed");focusWindow(window);updateTasks();
+    window.classList.remove("is-minimized","is-closed");const state=layout[window.dataset.windowId]||{};state.minimized=false;layout[window.dataset.windowId]=state;save();focusWindow(window);updateTasks();
   }
 
   function toggleMaximize(window){
@@ -122,7 +122,7 @@
   }
   function createTaskStrip(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;taskStrip=document.createElement("span");taskStrip.className="os-task-strip";
-    for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>openWindow(window);taskStrip.append(button)}
+    for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>window.classList.contains("is-minimized")||window.classList.contains("is-closed")?openWindow(window):toggleMinimize(window);taskStrip.append(button)}
     const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),calendarWindow=windows.find(window=>window.dataset.windowId==="calendarWindow"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="打开府库";const syncTray=()=>{tray.innerHTML=`金 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　望 <b>${$("prestigeValue")?.textContent||"—"}</b>`};syncTray();for(const id of ["goldValue","foodValue","prestigeValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>resourceWindow&&openWindow(resourceWindow);
     calendarTray=document.createElement("button");calendarTray.type="button";calendarTray.className="os-calendar-tray";calendarTray.title="打开历法";calendarTray.hidden=true;calendarTray.onclick=()=>calendarWindow&&openWindow(calendarWindow);syncCalendarTray();
     const clock=document.createElement("time");clock.className="os-clock";const tick=()=>{const now=new Date();clock.textContent=now.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})};tick();setInterval(tick,30000);dock.append(taskStrip,clock);updateTasks();

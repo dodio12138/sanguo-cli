@@ -11,5 +11,6 @@ for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-win
 if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
 if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
 if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar-tray"))throw new Error("缺少合并军令区或历法托盘图标");
+if(!source.includes('state.minimized=false')||!source.includes('?openWindow(window):toggleMinimize(window)'))throw new Error("窗口任务按钮未实现最小化切换或历法恢复状态未持久化");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
