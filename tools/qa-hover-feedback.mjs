@@ -19,11 +19,11 @@ try{
     const before=await exec(`const button=document.elementFromPoint(${item.x},${item.y})?.closest('button'),style=button&&getComputedStyle(button);return {background:style?.backgroundColor||"",color:style?.color||""}`);
     await request("POST",`/session/${sessionId}/actions`,{actions:[{type:"pointer",id:"mouse",parameters:{pointerType:"mouse"},actions:[{type:"pointerMove",duration:60,origin:"viewport",x:item.x,y:item.y}]}]});
     await pause(30);
-    const after=await exec(`const hit=document.elementFromPoint(${item.x},${item.y}),button=hit?.closest('button'),style=button&&getComputedStyle(button);return {isButton:Boolean(button),hit:(button?.getAttribute('aria-label')||button?.textContent||hit?.tagName||"").trim().replace(/\\s+/g,' ').slice(0,24),hover:Boolean(button?.matches(':hover')),outline:style?.outlineStyle||"",background:style?.backgroundColor||"",color:style?.color||"",border:style?.borderTopColor||""}`);
+    const after=await exec(`const hit=document.elementFromPoint(${item.x},${item.y}),button=hit?.closest('button'),style=button&&getComputedStyle(button),tip=document.getElementById('uiTooltip');return {isButton:Boolean(button),hit:(button?.getAttribute('aria-label')||button?.textContent||hit?.tagName||"").trim().replace(/\\s+/g,' ').slice(0,24),hover:Boolean(button?.matches(':hover')),outline:style?.outlineStyle||"",background:style?.backgroundColor||"",color:style?.color||"",border:style?.borderTopColor||"",tipVisible:Boolean(tip&&!tip.hidden&&tip.textContent.trim()),tip:(tip?.textContent||'').trim().slice(0,40)}`);
     results.push({...after,changed:before.background!==after.background||before.color!==after.color});
   }
-  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="dotted"||!result.changed);
-  const samples=checked.slice(-4).map(({label,background,color,border,outline,changed})=>({label,background,color,border,outline,changed}));
+  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="none"||!result.changed||!result.tipVisible);
+  const samples=checked.slice(-4).map(({label,background,color,border,outline,changed,tip})=>({label,background,color,border,outline,changed,tip}));
   console.log(JSON.stringify({checked:checked.length,skipped,samples,failures},null,2));
   if(!checked.length||failures.length)process.exitCode=1;
 }finally{

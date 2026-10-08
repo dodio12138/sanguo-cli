@@ -1,5 +1,30 @@
 (async () => {
   const $=id=>document.getElementById(id);
+  const tooltip=$("uiTooltip");tooltip.setAttribute("popover","manual");let tooltipTarget=null;
+  const compactLabel=value=>String(value||"").replace(/\s+/g," ").trim().slice(0,36);
+  function ensureButtonTip(button){
+    if(!button?.matches?.("button")||button.dataset.tip)return button;
+    const nativeTitle=button.getAttribute("title"),label=compactLabel(button.getAttribute("aria-label")||nativeTitle||button.querySelector(":scope > b")?.textContent||button.textContent);
+    if(!label)return button;
+    let message=`执行：${label}`;
+    if(button.classList.contains("os-task-button"))message=`切换${label}窗口`;
+    else if(button.classList.contains("os-window-close")||button.classList.contains("os-dialog-close"))message="关闭窗口";
+    else if(button.classList.contains("os-window-button"))message=label;
+    else if(button.classList.contains("os-start-button"))message="打开系统菜单";
+    else if(button.classList.contains("os-resource-tray"))message="切换府库窗口";
+    else if(button.classList.contains("os-calendar-tray"))message="切换历法窗口";
+    else if(button.classList.contains("terminal-select-button"))message=`选择：${label}`;
+    else if(button.classList.contains("map-legend-item"))message=`显示或隐藏${label}`;
+    else if(button.dataset.worldTab)message=`切换到${label}`;
+    button.dataset.tip=message;if(nativeTitle)button.removeAttribute("title");return button;
+  }
+  function hydrateButtonTips(root=document){if(root.matches?.("button"))ensureButtonTip(root);root.querySelectorAll?.("button").forEach(ensureButtonTip)}
+  function tooltipControl(node){const target=node?.closest?.("button,[data-tip]");if(target?.matches?.("button"))ensureButtonTip(target);return target?.dataset.tip?target:null}
+  function positionTooltip(event,target=tooltipTarget){if(!target||tooltip.hidden)return;const rect=target.getBoundingClientRect(),x=event?.clientX??rect.left,y=event?.clientY??rect.bottom,pad=12;tooltip.style.width="max-content";const w=Math.min(220,window.innerWidth-pad*2,Math.max(72,tooltip.scrollWidth));tooltip.style.width=`${w}px`;const h=tooltip.offsetHeight;let left=x+12;if(left+w>window.innerWidth-pad)left=x-w-12;if(left<pad)left=pad;let top=y+12;if(top+h>window.innerHeight-pad)top=y-h-12;if(top<pad)top=Math.max(pad,window.innerHeight-h-pad);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`}
+  function showTooltip(target,event){const message=target?.dataset.tip;if(!message)return;tooltipTarget=target;tooltip.textContent=message;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();positionTooltip(event,target)}
+  function hideTooltip(target){if(target&&tooltipTarget!==target)return;if(tooltip.hidePopover&&tooltip.matches(":popover-open"))tooltip.hidePopover();tooltip.hidden=true;tooltipTarget=null}
+  document.addEventListener("pointerover",event=>{const target=tooltipControl(event.target);if(target)showTooltip(target,event)});document.addEventListener("pointermove",event=>{if(tooltipTarget)positionTooltip(event)});document.addEventListener("pointerout",event=>{const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))hideTooltip(target)});document.addEventListener("focusin",event=>{const target=tooltipControl(event.target);if(target)showTooltip(target)});document.addEventListener("focusout",event=>hideTooltip(tooltipControl(event.target)));
+  hydrateButtonTips();new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===1)hydrateButtonTips(node)}))).observe(document.body,{childList:true,subtree:true});
   function selectRailPanel(button){const rail=button.closest(".left-rail,.right-rail");if(!rail)return;rail.querySelectorAll("[data-rail-tab]").forEach(tab=>tab.classList.toggle("active",tab===button));rail.querySelectorAll("[data-rail-panel]").forEach(panel=>panel.hidden=panel.id!==button.dataset.railTab)}
   document.querySelectorAll("[data-rail-tab]").forEach(button=>button.addEventListener("click",()=>selectRailPanel(button)));
   function selectWorldTab(button){const panel=$("forcesRailPanel"),tab=button.dataset.worldTab;panel.querySelectorAll("[data-world-tab]").forEach(item=>item.classList.toggle("active",item===button));panel.querySelectorAll("[data-world-panel]").forEach(item=>item.hidden=item.dataset.worldPanel!==tab)}
@@ -52,11 +77,6 @@
   for(const record of state.chronicles||[])if(record.status==="pending"){record.status="failed";record.text="史官执笔中断，可重试。";record.error="上次生成中断"}if(observerMode){for(const city of state.data.cities)state.intelligence.cities[city.id]=3;for(const army of state.data.armies)state.intelligence.armies[army.id]=3;for(const officer of state.data.officers)state.intelligence.officers[officer.id]=3;}
   $("dateLabel").textContent=state.dateLabel;$("eraLabel").textContent=data.scenario?.name||"建安五年";
   const esc=value=>String(value).replace(/[&<>'"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
-  const tooltip=$("uiTooltip");tooltip.setAttribute("popover","manual");let tooltipTarget=null;
-  function positionTooltip(event,target=tooltipTarget){if(!target||tooltip.hidden)return;const rect=target.getBoundingClientRect(),x=event?.clientX??rect.left,y=event?.clientY??rect.bottom,pad=12;tooltip.style.width="max-content";const w=Math.min(220,window.innerWidth-pad*2,Math.max(72,tooltip.scrollWidth));tooltip.style.width=`${w}px`;const h=tooltip.offsetHeight;let left=x+12;if(left+w>window.innerWidth-pad)left=x-w-12;if(left<pad)left=pad;let top=y+12;if(top+h>window.innerHeight-pad)top=y-h-12;if(top<pad)top=Math.max(pad,window.innerHeight-h-pad);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`}
-  function showTooltip(target,event){const message=target?.dataset.tip;if(!message)return;tooltipTarget=target;tooltip.textContent=message;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();positionTooltip(event,target)}
-  function hideTooltip(target){if(target&&tooltipTarget!==target)return;if(tooltip.hidePopover&&tooltip.matches(":popover-open"))tooltip.hidePopover();tooltip.hidden=true;tooltipTarget=null}
-  document.addEventListener("pointerover",event=>{const target=event.target.closest?.("[data-tip]");if(target)showTooltip(target,event)});document.addEventListener("pointermove",event=>{if(tooltipTarget)positionTooltip(event)});document.addEventListener("pointerout",event=>{const target=event.target.closest?.("[data-tip]");if(target&&!target.contains(event.relatedTarget))hideTooltip(target)});document.addEventListener("focusin",event=>{const target=event.target.closest?.("[data-tip]");if(target)showTooltip(target)});document.addEventListener("focusout",event=>hideTooltip(event.target.closest?.("[data-tip]")));
   const controlTips={battleReportButton:"查看历次野战、攻城和战法记录",reportButton:"查看每旬的命令与结算档案",clearOrders:"撤销本旬队列中的全部待执行命令",endTurn:"提交本旬命令并让所有势力统一结算",aiSettingsButton:"设置本机军师连接",askAdvisorButton:"让已连接的军师根据当前局势提出建议",observerToggle:"暂停或继续自动演进",observerStep:"暂停后仅推进一个旬"};for(const [id,message] of Object.entries(controlTips)){const element=$(id);if(element)element.dataset.tip=message}document.querySelectorAll("[data-layer]").forEach(button=>button.dataset.tip=`切换到${button.textContent.replace(/\[[^\]]+\]\s*/,"")}地图`);document.querySelectorAll("[data-ledger]").forEach(button=>button.dataset.tip=`打开${button.textContent}档案与相关计划`);
   const layerMeta={terrain:{label:"地形",items:Object.values(state.data.terrainDefs).map(t=>[t.name,t.color])},political:{label:"势力",items:state.data.forces.map(f=>[f.name,f.color])},province:{label:"州域",items:[["州界","#8f794f"],["州域","#59614d"]]},commandery:{label:"郡域",items:[["郡界","#eedb9b"],["郡域","#74633f"],["郡名","#d9c77f"],["县治","#b9b18b"]]},supply:{label:"补给",items:[["充足","hsl(90,42%,47%)"],["一般","hsl(50,42%,38%)"],["匮乏","hsl(10,42%,29%)"],["路线畅通","#93c86d"],["路线中断","#bd6658"]]}};
   const mapLegendItems=meta=>[...meta.items,["城市","#c8c49a"],["关隘","#e0ae68"],["渡口","#a7d5df"],["港口","#7eb6d2"],["道路","#d9c24f"],["水道","#55a7cb"]];

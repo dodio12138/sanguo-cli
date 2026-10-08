@@ -20,8 +20,6 @@ button:not(:disabled):hover{
   border-color:var(--control-hover-border)!important;
   background:var(--control-hover-background)!important;
   color:var(--control-hover-color)!important;
-  outline:1px dotted var(--button-hover-outline)!important;
-  outline-offset:-3px;
 }
 
 button:focus-visible{
