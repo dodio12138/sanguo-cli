@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8");
+const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=fs.readFileSync(new URL("js/ui/app.js",root),"utf8");
 if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
 for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
 if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
@@ -17,5 +17,6 @@ if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resour
 if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
 if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;left:0;bottom:34px"))throw new Error("底部任务栏未贴合视口两侧");
 if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
+if(!html.includes('data-situation-tab="legend"')||!html.includes('data-situation-tab="report"')||!appSource.includes("function selectSituationTab")||!css.includes(".situation-tab-panel[hidden]"))throw new Error("图例与旬报未拆分为分页内容");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

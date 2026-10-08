@@ -186,6 +186,16 @@ body.game-started{
 .game-started .map-column{left:361px;right:auto;top:104px;bottom:auto;width:485px;height:500px;min-width:410px;min-height:320px}
 .game-started #commandsRailPanel{left:auto;right:30px;top:57px;width:276px;height:413px}
 .game-started #situationRailPanel{left:auto;right:80px;top:494px;width:254px;height:222px}
+.situation-tabs{display:flex;flex:0 0 23px;border-bottom:1px solid #3d4737;padding:2px 5px;background:#111811}
+.game-started .situation-tabs button{flex:1;border:1px solid transparent;padding:2px 5px;background:transparent;color:#777f6d;font:8px/1 var(--mono);cursor:pointer}
+.game-started .situation-tabs button.active{border-color:#59634e;background:#273322;color:#e5cf7c;box-shadow:inset 1px 1px #77806444}
+.situation-tab-panel{flex:1;min-height:0;overflow:auto;padding:7px 8px}
+.situation-tab-panel[hidden]{display:none!important}
+.situation-panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;border-bottom:1px dotted #414b3b;padding-bottom:4px;color:#aeb59a;font-size:8px}
+.situation-panel-heading small{color:#d7bd69;font-size:8px}
+.game-started .situation-tab-panel>.legend{margin:0}
+.game-started .situation-report-panel>.campaign-objective,.game-started .situation-report-panel>.turn-report{margin:0 0 7px;padding:6px;line-height:1.55;overflow-wrap:anywhere}
+.game-started .situation-report-panel>.turn-report{border:1px solid #303a2d;background:#0a100b;color:#929983}
 .orders-pane{display:flex;flex:0 0 144px;flex-direction:column;min-height:100px;margin-top:5px;border-top:1px solid #4b563f;background:#0a100b;overflow:hidden}
 .orders-pane-title{display:flex;align-items:center;justify-content:space-between;flex:0 0 21px;padding:3px 8px;border-bottom:1px solid #303a2d;background:#172117;color:#d7bd69;font-size:8px}
 .orders-pane-title small{color:#8d927b;font-size:7px}.orders-pane-title b{color:#d7bd69}

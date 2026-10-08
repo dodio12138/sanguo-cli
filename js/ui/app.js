@@ -2,6 +2,8 @@
   const $=id=>document.getElementById(id);
   function selectRailPanel(button){const rail=button.closest(".left-rail,.right-rail");if(!rail)return;rail.querySelectorAll("[data-rail-tab]").forEach(tab=>tab.classList.toggle("active",tab===button));rail.querySelectorAll("[data-rail-panel]").forEach(panel=>panel.hidden=panel.id!==button.dataset.railTab)}
   document.querySelectorAll("[data-rail-tab]").forEach(button=>button.addEventListener("click",()=>selectRailPanel(button)));
+  function selectSituationTab(button){const panel=$("situationRailPanel"),tab=button.dataset.situationTab;panel.querySelectorAll("[data-situation-tab]").forEach(item=>item.classList.toggle("active",item===button));panel.querySelectorAll("[data-situation-panel]").forEach(item=>item.hidden=item.dataset.situationPanel!==tab)}
+  $("situationLegendTab").onclick=()=>selectSituationTab($("situationLegendTab"));$("situationReportTab").onclick=()=>selectSituationTab($("situationReportTab"));
   const hostSaveCache={};
   const safeLocalSet=(key,value)=>{try{localStorage.setItem(key,value);return true}catch{return false}};
   let returningToTitle=false;const activeSessionKey="sanguo.active-session.v1",activeSlot=()=>{try{return sessionStorage.getItem(activeSessionKey)}catch{return null}},markActive=slot=>{try{sessionStorage.setItem(activeSessionKey,String(slot))}catch{}},clearActive=()=>{try{sessionStorage.removeItem(activeSessionKey)}catch{}},finishResume=()=>document.documentElement.classList.remove("resume-pending");

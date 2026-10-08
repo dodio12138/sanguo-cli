@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/ui-polish.css?v=20260930-78">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261005-01">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-04">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261008-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
 </head>
@@ -126,10 +126,16 @@
         </section>
 
         <section id="situationRailPanel" data-rail-panel class="terminal-card legend-card" hidden>
-          <div class="card-title"><span>图例 / 旬报</span><small id="layerName">地形</small></div>
-          <div id="mapLegend" class="legend"></div>
-          <p id="campaignObjective" class="campaign-objective"></p>
-          <p id="turnReport" class="turn-report">暂无旬报。提交命令后结束本旬。</p>
+          <div class="card-title"><span>战局态势</span></div>
+          <nav class="situation-tabs" aria-label="战局态势内容"><button id="situationLegendTab" type="button" class="active" data-situation-tab="legend">图例</button><button id="situationReportTab" type="button" data-situation-tab="report">旬报</button></nav>
+          <section class="situation-tab-panel" data-situation-panel="legend">
+            <div class="situation-panel-heading"><span>舆图图例</span><small id="layerName">地形</small></div>
+            <div id="mapLegend" class="legend"></div>
+          </section>
+          <section class="situation-tab-panel situation-report-panel" data-situation-panel="report" hidden>
+            <p id="campaignObjective" class="campaign-objective"></p>
+            <p id="turnReport" class="turn-report">暂无旬报。提交命令后结束本旬。</p>
+          </section>
         </section>
       </aside>
     </main>
@@ -263,7 +269,7 @@
   <script src="js/ui/map-view.js?v=20260930-78"></script>
   <script src="js/ui/terminal-select.js?v=20260929-66"></script>
   <script src="js/ui/command-planner.js?v=20260930-78"></script>
-  <script src="js/ui/app.js?v=20261008-02"></script>
+  <script src="js/ui/app.js?v=20261008-03"></script>
   <script src="js/ui/os-window-manager.js?v=20261008-06"></script>
 </body>
 </html>
