@@ -16,7 +16,7 @@
   const isCompact=()=>matchMedia("(max-width:1000px)").matches;
   const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(layout))}catch{}}
   const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
-  const snapValue=(value,candidates,distance=12)=>{let result=value,best=distance+1;for(const candidate of candidates){const delta=Math.abs(value-candidate);if(delta<=distance&&delta<best){result=candidate;best=delta}}return {value:result,snapped:best<=distance}};
+  const snapValue=(value,candidates,distance=5)=>{let result=value,best=distance+1;for(const candidate of candidates){const delta=Math.abs(value-candidate);if(delta<=distance&&delta<best){result=candidate;best=delta}}return {value:result,snapped:best<=distance}};
   const titleOf=window=>window.dataset.windowTitle||"窗口";
 
   function focusWindow(window){
