@@ -173,6 +173,40 @@ dialog.wide-dialog > .dialog-content { min-height: 0; overflow: auto; }
 .battle-group .battle-art { color: #b8a765; }
 .battle-group .ledger-table { margin: 6px 12px 10px; width: calc(100% - 24px); }
 
+dialog.diplomacy-ledger { width: min(900px, 94vw); max-width: min(900px, 94vw); }
+.diplomacy-network { margin-top: 8px; border: 1px solid #3c4738; background: radial-gradient(circle at 50% 45%, #1d291c, #090e0a 72%); overflow: hidden; }
+.diplomacy-network-legend { display: flex; flex-wrap: wrap; gap: 5px 12px; padding: 6px 8px; border-bottom: 1px solid #354032; background: #111811; font-size: 8px; color: var(--muted); }
+.diplomacy-network-legend span::before { content: ""; display: inline-block; width: 15px; margin-right: 4px; border-top: 2px solid currentColor; vertical-align: 2px; }
+.diplomacy-network-map { display: block; width: 100%; max-height: 52vh; min-height: 310px; }
+.diplomacy-edge { stroke: #697061; stroke-width: 1; opacity: .13; transition: opacity .15s, stroke-width .15s; }
+.diplomacy-edge.is-player-edge { opacity: .48; stroke-width: 1.4; }
+.diplomacy-edge.relation-war,.diplomacy-network-legend .relation-war { stroke: #c75a4c; color: #c75a4c; opacity: .9; stroke-width: 2.2; }
+.diplomacy-edge.relation-alliance,.diplomacy-network-legend .relation-alliance { stroke: #66a96b; color: #66a96b; opacity: .8; stroke-width: 2; }
+.diplomacy-edge.relation-truce,.diplomacy-network-legend .relation-truce { stroke: #d0b768; color: #d0b768; opacity: .7; stroke-dasharray: 6 4; }
+.diplomacy-edge.relation-vassal,.diplomacy-network-legend .relation-vassal { stroke: #a67bd1; color: #a67bd1; opacity: .82; stroke-width: 2; stroke-dasharray: 2 3; }
+.diplomacy-edge.relation-friendly,.diplomacy-network-legend .relation-friendly { stroke: #6c956c; color: #6c956c; }
+.diplomacy-edge.relation-hostile,.diplomacy-network-legend .relation-hostile { stroke: #9b554a; color: #9b554a; }
+.diplomacy-edge.is-dim { opacity: .035; }
+.diplomacy-node { cursor: pointer; outline: none; }
+.diplomacy-node circle { fill: color-mix(in srgb, var(--force-color) 64%, #111 36%); stroke: #a4aa91; stroke-width: 1.2; filter: drop-shadow(2px 3px 2px #000b); transition: stroke-width .15s, filter .15s; }
+.diplomacy-node text { fill: #f2edcf; font: 700 10px var(--mono); text-anchor: middle; pointer-events: none; paint-order: stroke; stroke: #101410; stroke-width: 2px; }
+.diplomacy-node:hover circle,.diplomacy-node:focus-visible circle,.diplomacy-node.is-selected circle { stroke: #ffe39a; stroke-width: 3; filter: drop-shadow(0 0 5px #d8bd6577); }
+.diplomacy-node.is-player circle { stroke: #ffe39a; }
+.diplomacy-focus { border-top: 1px solid #3b4637; padding: 7px 8px 8px; background: #0c120d; }
+.diplomacy-focus[hidden] { display: none; }
+.diplomacy-focus header { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+.diplomacy-focus header i { width: 10px; height: 10px; background: var(--force-color); border: 1px solid #c5c9ae; }
+.diplomacy-focus header b { color: var(--amber); }
+.diplomacy-focus header span { color: var(--muted); font-size: 8px; }
+.diplomacy-focus > div { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 4px; }
+.relation-chip { display: flex; justify-content: space-between; gap: 6px; min-width: 0; border: 1px solid #354032; padding: 5px 6px; background: #151d15; color: var(--muted); font: 8px var(--mono); cursor: pointer; }
+.relation-chip b { overflow: hidden; color: var(--text); text-overflow: ellipsis; white-space: nowrap; }
+.relation-chip span { white-space: nowrap; }
+.relation-chip.relation-war { border-left: 3px solid #c75a4c; }.relation-chip.relation-alliance { border-left: 3px solid #66a96b; }.relation-chip.relation-truce { border-left: 3px solid #d0b768; }.relation-chip.relation-vassal { border-left: 3px solid #a67bd1; }.relation-chip.relation-hostile { border-left: 3px solid #9b554a; }.relation-chip.relation-friendly { border-left: 3px solid #6c956c; }
+.diplomacy-table-details { margin-top: 8px; border: 1px solid #354032; }
+.diplomacy-table-details > summary { padding: 7px 9px; background: #121a12; color: var(--muted); font-size: 9px; cursor: pointer; }
+@media(max-width:700px){.diplomacy-network-map{min-height:250px}.diplomacy-focus>div{grid-template-columns:1fr 1fr}}
+
 @media (max-width: 720px) {
   .ui-tooltip { display: none; }
   .command-book-launch { margin-top: 4px; }
