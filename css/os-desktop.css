@@ -216,6 +216,7 @@ body.game-started{
 .os-start-menu[hidden]{display:none}.os-start-menu:before{content:"三 国";position:absolute;inset:5px auto 5px 5px;width:17px;padding-top:7px;background:#3d4d37;color:#bfc79e;font:700 10px/1.45 serif;text-align:center}
 .os-start-menu>button,.os-start-menu .nav-end button{width:100%;border:1px solid transparent;padding:6px 7px;background:transparent;color:#cbd0ac;text-align:left;font-size:8px;cursor:pointer}
 .os-start-menu>button:hover,.os-start-menu .nav-end button:hover{border-color:#6b765b;background:#293626;color:#ffe89b}
+.os-start-menu>.os-layout-preset{border-top-color:#46513f;color:#e6cf7c}.os-start-menu>.os-layout-preset:disabled{opacity:.4;cursor:default}
 .os-start-menu .nav-end{display:contents}.os-start-menu .save-tools button{margin:0}.os-start-menu .nav-command-book{color:#ead079}
 .os-task-strip{display:flex;align-items:center;gap:3px;min-width:0;max-width:none;flex:1;margin-left:2px;border-left:1px solid #47513e;padding-left:4px;overflow-x:auto;scrollbar-width:none}
 .os-task-button{flex:1 1 74px;max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-color:#485440!important;background:#151d15!important;text-align:left}

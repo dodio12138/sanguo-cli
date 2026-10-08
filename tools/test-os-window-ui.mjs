@@ -28,4 +28,5 @@ if(!css.includes("dialog.os-managed-dialog{position:fixed;inset:0;margin:auto")|
 if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
 if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto 34px 0")||!css.includes("height:max-content;max-height:calc(100vh - 42px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
 if(!appSource.includes('tooltip.setAttribute("popover","manual")')||!appSource.includes("tooltip.showPopover()")||!polishCss.includes("height: max-content"))throw new Error("菜单条目提示框没有进入浏览器顶层");
+if(!source.includes('presetKey="sanguo.os-window-preset.v1"')||!source.includes("function captureLayoutPreset")||!source.includes("function saveLayoutPreset")||!source.includes("function applyLayoutPreset")||!source.includes('dataset.layoutPreset="save"')||!source.includes('dataset.layoutPreset="load"'))throw new Error("缺少用户版面预设的保存或恢复功能");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
