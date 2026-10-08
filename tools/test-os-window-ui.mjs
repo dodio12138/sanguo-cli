@@ -16,11 +16,12 @@ if(!source.includes('closed:true')||!source.includes('maximized:window.classList
 if(!source.includes("candidates,distance=5"))throw new Error("窗口吸附距离不是 5px");
 if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resourceWindow.classList.contains("is-minimized")'))throw new Error("府库资源条未实现最小化切换");
 if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
-if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;left:0;bottom:34px"))throw new Error("底部任务栏未贴合视口两侧");
+if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0"))throw new Error("底部任务栏或漢菜单未贴合视口边缘");
 if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
 if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("图例未独立或天下大势与旬报未合并分页");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
 if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
+if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto 34px 0")||!css.includes("height:max-content;max-height:calc(100vh - 42px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
 console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

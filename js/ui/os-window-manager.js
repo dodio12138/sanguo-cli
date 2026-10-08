@@ -119,10 +119,12 @@
 
   function createSystemMenu(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;
-    const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("aria-label","应用菜单");
+    const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("popover","manual");menu.setAttribute("aria-label","应用菜单");
     [...dock.querySelectorAll(":scope > button")].forEach(button=>menu.append(button));const utilities=dock.querySelector(":scope > .nav-end");if(utilities)menu.append(utilities);for(const [action,label] of [["map","仅显示舆图"],["minimize","全部最小化"],["cascade","层叠窗口"],["tile","平铺窗口"],["reset","恢复默认布局"]]){const button=document.createElement("button");button.type="button";button.className="os-layout-action";button.dataset.layoutAction=action;button.textContent=label;button.onclick=()=>arrangeWindows(windows,action);menu.append(button)}document.body.append(menu);
-    const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="漢";launcher.title="三国";launcher.setAttribute("aria-label","打开三国菜单");launcher.setAttribute("aria-expanded","false");launcher.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;launcher.setAttribute("aria-expanded",String(!menu.hidden))};dock.prepend(launcher);
-    menu.addEventListener("click",event=>{if(event.target.closest("button")){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});document.addEventListener("pointerdown",event=>{if(!menu.hidden&&!menu.contains(event.target)&&event.target!==launcher){menu.hidden=true;launcher.setAttribute("aria-expanded","false")}});
+    const launcher=document.createElement("button");launcher.type="button";launcher.className="os-start-button";launcher.textContent="漢";launcher.title="三国";launcher.setAttribute("aria-label","打开三国菜单");launcher.setAttribute("aria-expanded","false");
+    const menuIsOpen=()=>menu.matches(":popover-open")||(!menu.showPopover&&!menu.hidden),setMenuOpen=open=>{if(open){menu.hidden=false;if(menu.showPopover&&!menu.matches(":popover-open"))menu.showPopover()}else{if(menu.hidePopover&&menu.matches(":popover-open"))menu.hidePopover();menu.hidden=true}launcher.setAttribute("aria-expanded",String(open))};
+    launcher.onclick=event=>{event.stopPropagation();setMenuOpen(!menuIsOpen())};dock.prepend(launcher);
+    menu.addEventListener("click",event=>{if(event.target.closest("button"))setMenuOpen(false)});document.addEventListener("pointerdown",event=>{if(menuIsOpen()&&!menu.contains(event.target)&&event.target!==launcher)setMenuOpen(false)});document.addEventListener("keydown",event=>{if(event.key==="Escape"&&menuIsOpen())setMenuOpen(false)});
   }
 
   let taskStrip,calendarTray;

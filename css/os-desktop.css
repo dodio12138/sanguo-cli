@@ -214,7 +214,7 @@ body.game-started{
 
 .os-start-button{display:grid!important;place-items:center;flex:none;width:26px;min-width:26px!important;height:26px;border-color:#87916e!important;padding:0!important;background:#2d3929!important;color:#f0d983!important;font:700 15px/1 serif!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
 .os-start-button[aria-expanded="true"]{box-shadow:inset 1px 1px #080b08,inset -1px -1px #899171}
-.os-start-menu{position:fixed;z-index:9000;left:0;bottom:34px;display:grid;grid-template-columns:repeat(2,minmax(106px,1fr));gap:2px;width:246px;border:1px solid #87916e;padding:5px 5px 5px 27px;background:#192218;box-shadow:2px 3px 0 #030503,10px 14px 32px #000c,inset 1px 1px #b5bc98}
+.os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(106px,1fr));grid-auto-rows:max-content;align-content:start;gap:2px;width:246px;height:max-content;max-height:calc(100vh - 42px);overflow:auto;border:1px solid #87916e;padding:5px 5px 5px 27px;background:#192218;color:inherit;box-shadow:2px 3px 0 #030503,10px 14px 32px #000c,inset 1px 1px #b5bc98}
 .os-start-menu[hidden]{display:none}.os-start-menu:before{content:"三 国";position:absolute;inset:5px auto 5px 5px;width:17px;padding-top:7px;background:#3d4d37;color:#bfc79e;font:700 10px/1.45 serif;text-align:center}
 .os-start-menu>button,.os-start-menu .nav-end button{width:100%;border:1px solid transparent;padding:6px 7px;background:transparent;color:#cbd0ac;text-align:left;font-size:8px;cursor:pointer}
 .os-start-menu>button:hover,.os-start-menu .nav-end button:hover{border-color:#6b765b;background:#293626;color:#ffe89b}
