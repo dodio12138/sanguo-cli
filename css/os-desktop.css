@@ -246,7 +246,7 @@ dialog.os-dialog-window{
   background:#111911!important;
   box-shadow:2px 2px 0 #020302,10px 14px 36px #000b,inset 1px 1px #727d61!important;
 }
-dialog.os-managed-dialog{resize:both;overflow:hidden;min-width:300px;min-height:160px}
+dialog.os-managed-dialog{position:fixed;inset:0;margin:auto;resize:both;overflow:hidden;min-width:300px;min-height:160px;max-height:calc(100vh - 48px)}
 dialog.os-managed-dialog.os-dialog-maximized{position:fixed!important;inset:8px 10px 44px!important;width:auto!important;max-width:none!important;height:auto!important;max-height:none!important;margin:0!important;resize:none}
 dialog.os-managed-dialog.os-dialog-maximized>.dialog-content{max-height:none!important;height:calc(100% - 24px);overflow:auto}
 dialog.os-managed-dialog.is-dialog-minimized{display:none!important}

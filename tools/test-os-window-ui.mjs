@@ -24,6 +24,7 @@ if(html.includes("舆图图例")||html.includes("situation-panel-heading")||!htm
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
+if(!css.includes("dialog.os-managed-dialog{position:fixed;inset:0;margin:auto")||!css.includes("max-height:calc(100vh - 48px)"))throw new Error("常用弹窗会撑高页面或超出可视区");
 if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
 if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto 34px 0")||!css.includes("height:max-content;max-height:calc(100vh - 42px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
 if(!appSource.includes('tooltip.setAttribute("popover","manual")')||!appSource.includes("tooltip.showPopover()")||!polishCss.includes("height: max-content"))throw new Error("菜单条目提示框没有进入浏览器顶层");
