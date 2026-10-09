@@ -2,4 +2,5 @@
 .env.*
 !.env.example
 .local/
+.pages-dist/
 .DS_Store
