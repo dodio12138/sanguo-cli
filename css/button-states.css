@@ -1,0 +1,42 @@
+/*
+ * 按钮交互状态的唯一入口。
+ * 组件样式文件只负责静态外观；hover、键盘聚焦和禁用反馈统一在这里维护。
+ */
+:root{
+  --button-hover-outline:#f1d881;
+}
+
+button{
+  transition:outline-color .1s ease;
+}
+
+body button:not(:disabled):is(:hover,.is-pointer-hover){
+  outline:1px dashed var(--button-hover-outline)!important;
+  outline-offset:-3px;
+}
+
+button:focus-visible{
+  outline:1px dotted var(--button-hover-outline)!important;
+  outline-offset:-3px;
+}
+
+button:disabled{
+  opacity:.38;
+  cursor:not-allowed!important;
+  filter:grayscale(.45);
+}
+
+.terminal-select-list button:disabled{color:#4c5447}
+.start-footer button:disabled{opacity:.35;cursor:wait!important}
+.archive-tools button:disabled,.advisor-button:disabled,.save-slot button:disabled,.os-preset-row>button:disabled{opacity:.35}
+.war-plan-actions button:disabled{opacity:.4}
+.office-slot:disabled{opacity:.78}
+
+/* 浅色历法图标使用深色虚线，保留原本的文字和底色。 */
+.os-calendar-tray{
+  --button-hover-outline:#465634;
+}
+
+@media (prefers-reduced-motion:reduce){
+  button{transition:none}
+}

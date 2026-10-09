@@ -1,0 +1,44 @@
+import fs from "node:fs";
+
+const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=fs.readFileSync(new URL("js/ui/app.js",root),"utf8");
+const polishCss=fs.readFileSync(new URL("css/ui-polish.css",root),"utf8");
+const feedbackSource=fs.readFileSync(new URL("js/ui/button-feedback.js",root),"utf8");
+const buttonCss=fs.readFileSync(new URL("css/button-states.css",root),"utf8"),hierarchyCss=fs.readFileSync(new URL("css/hierarchy.css",root),"utf8"),styleCss=fs.readFileSync(new URL("css/style.css",root),"utf8");
+if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
+for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
+if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
+for(const feature of ["bindDrag","addResizeGrip","toggleMinimize","toggleMaximize","closeWindow","createSystemMenu","createTaskStrip","bindDialogs"])if(!source.includes(`function ${feature}`))throw new Error(`窗口管理器缺少 ${feature}`);
+if(!source.includes("snapValue")||!source.includes("function snapWindow")||!source.includes("is-snapping")||!source.includes("moveEvent.altKey"))throw new Error("缺少窗口磁性吸附");
+if(!css.includes("body,body *{-webkit-user-select:none;user-select:none}")||!css.includes('input,textarea,[contenteditable="true"]'))throw new Error("缺少界面文字防误选样式");
+for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-window.is-maximized",".os-window.is-closed",".os-window-resize",".os-start-menu",".os-task-strip",".os-resource-tray"])if(!css.includes(selector))throw new Error(`桌面样式缺少 ${selector}`);
+if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
+if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
+if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar-tray"))throw new Error("缺少合并军令区或历法托盘图标");
+if(!source.includes('minimized:false')||!source.includes('window.classList.contains("is-active")?toggleMinimize(window):focusWindow(window)'))throw new Error("任务按钮应恢复最小化窗口、激活后台窗口、最小化当前窗口");
+if(!source.includes('closed:true')||!source.includes('maximized:window.classList.contains("is-maximized")')||!source.includes("function arrangeWindows"))throw new Error("窗口关闭、最大化状态或整理功能未持久化");
+if(!source.includes("candidates,distance=5"))throw new Error("窗口吸附距离不是 5px");
+if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resourceWindow.classList.contains("is-minimized")'))throw new Error("府库资源条未实现最小化切换");
+if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
+if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0"))throw new Error("底部任务栏或漢菜单未贴合视口边缘");
+if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
+if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("图例未独立或天下大势与旬报未合并分页");
+if(html.includes("舆图图例")||html.includes("situation-panel-heading")||!html.includes('<span>图例</span><small id="layerName">地形</small>')||!source.includes('id:"situationRailPanel",title:"图例",icon:"例"'))throw new Error("图例窗口存在重复标题或窗口名称未统一");
+if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
+if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
+if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
+if(!css.includes("dialog.os-managed-dialog{position:fixed;inset:0;margin:auto")||!css.includes("max-height:calc(100vh - 48px)"))throw new Error("常用弹窗会撑高页面或超出可视区");
+if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
+if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto 34px 0")||!css.includes("height:max-content;max-height:calc(100vh - 42px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
+if(!feedbackSource.includes('tooltip.setAttribute("popover","manual")')||!feedbackSource.includes("tooltip.showPopover()")||!polishCss.includes("height: max-content"))throw new Error("菜单条目提示框没有进入浏览器顶层");
+if(!source.includes('legacyPresetKey="sanguo.os-window-preset.v1"')||!source.includes('presetKey=slot=>`sanguo.os-window-preset.v2.${slot}`')||!source.includes("function captureLayoutPreset")||!source.includes("function saveLayoutPreset")||!source.includes("function applyLayoutPreset")||!source.includes("for(let slot=1;slot<=3;slot++")||!source.includes('dataset.layoutPreset="save"')||!source.includes('dataset.layoutPreset="load"'))throw new Error("缺少三槽用户版面预设的保存或恢复功能");
+if(!source.includes("function captureDialogPreset")||!source.includes("function reopenPresetDialog")||!source.includes("dialogs=captureDialogPreset()")||!source.includes('state.id==="ledgerDialog"&&state.kind')||!appSource.includes('$("ledgerDialog").dataset.panelKind=kind'))throw new Error("版面预设没有包含情报等资料面板");
+if(!source.includes('makeSubmenu=(label,name,tip)')||!source.includes('makeSubmenu("档案与情报","archives"')||!source.includes('makeSubmenu("存档与读档","saves"')||!source.includes('makeSubmenu("窗口版面","layout"')||!source.includes('makeSubmenu("版面预设","presets"')||!css.includes(".os-start-submenu"))throw new Error("漢菜单没有整理为分类二级菜单");
+if(source.includes("if(!button.dataset.tip)button.dataset.tip="))throw new Error("漢菜单不应给所有按钮生成重复的执行提示");
+const hoverRule=buttonCss.match(/body button:not\(:disabled\):is\(:hover,\.is-pointer-hover\)\{([^}]+)\}/)?.[1]||"";
+if(!html.includes("css/button-states.css?v=20261009-05")||html.indexOf("css/button-states.css")<html.indexOf("css/os-desktop.css")||!hoverRule.includes("outline:1px dashed")||/background|border-color|box-shadow|filter|(?<!outline-)color:/.test(hoverRule))throw new Error("按钮 hover 应只显示统一虚线，不覆盖底色、文字或原边框");
+if(!appSource.includes("function ensureButtonTip")||!appSource.includes("function hydrateButtonTips")||!feedbackSource.includes('node?.closest?.("button,[data-tip]")')||!appSource.includes("new MutationObserver(records=>records.forEach"))throw new Error("静态或动态按钮没有统一的浮现提示");
+for(const legacyCss of [css,polishCss,hierarchyCss,styleCss]){
+  if(/(?:button|command-choice|start-choice|event-choice|map-legend-item|city-officer-card|city-army-card|office-slot|office-appoint-button)[^{}]*:hover/.test(legacyCss))throw new Error("按钮 hover 样式仍散落在非交互样式表中");
+  if(/(?:button|start-choice|advisor-button|office-slot|war-plan-actions|archive-tools|save-slot|os-preset-row)[^{}]*:disabled/.test(legacyCss))throw new Error("按钮 disabled 样式仍散落在非交互样式表中");
+}
+console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

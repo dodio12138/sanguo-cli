@@ -68,18 +68,37 @@ window.MapView = class MapView {
   refreshSupply(){this.cells=this.makeCells();this.draw()}
   bind(){
     new ResizeObserver(()=>this.resize()).observe(this.frame);
-    this.canvas.addEventListener("mousemove",e=>this.onMove(e));
-    this.canvas.addEventListener("mouseleave",()=>{this.hover=null;this.tooltip(true);this.scheduleDraw()});
-    this.canvas.addEventListener("mousedown",e=>this.drag={x:e.clientX,y:e.clientY,ox:this.offset.x,oy:this.offset.y,moved:false});
-    window.addEventListener("mouseup",e=>{if(this.drag&&!this.drag.moved)this.pick(e);this.drag=null});
-    this.canvas.addEventListener("wheel",e=>{e.preventDefault();this.setZoom(this.scale+(e.deltaY<0?.15:-.15))},{passive:false});this.state.addEventListener("layer",()=>this.draw());this.state.addEventListener("turn",()=>this.refreshSupply());
+    this.bindInput();
+    this.state.addEventListener("layer",()=>this.draw());this.state.addEventListener("turn",()=>this.refreshSupply());
   }
+  bindInput(){
+    this.disposeInput?.();this.drag=null;
+    const canvas=this.canvas,listeners=[];
+    const listen=(host,type,fn,options)=>{host.addEventListener(type,fn,options);listeners.push(()=>host.removeEventListener(type,fn,options))};
+    canvas.style.touchAction="none";
+    listen(canvas,"pointerdown",e=>{if(e.button!==0||e.isPrimary===false||this.drag)return;e.preventDefault();this.drag={pointerId:e.pointerId,x:e.clientX,y:e.clientY,ox:this.offset.x,oy:this.offset.y,moved:false};canvas.setPointerCapture(e.pointerId);this.tooltip(true)});
+    listen(canvas,"pointermove",e=>this.onMove(e));
+    listen(canvas,"pointerup",e=>{
+      const drag=this.drag;if(!drag||drag.pointerId!==e.pointerId)return;
+      const rect=canvas.getBoundingClientRect(),inside=e.clientX>=rect.left&&e.clientX<rect.right&&e.clientY>=rect.top&&e.clientY<rect.bottom;
+      const hit=document.elementFromPoint(e.clientX,e.clientY),moved=drag.moved||Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>3;
+      this.cancelDrag();if(e.button===0&&!moved&&inside&&hit===canvas)this.pick(e);
+    });
+    listen(canvas,"pointercancel",e=>{if(this.drag?.pointerId===e.pointerId)this.cancelDrag()});
+    listen(canvas,"lostpointercapture",e=>{if(this.drag?.pointerId===e.pointerId)this.cancelDrag()});
+    listen(canvas,"pointerleave",()=>{this.hover=null;this.tooltip(true);this.scheduleDraw()});
+    listen(window,"blur",()=>this.cancelDrag());
+    listen(document,"visibilitychange",()=>{if(document.hidden)this.cancelDrag()});
+    listen(canvas,"wheel",e=>{e.preventDefault();this.cancelDrag();this.setZoom(this.scale+(e.deltaY<0?.15:-.15))},{passive:false});
+    this.disposeInput=()=>{this.cancelDrag();listeners.forEach(remove=>remove())};
+  }
+  cancelDrag(){const id=this.drag?.pointerId;this.drag=null;this.hover=null;this.tooltip(true);if(id!==undefined&&this.canvas.hasPointerCapture(id))this.canvas.releasePointerCapture(id);this.scheduleDraw()}
   resize(){const r=this.frame.getBoundingClientRect(),w=Math.max(1,Math.floor(r.width)),h=Math.max(1,Math.floor(r.height));if(this.size?.w===w&&this.size?.h===h)return;const ratio=Math.max(.5,Math.min(window.devicePixelRatio||1,1.5,Math.sqrt(this.canvasPixelBudget/(w*h)))),pixelW=Math.max(1,Math.floor(w*ratio)),pixelH=Math.max(1,Math.floor(h*ratio));try{this.canvas.width=1;this.canvas.height=1;this.canvas.width=pixelW;this.canvas.height=pixelH;this.ctx.setTransform(ratio,0,0,ratio,0,0)}catch(error){console.warn("地图画布已降级为低内存模式",error);this.canvas.width=1;this.canvas.height=1;this.canvas.width=w;this.canvas.height=h;this.ctx.setTransform(1,0,0,1,0,0)}this.size={w,h};this.draw();}
   metrics(){const {width,height}=this.state.data.map,base=Math.max(1,Math.min((this.size.w-30)/width,(this.size.h-30)/height)),cell=base*this.scale;return {cell,startX:(this.size.w-width*cell)/2+this.offset.x,startY:(this.size.h-height*cell)/2+this.offset.y};}
   visibleBounds(m,padding=1){const {width,height}=this.state.data.map;return {minX:Math.max(0,Math.floor(-m.startX/m.cell)-padding),maxX:Math.min(width-1,Math.ceil((this.size.w-m.startX)/m.cell)+padding),minY:Math.max(0,Math.floor(-m.startY/m.cell)-padding),maxY:Math.min(height-1,Math.ceil((this.size.h-m.startY)/m.cell)+padding)}}
   inView(item,m,padding=2){const bounds=this.visibleBounds(m,padding);return item.x>=bounds.minX&&item.x<=bounds.maxX&&item.y>=bounds.minY&&item.y<=bounds.maxY}
   terrainDef(id){return this.state.data.terrainDefs[id]||{name:`未知地形(${id})`,color:"#59614d",move_cost:99,move:99}}
-  onMove(e){const r=this.canvas.getBoundingClientRect();if(this.drag){const dx=e.clientX-this.drag.x,dy=e.clientY-this.drag.y;if(Math.abs(dx)+Math.abs(dy)>3)this.drag.moved=true;this.offset.x=this.drag.ox+dx;this.offset.y=this.drag.oy+dy;this.tooltip(true);this.scheduleDraw();return}this.hover=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(this.hover){document.getElementById("cursorInfo").textContent=`坐标 ${String(this.hover.x).padStart(2,"0")},${String(this.hover.y).padStart(2,"0")} · ${this.hover.province}${this.hover.commandery?` · ${this.hover.commandery}`:""}${this.hover.county?` · ${this.hover.county.name}县治`:""} · ${this.terrainDef(this.hover.terrain).name}`;this.tooltip(false,e.offsetX,e.offsetY)}else this.tooltip(true);this.scheduleDraw();}
+  onMove(e){const r=this.canvas.getBoundingClientRect();if(this.drag){if(!(e.buttons&1)){this.cancelDrag();return}if(e.pointerId!==this.drag.pointerId)return;const dx=e.clientX-this.drag.x,dy=e.clientY-this.drag.y;if(Math.abs(dx)+Math.abs(dy)>3)this.drag.moved=true;if(this.drag.moved){this.offset.x=this.drag.ox+dx;this.offset.y=this.drag.oy+dy}this.tooltip(true);this.scheduleDraw();return}if(e.buttons)return;this.hover=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(this.hover){document.getElementById("cursorInfo").textContent=`坐标 ${String(this.hover.x).padStart(2,"0")},${String(this.hover.y).padStart(2,"0")} · ${this.hover.province}${this.hover.commandery?` · ${this.hover.commandery}`:""}${this.hover.county?` · ${this.hover.county.name}县治`:""} · ${this.terrainDef(this.hover.terrain).name}`;this.tooltip(false,e.clientX-r.left,e.clientY-r.top)}else this.tooltip(true);this.scheduleDraw();}
   cellAt(px,py){const m=this.metrics(),x=Math.floor((px-m.startX)/m.cell),y=Math.floor((py-m.startY)/m.cell);return this.cell(x,y)}
   pick(e){const r=this.canvas.getBoundingClientRect(),cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
   setZoom(value){this.scale=Math.max(.65,Math.min(3.4,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
