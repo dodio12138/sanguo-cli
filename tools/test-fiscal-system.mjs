@@ -69,4 +69,9 @@ assert.equal(harvestDays,1);assert.equal(state.date.year,201);assert.equal(state
 for(const city of state.data.cities)for(const key of ["localGold","localFood","localSilk","population"])assert(Number.isFinite(city[key])&&city[key]>=0,`${city.id}.${key}`);
 assert(state.resources.silk>0,"布帛按周期上缴后应能进入中央府库");
 const silk=state.resources.silk,officer=state.data.officers[0];FiscalSystem.handleOrder(state,{type:"reward_officer",officerIds:[officer.id],amount:20,options:{rewardResource:"silk"}},[]);assert.equal(state.resources.silk,silk-20);
-console.log("分级财政回归通过：收支守恒 / 上缴延迟与阻断 / 单次入库 / 重复征收防刷 / 任官与民心 / 徭役扣还人口与减产 / 军仓单次消耗 / 秋收周期 / 延迟工程与自动遣散 / 旧存档恢复 / 预估无副作用");
+state=fixture();city=state.data.cities[0];state.engine.playerForceId=state.playerForceId;city.garrison=8000;state.data.officers.push({id:"newbie",name:"新将",force:"cao",city:"a",status:"serving",command:70,war:80,intelligence:60,loyalty:85});
+const garrisonFood=city.localFood,formedEvents=[];
+state.engine.resolveOrder(state,{type:"form_army",commandName:"编军",cityIds:[city.id],officerIds:["newbie"],amount:3000,options:{units:{infantry:2000,cavalry:500,archers:500}}},formedEvents);
+const formed=state.data.armies.find(army=>army.id.startsWith("cao_army_"));
+assert(formed,"编军应生成新军团");assert(formed.stores,"新军团必须带军仓字段");assert(formed.stores.food>0,"新军团应自驻地就仓，军仓不得为空");assert.equal(city.localFood,garrisonFood-formed.stores.food,"就仓粮食应取自驻地存粮");
+console.log("分级财政回归通过：收支守恒 / 上缴延迟与阻断 / 单次入库 / 重复征收防刷 / 任官与民心 / 徭役扣还人口与减产 / 军仓单次消耗 / 编军就仓 / 秋收周期 / 延迟工程与自动遣散 / 旧存档恢复 / 预估无副作用");
