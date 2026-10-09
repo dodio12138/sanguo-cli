@@ -14,7 +14,7 @@ for(const selector of [".os-window.is-active",".os-window.is-minimized",".os-win
 if(!html.includes('id="calendarDays"')||!source.includes("function renderCalendar")||!css.includes(".os-calendar-day.is-current"))throw new Error("缺少复古月历组件");
 if(!source.includes("function constrainWindow")||!source.includes("max-width:1000px")&&!css.includes("max-width:1000px"))throw new Error("缺少窗口适配约束");
 if(!html.includes('class="orders-pane order-card"')||!css.includes(".os-calendar-tray"))throw new Error("缺少合并军令区或历法托盘图标");
-if(!source.includes('minimized:false')||!source.includes('?openWindow(window):toggleMinimize(window)'))throw new Error("窗口任务按钮未实现最小化切换或历法恢复状态未持久化");
+if(!source.includes('minimized:false')||!source.includes('window.classList.contains("is-active")?toggleMinimize(window):focusWindow(window)'))throw new Error("任务按钮应恢复最小化窗口、激活后台窗口、最小化当前窗口");
 if(!source.includes('closed:true')||!source.includes('maximized:window.classList.contains("is-maximized")')||!source.includes("function arrangeWindows"))throw new Error("窗口关闭、最大化状态或整理功能未持久化");
 if(!source.includes("candidates,distance=5"))throw new Error("窗口吸附距离不是 5px");
 if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resourceWindow.classList.contains("is-minimized")'))throw new Error("府库资源条未实现最小化切换");

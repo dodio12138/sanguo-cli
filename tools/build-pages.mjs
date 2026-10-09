@@ -6,7 +6,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const output=path.resolve(process.argv[2]||path.join(root,".pages-dist"));
 if(output===root||root.startsWith(output+path.sep))throw new Error("发布目录不能是项目根目录或其父目录");
 await fs.mkdir(output,{recursive:true});
-for(const name of ["css","js","game","mods"])await fs.cp(path.join(root,name),path.join(output,name),{recursive:true,filter:source=>!path.basename(source).startsWith(".")});
+for(const name of ["assets","css","js","game","mods"])await fs.cp(path.join(root,name),path.join(output,name),{recursive:true,filter:source=>!path.basename(source).startsWith(".")});
 await fs.mkdir(path.join(output,"docs"),{recursive:true});
 await fs.copyFile(path.join(root,"docs/game-turn-map.html"),path.join(output,"docs/game-turn-map.html"));
 const html=await fs.readFile(path.join(root,"index.html"),"utf8");

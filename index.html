@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/ui-polish.css?v=20261009-18">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-20">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-21">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -169,6 +169,16 @@
     <div id="detailContent" class="dialog-content detail-content"></div>
   </dialog>
 
+  <dialog id="armyDetailDialog" class="wide-dialog">
+    <div class="dialog-title"><span id="armyDetailTitle">军团详情</span><button data-close="armyDetailDialog">×</button></div>
+    <div id="armyDetailContent" class="dialog-content detail-content"></div>
+  </dialog>
+
+  <dialog id="officerDetailDialog" class="wide-dialog">
+    <div class="dialog-title"><span id="officerDetailTitle">人物详情</span><button data-close="officerDetailDialog">×</button></div>
+    <div id="officerDetailContent" class="dialog-content detail-content"></div>
+  </dialog>
+
   <dialog id="reportDialog" class="wide-dialog">
     <div class="dialog-title">旬报档案 <span class="dialog-tools"><button id="openChronicleButton" hidden>史官月录</button><button data-close="reportDialog">×</button></span></div>
     <div id="reportHistory" class="dialog-content report-history"></div>
@@ -275,8 +285,8 @@
   <script src="js/ui/map-view.js?v=20261009-01"></script>
   <script src="js/ui/terminal-select.js?v=20260929-66"></script>
   <script src="js/ui/command-planner.js?v=20260930-78"></script>
-  <script src="js/ui/button-feedback.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261009-22"></script>
-  <script src="js/ui/os-window-manager.js?v=20261009-20"></script>
+  <script src="js/ui/button-feedback.js?v=20261009-03"></script>
+  <script src="js/ui/app.js?v=20261009-23"></script>
+  <script src="js/ui/os-window-manager.js?v=20261009-22"></script>
 </body>
 </html>

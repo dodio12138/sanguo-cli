@@ -1,7 +1,7 @@
 /* Shared mouse feedback. Moving within a control also restores a dismissed tip. */
 (() => {
   function prepareControl(button){
-    const chrome=".os-window-button,.os-dialog-close,.os-task-button,.os-start-button,.os-resource-tray,.os-calendar-tray,.os-submenu-trigger,.os-layout-action,.os-layout-preset,.terminal-select-button,[role=option],[data-close],[data-world-tab],[data-rail-tab],#mapHomeButton,#helpButton,#gameSettingsButton,#closeHelp";
+    const chrome=".os-window-button,.os-dialog-close,.os-task-button,.os-start-button,.os-resource-tray,.os-calendar-tray,.os-desktop-icon,.os-app-launcher,.os-submenu-trigger,.os-layout-action,.os-layout-preset,.terminal-select-button,[role=option],[data-close],[data-world-tab],[data-rail-tab],#mapHomeButton,#helpButton,#gameSettingsButton,#closeHelp";
     if(button.matches(chrome)){delete button.dataset.tip;button.removeAttribute("title");return}
     const title=button.getAttribute("title");
     if(title&&!button.dataset.tip)button.dataset.tip=title;
