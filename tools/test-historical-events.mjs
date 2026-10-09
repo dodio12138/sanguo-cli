@@ -1,6 +1,6 @@
 import fs from "node:fs";
 globalThis.window=globalThis;
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 
 const events=JSON.parse(fs.readFileSync("game/data/common/events.json","utf8")).events;
 for(const sample of [

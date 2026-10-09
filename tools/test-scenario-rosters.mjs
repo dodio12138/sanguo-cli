@@ -11,7 +11,7 @@ globalThis.fetch=async url=>{
   catch(error){if(!relative.startsWith("mods/"))console.error(`fixture missing: ${relative} (${error.message})`);return {ok:false,status:404,json:async()=>({})}}
 };
 await import(pathToFileURL(path.join(root,"js/core/data-loader.js")));
-await import(pathToFileURL(path.join(root,"js/core/rule-engine.js")));
+await import(pathToFileURL(path.join(root,"js/core/game-clock.js")));await import(pathToFileURL(path.join(root,"js/core/fiscal-system.js")));await import(pathToFileURL(path.join(root,"js/core/rule-engine.js")));
 await import(pathToFileURL(path.join(root,"js/core/game-state.js")));
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 const sandbox={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,"js/data/offline-data.generated.js"),"utf8"),sandbox);const loader=new DataLoader(sandbox.window.SANGUO_DATA);await loader.load();

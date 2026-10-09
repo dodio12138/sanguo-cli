@@ -1,7 +1,7 @@
 globalThis.window=globalThis;
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,o={}){super(type);this.detail=o.detail}};
 await import("../js/data/offline-data.generated.js");
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
 const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"observer",observerMode:true,observerDelay:1000});

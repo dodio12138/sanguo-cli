@@ -179,7 +179,12 @@ body.game-started{
 
 /* Default desktop composition; positions are user-draggable and persisted. */
 .game-started #resourcePanel{left:12px;top:6px;width:220px;height:74px}
-.resource-window-body{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1;padding:7px;background:#0b120d}
+.resource-window-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;flex:1;min-height:0;padding:4px 7px;background:#0b120d}
+.resource-window-body>button b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:8px}
+.fiscal-table-scroll{overflow-x:auto;max-width:100%}
+.fiscal-summary .ledger-table td{vertical-align:top;white-space:normal}
+.fiscal-summary .ledger-table small{display:block;color:var(--muted)}
+.fiscal-summary details p{font-size:9px;line-height:1.65}
 .resource-window-body>button{display:grid;grid-template-columns:19px 1fr;align-items:center;min-width:0;border:1px solid #47523e;padding:0;background:#121b13;color:inherit;cursor:pointer}
 .resource-window-body i{display:grid;place-items:center;align-self:stretch;border-right:1px solid #47523e;background:#293525;color:#d8bd68;font:normal 9px serif}
 .resource-window-body b{overflow:hidden;padding:0 4px;color:#cfd6ae;font-size:9px;text-align:right;text-overflow:ellipsis}
@@ -190,12 +195,13 @@ body.game-started{
 .os-calendar-body{display:flex;flex-direction:column;gap:4px;flex:1;min-height:0;padding:7px;background:#9ca08b;color:#10140f;box-shadow:inset 1px 1px #d8dacb,inset -1px -1px #4e5548}
 .os-calendar-selectors{display:grid;grid-template-columns:.82fr 1.18fr;gap:5px}
 .os-calendar-selectors>span,.os-calendar-selectors>strong{min-width:0;height:21px;margin:0!important;border:1px solid;border-color:#e4e5d7 #464c40 #464c40 #e4e5d7;padding:4px 6px;background:#c1c3b3;color:#172016!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 9px/1.2 var(--mono)!important;letter-spacing:0!important}
-.os-calendar-week,.os-calendar-days{display:grid;grid-template-columns:repeat(7,1fr);width:100%;text-align:center}
+.os-calendar-days{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));width:100%;text-align:center}
+.os-calendar-cycle{border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;padding:3px;background:#858b78;color:#f1f0da;font:8px/1.2 var(--mono);text-align:center;white-space:nowrap}
 .os-calendar-week{border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;background:#858b78;color:#f1f0da;font-size:8px;line-height:16px}
 .game-started .os-calendar-week span{color:#f1f0da;font-size:8px}
-.os-calendar-days{flex:1;min-height:100px;grid-template-rows:repeat(6,1fr);border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;background:#d2d3c4;color:#172016}
-.game-started .os-calendar-day{display:grid;place-items:center;min-width:0;border-right:1px dotted #a1a493;border-bottom:1px dotted #a1a493;color:#4e5548;font:9px/1 var(--mono)}
-.game-started .os-calendar-day:nth-child(7n){border-right:0}.game-started .os-calendar-day.is-empty{color:transparent}.game-started .os-calendar-day.is-current{margin:1px;background:#304832;color:#f5e7aa;outline:1px dotted #e6dda9;outline-offset:-2px;font-weight:700}
+.os-calendar-days{flex:1;min-height:68px;grid-template-rows:repeat(4,1fr);border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;background:#d2d3c4;color:#172016}
+.game-started .os-calendar-day{display:grid;place-items:center;min-width:0;border-right:1px dotted #a1a493;border-bottom:1px dotted #a1a493;color:#4e5548;font:7px/1 var(--mono)}
+.game-started .os-calendar-day:nth-child(10n){border-right:0}.game-started .os-calendar-day.is-empty{color:transparent}.game-started .os-calendar-day.is-current{margin:1px;background:#304832;color:#f5e7aa;outline:1px dotted #e6dda9;outline-offset:-2px;font-weight:700}
 .os-calendar-body .status-dot{align-self:stretch;border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;padding:3px 5px;background:#b6b9a7;color:#263d29;font-size:8px;white-space:nowrap}
 .game-started #factionPanel{left:445px;top:610px;width:243px;height:144px}
 .game-started #factionPanel{overflow:auto}
@@ -329,3 +335,4 @@ body>.app-shell>footer{display:none}
   .game-started .main-nav{overflow:visible}.os-task-strip{display:none}.os-resource-tray{margin-left:auto}.os-clock{display:block}
   dialog.os-managed-dialog{resize:none;max-width:94vw;max-height:90vh}
 }
+.game-started .stat-grid button{background:transparent;text-align:left;font:inherit;font-size:8px;color:var(--muted);border:0;border-right:1px solid var(--line-dim);border-bottom:1px solid var(--line-dim);padding:4px;cursor:pointer}

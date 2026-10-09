@@ -3,7 +3,7 @@ import fs from "node:fs";
 globalThis.window=globalThis;
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,o={}){super(type);this.detail=o.detail}};
 await import("../js/data/offline-data.generated.js");
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
 const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),city=state.data.cities.find(c=>c.id==="xuchang"),army=state.data.armies.find(a=>a.id==="cao_central"),officers=state.data.officers.filter(o=>o.force==="cao"&&o.city==="xuchang"&&o.status==="serving");
