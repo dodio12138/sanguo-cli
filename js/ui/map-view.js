@@ -1,6 +1,6 @@
 window.MapView = class MapView {
   constructor(canvas,frame,state){
-    this.canvas=canvas;this.frame=frame;this.state=state;canvas.width=1;canvas.height=1;this.ctx=canvas.getContext("2d");if(!this.ctx)throw new Error("浏览器无法创建地图画布");this.scale=1;this.offset={x:0,y:0};this.hover=null;this.drag=null;this.plannedRoute=[];this.hiddenLegendItems=new Set();this.canvasPixelBudget=2000000;
+    this.canvas=canvas;this.frame=frame;this.state=state;canvas.width=1;canvas.height=1;this.ctx=canvas.getContext("2d");if(!this.ctx)throw new Error("浏览器无法创建地图画布");this.scale=1;this.offset={x:0,y:0};this.hover=null;this.drag=null;this.plannedRoute=[];this.hiddenLegendItems=new Set();this.canvasPixelBudget=2000000;this.territoryRadius=5;
     this.seaLabels=[{name:"渤海",x:33,y:9},{name:"黄海",x:35,y:15},{name:"东海",x:35,y:21},{name:"南海",x:29,y:29}];
     this.landLabels=[{name:"河西走廊",x:4,y:9},{name:"黄土高原",x:12,y:12},{name:"幽燕",x:21,y:4},{name:"河北",x:21,y:9},{name:"关中",x:12,y:16},{name:"中原",x:21,y:16},{name:"巴蜀",x:7,y:24},{name:"荆楚",x:18,y:25},{name:"江东",x:29,y:23},{name:"岭南",x:19,y:30}];
     this.routes=Object.entries(state.data.rules.city_graph||{}).flatMap(([a,targets])=>targets.filter(b=>a<b).map(b=>[a,b]));
@@ -107,13 +107,13 @@ window.MapView = class MapView {
   setLegendVisibility(key,visible){if(visible)this.hiddenLegendItems.delete(key);else this.hiddenLegendItems.add(key);this.draw()}
   legendHidden(key){return this.hiddenLegendItems.has(key)}
   color(cell){
-    const data=this.state.data;if(cell.terrain==="ocean")return this.legendHidden(this.terrainDef("ocean").name)?"#111b20":this.terrainDef("ocean").color;
+    if(cell.terrain==="ocean")return this.legendHidden(this.terrainDef("ocean").name)?"#111b20":this.terrainDef("ocean").color;
     if(this.state.layer==="terrain")return this.legendHidden(this.terrainDef(cell.terrain).name)?"#30372f":this.terrainDef(cell.terrain).color;
     if(cell.province==="域外")return"#343c30";
     if(this.state.layer==="province"){if(this.legendHidden("州域"))return"#3b4034";const names=[...new Set(this.cells.filter(c=>c.terrain!=="ocean").map(c=>c.province))],i=names.indexOf(cell.province);return `hsl(${28+i*31}, 27%, ${28+(i%3)*4}%)`}
     if(this.state.layer==="commandery"){if(this.legendHidden("郡域"))return"#3b4034";const name=cell.commandery||"史籍未详",hue=[...name].reduce((sum,char)=>sum+char.charCodeAt(0),0)%360;return `hsl(${hue}, 30%, ${28+(hue%3)*3}%)`}
     if(this.state.layer==="supply"){const band=cell.supply>=6?"充足":cell.supply>=3?"一般":"匮乏";return this.legendHidden(band)?"#30372f":`hsl(${cell.supply*10}, 42%, ${20+cell.supply*3}%)`}
-    let nearest=null,dist=Infinity;for(const city of data.cities){const d=Math.hypot(city.x-cell.x,city.y-cell.y);if(d<dist){dist=d;nearest=city}}const force=data.forces.find(f=>f.id===(nearest?.force||"neutral"));return dist<5&&!this.legendHidden(force?.name)?force.color:"#4c4e45";
+    const owner=this.politicalOwner(cell);return owner.distance<this.territoryRadius&&!this.legendHidden(owner.force?.name)?owner.force.color:"#4c4e45";
   }
   colorWithAlpha(color,alpha){
     const match=/^#([0-9a-f]{6})$/i.exec(color||"");
@@ -121,10 +121,27 @@ window.MapView = class MapView {
     const value=Number.parseInt(match[1],16);
     return `rgba(${value>>16},${value>>8&255},${value&255},${alpha})`;
   }
+  politicalOwner(cell){const cities=this.state.data.cities;let nearest=null,distance=Infinity;for(const city of cities){const value=Math.hypot(city.x-cell.x,city.y-cell.y);if(value<distance){distance=value;nearest=city}}return {force:this.state.data.forces.find(item=>item.id===(nearest?.force||"neutral")),distance};}
+  lightenColor(color,amount=.42){const match=/^#([0-9a-f]{6})$/i.exec(color||"");if(!match)return color||"#ffe9a8";const value=Number.parseInt(match[1],16),mix=channel=>Math.round(channel+(255-channel)*amount);return `rgb(${mix(value>>16)},${mix(value>>8&255)},${mix(value&255)})`;}
+  territoryOwner(cell,owners){const key=`${cell.x},${cell.y}`;if(!owners.has(key))owners.set(key,this.politicalOwner(cell));return owners.get(key);}
+  isPlayerTerritory(cell,owners){if(!cell||cell.terrain==="ocean"||cell.province==="域外")return false;const owner=this.territoryOwner(cell,owners);return owner.force?.id===this.state.playerForceId&&owner.distance<this.territoryRadius;}
+  drawPlayerTerritoryOutline(c,m,cells){
+    if(this.state.observerMode)return;
+    const force=this.state.data.forces.find(item=>item.id===this.state.playerForceId);if(!force||this.legendHidden(force.name))return;
+    const owners=new Map(),sides=[[1,0],[0,1],[-1,0],[0,-1]],edges=[];
+    for(const cell of cells){if(!this.isPlayerTerritory(cell,owners))continue;const open=sides.filter(([dx,dy])=>!this.isPlayerTerritory(this.cell(cell.x+dx,cell.y+dy),owners));if(open.length)edges.push({x:m.startX+cell.x*m.cell,y:m.startY+cell.y*m.cell,open})}
+    if(!edges.length)return;
+    const trace=(width,style)=>{c.strokeStyle=style;c.lineWidth=width;c.beginPath();for(const edge of edges)for(const [dx,dy] of edge.open){if(dx<0){c.moveTo(edge.x,edge.y);c.lineTo(edge.x,edge.y+m.cell)}else if(dx>0){c.moveTo(edge.x+m.cell,edge.y);c.lineTo(edge.x+m.cell,edge.y+m.cell)}else if(dy<0){c.moveTo(edge.x,edge.y);c.lineTo(edge.x+m.cell,edge.y)}else{c.moveTo(edge.x,edge.y+m.cell);c.lineTo(edge.x+m.cell,edge.y+m.cell)}}c.stroke()};
+    c.save();c.lineCap="butt";c.setLineDash([Math.max(3,m.cell*.32),Math.max(2.4,m.cell*.26)]);
+    trace(Math.max(1.6,m.cell*.14),"rgba(6,9,6,.85)");
+    c.shadowColor=force.color;c.shadowBlur=Math.max(1.5,m.cell*.09);
+    trace(Math.max(.8,m.cell*.07),this.lightenColor(force.color));
+    c.restore();
+  }
   draw(){
     if(!this.size)return;const c=this.ctx,m=this.metrics(),{width,height}=this.state.data.map,bounds=this.visibleBounds(m),visibleCells=this.cells.filter(cell=>cell.x>=bounds.minX&&cell.x<=bounds.maxX&&cell.y>=bounds.minY&&cell.y<=bounds.maxY);c.clearRect(0,0,this.size.w,this.size.h);c.fillStyle="#080d10";c.fillRect(0,0,this.size.w,this.size.h);
-    this.cellColors=this.cells.map(cell=>this.color(cell));c.save();c.beginPath();c.rect(0,0,this.size.w,this.size.h);c.clip();for(const cell of visibleCells){const x=m.startX+cell.x*m.cell,y=m.startY+cell.y*m.cell;c.fillStyle=this.cellColors[cell.y*width+cell.x];c.fillRect(x,y,m.cell+.25,m.cell+.25);this.drawTerrainBlend(c,m,cell);this.drawAdministrativeEdges(c,m,cell);this.drawCoastEdges(c,m,cell);if(this.hover===cell){c.strokeStyle="#fff2a8";c.lineWidth=2;c.strokeRect(x+1,y+1,m.cell-2,m.cell-2)}}this.drawColorEdges(c,m,visibleCells);
-    if(!this.legendHidden("水道"))this.drawWaterways(c,m);if(!this.legendHidden("道路")){this.drawRoutes(c,m);this.drawPlannedRoute(c,m)}this.drawSupplyRoutes(c,m);if(m.cell>15)this.drawLabels(c,m);if(this.state.layer==="commandery"){this.drawCounties(c,m);this.drawCommanderyLabels(c,m)}this.drawLandmarks(c,m);
+    this.cellColors=this.cells.map(cell=>this.color(cell));c.save();c.beginPath();c.rect(0,0,this.size.w,this.size.h);c.clip();for(const cell of visibleCells){const x=m.startX+cell.x*m.cell,y=m.startY+cell.y*m.cell;c.fillStyle=this.cellColors[cell.y*width+cell.x];c.fillRect(x,y,m.cell+.25,m.cell+.25);this.drawTerrainBlend(c,m,cell);this.drawAdministrativeEdges(c,m,cell);this.drawCoastEdges(c,m,cell)}this.drawColorEdges(c,m,visibleCells);
+    if(!this.legendHidden("水道"))this.drawWaterways(c,m);if(!this.legendHidden("道路")){this.drawRoutes(c,m);this.drawPlannedRoute(c,m)}this.drawSupplyRoutes(c,m);if(m.cell>15)this.drawLabels(c,m);if(this.state.layer==="commandery"){this.drawCounties(c,m);this.drawCommanderyLabels(c,m)}this.drawLandmarks(c,m);this.drawPlayerTerritoryOutline(c,m,visibleCells);if(this.hover){const hx=m.startX+this.hover.x*m.cell,hy=m.startY+this.hover.y*m.cell;c.strokeStyle="#fff2a8";c.lineWidth=2;c.strokeRect(hx+1,hy+1,m.cell-2,m.cell-2)}
     for(const city of this.state.data.cities){if(!this.inView(city,m))continue;
       const x=m.startX+(city.x+.5)*m.cell,y=m.startY+(city.y+.5)*m.cell,force=this.state.data.forces.find(f=>f.id===city.force),type=city.type||"city",markerKey=({pass:"关隘",ford:"渡口",port:"港口"})[type]||"城市",selected=this.state.selected.value===city,major=(city.level||1)>=4,size=Math.max(2.5,Math.min(major?6:(city.level||1)>=2?5:4,m.cell*(major?.38:.32)));
       if(this.legendHidden(markerKey))continue;c.fillStyle="#0b0e0b";c.strokeStyle=force?.color||"#777568";c.lineWidth=major?2.5:1.7;c.beginPath();

@@ -336,3 +336,8 @@ body>.app-shell>footer{display:none}
   dialog.os-managed-dialog{resize:none;max-width:94vw;max-height:90vh}
 }
 .game-started .stat-grid button{background:transparent;text-align:left;font:inherit;font-size:8px;color:var(--muted);border:0;border-right:1px solid var(--line-dim);border-bottom:1px solid var(--line-dim);padding:4px;cursor:pointer}
+.os-context-menu{position:fixed;inset:auto;margin:0;min-width:146px;padding:3px;border:1px solid #82906e;border-radius:0;background:#111910;box-shadow:2px 2px #000;color:var(--text);font:9px var(--mono);z-index:20000;max-height:calc(100vh - 8px);overflow:auto}
+.os-context-menu[hidden]{display:none!important}
+.os-context-menu button{display:block;width:100%;padding:6px 12px;border:0;border-radius:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer;white-space:nowrap}
+.os-context-menu hr{border:0;border-top:1px solid var(--line-dim);margin:3px 5px}
+.os-shortcut-seal{display:grid;place-items:center;width:48px;height:48px;border:2px solid #8e9876;box-shadow:inset 2px 2px #414d34,inset -2px -2px #050905;background:#182115;color:var(--amber);font:26px serif;font-style:normal}

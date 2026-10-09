@@ -127,9 +127,14 @@ window.FiscalSystem=class FiscalSystem {
       if(force.id===state.playerForceId){const entry={turn:state.turn,income:Math.floor(income),harvest,upkeep,netFood:force.resources.food-before.food,gold:force.resources.gold,food:force.resources.food,silk:force.resources.silk,centralGold:force.resources.gold-before.gold,centralFood:force.resources.food-before.food,centralSilk:force.resources.silk-before.silk,grainPrice:state.engine.grainPrice(state),countyIncome:0,countyHarvest:0};state.policies.economyHistory??=[];state.policies.economyHistory.push(entry);state.policies.economyHistory=state.policies.economyHistory.slice(-36)}
     }
   }
-  static consumeArmy(state,army,events){
-    this.initialize(state);const city=state.data.cities.find(city=>city.id===army.city&&city.force===army.force),need=Math.max(1,Math.ceil(army.soldiers/(GameClock.isDaily(state)?600:60))),target=need*(GameClock.isDaily(state)?60:6);
+  static stockArmy(state,army){
+    this.initialize(state);army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0;
+    const city=state.data.cities.find(city=>city.id===army.city&&city.force===army.force),need=Math.max(1,Math.ceil(army.soldiers/(GameClock.isDaily(state)?600:60))),target=need*(GameClock.isDaily(state)?60:6);
     if(city&&!state.engine.isCityBesieged(city)){const fill=Math.min(Math.max(0,target-army.stores.food),city.localFood||0);city.localFood-=fill;army.stores.food+=fill}
+    return need;
+  }
+  static consumeArmy(state,army,events){
+    const need=this.stockArmy(state,army);
     const taken=Math.min(need,army.stores.food);army.stores.food-=taken;army.stores.lastConsumption={turn:state.turn,need,taken};
     if(taken<need){army.supply=Math.max(0,(army.supply??100)-8);army.morale=Math.max(0,(army.morale??70)-4);if(army.force===state.playerForceId)events.push({phase:"后勤",text:`${army.name}军仓缺粮 ${need-taken}石，补给与士气下降`})}
   }
