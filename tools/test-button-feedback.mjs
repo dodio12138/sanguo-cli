@@ -10,7 +10,7 @@ class Host {
 }
 function control(text,rect={left:40,top:50,bottom:70}) {
   const classes=new Set();
-  return {dataset:{tip:text},isConnected:true,disabled:false,rect,
+  return {dataset:{tip:text},isConnected:true,disabled:false,rect,getAttribute(){return null},removeAttribute(){},
     classList:{add:x=>classes.add(x),remove:x=>classes.delete(x),contains:x=>classes.has(x)},
     closest(){return this},matches(selector){return selector===":disabled"?this.disabled:selector==="button"},
     getBoundingClientRect(){return this.rect},getClientRects(){return this.isConnected?[this.rect]:[]}};
@@ -39,6 +39,12 @@ second.disabled=true;move(second);assert.equal(tip.hidden,true);second.disabled=
 move(first,1);assert.equal(tip.hidden,true); // Dragging never shows a tip.
 move(first);first.isConnected=false;mutation();assert.equal(tip.textContent,"第二个");
 document.emit("mouseout",{relatedTarget:null});assert.equal(tip.hidden,true);
+const plain=control("");plain.closest=selector=>selector.includes("inert")?null:plain;
+move(plain);assert.equal(tip.hidden,true);assert(plain.classList.contains("is-pointer-hover"));
+const chrome=control("打开系统菜单");chrome.closest=selector=>selector.includes("inert")?null:chrome;
+chrome.matches=selector=>selector==="button"||selector.includes(".os-start-button");
+move(chrome);assert.equal(tip.hidden,true);assert(chrome.classList.contains("is-pointer-hover"));assert.equal(chrome.dataset.tip,undefined);
+move(second);assert.equal(tip.hidden,false);assert.equal(tip.textContent,"第二个");
 window.ButtonFeedback.install();assert.equal(document.handlers.get("mousemove").length,1);
 window.ButtonFeedback.dispose();assert.equal(document.handlers.get("mousemove").length,0);
 console.log("悬浮状态回归通过：失焦后移动恢复 / 子元素稳定 / 点击不触发 / 移出隐藏 / 禁用与移除 / 边界定位 / 单一控制器");
