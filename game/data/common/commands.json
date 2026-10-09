@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "categories": [
+    {"id":"personnel","name":"人事","commands":[["search_talent","搜索人才","active"],["recruit_officer","登庸","active"],["release_prisoner","释放俘虏","active"],["poach_officer","挖角","active"],["transfer_officer","调任","active"],["recall_officer","召回","active"],["exile_officer","放逐","active"],["reward_officer","赏赐","active"],["punish_officer","惩罚","active"],["grant_item","授予宝物","active"],["confiscate_item","没收宝物","active"]]},
+    {"id":"office","name":"官职","commands":[["appoint_office","任命","active"],["dismiss_office","罢免","active"],["promote_office","升官","active"],["demote_office","降职","active"],["designate_heir","指定继承人","active"],["set_advisor","设置军师","active"]]},
+    {"id":"organization","name":"组织","commands":[["create_corps","新建军团","active"],["disband_corps","解散军团","active"],["adjust_jurisdiction","调整辖区","active"],["set_leader","设置负责人","active"]]},
+    {"id":"domestic","name":"内政","commands":[["agriculture","督查农业","active"],["commerce","督查商业","active"],["public_order","督查治安","active"],["population","清查户籍","active"],["city_defense","督修城防","active"],["recruit_troops","定额征兵","active"],["train_troops","督练军伍","active"],["collect_tax","征税","active"]]},
+    {"id":"construction","name":"建设","commands":[["construct_building","建筑","active"],["repair","修缮","active"],["build_road","道路","active"],["build_warehouse","仓库","active"],["fortify","城防","active"],["waterworks","水利","active"]]},
+    {"id":"finance","name":"财政","commands":[["buy_food","买粮","active"],["sell_food","卖粮","active"],["transfer_gold","调拨资金","active"],["transfer_food","调拨粮食","active"],["set_tax_rate","调整税率","active"]]},
+    {"id":"logistics","name":"后勤","commands":[["transport","运输","active"],["establish_supply_route","建立补给路线","active"],["set_storage","设置仓储","active"],["requisition_labor","征用民夫","active"]]},
+    {"id":"military","name":"军事","commands":[["form_army","编军","active"],["reorganize_army","改编","active"],["return_garrison","归还驻军","active"],["disband_army","解散","active"],["reinforce","补员","active"],["redeploy","调兵","active"],["assemble","集结","active"]]},
+    {"id":"march","name":"行军","commands":[["move","移动","active"],["forced_march","急行军","active"],["camp","扎营","active"],["ambush","伏击","active"],["raid","掠夺","active"],["explore","探索","active"],["retreat","撤退","active"]]},
+    {"id":"diplomacy","name":"外交","commands":[["improve_relations","亲善","active"],["non_aggression","互不侵犯","active"],["alliance","同盟","active"],["coalition","联军","active"],["declare_war","宣战","active"],["truce","停战","active"],["seek_peace","求和","active"],["demand_surrender","劝降","active"],["vassalize","附庸","active"],["request_reinforcements","请求援军","active"],["request_war_entry","请求参战","active"],["exchange_land","土地交换","active"],["exchange_gold","金钱交换","active"],["exchange_food","粮食交换","active"],["political_marriage","联姻","active"]]},
+    {"id":"intelligence","name":"情报","commands":[["scout_city","城市侦察","active"],["scout_army","军队侦察","active"],["investigate_person","人物调查","active"],["investigate_route","路线调查","active"],["investigate_terrain","地形调查","active"],["counterintelligence","反间谍","active"]]},
+    {"id":"strategy","name":"谋略","commands":[["sow_discord","离间","active"],["bribe","收买","active"],["incite","煽动","active"],["establish_inside_contact","内通","active"],["sabotage","破坏","active"],["spread_rumor","散布谣言","active"],["instigate_defection","策反","active"]]},
+    {"id":"policy","name":"政策","commands":[["set_development_policy","制定发展方针","active"],["set_military_goal","设置军事目标","active"],["set_diplomatic_policy","设置外交方针","active"],["set_fiscal_policy","设置财政方针","active"],["set_authority","设置授权范围","active"]]},
+    {"id":"technology","name":"科技","commands":[["research","研究","active"],["reform","改革","active"],["promote_technology","技术推广","active"]]},
+    {"id":"relationship","name":"人际","commands":[["visit","拜访","active"],["banquet","宴请","active"],["give_gift","赠礼","active"],["sworn_brotherhood","结义","active"],["marriage","婚姻","active"],["recommend","推荐","active"]]},
+    {"id":"personal","name":"个人","commands":[["study","学习","active"],["personal_training","训练","active"],["travel","旅行","active"],["personal_investigation","调查","active"],["rest","休息","active"]]}
+  ]
+}

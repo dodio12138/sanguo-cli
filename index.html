@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script>window.SANGUO_RUNTIME={staticHosting:true};</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10150f">
+  <title>&lt;&lt;&lt;三国</title>
+  <link rel="stylesheet" href="css/style.css?v=20261009-47">
+  <link rel="stylesheet" href="css/observer.css?v=20261005-04">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261009-18">
+  <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
+  <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-19">
+  <link rel="stylesheet" href="css/button-states.css?v=20261009-04">
+  <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
+  <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <section id="startScreen" class="start-screen" aria-label="开始游戏">
+    <div class="start-terminal main-menu">
+      <header class="menu-header"><span class="brand-mark">漢</span><div><h1>&lt;&lt;&lt;三国</h1></div><span class="menu-build">本地存档 · 离线可用</span></header>
+      <nav class="start-nav" aria-label="主菜单"><button class="selected" data-start-view="home">主菜单</button><button data-start-view="new">新建战局</button><button data-start-view="load">载入存档</button><button data-start-view="settings">设置</button><button data-start-view="exit">退出</button></nav>
+      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button></div></div></section>
+      <section id="startNewView" class="start-view start-grid" hidden>
+        <section><h2>01 / 选择剧本</h2><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
+        <section><h2>02 / 选择势力</h2><div id="forceChoices" class="force-choices"></div><p id="startHistoricalBrief" class="start-historical-brief">选择势力后显示历史局势与阶段目标。</p></section>
+      </section>
+      <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
+      <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>观察者推进速度<select id="observerDefaultSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="confirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
+      <section id="startExitView" class="start-view exit-view" hidden><div class="exit-card"><span class="brand-mark">終</span><h2>退出 &lt;&lt;&lt;三国</h2><p>当前进度已保存。</p><button data-start-view="home">返回主菜单</button></div></section>
+      <footer class="start-footer"><span id="startSummary">本地游戏 · 等待选择</span><span class="menu-footer-actions"><button id="startBackButton" data-start-view="home">返回</button><label id="newSaveSlotWrap" class="new-save-slot" hidden>新局存入<select id="newSaveSlotChoice"></select></label><button id="startGameButton" disabled>进入乱世 ▷</button></span></footer>
+    </div>
+  </section>
+  <div class="app-shell">
+    <header class="topbar panel-line">
+      <div class="brand">
+        <span class="brand-mark">漢</span>
+        <div><h1>&lt;&lt;&lt;三国</h1></div>
+      </div>
+      <section class="turn-display">
+        <div class="card-title"><span>历法</span></div>
+        <div class="os-calendar-body">
+          <div class="os-calendar-selectors">
+            <span id="eraLabel">建安五年</span>
+            <strong id="dateLabel">200年 1月 上旬</strong>
+          </div>
+          <div class="os-calendar-week" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+          <div class="os-calendar-days" id="calendarDays" aria-label="本月历法"></div>
+          <span class="status-dot">● 筹划阶段</span>
+        </div>
+      </section>
+    </header>
+
+    <nav class="main-nav panel-line" aria-label="主菜单">
+      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">旬报</button><button id="commandBookButton" class="nav-command-book" data-tip="按分类浏览全部可用命令并选择目标">命令簿</button>
+      <div id="observerControls" class="observer-controls" hidden><span>● 观察演进</span><select id="observerSpeed" aria-label="观察推进速度"><option value="5000">5 秒/旬</option><option value="3000" selected>3 秒/旬</option><option value="1000">1 秒/旬</option></select><button id="observerToggle">暂停</button><button id="observerStep">单步</button></div>
+      <div class="nav-end save-tools"><button id="saveButton" data-tip="选择本地存档槽保存当前战局">存档</button><button id="loadButton" data-tip="选择本地存档槽载入战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
+    </nav>
+
+    <main class="workspace">
+      <section id="resourcePanel" class="terminal-card resource-window" aria-label="势力资源">
+        <div class="card-title"><span>府库</span></div>
+        <div class="resource-window-body">
+          <button type="button" data-resource-detail="gold" aria-label="查看金钱收支"><i>金</i><b id="goldValue">12,480</b></button>
+          <button type="button" data-resource-detail="food" aria-label="查看粮食收支"><i>粮</i><b id="foodValue">38,600</b></button>
+          <button type="button" data-resource-detail="prestige" aria-label="查看府库与势力明细"><i>望</i><b id="prestigeValue">276</b></button>
+        </div>
+      </section>
+      <aside class="left-rail">
+        <nav class="rail-tabs" aria-label="战略侧栏分组"><button class="active" data-rail-tab="factionPanel">我方</button><button data-rail-tab="selectionRailPanel">所选</button><button data-rail-tab="forcesRailPanel">群雄</button></nav>
+        <section id="factionPanel" data-rail-panel class="terminal-card faction-card">
+          <div class="card-title"><span>己方势力</span></div>
+          <div class="ruler-row"><div id="rulerSeal" class="portrait">曹</div><div><h2 id="rulerName">曹操</h2><p id="rulerTitle">势力君主</p></div></div>
+          <div class="stat-grid"><span>城池<b id="playerCityCount">00</b></span><span>武将<b id="playerOfficerCount">00</b></span><span>兵力<b id="playerSoldiers">0</b></span><span>民心<b>71</b></span></div>
+        </section>
+
+        <section id="selectionRailPanel" data-rail-panel class="terminal-card" hidden>
+          <div class="card-title"><span>选中区域</span><small id="selectionKind">城市</small></div>
+          <div id="selectionPanel" class="selection-panel"></div>
+        </section>
+
+        <section id="forcesRailPanel" data-rail-panel class="terminal-card compact-list" hidden>
+          <div class="card-title"><span>天下态势</span></div>
+          <nav class="world-tabs" aria-label="天下态势内容"><button id="worldForcesTab" type="button" class="active" data-world-tab="forces">天下</button><button id="worldReportTab" type="button" data-world-tab="report">旬报</button></nav>
+          <section class="world-tab-panel world-forces-panel" data-world-panel="forces"><div id="forceList"></div></section>
+          <section class="world-tab-panel world-report-panel" data-world-panel="report" hidden>
+            <p id="campaignObjective" class="campaign-objective"></p>
+            <p id="turnReport" class="turn-report">暂无旬报。提交命令后结束本旬。</p>
+          </section>
+        </section>
+      </aside>
+
+      <section class="map-column">
+        <div class="map-toolbar panel-line">
+          <div class="layer-tabs" role="tablist" aria-label="地图模式">
+            <button data-layer="terrain" class="active">地形</button>
+            <button data-layer="political">势力</button>
+            <button data-layer="province">州域</button>
+            <button data-layer="commandery">郡域</button>
+            <button data-layer="supply">补给</button>
+          </div>
+          <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
+        </div>
+        <div class="map-frame" id="mapFrame">
+          <canvas id="gameMap" aria-label="三国战略网格地图"></canvas>
+          <div class="map-corner tl">┌</div><div class="map-corner tr">┐</div><div class="map-corner bl">└</div><div class="map-corner br">┘</div>
+          <div id="mapTooltip" class="map-tooltip" hidden></div>
+          <div class="map-compass" aria-hidden="true"><b>北</b><span>╱│╲<br>─┼─<br>╲│╱</span></div>
+        </div>
+        <div class="map-footer panel-line"><span id="cursorInfo">坐标 --,-- · 等待选择</span><span>拖动舆图 · 滚轮缩放 · 单击选择 · 双击查看城池</span></div>
+      </section>
+
+      <aside class="right-rail">
+        <nav class="rail-tabs" aria-label="军令侧栏分组"><button class="active" data-rail-tab="commandsRailPanel">军令</button><button data-rail-tab="situationRailPanel">图例</button></nav>
+        <section id="commandsRailPanel" data-rail-panel class="terminal-card command-card">
+          <div class="card-title"><span>军令</span></div>
+          <div class="terminal-log" id="terminalLog" aria-live="polite">
+            <p><span class="prompt">军师&gt;</span> 主公，请下达军令。</p>
+          </div>
+          <form id="commandForm" class="command-input">
+            <label for="commandText">命令输入</label>
+            <div><span>&gt;</span><input id="commandText" autocomplete="off" placeholder="例：命夏侯惇领兵八千移驻官渡"><button type="submit">加入</button></div>
+          </form>
+          <div class="control-mode"><label for="controlMode">控制</label><select id="controlMode"><option value="manual">纯手动</option><option value="assist">军师辅助</option><option value="delegate">军师托管</option></select><span id="aiConnectionState">军师未连接</span><button id="aiSettingsButton">设置</button></div>
+          <button id="askAdvisorButton" class="advisor-button" disabled>请军师筹划本旬</button>
+          <section id="ordersRailPanel" class="orders-pane order-card">
+            <div class="orders-pane-title"><span>本旬命令</span><small><b id="orderCount">0</b> / 8</small></div>
+            <div id="orderQueue" class="order-queue"><p class="empty">尚无待执行命令</p></div>
+            <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">结束本旬 ▷</button></div>
+          </section>
+        </section>
+
+        <section id="situationRailPanel" data-rail-panel class="terminal-card legend-card" hidden>
+          <div class="card-title"><span>图例</span><small id="layerName">地形</small></div>
+          <section class="legend-window-body">
+            <div id="mapLegend" class="legend"></div>
+          </section>
+        </section>
+      </aside>
+    </main>
+    <footer><span>拖动地图 · 滚轮缩放 · 双击查看</span><span>版本 1.0.0</span></footer>
+  </div>
+
+  <dialog id="saveManagerDialog" class="save-manager-dialog">
+    <div class="dialog-title"><span id="saveManagerTitle">本地存档</span><button data-close="saveManagerDialog">×</button></div>
+    <div class="dialog-content"><p class="save-manager-note">存档同时保存在浏览器与项目本机文件。自动保存会更新当前战局所在槽位。</p><div id="gameSaveSlots" class="save-slots game-save-slots"></div></div>
+  </dialog>
+  <dialog id="gameSettingsDialog" class="settings-dialog">
+    <div class="dialog-title">游戏设置 <button data-close="gameSettingsDialog">×</button></div>
+    <div class="dialog-content settings-grid"><label>观察者推进速度<select id="gameObserverSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="gameConfirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
+  </dialog>
+  <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
+    <div class="dialog-title"><span>结束当前旬</span></div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
+  </dialog>
+  <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
+  <dialog id="helpDialog">
+    <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
+    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每回合做什么</h3><p>查看府库与局势，安排任命或军事行动，将命令加入队列，再结束当前回合统一结算。</p><button id="openTurnMapButton" type="button">查看可视化回合流程</button></section><section><h3>快捷操作</h3><p>F1～F5 切换舆图；回车查看所选城市；O 打开城市命令；M 规划行军；B 查看战报；Ctrl/⌘+S 保存。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
+  </dialog>
+
+  <dialog id="resourceDetailDialog" class="wide-dialog resource-detail-dialog">
+    <div class="dialog-title"><span>府库收支</span><button data-close="resourceDetailDialog">×</button></div>
+    <div id="resourceDetailContent" class="dialog-content resource-detail-content"></div>
+  </dialog>
+
+  <dialog id="detailDialog" class="wide-dialog">
+    <div class="dialog-title"><span id="detailTitle">城市详情</span><button data-close="detailDialog">×</button></div>
+    <div id="detailContent" class="dialog-content detail-content"></div>
+  </dialog>
+
+  <dialog id="reportDialog" class="wide-dialog">
+    <div class="dialog-title">旬报档案 <span class="dialog-tools"><button id="openChronicleButton" hidden>史官月录</button><button data-close="reportDialog">×</button></span></div>
+    <div id="reportHistory" class="dialog-content report-history"></div>
+  </dialog>
+
+  <dialog id="chronicleDialog" class="wide-dialog">
+    <div class="dialog-title">史官档案 <button data-close="chronicleDialog">×</button></div>
+    <nav class="chronicle-scopes" aria-label="史官档案范围"><button class="active" data-chronicle-scope="personal">本方月录</button><button data-chronicle-scope="global">天下季录</button></nav>
+    <div id="chronicleHistory" class="dialog-content chronicle-history"></div><div id="globalChronicleHistory" class="dialog-content chronicle-history" hidden></div>
+  </dialog>
+
+  <dialog id="battleReportDialog" class="wide-dialog">
+    <div class="dialog-title">战役档案 <button data-close="battleReportDialog">×</button></div>
+    <div id="battleReportHistory" class="dialog-content report-history"></div>
+  </dialog>
+
+  <dialog id="ledgerDialog" class="wide-dialog">
+    <div class="dialog-title"><span id="ledgerTitle">军政档案</span><button data-close="ledgerDialog">×</button></div>
+    <div id="ledgerContent" class="dialog-content ledger-content"></div>
+  </dialog>
+
+  <dialog id="commandDialog" class="command-dialog">
+    <div class="dialog-title"><span id="commandDialogTitle">全军命令簿</span> <button data-close="commandDialog">×</button></div>
+    <div class="command-browser"><nav id="commandCategories"></nav><section id="commandList"></section></div>
+  </dialog>
+
+  <dialog id="plannerDialog" class="wide-dialog">
+    <div class="dialog-title"><span id="plannerTitle">军事规划</span><button data-close="plannerDialog">×</button></div>
+    <form id="plannerForm" class="dialog-content planner-content"></form>
+  </dialog>
+
+  <dialog id="modToolsDialog" class="debug-dialog">
+    <div class="dialog-title">数据与模组工具 <button data-close="modToolsDialog">×</button></div>
+    <div class="dialog-content debug-tools">
+      <section id="debugSummary"></section>
+      <section><h3>模组加载报告</h3><div id="modReport"></div></section>
+      <section><h3>剧本数据</h3><textarea id="scenarioEditor" class="json-editor" spellcheck="false" aria-label="剧本数据编辑器"></textarea></section>
+      <div class="debug-actions"><button id="loadScenarioJson">载入当前数据</button><button id="validateScenarioJson">校验编辑内容</button><button id="downloadScenarioJson">导出剧本</button><button id="exportSaveJson">导出存档</button><button id="importSaveJson">导入存档</button><input id="saveFileInput" type="file" accept="application/json,.json" hidden><button id="copyDebugReport">复制报告</button></div>
+      <pre id="debugOutput">等待操作。</pre>
+    </div>
+  </dialog>
+
+  <dialog id="eventDialog" class="event-dialog">
+    <div class="dialog-title"><span>天下事件</span></div>
+    <div class="event-window-body">
+      <div class="event-seal">策</div>
+      <small id="eventKind">历史事件</small>
+      <h2 id="eventTitle">天下有变</h2>
+      <p id="eventText"></p>
+      <div id="eventLocation" class="event-location"></div>
+      <div id="eventChoices" class="event-choices"></div>
+    </div>
+  </dialog>
+
+  <dialog id="turnBriefingDialog" class="turn-briefing-dialog">
+    <div class="dialog-title"><span>本旬简报</span><button id="closeTurnBriefing" type="button">×</button></div>
+    <div class="turn-briefing-body">
+      <small id="turnBriefingDate" class="briefing-date"></small>
+      <h2>上一旬回顾</h2>
+      <section><h3>已下达命令</h3><div id="turnBriefingOrders"></div></section>
+      <section><h3>府库与兵民变化</h3><div id="turnBriefingResources"></div></section>
+      <section><h3>命令反馈</h3><div id="turnBriefingFeedback"></div></section>
+      <section><h3>相关军事行动</h3><div id="turnBriefingMilitary"></div></section>
+    </div>
+    <div class="turn-briefing-footer"><button id="ackTurnBriefing" type="button">阅毕，进入本旬</button></div>
+  </dialog>
+
+  <dialog id="aiDialog" class="wide-dialog ai-dialog">
+    <div class="dialog-title">军师连接 <button data-close="aiDialog">×</button></div>
+    <div class="dialog-content">
+      <p class="ai-security">模型密钥只由本机网关读取，不会发送到游戏页面。</p>
+      <label>网关地址<input id="aiEndpoint" value="http://127.0.0.1:8787" spellcheck="false"></label>
+      <div class="ai-actions"><button id="aiConnectButton">连接并检测</button><button id="aiDisconnectButton">断开</button><span id="aiHealthText">尚未检测</span></div>
+      <section><h3>本旬建议</h3><div id="aiSuggestions"><p class="empty">连接后可请军师筹划；辅助模式不会自动加入命令。</p></div></section>
+      <label>给军师的战略指令<textarea id="aiInstruction" rows="3" maxlength="1000" placeholder="例如：先守住许昌，不要主动宣战；优先整顿补给。"></textarea></label>
+      <button id="aiInstructionButton" class="advisor-button">按此意图重新筹划</button>
+      <section><h3>工具审计</h3><div id="aiAudit"><p class="empty">暂无调用。</p></div></section>
+    </div>
+  </dialog>
+
+  <dialog id="gameOverDialog" class="game-over-dialog">
+    <div class="dialog-title"><span>战局终了</span></div>
+    <div class="game-over-window-body">
+      <div class="game-over-seal" id="gameOverSeal">統</div>
+      <h2 id="gameOverTitle">天下归定</h2>
+      <p id="gameOverText"></p>
+      <div id="gameOverStats" class="game-over-stats"></div>
+      <button id="restartGame">重新开局</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="uiTooltip" class="ui-tooltip" role="tooltip" hidden></div>
+
+  <script src="js/data/command-catalog.js?v=20260930-78"></script>
+  <script src="js/data/game-data.js?v=20260928-16"></script>
+  <script src="js/data/offline-data.generated.js?v=20260930-78"></script>
+  <script src="js/core/data-loader.js?v=20260930-78"></script>
+  <script src="js/core/rule-engine.js?v=20261008-11"></script>
+  <script src="js/core/ai-bridge.js?v=20260929-46"></script>
+  <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
+  <script src="js/core/ai-controller.js?v=20261005-08"></script>
+  <script src="js/core/game-state.js?v=20261009-01"></script>
+  <script src="js/ui/map-view.js?v=20261009-01"></script>
+  <script src="js/ui/terminal-select.js?v=20260929-66"></script>
+  <script src="js/ui/command-planner.js?v=20260930-78"></script>
+  <script src="js/ui/button-feedback.js?v=20261009-01"></script>
+  <script src="js/ui/app.js?v=20261009-21"></script>
+  <script src="js/ui/os-window-manager.js?v=20261009-19"></script>
+</body>
+</html>

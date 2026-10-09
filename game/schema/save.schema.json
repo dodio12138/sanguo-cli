@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jiuzhou.local/schema/save.schema.json",
+  "title": "终端三国存档",
+  "type": "object",
+  "required": ["version","scenarioId","playerForceId","turn","date","resources","world"],
+  "properties": {
+    "version":{"type":"integer","minimum":1,"maximum":16},
+    "scenarioId":{"type":"string","minLength":1},
+    "playerForceId":{"type":"string","minLength":1},
+    "turn":{"type":"integer","minimum":1},
+    "date":{"type":"object","required":["year","month","xun"],"properties":{"year":{"type":"integer"},"month":{"type":"integer","minimum":1,"maximum":12},"xun":{"type":"integer","minimum":0,"maximum":2}}},
+    "resources":{"type":"object","required":["gold","food","prestige"]},
+    "orders":{"type":"array"},"reports":{"type":"array"},"chronicles":{"type":"array"},"worldChronicles":{"type":"array"},"diplomacy":{"type":"object"},"technology":{"type":"object"},"corps":{"type":"array"},
+    "world":{"type":"object","required":["cities","armies","officers","forces"]}
+  }
+}

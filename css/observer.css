@@ -1,0 +1,36 @@
+.observer-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 0 6px;
+  color: var(--green);
+  font-size: 9px;
+}
+
+.observer-controls[hidden] {
+  display: none !important;
+}
+
+.observer-controls select,
+.observer-controls button {
+  border: 1px solid var(--line-dim);
+  background: #101710;
+  color: var(--text);
+  padding: 3px 6px;
+}
+
+.observer-mode .command-input,
+.observer-mode .quick-commands,
+.observer-mode .advisor-button,
+.observer-mode .order-card {
+  display: none;
+}
+
+.observer-mode .command-card { flex: 1; }
+.observer-mode .nav-end { margin-left: 0; }
+
+@media (max-width: 900px) {
+  .observer-controls span { display: none; }
+  .observer-controls { padding: 0 2px; }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jiuzhou.local/schema/mod-manifest.schema.json",
+  "title": "终端三国 Mod 清单",
+  "type": "object",
+  "required": ["id","name","version","game_version"],
+  "properties": {
+    "id":{"type":"string","pattern":"^[a-z0-9][a-z0-9_-]*$"},
+    "name":{"type":"string","minLength":1},
+    "version":{"type":"string","minLength":1},
+    "game_version":{"type":"string","minLength":1},
+    "load_order":{"type":"integer"},
+    "patches":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "replaces":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "description":{"type":"string"}
+  }
+}

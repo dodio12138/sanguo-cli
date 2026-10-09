@@ -1,0 +1,5 @@
+{"schema_version":1,"scenarios":[
+  {"id":"200_guandu","name":"官渡风云","date":"建安五年 / 200年","description":"曹袁决战前夜，中原群雄并立。","enabled":true,"definition":"200_guandu.json"},
+  {"id":"190_coalition","name":"反董卓联合","date":"初平元年 / 190年","description":"关东诸侯起兵会盟，董卓据洛阳迎战。","enabled":true,"definition":"190_coalition.json"},
+  {"id":"208_red_cliffs","name":"赤壁前夕","date":"建安十三年 / 208年秋","description":"荆州易主，曹军压境；孙刘联军与荆南诸郡尚待抉择。","enabled":true,"definition":"208_red_cliffs.json"}
+]}

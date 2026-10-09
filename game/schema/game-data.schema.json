@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jiuzhou.local/schema/game-data.schema.json",
+  "title": "终端三国组合游戏数据",
+  "type": "object",
+  "required": ["scenario", "map", "forces", "cities", "officers", "armies", "rules", "commandCatalog"],
+  "properties": {
+    "scenario": {"type":"object","required":["id","start_date","playable_forces"],"properties":{"id":{"type":"string","minLength":1},"start_date":{"type":"string","pattern":"^[0-9]{3,4}-[0-9]{2}-[0-9]{2}$"},"playable_forces":{"type":"array","items":{"type":"string"},"uniqueItems":true}}},
+    "map": {"type":"object","required":["width","height"],"properties":{"width":{"type":"integer","minimum":1},"height":{"type":"integer","minimum":1}}},
+    "forces": {"type":"array","minItems":1,"items":{"type":"object","required":["id","name","color"],"properties":{"id":{"type":"string","minLength":1},"name":{"type":"string","minLength":1},"color":{"type":"string"}}}},
+    "cities": {"type":"array","items":{"type":"object","required":["id","name","x","y","force","population","garrison","level"],"properties":{"id":{"type":"string","minLength":1},"name":{"type":"string","minLength":1},"x":{"type":"integer","minimum":0},"y":{"type":"integer","minimum":0},"force":{"type":"string"},"population":{"type":"number","minimum":0},"garrison":{"type":"number","minimum":0},"level":{"type":"integer","minimum":1,"maximum":5}}}},
+    "officers": {"type":"array","items":{"type":"object","required":["id","name","force","status"],"properties":{"id":{"type":"string","minLength":1},"name":{"type":"string","minLength":1},"force":{"type":"string"},"status":{"enum":["serving","injured","free","hidden","discovered","prisoner","wandering","exiled","not_appeared","dead"]}}}},
+    "armies": {"type":"array","items":{"type":"object","required":["id","name","force","city","soldiers"],"properties":{"id":{"type":"string","minLength":1},"name":{"type":"string","minLength":1},"force":{"type":"string"},"city":{"type":"string"},"soldiers":{"type":"number","minimum":0}}}},
+    "rules": {"type":"object","required":["calendar","orders","city_graph"],"properties":{"calendar":{"type":"object"},"orders":{"type":"object"},"city_graph":{"type":"object"}}},
+    "commandCatalog": {"type":"object","required":["categories","commands"],"properties":{"categories":{"type":"array"},"commands":{"type":"array","minItems":1}}}
+  }
+}

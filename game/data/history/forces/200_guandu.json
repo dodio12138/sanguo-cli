@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "forces": [
+    {"id":"cao","name":"曹操","color":"#b89044","soldiers":86000,"cities":3},
+    {"id":"yuan","name":"袁绍","color":"#776aa0","soldiers":121000,"cities":2},
+    {"id":"liu","name":"刘备","color":"#637fa5","soldiers":24000,"cities":1},
+    {"id":"sun","name":"孙策","color":"#a35448","soldiers":58000,"cities":2},
+    {"id":"liu_biao","name":"刘表","color":"#55806a","soldiers":51000,"cities":2},
+    {"id":"liu_zhang","name":"刘璋","color":"#83765c","soldiers":42000,"cities":7},
+    {"id":"zhang_lu","name":"张鲁","color":"#8a7548","soldiers":15000,"cities":2},
+    {"id":"ma_teng","name":"马腾","color":"#a66c43","soldiers":28000,"cities":3},
+    {"id":"han_sui","name":"韩遂","color":"#8e6d59","soldiers":16000,"cities":1},
+    {"id":"gongsun_du","name":"公孙度","color":"#647d83","soldiers":12000,"cities":1},
+    {"id":"neutral","name":"无主","color":"#777568","soldiers":0,"cities":0}
+  ]
+}

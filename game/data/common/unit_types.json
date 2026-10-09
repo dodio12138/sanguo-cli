@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "unit_types": {
+    "infantry": {"name":"步兵","attack":1.0,"defence":1.0,"supply":1.0},
+    "cavalry": {"name":"骑兵","attack":1.35,"defence":0.9,"supply":1.5},
+    "archers": {"name":"弓兵","attack":1.15,"defence":0.8,"supply":1.1}
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "items": [
+    {"id":"yitian_sword","name":"倚天剑","owner":"koei11_344","type":"weapon","bonus":{"war":3}},
+    {"id":"qinggang_sword","name":"青釭剑","owner":null,"type":"weapon","bonus":{"war":3}},
+    {"id":"mengde_book","name":"孟德新书","owner":"koei11_344","type":"book","bonus":{"intelligence":2}}
+  ]
+}
