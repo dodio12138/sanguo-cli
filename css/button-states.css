@@ -3,27 +3,16 @@
  * 组件样式文件只负责静态外观；hover、键盘聚焦和禁用反馈统一在这里维护。
  */
 :root{
-  --button-hover-background:#56633b;
-  --button-hover-color:#fff6bd;
-  --button-hover-border:#f0d46f;
   --button-hover-outline:#f1d881;
-  --button-hover-shadow:inset 0 0 0 1px #8a9564,0 0 7px #d8bf634d;
 }
 
 button{
-  --control-hover-background:var(--button-hover-background);
-  --control-hover-color:var(--button-hover-color);
-  --control-hover-border:var(--button-hover-border);
-  transition:background-color .1s ease,color .1s ease,border-color .1s ease,outline-color .1s ease;
+  transition:outline-color .1s ease;
 }
 
 body button:not(:disabled):is(:hover,.is-pointer-hover){
-  border-color:var(--control-hover-border)!important;
-  background-color:var(--control-hover-background)!important;
-  background-image:none!important;
-  color:var(--control-hover-color)!important;
-  box-shadow:var(--button-hover-shadow)!important;
-  filter:brightness(1.12);
+  outline:1px dashed var(--button-hover-outline)!important;
+  outline-offset:-3px;
 }
 
 button:focus-visible{
@@ -43,18 +32,9 @@ button:disabled{
 .war-plan-actions button:disabled{opacity:.4}
 .office-slot:disabled{opacity:.78}
 
-/* 危险操作仍使用红色，但交互机制与其他按钮一致。 */
-.os-window-close,.os-dialog-close,[data-action="delete"]{
-  --control-hover-background:#824538;
-  --control-hover-color:#fff0d5;
-  --control-hover-border:#f0a17f;
-}
-
-/* 浅色日历托盘需要保持深色文字，避免统一亮色文字降低对比度。 */
+/* 浅色历法图标使用深色虚线，保留原本的文字和底色。 */
 .os-calendar-tray{
-  --control-hover-background:#f0f1d9;
-  --control-hover-color:#182318;
-  --control-hover-border:#f4e8ad;
+  --button-hover-outline:#465634;
 }
 
 @media (prefers-reduced-motion:reduce){

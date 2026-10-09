@@ -36,7 +36,7 @@ try{
     const stableTipRect=await exec(`const tip=document.getElementById('uiTooltip');return tip&&!tip.hidden?tip.style.left+','+tip.style.top:''`);
     results.push({...after,changed:before.background!==after.background||before.color!==after.color,stable:after.tipRect===stableTipRect});
   }
-  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="none"||!result.changed||!result.tipVisible||!result.stable);
+  const observations=results.map((result,index)=>({...buttons[index],...result})),checked=observations.filter(result=>result.isButton),skipped=observations.filter(result=>!result.isButton).map(result=>result.label),failures=checked.filter(result=>!result.hover||result.outline!=="dashed"||result.changed||!result.tipVisible||!result.stable);
   const samples=checked.slice(-4).map(({label,background,color,border,outline,changed,tip})=>({label,background,color,border,outline,changed,tip}));
   console.log(JSON.stringify({gameStarted,checked:checked.length,skipped,samples,failures},null,2));
   if(!checked.length||failures.length)process.exitCode=1;
