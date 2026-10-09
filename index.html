@@ -8,10 +8,10 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261009-47">
   <link rel="stylesheet" href="css/observer.css?v=20261005-04">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261009-18">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261009-19">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-21">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-23">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -54,7 +54,7 @@
     </header>
 
     <nav class="main-nav panel-line" aria-label="主菜单">
-      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">旬报</button><button id="commandBookButton" class="nav-command-book" data-tip="按分类浏览全部可用命令并选择目标">命令簿</button>
+      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">旬报</button>
       <div id="observerControls" class="observer-controls" hidden><span>● 观察演进</span><select id="observerSpeed" aria-label="观察推进速度"><option value="5000">5 秒/旬</option><option value="3000" selected>3 秒/旬</option><option value="1000">1 秒/旬</option></select><button id="observerToggle">暂停</button><button id="observerStep">单步</button></div>
       <div class="nav-end save-tools"><button id="saveButton" data-tip="选择本地存档槽保存当前战局">存档</button><button id="loadButton" data-tip="选择本地存档槽载入战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
     </nav>
@@ -71,7 +71,7 @@
       <aside class="left-rail">
         <nav class="rail-tabs" aria-label="战略侧栏分组"><button class="active" data-rail-tab="factionPanel">我方</button><button data-rail-tab="selectionRailPanel">所选</button><button data-rail-tab="forcesRailPanel">群雄</button></nav>
         <section id="factionPanel" data-rail-panel class="terminal-card faction-card">
-          <div class="card-title"><span>己方势力</span></div>
+          <div class="card-title"><span>本势力</span></div>
           <div class="ruler-row"><div id="rulerSeal" class="portrait">曹</div><div><h2 id="rulerName">曹操</h2><p id="rulerTitle">势力君主</p></div></div>
           <div class="stat-grid"><span>城池<b id="playerCityCount">00</b></span><span>武将<b id="playerOfficerCount">00</b></span><span>兵力<b id="playerSoldiers">0</b></span><span>民心<b>71</b></span></div>
         </section>
@@ -120,7 +120,7 @@
             <p><span class="prompt">军师&gt;</span> 主公，请下达军令。</p>
           </div>
           <form id="commandForm" class="command-input">
-            <label for="commandText">命令输入</label>
+            <header class="command-entry-header"><label for="commandText">命令输入</label><button id="commandBookButton" type="button" class="command-book-button" data-tip="按分类浏览全部可用命令并选择目标">命令簿</button></header>
             <div><span>&gt;</span><input id="commandText" autocomplete="off" placeholder="例：命夏侯惇领兵八千移驻官渡"><button type="submit">加入</button></div>
           </form>
           <div class="control-mode"><label for="controlMode">控制</label><select id="controlMode"><option value="manual">纯手动</option><option value="assist">军师辅助</option><option value="delegate">军师托管</option></select><span id="aiConnectionState">军师未连接</span><button id="aiSettingsButton">设置</button></div>
@@ -288,6 +288,6 @@
   <script src="js/ui/command-planner.js?v=20260930-78"></script>
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
   <script src="js/ui/app.js?v=20261009-23"></script>
-  <script src="js/ui/os-window-manager.js?v=20261009-22"></script>
+  <script src="js/ui/os-window-manager.js?v=20261009-24"></script>
 </body>
 </html>

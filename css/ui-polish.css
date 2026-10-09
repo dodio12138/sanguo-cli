@@ -132,6 +132,10 @@ dialog[open] { overflow: visible; }
 
 .planner-content .terminal-select { width: 100%; }
 .control-mode .terminal-select { flex: 1; min-width: 0; }
+.control-mode .terminal-select-button { height: 20px; min-height: 20px; grid-template-columns: minmax(0,1fr) 18px; padding: 0 0 0 6px; font: 8px/1.2 var(--mono); }
+.control-mode .terminal-select-button i { height: auto; min-height: 0; }
+.control-mode .terminal-select-button span { color: inherit; }
+.control-mode > button { height: 20px; padding: 0 6px; line-height: 1.2; }
 .planner-description { grid-column: 1 / -1; margin: 0; border-left: 2px solid var(--amber); padding: 7px 9px; background: #0a100b; color: var(--muted); font-size: 9px; }
 .difficulty-select .terminal-select { display: inline-block; min-width: 84px; margin-left: 6px; vertical-align: middle; }
 .observer-controls .terminal-select { width: 82px; min-width: 82px; }

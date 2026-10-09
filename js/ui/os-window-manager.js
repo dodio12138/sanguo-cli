@@ -4,7 +4,7 @@
     {selector:"#resourcePanel",id:"resourcePanel",title:"府库",icon:"库",handle:".card-title"},
     {selector:".turn-display",id:"calendarWindow",title:"历法",icon:"历",handle:".card-title"},
     {selector:".map-column",id:"mapWindow",title:"战略舆图",icon:"图",handle:".map-toolbar"},
-    {selector:"#factionPanel",id:"factionPanel",title:"己方势力",icon:"君",handle:".card-title"},
+    {selector:"#factionPanel",id:"factionPanel",title:"本势力",icon:"君",handle:".card-title"},
     {selector:"#selectionRailPanel",id:"selectionRailPanel",title:"选中区域",icon:"选",handle:".card-title"},
     {selector:"#forcesRailPanel",id:"forcesRailPanel",title:"天下大势",icon:"势",handle:".card-title"},
     {selector:"#commandsRailPanel",id:"commandsRailPanel",title:"军令",icon:"令",handle:".card-title"},
@@ -135,24 +135,57 @@
 
   const desktopApps=[
     {id:"mapWindow",name:"战略舆图",asset:"strategy-map"},
-    {id:"factionPanel",name:"己方势力",asset:"player-faction"},
+    {id:"factionPanel",name:"本势力",asset:"player-faction"},
     {id:"commandsRailPanel",name:"军令",asset:"military-orders"}
   ];
+  const defaultIconPositions={mapWindow:{column:0,row:0},factionPanel:{column:0,row:1},commandsRailPanel:{column:0,row:2}};
+  const iconPositionKey="sanguo.os-desktop-icons.v1",iconGrid={x:8,y:8,width:78,height:84};
+  function nearestIconCell(column,row,bounds,occupied){
+    column=clamp(Math.round(column),0,bounds.columns-1);row=clamp(Math.round(row),0,bounds.rows-1);
+    let best=null,distance=Infinity;
+    for(let y=0;y<bounds.rows;y++)for(let x=0;x<bounds.columns;x++){
+      if(occupied.has(`${x}:${y}`))continue;
+      const delta=Math.abs(x-column)+Math.abs(y-row);if(delta<distance){distance=delta;best={column:x,row:y}}
+    }
+    return best;
+  }
   function createDesktopShortcuts(windows){
     const workspace=document.querySelector(".workspace");if(!workspace)return;
     const desktop=document.createElement("nav");desktop.className="os-desktop-icons";desktop.setAttribute("aria-label","桌面应用");
+    let positions={};try{positions=JSON.parse(localStorage.getItem(iconPositionKey)||"{}")||{}}catch{}
+    const buttons=[],bounds=()=>{const box=desktop.getBoundingClientRect();return {box,columns:Math.max(1,Math.floor((box.width-16)/iconGrid.width)),rows:Math.max(1,Math.floor((box.height-16)/iconGrid.height))}},valid=cell=>Number.isInteger(cell?.column)&&cell.column>=0&&Number.isInteger(cell?.row)&&cell.row>=0;
+    const setCell=(button,cell)=>{button.dataset.gridColumn=String(cell.column);button.dataset.gridRow=String(cell.row);button.style.left=`${iconGrid.x+cell.column*iconGrid.width}px`;button.style.top=`${iconGrid.y+cell.row*iconGrid.height}px`};
+    const occupiedByOthers=button=>new Set(buttons.filter(other=>other!==button).map(other=>`${other.dataset.gridColumn}:${other.dataset.gridRow}`));
+    const arrangeIcons=()=>{if(isCompact())return;const grid=bounds();if(!grid.box.width||!grid.box.height)return;const occupied=new Set;buttons.forEach((button,index)=>{if(button.classList.contains("is-icon-dragging"))return;const saved=positions[button.dataset.desktopApp],initial=defaultIconPositions[button.dataset.desktopApp]||{column:0,row:index},desired=valid(saved)?saved:initial,cell=nearestIconCell(desired.column,desired.row,grid,occupied);if(cell){setCell(button,cell);occupied.add(`${cell.column}:${cell.row}`)}})};
     for(const app of desktopApps){
       const target=windows.find(window=>window.dataset.windowId===app.id);if(!target)continue;
       const button=document.createElement("button"),icon=document.createElement("img"),label=document.createElement("span");
       button.type="button";button.className="os-desktop-icon";button.dataset.desktopApp=app.id;button.setAttribute("aria-label",`打开${app.name}`);button.setAttribute("aria-pressed","false");
       icon.src=`assets/icons/${app.asset}.svg`;icon.alt="";icon.width=icon.height=48;icon.draggable=false;label.textContent=app.name;button.append(icon,label);
       const select=()=>{desktop.querySelectorAll("button").forEach(item=>{item.classList.toggle("is-selected",item===button);item.setAttribute("aria-pressed",String(item===button))})};
-      button.onclick=event=>{select();if(event.detail===0)openWindow(target)};
-      button.ondblclick=()=>openWindow(target);
-      button.addEventListener("pointerup",event=>{if(event.pointerType==="touch")openWindow(target)});
-      desktop.append(button);
+      let blockOpenUntil=0;
+      button.onclick=event=>{select();if(event.detail===0&&Date.now()>=blockOpenUntil)openWindow(target)};
+      button.ondblclick=()=>{if(Date.now()>=blockOpenUntil)openWindow(target)};
+      button.addEventListener("pointerdown",event=>{
+        if(event.button!==0||isCompact())return;event.preventDefault();select();button.focus({preventScroll:true});
+        const grid=bounds(),box=button.getBoundingClientRect(),start={column:Number(button.dataset.gridColumn)||0,row:Number(button.dataset.gridRow)||0},offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;
+        let dragging=false;
+        button.setPointerCapture(event.pointerId);
+        const move=moveEvent=>{if(!dragging&&Math.hypot(moveEvent.clientX-event.clientX,moveEvent.clientY-event.clientY)<5)return;dragging=true;blockOpenUntil=Date.now()+500;button.classList.add("is-icon-dragging");button.style.left=`${clamp(moveEvent.clientX-grid.box.left-offsetX,0,Math.max(0,grid.box.width-72))}px`;button.style.top=`${clamp(moveEvent.clientY-grid.box.top-offsetY,0,Math.max(0,grid.box.height-76))}px`};
+        trackPointer(button,event.pointerId,move,(endEvent,cancelled)=>{
+          button.classList.remove("is-icon-dragging");if(!dragging){if(!cancelled&&event.pointerType==="touch")openWindow(target);return}
+          blockOpenUntil=Date.now()+500;
+          const cell=cancelled?start:nearestIconCell((Number.parseFloat(button.style.left)-iconGrid.x)/iconGrid.width,(Number.parseFloat(button.style.top)-iconGrid.y)/iconGrid.height,bounds(),occupiedByOthers(button));
+          setCell(button,cell||start);
+          if(!cancelled&&cell){positions[app.id]=cell;try{localStorage.setItem(iconPositionKey,JSON.stringify(positions))}catch{desktopNotice("桌面图标位置保存失败")}}
+          arrangeIcons();
+        });
+      });
+      button.addEventListener("pointerup",event=>{if(isCompact()&&event.pointerType==="touch")openWindow(target)});
+      desktop.append(button);buttons.push(button);
     }
     workspace.prepend(desktop);
+    requestAnimationFrame(arrangeIcons);addEventListener("resize",arrangeIcons);addEventListener("sanguo-game-ready",arrangeIcons,{once:true});
     workspace.addEventListener("pointerdown",event=>{if(event.target!==workspace&&event.target!==desktop)return;desktop.querySelectorAll("button").forEach(button=>{button.classList.remove("is-selected");button.setAttribute("aria-pressed","false")})});
   }
 
@@ -160,7 +193,7 @@
     const dock=document.querySelector(".main-nav");if(!dock)return;
     const menu=document.createElement("nav");menu.className="os-start-menu";menu.hidden=true;menu.setAttribute("popover","manual");menu.setAttribute("aria-label","应用菜单");
     const utilities=dock.querySelector(":scope > .nav-end"),originalButtons=[...dock.querySelectorAll(":scope > button"),...dock.querySelectorAll(":scope > .nav-end button")],moved=new Set,move=(button,parent)=>{if(button){parent.append(button);moved.add(button)}},makeSubmenu=(label,name,tip)=>{const trigger=document.createElement("button"),panel=document.createElement("section");trigger.type="button";trigger.className="os-submenu-trigger";trigger.textContent=label;trigger.dataset.submenu=name;trigger.dataset.tip=tip;trigger.setAttribute("aria-haspopup","menu");trigger.setAttribute("aria-expanded","false");panel.className="os-start-submenu";panel.dataset.submenuPanel=name;panel.setAttribute("role","menu");panel.setAttribute("aria-label",label);panel.hidden=true;menu.append(trigger,panel);return {trigger,panel}};
-    $("mapHomeButton").dataset.tip="返回战略舆图并关闭已打开的资料窗口";$("helpButton").dataset.tip="查看游戏流程、操作方法与快捷键";move($("commandBookButton"),menu);move($("mapHomeButton"),menu);
+    $("mapHomeButton").dataset.tip="返回战略舆图并关闭已打开的资料窗口";$("helpButton").dataset.tip="查看游戏流程、操作方法与快捷键";move($("mapHomeButton"),menu);
     const applications=makeSubmenu("桌面应用","applications","");for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-app-launcher";button.textContent=titleOf(window);button.onclick=()=>openWindow(window);applications.panel.append(button)}
     const archive=makeSubmenu("档案与情报","archives","打开军政、内治、外交、情报与各类报告");originalButtons.filter(button=>button.dataset.ledger).forEach(button=>move(button,archive.panel));move($("battleReportButton"),archive.panel);move($("reportButton"),archive.panel);
     const saves=makeSubmenu("存档与读档","saves","保存当前战局或载入已有战局");move($("saveButton"),saves.panel);move($("loadButton"),saves.panel);
