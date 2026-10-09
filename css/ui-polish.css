@@ -200,7 +200,6 @@ dialog.diplomacy-ledger { width: min(900px, 94vw); max-width: min(900px, 94vw); 
 @media(max-width:700px){.diplomacy-network-map{min-height:250px}.diplomacy-focus>div{grid-template-columns:1fr 1fr}}
 
 @media (max-width: 720px) {
-  .ui-tooltip { display: none; }
   .command-book-launch { margin-top: 4px; }
   .main-nav > .nav-command-book { display: block !important; }
 }

@@ -84,6 +84,13 @@
     minimize.onclick=()=>toggleMinimize(window);maximize.onclick=()=>toggleMaximize(window);close.onclick=()=>closeWindow(window);controls.append(minimize,maximize,close);handle.append(controls);
   }
 
+  function trackPointer(handle,pointerId,move,finish){
+    let ended=false;
+    const cleanup=(event,cancelled=false)=>{if(ended||event?.pointerId!==undefined&&event.pointerId!==pointerId)return;ended=true;handle.removeEventListener("pointermove",moving);handle.removeEventListener("pointerup",up);handle.removeEventListener("pointercancel",cancel);handle.removeEventListener("lostpointercapture",cancel);globalThis.removeEventListener("blur",cancel);document.removeEventListener("visibilitychange",visibility);if(handle.hasPointerCapture(pointerId))handle.releasePointerCapture(pointerId);finish(event||{},cancelled)};
+    const moving=event=>{if(event.pointerId!==pointerId)return;if(!(event.buttons&1)){cleanup(event,true);return}move(event)},up=event=>cleanup(event),cancel=event=>cleanup(event,true),visibility=()=>{if(document.hidden)cancel()};
+    handle.addEventListener("pointermove",moving);handle.addEventListener("pointerup",up);handle.addEventListener("pointercancel",cancel);handle.addEventListener("lostpointercapture",cancel);globalThis.addEventListener("blur",cancel);document.addEventListener("visibilitychange",visibility);
+  }
+
   function addResizeGrip(window){
     const grip=document.createElement("span");grip.className="os-window-resize";grip.setAttribute("aria-hidden","true");window.append(grip);
     grip.addEventListener("pointerdown",event=>{
@@ -91,7 +98,7 @@
       event.stopPropagation();focusWindow(window);const startX=event.clientX,startY=event.clientY,startWidth=window.offsetWidth,startHeight=window.offsetHeight,minWidth=window.classList.contains("map-column")?410:180,minHeight=window.classList.contains("map-column")?320:76;
       window.style.right="auto";window.style.bottom="auto";grip.setPointerCapture(event.pointerId);
       const move=moveEvent=>{const host=document.querySelector(".workspace").getBoundingClientRect(),box=window.getBoundingClientRect(),maxWidth=Math.max(minWidth,host.right-box.left),maxHeight=Math.max(minHeight,host.bottom-box.top-46);window.style.width=`${clamp(startWidth+moveEvent.clientX-startX,minWidth,maxWidth)}px`;window.style.height=`${clamp(startHeight+moveEvent.clientY-startY,minHeight,maxHeight)}px`;if(window.classList.contains("map-column"))dispatchEvent(new Event("resize"))};
-      const end=()=>{grip.removeEventListener("pointermove",move);remember(window);dispatchEvent(new Event("resize"))};grip.addEventListener("pointermove",move);grip.addEventListener("pointerup",end,{once:true});grip.addEventListener("pointercancel",end,{once:true});
+      trackPointer(grip,event.pointerId,move,()=>{remember(window);dispatchEvent(new Event("resize"))});
       window.dataset.userPositioned="true";
     });
   }
@@ -104,7 +111,7 @@
       window.dataset.userPositioned="true";
       window.style.left=`${box.left-host.left}px`;window.style.top=`${box.top-host.top}px`;window.style.right="auto";window.style.bottom="auto";handle.setPointerCapture(event.pointerId);
       const move=moveEvent=>{const maxX=Math.max(0,host.width-window.offsetWidth),maxY=Math.max(0,host.height-window.offsetHeight-46);window.style.left=`${clamp(moveEvent.clientX-host.left-offsetX,0,maxX)}px`;window.style.top=`${clamp(moveEvent.clientY-host.top-offsetY,0,maxY)}px`;window.classList.toggle("is-snapping",!moveEvent.altKey&&snapWindow(window,host))};
-      const end=endEvent=>{if(!endEvent.altKey)snapWindow(window,host);window.classList.remove("is-snapping");handle.removeEventListener("pointermove",move);remember(window)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true});
+      trackPointer(handle,event.pointerId,move,(endEvent,cancelled)=>{if(!cancelled&&!endEvent.altKey)snapWindow(window,host);window.classList.remove("is-snapping");remember(window)});
     });
     window.addEventListener("pointerdown",()=>focusWindow(window));
   }
@@ -179,7 +186,7 @@
         if(taskStrip){const task=document.createElement("button");task.type="button";task.className="os-task-button os-dialog-task";task.textContent=dialog.querySelector(":scope > .dialog-title > span:not(.dialog-tools)")?.textContent?.trim()||handle.childNodes[0]?.textContent?.trim()||"窗口";task.hidden=true;task.onclick=()=>dialog.open?minimize(dialog):restore(dialog);taskStrip.append(task);tasks.set(dialog,task)}
         handle.addEventListener("dblclick",event=>{if(!event.target.closest("button"))maximize(dialog)});dialog.addEventListener("pointerdown",()=>focusDialog(dialog));dialog.addEventListener("close",()=>{dialog.classList.remove("is-active");syncTask(dialog)});new MutationObserver(()=>syncTask(dialog)).observe(dialog,{attributes:true,attributeFilter:["open"]})
       }
-      handle.addEventListener("pointerdown",event=>{if(event.button!==0||event.target.closest("button")||isCompact()||dialog.classList.contains("os-dialog-maximized"))return;const box=dialog.getBoundingClientRect(),offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;dialog.style.margin="0";dialog.style.left=`${box.left}px`;dialog.style.top=`${box.top}px`;dialog.classList.add("os-dialog-dragging");handle.setPointerCapture(event.pointerId);const move=moveEvent=>{const maxX=Math.max(0,innerWidth-dialog.offsetWidth),maxY=Math.max(0,innerHeight-dialog.offsetHeight),rawX=clamp(moveEvent.clientX-offsetX,0,maxX),rawY=clamp(moveEvent.clientY-offsetY,0,maxY),x=snapValue(rawX,[0,maxX]),y=snapValue(rawY,[0,maxY]);dialog.style.left=`${x.value}px`;dialog.style.top=`${y.value}px`;dialog.classList.toggle("is-snapping",x.snapped||y.snapped)};const end=()=>{dialog.classList.remove("os-dialog-dragging","is-snapping");handle.removeEventListener("pointermove",move)};handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",end,{once:true});handle.addEventListener("pointercancel",end,{once:true})})});
+      handle.addEventListener("pointerdown",event=>{if(event.button!==0||event.target.closest("button")||isCompact()||dialog.classList.contains("os-dialog-maximized"))return;const box=dialog.getBoundingClientRect(),offsetX=event.clientX-box.left,offsetY=event.clientY-box.top;dialog.style.margin="0";dialog.style.left=`${box.left}px`;dialog.style.top=`${box.top}px`;dialog.classList.add("os-dialog-dragging");handle.setPointerCapture(event.pointerId);const move=moveEvent=>{const maxX=Math.max(0,innerWidth-dialog.offsetWidth),maxY=Math.max(0,innerHeight-dialog.offsetHeight),rawX=clamp(moveEvent.clientX-offsetX,0,maxX),rawY=clamp(moveEvent.clientY-offsetY,0,maxY),x=snapValue(rawX,[0,maxX]),y=snapValue(rawY,[0,maxY]);dialog.style.left=`${x.value}px`;dialog.style.top=`${y.value}px`;dialog.classList.toggle("is-snapping",x.snapped||y.snapped)};trackPointer(handle,event.pointerId,move,()=>dialog.classList.remove("os-dialog-dragging","is-snapping"))})});
   }
 
   function renderCalendar(){

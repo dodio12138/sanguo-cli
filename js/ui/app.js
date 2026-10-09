@@ -1,6 +1,5 @@
 (async () => {
   const $=id=>document.getElementById(id);
-  const tooltip=$("uiTooltip");tooltip.setAttribute("popover","manual");let tooltipTarget=null,hoveredButton=null;
   const compactLabel=value=>String(value||"").replace(/\s+/g," ").trim().slice(0,36);
   function ensureButtonTip(button){
     if(!button?.matches?.("button")||button.dataset.tip)return button;
@@ -19,17 +18,9 @@
     button.dataset.tip=message;if(nativeTitle)button.removeAttribute("title");return button;
   }
   function hydrateButtonTips(root=document){if(root.matches?.("button"))ensureButtonTip(root);root.querySelectorAll?.("button").forEach(ensureButtonTip)}
-  function tooltipControl(node){const target=node?.closest?.("button,[data-tip]");if(target?.matches?.("button"))ensureButtonTip(target);return target?.dataset.tip?target:null}
-  function positionTooltip(target=tooltipTarget){if(!target||tooltip.hidden)return;const rect=target.getBoundingClientRect(),pad=12,gap=7;tooltip.style.width="max-content";const w=Math.min(220,window.innerWidth-pad*2,Math.max(72,tooltip.scrollWidth));tooltip.style.width=`${w}px`;const h=tooltip.offsetHeight;let left=Math.min(rect.left,window.innerWidth-w-pad);if(left<pad)left=pad;let top=rect.bottom+gap;if(top+h>window.innerHeight-pad)top=rect.top-h-gap;if(top<pad)top=pad;tooltip.style.left=`${Math.round(left)}px`;tooltip.style.top=`${Math.round(top)}px`}
-  function showTooltip(target){const message=target?.dataset.tip;if(!message)return;tooltipTarget=target;tooltip.textContent=message;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();positionTooltip(target)}
-  function hideTooltip(target){if(target&&tooltipTarget!==target)return;if(tooltip.hidePopover&&tooltip.matches(":popover-open"))tooltip.hidePopover();tooltip.hidden=true;tooltipTarget=null}
-  const clearPointerHover=()=>{hoveredButton?.classList.remove("is-pointer-hover");hoveredButton=null};
-  document.addEventListener("mouseover",event=>{const button=event.target?.closest?.("button:not(:disabled)");if(button!==hoveredButton){clearPointerHover();hoveredButton=button;hoveredButton?.classList.add("is-pointer-hover")}const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))showTooltip(target)});
-  document.addEventListener("mouseout",event=>{const button=event.target?.closest?.("button:not(:disabled)");if(button&&!button.contains(event.relatedTarget)&&button===hoveredButton)clearPointerHover();const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))hideTooltip(target)});
-  window.addEventListener("blur",()=>{clearPointerHover();hideTooltip()});
-  window.addEventListener("resize",()=>positionTooltip());document.addEventListener("scroll",()=>positionTooltip(),true);
+  window.ButtonFeedback.install({prepareButton:ensureButtonTip});
   hydrateButtonTips();new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===1)hydrateButtonTips(node)}))).observe(document.body,{childList:true,subtree:true});
-  function selectRailPanel(button){const rail=button.closest(".left-rail,.right-rail");if(!rail)return;rail.querySelectorAll("[data-rail-tab]").forEach(tab=>tab.classList.toggle("active",tab===button));rail.querySelectorAll("[data-rail-panel]").forEach(panel=>panel.hidden=panel.id!==button.dataset.railTab)}
+  function selectRailPanel(button){const rail=button?.closest(".left-rail,.right-rail");if(!rail||rail.querySelector(".os-window"))return;rail.querySelectorAll("[data-rail-tab]").forEach(tab=>tab.classList.toggle("active",tab===button));rail.querySelectorAll("[data-rail-panel]").forEach(panel=>panel.hidden=panel.id!==button.dataset.railTab)}
   document.querySelectorAll("[data-rail-tab]").forEach(button=>button.addEventListener("click",()=>selectRailPanel(button)));
   function selectWorldTab(button){const panel=$("forcesRailPanel"),tab=button.dataset.worldTab;panel.querySelectorAll("[data-world-tab]").forEach(item=>item.classList.toggle("active",item===button));panel.querySelectorAll("[data-world-panel]").forEach(item=>item.hidden=item.dataset.worldPanel!==tab)}
   $("worldForcesTab").onclick=()=>selectWorldTab($("worldForcesTab"));$("worldReportTab").onclick=()=>selectWorldTab($("worldReportTab"));
