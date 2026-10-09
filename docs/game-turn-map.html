@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>&lt;&lt;&lt;三国 · 回合流程图</title>
+  <title>&lt;&lt;&lt;三国 · 日流程图</title>
   <style>
     :root{--bg:#09100b;--panel:#111a13;--panel2:#172219;--line:#667353;--dim:#8d967a;--text:#e4dfbc;--gold:#ddc56f;--green:#91b879;--red:#cb7668;--blue:#7fa6a4;--shadow:#020503}
     *{box-sizing:border-box}html,body{margin:0;min-width:1080px;min-height:100%;background:var(--bg);color:var(--text);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}body{background-image:linear-gradient(90deg,#53604812 1px,transparent 1px),linear-gradient(#5360480e 1px,transparent 1px),radial-gradient(circle at 50% 30%,#263522 0,transparent 58%);background-size:24px 24px,24px 24px,auto;padding:24px}.sheet{position:relative;width:calc(100vw - 48px);max-width:1500px;min-width:1032px;min-height:920px;margin:auto;border:1px solid #84906d;padding:22px 26px 28px;background:#0b120ddd;box-shadow:5px 6px 0 var(--shadow),18px 24px 70px #000c,inset 1px 1px #aeb78a33}.sheet:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,#0002 4px)}header{position:relative;display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #59644c;padding:0 4px 15px}h1{margin:0;color:var(--gold);font:700 27px/1.1 serif;letter-spacing:.12em}header p{margin:6px 0 0;color:var(--dim);font-size:12px}header .seal{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--gold);color:var(--gold);font:28px serif;box-shadow:inset 0 0 13px #c3a84d25}.legend{display:flex;gap:15px;color:var(--dim);font-size:11px}.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;border:1px solid #ffffff44}.loop{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:30px}.node{position:relative;min-height:200px;border:1px solid var(--line);padding:0 12px 12px;background:linear-gradient(145deg,#172119,#0c130e);box-shadow:2px 3px 0 var(--shadow),8px 10px 22px #0008}.node:after{content:"";position:absolute;top:50%;right:-23px;width:22px;border-top:2px solid #78855f}.node:before{content:"▶";position:absolute;z-index:2;top:calc(50% - 8px);right:-27px;color:var(--gold);font-size:13px}.node:last-child:after,.node:last-child:before{display:none}.node-title{display:flex;align-items:center;gap:8px;height:34px;margin:0 -12px 10px;padding:0 9px;background:#46522f;color:#ffe799;font-size:13px;font-weight:700}.node-title b{display:grid;place-items:center;width:20px;height:20px;border:1px solid #d8cc8c;color:#f6e39a;font-size:10px}.node ul{margin:0;padding-left:17px;color:#b9bea2;font-size:11px;line-height:1.65}.node li+li{margin-top:3px}.node strong{color:var(--text)}.plan{border-color:#8d7641}.resolve{border-color:#577a50}.event{border-color:#8b554a}.output{border-color:#597777}.return-arrow{position:absolute;z-index:0;left:8.2%;right:8.2%;top:236px;height:36px;border:2px solid #59644c;border-top:0;border-radius:0 0 22px 22px}.return-arrow:before{content:"▲";position:absolute;left:-7px;top:-8px;color:var(--gold);font-size:13px}.return-arrow span{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:0 8px;background:#0b120d;color:#899478;font-size:10px}.resolution{position:relative;margin:74px auto 0;border:1px solid #526149;padding:13px 13px 12px;background:#0d160f}.resolution h2,.branch h2{display:flex;align-items:center;gap:8px;margin:0 0 12px;color:var(--gold);font-size:13px}.resolution h2:before,.branch h2:before{content:"■";font-size:7px}.phases{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}.phase{position:relative;min-height:92px;border:1px solid #3f4c3a;padding:8px;background:#121c14}.phase:not(:last-child):after{content:"›";position:absolute;right:-7px;top:35px;z-index:2;color:var(--gold);font-size:17px}.phase b{display:block;margin-bottom:5px;color:#d6c36e;font-size:11px}.phase span{color:#9ca58b;font-size:9px;line-height:1.5}.branches{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;margin-top:14px}.branch{border:1px solid #4a5742;padding:12px;background:#0f1811}.branch ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}.branch li{border-left:2px solid #596a4e;padding:5px 7px;background:#151f16;color:#aeb69b;font-size:10px;line-height:1.45}.branch li b{display:block;color:#e0d9aa;font-size:10px}.branch.mode li:nth-child(2){border-left-color:#738e65}.branch.mode li:nth-child(3){border-left-color:#9a8549}.branch.mode li:nth-child(4){border-left-color:#667f80}.branch.event-path li{border-left-color:#8b554a}.branch.persist li{border-left-color:#597777}.foot{display:grid;grid-template-columns:1fr auto;align-items:center;margin-top:14px;border-top:1px dotted #505c48;padding-top:10px;color:#747e6b;font-size:10px}.foot strong{color:#b5bd9d}.badge{border:1px solid #5b674f;padding:5px 8px;color:#aeb799;background:#111912}.tip{color:#ccb863}.node.player .node-title{background:#5b552d}.node.resolve .node-title{background:#354e32}.node.event .node-title{background:#593a32}.node.output .node-title{background:#36504d}@media print{body{padding:0;background:#fff}.sheet{box-shadow:none}}
@@ -15,22 +15,22 @@
 <body>
   <main class="sheet">
     <header>
-      <div><h1>&lt;&lt;&lt;三国 · 每回合发生了什么</h1><p>从观察局势、编排命令，到全局结算、事件抉择，再回到下一回合</p></div>
+      <div><h1>&lt;&lt;&lt;三国 · 每日发生了什么</h1><p>从观察局势、编排命令，到全局结算、事件抉择，逐日持续推进</p></div>
       <div class="legend"><span><i style="background:#5b552d"></i>玩家阶段</span><span><i style="background:#354e32"></i>系统结算</span><span><i style="background:#593a32"></i>事件分支</span><span><i style="background:#36504d"></i>结果输出</span></div>
       <div class="seal">漢</div>
     </header>
 
-    <section class="loop" aria-label="主回合流程">
-      <article class="node player"><h2 class="node-title"><b>01</b>观察局势</h2><ul><li>查看<strong>地图、资源、天下态势</strong></li><li>选择城池、军团或人物</li><li>阅读上一回合简报与预警</li><li>判断内政、军事和外交目标</li></ul></article>
-      <article class="node player plan"><h2 class="node-title"><b>02</b>规划与下令</h2><ul><li>手动下令，或让军师提出建议</li><li>从命令簿选择目标与执行者</li><li>命令加入本回合队列，最多 8 条</li><li>可撤销、调整，再确认结束回合</li></ul></article>
-      <article class="node resolve"><h2 class="node-title"><b>03</b>统一结算</h2><ul><li>所有势力在同一次结算中行动</li><li>先更新经济、外交与战略系统</li><li>再执行玩家命令和诸侯决策</li><li>最后处理战斗、补给与人物变化</li></ul></article>
+    <section class="loop" aria-label="主日流程">
+      <article class="node player"><h2 class="node-title"><b>01</b>观察局势</h2><ul><li>查看<strong>地图、资源、天下态势</strong></li><li>选择城池、军团或人物</li><li>阅读上一日简报与预警</li><li>判断内政、军事和外交目标</li></ul></article>
+      <article class="node player plan"><h2 class="node-title"><b>02</b>规划与下令</h2><ul><li>手动下令，或让军师提出建议</li><li>从命令簿选择目标与执行者</li><li>命令加入本日队列，最多 8 条</li><li>可撤销、调整，点击继续恢复模拟</li></ul></article>
+      <article class="node resolve"><h2 class="node-title"><b>03</b>统一结算</h2><ul><li>每一天统一更新天下</li><li>每日更新财政与运输，定期更新行政外交</li><li>再执行玩家命令和诸侯决策</li><li>最后处理战斗、补给与人物变化</li></ul></article>
       <article class="node event"><h2 class="node-title"><b>04</b>事件与胜负</h2><ul><li>检查历史事件或地方事件</li><li>有选项时暂停流程，等待玩家抉择</li><li>检查势力灭亡、胜利或失败</li><li>观察模式则持续演进直到统一</li></ul></article>
-      <article class="node output"><h2 class="node-title"><b>05</b>生成结果</h2><ul><li>更新地图、资源、军队和人物</li><li>生成旬报、日志与回合简报</li><li>推进日期并自动保存当前槽位</li><li>无终局时进入下一回合</li></ul></article>
+      <article class="node output"><h2 class="node-title"><b>05</b>生成结果</h2><ul><li>更新地图、资源、军队和人物</li><li>记录日报与日志，不自动弹出简报</li><li>推进日期并自动保存当前槽位</li><li>无终局时进入下一日</li></ul></article>
     </section>
-    <div class="return-arrow"><span>下一回合：重新观察变化后的天下</span></div>
+    <div class="return-arrow"><span>下一日：重新观察变化后的天下</span></div>
 
     <section class="resolution" aria-label="统一结算内部顺序">
-      <h2>统一结算内部顺序（代码实际执行次序）</h2>
+      <h2>统一结算内部顺序（每日与定期更新）</h2>
       <div class="phases">
         <button type="button" class="phase interactive" data-detail-target="economyDetail" aria-expanded="false"><b>① 经济</b><span>税收、粮食收成、军费、人口、城内储备</span><small class="open-hint">点击查看具体算法</small></button>
         <button type="button" class="phase interactive" data-detail-target="worldDetail" aria-expanded="false"><b>② 天下系统</b><span>战略政策、补给路线、外交、附庸与联盟</span><small class="open-hint">点击查看执行细节</small></button>
@@ -44,40 +44,40 @@
     </section>
 
     <section id="economyDetail" class="detail-panel" aria-label="经济结算公式" hidden>
-      <div class="detail-head"><div><h2>① 经济 · 具体计算</h2><p>先计算势力总资源，再更新每座城与辖县；所有最终结果按代码中的位置四舍五入。</p></div><button type="button" data-close-detail>收起</button></div>
+      <div class="detail-head"><div><h2>① 经济 · 具体计算</h2><p>每日累计生产与支出；按各自周期征收，并结算在途运输、工程与徭役。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>税收（金）</h3><code>城市税基 = 商业 × 1.2 + 城市人口 ÷ 30,000</code><code>辖县税基 = 辖县人口 ÷ 18,000 × 辖县商业 ÷ 50</code><code>总税收 = round(Σ城市税基 × 状态修正 × 税率÷10) + round(Σ辖县税基 × 状态修正 × 税率÷10)</code><p>默认税率为 <strong>10%</strong>，因此倍率是 <strong>1.0</strong>；税率可在 0%～30% 调整。</p></article>
-        <article class="formula-card"><h3>粮食收成</h3><code>城市收成 = round(Σ农业 × 3.5 × 状态修正 × 季节修正)</code><code>辖县收成 = round(Σ辖县人口 ÷ 8,000 × 辖县农业 ÷ 50 × 状态修正 × 季节修正)</code><code>总收成 = 城市收成 + 辖县收成</code><p>农业系数 <strong>3.5</strong> 来自当前游戏规则配置。</p></article>
-        <article class="formula-card"><h3>军费与净粮</h3><code>军团耗粮 = 全部军团兵力 ÷ 60</code><code>守军耗粮 = 全部城市守军 ÷ 250</code><code>军费 = round(军团耗粮 + 守军耗粮)</code><code>本回合净粮 = 总收成 − 军费</code><p>当前代码中的“军费”实际以<strong>粮食</strong>扣除，不扣金；军团越多、守军越厚，长期消耗越大。</p></article>
-        <article class="formula-card"><h3>人口变化</h3><code>增长率 = 0.00008 + (治安 − 50) × 0.000006 + 占领修正</code><code>城市新人口 = max(1,000, round(人口 × (1 + 增长率)))</code><code>辖县新人口 = max(500, round(人口 × (1 + 增长率)))</code><p>基础增长约 <strong>0.008%/回合</strong>；治安每高于 50 一点，再增加 0.0006%。</p></article>
-        <article class="formula-card"><h3>城内储备</h3><code>地方产粮 = round(农业 × 3 × 季节修正 × 占领修正)</code><code>城内粮 = min(仓库容量, 原城内粮 + 地方产粮)</code><code>城内金 = 原城内金 + round(商业 × 0.8)</code><p>默认仓库容量为 <strong>20,000</strong>。围城时地方产粮和城内金收入都停止；之后补给路线运输和驻军消耗还会继续改变城内粮。</p></article>
-        <article class="formula-card warning"><h3>粮库跌破零</h3><code>势力粮食归零；各军团损失约 2.5% 兵力（至少 50，保留 100）</code><code>军团士气 −6，补给 −8；各城守军减少 1%（至少保留 100）</code><p>这一步在基础收支后立即发生，因此持续扩军但没有农业基础会快速触发连锁惩罚。</p></article>
+        <article class="formula-card"><h3>田赋与商业税（贯）</h3><p>田赋按农村人口、农业与田赋税率累计；商业税按商业、农村人口、市集与商税率累计。民心、占领、围城和徭役影响产出。两项默认每月征收，税率与周期分别设置。</p></article>
+        <article class="formula-card"><h3>秋收（石）</h3><p>每日累计农田产出，九月月末收获。官员能力、农田、民心与徭役影响收成。征收后分为行政损耗、地方消耗、留用与上缴。</p></article>
+        <article class="formula-card"><h3>守军与军队仓储</h3><code>军团每日粮需 = ceil(兵力 ÷ 600)</code><p>军团消耗自身仓储；驻己方安全城池时可从当地补给。地方另承担官僚与守军日常消耗；围城军需按攻城结算处理。</p></article>
+        <article class="formula-card"><h3>人口与徭役</h3><p>人口每日按治安和占领状态变化，保留小数累计。徭役从辖县调出人员，按人日记录工作量，影响生产；工程完成或遣散后返回原县。</p></article>
+        <article class="formula-card"><h3>地方财政与中央府库</h3><p>地方留存钱币、粮食与布帛；上缴部分形成运输记录。府库仅计已入库资源，详情显示在途数量、目的地、尚需日数与受阻状态。</p></article>
+        <article class="formula-card warning"><h3>布帛与征收成本</h3><p>布帛默认每季征收，可赏赐武将。每次征收消耗地方钱币并增加官员事务负担；同类税目当月不可重复征收。</p></article>
       </div>
       <div class="modifier-strip"><div class="modifier"><b>正常状态 ×1.0</b>城市及其辖县完整产出。</div><div class="modifier"><b>占领状态 ×0.5</b>税收、总收成和地方产粮减半；人口另加 −0.05%。</div><div class="modifier"><b>围城状态 ×0</b>税收和收成停摆；辖县人口按 −0.05% 衰减。</div><div class="modifier"><b>季节修正</b>7～10月 ×1.35；11～2月 ×0.75；3～6月 ×1.0。</div></div>
-      <p class="source-note">公式来源：js/core/rule-engine.js · resolveEconomies()；配置来源：game/data/common/game_rules.json</p>
+      <p class="source-note">公式来源：js/core/fiscal-system.js；配置来源：game/data/common/game_rules.json</p>
     </section>
 
     <section id="worldDetail" class="detail-panel" aria-label="天下系统执行细节" hidden>
       <div class="detail-head"><div><h2>② 天下系统 · 执行细节</h2><p>经济完成后，依次处理建筑科技、补给路线、外交、附庸、委任军团与联盟。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>建筑、科技与势力特性</h3><code>市集金 = round(数量 × (40 + 商业×0.4) × (1 + 行政科技×0.06 + 势力加成))</code><code>农庄粮 = round(数量 × (70 + 农业×0.7) × (1 + 农业科技×0.08 + 势力加成))</code><p>每座兵营增加守军 120；学宫增加技术点 2；驿站与后勤科技恢复驻城军团补给。围城城市不生效。</p></article>
-        <article class="formula-card"><h3>补给路线审计</h3><code>运量上限 = max(150, 700 − 距离×60 + 驿站×100 + 后勤科技×80)</code><code>实际输粮 = min(运量上限, 来源超出保留量, 目标仓库空位)</code><p>路线只能经过己方、未被围困且无敌军占据的城市；中断和恢复都会写入旬报。</p></article>
-        <article class="formula-card"><h3>天下外交</h3><p>每 3 回合检查一次诸侯关系。战争持续至少 12 回合后可能停战；高关系可能结盟或互不侵犯；邻接且低关系可能爆发战争。</p><p>拥有共同敌人的非交战双方关系 +2；条约到期会被清除。</p></article>
-        <article class="formula-card"><h3>附庸与决胜阶段</h3><p>每 12 回合检查附庸：关系至少 60、未交战且强方国力达到弱方 3 倍时，弱方可能称臣。</p><p>进入决胜阶段后附庸关系全部解除，相邻诸侯更容易撕毁条约并开战。</p></article>
-        <article class="formula-card"><h3>委任军团</h3><p>政策设为“自动执行”时，每 3 回合运行：花费 120 金，为辖区内发展最低的城市农业、商业各 +1。</p><p>委任军团所属、未被围困的军队补给 +5、士气 +2。</p></article>
-        <article class="formula-card"><h3>联盟协同</h3><p>每 3 回合，联盟成员寻找至少 1,200 人的空闲军团，选择通往共同目标的最短可行路线。</p><p>尚未参战时会先宣战，再将军团设为“联军进军”。</p></article>
+        <article class="formula-card"><h3>建筑与科技</h3><p>建筑、科技、官署发展与攻城每十日更新。市集、农庄产出计入地方财政，不再直接增加府库。</p></article>
+        <article class="formula-card"><h3>补给路线审计</h3><code>运量上限 = max(150, 700 − 距离×60 + 驿站×100 + 后勤科技×80)</code><code>实际输粮 = min(运量上限, 来源超出保留量, 目标仓库空位)</code><p>路线只能经过己方、未被围困且无敌军占据的城市；中断和恢复都会写入日报。</p></article>
+        <article class="formula-card"><h3>天下外交</h3><p>每月检查一次诸侯关系。战争持续至少 12 日后可能停战；高关系可能结盟或互不侵犯；邻接且低关系可能爆发战争。</p><p>拥有共同敌人的非交战双方关系 +2；条约到期会被清除。</p></article>
+        <article class="formula-card"><h3>附庸与决胜阶段</h3><p>每季检查附庸：关系至少 60、未交战且强方国力达到弱方 3 倍时，弱方可能称臣。</p><p>进入决胜阶段后附庸关系全部解除，相邻诸侯更容易撕毁条约并开战。</p></article>
+        <article class="formula-card"><h3>委任军团</h3><p>政策设为“自动执行”时，每月运行：花费 120 金，为辖区内发展最低的城市农业、商业各 +1。</p><p>委任军团所属、未被围困的军队补给 +5、士气 +2。</p></article>
+        <article class="formula-card"><h3>联盟协同</h3><p>每月，联盟成员寻找至少 1,200 人的空闲军团，选择通往共同目标的最短可行路线。</p><p>尚未参战时会先宣战，再将军团设为“联军进军”。</p></article>
       </div>
     </section>
 
     <section id="ordersDetail" class="detail-panel" aria-label="玩家命令执行细节" hidden>
       <div class="detail-head"><div><h2>③ 玩家命令 · 执行细节</h2><p>命令按队列原顺序逐条处理；某条失败不会回滚已经执行的命令，也不会阻止后续命令。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>进入队列前</h3><p>每回合最多 8 条。相同命令、相同目标、相同数量与参数组成同一签名，重复命令会被拒绝。</p><p>关系与个人行动中，同一人物每回合只能承担一次行动。</p></article>
+        <article class="formula-card"><h3>进入队列前</h3><p>每日最多 8 条。相同命令、相同目标、相同数量与参数组成同一签名，重复命令会被拒绝。</p><p>关系与个人行动中，同一人物每日只能承担一次行动。</p></article>
         <article class="formula-card"><h3>执行路由</h3><p>依次尝试：人事与官职 → 建设后勤 → 外交情报计略 → 组织政策个人 → 内政军事行军。</p><p>无法通过任何规则路由的自由命令只生成失败记录，不改变世界状态。</p></article>
         <article class="formula-card"><h3>通用验证</h3><p>检查目标是否存在、是否属于己方、人物是否在任、军团是否驻城、是否正在围城，以及金粮、兵力和情报是否满足。</p><p>验证失败只记录原因，不消耗该命令原定资源。</p></article>
-        <article class="formula-card"><h3>即时生效</h3><p>赏罚、调任、政策、外交、买卖粮食、建筑、组建或改编军团等在此阶段立即改变状态。</p><p>发展、募兵、训练等部分命令设置持续 6 回合的官署增益或目标，实际增长在行政阶段发生。</p></article>
+        <article class="formula-card"><h3>即时生效</h3><p>赏罚、调任、政策、外交、买卖粮食、建筑、组建或改编军团等在此阶段立即改变状态。</p><p>发展、募兵、训练等部分命令设置持续六十日的官署增益或目标，实际增长在行政阶段发生。</p></article>
         <article class="formula-card"><h3>战争计划</h3><p>进攻与防御计划会自动生成多条行军命令，但仍受队列剩余容量限制；重复或超出上限的提案会跳过。</p><p>对敌进军前必须处于战争状态，否则接战或进入敌城时会停止。</p></article>
-        <article class="formula-card"><h3>结果记录</h3><p>每条命令的成功、失败、费用和效果都会加入本回合事件列表，随后进入旬报与回合简报。</p></article>
+        <article class="formula-card"><h3>结果记录</h3><p>每条命令的成功、失败、费用和效果都会加入本日事件列表，随后进入日报与日简报。</p></article>
       </div>
     </section>
 
@@ -96,11 +96,11 @@
     <section id="aiDetail" class="detail-panel" aria-label="诸侯决策执行细节" hidden>
       <div class="detail-head"><div><h2>⑤ 诸侯决策 · 执行细节</h2><p>每个存活诸侯依难度和自身性格分别决策，不直接读取玩家计划。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>内政与守备</h3><p>先补充城市守军；按周期花金提升农业、商业。增长速度、防守容量和军团密度受难度与势力性格修正。</p></article>
-        <article class="formula-card"><h3>组建与补员</h3><p>资金、守军、可用人物和军团数量允许时组建新军；每 3 回合可从驻城守军为弱军补员，同时消耗金粮。</p></article>
+        <article class="formula-card"><h3>内政与守备</h3><p>先补充城市守军；每天按概率花钱提升农业、商业。增长速度、防守容量和军团密度受难度与势力性格修正。</p></article>
+        <article class="formula-card"><h3>组建与补员</h3><p>资金、守军、可用人物和军团数量允许时组建新军；每日按概率从驻城守军为弱军补员，同时消耗金粮。</p></article>
         <article class="formula-card"><h3>优先驰援</h3><p>先比较敌军对己方城市的压力；若压力超过守军约 55%，空闲军团会优先强行军驰援，而不是继续进攻。</p></article>
         <article class="formula-card"><h3>目标评分</h3><p>综合路线距离、敌我战力比、城市价值、是否中立、是否飞地、是否属于霸主势力，选择分数最低的目标。</p></article>
-        <article class="formula-card"><h3>是否出兵</h3><p>标准难度通常每 2 回合尝试行动；宽松更慢，艰难每回合可行动。补给或士气低于 45 时不会主动进攻。</p><p>战争越到后期，AI 可接受的最低战力比越低。</p></article>
+        <article class="formula-card"><h3>每日概率决策</h3><p>各军团每天独立判断是否行动，不设固定日期或冷却间隔；难度影响行动概率。补给、士气低于 45 时不主动进攻；威胁下优先考虑驰援。</p></article>
         <article class="formula-card"><h3>宣战与行军</h3><p>选定非中立目标后先建立战争状态，再规划路线。补给高于 65 时普通行军，否则可能强行军。</p></article>
       </div>
     </section>
@@ -108,11 +108,11 @@
     <section id="warDetail" class="detail-panel" aria-label="战争移动执行细节" hidden>
       <div class="detail-head"><div><h2>⑥ 战争移动 · 执行细节</h2><p>先结算已经存在的围城，再移动所有军团；移动途中可能立刻触发野战或建立新围城。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>行军步数与消耗</h3><code>普通行军：1 节点；强行军：最多 2 节点</code><code>基础补给消耗 8；渡河额外 +5；强行军总消耗 ×1.6 后向上取整</code><p>强行军每移动一段另损失士气 3。</p></article>
+        <article class="formula-card"><h3>行军步数与消耗</h3><code>普通行军：每十日 1 节点；强行军：每五日 1 节点</code><code>基础补给消耗 8；渡河额外 +5；强行军总消耗 ×1.6 后向上取整</code><p>强行军每移动一段另损失士气 3。</p></article>
         <article class="formula-card"><h3>野战触发</h3><p>进入有敌军的节点立刻接战。战力综合兵种、地形、主将统武、参军智政、士气、训练、补给、阵型战术和难度。</p><p>渡河进攻 ×0.78，强行军接战 ×0.9；关隘防御 ×1.3，渡口防御 ×1.1，伏击防御 ×1.35。</p></article>
         <article class="formula-card"><h3>野战结果</h3><p>损失按双方战力和兵力计算并分成接战、鏖战、决胜三段记录。败军退回、士气下降；严重失败可能导致主将受伤或被俘。</p></article>
-        <article class="formula-card"><h3>围城每回合</h3><p>攻守双方损兵；城防受损，守方消耗城内粮，缺粮会额外降低士气、人口和守军。孤城压力更大。</p><p>城内士气降至投降线会开城；城防归零且战力条件满足则破城。</p></article>
-        <article class="formula-card"><h3>撤围与占领</h3><p>攻方全部粮尽、士气低于 20 或兵力低于 500 时撤围。夺城后治安、人口、城内金粮受损，并进入 3～6 回合占领状态。</p></article>
+        <article class="formula-card"><h3>围城每十日</h3><p>攻守双方损兵；城防受损，守方消耗城内粮，缺粮会额外降低士气、人口和守军。孤城压力更大。</p><p>城内士气降至投降线会开城；城防归零且战力条件满足则破城。</p></article>
+        <article class="formula-card"><h3>撤围与占领</h3><p>攻方全部粮尽、士气低于 20 或兵力低于 500 时撤围。夺城后治安、人口、城内金粮受损，并进入 30～60 日占领状态。</p></article>
         <article class="formula-card"><h3>未移动军团</h3><p>己方城市内恢复补给；补给线连接可提高恢复，扎营恢复更多并增加士气。滞留非己方区域则持续消耗补给。</p></article>
       </div>
     </section>
@@ -120,31 +120,31 @@
     <section id="peopleDetail" class="detail-panel" aria-label="补给人物执行细节" hidden>
       <div class="detail-head"><div><h2>⑦ 补给人物 · 执行细节</h2><p>战争移动后扣除驻军地方粮，再按周期更新人物忠诚与归属。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>驻城军团耗粮</h3><code>需求 = max(5, ceil(军团兵力 ÷ 400))</code><p>从驻地城内粮扣除。粮不足时按缺口比例令补给最多 −8，并令士气 −2。</p></article>
-        <article class="formula-card"><h3>人物忠诚</h3><p>每 3 回合更新：与君主相性高则 +1，相性低则 −1；有官职 +1；拥有达到 40 的重要关系，每条再 +1。</p></article>
+        <article class="formula-card"><h3>驻城军团耗粮</h3><code>需求 = ceil(军团兵力 ÷ 600)</code><p>从军队仓储扣除。粮不足时按缺口比例令补给最多 −8，并令士气 −2。</p></article>
+        <article class="formula-card"><h3>人物忠诚</h3><p>每月更新：与君主相性高则 +1，相性低则 −1；有官职 +1；拥有达到 40 的重要关系，每条再 +1。</p></article>
         <article class="formula-card"><h3>低忠叛离</h3><code>忠诚 ≤15 时，叛离概率 = (16 − 忠诚) × 0.012 × 野心</code><p>优先投奔相性最合的其他势力；若最佳相性仍低于 35，则离开成为在野人物。</p></article>
-        <article class="formula-card"><h3>俘虏处理</h3><p>诸侯每隔 6 回合尝试登庸被俘人物；成功率随忠诚下降。被俘至少 18 回合仍未归降时，可能获释。</p></article>
-        <article class="formula-card"><h3>伤病与军职同步</h3><p>战斗中人物可能负伤 6 回合或被俘。回合推进后处理伤愈与体力，并同步主将、副将、参军所在城市。</p></article>
-        <article class="formula-card"><h3>补给归零</h3><p>任何军团在行军或驻扎结算后补给为 0，士气额外 −8；低补给会进一步限制下一回合 AI 或玩家的持续作战能力。</p></article>
+        <article class="formula-card"><h3>俘虏处理</h3><p>被俘六十日后，诸侯每日按概率尝试登庸；成功率随忠诚下降。被俘至少一百八十日仍未归降时，可能获释。</p></article>
+        <article class="formula-card"><h3>伤病与军职同步</h3><p>战斗中人物可能负伤六十日或被俘。日推进后处理伤愈与体力，并同步主将、副将、参军所在城市。</p></article>
+        <article class="formula-card"><h3>补给归零</h3><p>任何军团在行军或驻扎结算后补给为 0，士气额外 −8；低补给会进一步限制下一日 AI 或玩家的持续作战能力。</p></article>
       </div>
     </section>
 
     <section id="eventDetail" class="detail-panel" aria-label="事件终局执行细节" hidden>
       <div class="detail-head"><div><h2>⑧ 事件终局 · 执行细节</h2><p>人物与补给处理后，按“阶段评议 → 随机事件 → 势力灭亡与胜负”收尾。</p></div><button type="button" data-close-detail>收起</button></div>
       <div class="formula-grid">
-        <article class="formula-card"><h3>阶段评议</h3><p>每 12 回合统计存活势力，按据点数量、再按国力排序，记录当前霸主、我方据点和名次。</p></article>
-        <article class="formula-card"><h3>事件资格</h3><p>检查剧本、玩家势力、回合范围、月份、是否仅一次、冷却、最低资源和最低城池数。已有待决事件时不会再生成。</p></article>
+        <article class="formula-card"><h3>阶段评议</h3><p>每季统计存活势力，按据点数量、再按国力排序，记录当前霸主、我方据点和名次。</p></article>
+        <article class="formula-card"><h3>事件资格</h3><p>检查剧本、玩家势力、日范围、月份、是否仅一次、冷却、最低资源和最低城池数。已有待决事件时不会再生成。</p></article>
         <article class="formula-card"><h3>抽取顺序</h3><p>若有符合条件的历史事件，历史事件优先；否则从普通事件池按权重随机。普通随机事件还受最短间隔和自身概率限制。</p></article>
-        <article class="formula-card"><h3>即时与抉择事件</h3><p>无选项事件立即修改金、粮、威望、城池或军团。有选项事件写入待决状态，弹出窗口并阻止下一次结束回合，直到玩家选择。</p></article>
+        <article class="formula-card"><h3>即时与抉择事件</h3><p>无选项事件立即修改金、粮、威望、城池或军团。有选项事件写入待决状态，弹出窗口并阻止下一次结束日，直到玩家选择。</p></article>
         <article class="formula-card"><h3>势力灭亡</h3><p>失去最后据点的势力被标记灭亡，其军团移除；在仕和受伤人物成为在野，所持俘虏获释或回归原势力。</p></article>
-        <article class="formula-card"><h3>胜负与回合收尾</h3><p>玩家灭亡则失败；只剩玩家势力则胜利；观察模式只剩一个势力则天下统一。</p><p>之后生成报告、清空命令、推进日期、更新人物生命周期并自动保存。</p></article>
+        <article class="formula-card"><h3>胜负与日收尾</h3><p>玩家灭亡则失败；只剩玩家势力则胜利；观察模式只剩一个势力则天下统一。</p><p>之后生成报告、清空命令、推进日期、更新人物生命周期并自动保存。</p></article>
       </div>
     </section>
 
     <section class="branches">
-      <article class="branch mode"><h2>玩家可以怎样参与</h2><ul><li><b>纯手动</b>玩家自己规划并提交全部命令</li><li><b>军师辅助</b>军师给建议，玩家决定是否加入</li><li><b>军师托管</b>结束回合前由军师自动补充命令</li><li><b>观察模式</b>不控制势力，自动或单步观看演进</li></ul></article>
-      <article class="branch event-path"><h2>事件分支</h2><ul><li><b>即时事件</b>效果直接写入资源、城池或军团</li><li><b>抉择事件</b>弹出事件窗口，选择后继续简报</li><li><b>历史事件优先</b>满足条件时优先于普通随机事件</li><li><b>阶段评议</b>定期汇总霸主、据点和国力排名</li></ul></article>
-      <article class="branch persist"><h2>报告与保存</h2><ul><li><b>旬报</b>记录命令、阶段结果和相关事件</li><li><b>回合简报</b>突出我方反馈与军事变化</li><li><b>史官</b>可选生成月度本方纪事与季度天下纪事</li><li><b>自动保存</b>结算和浏览器刷新都会保存当前战局</li></ul></article>
+      <article class="branch mode"><h2>玩家可以怎样参与</h2><ul><li><b>纯手动</b>玩家自己规划并提交全部命令</li><li><b>军师辅助</b>军师给建议，玩家决定是否加入</li><li><b>军师托管</b>每天按概率由军师补充命令</li><li><b>观察模式</b>不控制势力，暂停或继续观看演进</li></ul></article>
+      <article class="branch event-path"><h2>事件分支</h2><ul><li><b>即时事件</b>效果直接写入资源、城池或军团</li><li><b>抉择事件</b>弹出事件窗口，选择后可继续模拟</li><li><b>历史事件优先</b>满足条件时优先于普通随机事件</li><li><b>阶段评议</b>定期汇总霸主、据点和国力排名</li></ul></article>
+      <article class="branch persist"><h2>报告与保存</h2><ul><li><b>日报</b>记录命令、阶段结果和相关事件</li><li><b>日简报</b>突出我方反馈与军事变化</li><li><b>史官</b>可选生成月度本方纪事与季度天下纪事</li><li><b>自动保存</b>结算和浏览器刷新都会保存当前战局</li></ul></article>
     </section>
 
     <footer class="foot"><span><strong>阅读顺序：</strong>先看上方 01→05 主循环，再看中部结算细节；下方是控制模式、事件和存档三条支线。</span><span class="badge">依据当前 feature/os-window-ui 代码整理</span></footer>

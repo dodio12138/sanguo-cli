@@ -210,7 +210,7 @@
   }
 
   let taskStrip,calendarTray,resourceTray;
-  function syncCalendarTray(){if(!calendarTray)return;const match=$("dateLabel")?.textContent.match(/(上|中|下)旬/),day={上:5,中:15,下:25}[match?.[1]]||5;calendarTray.textContent=String(day)}
+  function syncCalendarTray(){if(!calendarTray)return;const match=$("dateLabel")?.textContent.match(/(\d+)日/);calendarTray.textContent=match?.[1]||"1"}
   function syncTaskButton(button,{closed,minimized,active}){
     button.hidden=closed;button.classList.toggle("is-minimized",minimized);button.classList.toggle("is-active",active&&!minimized&&!closed);
     button.setAttribute("aria-pressed",String(active&&!minimized&&!closed));
@@ -232,7 +232,7 @@
   function createTaskStrip(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;taskStrip=document.createElement("span");taskStrip.className="os-task-strip";
     for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>window.classList.contains("is-minimized")||window.classList.contains("is-closed")?openWindow(window):window.classList.contains("is-active")?toggleMinimize(window):focusWindow(window);taskStrip.append(button)}
-    const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),calendarWindow=windows.find(window=>window.dataset.windowId==="calendarWindow"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="切换府库窗口";const syncTray=()=>{tray.innerHTML=`金 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　望 <b>${$("prestigeValue")?.textContent||"—"}</b>`};resourceTray=tray;syncTray();for(const id of ["goldValue","foodValue","prestigeValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>{if(!resourceWindow)return;resourceWindow.classList.contains("is-minimized")||resourceWindow.classList.contains("is-closed")?openWindow(resourceWindow):toggleMinimize(resourceWindow)};
+    const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),calendarWindow=windows.find(window=>window.dataset.windowId==="calendarWindow"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="切换府库窗口";const syncTray=()=>{tray.innerHTML=`钱 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　帛 <b>${$("silkValue")?.textContent||"—"}</b>`};resourceTray=tray;syncTray();for(const id of ["goldValue","foodValue","silkValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>{if(!resourceWindow)return;resourceWindow.classList.contains("is-minimized")||resourceWindow.classList.contains("is-closed")?openWindow(resourceWindow):toggleMinimize(resourceWindow)};
     calendarTray=document.createElement("button");calendarTray.type="button";calendarTray.className="os-calendar-tray";calendarTray.title="打开历法";calendarTray.hidden=true;calendarTray.onclick=()=>calendarWindow&&openWindow(calendarWindow);syncCalendarTray();
     const clock=document.createElement("time");clock.className="os-clock";const tick=()=>{const now=new Date();clock.textContent=now.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})};tick();setInterval(tick,30000);dock.append(taskStrip,clock);updateTasks();
     dock.insertBefore(calendarTray,clock);dock.insertBefore(tray,clock);updateTasks();
@@ -262,10 +262,15 @@
 
   function renderCalendar(){
     const label=$("dateLabel"),days=$("calendarDays");if(!label||!days)return;
-    const match=label.textContent.match(/(\d+)年\s*(\d+)月(?:\s*(上|中|下)旬)?/),year=Number(match?.[1])||200,month=clamp(Number(match?.[2])||1,1,12),period=match?.[3]||"上",currentDay={上:5,中:15,下:25}[period],firstDay=new Date(year,month-1,1).getDay(),dayCount=new Date(year,month,0).getDate();
-    days.replaceChildren(...Array.from({length:42},(_,index)=>{const cell=document.createElement("span"),day=index-firstDay+1;cell.className="os-calendar-day";if(day<1||day>dayCount)cell.classList.add("is-empty");else{cell.textContent=String(day);if(day===currentDay){cell.classList.add("is-current");cell.setAttribute("aria-current","date")}}return cell}));
-    days.setAttribute("aria-label",`${year}年${month}月`);
-    syncCalendarTray();
+    const match=label.textContent.match(/(\d+)年\s*(\d+)月\s*(\d+)日/),date={year:Number(match?.[1])||200,month:Number(match?.[2])||1,day:Number(match?.[3])||1},dayCount=GameClock.daysInMonth(date.year,date.month);
+    if($("eraLabel"))$("eraLabel").textContent=GameClock.era(date);
+    if($("calendarCycle"))$("calendarCycle").textContent=`岁次 ${GameClock.yearStem(date)} · ${GameClock.dayStem(date)}日`;
+    days.replaceChildren(...Array.from({length:40},(_,index)=>{
+      const cell=document.createElement("span"),day=index+1;cell.className="os-calendar-day";
+      if(day>dayCount)cell.classList.add("is-empty");else{cell.textContent=GameClock.dayName(day);cell.setAttribute("aria-label",`${date.month}月${day}日`);if(day===date.day){cell.classList.add("is-current");cell.setAttribute("aria-current","date")}}
+      return cell;
+    }));
+    days.setAttribute("aria-label",`${GameClock.era(date)}${date.month}月日序`);syncCalendarTray();
   }
 
   function initialize(){
