@@ -85,6 +85,14 @@ body.game-started{
 .game-started .left-rail,.game-started .right-rail{display:contents}
 .game-started .rail-tabs{display:none}
 
+/* Shortcuts live below application windows, never over the map or dialog input. */
+.os-desktop-icons{display:none}
+.game-started .os-desktop-icons{position:absolute;z-index:0;left:248px;top:10px;display:grid;grid-template-columns:repeat(3,72px);gap:6px;padding:0}
+.game-started .os-desktop-icon{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;width:72px;min-height:76px;margin:0;border:1px solid transparent;border-radius:0;padding:5px 2px;background:transparent;box-shadow:none;color:#c3c9a5;font:9px/1.4 var(--mono);cursor:default;touch-action:manipulation}
+.os-desktop-icon img{display:block;flex:none;width:48px;height:48px;pointer-events:none;image-rendering:pixelated}
+.os-desktop-icon span{max-width:100%;padding:1px 3px;white-space:nowrap;text-shadow:1px 1px #020503;pointer-events:none}
+.game-started .os-desktop-icon.is-selected span{background:#314432;color:#ecd58b}
+
 /* Shared raised-window treatment. */
 .game-started .os-window{
   position:absolute;
@@ -232,7 +240,9 @@ body.game-started{
 .os-task-strip{display:flex;align-items:center;gap:3px;min-width:0;max-width:none;flex:1;margin-left:2px;border-left:1px solid #47513e;padding-left:4px;overflow-x:auto;scrollbar-width:none}
 .os-task-button{flex:1 1 74px;max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-color:#485440!important;background:#151d15!important;text-align:left}
 .os-task-button.is-minimized{color:#69705f!important}
-.os-task-button.is-closed{color:#555d4f!important}.os-task-button[data-task-window="resourcePanel"]{display:none}
+.os-task-button[hidden],.os-resource-tray[hidden],.os-calendar-tray[hidden]{display:none!important}
+.os-task-button.is-active{border-color:#9a9564!important;box-shadow:inset 1px 1px #050805,inset -1px -1px #6e7756}
+.os-task-button[data-task-window="resourcePanel"]{display:none}
 .os-task-button[data-task-window="calendarWindow"]{display:none}
 .os-calendar-tray{position:relative;display:grid;place-items:end center;flex:none;width:24px;height:24px;border:1px solid #66705a;padding:7px 2px 2px;background:#c3c5b5;color:#263026;font:700 8px/1 var(--mono);cursor:pointer;box-shadow:inset 1px 1px #f0f0df,inset -1px -1px #343b31}
 .os-calendar-tray:before{content:"";position:absolute;inset:2px 2px auto;height:5px;background:#536746}.os-calendar-tray[hidden]{display:none}
@@ -293,6 +303,7 @@ dialog.os-dialog-window>.dialog-content{border-top:1px solid #303a2d;background:
 body>.app-shell>footer{display:none}
 
 @media(max-width:1250px) and (min-width:1001px){
+  .game-started .os-desktop-icons{left:12px;top:auto;bottom:54px}
   .game-started #resourcePanel{top:6px;height:74px}
   .game-started .turn-display{left:12px;top:88px;width:220px;height:174px}
   .game-started #factionPanel{left:12px;top:270px;width:220px;height:92px}
@@ -305,6 +316,7 @@ body>.app-shell>footer{display:none}
   .os-calendar-days{min-height:68px}
 }
 @media(max-width:1000px){
+  .game-started .os-desktop-icons{position:relative;left:auto;top:auto;bottom:auto;justify-content:start;margin-bottom:8px}
   .game-started .workspace{overflow:auto;padding:7px 7px 54px}
   .game-started .os-window{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:180px;margin-bottom:8px;transform:none!important}
   .game-started #resourcePanel{min-height:80px}.game-started .turn-display{min-height:194px}
