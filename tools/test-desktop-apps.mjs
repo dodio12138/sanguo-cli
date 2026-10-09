@@ -74,3 +74,17 @@ assert.equal(new Set(shortcuts.map(button=>`${button.dataset.gridColumn}:${butto
 down();moveTo(100,-100);shortcut.send("pointerup",{pointerId:1});assert.equal(shortcut.dataset.gridColumn,"16");assert.equal(shortcut.dataset.gridRow,"0","不可拖出桌面");
 api.createDesktopShortcuts(windows);const restored=workspace.children[0].children[0];assert.equal(restored.style.left,shortcut.style.left);assert.equal(restored.style.top,shortcut.style.top);
 console.log("桌面拖动回归通过：网格吸附 / 位置持久化与恢复 / 占位避让 / 边界限制 / 防误打开 / 取消与失焦恢复 / 指针释放");
+
+const registry=api.createDesktopShortcuts(windows),addedDesktop=workspace.children[0];
+assert.equal(registry.add("resourcePanel"),true);assert.equal(registry.has("resourcePanel"),true);
+assert.equal(registry.add("resourcePanel"),false,"禁止重复快捷方式");assert.equal(registry.add("invalid"),false);
+assert(JSON.parse(stored.get("sanguo.os-desktop-shortcuts.v1")).includes("resourcePanel"));
+assert.equal(new Set(addedDesktop.children.map(button=>`${button.dataset.gridColumn}:${button.dataset.gridRow}`)).size,4);
+const added=addedDesktop.children.find(button=>button.dataset.desktopApp==="resourcePanel");
+added.remove=()=>addedDesktop.children.splice(addedDesktop.children.indexOf(added),1);
+registry.remove("resourcePanel");assert.equal(registry.has("resourcePanel"),false);
+assert(!JSON.parse(stored.get("sanguo.os-desktop-shortcuts.v1")).includes("resourcePanel"));
+api.createDesktopShortcuts(windows);assert.equal(workspace.children[0].children.length,3);
+assert(source.includes('button.dataset.shortcutWindow=window.dataset.windowId'));
+assert(source.includes('ledger-${button.dataset.ledger}'));
+console.log("快捷方式回归通过：动态创建 / 去重与校验 / 网格避让 / 保存恢复 / 移除快捷方式 / 汉菜单入口");
