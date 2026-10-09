@@ -1,6 +1,6 @@
 (async () => {
   const $=id=>document.getElementById(id);
-  const tooltip=$("uiTooltip");tooltip.setAttribute("popover","manual");let tooltipTarget=null;
+  const tooltip=$("uiTooltip");tooltip.setAttribute("popover","manual");let tooltipTarget=null,hoveredButton=null;
   const compactLabel=value=>String(value||"").replace(/\s+/g," ").trim().slice(0,36);
   function ensureButtonTip(button){
     if(!button?.matches?.("button")||button.dataset.tip)return button;
@@ -20,10 +20,14 @@
   }
   function hydrateButtonTips(root=document){if(root.matches?.("button"))ensureButtonTip(root);root.querySelectorAll?.("button").forEach(ensureButtonTip)}
   function tooltipControl(node){const target=node?.closest?.("button,[data-tip]");if(target?.matches?.("button"))ensureButtonTip(target);return target?.dataset.tip?target:null}
-  function positionTooltip(event,target=tooltipTarget){if(!target||tooltip.hidden)return;const rect=target.getBoundingClientRect(),x=event?.clientX??rect.left,y=event?.clientY??rect.bottom,pad=12;tooltip.style.width="max-content";const w=Math.min(220,window.innerWidth-pad*2,Math.max(72,tooltip.scrollWidth));tooltip.style.width=`${w}px`;const h=tooltip.offsetHeight;let left=x+12;if(left+w>window.innerWidth-pad)left=x-w-12;if(left<pad)left=pad;let top=y+12;if(top+h>window.innerHeight-pad)top=y-h-12;if(top<pad)top=Math.max(pad,window.innerHeight-h-pad);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`}
-  function showTooltip(target,event){const message=target?.dataset.tip;if(!message)return;tooltipTarget=target;tooltip.textContent=message;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();positionTooltip(event,target)}
+  function positionTooltip(target=tooltipTarget){if(!target||tooltip.hidden)return;const rect=target.getBoundingClientRect(),pad=12,gap=7;tooltip.style.width="max-content";const w=Math.min(220,window.innerWidth-pad*2,Math.max(72,tooltip.scrollWidth));tooltip.style.width=`${w}px`;const h=tooltip.offsetHeight;let left=Math.min(rect.left,window.innerWidth-w-pad);if(left<pad)left=pad;let top=rect.bottom+gap;if(top+h>window.innerHeight-pad)top=rect.top-h-gap;if(top<pad)top=pad;tooltip.style.left=`${Math.round(left)}px`;tooltip.style.top=`${Math.round(top)}px`}
+  function showTooltip(target){const message=target?.dataset.tip;if(!message)return;tooltipTarget=target;tooltip.textContent=message;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();positionTooltip(target)}
   function hideTooltip(target){if(target&&tooltipTarget!==target)return;if(tooltip.hidePopover&&tooltip.matches(":popover-open"))tooltip.hidePopover();tooltip.hidden=true;tooltipTarget=null}
-  document.addEventListener("pointerover",event=>{const target=tooltipControl(event.target);if(target)showTooltip(target,event)});document.addEventListener("pointermove",event=>{if(tooltipTarget)positionTooltip(event)});document.addEventListener("pointerout",event=>{const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))hideTooltip(target)});document.addEventListener("focusin",event=>{const target=tooltipControl(event.target);if(target)showTooltip(target)});document.addEventListener("focusout",event=>hideTooltip(tooltipControl(event.target)));
+  const clearPointerHover=()=>{hoveredButton?.classList.remove("is-pointer-hover");hoveredButton=null};
+  document.addEventListener("mouseover",event=>{const button=event.target?.closest?.("button:not(:disabled)");if(button!==hoveredButton){clearPointerHover();hoveredButton=button;hoveredButton?.classList.add("is-pointer-hover")}const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))showTooltip(target)});
+  document.addEventListener("mouseout",event=>{const button=event.target?.closest?.("button:not(:disabled)");if(button&&!button.contains(event.relatedTarget)&&button===hoveredButton)clearPointerHover();const target=tooltipControl(event.target);if(target&&!target.contains(event.relatedTarget))hideTooltip(target)});
+  window.addEventListener("blur",()=>{clearPointerHover();hideTooltip()});
+  window.addEventListener("resize",()=>positionTooltip());document.addEventListener("scroll",()=>positionTooltip(),true);
   hydrateButtonTips();new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===1)hydrateButtonTips(node)}))).observe(document.body,{childList:true,subtree:true});
   function selectRailPanel(button){const rail=button.closest(".left-rail,.right-rail");if(!rail)return;rail.querySelectorAll("[data-rail-tab]").forEach(tab=>tab.classList.toggle("active",tab===button));rail.querySelectorAll("[data-rail-panel]").forEach(panel=>panel.hidden=panel.id!==button.dataset.railTab)}
   document.querySelectorAll("[data-rail-tab]").forEach(button=>button.addEventListener("click",()=>selectRailPanel(button)));

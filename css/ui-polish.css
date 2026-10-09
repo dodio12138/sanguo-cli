@@ -112,12 +112,12 @@ select option { color: var(--text); background: #101710; }
   max-height: min(120px, calc(100vh - 24px));
   overflow: auto;
   overflow-wrap: anywhere;
-  padding: 5px 7px;
-  border: 1px solid var(--amber);
-  background: #090e0aee;
-  color: #ddd8b4;
-  box-shadow: 4px 5px 16px #000b, inset 0 0 0 1px #263020;
-  font: 8px/1.45 var(--mono);
+  padding: 6px 9px;
+  border: 1px solid #efd36d;
+  background: #10170ff5;
+  color: #fff2b5;
+  box-shadow: 4px 5px 16px #000d, inset 0 0 0 1px #59633e;
+  font: 9px/1.45 var(--mono);
   pointer-events: none;
 }
 .ui-tooltip::before { content: "> "; color: var(--green); }
