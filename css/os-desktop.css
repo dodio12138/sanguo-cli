@@ -10,6 +10,18 @@
   --title:#a98a45;
   --title-active:#d3b45f;
   --taskbar:#111811;
+  --scrollbar-track:#10170f;
+  --scrollbar-thumb:#536148;
+  --scrollbar-edge:#87916e;
+}
+
+/* Shared square scrollbar for all desktop window contents. */
+:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar{width:12px;height:12px}
+:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-track{background:var(--scrollbar-track);box-shadow:inset 1px 0 #030503}
+:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-thumb{min-height:24px;border:1px solid var(--scrollbar-edge);border-radius:0;background:var(--scrollbar-thumb);box-shadow:inset 1px 1px #a7af89,inset -1px -1px #263020}
+:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-corner{background:var(--scrollbar-track)}
+@supports not selector(::-webkit-scrollbar){
+  :where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *){scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
 }
 
 /* UI chrome should drag and click like a desktop, without accidental text selection. */
@@ -188,6 +200,7 @@ body.game-started{
 .game-started .world-tabs button{flex:1;border:1px solid transparent;padding:2px 5px;background:transparent;color:#777f6d;font:8px/1 var(--mono);cursor:pointer}
 .game-started .world-tabs button.active{border-color:#59634e;background:#273322;color:#e5cf7c;box-shadow:inset 1px 1px #77806444}
 .world-tab-panel,.legend-window-body{flex:1;min-height:0;overflow:auto;padding:7px 8px}
+.world-tab-panel{overflow-x:hidden;scrollbar-gutter:stable;overscroll-behavior:contain}
 .world-tab-panel[hidden]{display:none!important}
 .game-started .legend-window-body>.legend,.game-started .world-forces-panel>#forceList{margin:0}
 .game-started .world-report-panel>.campaign-objective,.game-started .world-report-panel>.turn-report{margin:0 0 7px;padding:6px;line-height:1.55;overflow-wrap:anywhere}
