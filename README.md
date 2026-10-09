@@ -33,12 +33,6 @@ node tools/start-game.mjs
 
 详细配置见 [AI 接入说明](docs/AI_API.md)。
 
-## GitHub Pages 发布
-
-运行 `node tools/build-pages.mjs`，将生成的 `.pages-dist/` 发布到 `gh-pages` 分支根目录。该目录只含游戏静态资源，不包含 `.env`、本地存档或服务器。Pages 选择 `gh-pages` 分支的根目录作为来源；生成的 `.nojekyll` 会关闭 Jekyll 处理。
-
-发布版使用纯浏览器存档并隐藏外部 AI 入口。本地 `node tools/start-game.mjs` 的存档服务和可选 AI 功能仍然可用。
-
 ## 项目目录
 
 ```text
