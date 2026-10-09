@@ -2,22 +2,11 @@
   const $=id=>document.getElementById(id);
   const staticHosting=window.SANGUO_RUNTIME?.staticHosting===true||/\.github\.io$/i.test(location.hostname),externalAI=!staticHosting;
   if(staticHosting){document.body.classList.add("static-hosting");for(const id of ["chronicleEnabled","globalHistorianEnabled","gameChronicleEnabled","gameGlobalHistorianEnabled"]){const input=$(id);if(input){input.checked=false;input.closest("label").dataset.externalAi=""}}}
-  const compactLabel=value=>String(value||"").replace(/\s+/g," ").trim().slice(0,36);
   function ensureButtonTip(button){
-    if(!button?.matches?.("button")||button.dataset.tip)return button;
-    const nativeTitle=button.getAttribute("title"),label=compactLabel(button.getAttribute("aria-label")||nativeTitle||button.querySelector(":scope > b")?.textContent||button.textContent);
-    if(!label)return button;
-    let message=`执行：${label}`;
-    if(button.classList.contains("os-task-button"))message=`切换${label}窗口`;
-    else if(button.classList.contains("os-window-close")||button.classList.contains("os-dialog-close"))message="关闭窗口";
-    else if(button.classList.contains("os-window-button"))message=label;
-    else if(button.classList.contains("os-start-button"))message="打开系统菜单";
-    else if(button.classList.contains("os-resource-tray"))message="切换府库窗口";
-    else if(button.classList.contains("os-calendar-tray"))message="切换历法窗口";
-    else if(button.classList.contains("terminal-select-button"))message=`选择：${label}`;
-    else if(button.classList.contains("map-legend-item"))message=`显示或隐藏${label}`;
-    else if(button.dataset.worldTab)message=`切换到${label}`;
-    button.dataset.tip=message;if(nativeTitle)button.removeAttribute("title");return button;
+    if(!button?.matches?.("button"))return button;
+    window.ButtonFeedback.prepareControl(button);
+    if(!button.dataset.tip&&button.classList.contains("map-legend-item"))button.dataset.tip=`显示或隐藏地图上的${button.textContent.trim()}`;
+    return button;
   }
   function hydrateButtonTips(root=document){if(root.matches?.("button"))ensureButtonTip(root);root.querySelectorAll?.("button").forEach(ensureButtonTip)}
   window.ButtonFeedback.install({prepareButton:ensureButtonTip});

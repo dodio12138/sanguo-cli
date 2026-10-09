@@ -1,6 +1,14 @@
 /* Shared mouse feedback. Moving within a control also restores a dismissed tip. */
 (() => {
-  function install({tooltip=document.getElementById("uiTooltip"),prepareButton=()=>{}}={}) {
+  function prepareControl(button){
+    const chrome=".os-window-button,.os-dialog-close,.os-task-button,.os-start-button,.os-resource-tray,.os-calendar-tray,.os-submenu-trigger,.os-layout-action,.os-layout-preset,.terminal-select-button,[role=option],[data-close],[data-world-tab],[data-rail-tab],#mapHomeButton,#helpButton,#gameSettingsButton,#closeHelp";
+    if(button.matches(chrome)){delete button.dataset.tip;button.removeAttribute("title");return}
+    const title=button.getAttribute("title");
+    if(title&&!button.dataset.tip)button.dataset.tip=title;
+    button.removeAttribute("title");
+    if(/^(执行[：:]|选择[：:])/.test(button.dataset.tip||"")||/^执行.+操作$/.test(button.dataset.tip||""))delete button.dataset.tip;
+  }
+  function install({tooltip=document.getElementById("uiTooltip"),prepareButton=prepareControl}={}) {
     window.ButtonFeedback?.dispose?.();
     let target=null,button=null,point=null;
     const listeners=[];
@@ -14,8 +22,8 @@
       tooltip.style.left=`${Math.max(pad,Math.min(rect.left,innerWidth-box.width-pad))}px`;
       tooltip.style.top=`${Math.max(pad,rect.bottom+gap+box.height<=innerHeight-pad?rect.bottom+gap:rect.top-box.height-gap)}px`;
     }
-    function hide() {
-      button?.classList.remove("is-pointer-hover");button=null;target=null;
+    function hide(clearButton=true) {
+      if(clearButton){button?.classList.remove("is-pointer-hover");button=null}target=null;
       if(tooltip.matches(":popover-open"))tooltip.hidePopover();
       tooltip.hidden=true;
     }
@@ -28,7 +36,7 @@
       const nextButton=next.matches("button")?next:null;
       if(button!==nextButton){button?.classList.remove("is-pointer-hover");button=nextButton}
       button?.classList.add("is-pointer-hover");
-      if(!next.dataset.tip){hide();return}
+      if(!next.dataset.tip){hide(false);return}
       const changed=target!==next||tooltip.hidden||tooltip.textContent!==next.dataset.tip;
       target=next;
       if(changed){tooltip.textContent=next.dataset.tip;tooltip.hidden=false;if(tooltip.showPopover&&!tooltip.matches(":popover-open"))tooltip.showPopover();position()}
@@ -38,17 +46,18 @@
     listen(document,"mousemove",move);
     listen(document,"mouseover",move);
     listen(document,"mouseout",event=>update(event.relatedTarget));
-    listen(document,"mousedown",hide);
+    listen(document,"mousedown",()=>hide());
     listen(window,"blur",()=>{point=null;hide()});
     listen(window,"resize",position);
     listen(document,"scroll",()=>{if(point)update(document.elementFromPoint(point.x,point.y));position()});
     const observer=new MutationObserver(()=>{
-      if(target&&(!target.isConnected||target.matches(":disabled")||!target.getClientRects().length)){hide();if(point)update(document.elementFromPoint(point.x,point.y))}
+      const current=target||button;
+      if(current&&(!current.isConnected||current.matches(":disabled")||!current.getClientRects().length)){hide();if(point)update(document.elementFromPoint(point.x,point.y))}
     });
     observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["hidden","disabled","open"]});
     const initial=Array.from(document.querySelectorAll("button:hover,[data-tip]:hover")).at(-1);
     if(initial&&document.hasFocus())update(initial);
     window.ButtonFeedback.dispose=()=>{listeners.forEach(remove=>remove());observer.disconnect();hide()};
   }
-  window.ButtonFeedback={install};
+  window.ButtonFeedback={install,prepareControl};
 })();
