@@ -145,8 +145,7 @@ body.game-started{
 .game-started .selection-panel,.game-started .compact-list>#forceList,
 .game-started .command-card>.terminal-log,.game-started .command-card>.command-input,
 .game-started .command-card>.control-mode,.game-started .command-card>.advisor-button,
-.game-started .order-card>.order-queue,.game-started .order-card>.order-actions,
-.game-started .legend-card>.legend,.game-started .legend-card>.campaign-objective,.game-started .legend-card>.turn-report{margin-left:8px;margin-right:8px}
+.game-started .order-card>.order-queue,.game-started .order-card>.order-actions{margin-left:8px;margin-right:8px}
 
 .os-window-buttons{position:absolute;z-index:5;right:4px;top:3px;display:flex;gap:3px;margin:0}
 .os-window-button{
@@ -225,14 +224,13 @@ body.game-started{
 .game-started #forcesRailPanel{left:40px;top:563px;width:277px;height:191px}
 .game-started .map-column{left:361px;right:auto;top:104px;bottom:auto;width:485px;height:500px;min-width:410px;min-height:320px}
 .game-started #commandsRailPanel{left:auto;right:30px;top:57px;width:276px;height:413px}
-.game-started #situationRailPanel{left:auto;right:80px;top:494px;width:254px;height:222px}
 .world-tabs{display:flex;flex:0 0 23px;border-bottom:1px solid #3d4737;padding:2px 5px;background:#111811}
 .game-started .world-tabs button{flex:1;border:1px solid transparent;padding:2px 5px;background:transparent;color:#777f6d;font:8px/1 var(--mono);cursor:pointer}
 .game-started .world-tabs button.active{border-color:#59634e;background:#273322;color:#e5cf7c;box-shadow:inset 1px 1px #77806444}
-.world-tab-panel,.legend-window-body{flex:1;min-height:0;overflow:auto;padding:7px 8px}
+.world-tab-panel{flex:1;min-height:0;overflow:auto;padding:7px 8px}
 .world-tab-panel{overflow-x:hidden;scrollbar-gutter:stable;overscroll-behavior:contain}
 .world-tab-panel[hidden]{display:none!important}
-.game-started .legend-window-body>.legend,.game-started .world-forces-panel>#forceList{margin:0}
+.game-started .world-forces-panel>#forceList{margin:0}
 .game-started .world-report-panel>.campaign-objective,.game-started .world-report-panel>.turn-report{margin:0 0 7px;padding:6px;line-height:1.55;overflow-wrap:anywhere}
 .game-started .world-report-panel>.turn-report{border:1px solid #303a2d;background:#0a100b;color:#929983}
 .orders-pane{display:flex;flex:0 0 144px;flex-direction:column;min-height:100px;margin-top:5px;border-top:1px solid #4b563f;background:#0a100b;overflow:hidden}
@@ -251,6 +249,7 @@ body.game-started{
 .game-started .map-column .map-actions button{padding:2px 6px;color:#d3c888}
 .game-started .map-column .map-frame{min-height:0;border:0}
 .game-started .map-column .map-footer{min-height:24px;padding:3px 7px;background:#0a100b;border-top:1px solid #3c4635}
+.game-started .map-column .map-legend{max-height:88px;gap:4px 9px;padding:4px 16px 4px 8px;background:#0a100b;border-top:1px solid #3c4635}
 .game-started .map-tooltip{max-width:200px;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 
 .os-start-button{display:grid!important;place-items:center;flex:none;width:26px;min-width:26px!important;height:26px;border-color:#87916e!important;padding:0!important;background:#2d3929!important;color:#f0d983!important;font:700 15px/1 serif!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
@@ -335,7 +334,6 @@ body>.app-shell>footer{display:none}
   .game-started #forcesRailPanel{left:12px;top:470px;width:220px;height:88px}
   .game-started .map-column{left:242px;right:270px;top:10px;bottom:48px;width:auto;height:auto}
   .game-started #commandsRailPanel{left:auto;right:12px;top:6px;width:250px;height:322px}
-  .game-started #situationRailPanel{left:auto;right:12px;top:336px;width:250px;height:222px}
   .orders-pane{flex-basis:118px}
   .os-calendar-days{min-height:68px}
 }

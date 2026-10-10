@@ -5,7 +5,7 @@ const polishCss=fs.readFileSync(new URL("css/ui-polish.css",root),"utf8");
 const feedbackSource=fs.readFileSync(new URL("js/ui/button-feedback.js",root),"utf8");
 const buttonCss=fs.readFileSync(new URL("css/button-states.css",root),"utf8"),hierarchyCss=fs.readFileSync(new URL("css/hierarchy.css",root),"utf8"),styleCss=fs.readFileSync(new URL("css/style.css",root),"utf8");
 if(!html.includes("css/os-desktop.css")||!html.includes("js/ui/os-window-manager.js"))throw new Error("桌面窗口资源未接入主页");
-for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel","situationRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
+for(const id of ["resourcePanel","calendarWindow","mapWindow","factionPanel","selectionRailPanel","forcesRailPanel","commandsRailPanel"])if(!source.includes(`id:"${id}"`))throw new Error(`窗口管理器缺少 ${id}`);
 if(source.includes('id:"ordersRailPanel"'))throw new Error("本旬命令不应保留独立窗口");
 for(const feature of ["bindDrag","addResizeGrip","toggleMinimize","toggleMaximize","closeWindow","createSystemMenu","createTaskStrip","bindDialogs"])if(!source.includes(`function ${feature}`))throw new Error(`窗口管理器缺少 ${feature}`);
 if(!source.includes("snapValue")||!source.includes("function snapWindow")||!source.includes("is-snapping")||!source.includes("moveEvent.altKey"))throw new Error("缺少窗口磁性吸附");
@@ -21,8 +21,8 @@ if(!source.includes('tray.title="切换府库窗口"')||!source.includes('resour
 if(!source.includes('const hasGeometry=["left","top","width","height"].some')||!source.includes("if(!hasGeometry)return"))throw new Error("只有最小化状态的窗口记录会破坏默认布局");
 if(!css.includes("left:0;\n  right:0;\n  bottom:0;")||!css.includes(".os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0"))throw new Error("底部任务栏或漢菜单未贴合视口边缘");
 if(!source.includes('dialog.classList.add("os-dialog-window")')||!html.includes('class="event-window-body"')||!html.includes('class="game-over-window-body"')||!css.includes("dialog.os-dialog-window>.dialog-title"))throw new Error("事件或弹窗未统一为桌面窗口样式");
-if(!html.includes('class="legend-window-body"')||!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("图例未独立或天下大势与旬报未合并分页");
-if(html.includes("舆图图例")||html.includes("situation-panel-heading")||!html.includes('<span>图例</span><small id="layerName">地形</small>')||!source.includes('id:"situationRailPanel",title:"图例",icon:"例"'))throw new Error("图例窗口存在重复标题或窗口名称未统一");
+if(!html.includes('data-world-tab="forces"')||!html.includes('data-world-tab="report"')||!appSource.includes("function selectWorldTab")||!css.includes(".world-tab-panel[hidden]"))throw new Error("天下大势与旬报未合并分页");
+if(html.includes("舆图图例")||html.includes("situation-panel-heading")||html.includes("situationRailPanel")||html.includes("layerName")||source.includes("situationRailPanel")||!html.includes('id="mapLegend" class="legend map-legend"')||html.indexOf('id="mapLegend"')<html.indexOf('class="map-footer'))throw new Error("图例应并入舆图窗口底部且不再有独立标题或图层名");
 if(!source.includes('launcher.textContent="漢"')||!css.includes("width:26px;min-width:26px!important;height:26px"))throw new Error("左下角菜单按钮不是正方形繁体漢字");
 if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast"')||!appSource.includes("economyForecastMarkup")||!appSource.includes("resourceDeltaMarkup"))throw new Error("府库估算、军令预估或结算差额界面缺失");
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
@@ -41,4 +41,4 @@ for(const legacyCss of [css,polishCss,hierarchyCss,styleCss]){
   if(/(?:button|command-choice|start-choice|event-choice|map-legend-item|city-officer-card|city-army-card|office-slot|office-appoint-button)[^{}]*:hover/.test(legacyCss))throw new Error("按钮 hover 样式仍散落在非交互样式表中");
   if(/(?:button|start-choice|advisor-button|office-slot|war-plan-actions|archive-tools|save-slot|os-preset-row)[^{}]*:disabled/.test(legacyCss))throw new Error("按钮 disabled 样式仍散落在非交互样式表中");
 }
-console.log("桌面窗口界面通过：8 个窗口 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");
+console.log("桌面窗口界面通过：7 个窗口 / 舆图内嵌图例 / 合并军令队列 / 历法托盘图标 / 府库资源窗 / 开始菜单 / 拖动 / 缩放 / 关闭 / 任务栏");

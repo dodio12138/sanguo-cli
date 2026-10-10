@@ -717,6 +717,15 @@ submit_orders()
 - [x] `queueHostSave` 写入本地游戏服务前先把快照记入 `this.hostSaves`，同局内浏览器副本写满也能载入较新的战局；无本地服务（静态托管）时仍按浏览器副本与备份恢复，最坏情况退回原有提示。
 - [x] 新增 `tools/test-save-source-priority.mjs`：配额写满后降级本地服务、同局载入取最新、跨刷新保留占领区与领地数量、无服务端时仍按副本载入；`js/ui/app.js` 与 `js/core/game-state.js` 缓存版本更新到 `20261010-06`。
 
+### P69（舆图图例：并入舆图窗口底部）
+
+- [x] 按需求把独立「图例」窗口并入「战略舆图」窗口：图例条改为舆图窗口最下方一行（`#mapLegend.legend.map-legend`），军令侧栏不再保留「图例」页签，窗口管理器移除 `situationRailPanel` 窗口定义（窗口数 8 → 7）。
+- [x] 去掉图例标题：删除卡片标题行 `<span>图例</span><small id="layerName">地形</small>` 与随标题行显示的图层名，当前图层改由舆图工具栏页签高亮表达；`renderLayer()` 只重建 `#mapLegend` 的显隐开关，图例仍可点击切换要素（`data-legend-key` / `aria-pressed` 不变）。
+- [x] 图例条随窗口缩放：`flex:none;max-height:92px;overflow:auto` 放在 `.map-frame` 与 `.map-footer` 之后，条目过多时自行滚动，不压缩舆图工具栏与状态栏。
+- [x] 清理死代码：`css/style.css`、`css/hierarchy.css`、`css/os-desktop.css` 中 `.legend-card` / `.legend-window-body` 规则全部移除。
+- [x] 同步测试：`tools/test-os-window-ui.mjs`（窗口数 8 → 7、图例并入舆图且无独立标题断言）、`tools/test-desktop-apps.mjs`（桌面应用清单去掉图例窗口）、`tools/qa-county-map.mjs`（图层名改读工具栏高亮页签）。
+- [x] `css/style.css`、`css/hierarchy.css`、`css/os-desktop.css`、`js/ui/app.js` 缓存版本更新；`ui-polish.css` 未改动。
+
 ## 7. 完成标准
 
 - 无依赖环境可以打开页面。

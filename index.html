@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10150f">
   <title>&lt;&lt;&lt;三国</title>
-  <link rel="stylesheet" href="css/style.css?v=20261009-47">
+  <link rel="stylesheet" href="css/style.css?v=20261010-01">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
   <link rel="stylesheet" href="css/ui-polish.css?v=20261010-04">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
-  <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261010-02">
+  <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261010-03">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -110,10 +110,10 @@
           <div class="map-compass" aria-hidden="true"><b>北</b><span>╱│╲<br>─┼─<br>╲│╱</span></div>
         </div>
         <div class="map-footer panel-line"><span id="cursorInfo">坐标 --,-- · 等待选择</span><span>拖动舆图 · 滚轮缩放 · 单击选择 · 双击查看城池</span></div>
+        <div id="mapLegend" class="legend map-legend" aria-label="地图图例"></div>
       </section>
 
       <aside class="right-rail">
-        <nav class="rail-tabs" aria-label="军令侧栏分组"><button class="active" data-rail-tab="commandsRailPanel">军令</button><button data-rail-tab="situationRailPanel">图例</button></nav>
         <section id="commandsRailPanel" data-rail-panel class="terminal-card command-card">
           <div class="card-title"><span>军令</span></div>
           <div class="terminal-log" id="terminalLog" aria-live="polite">
@@ -129,13 +129,6 @@
             <div class="orders-pane-title"><span>本日命令</span><small><b id="orderCount">0</b> / 8</small></div>
             <div id="orderQueue" class="order-queue"><p class="empty">尚无待执行命令</p></div>
             <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">暂停</button></div>
-          </section>
-        </section>
-
-        <section id="situationRailPanel" data-rail-panel class="terminal-card legend-card" hidden>
-          <div class="card-title"><span>图例</span><small id="layerName">地形</small></div>
-          <section class="legend-window-body">
-            <div id="mapLegend" class="legend"></div>
           </section>
         </section>
       </aside>
@@ -293,7 +286,7 @@
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
   <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261010-06"></script>
+  <script src="js/ui/app.js?v=20261010-07"></script>
   <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
   <script src="js/ui/os-window-manager.js?v=20261009-30"></script>
 </body>

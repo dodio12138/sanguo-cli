@@ -12,5 +12,5 @@ for(const rule of [
   "@media (max-width: 560px)",
   ".command-browser section { grid-template-columns: minmax(0, 1fr)"
 ])if(!css.includes(rule))throw new Error(`命令簿布局缺少防溢出规则：${rule}`);
-if(!html.includes("ui-polish.css?v=20261010-04")||!html.includes("app.js?v=20261010-06"))throw new Error("命令簿样式缓存版本未更新");
+if(!html.includes("ui-polish.css?v=20261010-04")||!html.includes("app.js?v=20261010-07"))throw new Error("命令簿样式缓存版本未更新");
 console.log("命令簿布局通过：弹窗宽度限制 / 网格最小宽度 / 命令说明换行 / 窄屏单列");

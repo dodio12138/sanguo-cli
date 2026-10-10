@@ -21,7 +21,7 @@ class Element {
   getBoundingClientRect(){return this.tag==="button"?{left:Number.parseFloat(this.style.left)||0,top:Number.parseFloat(this.style.top)||0,width:72,height:76}:{left:0,top:0,width:1400,height:720}}
   querySelectorAll(selector){const nodes=this.children.flatMap(node=>[node,...node.querySelectorAll("*")]);return nodes.filter(node=>selector==="*"||selector==="button"&&node.tag==="button"||selector==="[data-task-window]"&&node.dataset.taskWindow||selector==="[data-task-dialog]"&&node.dataset.taskDialog)}
 }
-const windowIds=["mapWindow","factionPanel","commandsRailPanel","resourcePanel","calendarWindow","selectionRailPanel","forcesRailPanel","situationRailPanel"];
+const windowIds=["mapWindow","factionPanel","commandsRailPanel","resourcePanel","calendarWindow","selectionRailPanel","forcesRailPanel"];
 const ledgerLabels={military:"军政",domestic:"内治",diplomacy:"外交",intelligence:"情报",officers:"人物",policy:"政策"};
 const ledgerLogos={military:"military-affairs",domestic:"domestic-affairs",diplomacy:"diplomacy",intelligence:"intelligence",officers:"officers",policy:"policy"};
 const reportLogos={battleReportButton:"battle-report",reportButton:"daily-report",openChronicleButton:"chronicle-archive"};
@@ -38,7 +38,7 @@ vm.runInContext(source.slice(0,source.lastIndexOf("  if(document.readyState"))+"
 const api=context.desktopTest;
 api.createDesktopShortcuts(windows);api.createTaskStrip(windows);
 const shortcuts=workspace.children[0].children;
-const windowLogos={mapWindow:"strategy-map",factionPanel:"player-faction",commandsRailPanel:"military-orders",resourcePanel:"treasury-reserve",calendarWindow:"calendar-almanac",selectionRailPanel:"region-selection",forcesRailPanel:"world-powers",situationRailPanel:"legend-key"};
+const windowLogos={mapWindow:"strategy-map",factionPanel:"player-faction",commandsRailPanel:"military-orders",resourcePanel:"treasury-reserve",calendarWindow:"calendar-almanac",selectionRailPanel:"region-selection",forcesRailPanel:"world-powers"};
 const appLogos={...windowLogos,...Object.fromEntries(Object.entries(ledgerLogos).map(([kind,asset])=>[`ledger-${kind}`,asset])),...Object.fromEntries(Object.entries(reportLogos).map(([buttonId,asset])=>[`app-${buttonId}`,asset])),"app-aiSettingsButton":"ai-advisor"};
 const appOrder=[...windowIds,...Object.keys(ledgerLogos).map(kind=>`ledger-${kind}`),"app-battleReportButton","app-reportButton","app-openChronicleButton","app-aiSettingsButton"];
 const defaultApps=["mapWindow","factionPanel","commandsRailPanel"];

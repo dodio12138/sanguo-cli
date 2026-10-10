@@ -7,8 +7,7 @@
     {selector:"#factionPanel",id:"factionPanel",title:"本势力",icon:"君",asset:"player-faction",handle:".card-title"},
     {selector:"#selectionRailPanel",id:"selectionRailPanel",title:"选中区域",icon:"选",asset:"region-selection",handle:".card-title"},
     {selector:"#forcesRailPanel",id:"forcesRailPanel",title:"天下大势",icon:"势",asset:"world-powers",handle:".card-title"},
-    {selector:"#commandsRailPanel",id:"commandsRailPanel",title:"军令",icon:"令",asset:"military-orders",handle:".card-title"},
-    {selector:"#situationRailPanel",id:"situationRailPanel",title:"图例",icon:"例",asset:"legend-key",handle:".card-title"}
+    {selector:"#commandsRailPanel",id:"commandsRailPanel",title:"军令",icon:"令",asset:"military-orders",handle:".card-title"}
   ];
   let topZ=100,layout={};
   try{layout=JSON.parse(localStorage.getItem(storageKey)||"{}")||{}}catch{}
