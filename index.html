@@ -7,10 +7,10 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261009-47">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261009-19">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261010-04">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-26">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261010-02">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -62,9 +62,9 @@
       <section id="resourcePanel" class="terminal-card resource-window" aria-label="势力资源">
         <div class="card-title"><span>府库</span></div>
         <div class="resource-window-body">
-          <button type="button" data-resource-detail="gold" aria-label="查看钱币财政" data-tip="查看田租、商业税、地方留用与中央入库"><i>钱</i><b id="goldValue">0贯</b></button>
-          <button type="button" data-resource-detail="food" aria-label="查看粮食财政" data-tip="查看秋收、地方留粮、军需与运输损耗"><i>粮</i><b id="foodValue">0石</b></button>
-          <button type="button" data-resource-detail="silk" aria-label="查看布帛财政" data-tip="查看布帛征收、在途上缴与赏赐库存"><i>帛</i><b id="silkValue">0品</b></button>
+          <button type="button" data-resource-detail="gold" aria-label="查看钱币财政" data-tip="查看田租、商业税、收入来源占比与中央入库"><i>钱</i><b id="goldValue">0贯</b></button>
+          <button type="button" data-resource-detail="food" aria-label="查看粮食财政" data-tip="查看秋收、收入来源占比、军需与运输损耗"><i>粮</i><b id="foodValue">0石</b></button>
+          <button type="button" data-resource-detail="silk" aria-label="查看布帛财政" data-tip="查看布帛征收、收入来源占比与在途上缴"><i>帛</i><b id="silkValue">0品</b></button>
           <button type="button" data-resource-detail="labor" aria-label="查看徭役与工程" data-tip="查看徭役人日、生产占用与遣散"><i>役</i><b id="laborValue">0人日</b></button>
         </div>
       </section>
@@ -99,7 +99,7 @@
             <button data-layer="political">势力</button>
             <button data-layer="province">州域</button>
             <button data-layer="commandery">郡域</button>
-            <button data-layer="supply">补给</button>
+            <button data-layer="supply">补给</button><button data-layer="intel">情报</button>
           </div>
           <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
         </div>
@@ -157,7 +157,7 @@
   <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
   <dialog id="helpDialog">
     <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
-    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每日模拟</h3><p>运行时逐日推进；暂停后查看府库与局势，安排任命或军事行动，继续后执行待办军令。任务栏右侧播放键暂停／继续；速度键单击循环切换 3、1、0.5 秒／日。</p><button id="openTurnMapButton" type="button">查看可视化每日流程</button></section><section><h3>快捷操作</h3><p>空格：暂停／继续；[／]：减速／加速；F1～F5：切换舆图；回车：所选城市详情；O：城市命令；M：规划行军；C：命令簿；B：战报；R：日报；I：情报；H：帮助；Esc：关闭最前窗口；Ctrl/⌘+S：保存。输入、命令编辑与事件抉择时不触发模拟快捷键。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
+    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每日模拟</h3><p>运行时逐日推进；暂停后查看府库与局势，安排任命或军事行动，继续后执行待办军令。任务栏右侧播放键暂停／继续；速度键单击循环切换 3、1、0.5 秒／日。</p><button id="openTurnMapButton" type="button">查看可视化每日流程</button></section><section><h3>快捷操作</h3><p>空格：暂停／继续；[／]：减速／加速；F1～F6：切换舆图；回车：所选城市详情；O：城市命令；M：规划行军；C：命令簿；B：战报；R：日报；I：情报；H：帮助；Esc：关闭最前窗口；Ctrl/⌘+S：保存。输入、命令编辑与事件抉择时不触发模拟快捷键。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
   </dialog>
 
   <dialog id="resourceDetailDialog" class="wide-dialog resource-detail-dialog">
@@ -280,20 +280,20 @@
   <script src="js/core/data-loader.js?v=20260930-78"></script>
   <script src="js/core/game-clock.js?v=20261009-01"></script>
   <script src="js/core/simulation-clock.js?v=20261009-02"></script>
-  <script src="js/core/fiscal-system.js?v=20261009-05"></script>
-  <script src="js/core/rule-engine.js?v=20261009-05"></script>
+  <script src="js/core/fiscal-system.js?v=20261010-03"></script>
+  <script src="js/core/rule-engine.js?v=20261010-05"></script>
   <script src="js/core/ai-bridge.js?v=20261009-02"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/game-state.js?v=20261009-02"></script>
-  <script src="js/ui/map-view.js?v=20261009-04"></script>
+  <script src="js/core/game-state.js?v=20261010-06"></script>
+  <script src="js/ui/map-view.js?v=20261010-05"></script>
   <script src="js/ui/terminal-select.js?v=20260929-66"></script>
-  <script src="js/ui/fiscal-ui.js?v=20261009-01"></script>
+  <script src="js/ui/fiscal-ui.js?v=20261010-03"></script>
   <script src="js/ui/command-planner.js?v=20261009-01"></script>
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
-  <script src="js/ui/keyboard-shortcuts.js?v=20261009-03"></script>
+  <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
   <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261009-31"></script>
+  <script src="js/ui/app.js?v=20261010-06"></script>
   <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
   <script src="js/ui/os-window-manager.js?v=20261009-30"></script>
 </body>
