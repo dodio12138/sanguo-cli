@@ -18,7 +18,7 @@ window.GameShortcuts = {
       const editing=node=>node?.isContentEditable||node?.closest?.('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"],[role="combobox"],[role="listbox"]');
       if(editing(target)||editing(active)||blocked()||document.querySelector('.os-start-menu:not([hidden]),.terminal-select.open,.os-context-menu:not([hidden])'))return;
       if(key==="Enter"&&(target?.closest?.('button,a,[role="button"]')||active?.closest?.('button,a,[role="button"]')))return;
-      const layer=key.match(/^F([1-5])$/);
+      const layer=key.match(/^F([1-6])$/);
       const action=layer?"layer":bindings[key];if(!action)return;
       if(["city","cityCommands","march"].includes(action)&&!citySelected())return;
       event.preventDefault();

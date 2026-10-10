@@ -4,7 +4,8 @@ window.FiscalSystem=class FiscalSystem {
   static names={gold:"钱币",food:"粮食",silk:"布帛",labor:"徭役"};
   static clamp(value,min,max){return Math.max(min,Math.min(max,value))}
   static monthIndex(date){return date.year*12+date.month-1}
-  static defaults(){return {landRate:10,commercialRate:10,silkRate:10,periods:{land:1,commercial:1,food:12,silk:3},harvestMonth:9}}
+  static defaults(){return {landRate:10,commercialRate:10,silkRate:10,periods:{land:1,commercial:1,food:12,silk:3},harvestMonth:9,arrears:"remit"}}
+  static arrearsModes={remit:"补缴至首都",retain:"地方留用"}
   static commands=[
     ["set_collection_policy","征收制度","finance","财政","分别设置田租、商业税、粮食和布帛的税率与征收周期"],
     ["set_capital","设置首都","finance","财政","将己方城市设为中央府库所在地，新上缴按通往首都的道路计算"],
@@ -24,7 +25,8 @@ window.FiscalSystem=class FiscalSystem {
       const account=ledger.forces[force.id]??={...defaults,capitalId:owned.find(city=>city.id===force.capital||city.name===force.capital)?.id||owned[0]?.id||null};
       account.periods={...defaults.periods,...account.periods};
       if(!owned.some(city=>city.id===account.capitalId))account.capitalId=owned[0]?.id||null;
-      for(const key of ["landRate","commercialRate","silkRate","harvestMonth"])account[key]??=defaults[key];
+      for(const key of ["landRate","commercialRate","silkRate","harvestMonth","arrears"])account[key]??=defaults[key];
+      if(!this.arrearsModes[account.arrears])account.arrears=defaults.arrears;
       if(force.id===state.playerForceId)force.resources=state.resources;
       else force.resources??={gold:Math.max(6000,(force.cities||1)*3000),food:Math.max(18000,(force.soldiers||20000)*.45),silk:0,prestige:200};
       force.resources.silk??=0;
@@ -105,7 +107,11 @@ window.FiscalSystem=class FiscalSystem {
       for(const city of cities){
         const fiscal=city.fiscal,g=this.governance(state,city),counties=state.engine.countiesForCity(city.id),besieged=state.engine.isCityBesieged(city),factor=besieged?0:city.occupiedUntil?.5:1;
         fiscal.attention=Math.max(0,fiscal.attention-3*scale);fiscal.efficiency=g.efficiency;fiscal.effectiveCorruption=g.corruption;
-        for(const resource of ["gold","food","silk"]){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[resource],amount=Math.min(fiscal.pendingRemittance[resource]||0,city[key]||0);if(amount>0){const shipment=this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount,purpose:"补缴"});if(shipment){city[key]-=amount;fiscal.pendingRemittance[resource]-=amount}}}
+        const foodReserve=this.localFoodReserve(state,city,g),keepArrears=account.arrears==="retain";let arrearLine="";
+        for(const resource of ["gold","food","silk"]){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[resource],owed=fiscal.pendingRemittance[resource]||0;if(owed<=0)continue;
+          if(keepArrears){fiscal.pendingRemittance[resource]=0;fiscal.arrearsRetained={gold:0,food:0,silk:0,...(typeof fiscal.arrearsRetained==="object"?fiscal.arrearsRetained:null)};fiscal.arrearsRetained[resource]+=owed;arrearLine+=`${arrearLine?"、":""}${this.names[resource]} ${owed}${this.units[resource]}`;continue}
+          const amount=Math.min(owed,Math.max(0,(city[key]||0)-(resource==="food"?foodReserve:0)));if(amount<=0)continue;const shipment=this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount,purpose:"补缴"});if(shipment){city[key]-=amount;fiscal.pendingRemittance[resource]-=amount;arrearLine+=`${arrearLine?"、":""}${this.names[resource]} ${amount}${this.units[resource]}`}}
+        if(arrearLine&&city.force===state.playerForceId&&(keepArrears||(fiscal.arrearsNoticeTurn??-999)+30<=state.turn)){fiscal.arrearsNoticeTurn=state.turn;events.push({phase:"财政",siteId:city.id,text:keepArrears?`${city.name}欠额 ${arrearLine}不再补缴，转为地方留用`:`${city.name}以本地余粮补缴欠额 ${arrearLine}${foodReserve?`，本地留底粮食 ${foodReserve}石优先保障驻军与军团`:""}`})}
         const countyPopulation=counties.reduce((sum,county)=>sum+(county.population||0),0),rural=(counties.length?countyPopulation+(city.population||0)*.15:(city.population||0)),agriculture=(city.agriculture||40)/50,commerce=(city.commerce||30)/50;
         const activeLabor=this.initialize(state).laborGroups.filter(group=>group.cityId===city.id&&group.status==="服役").reduce((sum,group)=>sum+group.people,0),laborFactor=this.clamp(1-activeLabor/Math.max(1,rural+activeLabor)*2,.1,1);
         const markets=(city.buildings||[]).filter(name=>name==="市集").length,farms=(city.buildings||[]).filter(name=>name==="农庄").length;
@@ -127,16 +133,55 @@ window.FiscalSystem=class FiscalSystem {
       if(force.id===state.playerForceId){const entry={turn:state.turn,income:Math.floor(income),harvest,upkeep,netFood:force.resources.food-before.food,gold:force.resources.gold,food:force.resources.food,silk:force.resources.silk,centralGold:force.resources.gold-before.gold,centralFood:force.resources.food-before.food,centralSilk:force.resources.silk-before.silk,grainPrice:state.engine.grainPrice(state),countyIncome:0,countyHarvest:0};state.policies.economyHistory??=[];state.policies.economyHistory.push(entry);state.policies.economyHistory=state.policies.economyHistory.slice(-36)}
     }
   }
+  static incomeSources(state,forceId=state.playerForceId){
+    const cities=state.data.cities.filter(city=>city.force===forceId),rows=[];
+    for(const city of cities)for(const [kind,item] of Object.entries(city.fiscal?.lastCollection||{}))if(item&&item.gross>0)rows.push({cityId:city.id,cityName:city.name,kind,resource:item.resource,turn:item.turn||0,gross:item.gross,remitted:item.remitted||0,retained:item.retained||0,arrears:item.pending||0});
+    return ["gold","food","silk"].map(resource=>{
+      const matching=rows.filter(row=>row.resource===resource);
+      if(!matching.length)return {resource,turn:null,total:0,entries:[]};
+      const turn=Math.max(...matching.map(row=>row.turn)),merged=new Map;
+      for(const row of matching.filter(row=>row.turn===turn)){const entry=merged.get(row.cityId)||{cityId:row.cityId,cityName:row.cityName,kinds:[],gross:0,remitted:0,retained:0,arrears:0};entry.gross+=row.gross;entry.remitted+=row.remitted;entry.retained+=row.retained;entry.arrears+=row.arrears;entry.kinds.push(row.kind);merged.set(row.cityId,entry)}
+      const entries=[...merged.values()],total=entries.reduce((sum,entry)=>sum+entry.gross,0);
+      for(const entry of entries)entry.share=total>0?entry.gross/total:0;entries.sort((a,b)=>b.gross-a.gross);
+      return {resource,turn,total,entries};
+    });
+  }
+  static pendingArrears(state,forceId=state.playerForceId){
+    const cities=state.data.cities.filter(city=>city.force===forceId);
+    return ["gold","food","silk"].reduce((totals,resource)=>(totals[resource]=cities.reduce((sum,city)=>sum+(city.fiscal?.pendingRemittance?.[resource]||0),0),totals),{});
+  }
+  static armyDailyNeed(state,army){return Math.max(1,Math.ceil(army.soldiers/(GameClock.isDaily(state)?600:60)))}
+  static armyFoodTarget(state,army){return this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?60:6)}
+  static localFoodReserve(state,city,g){const garrisonReserve=Math.floor((g.population||0)*.03+(city.garrison||0)/250*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve)}
+  static supplyCity(state,army){
+    const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
+    return city&&!state.engine.isCityBesieged(city)?city:null;
+  }
+  static stationedCity(state,army){
+    if(army.route?.length||army.siegeTarget)return null;
+    return this.supplyCity(state,army);
+  }
+  static hasLedger(state){return Boolean(state?.data?.cities&&state.policies)}
   static stockArmy(state,army){
-    this.initialize(state);army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0;
-    const city=state.data.cities.find(city=>city.id===army.city&&city.force===army.force),need=Math.max(1,Math.ceil(army.soldiers/(GameClock.isDaily(state)?600:60))),target=need*(GameClock.isDaily(state)?60:6);
-    if(city&&!state.engine.isCityBesieged(city)){const fill=Math.min(Math.max(0,target-army.stores.food),city.localFood||0);city.localFood-=fill;army.stores.food+=fill}
-    return need;
+    army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0;
+    if(!this.hasLedger(state))return 0;
+    this.initialize(state);
+    const city=this.supplyCity(state,army),target=this.armyFoodTarget(state,army),fill=city?Math.min(Math.max(0,target-army.stores.food),city.localFood||0):0;
+    if(fill>0){city.localFood-=fill;army.stores.food+=fill}
+    return fill;
   }
   static consumeArmy(state,army,events){
-    const need=this.stockArmy(state,army);
-    const taken=Math.min(need,army.stores.food);army.stores.food-=taken;army.stores.lastConsumption={turn:state.turn,need,taken};
-    if(taken<need){army.supply=Math.max(0,(army.supply??100)-8);army.morale=Math.max(0,(army.morale??70)-4);if(army.force===state.playerForceId)events.push({phase:"后勤",text:`${army.name}军仓缺粮 ${need-taken}石，补给与士气下降`})}
+    army.stores??={gold:0,food:0,silk:0};army.stores.food??=0;
+    if(!this.hasLedger(state))return 0;
+    this.initialize(state);
+    const need=this.armyDailyNeed(state,army),city=this.stationedCity(state,army);
+    const fromCity=city?Math.min(need,Math.max(0,city.localFood||0)):0;
+    if(fromCity>0)city.localFood-=fromCity;
+    const fromStores=Math.min(need-fromCity,army.stores.food);army.stores.food-=fromStores;
+    const taken=fromCity+fromStores,short=need-taken;
+    army.stores.lastConsumption={turn:state.turn,need,taken,fromCity,fromStores,short,cityId:city?.id||null,source:short>0?"缺粮":fromCity>=need?"城市粮仓":fromStores>=need-fromCity?"随军军仓":"兼取"};
+    if(short>0){army.supply=Math.max(0,(army.supply??100)-8);army.morale=Math.max(0,(army.morale??70)-4);if(army.force===state.playerForceId)events.push({phase:"后勤",text:`${army.name}军仓缺粮 ${short}石，补给与士气下降`})}
+    return need;
   }
   static preview(state,forceId=state.playerForceId){
     const data=structuredClone(state.data),copy={...state,data,policies:structuredClone(state.policies),resources:structuredClone(state.resources),date:{...state.date},engine:new RuleEngine(data)},beforePopulation=state.economicSnapshot?.().population||0;
@@ -181,7 +226,8 @@ window.FiscalSystem=class FiscalSystem {
     if(order.type==="set_collection_policy"){
       const rates=["landRate","commercialRate","silkRate"],periods=["land","commercial","food","silk"];
       if(rates.some(key=>!Number.isFinite(Number(options[key]))||Number(options[key])<0||Number(options[key])>40)||periods.some(key=>![1,3,6,12].includes(Number(options[`${key}Period`]))))return fail("征收制度失败：税率须为0—40%，周期为1、3、6或12个月");
-      for(const key of rates)account[key]=Number(options[key]);for(const key of periods)account.periods[key]=Number(options[`${key}Period`]);state.policies.taxRate=account.landRate;events.push({phase:"财政",text:`征收制度更新：田租 ${account.landRate}%、商业税 ${account.commercialRate}%、布帛 ${account.silkRate}%；粮食仅秋收产生`});return true;
+      if(options.arrears!==undefined&&!this.arrearsModes[options.arrears])return fail("征收制度失败：欠缴处理只能选择补缴或地方留用");
+      for(const key of rates)account[key]=Number(options[key]);for(const key of periods)account.periods[key]=Number(options[`${key}Period`]);state.policies.taxRate=account.landRate;if(options.arrears!==undefined)account.arrears=options.arrears;events.push({phase:"财政",text:`征收制度更新：田租 ${account.landRate}%、商业税 ${account.commercialRate}%、布帛 ${account.silkRate}%；粮食仅秋收产生；欠缴${this.arrearsModes[account.arrears]}`});return true;
     }
     if(order.type==="set_tax_rate"){const rate=Number(order.amount);if(!Number.isFinite(rate)||rate<0||rate>40)return fail("税率必须在0—40%之间");account.landRate=rate;account.commercialRate=rate;state.policies.taxRate=rate;return fail(`田租和商业税均设为 ${rate}%`)}
     if(order.type==="set_capital"){if(!own)return fail("首都必须是己方城市");account.capitalId=city.id;return fail(`中央府库迁至${city.name}，已发出的上缴继续送往原定目的地`)}
