@@ -13,6 +13,8 @@
   --scrollbar-track:#10170f;
   --scrollbar-thumb:#536148;
   --scrollbar-edge:#87916e;
+  --taskbar-height:34px;
+  --desktop-bottom-gap:46px;
 }
 
 /* Shared square scrollbar for all desktop window contents. */
@@ -53,7 +55,8 @@ body.game-started{
   left:0;
   right:0;
   bottom:0;
-  height:34px;
+  height:var(--taskbar-height);
+  min-height:var(--taskbar-height);
   padding:3px;
   border:1px solid var(--window-edge);
   background:#20281e;
@@ -80,7 +83,7 @@ body.game-started{
   flex:1;
   min-height:0;
   overflow:hidden;
-  padding-bottom:46px;
+  padding-bottom:var(--desktop-bottom-gap);
 }
 .game-started .left-rail,.game-started .right-rail{display:contents}
 .game-started .rail-tabs{display:none}
@@ -118,7 +121,7 @@ body.game-started{
 .game-started .terminal-card{padding:0}
 .game-started .terminal-card>.card-title,
 .game-started .turn-display>.card-title,
-.game-started .map-column>.map-toolbar{
+.game-started .map-column>.map-titlebar{
   position:relative;
   flex:0 0 23px;
   min-height:23px;
@@ -133,8 +136,8 @@ body.game-started{
   touch-action:none;
 }
 .game-started .os-window.is-active>.card-title,
-.game-started .os-window.is-active>.map-toolbar{background:#69572d}
-.game-started .terminal-card>.card-title:before{content:"■";color:#d4b95e;font-size:6px}
+.game-started .os-window.is-active>.map-titlebar{background:#69572d}
+.game-started .terminal-card>.card-title:before,.game-started .map-column>.map-titlebar:before{content:"■";color:#d4b95e;font-size:6px}
 .game-started .terminal-card>.card-title{font-size:9px}
 .game-started .terminal-card>.card-title+*{min-height:0}
 .game-started .terminal-card{font-size:8px}
@@ -142,6 +145,7 @@ body.game-started{
 .game-started .portrait{width:38px;height:42px;font-size:21px}.game-started .ruler-row{gap:8px;padding:3px}.game-started .stat-grid{margin-top:3px}.game-started .stat-grid span{padding:4px}.game-started .selection-panel h3{font-size:14px}
 .game-started .terminal-log,.game-started .command-input input,.game-started .order-actions button,.game-started .order-queue,.game-started .legend,.game-started .turn-report{font-size:8px}
 .game-started .faction-card>.ruler-row,.game-started .faction-card>.stat-grid{margin-inline:8px}
+.game-started .faction-card>.ruler-row,.game-started .faction-card>.stat-grid{flex:none}
 .game-started .selection-panel,.game-started .compact-list>#forceList,
 .game-started .command-card>.terminal-log,.game-started .command-card>.command-input,
 .game-started .command-card>.control-mode,.game-started .command-card>.advisor-button,
@@ -219,6 +223,7 @@ body.game-started{
 .os-calendar-body .status-dot{align-self:stretch;border:1px solid;border-color:#464c40 #e4e5d7 #e4e5d7 #464c40;padding:3px 5px;background:#b6b9a7;color:#263d29;font-size:8px;white-space:nowrap}
 .game-started #factionPanel{left:445px;top:610px;width:243px;height:144px}
 .game-started #factionPanel{overflow:auto}
+.game-started #factionPanel>.card-title{position:sticky;top:0;z-index:6}
 .game-started #selectionRailPanel{left:0;top:285px;width:337px;height:265px}
 .game-started #selectionRailPanel .selection-panel{flex:1;overflow:auto;padding-bottom:8px}
 .game-started #forcesRailPanel{left:40px;top:563px;width:277px;height:191px}
@@ -240,21 +245,25 @@ body.game-started{
 .command-entry-header label{margin:0}
 .command-entry-header>.command-book-button{flex:none;border:1px solid #586448;padding:3px 7px;background:#202c1d;color:#d7bd69;font:8px/1.2 var(--mono);cursor:pointer}
 
-.game-started .map-column .layer-tabs{display:flex;align-items:center;min-width:0;overflow:hidden}
-.os-map-caption{display:flex;align-items:center;align-self:stretch;gap:5px;flex:none;margin:-3px 5px -3px -8px;border-right:1px solid #766a3e;padding:0 9px;color:#ffe08a;font-size:9px;white-space:nowrap}
-.os-map-caption:before{content:"■";font-size:7px}
-.game-started .map-column .layer-tabs button{padding:2px 7px;color:#d0c79b;font-size:8px}
+.game-started .map-column>.map-titlebar{display:flex;align-items:center}
+.game-started .map-column>.map-toolbar{display:flex;flex:0 0 auto;flex-wrap:wrap;align-items:center;gap:3px 8px;min-height:25px;margin:0;padding:3px 6px;border-bottom:1px solid #3c4635;background:var(--window-raised)}
+.game-started .map-column .layer-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:1px;min-width:0;overflow:visible}
+.os-map-caption{display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden;text-overflow:ellipsis;color:#ffe08a;font-size:9px;white-space:nowrap}
+.game-started .map-column .layer-tabs button{flex:none;padding:2px 7px;color:#d0c79b;font-size:8px;white-space:nowrap}
 .game-started .map-column .layer-tabs button.active{color:#ffe38a;background:#161d13}
-.game-started .map-column .map-actions{margin-left:auto}
-.game-started .map-column .map-actions button{padding:2px 6px;color:#d3c888}
+.game-started .map-column .map-actions{flex:none;margin:0 0 0 auto}
+.game-started .map-column .map-actions button{flex:none;min-height:18px;padding:2px 6px;color:#d3c888;font:8px/1.2 var(--mono);white-space:nowrap}
 .game-started .map-column .map-frame{min-height:0;border:0}
-.game-started .map-column .map-footer{min-height:24px;padding:3px 7px;background:#0a100b;border-top:1px solid #3c4635}
+.game-started .map-column .map-footer{flex:0 0 24px;min-height:24px;gap:8px;padding:3px 7px;overflow:hidden;background:#0a100b;border-top:1px solid #3c4635}
+.game-started .map-column .map-footer>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.game-started .map-column .map-footer>span:first-child{flex:1}
+.game-started .map-column .map-footer>span:last-child{flex:0 1 auto;max-width:50%}
 .game-started .map-column .map-legend{max-height:88px;gap:4px 9px;padding:4px 16px 4px 8px;background:#0a100b;border-top:1px solid #3c4635}
 .game-started .map-tooltip{max-width:200px;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 
 .os-start-button{display:grid!important;place-items:center;flex:none;width:26px;min-width:26px!important;height:26px;border-color:#87916e!important;padding:0!important;background:#2d3929!important;color:#f0d983!important;font:700 15px/1 serif!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
 .os-start-button[aria-expanded="true"]{box-shadow:inset 1px 1px #080b08,inset -1px -1px #899171}
-.os-start-menu{position:fixed;z-index:9000;inset:auto auto 34px 0;margin:0;display:grid;grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;gap:2px;width:188px;height:max-content;max-height:calc(100vh - 42px);overflow:visible;border:1px solid #87916e;padding:5px 5px 5px 27px;background:#192218;color:inherit;box-shadow:2px 3px 0 #030503,10px 14px 32px #000c,inset 1px 1px #b5bc98}
+.os-start-menu{position:fixed;z-index:9000;inset:auto auto var(--taskbar-height) 0;margin:0;display:grid;grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;gap:2px;width:188px;height:max-content;max-height:calc(100dvh - var(--taskbar-height) - 8px);overflow:visible;border:1px solid #87916e;padding:5px 5px 5px 27px;background:#192218;color:inherit;box-shadow:2px 3px 0 #030503,10px 14px 32px #000c,inset 1px 1px #b5bc98}
 .os-start-menu[hidden]{display:none}.os-start-menu:before{content:"三 国";position:absolute;inset:5px auto 5px 5px;width:17px;padding-top:7px;background:#3d4d37;color:#bfc79e;font:700 10px/1.45 serif;text-align:center}
 .os-start-menu>button,.os-start-submenu>button{width:100%;border:1px solid transparent;padding:6px 7px;background:transparent;color:#cbd0ac;text-align:left;font-size:8px;cursor:pointer}
 .os-submenu-trigger[aria-expanded="true"]{border-color:#6b765b;background:#293626;color:#ffe89b}
@@ -329,24 +338,33 @@ body>.app-shell>footer{display:none}
 @media(max-width:1250px) and (min-width:1001px){
   .game-started #resourcePanel{top:6px;height:74px}
   .game-started .turn-display{left:12px;top:88px;width:220px;height:174px}
-  .game-started #factionPanel{left:12px;top:270px;width:220px;height:92px}
-  .game-started #selectionRailPanel{left:12px;top:370px;width:224px;height:92px}
-  .game-started #forcesRailPanel{left:12px;top:470px;width:220px;height:88px}
+  .game-started #factionPanel{left:12px;top:270px;width:220px;height:132px}
+  .game-started #selectionRailPanel{left:12px;top:410px;width:224px;height:190px}
+  .game-started #forcesRailPanel{left:12px;top:608px;width:220px;height:clamp(104px,calc(100dvh - 662px),191px)}
   .game-started .map-column{left:242px;right:270px;top:10px;bottom:48px;width:auto;height:auto}
   .game-started #commandsRailPanel{left:auto;right:12px;top:6px;width:250px;height:322px}
   .orders-pane{flex-basis:118px}
   .os-calendar-days{min-height:68px}
 }
 @media(max-width:1000px){
+  .game-started{--taskbar-height:62px;--desktop-bottom-gap:74px}
   .game-started .os-desktop-icons{position:relative;inset:auto;display:grid;grid-template-columns:repeat(3,72px);gap:6px;justify-content:start;margin-bottom:8px}
   .game-started .os-desktop-icon{position:relative;left:auto!important;top:auto!important;touch-action:manipulation}
-  .game-started .workspace{overflow:auto;padding:7px 7px 54px}
+  .game-started .workspace{overflow:auto;padding:7px 7px var(--desktop-bottom-gap)}
   .game-started .os-window{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:180px;margin-bottom:8px;transform:none!important}
   .game-started #resourcePanel{min-height:80px}.game-started .turn-display{min-height:194px}
-  .game-started .map-column{min-height:440px}
+  .game-started .map-column{min-width:0;min-height:440px}
   .game-started .left-rail,.game-started .right-rail{display:contents}
-  .game-started .main-nav{overflow:visible}.os-task-strip{display:none}.os-resource-tray{margin-left:auto}.os-clock{display:block}
-  dialog.os-managed-dialog{resize:none;max-width:94vw;max-height:90vh}
+  .game-started .main-nav{display:grid;grid-template-columns:26px minmax(0,1fr) auto auto auto;grid-template-rows:26px 24px;gap:4px;align-items:center;overflow:visible}
+  .game-started .os-start-button{grid-area:1/1}
+  .game-started .os-task-strip{display:flex;grid-area:2/1/3/-1;width:100%;margin:0;padding:0;border:0;align-self:stretch;scrollbar-width:thin}
+  .game-started .os-task-button{flex:0 0 88px;max-width:110px;min-width:68px}
+  .game-started .os-resource-tray{grid-area:1/2;margin:0;min-width:0;overflow:hidden;justify-self:stretch}
+  .game-started .os-calendar-tray{grid-area:1/3}
+  .game-started .observer-controls{grid-area:1/4;margin:0}
+  .game-started .os-clock{display:block;grid-area:1/5;margin:0}
+  .game-started dialog.os-managed-dialog{inset:8px 3vw calc(var(--taskbar-height) + 8px)!important;min-width:0;width:94vw!important;max-width:94vw!important;height:max-content!important;max-height:calc(100dvh - var(--taskbar-height) - 16px)!important;margin:auto!important;resize:none}
+  .game-started dialog.os-managed-dialog.os-dialog-maximized{height:auto!important}
 }
 .game-started .stat-grid button{background:transparent;text-align:left;font:inherit;font-size:8px;color:var(--muted);border:0;border-right:1px solid var(--line-dim);border-bottom:1px solid var(--line-dim);padding:4px;cursor:pointer}
 .os-context-menu{position:fixed;inset:auto;margin:0;min-width:146px;padding:3px;border:1px solid #82906e;border-radius:0;background:#111910;box-shadow:2px 2px #000;color:var(--text);font:9px var(--mono);z-index:20000;max-height:calc(100vh - 8px);overflow:auto}

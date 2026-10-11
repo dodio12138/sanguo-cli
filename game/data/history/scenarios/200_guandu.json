@@ -6,7 +6,7 @@
   "default_player_force": "cao",
   "player_force": "cao",
   "playable_forces": ["cao", "yuan", "liu", "sun", "liu_biao", "liu_zhang", "zhang_lu", "ma_teng", "han_sui", "gongsun_du"],
-  "map": "china_40x32",
+  "map": "china_pixel_60x60",
   "data_files": {
     "forces": "game/data/history/forces/200_guandu.json",
     "cities": "game/data/history/cities/200_guandu.json",
