@@ -6,7 +6,7 @@ await import("../js/core/data-loader.js");
 const read=path=>JSON.parse(fs.readFileSync(path,"utf8"));
 const scenario=read("game/data/history/scenarios/200_guandu.json"),map=read("game/data/map/central_plains.json"),commands=read("game/data/common/commands.json"),terrain=read("game/data/common/terrain.json");
 const payload={
-  scenario,map:{...map.grid,id:map.id},
+  scenario,map:{...map.grid,...map,id:map.id},
   terrainDefs:Object.fromEntries(Object.entries(terrain.terrains).map(([id,value])=>[id,value])),
   unitTypes:read("game/data/common/unit_types.json").unit_types,
   items:read("game/data/common/items.json").items,
@@ -20,7 +20,7 @@ const payload={
   commandCatalog:{schemaVersion:commands.schema_version,categories:commands.categories.map(({id,name})=>({id,name})),commands:commands.categories.flatMap(category=>category.commands.map(entry=>{const [id,name,status="active"]=entry;return {id,name,status,description:window.SANGUO_COMMAND_DESCRIPTION(id,name,category.id),categoryId:category.id,categoryName:category.name,parameters:["actor_id","target_ids","amount","options"]}}))}
 };
 payload.counties=structuredClone(payload.administrativeDivisions.county_seats||[]);
-new window.DataLoader(payload).applyCityResources(payload,scenario.id);
+const loader=new window.DataLoader(payload);loader.applyCityResources(payload,scenario.id);loader.assignCommanderySeatOwners(payload);loader.applyCountyResources(payload,scenario.id);
 const output=`// 由 tools/build-offline-data.mjs 自动生成；不要手工编辑。\nwindow.SANGUO_DATA=Object.assign(window.SANGUO_DATA||{},${JSON.stringify(payload)});\n`;
 fs.writeFileSync("js/data/offline-data.generated.js",output);
 console.log(`离线镜像已生成：${payload.officers.length} 人物 / ${payload.cities.length} 据点 / ${payload.commandCatalog.commands.length} 命令`);

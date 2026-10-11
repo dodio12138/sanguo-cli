@@ -1,0 +1,16 @@
+import assert from "node:assert/strict";
+globalThis.window=globalThis;
+await import("../js/core/map-grid.js");
+await import("../js/ui/map-view.js");
+const view=Object.create(MapView.prototype);view.waterways=[{name:"校验河",points:[[1,2],[4,3],[5,7]]}];
+const geometry=[];let strokes=0;
+const context={beginPath(){},moveTo:(...point)=>geometry.push(["move",...point]),lineTo:(...point)=>geometry.push(["line",...point]),stroke:()=>strokes++,fillText(){}};
+view.drawWaterways(context,{startX:10,startY:20,cell:10});
+assert.deepEqual(geometry,[["move",25,45],["line",55,55],["line",65,95]],"游戏内河流须按编辑器的网格中心与控制点直接绘制，不能改成另一条折线路径");
+assert.equal(strokes,2,"保留原有河流深色底线和蓝色线条");
+view.waterways=[];geometry.length=0;strokes=0;view.drawWaterways(context,{startX:0,startY:0,cell:10});assert.equal(strokes,0);assert.equal(geometry.length,0,"清空后不能重新出现默认河流");
+console.log("河流显示通过：编辑器与游戏坐标一致 / 控制点走向一致 / 空图层无默认回填");
+view.state={data:{map:{waterways:[{name:"新存档河",points:[[2,2],[4,4]]}],landmarks:[{name:"新地标",x:3,y:3}]}}};view.syncRoads=()=>{};view.makeCells=()=>[];view.rebuildDerivedMapData=()=>{};view.draw=()=>{};
+view.refreshSupply();assert.deepEqual(view.waterways,view.state.data.map.waterways);assert.deepEqual(view.landmarks,view.state.data.map.landmarks);
+view.state.data.map={waterways:[],landmarks:[]};view.refreshSupply();assert.deepEqual(view.waterways,[]);assert.deepEqual(view.landmarks,[]);
+console.log("读档显示通过：河流 / 地标缓存全部刷新 / 空图层不残留");

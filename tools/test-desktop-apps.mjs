@@ -34,7 +34,8 @@ const stored=new Map,eventHost=new Element;
 document.addEventListener=eventHost.addEventListener.bind(eventHost);document.removeEventListener=eventHost.removeEventListener.bind(eventHost);
 const context=vm.createContext({document,localStorage:{getItem:key=>stored.get(key)||null,setItem:(key,value)=>stored.set(key,value)},matchMedia:()=>({matches:false}),requestAnimationFrame:fn=>fn(),addEventListener:eventHost.addEventListener.bind(eventHost),removeEventListener:eventHost.removeEventListener.bind(eventHost),setInterval(){},MutationObserver:class{observe(){}},Date});
 const source=fs.readFileSync(new URL("../js/ui/os-window-manager.js",import.meta.url),"utf8");
-vm.runInContext(source.slice(0,source.lastIndexOf("  if(document.readyState"))+"globalThis.desktopTest={createDesktopShortcuts,createTaskStrip,openWindow,closeWindow,toggleMinimize,focusWindow,updateTasks,syncTaskButton};})();",context);
+const testExports="globalThis.desktopTest={createDesktopShortcuts,createTaskStrip,openWindow,closeWindow,toggleMinimize,focusWindow,restorePosition,updateTasks,syncTaskButton};})();";
+vm.runInContext(source.slice(0,source.lastIndexOf("  if(document.readyState"))+testExports,context);
 const api=context.desktopTest;
 api.createDesktopShortcuts(windows);api.createTaskStrip(windows);
 const shortcuts=workspace.children[0].children;
@@ -112,3 +113,30 @@ api.createDesktopShortcuts(windows);assert.equal(workspace.children[0].children.
 assert(source.includes('button.dataset.shortcutWindow=window.dataset.windowId'));
 assert(source.includes('ledger-${button.dataset.ledger}'));
 console.log("快捷方式回归通过：默认三图标 / 动态创建 / 去重与校验 / 网格避让 / 保存恢复 / 移除快捷方式 / 汉菜单入口");
+
+// Compact focus reveals the requested window without scrolling the whole page.
+context.matchMedia=()=>({matches:true});
+workspace.scrollTop=0;
+workspace.getBoundingClientRect=()=>({left:0,top:0,width:900,height:700});
+map.getBoundingClientRect=()=>({left:7,top:1147-workspace.scrollTop,width:886,height:440});
+api.openWindow(map);assert.equal(workspace.scrollTop,1140,"窄屏打开舆图应定位到窗口标题");
+workspace.scrollTop=1200;api.focusWindow(map,{reveal:false});assert.equal(workspace.scrollTop,1200,"窗口内容点击不能跳到标题");
+api.toggleMinimize(map);assert.equal(task.hidden,false,"窄屏最小化仍保留任务");
+workspace.scrollTop=0;task.onclick();assert.equal(workspace.scrollTop,1140,"窄屏任务恢复应定位窗口");
+const frames=[];context.requestAnimationFrame=fn=>frames.push(fn);
+workspace.scrollTop=0;api.openWindow(map);api.focusWindow(windows[1],{reveal:false});frames.splice(0).forEach(fn=>fn());assert.equal(workspace.scrollTop,0,"过期定位不能抢夺后来激活的窗口");
+api.openWindow(map);api.closeWindow(map);frames.splice(0).forEach(fn=>fn());assert.equal(workspace.scrollTop,0,"关闭窗口不能触发过期定位");
+context.matchMedia=()=>({matches:false});context.requestAnimationFrame=fn=>fn();api.openWindow(map);assert.equal(workspace.scrollTop,0,"桌面模式不应滚动工作区");
+
+// Reload on a narrow screen must preserve states without overwriting desktop geometry.
+const savedGeometry={left:320,top:180,width:500,height:400,minimized:true,closed:false,maximized:false};
+stored.set("sanguo.os-window-layout.v3",JSON.stringify({mapWindow:savedGeometry,factionPanel:{closed:true},calendarWindow:{maximized:true}}));
+context.matchMedia=()=>({matches:true});
+vm.runInContext(source.slice(0,source.lastIndexOf("  if(document.readyState"))+testExports,context);
+map.style={};map.dataset.userPositioned="false";
+context.desktopTest.restorePosition(map);context.desktopTest.restorePosition(windows[1]);context.desktopTest.restorePosition(windows[4]);
+assert(map.classList.contains("is-minimized"));assert(windows[1].classList.contains("is-closed"));assert(windows[4].classList.contains("is-maximized"));
+assert.equal(map.dataset.userPositioned,"true");assert.equal(map.style.left,undefined,"窄屏不写桌面坐标");
+assert.deepEqual(JSON.parse(stored.get("sanguo.os-window-layout.v3")).mapWindow,savedGeometry);
+context.matchMedia=()=>({matches:false});context.desktopTest.restorePosition(map);assert.equal(map.style.left,"320px");assert.equal(map.style.width,"500px");
+console.log("窄屏窗口回归通过：打开与任务恢复定位 / 内容点击不跳动 / 过期回调保护 / 状态恢复 / 桌面坐标保留");

@@ -1,5 +1,5 @@
 {
-  "schema_version":2,"id":"208_red_cliffs","name":"赤壁前夕","start_date":"208-10-01","map":"china_40x32","default_player_force":"liu","playable_forces":["cao","liu","sun","liu_zhang","zhang_lu","gongsun_kang","han_xuan","liu_du","zhao_fan","jin_xuan"],
+  "schema_version":2,"id":"208_red_cliffs","name":"赤壁前夕","start_date":"208-10-01","map":"china_pixel_60x60","default_player_force":"liu","playable_forces":["cao","liu","sun","liu_zhang","zhang_lu","gongsun_kang","han_xuan","liu_du","zhao_fan","jin_xuan"],
   "description":"建安十三年刘表病逝、荆州易主之后，曹军压境，孙刘联军正在集结；南郡与荆南诸郡尚未归一。",
   "historical_brief":"曹操接收荆州北部并沿江东下；刘备携民南撤后驻夏口一带，孙权以柴桑为前线集结地。益州刘璋、汉中张鲁与荆南四郡仍各守其地。以208年秋为开局，展示赤壁大战前多方并立的格局。",
   "force_briefs":{"cao":"控制北方并接收荆州北部，兵多势盛；长江水战、疫病与南方补给线是进军隐忧。","liu":"刘备刚在长坂败退，依托夏口与刘琦残部；兵少但关张赵和诸葛亮仍在。","sun":"以江东和柴桑为根本，水军可控长江下游；是否与刘备联手决定能否挡住曹军。","liu_zhang":"据守益州盆地，蜀道险要；张鲁在北方门户构成长期威胁。","zhang_lu":"据汉中并扼阳平关，山地防守有利；须同时防备曹军与益州方向。","gongsun_kang":"承继辽东基业，远离赤壁主战线，保有边地自主与对朝廷的名义臣属关系。","han_xuan":"镇守长沙，南郡大局突变后需要选择自保、结盟或扩张。","liu_du":"据有零陵，地处荆南内陆；兵力有限，需依托山地与郡县防务。","zhao_fan":"驻守桂阳，控制南岭北麓通道；强邻争夺荆南时容易陷入孤立。","jin_xuan":"据武陵及沅水通道，需在荆州战局中维持郡内自主。"},

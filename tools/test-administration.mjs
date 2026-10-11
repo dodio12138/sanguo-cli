@@ -21,7 +21,7 @@ const commander=state.data.officers.find(o=>o.name===army.commander),military=st
 if(!military.ok||army.reinforcementTarget!==army.soldiers+500)throw new Error("军职任命或补员目标设置失败");
 const soldiersBefore=army.soldiers;city.garrison=Math.max(city.garrison,3000);state.engine.resolveAdministration(state,[]);if(army.soldiers<=soldiersBefore)throw new Error("军团没有按目标自动补员");
 
-const save=state.serialize(),migrated=state.migrateSave({...save,version:13});if(save.version!==16||migrated.version!==16||!save.world.cities.find(c=>c.id==="xuchang").administration||!save.world.counties?.length)throw new Error("v16 存档没有持久化治理及县域状态");
+const save=state.serialize(),migrated=state.migrateSave({...save,version:13});if(save.version!==17||migrated.version!==17||!save.world.cities.find(c=>c.id==="xuchang").administration||!save.world.counties?.length)throw new Error("v17 存档没有持久化治理及县域状态");
 const view=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");for(const text of ["郡县官署任命","普通官员 · 能力45","军职任命","自动补员目标","data-office-role","更换 / 任命","data-officer-appointment"])if(!view.includes(text))throw new Error(`治理 UI 缺少 ${text}`);
 
-console.log("郡县治理通过：郡守/太守/属官槽 / 普通官员 / 兼任衰减 / 持续发展 / 自动征募补员 / 军职槽 / v16 存档");
+console.log("郡县治理通过：郡守/太守/属官槽 / 普通官员 / 兼任衰减 / 持续发展 / 自动征募补员 / 军职槽 / v17 存档");

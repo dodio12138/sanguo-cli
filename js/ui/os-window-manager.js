@@ -3,7 +3,7 @@
   const definitions=[
     {selector:"#resourcePanel",id:"resourcePanel",title:"府库",icon:"库",asset:"treasury-reserve",handle:".card-title"},
     {selector:".turn-display",id:"calendarWindow",title:"历法",icon:"历",asset:"calendar-almanac",handle:".card-title"},
-    {selector:".map-column",id:"mapWindow",title:"战略舆图",icon:"图",asset:"strategy-map",handle:".map-toolbar"},
+    {selector:".map-column",id:"mapWindow",title:"战略舆图",icon:"图",asset:"strategy-map",handle:".map-titlebar"},
     {selector:"#factionPanel",id:"factionPanel",title:"本势力",icon:"君",asset:"player-faction",handle:".card-title"},
     {selector:"#selectionRailPanel",id:"selectionRailPanel",title:"选中区域",icon:"选",asset:"region-selection",handle:".card-title"},
     {selector:"#forcesRailPanel",id:"forcesRailPanel",title:"天下大势",icon:"势",asset:"world-powers",handle:".card-title"},
@@ -18,9 +18,20 @@
   const snapValue=(value,candidates,distance=5)=>{let result=value,best=distance+1;for(const candidate of candidates){const delta=Math.abs(value-candidate);if(delta<=distance&&delta<best){result=candidate;best=delta}}return {value:result,snapped:best<=distance}};
   const titleOf=window=>window.dataset.windowTitle||"窗口";
 
-  function focusWindow(window){
+  function revealWindow(window){
+    if(!isCompact())return;
+    requestAnimationFrame(()=>{
+      if(!isCompact()||window.isConnected===false||!window.classList.contains("is-active")||window.classList.contains("is-minimized")||window.classList.contains("is-closed"))return;
+      const workspace=document.querySelector(".workspace");if(!workspace)return;
+      const host=workspace.getBoundingClientRect(),box=window.getBoundingClientRect();
+      // Scroll the workspace only: the taskbar and page stay anchored.
+      workspace.scrollTop=Math.max(0,workspace.scrollTop+box.top-host.top-7);
+    });
+  }
+
+  function focusWindow(window,{reveal=true}={}){
     document.querySelectorAll(".os-window.is-active,.os-managed-dialog.is-active").forEach(item=>item.classList.remove("is-active"));
-    window.classList.add("is-active");window.style.zIndex=String(++topZ);updateTasks();
+    window.classList.add("is-active");window.style.zIndex=String(++topZ);updateTasks();if(reveal)revealWindow(window);
   }
 
   function remember(window){
@@ -30,10 +41,11 @@
   }
 
   function restorePosition(window){
-    const saved=layout[window.dataset.windowId];if(!saved||isCompact())return;
+    const saved=layout[window.dataset.windowId];if(!saved)return;
     window.classList.toggle("is-minimized",!!saved.minimized);window.classList.toggle("is-closed",!!saved.closed);window.classList.toggle("is-maximized",!!saved.maximized);
     const hasGeometry=["left","top","width","height"].some(key=>Number.isFinite(saved[key]));if(!hasGeometry)return;
     window.dataset.userPositioned="true";
+    if(isCompact())return;
     for(const key of ["left","top","width","height"])if(Number.isFinite(saved[key]))window.style[key]=`${saved[key]}px`;
     if(Number.isFinite(saved.z))window.style.zIndex=String(saved.z);
     window.style.right="auto";window.style.bottom="auto";
@@ -112,7 +124,7 @@
       const move=moveEvent=>{const maxX=Math.max(0,host.width-window.offsetWidth),maxY=Math.max(0,host.height-window.offsetHeight-46);window.style.left=`${clamp(moveEvent.clientX-host.left-offsetX,0,maxX)}px`;window.style.top=`${clamp(moveEvent.clientY-host.top-offsetY,0,maxY)}px`;window.classList.toggle("is-snapping",!moveEvent.altKey&&snapWindow(window,host))};
       trackPointer(handle,event.pointerId,move,(endEvent,cancelled)=>{if(!cancelled&&!endEvent.altKey)snapWindow(window,host);window.classList.remove("is-snapping");remember(window)});
     });
-    window.addEventListener("pointerdown",()=>focusWindow(window));
+    window.addEventListener("pointerdown",()=>focusWindow(window,{reveal:false}));
   }
 
   function arrangeWindows(windows,mode){
@@ -129,7 +141,7 @@
   function captureDialogPreset(){return [...document.querySelectorAll("dialog.os-managed-dialog")].filter(dialog=>dialog.open||dialog.classList.contains("is-dialog-minimized")).map(dialog=>{const state={id:dialog.id,kind:dialog.dataset.panelKind||null,open:dialog.open,minimized:dialog.classList.contains("is-dialog-minimized"),maximized:dialog.classList.contains("os-dialog-maximized"),z:Number.parseInt(getComputedStyle(dialog).zIndex,10)||0};if(dialog.open&&!state.maximized){const box=dialog.getBoundingClientRect();Object.assign(state,{left:Math.round(box.left),top:Math.round(box.top),width:Math.round(box.width),height:Math.round(box.height)})}return state})}
   function readLayoutPreset(slot){try{return JSON.parse(localStorage.getItem(presetKey(slot))||(slot===1?localStorage.getItem(legacyPresetKey):"")||"null")}catch{return null}}
   function saveLayoutPreset(windows,slot,loadButton){try{const snapshot=captureLayoutPreset(windows),dialogs=captureDialogPreset();localStorage.setItem(presetKey(slot),JSON.stringify({version:3,slot,savedAt:new Date().toISOString(),layout:snapshot,dialogs}));loadButton.disabled=false;desktopNotice(`当前版面已保存到预设${["一","二","三"][slot-1]}`)}catch{desktopNotice("版面预设保存失败")}}
-  function reopenPresetDialog(state){const dialog=$(state.id);if(!dialog)return;const opener={helpDialog:()=>$("helpButton")?.click(),resourceDetailDialog:()=>document.querySelector("[data-resource-detail]")?.click(),reportDialog:()=>$("reportButton")?.click(),chronicleDialog:()=>$("openChronicleButton")?.click(),battleReportDialog:()=>$("battleReportButton")?.click(),commandDialog:()=>$("commandBookButton")?.click(),modToolsDialog:()=>$("modToolsButton")?.click(),aiDialog:()=>$("aiSettingsButton")?.click(),gameSettingsDialog:()=>$("gameSettingsButton")?.click(),saveManagerDialog:()=>$(state.kind==="load"?"loadButton":"saveButton")?.click()}[state.id];if(state.id==="ledgerDialog"&&state.kind)document.querySelector(`[data-ledger="${state.kind}"]`)?.click();else opener?.();if(!dialog.open)dialog.showModal();dialog.classList.remove("is-dialog-minimized","os-dialog-maximized","is-active");for(const key of ["left","top","right","bottom","width","height","margin","zIndex"])dialog.style.removeProperty(key);if(state.maximized)dialog.classList.add("os-dialog-maximized");else if(Number.isFinite(state.left)){Object.assign(dialog.style,{left:`${state.left}px`,top:`${state.top}px`,width:`${state.width}px`,height:`${state.height}px`,right:"auto",bottom:"auto",margin:"0px"})}if(Number.isFinite(state.z))dialog.style.zIndex=String(state.z);if(state.minimized){dialog.classList.add("is-dialog-minimized");if(dialog.open)dialog.close()}}
+  function reopenPresetDialog(state){const dialog=$(state.id);if(!dialog)return;const opener={helpDialog:()=>$("helpButton")?.click(),resourceDetailDialog:()=>document.querySelector("[data-resource-detail]")?.click(),reportDialog:()=>$("reportButton")?.click(),chronicleDialog:()=>$("openChronicleButton")?.click(),battleReportDialog:()=>$("battleReportButton")?.click(),commandDialog:()=>$("commandBookButton")?.click(),modToolsDialog:()=>$("modToolsButton")?.click(),mapEditorDialog:()=>$("openMapEditor")?.click(),aiDialog:()=>$("aiSettingsButton")?.click(),gameSettingsDialog:()=>$("gameSettingsButton")?.click(),saveManagerDialog:()=>$(state.kind==="load"?"loadButton":"saveButton")?.click()}[state.id];if(state.id==="ledgerDialog"&&state.kind)document.querySelector(`[data-ledger="${state.kind}"]`)?.click();else opener?.();if(!dialog.open)dialog.showModal();dialog.classList.remove("is-dialog-minimized","os-dialog-maximized","is-active");for(const key of ["left","top","right","bottom","width","height","margin","zIndex"])dialog.style.removeProperty(key);if(state.maximized)dialog.classList.add("os-dialog-maximized");else if(Number.isFinite(state.left)){Object.assign(dialog.style,{left:`${state.left}px`,top:`${state.top}px`,width:`${state.width}px`,height:`${state.height}px`,right:"auto",bottom:"auto",margin:"0px"})}if(Number.isFinite(state.z))dialog.style.zIndex=String(state.z);if(state.minimized){dialog.classList.add("is-dialog-minimized");if(dialog.open)dialog.close()}}
   function applyLayoutPreset(windows,slot){const record=readLayoutPreset(slot),preset=record?.layout||record;if(!preset||typeof preset!=="object"){desktopNotice(`预设${["一","二","三"][slot-1]}尚未保存`);return}layout=JSON.parse(JSON.stringify(preset));save();for(const window of windows){window.classList.remove("is-minimized","is-maximized","is-closed","is-active");for(const key of ["left","top","right","bottom","width","height","zIndex"])window.style.removeProperty(key);delete window.dataset.userPositioned;restorePosition(window);constrainWindow(window)}document.querySelectorAll("dialog.os-managed-dialog").forEach(dialog=>{if(dialog.open)dialog.close();dialog.classList.remove("is-dialog-minimized","os-dialog-maximized","is-active")});for(const state of record?.dialogs||[])reopenPresetDialog(state);updateTasks();const visible=windows.filter(window=>!window.classList.contains("is-minimized")&&!window.classList.contains("is-closed")).sort((a,b)=>(layout[b.dataset.windowId]?.z||0)-(layout[a.dataset.windowId]?.z||0))[0];if(visible)visible.classList.add("is-active");topZ=Math.max(100,...windows.map(window=>layout[window.dataset.windowId]?.z||0),...(record?.dialogs||[]).map(dialog=>dialog.z||0));dispatchEvent(new Event("resize"));desktopNotice(`已恢复版面预设${["一","二","三"][slot-1]}`)}
 
   const primaryDesktopApps=["mapWindow","factionPanel","commandsRailPanel"];
@@ -248,7 +260,7 @@
   }
 
   function bindDialogs(){
-    const managedIds=new Set(["helpDialog","detailDialog","armyDetailDialog","officerDetailDialog","resourceDetailDialog","reportDialog","chronicleDialog","battleReportDialog","ledgerDialog","commandDialog","plannerDialog","modToolsDialog","aiDialog","saveManagerDialog","gameSettingsDialog"]),tasks=new Map;
+    const managedIds=new Set(["helpDialog","detailDialog","armyDetailDialog","officerDetailDialog","resourceDetailDialog","reportDialog","chronicleDialog","battleReportDialog","ledgerDialog","commandDialog","plannerDialog","modToolsDialog","mapEditorDialog","aiDialog","saveManagerDialog","gameSettingsDialog"]),tasks=new Map;
     const syncTask=dialog=>{const button=tasks.get(dialog);if(!button)return;const title=dialog.querySelector(":scope > .dialog-title > span:not(.os-dialog-buttons):not(.dialog-tools)");if(title)button.textContent=title.textContent.trim();updateTasks()};
     const minimize=dialog=>{dialog.classList.add("is-dialog-minimized");if(dialog.open)dialog.close();syncTask(dialog)};
     const restore=dialog=>{dialog.classList.remove("is-dialog-minimized");if(!dialog.open)dialog.showModal();syncTask(dialog)};
@@ -289,7 +301,7 @@
       const target=event.target,launcher=target.closest?.("[data-shortcut-window],.os-start-menu [data-ledger],.os-start-menu #battleReportButton,.os-start-menu #reportButton,#openChronicleButton,#aiSettingsButton"),icon=target.closest?.("[data-desktop-app]");
       if(launcher)return [shortcutItem(launcher.dataset.shortcutWindow||(launcher.dataset.ledger?`ledger-${launcher.dataset.ledger}`:`app-${launcher.id}`))];
       if(icon){const id=icon.dataset.desktopApp;return [{label:"打开",run:()=>shortcuts.open(id)},{separator:true},{label:"移除快捷方式",run:()=>shortcuts.remove(id)}]}
-      const task=target.closest?.("[data-task-window]"),title=target.closest?.(".card-title,.map-toolbar"),window=task?windows.find(window=>window.dataset.windowId===task.dataset.taskWindow):title?.closest(".os-window");
+      const task=target.closest?.("[data-task-window]"),title=target.closest?.(".card-title"),window=task?windows.find(window=>window.dataset.windowId===task.dataset.taskWindow):title?.closest(".os-window");
       if(window)return [{label:"显示窗口",run:()=>openWindow(window)},{label:"最小化",run:()=>{if(!window.classList.contains("is-minimized"))toggleMinimize(window)}},{label:window.classList.contains("is-maximized")?"还原":"最大化",disabled:isCompact(),run:()=>toggleMaximize(window)},{label:"关闭",run:()=>closeWindow(window)},{separator:true},shortcutItem(window.dataset.windowId)];
       if(target.closest?.("#gameMap")){const detail={event,items:[]};document.dispatchEvent(new CustomEvent("sanguo-map-context",{detail}));if(detail.items.length)return detail.items}
       return [{label:$("observerToggle")?.getAttribute("aria-label")||"暂停／继续",run:()=>$("observerToggle")?.click()},{label:"命令簿",run:()=>$("commandBookButton")?.click()},{label:"保存战局",run:()=>$("saveButton")?.click()},{separator:true},...[["mapWindow","战略舆图"],["factionPanel","本势力"],["resourcePanel","府库"],["calendarWindow","历法"]].map(([id,label])=>({label,run:()=>{const window=windows.find(window=>window.dataset.windowId===id);if(window)openWindow(window)}})),{separator:true},{label:"整理桌面图标",run:()=>shortcuts.arrange()},{label:"平铺窗口",run:()=>arrangeWindows(windows,"tile")},{label:"全部最小化",run:()=>arrangeWindows(windows,"minimize")}];
@@ -298,13 +310,13 @@
 
   function initialize(){
     const windows=[];
-    for(const definition of definitions){const window=document.querySelector(definition.selector);if(definition.id==="calendarWindow")document.querySelector(".workspace")?.prepend(window);const handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;if(definition.id==="mapWindow"){const caption=document.createElement("span");caption.className="os-map-caption";caption.textContent=definition.title;handle.prepend(caption)}addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
+    for(const definition of definitions){const window=document.querySelector(definition.selector);if(definition.id==="calendarWindow")document.querySelector(".workspace")?.prepend(window);const handle=window?.querySelector(definition.handle);if(!window||!handle)continue;window.classList.add("os-window");window.dataset.windowId=definition.id;window.dataset.windowTitle=definition.title;window.dataset.windowIcon=definition.icon;window.hidden=false;addControls(window,handle);addResizeGrip(window);bindDrag(window,handle);restorePosition(window);windows.push(window)}
     const shortcuts=createDesktopShortcuts(windows);createSystemMenu(windows);createTaskStrip(windows);bindDialogs();renderCalendar();bindDesktopContextMenu(windows,shortcuts);
     const dateLabel=$("dateLabel");if(dateLabel)new MutationObserver(renderCalendar).observe(dateLabel,{childList:true,characterData:true,subtree:true});
     const map=windows.find(window=>window.dataset.windowId==="mapWindow"),focusTarget=map&&!map.classList.contains("is-minimized")&&!map.classList.contains("is-closed")?map:windows.find(window=>!window.classList.contains("is-minimized")&&!window.classList.contains("is-closed"));if(focusTarget)focusWindow(focusTarget);
     let wasCompact=isCompact();const clearGeometry=window=>{for(const key of ["left","top","right","bottom","width","height"])window.style.removeProperty(key)};
     const adapt=()=>{const compact=isCompact();if(compact)windows.forEach(clearGeometry);else{if(wasCompact)windows.forEach(window=>window.dataset.userPositioned&&restorePosition(window));windows.forEach(window=>{if(!window.dataset.userPositioned)clearGeometry(window);constrainWindow(window)})}wasCompact=compact};
-    addEventListener("resize",adapt);addEventListener("sanguo-game-ready",adapt,{once:true});new MutationObserver(()=>requestAnimationFrame(adapt)).observe(document.body,{attributes:true,attributeFilter:["class"]});requestAnimationFrame(adapt);
+    addEventListener("resize",adapt);addEventListener("sanguo-game-ready",()=>{adapt();const active=windows.find(window=>window.classList.contains("is-active"));if(active)revealWindow(active)},{once:true});new MutationObserver(()=>requestAnimationFrame(adapt)).observe(document.body,{attributes:true,attributeFilter:["class"]});requestAnimationFrame(adapt);
     window.SanguoDesktop={reset(){arrangeWindows(windows,"reset")},arrange:mode=>arrangeWindows(windows,mode),windows};
   }
 

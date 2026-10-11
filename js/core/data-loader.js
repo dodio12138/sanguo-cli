@@ -1,7 +1,7 @@
 window.DataLoader = class DataLoader {
-  constructor(fallback){this.fallback=fallback;this.sources=[];this.warnings=[];this.modReports=[];this.patchOwners=new Map();}
-  async load(){
-    if(location.protocol==="file:"){this.sources.push("embedded:file-fallback");return this.validate(this.fallback);}
+  constructor(fallback){this.fallback=fallback;this.sources=[];this.warnings=[];this.modReports=[];this.patchOwners=new Map();this.scenarioMaps=window.ScenarioMapStore&&window.MapEditor?new ScenarioMapStore():null;}
+  async load({useSavedMap=true}={}){
+    if(location.protocol==="file:"){this.sources.push("embedded:file-fallback");this.scenarioBase=structuredClone(this.fallback);return this.finishScenario(structuredClone(this.scenarioBase),useSavedMap);}
     try{
       const [terrain,unitTypes,items,rules,events,relationships,combatDoctrines,commandDefs,scenario,map,forces,cities,officers,armies,cityResourceProfiles,administrativeDivisions]=await Promise.all([
         "game/data/common/terrain.json","game/data/common/unit_types.json","game/data/common/items.json","game/data/common/game_rules.json","game/data/common/events.json","game/data/common/officer_relationships.json","game/data/common/combat_doctrines.json","game/data/common/commands.json","game/data/history/scenarios/200_guandu.json","game/data/map/central_plains.json",
@@ -9,11 +9,27 @@ window.DataLoader = class DataLoader {
       ].map(path=>this.fetchJson(path)));
       const data=structuredClone(this.fallback);
       data.terrainDefs=Object.fromEntries(Object.entries(terrain.terrains).map(([id,t])=>[id,{...data.terrainDefs[id],...t}]));
-      data.unitTypes=unitTypes.unit_types;data.items=items.items;data.rules=rules;data.events=events.events;data.officerRelationships=relationships.relationships;data.combatDoctrines=combatDoctrines;data.commandCatalog=this.normalizeCommands(commandDefs);data.scenario=scenario;data.map={...data.map,...map.grid,id:map.id};data.forces=forces.forces;data.cities=cities.cities;data.officers=officers.officers;data.armies=armies.armies;data.cityResourceProfiles=cityResourceProfiles;data.administrativeDivisions=administrativeDivisions;data.counties=structuredClone(administrativeDivisions.county_seats||[]);this.applyCityResources(data,scenario.id);this.applyCountyResources(data,scenario.id);
-      await this.discoverMods(data);this.scenarioBase=structuredClone(data);return this.validate(data);
-    }catch(error){this.warnings.push(`外部数据读取失败，使用内嵌数据：${error.message}`);this.sources.push("embedded:http-fallback");return this.validate(this.fallback);}
+      data.unitTypes=unitTypes.unit_types;data.items=items.items;data.rules=rules;data.events=events.events;data.officerRelationships=relationships.relationships;data.combatDoctrines=combatDoctrines;data.commandCatalog=this.normalizeCommands(commandDefs);data.scenario=scenario;data.map={...data.map,...map.grid,...map,id:map.id};data.forces=forces.forces;data.cities=cities.cities;data.officers=officers.officers;data.armies=armies.armies;data.cityResourceProfiles=cityResourceProfiles;data.administrativeDivisions=administrativeDivisions;data.counties=structuredClone(administrativeDivisions.county_seats||[]);this.applyCityResources(data,scenario.id);this.assignCommanderySeatOwners(data);this.applyCountyResources(data,scenario.id);
+      await this.discoverMods(data);this.scenarioBase=structuredClone(data);return this.finishScenario(data,useSavedMap);
+    }catch(error){this.warnings.push(`外部数据读取失败，使用内嵌数据：${error.message}`);this.sources.push("embedded:http-fallback");this.scenarioBase=structuredClone(this.fallback);return this.finishScenario(structuredClone(this.scenarioBase),useSavedMap);}
   }
   async fetchJson(path){const response=await fetch(path,{cache:"no-cache"});if(!response.ok)throw new Error(`${path} (${response.status})`);this.sources.push(path);return response.json();}
+  static populationRecord(config,name){
+    const reference=config?.population_reference,commandery=reference?.aliases?.[name]||name,raw=reference?.records?.[commandery];
+    if(!raw)return null;
+    const [year,population,source,status,note]=raw;return {commandery,year,population,source,status,note:note||"",sourceInfo:reference.sources?.[source]};
+  }
+  static populationHistory(config,name,basis={}){
+    const record=DataLoader.populationRecord(config,name);
+    if(record)return {commandery:record.commandery,censusYear:record.year,censusPopulation:record.population,populationStatus:record.status,source:record.source,sourceTitle:record.sourceInfo?.title,sourceUrl:record.sourceInfo?.url,note:record.note,method:config.methodology};
+    const matches=basis.commandery===name;
+    return {commandery:name,censusYear:matches?basis.census_year||null:null,censusPopulation:matches?basis.census_population||null:null,populationStatus:matches&&basis.census_population?"legacy":"unrecorded",method:config.methodology};
+  }
+  refreshPopulationHistory(data){
+    const config=data.cityResourceProfiles;if(!config)return;
+    const fields=config.basis_fields||["commandery","census_year","census_population","resource_region"];
+    for(const city of data.cities||[]){const raw=config.historical_basis?.[city.id],basis=raw?Object.fromEntries(fields.map((field,index)=>[field,raw[index]])):{};city.historical=DataLoader.populationHistory(config,city.commandery||basis.commandery||"史籍未详",basis)}
+  }
   applyCityResources(data,scenarioId=data.scenario?.id||"200_guandu"){
     const config=data.cityResourceProfiles;if(!config)return data;
     const fields=config.basis_fields||["commandery","census_year","census_population","resource_region"],scenario=config.scenarios?.[scenarioId]||config.scenarios?.["200_guandu"]||{},defaults=scenario.default||{},regions=scenario.regions||{},overrides=scenario.cities||{};
@@ -21,12 +37,17 @@ window.DataLoader = class DataLoader {
       const raw=config.historical_basis?.[city.id],basis=raw?Object.fromEntries(fields.map((field,index)=>[field,raw[index]])):{};
       const adjustment={...defaults,...(regions[basis.resource_region]||{}),...(overrides[city.id]||{})},basePopulation=Number(city.population)||1000,baseGarrison=Number(city.garrison)||0;
       const commandery=basis.commandery||"史籍未详",counties=data.administrativeDivisions?.commandery_counties?.[commandery]||[city.name];
-      city.historical={commandery,censusYear:basis.census_year||null,censusPopulation:basis.census_population||null,method:config.methodology};city.commandery=commandery;city.counties=[...counties];city.resourceRegion=basis.resource_region||"other";city.resourceScenario=scenarioId;
+      city.historical=DataLoader.populationHistory(config,commandery,basis);city.commandery=commandery;city.counties=[...counties];city.resourceRegion=basis.resource_region||"other";city.resourceScenario=scenarioId;
       city.population=Math.max(1000,Math.round(basePopulation*(adjustment.population??1)/500)*500);city.garrison=Math.max(city.type==="city"?500:100,Math.round(baseGarrison*(adjustment.garrison??1)/100)*100);
       city.agriculture=Math.max(0,Math.min(100,Math.round((city.agriculture||0)+(adjustment.agriculture||0))));city.commerce=Math.max(0,Math.min(100,Math.round((city.commerce||0)+(adjustment.commerce||0))));city.order=Math.max(0,Math.min(100,Math.round((city.order||0)+(adjustment.order||0))));
       const levelCapacity=config.storage_by_level?.[String(city.level||1)]||20000;city.storage=config.type_storage?.[city.type]||levelCapacity;
       const foodRatio=Math.max(.2,Math.min(.95,adjustment.food_stock??.74)),goldFactor=Math.max(.2,adjustment.gold_stock??1);city.localFood=Math.min(city.storage,Math.round(city.storage*foodRatio/100)*100);city.localGold=Math.round((city.population/32+city.commerce*28)*goldFactor/100)*100;city.reserveRatio=city.type==="city"?25:35;
     }
+    return data;
+  }
+  assignCommanderySeatOwners(data){
+    const cities=new Map((data.cities||[]).map(city=>[city.id,city]));
+    for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;const parentId=data.rules?.city_graph?.[city.id]?.[0],parent=cities.get(parentId);city.force=parent?.force||"neutral";city.governor="—"}
     return data;
   }
   applyCountyResources(data,scenarioId=data.scenario?.id||"200_guandu"){
@@ -59,7 +80,18 @@ window.DataLoader = class DataLoader {
     }
     return officers;
   }
-  async loadScenario(id){if(id==="200_guandu")return this.validate(structuredClone(this.scenarioBase||await this.load()));if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load()),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.validate(base);}
+  async loadScenario(id,{useSavedMap=true}={}){if(id==="200_guandu")return this.finishScenario(structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),useSavedMap);if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.assignCommanderySeatOwners(base);this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.finishScenario(base,useSavedMap);}
+  async finishScenario(data,useSavedMap){
+    this.validate(data);
+    if(!useSavedMap||!this.scenarioMaps)return data;
+    const baseFingerprint=ScenarioMapStore.fingerprint(data);
+    try{
+      const record=await this.scenarioMaps.get(data.scenario.id);
+      if(record){const saved=ScenarioMapStore.prepare(data,record);this.validate(saved);this.sources.push(`saved-map:${data.scenario.id}`);return saved}
+      data.meta={...data.meta,scenarioMap:{status:"original",baseFingerprint}};
+    }catch(error){this.warnings.push(`剧本地图未自动载入：${error.message}`);data.meta={...data.meta,scenarioMap:{status:"unavailable",message:error.message,baseFingerprint}}}
+    return this.validate(data);
+  }
   async discoverMods(data){
     // 浏览器不能枚举目录；注册表决定启用的模组及加载顺序。
     this.modReports=[];this.patchOwners.clear();
@@ -86,7 +118,9 @@ window.DataLoader = class DataLoader {
     for(const key of ["forces","cities"]){if(!Array.isArray(data[key]))errors.push(`${key} 必须是数组`)}
     const ids=new Set();for(const force of data.forces||[]){if(!force.id||ids.has(force.id))errors.push(`势力 ID 无效或重复：${force.id}`);ids.add(force.id)}
     for(const city of data.cities||[]){if(!city.id||!ids.has(city.force))errors.push(`城市 ${city.id||"?"} 的势力引用无效`);if(city.x<0||city.y<0||city.x>=data.map.width||city.y>=data.map.height)errors.push(`城市 ${city.id} 坐标越界`);city.localGold??=Math.round(city.population/20);city.localFood??=Math.round(city.population/8);city.storage??=20000;city.labor??=0;city.buildings??=[];city.defenseDamage??=0;city.reserveRatio??=25}
-    const countyCells=new Set,countyIds=new Set,commanderyNames=new Set(Object.keys(data.administrativeDivisions?.commandery_counties||{})),cityIdSet=new Set((data.cities||[]).map(city=>city.id));for(const county of data.counties||[]){const cell=`${county.x},${county.y}`;if(!county.id||countyIds.has(county.id))errors.push(`县治 ID 无效或重复：${county.id||"?"}`);countyIds.add(county.id);if(countyCells.has(cell))errors.push(`县治网格重叠：${cell}`);countyCells.add(cell);if(!commanderyNames.has(county.commandery))errors.push(`县治 ${county.name} 的郡属无效：${county.commandery}`);if(county.x<0||county.y<0||county.x>=data.map.width||county.y>=data.map.height)errors.push(`县治 ${county.name} 坐标越界`);if(!Number.isFinite(county.historicalPopulation)||county.historicalPopulation<=0||!Number.isFinite(county.population)||county.population<=0)errors.push(`县治 ${county.name} 人口无效`);if(!cityIdSet.has(county.jurisdictionCityId))errors.push(`县治 ${county.name} 缺少有效管辖据点`);if(county.cityId){const city=(data.cities||[]).find(item=>item.id===county.cityId);if(!city||city.x!==county.x||city.y!==county.y)errors.push(`县治 ${county.name} 未与据点 ${county.cityId} 对齐`)}}
+    const countyCells=new Set,countyIds=new Set,commanderyNames=new Set(Object.keys(data.administrativeDivisions?.commandery_counties||{})),cityIdSet=new Set((data.cities||[]).map(city=>city.id));
+    if(data.map?.editorVersion===1&&window.MapGrid){for(const name of MapGrid.decodeLayer(data.map,"commanderies",data.map.width,data.map.height)||[])if(name)commanderyNames.add(name);commanderyNames.add("")}
+    for(const county of data.counties||[]){const cell=`${county.x},${county.y}`;if(!county.id||countyIds.has(county.id))errors.push(`县治 ID 无效或重复：${county.id||"?"}`);countyIds.add(county.id);if(countyCells.has(cell))errors.push(`县治网格重叠：${cell}`);countyCells.add(cell);if(!commanderyNames.has(county.commandery))errors.push(`县治 ${county.name} 的郡属无效：${county.commandery}`);if(county.x<0||county.y<0||county.x>=data.map.width||county.y>=data.map.height)errors.push(`县治 ${county.name} 坐标越界`);if(!Number.isFinite(county.historicalPopulation)||county.historicalPopulation<=0||!Number.isFinite(county.population)||county.population<=0)errors.push(`县治 ${county.name} 人口无效`);if(!cityIdSet.has(county.jurisdictionCityId))errors.push(`县治 ${county.name} 缺少有效管辖据点`);if(county.cityId){const city=(data.cities||[]).find(item=>item.id===county.cityId);if(!city||city.x!==county.x||city.y!==county.y)errors.push(`县治 ${county.name} 未与据点 ${county.cityId} 对齐`)}}
     const cityIds=new Set((data.cities||[]).map(city=>city.id)),officerIds=new Set(),statuses=new Set(["serving","injured","free","hidden","discovered","prisoner","wandering","exiled","not_appeared","dead"]);for(const officer of data.officers||[]){if(!officer.id||officerIds.has(officer.id))errors.push(`人物 ID 无效或重复：${officer.id||"?"}`);officerIds.add(officer.id);if(!ids.has(officer.force))errors.push(`人物 ${officer.name} 势力引用无效`);if(officer.city&&!cityIds.has(officer.city))errors.push(`人物 ${officer.name} 城市引用无效`);if(!statuses.has(officer.status))errors.push(`人物 ${officer.name} 状态无效：${officer.status}`)}
     const officerNames=new Set((data.officers||[]).map(o=>o.name)),armyIds=new Set();for(const army of data.armies||[]){if(!army.id||armyIds.has(army.id))errors.push(`军团 ID 无效或重复：${army.id||"?"}`);armyIds.add(army.id);if(!ids.has(army.force))errors.push(`军团 ${army.name} 势力引用无效`);if(!cityIds.has(army.city))errors.push(`军团 ${army.name} 驻地引用无效`);if(!Number.isFinite(army.soldiers)||army.soldiers<0)errors.push(`军团 ${army.name} 兵力无效`);if(army.commander&&!officerNames.has(army.commander))warnings.push(`军团 ${army.name} 主将未出现在人物表：${army.commander}`);if(army.units){const total=Object.values(army.units).reduce((n,v)=>n+(Number(v)||0),0);if(total!==army.soldiers)errors.push(`军团 ${army.name} 编制 ${total} 与兵力 ${army.soldiers} 不一致`)}}
     for(const army of data.armies||[])for(const deputyId of army.deputyOfficerIds||[]){const deputy=(data.officers||[]).find(o=>o.id===deputyId);if(!deputy)errors.push(`军团 ${army.name} 副将引用无效：${deputyId}`);else if(deputy.force!==army.force)warnings.push(`军团 ${army.name} 副将 ${deputy.name} 与军团势力不一致`)}
@@ -98,6 +132,19 @@ window.DataLoader = class DataLoader {
     for(const item of data.items||[]){if(item.owner&&!officerIds.has(item.owner)&&!officerNames.has(item.owner))warnings.push(`宝物 ${item.name||item.id} 持有者不存在：${item.owner}`)}
     return {ok:errors.length===0,errors,warnings,stats:{forces:(data.forces||[]).length-((data.forces||[]).some(f=>f.id==="neutral")?1:0),cities:(data.cities||[]).length,counties:(data.counties||[]).length,officers:(data.officers||[]).length,armies:(data.armies||[]).length,commands:(data.commandCatalog?.commands||[]).length,events:(data.events||[]).length,map:`${data.map?.width||0}×${data.map?.height||0}`}};
   }
-  validate(data){const byName=new Map((data.officers||[]).map(o=>[o.name,o]));for(const relation of data.officerRelationships||[]){const present=relation.members.filter(name=>byName.has(name));for(const name of present){const officer=byName.get(name);officer.historicalRelations??=[];for(const other of present.filter(n=>n!==name))if(!officer.historicalRelations.some(r=>r.type===relation.type&&r.name===other))officer.historicalRelations.push({type:relation.type,name:other})}}for(const army of data.armies||[]){army.deputyOfficerIds??=(data.officers||[]).filter(o=>o.force===army.force&&o.city===army.city&&o.status==="serving"&&o.name!==army.commander).sort((a,b)=>(b.command+b.war+b.intelligence)-(a.command+a.war+a.intelligence)).slice(0,2).map(o=>o.id);const commander=byName.get(army.commander),units=army.units||{};army.formation??=(units.cavalry||0)>army.soldiers*.5?"wedge":(units.archers||0)>army.soldiers*.5?"crane_wing":"balanced";army.tactic??=(commander?.war||0)>(commander?.intelligence||0)+15?"aggressive":(commander?.intelligence||0)>(commander?.war||0)+15?"cautious":"balanced"}const diagnostics=this.diagnose(data);if(diagnostics.errors.length)throw new Error(`数据校验失败：${diagnostics.errors.join("；")}`);data.meta={sources:[...this.sources],warnings:[...this.warnings,...diagnostics.warnings],mods:structuredClone(this.modReports),diagnostics};return data;
+  validate(data){
+    const byName=new Map((data.officers||[]).map(officer=>[officer.name,officer]));
+    for(const relation of data.officerRelationships||[]){
+      const present=relation.members.filter(name=>byName.has(name));
+      for(const name of present){const officer=byName.get(name);officer.historicalRelations??=[];for(const other of present.filter(n=>n!==name))if(!officer.historicalRelations.some(r=>r.type===relation.type&&r.name===other))officer.historicalRelations.push({type:relation.type,name:other})}
+    }
+    for(const army of data.armies||[]){
+      army.deputyOfficerIds??=(data.officers||[]).filter(officer=>officer.force===army.force&&officer.city===army.city&&officer.status==="serving"&&officer.name!==army.commander).sort((a,b)=>(b.command+b.war+b.intelligence)-(a.command+a.war+a.intelligence)).slice(0,2).map(officer=>officer.id);
+      const commander=byName.get(army.commander),units=army.units||{};
+      army.formation??=(units.cavalry||0)>army.soldiers*.5?"wedge":(units.archers||0)>army.soldiers*.5?"crane_wing":"balanced";
+      army.tactic??=(commander?.war||0)>(commander?.intelligence||0)+15?"aggressive":(commander?.intelligence||0)>(commander?.war||0)+15?"cautious":"balanced";
+    }
+    const diagnostics=this.diagnose(data);if(diagnostics.errors.length)throw new Error(`数据校验失败：${diagnostics.errors.join("；")}`);
+    data.meta={...data.meta,sources:[...this.sources],warnings:[...this.warnings,...diagnostics.warnings],mods:structuredClone(this.modReports),diagnostics};return data;
   }
 };

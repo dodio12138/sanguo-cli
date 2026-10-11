@@ -1,10 +1,1957 @@
 {
   "schema_version": 1,
-  "id": "china_40x32",
-  "grid": { "type": "square", "width": 40, "height": 32 },
-  "layers": ["terrain", "political", "province", "commandery", "supply"],
+  "id": "china_pixel_60x60",
+  "grid": {
+    "type": "square",
+    "width": 60,
+    "height": 60
+  },
+  "layers": [
+    "terrain",
+    "political",
+    "province",
+    "commandery",
+    "supply"
+  ],
   "coordinate_origin": "north_west",
-  "projection_note": "Expanded square strategic grid arranged from the supplied historical-game map reference; relative location layout only, not a surveying map.",
-  "reference_image": "spring.jpg.png",
-  "grid_lines": "only_between_different_terrain_or_map_colors"
+  "projection_note": "按用户提供的 30×30 单色地图逐像素放大 2 倍为 60×60 网格；城市与县治从原战略网格等比例迁移并贴合陆地区域。",
+  "reference_image": "00_bit.bmp",
+  "grid_lines": "only_between_different_terrain_or_map_colors",
+  "pixel_scale": 2,
+  "pixel_mask": "land*414,sea*4,land*56,sea*4,land*54,sea*4,land*56,sea*4,land*52,sea*6,land*54,sea*6,land*48,sea*12,land*2,sea*4,land*42,sea*12,land*2,sea*4,land*44,sea*16,land*44,sea*16,land*44,sea*8,land*4,sea*4,land*44,sea*8,land*4,sea*4,land*58,sea*2,land*58,sea*2,land*52,sea*8,land*52,sea*8,land*50,sea*10,land*50,sea*10,land*48,sea*12,land*48,sea*12,land*48,sea*12,land*48,sea*12,land*50,sea*10,land*50,sea*10,land*52,sea*8,land*52,sea*8,land*52,sea*8,land*52,sea*8,land*52,sea*8,land*52,sea*8,land*54,sea*6,land*54,sea*6,land*56,sea*4,land*56,sea*4,land*58,sea*2,land*58,sea*2,land*56,sea*4,land*56,sea*4,land*56,sea*4,land*56,sea*4,land*54,sea*6,land*54,sea*6,land*52,sea*8,land*52,sea*8,land*50,sea*10,land*50,sea*10,land*50,sea*10,land*50,sea*10,land*48,sea*12,land*48,sea*12,land*48,sea*6,land*2,sea*4,land*48,sea*6,land*2,sea*4,land*44,sea*8,land*4,sea*4,land*44,sea*8,land*4,sea*4",
+  "terrain": "hills*6,grassland*16,hills*2,grassland*6,hills*6,grassland*3,mountain*21,hills*6,grassland*16,hills*2,grassland*6,hills*6,grassland*3,mountain*21,hills*6,grassland*3,hills*4,grassland*17,hills*4,grassland*5,mountain*21,hills*6,grassland*3,hills*4,grassland*17,hills*4,grassland*5,mountain*21,hills*3,grassland*4,hills*6,grassland*24,hills*2,mountain*21,hills*3,grassland*4,hills*6,grassland*24,hills*2,mountain*21,grassland*7,hills*6,grassland*5,hills*3,grassland*16,hills*2,mountain*15,ocean*4,mountain*2,grassland*7,hills*5,grassland*4,hills*6,grassland*17,mountain*15,ocean*4,mountain*2,grassland*7,hills*5,grassland*4,hills*6,grassland*17,mountain*13,ocean*4,mountain*4,grassland*16,hills*5,grassland*4,hills*5,grassland*9,mountain*13,ocean*4,mountain*4,grassland*16,hills*5,grassland*4,hills*5,grassland*9,mountain*9,ocean*6,mountain*16,plains*11,forest*1,plains*3,hills*3,plains*12,forest*2,plains*6,ocean*6,plains*6,mountain*10,plains*11,forest*1,plains*3,hills*3,plains*12,forest*2,ocean*12,plains*2,ocean*4,desert*10,plains*8,forest*1,plateau*5,hills*4,plateau*3,plains*3,hills*2,plains*1,forest*2,plains*3,ocean*12,plains*2,ocean*4,desert*10,plains*8,forest*1,plateau*5,hills*4,plateau*3,plains*3,hills*2,plains*1,forest*2,plains*5,ocean*16,desert*3,mountain*4,desert*3,grassland*11,plateau*3,hills*3,plateau*4,plains*2,hills*1,forest*2,plains*8,ocean*16,desert*3,mountain*4,desert*3,grassland*11,plateau*3,hills*3,plateau*4,plains*2,hills*1,forest*2,plains*8,ocean*8,plains*4,ocean*4,desert*3,mountain*3,desert*4,grassland*2,hills*3,grassland*6,plateau*10,forest*2,hills*3,plains*6,hills*2,ocean*8,hills*4,ocean*4,desert*3,mountain*3,desert*4,grassland*2,hills*3,grassland*6,plateau*10,forest*2,hills*3,plains*6,hills*16,ocean*2,desert*3,mountain*1,desert*6,hills*5,grassland*6,plateau*10,plains*9,hills*18,ocean*2,desert*3,mountain*1,desert*6,hills*5,grassland*6,plateau*10,plains*9,hills*12,ocean*8,desert*10,hills*5,grassland*4,hills*3,plateau*9,plains*9,hills*3,plains*2,forest*7,ocean*8,desert*10,hills*3,grassland*5,hills*6,plateau*7,plains*11,forest*1,plains*7,ocean*10,desert*10,hills*3,grassland*5,hills*6,plateau*7,plains*11,forest*1,plains*7,ocean*10,desert*10,grassland*8,hills*4,plateau*5,hills*4,plains*8,forest*1,plains*8,ocean*12,desert*10,grassland*8,hills*4,plateau*5,hills*4,plains*8,forest*1,plains*8,ocean*12,mountain*1,plateau*5,grassland*12,hills*3,plateau*4,hills*6,plains*5,forest*1,plains*11,ocean*12,mountain*1,plateau*5,grassland*12,hills*3,plateau*4,hills*6,plains*5,forest*1,plains*11,ocean*12,plateau*6,grassland*1,hills*2,grassland*12,plateau*4,hills*6,plains*2,forest*1,plains*16,ocean*10,plateau*6,grassland*1,hills*2,grassland*12,plateau*4,hills*6,plains*2,forest*1,plains*16,ocean*10,plateau*4,mountain*5,plateau*9,plains*1,plateau*6,hills*3,plateau*3,plains*3,hills*5,plains*13,ocean*8,plateau*4,mountain*5,plateau*9,plains*1,plateau*6,hills*3,plateau*3,plains*3,hills*5,plains*13,ocean*8,plateau*4,mountain*5,plateau*9,plains*9,forest*1,plains*6,hills*3,plains*15,ocean*8,plateau*4,mountain*5,plateau*9,plains*9,forest*1,plains*6,hills*3,plains*15,ocean*8,plateau*4,mountain*3,plateau*5,mountain*4,plateau*2,plains*6,forest*1,plains*18,forest*2,hills*7,ocean*8,plateau*4,mountain*3,plateau*5,mountain*4,plateau*2,plains*6,forest*1,plains*18,forest*2,hills*7,ocean*8,plateau*12,mountain*4,plateau*2,mountain*10,plains*6,marsh*6,forest*2,marsh*12,ocean*6,plateau*12,mountain*3,plateau*3,basin*3,mountain*3,basin*4,plains*6,marsh*3,forest*2,marsh*15,ocean*6,plateau*12,mountain*3,plateau*3,basin*3,mountain*3,basin*4,plains*6,marsh*3,forest*2,marsh*17,ocean*4,plateau*18,basin*3,mountain*3,basin*4,plains*6,forest*2,marsh*20,ocean*4,plateau*18,basin*3,mountain*3,basin*4,plains*6,forest*2,marsh*22,ocean*2,mountain*3,plateau*15,basin*10,hills*3,forest*2,plains*1,marsh*24,ocean*2,mountain*3,plateau*15,basin*10,hills*3,forest*2,plains*1,marsh*22,ocean*4,hills*1,plains*8,forest*1,plains*6,mountain*2,basin*10,forest*2,hills*1,plains*3,marsh*14,forest*8,ocean*4,hills*1,plains*8,forest*1,plains*6,mountain*2,basin*10,forest*2,hills*1,plains*3,marsh*14,forest*8,ocean*4,hills*1,plains*5,forest*1,hills*2,plains*7,mountain*2,basin*10,plains*6,marsh*11,forest*1,marsh*10,ocean*4,hills*1,plains*5,forest*1,hills*2,plains*7,mountain*2,basin*10,plains*6,marsh*11,forest*1,marsh*8,ocean*6,plains*3,forest*1,plains*2,hills*4,plains*6,mountain*2,basin*10,plateau*5,plains*1,marsh*8,forest*1,marsh*11,ocean*6,plains*3,forest*1,plains*2,hills*4,plains*6,mountain*2,basin*10,plateau*5,plains*1,marsh*8,forest*1,marsh*9,ocean*8,forest*1,plains*5,hills*3,plains*6,hills*1,mountain*2,basin*10,plateau*5,plains*1,marsh*5,forest*1,marsh*12,ocean*8,forest*1,plains*5,hills*3,plains*6,hills*1,mountain*2,basin*10,plateau*5,plains*1,marsh*5,forest*1,marsh*10,ocean*10,plains*15,hills*1,forest*2,mountain*1,plateau*5,mountain*3,plateau*6,plains*1,marsh*2,forest*1,marsh*13,ocean*10,plains*13,forest*2,hills*1,plains*2,plateau*3,mountain*6,plateau*6,forest*1,marsh*16,ocean*10,plains*13,forest*2,hills*1,plains*2,plateau*3,mountain*6,plateau*6,forest*1,marsh*16,ocean*10,plains*10,forest*2,plains*6,plateau*3,mountain*6,plateau*4,mountain*2,plains*1,marsh*14,ocean*12,plains*10,forest*2,plains*6,plateau*3,mountain*6,plateau*4,mountain*2,plains*1,marsh*14,ocean*12,plains*7,forest*2,plains*9,plateau*3,mountain*4,plateau*5,mountain*3,hills*1,marsh*14,ocean*6,marsh*2,ocean*4,plains*7,forest*2,plains*9,plateau*3,mountain*4,plateau*5,mountain*3,hills*1,marsh*14,ocean*6,marsh*2,ocean*4,hills*4,forest*2,plains*12,plateau*10,mountain*5,hills*11,ocean*8,hills*4,ocean*4,hills*4,forest*2,plains*12,plateau*10,mountain*5,hills*11,ocean*8,hills*4,ocean*4",
+  "provinces": "凉州*14,并州*11,幽州*35,凉州*13,并州*13,幽州*34,凉州*13,并州*13,幽州*34,凉州*12,并州*14,幽州*34,凉州*11,并州*16,幽州*33,凉州*11,并州*16,幽州*33,凉州*10,并州*17,幽州*27,*4,幽州*2,凉州*10,并州*17,幽州*27,*4,幽州*2,凉州*10,并州*17,幽州*25,*4,幽州*4,凉州*10,并州*17,幽州*25,*4,幽州*4,凉州*10,并州*17,幽州*21,*6,幽州*6,凉州*11,并州*11,幽州*26,*6,幽州*6,凉州*11,并州*11,幽州*17,冀州*1,幽州*2,*12,幽州*2,*4,凉州*11,并州*19,幽州*7,冀州*4,幽州*1,*12,幽州*2,*4,凉州*12,并州*17,冀州*2,幽州*4,冀州*7,幽州*2,*16,凉州*13,并州*16,冀州*3,幽州*2,冀州*9,幽州*1,*16,凉州*14,并州*15,冀州*15,*8,青州*3,幽州*1,*4,凉州*15,并州*10,冀州*18,青州*1,*8,青州*4,*4,凉州*15,并州*9,冀州*5,青州*5,冀州*7,青州*17,*2,凉州*15,并州*10,冀州*4,青州*6,冀州*3,青州*6,兖州*1,青州*13,*2,凉州*16,并州*12,冀州*1,青州*14,兖州*2,青州*7,*8,凉州*16,并州*13,冀州*6,青州*5,兖州*1,青州*1,兖州*4,青州*6,*8,凉州*16,并州*12,冀州*8,青州*2,兖州*8,青州*4,*10,凉州*16,并州*12,冀州*8,青州*2,兖州*6,徐州*3,青州*3,*10,凉州*16,并州*11,冀州*10,兖州*7,徐州*4,*12,凉州*17,并州*8,司隶*1,冀州*10,兖州*9,徐州*3,*12,凉州*10,司隶*11,并州*3,司隶*4,冀州*8,兖州*5,豫州*5,徐州*2,*12,凉州*10,司隶*12,并州*1,司隶*6,冀州*3,豫州*1,冀州*1,兖州*7,豫州*6,徐州*1,*12,凉州*10,司隶*20,兖州*1,豫州*3,兖州*9,豫州*2,徐州*5,*10,凉州*11,司隶*18,兖州*2,豫州*3,兖州*4,徐州*3,兖州*3,徐州*6,*10,凉州*11,司隶*17,兖州*3,豫州*4,兖州*3,徐州*14,*8,凉州*11,司隶*18,兖州*2,豫州*7,徐州*3,兖州*3,徐州*8,*8,凉州*14,司隶*15,兖州*2,豫州*8,徐州*1,兖州*4,豫州*8,*8,凉州*8,益州*2,凉州*5,司隶*15,兖州*1,豫州*8,徐州*1,兖州*3,豫州*9,*8,凉州*4,益州*7,凉州*5,益州*1,司隶*12,豫州*4,扬州*10,徐州*9,*8,凉州*1,益州*11,凉州*2,益州*4,司隶*10,豫州*6,扬州*10,徐州*8,*8,益州*19,司隶*7,荆州*2,豫州*8,扬州*9,徐州*9,*6,益州*19,司隶*6,荆州*3,豫州*10,扬州*7,徐州*9,*6,益州*19,司隶*5,荆州*5,豫州*10,扬州*7,徐州*9,扬州*1,*4,益州*20,司隶*3,荆州*6,豫州*4,荆州*7,扬州*7,徐州*2,扬州*7,*4,益州*20,司隶*2,荆州*7,豫州*3,荆州*7,扬州*19,*2,益州*20,司隶*1,荆州*8,豫州*3,荆州*7,扬州*19,*2,益州*21,荆州*9,豫州*1,荆州*8,扬州*17,*4,益州*21,荆州*17,扬州*18,*4,益州*21,荆州*16,扬州*19,*4,益州*21,荆州*13,扬州*22,*4,益州*20,荆州*13,扬州*21,*6,益州*20,荆州*13,扬州*21,*6,益州*20,荆州*14,扬州*18,*8,益州*20,荆州*14,扬州*18,*8,益州*20,荆州*15,扬州*15,*10,益州*20,荆州*17,扬州*13,*10,益州*21,荆州*18,扬州*11,*10,益州*21,荆州*20,扬州*9,*10,益州*21,交州*1,荆州*6,交州*1,荆州*14,扬州*5,*12,益州*19,交州*4,荆州*5,交州*6,荆州*10,扬州*4,*12,益州*17,交州*8,荆州*2,交州*8,荆州*10,扬州*3,*6,扬州*2,*4,益州*16,交州*10,荆州*1,交州*10,荆州*9,扬州*2,*6,扬州*2,*4,益州*16,交州*22,荆州*6,*8,扬州*4,*4,益州*15,交州*25,荆州*4,*8,扬州*4,*4",
+  "commanderies": "张掖居延属国*14,五原郡*9,云中郡*2,上谷郡*12,辽西郡*7,乐浪郡*16,张掖居延属国*13,朔方郡*1,五原郡*9,云中郡*3,上谷郡*11,辽西郡*7,乐浪郡*16,张掖居延属国*13,朔方郡*1,五原郡*9,云中郡*3,上谷郡*11,辽西郡*8,乐浪郡*15,张掖居延属国*12,朔方郡*3,五原郡*8,云中郡*3,上谷郡*11,辽西郡*8,乐浪郡*15,敦煌郡*1,张掖居延属国*10,朔方郡*4,五原郡*8,云中郡*4,上谷郡*9,渔阳郡*2,辽西郡*8,乐浪郡*14,敦煌郡*2,张掖居延属国*9,朔方郡*5,五原郡*7,云中郡*4,上谷郡*9,渔阳郡*2,辽西郡*8,乐浪郡*14,敦煌郡*3,张掖居延属国*7,朔方郡*6,五原郡*7,云中郡*4,广阳郡*1,上谷郡*7,渔阳郡*3,辽西郡*8,辽东郡*1,乐浪郡*7,*4,乐浪郡*2,敦煌郡*4,张掖居延属国*6,朔方郡*6,五原郡*7,云中郡*4,广阳郡*2,上谷郡*6,渔阳郡*3,辽西郡*7,辽东郡*3,玄菟郡*6,*4,玄菟郡*2,酒泉郡*5,张掖居延属国*3,武威郡*2,朔方郡*7,五原郡*6,云中郡*4,广阳郡*3,上谷郡*4,渔阳郡*5,辽西郡*6,辽东郡*3,玄菟郡*4,*4,玄菟郡*4,酒泉郡*6,武威郡*4,朔方郡*7,五原郡*6,云中郡*4,广阳郡*4,上谷郡*2,右北平郡*1,渔阳郡*5,辽西郡*5,辽东郡*4,玄菟郡*4,*4,玄菟郡*4,酒泉郡*6,武威郡*4,朔方郡*8,五原郡*5,云中郡*4,广阳郡*5,右北平郡*2,渔阳郡*5,辽西郡*3,辽东属国*2,辽东郡*4,*6,玄菟郡*6,酒泉郡*5,武威郡*6,朔方郡*7,五原郡*4,代郡*5,广阳郡*4,右北平郡*4,渔阳郡*4,辽东属国*6,辽东郡*3,*6,玄菟郡*6,酒泉郡*4,武威郡*7,朔方郡*7,五原郡*4,代郡*5,广阳郡*3,涿郡*3,右北平郡*2,渔阳郡*4,河间国*1,辽东属国*2,*12,玄菟郡*2,*4,张掖郡*4,武威郡*6,金城郡*1,朔方郡*8,五原郡*3,定襄郡*4,雁门郡*4,涿郡*5,右北平郡*1,渔阳郡*1,河间国*4,辽东属国*1,*12,玄菟郡*2,*4,张掖郡*4,武威郡*5,金城郡*3,朔方郡*7,上党郡*3,定襄郡*4,雁门郡*3,中山国*2,涿郡*4,渤海郡*2,河间国*5,辽东属国*2,*16,张掖郡*5,武威郡*3,金城郡*5,朔方郡*5,上党郡*4,定襄郡*4,雁门郡*3,中山国*3,涿郡*2,渤海郡*3,河间国*6,辽东属国*1,*16,张掖郡*3,张掖属国*2,武威郡*2,金城郡*7,朔方郡*3,上党郡*6,定襄郡*3,雁门郡*3,中山国*4,渤海郡*4,河间国*7,*8,东莱郡*3,玄菟郡*1,*4,张掖郡*1,张掖属国*5,金城郡*9,朔方郡*1,上党郡*8,定襄郡*1,常山国*4,中山国*4,渤海郡*5,河间国*5,北海国*1,*8,东莱郡*4,*4,张掖属国*6,金城郡*9,上郡*2,上党郡*7,常山国*5,平原郡*3,济南国*2,安平国*4,河间国*3,北海国*4,东莱郡*13,*2,张掖属国*6,金城郡*7,北地郡*2,上郡*4,上党郡*5,太原郡*1,常山国*4,平原郡*3,济南国*3,安平国*3,乐安国*3,北海国*3,泰山郡*1,东莱郡*13,*2,张掖属国*6,金城郡*6,北地郡*4,上郡*5,上党郡*1,西河郡*1,太原郡*5,常山国*1,平原郡*3,济南国*4,齐国*2,乐安国*3,北海国*2,泰山郡*2,东莱郡*7,*8,张掖属国*6,金城郡*4,安定郡*1,北地郡*5,上郡*5,西河郡*3,太原郡*5,赵国*3,清河国*3,齐国*3,乐安国*2,济北国*1,北海国*1,泰山郡*4,东莱郡*6,*8,汉阳郡*7,金城郡*1,安定郡*4,北地郡*4,上郡*5,西河郡*3,太原郡*4,赵国*4,清河国*4,齐国*2,济北国*4,泰山郡*4,东莱郡*4,*10,汉阳郡*8,安定郡*5,北地郡*3,上郡*4,西河郡*5,太原郡*3,赵国*4,巨鹿郡*2,清河国*2,齐国*2,济北国*4,泰山郡*2,琅邪国*3,东莱郡*3,*10,汉阳郡*8,安定郡*6,北地郡*2,上郡*4,西河郡*5,太原郡*2,魏郡*3,赵国*2,巨鹿郡*4,清河国*1,东郡*1,济北国*3,东平国*3,琅邪国*4,*12,汉阳郡*7,陇西郡*2,安定郡*6,北地郡*2,上郡*3,西河郡*5,河内郡*1,魏郡*6,巨鹿郡*4,东郡*5,东平国*4,琅邪国*3,*12,汉阳郡*7,陇西郡*3,右扶风*6,左冯翊*5,西河郡*3,河内郡*4,魏郡*4,巨鹿郡*4,东郡*5,鲁国*5,琅邪国*2,*12,汉阳郡*6,陇西郡*4,右扶风*5,京兆尹*1,左冯翊*6,西河郡*1,河内郡*6,魏郡*3,颍川郡*1,巨鹿郡*1,济阴郡*2,东郡*5,鲁国*6,东海国*1,*12,汉阳郡*6,陇西郡*4,右扶风*5,京兆尹*2,左冯翊*6,河内郡*7,陈留郡*1,颍川郡*3,济阴郡*3,东郡*4,任城国*2,鲁国*2,东海国*5,*10,汉阳郡*5,陇西郡*6,右扶风*3,京兆尹*3,左冯翊*5,弘农郡*1,河内郡*6,陈留郡*2,颍川郡*3,济阴郡*4,彭城国*3,任城国*3,东海国*6,*10,汉阳郡*4,陇西郡*7,右扶风*2,京兆尹*4,左冯翊*3,弘农郡*3,河南尹*4,河内郡*1,陈留郡*3,颍川郡*4,济阴郡*3,彭城国*3,下邳国*3,东海国*8,*8,汉阳郡*4,陇西郡*7,右扶风*2,京兆尹*5,左冯翊*1,弘农郡*4,河南尹*6,陈留郡*2,颍川郡*4,沛国*3,彭城国*3,山阳郡*3,东海国*8,*8,汉阳郡*3,陇西郡*7,武都郡*4,京兆尹*4,弘农郡*5,河南尹*6,陈留郡*2,颍川郡*3,沛国*5,彭城国*1,山阳郡*4,梁国*8,*8,汉阳郡*3,陇西郡*5,广汉属国*2,武都郡*5,京兆尹*2,弘农郡*5,河东郡*2,河南尹*6,陈留郡*1,颍川郡*3,沛国*5,彭城国*1,山阳郡*3,梁国*9,*8,汉阳郡*2,陇西郡*2,广汉属国*7,武都郡*5,汉中郡*1,弘农郡*4,河东郡*4,河南尹*4,汝南郡*4,九江郡*7,庐江郡*3,广陵郡*9,*8,汉阳郡*1,广汉属国*11,武都郡*2,汉中郡*4,弘农郡*2,河东郡*6,河南尹*2,汝南郡*5,陈国*1,九江郡*6,庐江郡*4,广陵郡*8,*8,广汉属国*13,汉中郡*6,河东郡*7,南阳郡*2,汝南郡*5,陈国*3,九江郡*3,庐江郡*6,广陵郡*9,*6,蜀郡*2,广汉属国*10,汉中郡*7,河东郡*6,南阳郡*3,汝南郡*5,陈国*5,九江郡*1,庐江郡*6,广陵郡*9,*6,蜀郡*4,广汉属国*8,汉中郡*7,河东郡*5,南阳郡*5,汝南郡*4,陈国*6,庐江郡*7,广陵郡*9,吴郡*1,*4,蜀郡*5,广汉属国*7,汉中郡*8,河东郡*3,南阳郡*6,汝南郡*4,江夏郡*7,丹阳郡*7,广陵郡*2,吴郡*7,*4,蜀郡*7,广汉属国*5,汉中郡*8,河东郡*2,南阳郡*7,汝南郡*3,江夏郡*7,丹阳郡*8,吴郡*11,*2,蜀郡*7,广汉郡*5,汉中郡*8,河东郡*1,南阳郡*8,汝南郡*3,江夏郡*7,丹阳郡*8,吴郡*11,*2,蜀郡*7,广汉郡*7,汉中郡*1,巴郡*6,南阳郡*9,汝南郡*1,江夏郡*8,丹阳郡*7,吴郡*10,*4,蜀郡*7,广汉郡*6,巴郡*8,南阳郡*2,南郡*8,江夏郡*7,丹阳郡*7,吴郡*11,*4,蜀郡*7,广汉郡*6,巴郡*8,武陵郡*1,南郡*10,江夏郡*5,豫章郡*2,丹阳郡*5,会稽郡*2,吴郡*10,*4,蜀郡*7,广汉郡*6,巴郡*8,武陵郡*2,南郡*10,江夏郡*1,豫章郡*6,丹阳郡*2,会稽郡*4,吴郡*10,*4,蜀郡*7,蜀郡属国*1,广汉郡*4,巴郡*8,武陵郡*4,南郡*9,豫章郡*8,会稽郡*5,吴郡*8,*6,蜀郡*5,犍为郡*2,蜀郡属国*2,广汉郡*3,巴郡*8,武陵郡*4,南郡*9,豫章郡*8,会稽郡*6,吴郡*7,*6,蜀郡*2,犍为郡*6,蜀郡属国*1,越巂郡*2,广汉郡*1,巴郡*8,武陵郡*5,南郡*7,长沙郡*2,豫章郡*8,会稽郡*5,吴郡*5,*8,犍为郡*8,越巂郡*3,犍为属国*3,巴郡*4,牂柯郡*2,武陵郡*6,南郡*4,长沙郡*4,豫章郡*8,会稽郡*5,吴郡*5,*8,犍为郡*7,越巂郡*4,犍为属国*5,牂柯郡*4,武陵郡*7,南郡*1,长沙郡*6,桂阳郡*1,豫章郡*7,会稽郡*6,吴郡*2,*10,永昌郡*4,犍为郡*2,越巂郡*5,犍为属国*5,牂柯郡*4,武陵郡*7,长沙郡*7,桂阳郡*3,豫章郡*6,会稽郡*5,吴郡*2,*10,永昌郡*6,越巂郡*5,益州郡*1,犍为属国*3,牂柯郡*6,武陵郡*5,零陵郡*1,长沙郡*6,桂阳郡*6,豫章郡*4,会稽郡*5,吴郡*2,*10,永昌郡*7,越巂郡*3,益州郡*5,牂柯郡*6,武陵郡*3,零陵郡*4,长沙郡*5,桂阳郡*8,豫章郡*2,会稽郡*6,吴郡*1,*10,永昌郡*8,越巂郡*1,益州郡*6,牂柯郡*6,交趾郡*1,零陵郡*6,郁林郡*1,长沙郡*4,桂阳郡*10,豫章郡*1,会稽郡*4,*12,永昌郡*9,益州郡*7,牂柯郡*3,交趾郡*4,零陵郡*5,郁林郡*3,南海郡*3,桂阳郡*10,会稽郡*4,*12,永昌郡*9,益州郡*7,牂柯郡*1,交趾郡*6,九真郡*2,零陵郡*2,郁林郡*3,苍梧郡*1,南海郡*4,桂阳郡*10,会稽郡*3,*6,吴郡*2,*4,永昌郡*9,益州郡*7,交趾郡*6,日南郡*1,九真郡*3,零陵郡*1,郁林郡*2,苍梧郡*3,南海郡*5,桂阳郡*9,会稽郡*2,*6,吴郡*2,*4,永昌郡*9,益州郡*7,交趾郡*6,日南郡*1,九真郡*4,郁林郡*1,苍梧郡*4,合浦郡*1,南海郡*5,桂阳郡*6,*8,吴郡*4,*4,永昌郡*9,益州郡*6,交趾郡*6,日南郡*3,九真郡*3,苍梧郡*5,合浦郡*2,南海郡*6,桂阳郡*4,*8,吴郡*4,*4",
+  "waterways": [
+    {
+      "name": "黄河",
+      "points": [
+        [
+          0,
+          21
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          15,
+          19
+        ],
+        [
+          20,
+          23
+        ],
+        [
+          24,
+          23
+        ],
+        [
+          27,
+          25
+        ],
+        [
+          30,
+          23
+        ],
+        [
+          35,
+          21
+        ],
+        [
+          39,
+          19
+        ],
+        [
+          44,
+          21
+        ],
+        [
+          45,
+          17
+        ]
+      ]
+    },
+    {
+      "name": "长江",
+      "points": [
+        [
+          0,
+          51
+        ],
+        [
+          8,
+          49
+        ],
+        [
+          12,
+          45
+        ],
+        [
+          17,
+          45
+        ],
+        [
+          21,
+          42
+        ],
+        [
+          26,
+          44
+        ],
+        [
+          29,
+          45
+        ],
+        [
+          33,
+          44
+        ],
+        [
+          38,
+          42
+        ],
+        [
+          42,
+          44
+        ],
+        [
+          45,
+          40
+        ]
+      ]
+    },
+    {
+      "name": "汉水",
+      "points": [
+        [
+          21,
+          34
+        ],
+        [
+          23,
+          38
+        ],
+        [
+          26,
+          40
+        ],
+        [
+          29,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "淮水",
+      "points": [
+        [
+          30,
+          34
+        ],
+        [
+          33,
+          34
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          38,
+          38
+        ],
+        [
+          41,
+          38
+        ],
+        [
+          44,
+          36
+        ]
+      ]
+    },
+    {
+      "name": "渭水",
+      "points": [
+        [
+          12,
+          27
+        ],
+        [
+          17,
+          27
+        ],
+        [
+          20,
+          29
+        ],
+        [
+          24,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "辽水",
+      "points": [
+        [
+          44,
+          4
+        ],
+        [
+          45,
+          10
+        ],
+        [
+          47,
+          14
+        ]
+      ]
+    },
+    {
+      "name": "海河",
+      "points": [
+        [
+          29,
+          10
+        ],
+        [
+          32,
+          14
+        ],
+        [
+          35,
+          17
+        ],
+        [
+          36,
+          19
+        ]
+      ]
+    },
+    {
+      "name": "湘水",
+      "points": [
+        [
+          27,
+          59
+        ],
+        [
+          29,
+          53
+        ],
+        [
+          29,
+          49
+        ],
+        [
+          30,
+          45
+        ]
+      ]
+    },
+    {
+      "name": "赣水",
+      "points": [
+        [
+          38,
+          53
+        ],
+        [
+          38,
+          49
+        ],
+        [
+          36,
+          45
+        ],
+        [
+          36,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "珠江",
+      "points": [
+        [
+          21,
+          59
+        ],
+        [
+          27,
+          57
+        ],
+        [
+          33,
+          57
+        ],
+        [
+          38,
+          55
+        ]
+      ]
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "祁连山",
+      "x": 8,
+      "y": 23,
+      "type": "mountain"
+    },
+    {
+      "name": "太行山",
+      "x": 24,
+      "y": 17,
+      "type": "mountain"
+    },
+    {
+      "name": "泰山",
+      "x": 41,
+      "y": 23,
+      "type": "mountain"
+    },
+    {
+      "name": "秦岭",
+      "x": 17,
+      "y": 34,
+      "type": "mountain"
+    },
+    {
+      "name": "大巴山",
+      "x": 15,
+      "y": 42,
+      "type": "mountain"
+    },
+    {
+      "name": "洞庭湖",
+      "x": 29,
+      "y": 51,
+      "type": "lake"
+    },
+    {
+      "name": "鄱阳湖",
+      "x": 36,
+      "y": 47,
+      "type": "lake"
+    },
+    {
+      "name": "云梦泽",
+      "x": 32,
+      "y": 47,
+      "type": "lake"
+    },
+    {
+      "name": "巢湖",
+      "x": 41,
+      "y": 36,
+      "type": "lake"
+    }
+  ],
+  "roads": [
+    {
+      "id": "main:baima|chenliu",
+      "from": "baima",
+      "to": "chenliu",
+      "kind": "main",
+      "path": "32,29:WSW"
+    },
+    {
+      "id": "main:baima|yanjin",
+      "from": "baima",
+      "to": "yanjin",
+      "kind": "main",
+      "path": "32,29:NNE"
+    },
+    {
+      "id": "main:beihai|langya",
+      "from": "beihai",
+      "to": "langya",
+      "kind": "main",
+      "path": "41,21:SSSEESE"
+    },
+    {
+      "id": "main:beihai|linzi",
+      "from": "beihai",
+      "to": "linzi",
+      "kind": "main",
+      "path": "41,21:WSWWWWN"
+    },
+    {
+      "id": "main:beiping|ji",
+      "from": "beiping",
+      "to": "ji",
+      "kind": "main",
+      "path": "33,12:NWWWWN"
+    },
+    {
+      "id": "main:beiping|xiangping",
+      "from": "beiping",
+      "to": "xiangping",
+      "kind": "main",
+      "path": "33,12:ENEEEEEEEEEEEN"
+    },
+    {
+      "id": "main:cangwu|guiyang",
+      "from": "cangwu",
+      "to": "guiyang",
+      "kind": "main",
+      "path": "30,59:EEENNNNEE"
+    },
+    {
+      "id": "main:cangwu|panyu",
+      "from": "cangwu",
+      "to": "panyu",
+      "kind": "main",
+      "path": "30,59:NEENE"
+    },
+    {
+      "id": "main:chaisang|jianye",
+      "from": "chaisang",
+      "to": "jianye",
+      "kind": "main",
+      "path": "35,45:EEEENEEE"
+    },
+    {
+      "id": "main:chaisang|xiakou",
+      "from": "chaisang",
+      "to": "xiakou",
+      "kind": "main",
+      "path": "35,45:NNN"
+    },
+    {
+      "id": "main:changan|tongguan",
+      "from": "changan",
+      "to": "tongguan",
+      "kind": "main",
+      "path": "15,30:NEEESSSEEEEE"
+    },
+    {
+      "id": "main:changsha|wuling",
+      "from": "changsha",
+      "to": "wuling",
+      "kind": "main",
+      "path": "30,53:NWWNWNWWWWS"
+    },
+    {
+      "id": "main:chengdu|jiangzhou",
+      "from": "chengdu",
+      "to": "jiangzhou",
+      "kind": "main",
+      "path": "5,45:EEEEEESSEEEE"
+    },
+    {
+      "id": "main:chengdu|jianmen",
+      "from": "chengdu",
+      "to": "jianmen",
+      "kind": "main",
+      "path": "5,45:NEEEE"
+    },
+    {
+      "id": "main:chenliu|qiao",
+      "from": "chenliu",
+      "to": "qiao",
+      "kind": "main",
+      "path": "30,30:SSSEEES"
+    },
+    {
+      "id": "main:daixian|ji",
+      "from": "daixian",
+      "to": "ji",
+      "kind": "main",
+      "path": "24,12:NEEEENE"
+    },
+    {
+      "id": "main:daixian|jinyang",
+      "from": "daixian",
+      "to": "jinyang",
+      "kind": "main",
+      "path": "24,12:EESSSSSSSSS"
+    },
+    {
+      "id": "main:hangu|hulao",
+      "from": "hangu",
+      "to": "hulao",
+      "kind": "main",
+      "path": "24,30:EENNNE"
+    },
+    {
+      "id": "main:hangu|luoyang",
+      "from": "hangu",
+      "to": "luoyang",
+      "kind": "main",
+      "path": "24,30:SSEE"
+    },
+    {
+      "id": "main:hanzhong|zitong",
+      "from": "hanzhong",
+      "to": "zitong",
+      "kind": "main",
+      "path": "14,38:SSSSSWWWWWN"
+    },
+    {
+      "id": "main:hefei|jianye",
+      "from": "hefei",
+      "to": "jianye",
+      "kind": "main",
+      "path": "39,34:SEEESSSSSSSSS"
+    },
+    {
+      "id": "main:hefei|shouchun",
+      "from": "hefei",
+      "to": "shouchun",
+      "kind": "main",
+      "path": "39,34:WWSWS"
+    },
+    {
+      "id": "main:henei|hulao",
+      "from": "henei",
+      "to": "hulao",
+      "kind": "main",
+      "path": "27,29:NN"
+    },
+    {
+      "id": "main:henei|luoyang",
+      "from": "henei",
+      "to": "luoyang",
+      "kind": "main",
+      "path": "27,29:SSWS"
+    },
+    {
+      "id": "main:henei|puyang",
+      "from": "henei",
+      "to": "puyang",
+      "kind": "main",
+      "path": "27,29:ENNEEENEEEEEEES"
+    },
+    {
+      "id": "main:hongnong|luoyang",
+      "from": "hongnong",
+      "to": "luoyang",
+      "kind": "main",
+      "path": "20,32:SEEEEEEN"
+    },
+    {
+      "id": "main:hongnong|tongguan",
+      "from": "hongnong",
+      "to": "tongguan",
+      "kind": "main",
+      "path": "20,32:NEEES"
+    },
+    {
+      "id": "main:jianan|kuaiji",
+      "from": "jianan",
+      "to": "kuaiji",
+      "kind": "main",
+      "path": "41,47:EEE"
+    },
+    {
+      "id": "main:jiangling|wuling",
+      "from": "jiangling",
+      "to": "wuling",
+      "kind": "main",
+      "path": "27,47:WWSWWSWSSE"
+    },
+    {
+      "id": "main:jiangling|xiangyang",
+      "from": "jiangling",
+      "to": "xiangyang",
+      "kind": "main",
+      "path": "27,47:NEENEN"
+    },
+    {
+      "id": "main:jiangling|yiling",
+      "from": "jiangling",
+      "to": "yiling",
+      "kind": "main",
+      "path": "27,47:WNWWN"
+    },
+    {
+      "id": "main:jiangzhou|yongan",
+      "from": "jiangzhou",
+      "to": "yongan",
+      "kind": "main",
+      "path": "15,47:NNNNNEEE"
+    },
+    {
+      "id": "main:jianmen|zitong",
+      "from": "jianmen",
+      "to": "zitong",
+      "kind": "main",
+      "path": "9,44:NN"
+    },
+    {
+      "id": "main:jianye|wu",
+      "from": "jianye",
+      "to": "wu",
+      "kind": "main",
+      "path": "42,44:SEEEEE"
+    },
+    {
+      "id": "main:kuaiji|wu",
+      "from": "kuaiji",
+      "to": "wu",
+      "kind": "main",
+      "path": "44,47:ENEEN"
+    },
+    {
+      "id": "main:langya|xiapi",
+      "from": "langya",
+      "to": "xiapi",
+      "kind": "main",
+      "path": "44,25:SSSSSWW"
+    },
+    {
+      "id": "main:lelang|xiangping",
+      "from": "lelang",
+      "to": "xiangping",
+      "kind": "main",
+      "path": "50,6:WWWSSSWSW"
+    },
+    {
+      "id": "main:linzi|pingyuan",
+      "from": "linzi",
+      "to": "pingyuan",
+      "kind": "main",
+      "path": "36,21:NWWWWNWW"
+    },
+    {
+      "id": "main:luoyang|wan",
+      "from": "luoyang",
+      "to": "wan",
+      "kind": "main",
+      "path": "26,32:EESSSSSSWW"
+    },
+    {
+      "id": "main:nanpi|pingyuan",
+      "from": "nanpi",
+      "to": "pingyuan",
+      "kind": "main",
+      "path": "35,17:WWSWWWS"
+    },
+    {
+      "id": "main:nanpi|ye",
+      "from": "nanpi",
+      "to": "ye",
+      "kind": "main",
+      "path": "35,17:NWWWWSWWSSSSSSSS"
+    },
+    {
+      "id": "main:puyang|yanjin",
+      "from": "puyang",
+      "to": "yanjin",
+      "kind": "main",
+      "path": "38,27:WWWWW"
+    },
+    {
+      "id": "main:qiao|shouchun",
+      "from": "qiao",
+      "to": "shouchun",
+      "kind": "main",
+      "path": "33,34:SEESE"
+    },
+    {
+      "id": "main:qiao|xuchang",
+      "from": "qiao",
+      "to": "xuchang",
+      "kind": "main",
+      "path": "33,34:WWW"
+    },
+    {
+      "id": "main:wan|xinye",
+      "from": "wan",
+      "to": "xinye",
+      "kind": "main",
+      "path": "26,38:WSWSSS"
+    },
+    {
+      "id": "main:xiakou|xiangyang",
+      "from": "xiakou",
+      "to": "xiangyang",
+      "kind": "main",
+      "path": "35,42:WWSWWSW"
+    },
+    {
+      "id": "main:xiangyang|xinye",
+      "from": "xiangyang",
+      "to": "xinye",
+      "kind": "main",
+      "path": "30,44:NWWWWWWN"
+    },
+    {
+      "id": "main:yiling|yongan",
+      "from": "yiling",
+      "to": "yongan",
+      "kind": "main",
+      "path": "24,45:WNWNWWWWN"
+    }
+  ],
+  "commanderySeats": [
+    {
+      "province": "司隶",
+      "name": "河南尹",
+      "seat": "雒阳",
+      "kind": "尹",
+      "id": "commandery_seat_001",
+      "x": 26,
+      "y": 32,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "luoyang"
+    },
+    {
+      "province": "司隶",
+      "name": "河内郡",
+      "seat": "怀县",
+      "kind": "郡",
+      "id": "commandery_seat_002",
+      "x": 27,
+      "y": 28,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_002"
+    },
+    {
+      "province": "司隶",
+      "name": "河东郡",
+      "seat": "安邑",
+      "kind": "郡",
+      "id": "commandery_seat_003",
+      "x": 23,
+      "y": 35,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_003"
+    },
+    {
+      "province": "司隶",
+      "name": "弘农郡",
+      "seat": "弘农",
+      "kind": "郡",
+      "id": "commandery_seat_004",
+      "x": 20,
+      "y": 32,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "hongnong"
+    },
+    {
+      "province": "司隶",
+      "name": "京兆尹",
+      "seat": "长安",
+      "kind": "尹",
+      "id": "commandery_seat_005",
+      "x": 15,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "changan"
+    },
+    {
+      "province": "司隶",
+      "name": "左冯翊",
+      "seat": "高陵",
+      "kind": "郡",
+      "id": "commandery_seat_006",
+      "x": 18,
+      "y": 29,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_006"
+    },
+    {
+      "province": "司隶",
+      "name": "右扶风",
+      "seat": "槐里",
+      "kind": "郡",
+      "id": "commandery_seat_007",
+      "x": 12,
+      "y": 28,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_007"
+    },
+    {
+      "province": "豫州",
+      "name": "颍川郡",
+      "seat": "阳翟",
+      "kind": "郡",
+      "id": "commandery_seat_008",
+      "x": 32,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_008"
+    },
+    {
+      "province": "豫州",
+      "name": "汝南郡",
+      "seat": "平舆",
+      "kind": "郡",
+      "id": "commandery_seat_009",
+      "x": 30,
+      "y": 37,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_009"
+    },
+    {
+      "province": "豫州",
+      "name": "梁国",
+      "seat": "下邑",
+      "kind": "王国",
+      "id": "commandery_seat_010",
+      "x": 45,
+      "y": 33,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_010"
+    },
+    {
+      "province": "豫州",
+      "name": "沛国",
+      "seat": "相县",
+      "kind": "王国",
+      "id": "commandery_seat_011",
+      "x": 36,
+      "y": 32,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_011"
+    },
+    {
+      "province": "豫州",
+      "name": "陈国",
+      "seat": "陈县",
+      "kind": "王国",
+      "id": "commandery_seat_012",
+      "x": 35,
+      "y": 37,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_012"
+    },
+    {
+      "province": "豫州",
+      "name": "鲁国",
+      "seat": "鲁县",
+      "kind": "王国",
+      "id": "commandery_seat_013",
+      "x": 43,
+      "y": 27,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_013"
+    },
+    {
+      "province": "冀州",
+      "name": "魏郡",
+      "seat": "邺县",
+      "kind": "郡",
+      "id": "commandery_seat_014",
+      "x": 29,
+      "y": 25,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "ye"
+    },
+    {
+      "province": "冀州",
+      "name": "巨鹿郡",
+      "seat": "瘿陶",
+      "kind": "郡",
+      "id": "commandery_seat_015",
+      "x": 33,
+      "y": 24,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_015"
+    },
+    {
+      "province": "冀州",
+      "name": "常山国",
+      "seat": "元氏",
+      "kind": "王国",
+      "id": "commandery_seat_016",
+      "x": 27,
+      "y": 18,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_016"
+    },
+    {
+      "province": "冀州",
+      "name": "中山国",
+      "seat": "卢奴",
+      "kind": "王国",
+      "id": "commandery_seat_017",
+      "x": 30,
+      "y": 16,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_017"
+    },
+    {
+      "province": "冀州",
+      "name": "安平国",
+      "seat": "信都",
+      "kind": "王国",
+      "id": "commandery_seat_018",
+      "x": 35,
+      "y": 18,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_018"
+    },
+    {
+      "province": "冀州",
+      "name": "河间国",
+      "seat": "乐成",
+      "kind": "王国",
+      "id": "commandery_seat_019",
+      "x": 39,
+      "y": 16,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_019"
+    },
+    {
+      "province": "冀州",
+      "name": "清河国",
+      "seat": "甘陵",
+      "kind": "王国",
+      "id": "commandery_seat_020",
+      "x": 34,
+      "y": 22,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_020"
+    },
+    {
+      "province": "冀州",
+      "name": "赵国",
+      "seat": "邯郸",
+      "kind": "王国",
+      "id": "commandery_seat_021",
+      "x": 30,
+      "y": 23,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_021"
+    },
+    {
+      "province": "冀州",
+      "name": "渤海郡",
+      "seat": "南皮",
+      "kind": "郡",
+      "id": "commandery_seat_022",
+      "x": 35,
+      "y": 17,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "nanpi"
+    },
+    {
+      "province": "兖州",
+      "name": "陈留郡",
+      "seat": "陈留",
+      "kind": "郡",
+      "id": "commandery_seat_023",
+      "x": 30,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "chenliu"
+    },
+    {
+      "province": "兖州",
+      "name": "东郡",
+      "seat": "濮阳",
+      "kind": "郡",
+      "id": "commandery_seat_024",
+      "x": 38,
+      "y": 27,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "puyang"
+    },
+    {
+      "province": "兖州",
+      "name": "东平国",
+      "seat": "无盐",
+      "kind": "王国",
+      "id": "commandery_seat_025",
+      "x": 43,
+      "y": 25,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_025"
+    },
+    {
+      "province": "兖州",
+      "name": "任城国",
+      "seat": "任城",
+      "kind": "王国",
+      "id": "commandery_seat_026",
+      "x": 42,
+      "y": 29,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_026"
+    },
+    {
+      "province": "兖州",
+      "name": "泰山郡",
+      "seat": "奉高",
+      "kind": "郡",
+      "id": "commandery_seat_027",
+      "x": 43,
+      "y": 22,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_027"
+    },
+    {
+      "province": "兖州",
+      "name": "济北国",
+      "seat": "卢县",
+      "kind": "王国",
+      "id": "commandery_seat_028",
+      "x": 40,
+      "y": 22,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_028"
+    },
+    {
+      "province": "兖州",
+      "name": "山阳郡",
+      "seat": "昌邑",
+      "kind": "郡",
+      "id": "commandery_seat_029",
+      "x": 42,
+      "y": 31,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_029"
+    },
+    {
+      "province": "兖州",
+      "name": "济阴郡",
+      "seat": "定陶",
+      "kind": "郡",
+      "id": "commandery_seat_030",
+      "x": 36,
+      "y": 29,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_030"
+    },
+    {
+      "province": "徐州",
+      "name": "东海国",
+      "seat": "郯县",
+      "kind": "王国",
+      "id": "commandery_seat_031",
+      "x": 45,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_031"
+    },
+    {
+      "province": "徐州",
+      "name": "琅邪国",
+      "seat": "开阳",
+      "kind": "王国",
+      "id": "commandery_seat_032",
+      "x": 44,
+      "y": 24,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_032"
+    },
+    {
+      "province": "徐州",
+      "name": "彭城国",
+      "seat": "彭城",
+      "kind": "王国",
+      "id": "commandery_seat_033",
+      "x": 39,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "pengcheng"
+    },
+    {
+      "province": "徐州",
+      "name": "广陵郡",
+      "seat": "广陵",
+      "kind": "郡",
+      "id": "commandery_seat_034",
+      "x": 45,
+      "y": 34,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "guangling"
+    },
+    {
+      "province": "徐州",
+      "name": "下邳国",
+      "seat": "下邳",
+      "kind": "王国",
+      "id": "commandery_seat_035",
+      "x": 42,
+      "y": 30,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "xiapi"
+    },
+    {
+      "province": "青州",
+      "name": "济南国",
+      "seat": "东平陵",
+      "kind": "王国",
+      "id": "commandery_seat_036",
+      "x": 34,
+      "y": 19,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_036"
+    },
+    {
+      "province": "青州",
+      "name": "平原郡",
+      "seat": "平原",
+      "kind": "郡",
+      "id": "commandery_seat_037",
+      "x": 30,
+      "y": 19,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "pingyuan"
+    },
+    {
+      "province": "青州",
+      "name": "乐安国",
+      "seat": "临济",
+      "kind": "王国",
+      "id": "commandery_seat_038",
+      "x": 39,
+      "y": 20,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_038"
+    },
+    {
+      "province": "青州",
+      "name": "北海国",
+      "seat": "剧县",
+      "kind": "王国",
+      "id": "commandery_seat_039",
+      "x": 41,
+      "y": 20,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_039"
+    },
+    {
+      "province": "青州",
+      "name": "东莱郡",
+      "seat": "黄县",
+      "kind": "郡",
+      "id": "commandery_seat_040",
+      "x": 47,
+      "y": 20,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_040"
+    },
+    {
+      "province": "青州",
+      "name": "齐国",
+      "seat": "临淄",
+      "kind": "王国",
+      "id": "commandery_seat_041",
+      "x": 36,
+      "y": 21,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "linzi"
+    },
+    {
+      "province": "荆州",
+      "name": "南阳郡",
+      "seat": "宛县",
+      "kind": "郡",
+      "id": "commandery_seat_042",
+      "x": 26,
+      "y": 38,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "wan"
+    },
+    {
+      "province": "荆州",
+      "name": "南郡",
+      "seat": "江陵",
+      "kind": "郡",
+      "id": "commandery_seat_043",
+      "x": 27,
+      "y": 47,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "jiangling"
+    },
+    {
+      "province": "荆州",
+      "name": "江夏郡",
+      "seat": "西陵",
+      "kind": "郡",
+      "id": "commandery_seat_044",
+      "x": 35,
+      "y": 40,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_044"
+    },
+    {
+      "province": "荆州",
+      "name": "零陵郡",
+      "seat": "泉陵",
+      "kind": "郡",
+      "id": "commandery_seat_045",
+      "x": 26,
+      "y": 55,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_045"
+    },
+    {
+      "province": "荆州",
+      "name": "桂阳郡",
+      "seat": "郴县",
+      "kind": "郡",
+      "id": "commandery_seat_046",
+      "x": 35,
+      "y": 54,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_046"
+    },
+    {
+      "province": "荆州",
+      "name": "武陵郡",
+      "seat": "临沅",
+      "kind": "郡",
+      "id": "commandery_seat_047",
+      "x": 23,
+      "y": 50,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_047"
+    },
+    {
+      "province": "荆州",
+      "name": "长沙郡",
+      "seat": "临湘",
+      "kind": "郡",
+      "id": "commandery_seat_048",
+      "x": 30,
+      "y": 52,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_048"
+    },
+    {
+      "province": "扬州",
+      "name": "九江郡",
+      "seat": "阴陵",
+      "kind": "郡",
+      "id": "commandery_seat_049",
+      "x": 36,
+      "y": 35,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_049"
+    },
+    {
+      "province": "扬州",
+      "name": "丹阳郡",
+      "seat": "宛陵",
+      "kind": "郡",
+      "id": "commandery_seat_050",
+      "x": 42,
+      "y": 42,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_050"
+    },
+    {
+      "province": "扬州",
+      "name": "庐江郡",
+      "seat": "舒县",
+      "kind": "郡",
+      "id": "commandery_seat_051",
+      "x": 42,
+      "y": 36,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_051"
+    },
+    {
+      "province": "扬州",
+      "name": "会稽郡",
+      "seat": "山阴",
+      "kind": "郡",
+      "id": "commandery_seat_052",
+      "x": 44,
+      "y": 46,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_052"
+    },
+    {
+      "province": "扬州",
+      "name": "吴郡",
+      "seat": "吴县",
+      "kind": "郡",
+      "id": "commandery_seat_053",
+      "x": 47,
+      "y": 45,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "wu"
+    },
+    {
+      "province": "扬州",
+      "name": "豫章郡",
+      "seat": "南昌",
+      "kind": "郡",
+      "id": "commandery_seat_054",
+      "x": 38,
+      "y": 48,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_054"
+    },
+    {
+      "province": "益州",
+      "name": "汉中郡",
+      "seat": "南郑",
+      "kind": "郡",
+      "id": "commandery_seat_055",
+      "x": 14,
+      "y": 37,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_055"
+    },
+    {
+      "province": "益州",
+      "name": "巴郡",
+      "seat": "江州",
+      "kind": "郡",
+      "id": "commandery_seat_056",
+      "x": 15,
+      "y": 47,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "jiangzhou"
+    },
+    {
+      "province": "益州",
+      "name": "广汉郡",
+      "seat": "雒县",
+      "kind": "郡",
+      "id": "commandery_seat_057",
+      "x": 9,
+      "y": 45,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_057"
+    },
+    {
+      "province": "益州",
+      "name": "蜀郡",
+      "seat": "成都",
+      "kind": "郡",
+      "id": "commandery_seat_058",
+      "x": 5,
+      "y": 45,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "chengdu"
+    },
+    {
+      "province": "益州",
+      "name": "犍为郡",
+      "seat": "武阳",
+      "kind": "郡",
+      "id": "commandery_seat_059",
+      "x": 6,
+      "y": 48,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_059"
+    },
+    {
+      "province": "益州",
+      "name": "牂柯郡",
+      "seat": "故且兰",
+      "kind": "郡",
+      "id": "commandery_seat_060",
+      "x": 17,
+      "y": 52,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_060"
+    },
+    {
+      "province": "益州",
+      "name": "越巂郡",
+      "seat": "邛都",
+      "kind": "郡",
+      "id": "commandery_seat_061",
+      "x": 8,
+      "y": 50,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_061"
+    },
+    {
+      "province": "益州",
+      "name": "益州郡",
+      "seat": "滇池",
+      "kind": "郡",
+      "id": "commandery_seat_062",
+      "x": 12,
+      "y": 54,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_062"
+    },
+    {
+      "province": "益州",
+      "name": "永昌郡",
+      "seat": "不韦",
+      "kind": "郡",
+      "id": "commandery_seat_063",
+      "x": 4,
+      "y": 55,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_063"
+    },
+    {
+      "province": "益州",
+      "name": "广汉属国",
+      "seat": "阴平道",
+      "kind": "属国",
+      "id": "commandery_seat_064",
+      "x": 10,
+      "y": 36,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_064"
+    },
+    {
+      "province": "益州",
+      "name": "蜀郡属国",
+      "seat": "汉嘉",
+      "kind": "属国",
+      "id": "commandery_seat_065",
+      "x": 7,
+      "y": 47,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_065"
+    },
+    {
+      "province": "益州",
+      "name": "犍为属国",
+      "seat": "朱提",
+      "kind": "属国",
+      "id": "commandery_seat_066",
+      "x": 13,
+      "y": 51,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_066"
+    },
+    {
+      "province": "凉州",
+      "name": "陇西郡",
+      "seat": "狄道",
+      "kind": "郡",
+      "id": "commandery_seat_067",
+      "x": 8,
+      "y": 29,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_067"
+    },
+    {
+      "province": "凉州",
+      "name": "汉阳郡",
+      "seat": "冀县",
+      "kind": "郡",
+      "id": "commandery_seat_068",
+      "x": 3,
+      "y": 26,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_068"
+    },
+    {
+      "province": "凉州",
+      "name": "武都郡",
+      "seat": "下辨",
+      "kind": "郡",
+      "id": "commandery_seat_069",
+      "x": 12,
+      "y": 34,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_069"
+    },
+    {
+      "province": "凉州",
+      "name": "金城郡",
+      "seat": "允吾",
+      "kind": "郡",
+      "id": "commandery_seat_070",
+      "x": 9,
+      "y": 17,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_070"
+    },
+    {
+      "province": "凉州",
+      "name": "安定郡",
+      "seat": "临泾",
+      "kind": "郡",
+      "id": "commandery_seat_071",
+      "x": 12,
+      "y": 24,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_071"
+    },
+    {
+      "province": "凉州",
+      "name": "北地郡",
+      "seat": "富平",
+      "kind": "郡",
+      "id": "commandery_seat_072",
+      "x": 13,
+      "y": 23,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_072"
+    },
+    {
+      "province": "凉州",
+      "name": "武威郡",
+      "seat": "姑臧",
+      "kind": "郡",
+      "id": "commandery_seat_073",
+      "x": 6,
+      "y": 14,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "xiliang"
+    },
+    {
+      "province": "凉州",
+      "name": "张掖郡",
+      "seat": "觻得",
+      "kind": "郡",
+      "id": "commandery_seat_074",
+      "x": 2,
+      "y": 15,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_074"
+    },
+    {
+      "province": "凉州",
+      "name": "酒泉郡",
+      "seat": "禄福",
+      "kind": "郡",
+      "id": "commandery_seat_075",
+      "x": 1,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_075"
+    },
+    {
+      "province": "凉州",
+      "name": "敦煌郡",
+      "seat": "敦煌",
+      "kind": "郡",
+      "id": "commandery_seat_076",
+      "x": 1,
+      "y": 6,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_076"
+    },
+    {
+      "province": "凉州",
+      "name": "张掖属国",
+      "seat": "候官",
+      "kind": "属国",
+      "id": "commandery_seat_077",
+      "x": 3,
+      "y": 17,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_077"
+    },
+    {
+      "province": "凉州",
+      "name": "张掖居延属国",
+      "seat": "居延",
+      "kind": "属国",
+      "id": "commandery_seat_078",
+      "x": 2,
+      "y": 5,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_078"
+    },
+    {
+      "province": "并州",
+      "name": "上党郡",
+      "seat": "长子",
+      "kind": "郡",
+      "id": "commandery_seat_079",
+      "x": 21,
+      "y": 17,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_079"
+    },
+    {
+      "province": "并州",
+      "name": "太原郡",
+      "seat": "晋阳",
+      "kind": "郡",
+      "id": "commandery_seat_080",
+      "x": 26,
+      "y": 21,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "jinyang"
+    },
+    {
+      "province": "并州",
+      "name": "上郡",
+      "seat": "肤施",
+      "kind": "郡",
+      "id": "commandery_seat_081",
+      "x": 18,
+      "y": 22,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_081"
+    },
+    {
+      "province": "并州",
+      "name": "西河郡",
+      "seat": "离石",
+      "kind": "郡",
+      "id": "commandery_seat_082",
+      "x": 22,
+      "y": 23,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_082"
+    },
+    {
+      "province": "并州",
+      "name": "五原郡",
+      "seat": "九原",
+      "kind": "郡",
+      "id": "commandery_seat_083",
+      "x": 20,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_083"
+    },
+    {
+      "province": "并州",
+      "name": "云中郡",
+      "seat": "云中",
+      "kind": "郡",
+      "id": "commandery_seat_084",
+      "x": 24,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_084"
+    },
+    {
+      "province": "并州",
+      "name": "定襄郡",
+      "seat": "善无",
+      "kind": "郡",
+      "id": "commandery_seat_085",
+      "x": 24,
+      "y": 15,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_085"
+    },
+    {
+      "province": "并州",
+      "name": "雁门郡",
+      "seat": "阴馆",
+      "kind": "郡",
+      "id": "commandery_seat_086",
+      "x": 27,
+      "y": 15,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_086"
+    },
+    {
+      "province": "并州",
+      "name": "朔方郡",
+      "seat": "临戎",
+      "kind": "郡",
+      "id": "commandery_seat_087",
+      "x": 15,
+      "y": 12,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_087"
+    },
+    {
+      "province": "幽州",
+      "name": "涿郡",
+      "seat": "涿县",
+      "kind": "郡",
+      "id": "commandery_seat_088",
+      "x": 32,
+      "y": 13,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_088"
+    },
+    {
+      "province": "幽州",
+      "name": "广阳郡",
+      "seat": "蓟县",
+      "kind": "郡",
+      "id": "commandery_seat_089",
+      "x": 29,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "ji"
+    },
+    {
+      "province": "幽州",
+      "name": "代郡",
+      "seat": "高柳",
+      "kind": "郡",
+      "id": "commandery_seat_090",
+      "x": 24,
+      "y": 11,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_090"
+    },
+    {
+      "province": "幽州",
+      "name": "上谷郡",
+      "seat": "沮阳",
+      "kind": "郡",
+      "id": "commandery_seat_091",
+      "x": 31,
+      "y": 8,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_091"
+    },
+    {
+      "province": "幽州",
+      "name": "渔阳郡",
+      "seat": "渔阳",
+      "kind": "郡",
+      "id": "commandery_seat_092",
+      "x": 35,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_092"
+    },
+    {
+      "province": "幽州",
+      "name": "右北平郡",
+      "seat": "土垠",
+      "kind": "郡",
+      "id": "commandery_seat_093",
+      "x": 33,
+      "y": 11,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_093"
+    },
+    {
+      "province": "幽州",
+      "name": "辽西郡",
+      "seat": "阳乐",
+      "kind": "郡",
+      "id": "commandery_seat_094",
+      "x": 42,
+      "y": 8,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_094"
+    },
+    {
+      "province": "幽州",
+      "name": "辽东郡",
+      "seat": "襄平",
+      "kind": "郡",
+      "id": "commandery_seat_095",
+      "x": 45,
+      "y": 10,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "xiangping"
+    },
+    {
+      "province": "幽州",
+      "name": "玄菟郡",
+      "seat": "高句骊",
+      "kind": "郡",
+      "id": "commandery_seat_096",
+      "x": 50,
+      "y": 9,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_096"
+    },
+    {
+      "province": "幽州",
+      "name": "乐浪郡",
+      "seat": "朝鲜",
+      "kind": "郡",
+      "id": "commandery_seat_097",
+      "x": 50,
+      "y": 5,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_097"
+    },
+    {
+      "province": "幽州",
+      "name": "辽东属国",
+      "seat": "昌辽",
+      "kind": "属国",
+      "id": "commandery_seat_098",
+      "x": 43,
+      "y": 11,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_098"
+    },
+    {
+      "province": "交州",
+      "name": "南海郡",
+      "seat": "番禺",
+      "kind": "郡",
+      "id": "commandery_seat_099",
+      "x": 33,
+      "y": 57,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "panyu"
+    },
+    {
+      "province": "交州",
+      "name": "苍梧郡",
+      "seat": "广信",
+      "kind": "郡",
+      "id": "commandery_seat_100",
+      "x": 30,
+      "y": 58,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_100"
+    },
+    {
+      "province": "交州",
+      "name": "郁林郡",
+      "seat": "布山",
+      "kind": "郡",
+      "id": "commandery_seat_101",
+      "x": 28,
+      "y": 56,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_101"
+    },
+    {
+      "province": "交州",
+      "name": "合浦郡",
+      "seat": "合浦",
+      "kind": "郡",
+      "id": "commandery_seat_102",
+      "x": 32,
+      "y": 58,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_102"
+    },
+    {
+      "province": "交州",
+      "name": "交趾郡",
+      "seat": "龙编",
+      "kind": "郡",
+      "id": "commandery_seat_103",
+      "x": 20,
+      "y": 58,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_103"
+    },
+    {
+      "province": "交州",
+      "name": "九真郡",
+      "seat": "胥浦",
+      "kind": "郡",
+      "id": "commandery_seat_104",
+      "x": 24,
+      "y": 58,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_104"
+    },
+    {
+      "province": "交州",
+      "name": "日南郡",
+      "seat": "西卷",
+      "kind": "郡",
+      "id": "commandery_seat_105",
+      "x": 22,
+      "y": 59,
+      "coordinateQuality": "interactive-city-node",
+      "coordinateSource": "可操作城池节点",
+      "cityId": "commandery_city_105"
+    }
+  ]
 }
