@@ -8,7 +8,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261010-01">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261010-22">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261011-03">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
   <link rel="stylesheet" href="css/os-desktop.css?v=20261011-01">
@@ -22,7 +22,7 @@
     <div class="start-terminal main-menu">
       <header class="menu-header"><span class="brand-mark">漢</span><div><h1>&lt;&lt;&lt;三国</h1></div><span class="menu-build">本地存档 · 离线可用</span></header>
       <nav class="start-nav" aria-label="主菜单"><button class="selected" data-start-view="home">主菜单</button><button data-start-view="new">新建战局</button><button data-start-view="load">载入存档</button><button data-start-view="settings">设置</button><button data-start-view="exit">退出</button></nav>
-      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button><button id="openMapEditor" data-tip="编辑据点与逐格手绘道路路径">舆图编辑器</button></div></div></section>
+      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button><button id="openMapEditor" disabled data-tip="编辑据点与逐格手绘道路路径">舆图编辑器</button></div></div></section>
       <section id="startNewView" class="start-view start-grid" hidden>
         <section><h2>01 / 选择剧本</h2><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div><p id="scenarioStepHint" class="start-hint">点击剧本后展开势力选择。</p></section>
         <section id="startForceStep" hidden><h2>02 / 选择势力</h2><div id="forceChoices" class="force-choices"></div><p id="startHistoricalBrief" class="start-historical-brief">选择势力后显示历史局势与阶段目标。</p></section>
@@ -220,12 +220,12 @@
   <dialog id="mapEditorDialog" class="wide-dialog map-editor-dialog">
     <div class="dialog-title"><span>舆图编辑</span> <button data-close="mapEditorDialog">×</button></div>
     <div class="dialog-content map-editor-content">
-      <div class="map-editor-column"><div class="map-editor-board"><div class="map-editor-zoom" role="group" aria-label="地图缩放与移动"><button id="mapEditorZoomOut" type="button" aria-label="缩小地图">−</button><output id="mapEditorZoomValue">适配</output><button id="mapEditorZoomIn" type="button" aria-label="放大地图">＋</button><button id="mapEditorZoomFit" type="button">适配窗口</button><button id="mapEditorPanToggle" type="button" aria-pressed="false">拖动地图</button><span>Ctrl+滚轮缩放 · 空格/中键拖动</span></div><div class="map-editor-viewport"><div class="map-editor-canvas-wrap"><canvas id="mapEditorCanvas" tabindex="0" aria-label="舆图网格"></canvas><canvas id="mapEditorOverlay" aria-hidden="true"></canvas></div></div><p id="mapEditorHover" class="map-editor-hover">将光标移到舆图上查看格子信息。</p></div></div>
+      <div class="map-editor-column"><div class="map-editor-board"><div class="map-editor-zoom" role="group" aria-label="地图缩放与移动"><button id="mapEditorZoomOut" type="button" aria-label="缩小地图">−</button><output id="mapEditorZoomValue">适配</output><button id="mapEditorZoomIn" type="button" aria-label="放大地图">＋</button><button id="mapEditorZoomFit" type="button">适配窗口</button><button id="mapEditorPanToggle" type="button" aria-pressed="false">拖动地图</button><span>Ctrl+滚轮缩放 · 空格/中键拖动</span></div><div class="map-editor-viewport"><div class="map-editor-canvas-wrap"><canvas id="mapEditorTerrain" aria-hidden="true"></canvas><canvas id="mapEditorReferenceCanvas" aria-hidden="true"></canvas><canvas id="mapEditorCanvas" tabindex="0" aria-label="舆图网格"></canvas><canvas id="mapEditorOverlay" aria-hidden="true"></canvas></div></div><p id="mapEditorHover" class="map-editor-hover">将光标移到舆图上查看格子信息。</p></div></div>
       <aside class="map-editor-side">
         <section><h3>编辑工具</h3>
           <div class="map-editor-tools" role="group" aria-label="舆图编辑工具">
             <button id="mapEditorToolLayer" class="active">地形</button>
-            <button id="mapEditorToolProvince">州域</button>
+            <button id="mapEditorToolProvince" data-tip="查看按郡属州自动合成的州域">州域</button>
             <button id="mapEditorToolCommandery">郡域</button>
             <button id="mapEditorToolCity">据点</button>
             <button id="mapEditorToolRoad">道路</button>
@@ -234,6 +234,20 @@
           <p id="mapEditorToolHint" class="map-editor-info">选择图层与取值，在舆图上按住拖拽绘制。</p>
         </section>
         <div class="map-editor-side-scroll">
+        <section><h3>地图网格</h3><div class="map-editor-actions"><button id="mapEditorResize100" type="button" data-tip="同步映射地形、州郡、据点、县治、道路与河流">转换为100×100</button></div></section>
+        <section id="mapEditorReferenceSection"><h3>参考底图</h3>
+          <p id="mapEditorReferenceInfo" class="map-editor-info">未添加底图</p>
+          <div class="map-editor-actions"><button id="mapEditorReferenceAdd" type="button">添加底图</button><button id="mapEditorReferenceRemove" type="button" disabled>移除底图</button></div>
+          <input id="mapEditorReferenceFile" type="file" accept="image/png,image/jpeg,image/webp,image/bmp,.bmp" hidden>
+          <div id="mapEditorReferenceControls" hidden>
+            <label class="map-editor-region-fill"><input id="mapEditorReferenceVisible" type="checkbox" checked>显示底图</label>
+            <label>底图不透明度（%）<input id="mapEditorReferenceOpacity" type="range" min="0" max="100" value="65"></label>
+            <label>底图缩放（%）<input id="mapEditorReferenceScale" type="number" min="10" max="1000" step="1" value="100"></label>
+            <div class="map-editor-coords"><label>横向位置（格）<input id="mapEditorReferenceX" type="number" step="0.1" value="0"></label><label>纵向位置（格）<input id="mapEditorReferenceY" type="number" step="0.1" value="0"></label></div>
+            <div class="map-editor-actions"><button id="mapEditorReferenceAdjust" type="button" aria-pressed="false">调整底图</button><button id="mapEditorReferenceReset" type="button">底图居中</button></div>
+            <p class="map-editor-info">调整时拖动底图、滚轮缩放；完成后描绘地图。</p>
+          </div>
+        </section>
         <section id="mapEditorScenarioSection"><h3>剧本地图</h3><p id="mapEditorScenarioStatus" class="map-editor-info">原始地图</p><div class="map-editor-actions"><button id="mapEditorLoadScenario">载入已保存地图</button><button id="mapEditorResetScenario">恢复原始地图</button></div></section>
         <section id="mapEditorDraftNotice" hidden><h3>未应用的草稿</h3><p class="map-editor-info">这张舆图有上次保存的编辑草稿。</p><div class="map-editor-actions"><button id="mapEditorRestoreDraft" type="button">恢复草稿</button><button id="mapEditorDiscardDraft" type="button">放弃旧草稿</button></div></section>
         <section><h3>显示元素</h3>
@@ -252,10 +266,16 @@
           <label class="map-editor-layer-select" hidden>编辑图层<select id="mapEditorLayer"><option value="terrain">地形</option><option value="province">州域</option><option value="commandery">郡域</option></select></label>
           <label id="mapEditorRegionNameRow" hidden>新增区域名称<input id="mapEditorRegionName" spellcheck="false" placeholder="输入州名或郡名"></label>
           <div class="map-editor-actions" id="mapEditorRegionActions" hidden><button id="mapEditorAddRegion" type="button">加入区域列表</button><label class="map-editor-region-fill"><input id="mapEditorRegionFill" type="checkbox">点击改整片相连区域</label></div>
-          <label>笔刷取值<select id="mapEditorValue"></select></label>
-          <label>笔刷宽度<select id="mapEditorBrushSize"><option value="1">1 格</option><option value="3">3 格</option><option value="5">5 格</option></select></label>
+          <label id="mapEditorBrushValueRow">笔刷取值<select id="mapEditorValue"></select></label>
+          <div id="mapEditorPickCommanderyRow" class="map-editor-actions" hidden><button id="mapEditorPickCommandery" type="button" hidden aria-pressed="false">点选郡域</button></div>
+          <label id="mapEditorBrushSizeRow">笔刷宽度<select id="mapEditorBrushSize"><option value="1">1 格</option><option value="3">3 格</option><option value="5">5 格</option></select></label>
+          <div id="mapEditorProvinceAssignment" hidden>
+            <label>郡域<select id="mapEditorAssignmentCommandery"></select></label>
+            <label>所属州<select id="mapEditorCommanderyProvince"></select></label>
+            <div class="map-editor-actions"><button id="mapEditorAssignProvince" type="button">调整郡属州</button></div>
+          </div>
           <p id="mapEditorRegionHint" class="map-editor-info">按住 Alt 点击取值 · 每次拖绘可整笔撤销</p>
-          <div class="map-editor-actions"><button id="mapEditorFill">整层填充</button><button id="mapEditorResetLayer">还原本层</button></div>
+          <div id="mapEditorLayerActions" class="map-editor-actions"><button id="mapEditorFill">整层填充</button><button id="mapEditorResetLayer">还原本层</button></div>
         </section>
         <section id="mapEditorPanelCity" hidden><h3>据点</h3>
           <label>据点<select id="mapEditorCity"></select></label>
@@ -352,29 +372,30 @@
 
   <script src="js/data/command-catalog.js?v=20260930-78"></script>
   <script src="js/data/game-data.js?v=20260928-16"></script>
-  <script src="js/data/offline-data.generated.js?v=20261011-01"></script>
-  <script src="js/core/data-loader.js?v=20261011-01"></script>
+  <script src="js/data/offline-data.generated.js?v=20261011-03"></script>
+  <script src="js/core/data-loader.js?v=20261011-03"></script>
   <script src="js/core/game-clock.js?v=20261009-01"></script>
   <script src="js/core/simulation-clock.js?v=20261009-02"></script>
   <script src="js/core/fiscal-system.js?v=20261010-03"></script>
-  <script src="js/core/rule-engine.js?v=20261010-05"></script>
+  <script src="js/core/rule-engine.js?v=20261011-01"></script>
   <script src="js/core/ai-bridge.js?v=20261009-02"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/game-state.js?v=20261010-11"></script>
-  <script src="js/core/map-grid.js?v=20261010-07"></script>
+  <script src="js/core/game-state.js?v=20261011-05"></script>
+  <script src="js/core/map-grid.js?v=20261011-02"></script>
   <script src="js/core/map-editor-drafts.js?v=20261010-02"></script>
-  <script src="js/core/scenario-map-store.js?v=20261010-01"></script>
-  <script src="js/ui/map-view.js?v=20261010-14"></script>
-  <script src="js/ui/map-editor.js?v=20261010-29"></script>
+  <script src="js/core/scenario-map-store.js?v=20261011-01"></script>
+  <script src="js/ui/map-view.js?v=20261011-05"></script>
+  <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
+  <script src="js/ui/map-editor.js?v=20261011-09"></script>
   <script src="js/ui/terminal-select.js?v=20261010-10"></script>
   <script src="js/ui/fiscal-ui.js?v=20261010-03"></script>
   <script src="js/ui/command-planner.js?v=20261009-01"></script>
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
   <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261011-01"></script>
+  <script src="js/ui/app.js?v=20261011-02"></script>
   <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
-  <script src="js/ui/os-window-manager.js?v=20261011-01"></script>
+  <script src="js/ui/os-window-manager.js?v=20261011-02"></script>
 </body>
 </html>

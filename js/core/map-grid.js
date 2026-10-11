@@ -60,7 +60,38 @@ window.MapGrid = class MapGrid {
     if(x>=26&&y<=5)return"mountain";if(y<=5)return variation>.55?"hills":"grassland";
     if((x+y*2)%13===0)return"forest";if(y>=19&&x>=23)return"marsh";return variation>1.35?"hills":"plains";
   }
-  static dimensions(map={}){return {width:Number(map.width)||MapGrid.DEFAULT_WIDTH,height:Number(map.height)||MapGrid.DEFAULT_HEIGHT}}
+  static dimensions(map={}){return {width:Number(map.width??map.grid?.width)||MapGrid.DEFAULT_WIDTH,height:Number(map.height??map.grid?.height)||MapGrid.DEFAULT_HEIGHT}}
+  static remapPoint(x,y,from,to){return {x:Math.min(to.width-1,Math.floor((x+.5)*to.width/from.width)),y:Math.min(to.height-1,Math.floor((y+.5)*to.height/from.height))}}
+  static groundDistance(map,a,b){const scale=map?.distance_scale;return Math.hypot(((a.x||0)-(b.x||0))/(scale?.x||1),((a.y||0)-(b.y||0))/(scale?.y||1))}
+  static resampleLayer(values,from,to){
+    if(!Array.isArray(values)||values.length!==from.width*from.height)throw new Error("映射分层尺寸不一致");
+    return Array.from({length:to.width*to.height},(_,index)=>{const x=index%to.width,y=Math.floor(index/to.width),sx=Math.min(from.width-1,Math.floor((x+.5)*from.width/to.width)),sy=Math.min(from.height-1,Math.floor((y+.5)*from.height/to.height));return values[sy*from.width+sx]});
+  }
+  static gridLine(x,y,tx,ty){const points=[[x,y]],nx=Math.abs(tx-x),ny=Math.abs(ty-y),sx=Math.sign(tx-x),sy=Math.sign(ty-y);let ix=0,iy=0;while(ix<nx||iy<ny){if(ix<nx&&(iy===ny||(1+2*ix)*ny<(1+2*iy)*nx)){x+=sx;ix++}else{y+=sy;iy++}points.push([x,y])}return points}
+  static resizeSource(source,width,height){
+    const from=MapGrid.dimensions(source.map),to={width,height};
+    if(!Number.isInteger(width)||!Number.isInteger(height)||width<from.width||height<from.height||width>256||height>256)throw new Error("网格只能扩展，最大为256×256");
+    const next=structuredClone(source);if(width===from.width&&height===from.height)return next;
+    const point=node=>({...node,...MapGrid.remapPoint(node.x,node.y,from,to)}),map=next.map;
+    const layers=MapGrid.layers(source.map,source.cities,source.counties||source.administrativeDivisions?.county_seats);
+    for(const key of ["terrain","provinces","commanderies"])map[key]=MapGrid.encode(MapGrid.resampleLayer(layers[key],from,to));
+    if(map.pixel_mask)map.pixel_mask=MapGrid.encode(MapGrid.resampleLayer(MapGrid.decode(map.pixel_mask,from.width*from.height),from,to));
+    next.cities=(next.cities||[]).map(point);next.counties=(next.counties||next.administrativeDivisions?.county_seats||[]).map(point);
+    const points=list=>list.map(([x,y])=>{const p=MapGrid.remapPoint(x,y,from,to);return [p.x,p.y]});
+    map.waterways=MapGrid.waterways(source.map).map(river=>({...river,points:points(river.points)}));map.landmarks=MapGrid.landmarks(source.map).map(point);
+    map.commanderySeats=(map.commanderySeats||[]).map(point);
+    map.roads=(source.map.roads||[]).map(route=>{
+      const mapped=points(MapGrid.decodeRoadPath(route)),path=[];
+      for(const p of mapped){if(!path.length)path.push(p);else path.push(...MapGrid.gridLine(...path.at(-1),...p).slice(1))}
+      const {points:unused,...metadata}=route;return {...metadata,path:MapGrid.encodeRoadPath(path)};
+    });
+    if(next.administrativeDivisions){if(next.administrativeDivisions.county_seats)next.administrativeDivisions.county_seats=structuredClone(next.counties);if(next.administrativeDivisions.commandery_seats_140)next.administrativeDivisions.commandery_seats_140=next.administrativeDivisions.commandery_seats_140.map(point)}
+    map.width=width;map.height=height;map.grid={...map.grid,width,height};
+    map.distance_scale={x:(source.map.distance_scale?.x||1)*width/from.width,y:(source.map.distance_scale?.y||1)*height/from.height};
+    map.grid_mapping={from,to,method:"cell-center-nearest",sourceRevision:source.map.layout_revision||null};
+    if(map.pixel_scale)map.pixel_scale*=width/from.width;
+    return next;
+  }
   static encode(values){
     const parts=[];
     for(const value of values){
@@ -103,14 +134,36 @@ window.MapGrid = class MapGrid {
     }
     return values;
   }
-  static layers(map,cities=[],counties=[]){
+  static administrativeLayers({width,height,terrain,provinces,commanderies,map={},cities=[],counties=[],divisions={}}){
+    const owners=commanderies.map((name,index)=>terrain[index]==="ocean"?null:name),mapping=Object.create(null),votes=new Map(),validProvince=name=>typeof name==="string"&&name&&!['域外','渤海','黄海','东海','南海'].includes(name);
+    const declare=(name,province)=>{if(name&&validProvince(province)&&!Object.hasOwn(mapping,name))mapping[name]=province};
+    for(const [name,province] of Object.entries(map.commandery_provinces||{}))declare(name,province);
+    for(const seat of [...(divisions.commandery_seats_140||[]),...(map.commanderySeats||[])])declare(seat.name,seat.mapProvince||seat.province);
+    for(let index=0;index<owners.length;index++)if(owners[index]&&validProvince(provinces[index])){const counts=votes.get(owners[index])||new Map();counts.set(provinces[index],(counts.get(provinces[index])||0)+1);votes.set(owners[index],counts)}
+    for(const [name,counts] of votes)declare(name,[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'zh'))[0][0]);
+    for(const node of [...counties,...cities])declare(node.commandery,node.province);
+    // Only fill unassigned land. Existing hand-drawn ownership and terrain are immutable here.
+    const queue=[],seeds=[];
+    for(let index=0;index<owners.length;index++)if(owners[index]){queue.push(index);seeds.push(index)}
+    const neighbors=index=>{const x=index%width,y=Math.floor(index/width);return [x>0?index-1:-1,x+1<width?index+1:-1,y>0?index-width:-1,y+1<height?index+width:-1]};
+    for(let cursor=0;cursor<queue.length;cursor++){const index=queue[cursor];for(const next of neighbors(index))if(next>=0&&terrain[next]!=="ocean"&&!owners[next]){owners[next]=owners[index];queue.push(next)}}
+    // A newly drawn island may have no land-connected seed; attach its whole component once.
+    for(let index=0;index<owners.length;index++)if(terrain[index]!=="ocean"&&!owners[index]&&seeds.length){let nearest=seeds[0],distance=Infinity;for(const seed of seeds){const value=(index%width-seed%width)**2+(Math.floor(index/width)-Math.floor(seed/width))**2;if(value<distance){distance=value;nearest=seed}}const component=[index];owners[index]=owners[nearest];for(let cursor=0;cursor<component.length;cursor++)for(const next of neighbors(component[cursor]))if(next>=0&&terrain[next]!=="ocean"&&!owners[next]){owners[next]=owners[index];component.push(next)}}
+    return {commanderies:owners,provinces:owners.map((name,index)=>terrain[index]==="ocean"?null:mapping[name]||null),commanderyProvinces:{...mapping}};
+  }
+  static layers(map,cities=[],counties=[],divisions={}){
     const {width,height}=MapGrid.dimensions(map);
-    return {
-      width,height,
-      terrain:MapGrid.decodeLayer(map,"terrain",width,height)||MapGrid.defaultTerrain(width,height),
-      provinces:MapGrid.decodeLayer(map,"provinces",width,height)||MapGrid.defaultProvinces(width,height),
-      commanderies:MapGrid.decodeLayer(map,"commanderies",width,height)||MapGrid.defaultCommanderies(width,height,cities,counties,map)
-    };
+    const terrain=MapGrid.defaultTerrain(width,height,map),provinces=MapGrid.defaultProvinces(width,height,map),commanderies=MapGrid.defaultCommanderies(width,height,cities,counties,map);
+    return {width,height,terrain,...MapGrid.administrativeLayers({width,height,terrain,provinces,commanderies,map,cities,counties,divisions})};
+  }
+  static syncAdministrativeRegions(data){
+    if(!data?.map)return;
+    const counties=data.counties||data.administrativeDivisions?.county_seats||[],layers=MapGrid.layers(data.map,data.cities||[],counties,data.administrativeDivisions||{});
+    data.map.provinces=MapGrid.encode(layers.provinces);data.map.commanderies=MapGrid.encode(layers.commanderies);data.map.commandery_provinces=layers.commanderyProvinces;
+    for(const node of [...(data.cities||[]),...counties,...(data.map.commanderySeats||[])])if(Number.isInteger(node.x)&&Number.isInteger(node.y)&&node.x>=0&&node.y>=0&&node.x<layers.width&&node.y<layers.height){const index=node.y*layers.width+node.x;node.province=layers.provinces[index]||"";node.commandery=layers.commanderies[index]||"";if((data.map.commanderySeats||[]).includes(node))node.mapProvince=node.province}
+    if(data.administrativeDivisions?.county_seats)data.administrativeDivisions.county_seats=structuredClone(counties);
+    if(data.administrativeDivisions?.commandery_seats_140&&data.map.commanderySeats)data.administrativeDivisions.commandery_seats_140=structuredClone(data.map.commanderySeats);
+    return layers;
   }
   static waterways(map){return Array.isArray(map?.waterways)?structuredClone(map.waterways):structuredClone(MapGrid.DEFAULT_WATERWAYS)}
   static landmarks(map){return Array.isArray(map?.landmarks)?structuredClone(map.landmarks):structuredClone(MapGrid.DEFAULT_LANDMARKS)}

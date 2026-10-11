@@ -13,7 +13,8 @@ window.RuleEngine = class RuleEngine {
   }
   groundDistance(a,b){
     const cities=this.data.cities,ca=typeof a==="object"?a:cities.find(city=>city.id===a),cb=typeof b==="object"?b:cities.find(city=>city.id===b);
-    return !ca||!cb?0:Math.hypot((ca.x||0)-(cb.x||0),(ca.y||0)-(cb.y||0));
+    if(!ca||!cb)return 0;
+    return window.MapGrid?MapGrid.groundDistance(this.data.map,ca,cb):Math.hypot((ca.x||0)-(cb.x||0),(ca.y||0)-(cb.y||0));
   }
   searchRoute(from,to,allow){
     if(from===to)return [from];

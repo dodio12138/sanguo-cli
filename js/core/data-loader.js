@@ -9,7 +9,9 @@ window.DataLoader = class DataLoader {
       ].map(path=>this.fetchJson(path)));
       const data=structuredClone(this.fallback);
       data.terrainDefs=Object.fromEntries(Object.entries(terrain.terrains).map(([id,t])=>[id,{...data.terrainDefs[id],...t}]));
-      data.unitTypes=unitTypes.unit_types;data.items=items.items;data.rules=rules;data.events=events.events;data.officerRelationships=relationships.relationships;data.combatDoctrines=combatDoctrines;data.commandCatalog=this.normalizeCommands(commandDefs);data.scenario=scenario;data.map={...data.map,...map.grid,...map,id:map.id};data.forces=forces.forces;data.cities=cities.cities;data.officers=officers.officers;data.armies=armies.armies;data.cityResourceProfiles=cityResourceProfiles;data.administrativeDivisions=administrativeDivisions;data.counties=structuredClone(administrativeDivisions.county_seats||[]);this.applyCityResources(data,scenario.id);this.assignCommanderySeatOwners(data);this.applyCountyResources(data,scenario.id);
+      data.unitTypes=unitTypes.unit_types;data.items=items.items;data.rules=rules;data.events=events.events;data.officerRelationships=relationships.relationships;data.combatDoctrines=combatDoctrines;data.commandCatalog=this.normalizeCommands(commandDefs);data.scenario=scenario;data.map={...data.map,...map.grid,...map,id:map.id};data.forces=forces.forces;data.cities=cities.cities;data.officers=officers.officers;data.armies=armies.armies;data.cityResourceProfiles=cityResourceProfiles;data.administrativeDivisions=administrativeDivisions;data.counties=structuredClone(administrativeDivisions.county_seats||[]);this.applyCityResources(data,scenario.id);this.assignCommanderySeatOwners(data,new Set((cities.cities||[]).map(city=>city.id)));this.applyCountyResources(data,scenario.id);
+      if(map.layout_archive_file&&map.legacy_revision)data.mapLayouts={[map.legacy_revision]:await this.fetchJson(map.layout_archive_file)};
+      if(map.layout_archive_files)data.mapLayouts=Object.fromEntries(await Promise.all(Object.entries(map.layout_archive_files).map(async([revision,file])=>[revision,await this.fetchJson(file)])));
       await this.discoverMods(data);this.scenarioBase=structuredClone(data);return this.finishScenario(data,useSavedMap);
     }catch(error){this.warnings.push(`外部数据读取失败，使用内嵌数据：${error.message}`);this.sources.push("embedded:http-fallback");this.scenarioBase=structuredClone(this.fallback);return this.finishScenario(structuredClone(this.scenarioBase),useSavedMap);}
   }
@@ -45,9 +47,17 @@ window.DataLoader = class DataLoader {
     }
     return data;
   }
-  assignCommanderySeatOwners(data){
-    const cities=new Map((data.cities||[]).map(city=>[city.id,city]));
-    for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;const parentId=data.rules?.city_graph?.[city.id]?.[0],parent=cities.get(parentId);city.force=parent?.force||"neutral";city.governor="—"}
+  assignCommanderySeatOwners(data,explicitIds){
+    const cities=new Map((data.cities||[]).map(city=>[city.id,city])),explicit=explicitIds instanceof Set?explicitIds:new Set(explicitIds||[]),cache=new Map();
+    // 基础数据文件与剧本补丁若已显式指定归属，以显式值为准；仅缺省或中立时才沿城市路网向上继承。
+    const resolve=city=>{
+      if(cache.has(city.id))return cache.get(city.id);
+      cache.set(city.id,city.force||"neutral");
+      let force=city.force;
+      if(!explicit.has(city.id)&&(!force||force==="neutral")){const parent=cities.get(data.rules?.city_graph?.[city.id]?.[0]);force=parent?resolve(parent):"neutral"}
+      const value=force||"neutral";cache.set(city.id,value);return value
+    };
+    for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;city.force=resolve(city);city.governor="—"}
     return data;
   }
   applyCountyResources(data,scenarioId=data.scenario?.id||"200_guandu"){
@@ -80,7 +90,7 @@ window.DataLoader = class DataLoader {
     }
     return officers;
   }
-  async loadScenario(id,{useSavedMap=true}={}){if(id==="200_guandu")return this.finishScenario(structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),useSavedMap);if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.assignCommanderySeatOwners(base);this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.finishScenario(base,useSavedMap);}
+  async loadScenario(id,{useSavedMap=true}={}){if(id==="200_guandu")return this.finishScenario(structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),useSavedMap);if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.assignCommanderySeatOwners(base,new Set(Object.keys(patch.city_forces||{})));this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.finishScenario(base,useSavedMap);}
   async finishScenario(data,useSavedMap){
     this.validate(data);
     if(!useSavedMap||!this.scenarioMaps)return data;

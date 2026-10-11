@@ -104,6 +104,17 @@
           "city_value": 1.08,
           "combat": 1.08
         },
+        "sun_jian": {
+          "name": "长沙劲锐",
+          "growth": 0.96,
+          "formation": 1.04,
+          "army_density": 1.02,
+          "aggression": 1.18,
+          "defence": 0.9,
+          "distance": 0.86,
+          "city_value": 1,
+          "combat": 1.14
+        },
         "liu_biao": {
           "name": "荆州守成",
           "growth": 1.1,
@@ -180,6 +191,17 @@
           "distance": 1.32,
           "city_value": 1.06,
           "combat": 0.92
+        },
+        "gongsun": {
+          "name": "白马突骑",
+          "growth": 0.9,
+          "formation": 1.06,
+          "army_density": 0.96,
+          "aggression": 1.16,
+          "defence": 0.92,
+          "distance": 0.9,
+          "city_value": 0.96,
+          "combat": 1.1
         },
         "yuan_shu": {
           "name": "淮南争雄",
@@ -597,7 +619,8 @@
       "ye",
       "luoyang",
       "shangdang",
-      "commandery_city_016"
+      "commandery_city_016",
+      "commandery_city_083"
     ],
     "shangdang": [
       "jinyang",
@@ -628,7 +651,8 @@
       "commandery_city_018",
       "commandery_city_019",
       "commandery_city_020",
-      "commandery_city_036"
+      "commandery_city_036",
+      "commandery_city_129"
     ],
     "pingyuan": [
       "nanpi",
@@ -636,7 +660,8 @@
       "beihai",
       "linzi",
       "puyang",
-      "commandery_city_017"
+      "commandery_city_017",
+      "commandery_city_113"
     ],
     "linzi": [
       "pingyuan",
@@ -725,7 +750,9 @@
       "wuguan",
       "xinye",
       "shangyong",
-      "xuchang"
+      "xuchang",
+      "commandery_city_117",
+      "commandery_city_128"
     ],
     "wuguan": [
       "wan",
@@ -856,6 +883,7 @@
       "xiangyang"
     ],
     "shangyong": [
+      "commandery_city_055",
       "wan",
       "hanzhong",
       "xiangyang"
@@ -874,16 +902,17 @@
       "chengdu"
     ],
     "zitong": [
+      "commandery_city_057",
       "hanzhong",
       "langzhong",
       "chengdu",
       "jianmen"
     ],
     "langzhong": [
+      "jiangzhou",
       "hanzhong",
       "zitong",
       "chengdu",
-      "jiangzhou",
       "commandery_city_064"
     ],
     "jianmen": [
@@ -900,7 +929,8 @@
       "yangping",
       "commandery_city_059",
       "commandery_city_061",
-      "commandery_city_065"
+      "commandery_city_065",
+      "commandery_city_121"
     ],
     "yongan": [
       "chengdu",
@@ -920,7 +950,9 @@
       "badong",
       "fuling",
       "jianing",
-      "wuling"
+      "wuling",
+      "commandery_city_107",
+      "commandery_city_110"
     ],
     "fuling": [
       "jiangzhou",
@@ -946,10 +978,10 @@
       "commandery_city_063"
     ],
     "xiangyang": [
+      "jiangling",
       "wuguan",
       "xinye",
       "shangyong",
-      "jiangling",
       "yiling",
       "xiakou"
     ],
@@ -957,7 +989,8 @@
       "xiangyang",
       "yiling",
       "wuling",
-      "xiakou"
+      "xiakou",
+      "commandery_city_125"
     ],
     "yiling": [
       "yongan",
@@ -1107,14 +1140,16 @@
       "guandu"
     ],
     "commandery_city_009": [
-      "runan"
+      "runan",
+      "commandery_city_126"
     ],
     "commandery_city_010": [
       "guangling",
       "xiaopei"
     ],
     "commandery_city_011": [
-      "xiaopei"
+      "xiaopei",
+      "commandery_city_120"
     ],
     "commandery_city_012": [
       "shouchun",
@@ -1179,7 +1214,10 @@
       "xiapi"
     ],
     "commandery_city_032": [
-      "langya"
+      "langya",
+      "custom_1",
+      "commandery_city_108",
+      "commandery_city_115"
     ],
     "commandery_city_036": [
       "commandery_city_018",
@@ -1198,7 +1236,8 @@
       "langya"
     ],
     "commandery_city_044": [
-      "xiakou"
+      "xiakou",
+      "commandery_city_119"
     ],
     "commandery_city_045": [
       "lingling"
@@ -1225,18 +1264,26 @@
       "kuaiji"
     ],
     "commandery_city_054": [
-      "yuzhang"
+      "yuzhang",
+      "commandery_city_118",
+      "commandery_city_116"
     ],
     "commandery_city_055": [
-      "hanzhong"
+      "hanzhong",
+      "commandery_city_111",
+      "commandery_city_122",
+      "shangyong",
+      "commandery_city_109"
     ],
     "commandery_city_057": [
-      "jianmen"
+      "jianmen",
+      "zitong"
     ],
     "commandery_city_059": [
       "chengdu",
       "commandery_city_061",
-      "commandery_city_065"
+      "commandery_city_065",
+      "commandery_city_112"
     ],
     "commandery_city_060": [
       "fuling"
@@ -1264,7 +1311,8 @@
     ],
     "commandery_city_066": [
       "commandery_city_062",
-      "fuling"
+      "fuling",
+      "commandery_city_130"
     ],
     "commandery_city_067": [
       "longxi"
@@ -1275,10 +1323,12 @@
     "commandery_city_069": [
       "commandery_city_064",
       "longxi",
-      "hanzhong"
+      "hanzhong",
+      "commandery_city_127"
     ],
     "commandery_city_070": [
-      "jincheng"
+      "jincheng",
+      "commandery_city_124"
     ],
     "commandery_city_071": [
       "anding",
@@ -1305,14 +1355,16 @@
     ],
     "commandery_city_077": [
       "commandery_city_074",
-      "xiliang"
+      "xiliang",
+      "commandery_city_123"
     ],
     "commandery_city_078": [
       "commandery_city_076",
       "xiliang"
     ],
     "commandery_city_079": [
-      "shangdang"
+      "shangdang",
+      "commandery_city_114"
     ],
     "commandery_city_081": [
       "shangdang"
@@ -1321,6 +1373,7 @@
       "shangdang"
     ],
     "commandery_city_083": [
+      "jinyang",
       "daixian",
       "commandery_city_087"
     ],
@@ -1339,7 +1392,8 @@
       "daixian"
     ],
     "commandery_city_088": [
-      "beiping"
+      "beiping",
+      "commandery_city_106"
     ],
     "commandery_city_090": [
       "daixian",
@@ -1389,6 +1443,84 @@
     ],
     "commandery_city_105": [
       "jiaozhi"
+    ],
+    "custom_1": [
+      "commandery_city_032"
+    ],
+    "commandery_city_106": [
+      "commandery_city_088"
+    ],
+    "commandery_city_107": [
+      "jiangzhou"
+    ],
+    "commandery_city_108": [
+      "commandery_city_032"
+    ],
+    "commandery_city_109": [
+      "commandery_city_055"
+    ],
+    "commandery_city_110": [
+      "jiangzhou"
+    ],
+    "commandery_city_111": [
+      "commandery_city_055"
+    ],
+    "commandery_city_112": [
+      "commandery_city_059"
+    ],
+    "commandery_city_113": [
+      "pingyuan"
+    ],
+    "commandery_city_114": [
+      "commandery_city_079"
+    ],
+    "commandery_city_115": [
+      "commandery_city_032"
+    ],
+    "commandery_city_116": [
+      "commandery_city_054"
+    ],
+    "commandery_city_117": [
+      "wan"
+    ],
+    "commandery_city_118": [
+      "commandery_city_054"
+    ],
+    "commandery_city_119": [
+      "commandery_city_044"
+    ],
+    "commandery_city_120": [
+      "commandery_city_011"
+    ],
+    "commandery_city_121": [
+      "chengdu"
+    ],
+    "commandery_city_122": [
+      "commandery_city_055"
+    ],
+    "commandery_city_123": [
+      "commandery_city_077"
+    ],
+    "commandery_city_124": [
+      "commandery_city_070"
+    ],
+    "commandery_city_125": [
+      "jiangling"
+    ],
+    "commandery_city_126": [
+      "commandery_city_009"
+    ],
+    "commandery_city_127": [
+      "commandery_city_069"
+    ],
+    "commandery_city_128": [
+      "wan"
+    ],
+    "commandery_city_129": [
+      "nanpi"
+    ],
+    "commandery_city_130": [
+      "commandery_city_066"
     ]
   },
   "resolution_phases": [
