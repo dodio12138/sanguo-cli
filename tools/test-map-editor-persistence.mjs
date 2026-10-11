@@ -13,7 +13,7 @@ const countyCells=new Set(editor.counties.map(county=>`${county.x},${county.y}`)
 const destination=editor.openCityCell();
 for(let y=0;y<editor.height;y++)for(let x=0;x<editor.width;x++)if(!editor.cityAt(x,y)&&!countyCells.has(`${x},${y}`)&&editor.terrainAt(x,y)!=="ocean"){destination.x=x;destination.y=y}
 editor.updateCity(city.id,{name:"校验城",...destination});
-editor.setTerrain(0,0,"forest");editor.setProvince(0,0,"校验州");editor.setCommandery(0,0,"校验郡");
+editor.setTerrain(0,0,"forest");editor.setCommandery(0,0,"校验郡");editor.assignCommanderyProvince("校验郡","校验州");
 const removable=editor.cities.find(item=>item.id!==city.id&&!state.data.officers.some(officer=>officer.city===item.id)&&!state.data.armies.some(army=>army.city===item.id));
 editor.removeCity(removable.id);
 const river=editor.waterways[0],riverPoints=structuredClone(river.points);riverPoints[1][1]+=1;editor.saveWaterway(river.id,"存档测试河",riverPoints);

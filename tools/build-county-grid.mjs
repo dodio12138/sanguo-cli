@@ -11,6 +11,7 @@ const adminPath="game/data/history/administrative_divisions.json";
 const admin=JSON.parse(fs.readFileSync(adminPath,"utf8"));
 const cities=JSON.parse(fs.readFileSync("game/data/history/cities/200_guandu.json","utf8")).cities;
 const profiles=JSON.parse(fs.readFileSync("game/data/history/city_resource_profiles.json","utf8"));
+if(JSON.parse(fs.readFileSync("game/data/map/central_plains.json","utf8")).commandery_reference)throw new Error("当前基准已有人工校正郡域，不能再用最近邻重排县治；请在编辑器中修改郡域后运行 node tools/freeze-map-layout.mjs --write。");
 const width=60,height=60;
 
 for(const city of cities)city.commandery=profiles.historical_basis?.[city.id]?.[0]||"史籍未详";

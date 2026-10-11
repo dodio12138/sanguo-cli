@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 globalThis.window=globalThis;
+await import("../js/core/map-grid.js");
 await import("../js/ui/map-view.js");
 
 const width=12,height=6;

@@ -36,13 +36,13 @@ assert.deepEqual(editor.provinces,MapGrid.defaultProvinces(6,6),"未提供州域
 assert.deepEqual(editor.commanderies,MapGrid.defaultCommanderies(6,6,editor.cities,editor.counties),"未提供郡域时按县治最近邻生成");
 assert.equal(editor.stats().roads,1,"初始路网应统计为一条道路");
 
-assert.equal(editor.paint("province",0,0,2,2,"兖州"),9,"矩形笔刷应绘制 3×3 格");
-assert.equal(editor.paint("province",0,0,2,2,"兖州"),0,"重复绘制同一取值不应产生改动");
+assert.equal(editor.paint("province",0,0,2,2,"兖州"),0,"州域为只读派生层，不能独立绘制");
+assert.equal(editor.assignCommanderyProvince(editor.commanderyAt(2,2),"兖州"),true,"按整郡分配州属");
 assert.equal(editor.provinceAt(2,2),"兖州");
-assert.equal(editor.provinceAt(3,3),MapGrid.provinceAt(3,3),"笔刷范围外的格子保持不变");
+assert.equal(editor.provinceAt(3,3),"兖州","同郡其他格随州属同步变化");
 assert.equal(editor.fill("commandery","测试郡"),36,"整层填充应覆盖全部格子");
 assert.equal(editor.fill("commandery","测试郡"),0,"整层填充同值应为无改动");
-const regions=new MapEditor(fixture());regions.provinces=new Array(36).fill("甲州");regions.provinces[0]=regions.provinces[1]=regions.provinces[2]="乙州";assert.equal(regions.relabelRegion("province",0,0,"丙州"),3,"整片区域改属应只替换相连的同值网格");assert.equal(regions.provinceAt(2,0),"丙州");assert.equal(regions.provinceAt(3,0),"甲州","区域改属不得跨越边界");assert.equal(regions.undo(),true);assert.equal(regions.provinceAt(1,0),"乙州","区域改属应支持撤销");assert.equal(regions.redo(),true);const regionRoundTrip=new MapEditor(fixture());regionRoundTrip.importPatch({map:regions.exportMap()});assert.equal(regionRoundTrip.provinceAt(1,0),"丙州","区域改动应写入可导出的地图数据");
+const regions=new MapEditor(fixture()),initialProvince=regions.provinceAt(1,0);assert.equal(regions.relabelRegion("province",0,0,"丙州"),0,"禁止独立改相连州域");regions.assignCommanderyProvince(regions.commanderyAt(0,0),"丙州");assert.equal(regions.provinceAt(2,0),"丙州");assert.equal(regions.provinceAt(3,0),"丙州","同郡整体划入州域");assert.equal(regions.undo(),true);assert.equal(regions.provinceAt(1,0),initialProvince,"郡属州应支持撤销");assert.equal(regions.redo(),true);const regionRoundTrip=new MapEditor(fixture());regionRoundTrip.importPatch({map:regions.exportMap()});assert.equal(regionRoundTrip.provinceAt(1,0),"丙州","郡属州应写入可导出的地图数据");
 assert.equal(editor.setTerrain(5,5,"mountain"),true,"单格改地形应生效");
 assert.equal(editor.setTerrain(5,5,"mountain"),false,"同值写入应返回未改动");
 assert.equal(editor.at("province",6,0),null,"越界读取应返回 null");

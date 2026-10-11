@@ -9,6 +9,7 @@ const rulesPath="game/data/common/game_rules.json";
 const mapPath="game/data/map/central_plains.json";
 const offlineText=fs.readFileSync("js/data/offline-data.generated.js","utf8"),offlineStart=offlineText.indexOf("window.SANGUO_DATA=Object.assign(window.SANGUO_DATA||{},")+"window.SANGUO_DATA=Object.assign(window.SANGUO_DATA||{},".length,offlineEnd=offlineText.lastIndexOf(");"),embedded=JSON.parse(offlineText.slice(offlineStart,offlineEnd));
 const divisions=read(divisionsPath),cityFile=read(citiesPath),profiles=read(profilesPath),rules=read(rulesPath),map=read(mapPath);
+if(map.commandery_reference)throw new Error("当前基准已有人工校正郡域，不能再用最近城市重建治所；请在编辑器中修改郡域后运行 node tools/freeze-map-layout.mjs --write。");
 rules.city_graph=structuredClone(embedded.rules.city_graph);
 const cityById=new Map();for(const city of [...(embedded.cities||[]),...cityFile.cities])if(!city.id.startsWith("commandery_city_"))cityById.set(city.id,city);
 const baseCities=[...cityById.values()],seats=map.commanderySeats||divisions.commandery_seats_140;

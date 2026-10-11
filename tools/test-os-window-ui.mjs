@@ -28,6 +28,7 @@ if(!html.includes('id="resourceDetailDialog"')||!html.includes('id="turnForecast
 if(!source.includes("os-managed-dialog")||!css.includes("os-dialog-maximized")||!css.includes("os-dialog-task"))throw new Error("常用弹窗没有接入桌面窗口控制");
 if(!css.includes("dialog.os-managed-dialog{position:fixed;inset:0;margin:auto")||!css.includes("max-height:calc(100vh - 48px)"))throw new Error("常用弹窗会撑高页面或超出可视区");
 if(!source.includes("dialog.showModal=showManaged")||!source.includes("controls.append(close)")||!css.includes(".dialog-tools+.os-dialog-buttons"))throw new Error("常用弹窗没有统一标题栏按钮组或仍会遮挡系统菜单");
+if(!source.includes('close.addEventListener("click",()=>{dialog.classList.remove("is-dialog-minimized");if(dialog.open)dialog.close()})'))throw new Error("共享窗口关闭按钮不能依赖战局初始化后的业务绑定");
 if(!source.includes('menu.setAttribute("popover","manual")')||!source.includes("menu.showPopover()")||!css.includes("inset:auto auto var(--taskbar-height) 0")||!css.includes("height:max-content;max-height:calc(100dvh - var(--taskbar-height) - 8px)"))throw new Error("漢菜单没有进入浏览器顶层或未固定在左下角");
 if(!html.includes('class="map-titlebar card-title"')||!source.includes('handle:".map-titlebar"')||source.includes('handle:".map-toolbar"')||!css.includes('.game-started .map-column>.map-toolbar{display:flex;flex:0 0 auto;flex-wrap:wrap'))throw new Error("舆图标题与可换行工具栏未分离");
 if(!css.includes('.game-started .map-column .map-footer{flex:0 0 24px')||!css.includes('.game-started .map-column .map-footer>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'))throw new Error("舆图坐标变长会挤压画布或推动状态栏");

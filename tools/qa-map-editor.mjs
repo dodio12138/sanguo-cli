@@ -71,14 +71,14 @@ try{
   assert.match(roadQa.moveGuard,/请先完成并保存或取消/);assert.equal(roadQa.finishDisabled,true);assert.equal(roadQa.cancelDisabled,true);assert.match(roadQa.message,/端点已更改/);
   const regionQa=await evaluate(`${setup}
     const before=exported(),city=before.cities[0];$('mapEditorToolProvince').click();
-    $('mapEditorRegionName').value='验证州';$('mapEditorAddRegion').click();clickCell(city.x,city.y);const province=exported();
-    $('mapEditorToolCommandery').click();$('mapEditorRegionName').value='验证郡';$('mapEditorAddRegion').click();clickCell(city.x,city.y);const commandery=exported();
+    clickCell(city.x,city.y);$('mapEditorCommanderyProvince').value='荆州';$('mapEditorAssignProvince').click();const province=exported();
+    $('mapEditorToolCommandery').click();$('mapEditorRegionName').value='验证郡';$('mapEditorAddRegion').click();const capture=canvas.setPointerCapture;canvas.setPointerCapture=()=>{};try{pointer('pointerdown',city.x,city.y,{shiftKey:true});pointer('pointerup',city.x,city.y)}finally{canvas.setPointerCapture=capture}const commandery=exported();
     $('mapEditorToolCity').click();const form={province:$('mapEditorCityProvince').value,commandery:$('mapEditorCityCommandery').value,readonly:$('mapEditorCityProvince').readOnly&&$('mapEditorCityCommandery').readOnly};
     $('mapEditorUndo').click();$('mapEditorUndo').click();const restored=exported();
     return {before:{terrain:before.map.terrain,commanderies:before.map.commanderies,provinces:before.map.provinces},province:{terrain:province.map.terrain,commanderies:province.map.commanderies,provinces:province.map.provinces,city:province.cities[0]},commandery:{terrain:commandery.map.terrain,provinces:commandery.map.provinces,city:commandery.cities[0]},form,restored:{terrain:restored.map.terrain,commanderies:restored.map.commanderies,provinces:restored.map.provinces}}
   `);
-  assert.equal(regionQa.province.terrain,regionQa.before.terrain);assert.equal(regionQa.province.commanderies,regionQa.before.commanderies);assert.equal(regionQa.province.city.province,'验证州');
-  assert.equal(regionQa.commandery.provinces,regionQa.province.provinces);assert.equal(regionQa.commandery.city.commandery,'验证郡');assert.deepEqual(regionQa.form,{province:'验证州',commandery:'验证郡',readonly:true});assert.deepEqual(regionQa.restored,regionQa.before);
+  assert.equal(regionQa.province.terrain,regionQa.before.terrain);assert.equal(regionQa.province.commanderies,regionQa.before.commanderies);assert.equal(regionQa.province.city.province,'荆州');
+  assert.equal(regionQa.commandery.provinces,regionQa.province.provinces);assert.equal(regionQa.commandery.city.commandery,'验证郡');assert.deepEqual(regionQa.form,{province:'荆州',commandery:'验证郡',readonly:true});assert.deepEqual(regionQa.restored,regionQa.before);
   const riverQa=await evaluate(`${setup}
     $('mapEditorToolRiver').click();const original=exported(),river=original.map.waterways[0];$('mapEditorRiverSelect').value=river.id;$('mapEditorRiverSelect').onchange();$('mapEditorRiverAdjust').click();
     const capture=canvas.setPointerCapture;canvas.setPointerCapture=()=>{};

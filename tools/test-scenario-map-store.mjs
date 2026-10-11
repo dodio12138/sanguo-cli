@@ -7,7 +7,7 @@ globalThis.localStorage=new Proxy(storage,{ownKeys:()=>Object.keys(memory),getOw
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 for(const file of ["data/offline-data.generated","core/map-grid","core/map-editor-drafts","core/scenario-map-store","ui/map-editor","core/data-loader","core/game-clock","core/fiscal-system","core/rule-engine","core/game-state"])await import(`../js/${file}.js`);
 const loader=new DataLoader(SANGUO_DATA),base=await loader.load({useSavedMap:false}),editor=new MapEditor(base),id=base.scenario.id;
-editor.setTerrain(0,0,"forest");const city=editor.city("xuchang");editor.setProvince(city.x,city.y,"测试州");editor.setCommandery(city.x,city.y,"测试郡");editor.updateCity(city.id,{name:"持久城"});
+editor.setTerrain(0,0,"forest");const city=editor.city("xuchang");editor.setCommandery(city.x,city.y,"测试郡");editor.assignCommanderyProvince("测试郡","测试州");editor.updateCity(city.id,{name:"持久城"});
 editor.clearWaterways();editor.clearRoads();
 const record={version:1,scenarioId:id,savedAt:new Date().toISOString(),baseFingerprint:ScenarioMapStore.fingerprint(base),patch:editor.exportPatch()};
 await loader.scenarioMaps.put(id,record);

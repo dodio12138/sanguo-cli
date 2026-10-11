@@ -10,6 +10,8 @@ window.DataLoader = class DataLoader {
       const data=structuredClone(this.fallback);
       data.terrainDefs=Object.fromEntries(Object.entries(terrain.terrains).map(([id,t])=>[id,{...data.terrainDefs[id],...t}]));
       data.unitTypes=unitTypes.unit_types;data.items=items.items;data.rules=rules;data.events=events.events;data.officerRelationships=relationships.relationships;data.combatDoctrines=combatDoctrines;data.commandCatalog=this.normalizeCommands(commandDefs);data.scenario=scenario;data.map={...data.map,...map.grid,...map,id:map.id};data.forces=forces.forces;data.cities=cities.cities;data.officers=officers.officers;data.armies=armies.armies;data.cityResourceProfiles=cityResourceProfiles;data.administrativeDivisions=administrativeDivisions;data.counties=structuredClone(administrativeDivisions.county_seats||[]);this.applyCityResources(data,scenario.id);this.assignCommanderySeatOwners(data);this.applyCountyResources(data,scenario.id);
+      if(map.layout_archive_file&&map.legacy_revision)data.mapLayouts={[map.legacy_revision]:await this.fetchJson(map.layout_archive_file)};
+      if(map.layout_archive_files)data.mapLayouts=Object.fromEntries(await Promise.all(Object.entries(map.layout_archive_files).map(async([revision,file])=>[revision,await this.fetchJson(file)])));
       await this.discoverMods(data);this.scenarioBase=structuredClone(data);return this.finishScenario(data,useSavedMap);
     }catch(error){this.warnings.push(`外部数据读取失败，使用内嵌数据：${error.message}`);this.sources.push("embedded:http-fallback");this.scenarioBase=structuredClone(this.fallback);return this.finishScenario(structuredClone(this.scenarioBase),useSavedMap);}
   }

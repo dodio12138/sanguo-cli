@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 globalThis.window=globalThis;
+await import("../js/core/map-grid.js");
 await import("../js/ui/map-view.js");
 
 const width=12,height=6,radius=5;
@@ -54,7 +55,7 @@ assert.equal(run(makeView({playerForceId:"wu"})).length,0,"没有对应势力时
 assert.ok(segments(run(makeView({layer:"terrain"})))[0]>0,"非势力图层也应标示我方疆界");
 
 const view=fs.readFileSync(new URL("../js/ui/map-view.js",import.meta.url),"utf8");
-for(const feature of ["this.territoryRadius=5","politicalOwner","lightenColor","isPlayerTerritory","drawPlayerTerritoryOutline","this.drawPlayerTerritoryOutline(c,m,visibleCells)","c.setLineDash("])if(!view.includes(feature))throw new Error(`地图缺少我方疆界描边：${feature}`);
+for(const feature of ["this.territoryRadius=8","politicalOwner","lightenColor","isPlayerTerritory","drawPlayerTerritoryOutline","this.drawPlayerTerritoryOutline(c,m,visibleCells)","c.setLineDash("])if(!view.includes(feature))throw new Error(`地图缺少我方疆界描边：${feature}`);
 if(!/owner\.distance<this\.territoryRadius/.test(view))throw new Error("势力归属没有复用统一的疆域半径");
 const outlineCall=view.indexOf("this.drawPlayerTerritoryOutline(c,m,visibleCells)"),hoverCall=view.indexOf("strokeRect(hx+1,hy+1");
 if(!(outlineCall>=0&&hoverCall>outlineCall))throw new Error("悬停光标框必须在我方疆界描边之后绘制，避免被描边遮盖");

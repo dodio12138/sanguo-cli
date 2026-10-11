@@ -20,31 +20,62 @@ window.MapEditor = class MapEditor {
     this.cities=structuredClone(source.cities||[]);this.graph=structuredClone(source.rules?.city_graph||{});this.customRoutes=MapEditor.editableRoads(source.map?.roads||[]);
     this.undoStack=[];this.redoStack=[];
     this.syncRegionMembership({checkpoint:false});
+    this._legacyApplied=JSON.stringify(this.snapshot());
+    this.syncAdministrativeRegions();
+    this.defaults={terrain:[...this.terrain],provinces:[...this.provinces],commanderies:[...this.commanderies]};
     this.markApplied();
     return this;
   }
   reset(){return this.load(this.source)}
   index(x,y){return y*this.width+x}
   inBounds(x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<this.width&&y<this.height}
-  static gridLine(x,y,tx,ty){const points=[[x,y]],nx=Math.abs(tx-x),ny=Math.abs(ty-y),sx=Math.sign(tx-x),sy=Math.sign(ty-y);let ix=0,iy=0;while(ix<nx||iy<ny){if(ix<nx&&(iy===ny||(1+2*ix)*ny<(1+2*iy)*nx)){x+=sx;ix++}else{y+=sy;iy++}points.push([x,y])}return points}
+  static gridLine(x,y,tx,ty){return MapGrid.gridLine(x,y,tx,ty)}
   layer(kind){return kind==="terrain"?this.terrain:kind==="province"?this.provinces:kind==="commandery"?this.commanderies:null}
   at(kind,x,y){const values=this.layer(kind);return values&&this.inBounds(x,y)?values[this.index(x,y)]:null}
   terrainAt(x,y){return this.at("terrain",x,y)}
   provinceAt(x,y){return this.at("province",x,y)}
   commanderyAt(x,y){return this.at("commandery",x,y)}
-  set(kind,x,y,value){const values=this.layer(kind);if(!values||!this.inBounds(x,y))return false;const index=this.index(x,y);if(values[index]===value)return false;this.checkpoint();values[index]=value;this.syncAfterRegionEdit(kind);return true}
-  syncAfterRegionEdit(kind){if(kind==="province"||kind==="commandery")this.syncRegionMembership({checkpoint:false})}
+  set(kind,x,y,value){const values=this.layer(kind);if(kind==="province"||!values||!this.inBounds(x,y)||(kind==="commandery"&&this.terrainAt(x,y)==="ocean"))return false;const index=this.index(x,y);if(values[index]===value)return false;this.checkpoint();this.inheritCommanderyProvince(kind,value,[index]);values[index]=value;this.syncAfterRegionEdit(kind);return true}
+  syncAfterRegionEdit(kind){if(kind==="terrain"||kind==="commandery")this.syncAdministrativeRegions()}
+  syncAdministrativeRegions(){const layers=MapGrid.administrativeLayers({width:this.width,height:this.height,terrain:this.terrain,provinces:this.provinces,commanderies:this.commanderies,map:this.map,cities:this.cities,counties:this.counties,divisions:this.divisions});this.commanderies.splice(0,this.commanderies.length,...layers.commanderies);this.provinces.splice(0,this.provinces.length,...layers.provinces);this.map.commandery_provinces=layers.commanderyProvinces;this.syncRegionMembership({checkpoint:false})}
+  inheritCommanderyProvince(kind,name,indices){if(kind!=="commandery"||!name||this.map.commandery_provinces?.[name])return;const province=indices.map(index=>this.provinces[index]).find(Boolean);if(province)this.map.commandery_provinces={...this.map.commandery_provinces,[name]:province}}
+  commanderyProvince(name){return this.map.commandery_provinces?.[name]||""}
+  assignCommanderyProvince(name,province){name=MapEditor.regionName(name);province=MapEditor.regionName(province);if(!this.commanderyNames().includes(name))throw new Error("请选择有效郡域");if(this.commanderyProvince(name)===province)return false;this.checkpoint();this.map.commandery_provinces={...this.map.commandery_provinces,[name]:province};this.syncAdministrativeRegions();return true}
   static regionName(value){const name=String(value||"").trim();if(!name||name.length>40||/[*,\n\r]/.test(name))throw new Error("区域名称需为 1–40 个字，不能包含逗号、星号或换行");return name}
   beginEdit(){if(!this._edit)this._edit={before:this.snapshot(),changed:false}}
   endEdit(){const edit=this._edit;this._edit=null;if(edit?.changed){this.undoStack.push(edit.before);if(this.undoStack.length>MapEditor.checkpointLimit)this.undoStack.shift();this.redoStack=[]}return !!edit?.changed}
   cancelEdit(){const edit=this._edit;this._edit=null;if(edit?.changed)this.restore(edit.before);return !!edit?.changed}
-  resetLayer(kind){const values=this.layer(kind),initial=this.defaults[kind==="terrain"?"terrain":kind==="province"?"provinces":"commanderies"];if(!values||JSON.stringify(values)===JSON.stringify(initial))return false;this.checkpoint();values.splice(0,values.length,...initial);this.syncAfterRegionEdit(kind);return true}
+  resetLayer(kind){const values=this.layer(kind),initial=this.defaults[kind==="terrain"?"terrain":kind==="province"?"provinces":"commanderies"];if(kind==="province"||!values||JSON.stringify(values)===JSON.stringify(initial))return false;this.checkpoint();values.splice(0,values.length,...initial);this.syncAfterRegionEdit(kind);return true}
   setTerrain(x,y,value){return this.set("terrain",x,y,value)}
   setProvince(x,y,value){return this.set("province",x,y,value)}
   setCommandery(x,y,value){return this.set("commandery",x,y,value)}
-  paint(kind,x0,y0,x1,y1,value){const values=this.layer(kind);if(!values)return 0;const left=Math.min(x0,x1),right=Math.max(x0,x1),top=Math.min(y0,y1),bottom=Math.max(y0,y1),targets=[];for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++)if(this.inBounds(x,y)){const index=this.index(x,y);if(values[index]!==value)targets.push(index)}if(!targets.length)return 0;this.checkpoint();for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
-  relabelRegion(kind,x,y,value){const values=this.layer(kind);if(!values||!this.inBounds(x,y))return 0;const start=this.index(x,y),source=values[start];if(source===value)return 0;const queue=[start],visited=new Set([start]),targets=[];for(let cursor=0;cursor<queue.length;cursor++){const index=queue[cursor];if(values[index]!==source)continue;targets.push(index);const px=index%this.width,py=Math.floor(index/this.width);for(const [nx,ny] of [[px-1,py],[px+1,py],[px,py-1],[px,py+1]])if(this.inBounds(nx,ny)){const next=this.index(nx,ny);if(!visited.has(next)&&values[next]===source){visited.add(next);queue.push(next)}}}if(!targets.length)return 0;this.checkpoint();for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
-  fill(kind,value){const values=this.layer(kind);if(!values)return 0;const targets=values.map((current,index)=>current!==value?index:-1).filter(index=>index>=0);if(!targets.length)return 0;this.checkpoint();for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
+  paint(kind,x0,y0,x1,y1,value){const values=this.layer(kind);if(kind==="province"||!values)return 0;const left=Math.min(x0,x1),right=Math.max(x0,x1),top=Math.min(y0,y1),bottom=Math.max(y0,y1),targets=[];for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++)if(this.inBounds(x,y)&&(kind!=="commandery"||this.terrainAt(x,y)!=="ocean")){const index=this.index(x,y);if(values[index]!==value)targets.push(index)}if(!targets.length)return 0;this.checkpoint();this.inheritCommanderyProvince(kind,value,targets);for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
+  cedeCommandery(x0,y0,x1,y1,{visited=new Set(),random=Math.random}={}){
+    const pending=[];
+    for(let y=Math.min(y0,y1);y<=Math.max(y0,y1);y++)for(let x=Math.min(x0,x1);x<=Math.max(x0,x1);x++){
+      if(!this.inBounds(x,y)||this.terrainAt(x,y)==="ocean")continue;
+      const index=this.index(x,y);if(visited.has(index))continue;
+      visited.add(index);pending.push({x,y,index,source:this.commanderies[index]});
+    }
+    let changed=0,progress=true;
+    // Expand from touching neighbours; do not invent a remote owner or leave blank cells.
+    while(progress&&pending.length){
+      progress=false;
+      for(let i=0;i<pending.length;){
+        const target=pending[i],choices=[...new Set([[-1,0],[1,0],[0,-1],[0,1]].map(([dx,dy])=>{
+          const x=target.x+dx,y=target.y+dy;return this.inBounds(x,y)&&this.terrainAt(x,y)!=="ocean"?this.commanderyAt(x,y):null;
+        }).filter(value=>value&&value!==target.source))];
+        if(!choices.length){i++;continue}
+        if(!changed)this.checkpoint();
+        this.commanderies[target.index]=choices[Math.max(0,Math.min(choices.length-1,Math.floor(random()*choices.length)))];
+        pending.splice(i,1);changed++;progress=true;
+      }
+    }
+    if(changed)this.syncAfterRegionEdit("commandery");
+    return changed;
+  }
+  relabelRegion(kind,x,y,value){const values=this.layer(kind);if(kind==="province"||!values||!this.inBounds(x,y)||(kind==="commandery"&&this.terrainAt(x,y)==="ocean"))return 0;const start=this.index(x,y),source=values[start];if(source===value)return 0;const queue=[start],visited=new Set([start]),targets=[];for(let cursor=0;cursor<queue.length;cursor++){const index=queue[cursor];if(values[index]!==source)continue;targets.push(index);const px=index%this.width,py=Math.floor(index/this.width);for(const [nx,ny] of [[px-1,py],[px+1,py],[px,py-1],[px,py+1]])if(this.inBounds(nx,ny)&&(kind!=="commandery"||this.terrainAt(nx,ny)!=="ocean")){const next=this.index(nx,ny);if(!visited.has(next)&&values[next]===source){visited.add(next);queue.push(next)}}}if(!targets.length)return 0;this.checkpoint();this.inheritCommanderyProvince(kind,value,targets);for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
+  fill(kind,value){const values=this.layer(kind);if(kind==="province"||!values)return 0;const targets=values.map((current,index)=>current!==value&&(kind!=="commandery"||this.terrain[index]!=="ocean")?index:-1).filter(index=>index>=0);if(!targets.length)return 0;this.checkpoint();this.inheritCommanderyProvince(kind,value,targets);for(const index of targets)values[index]=value;this.syncAfterRegionEdit(kind);return targets.length}
   terrainIds(){return Object.keys(this.terrainDefs)}
   declared(kind){
     const source=kind==="province"?"province":"commandery",list=[];
@@ -54,13 +85,19 @@ window.MapEditor = class MapEditor {
     if(kind==="commandery")list.push(...Object.keys(divisions.commandery_counties||{}),...(divisions.commandery_seats_140||[]).map(item=>item.name));
     return list;
   }
-  provinceNames(){return [...new Set([...this.provinces.filter(Boolean),...this.declared("province")])].sort()}
+  provinceNames(){return [...new Set([...this.provinces.filter(Boolean),...Object.values(this.map.commandery_provinces||{}),...this.declared("province")])].filter(value=>value&&!['域外','渤海','黄海','东海','南海'].includes(value)).sort()}
   commanderyNames(){return [...new Set([...this.commanderies.filter(Boolean),...this.declared("commandery")])].sort()}
   names(kind){return kind==="terrain"?[...new Set([...this.terrainIds(),...this.terrain.filter(Boolean)])].sort():kind==="province"?this.provinceNames():this.commanderyNames()}
   valueOptions(kind){return this.names(kind).map(value=>({value,label:kind==="terrain"?this.terrainDefs[value]?.name||value:value}))}
   dominant(kind){const values=this.layer(kind);if(!values)return null;const counts=new Map();for(const value of values)if(value)counts.set(value,(counts.get(value)||0)+1);const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]||(a[0]<b[0]?-1:a[0]>b[0]?1:0));return ranked.length?ranked[0][0]:null}
   snapshot(){return {map:structuredClone(this.map),divisions:structuredClone(this.divisions),terrain:[...this.terrain],provinces:[...this.provinces],commanderies:[...this.commanderies],waterways:structuredClone(this.waterways),landmarks:structuredClone(this.landmarks),cities:structuredClone(this.cities),counties:structuredClone(this.counties),graph:structuredClone(this.graph),customRoutes:structuredClone(this.customRoutes)}}
-  restore(state){const copy=structuredClone(state);for(const key of ["map","divisions","terrain","provinces","commanderies","waterways","landmarks","cities","counties","graph","customRoutes"])if(copy[key]!==undefined)this[key]=copy[key];this._roadNetwork=null}
+  restore(state){const copy=structuredClone(state),from={width:this.width,height:this.height};for(const key of ["map","divisions","terrain","provinces","commanderies","waterways","landmarks","cities","counties","graph","customRoutes"])if(copy[key]!==undefined)this[key]=copy[key];const to=MapGrid.dimensions(this.map);this.width=to.width;this.height=to.height;if(from.width!==to.width||from.height!==to.height)for(const key of ["terrain","provinces","commanderies"])this.defaults[key]=MapGrid.resampleLayer(this.defaults[key],from,to);this._roadNetwork=null}
+  resize(width=100,height=100){
+    if(width===this.width&&height===this.height)return false;
+    const mapped=MapGrid.resizeSource(this.exportScenario(),width,height),candidate=new MapEditor(mapped),validation=candidate.validate();
+    if(!validation.ok)throw new Error(`映射校验失败：${validation.errors.slice(0,5).join("；")}`);
+    this.endEdit();this.checkpoint();this.restore(candidate.snapshot());return true;
+  }
   checkpoint(){if(this._edit){this._edit.changed=true;return}this.undoStack.push(this.snapshot());if(this.undoStack.length>MapEditor.checkpointLimit)this.undoStack.shift();this.redoStack=[];this._roadNetwork=null}
   undo(){this.endEdit();if(!this.undoStack.length)return false;this.redoStack.push(this.snapshot());this.restore(this.undoStack.pop());return true}
   redo(){this.endEdit();if(!this.redoStack.length)return false;this.undoStack.push(this.snapshot());this.restore(this.redoStack.pop());return true}
@@ -238,8 +275,13 @@ window.MapEditor = class MapEditor {
     const candidate=new MapEditor(this.source);candidate.restore(this.snapshot());
     if(value.map){
       if(typeof value.map!=="object"||Array.isArray(value.map))throw new Error("地图数据需为对象");
+      if("commandery_provinces" in value.map){const mapping=value.map.commandery_provinces;if(!mapping||typeof mapping!=="object"||Array.isArray(mapping))throw new Error("郡属州需为郡名到州名的对象");for(const [name,province] of Object.entries(mapping)){if(typeof province!=="string")throw new Error("郡属州名称需为文字");MapEditor.regionName(name);MapEditor.regionName(province)}}
       const {width,height}=MapGrid.dimensions({...this.map,...value.map,width:value.map.width??value.map.grid?.width??this.width,height:value.map.height??value.map.grid?.height??this.height});
-      if(width!==this.width||height!==this.height)throw new Error(`舆图尺寸不一致：${width}×${height}`);
+      if(width!==this.width||height!==this.height){
+        if(!Number.isInteger(width)||!Number.isInteger(height)||width<4||height<4||width>256||height>256||!["terrain","provinces","commanderies"].every(key=>value.map[key])||!Array.isArray(value.cities)||!Array.isArray(value.counties)||!value.administrativeDivisions||!value.rules?.city_graph)throw new Error(`舆图尺寸不一致：${width}×${height}，请导入包含全部分层、据点、县治与道路的完整补丁`);
+        candidate.defaults=Object.fromEntries(Object.entries(candidate.defaults).map(([key,values])=>[key,MapGrid.resampleLayer(values,{width:this.width,height:this.height},{width,height})]));candidate.width=width;candidate.height=height;
+        candidate.map=structuredClone(value.map);
+      }
       for(const [key,field] of [["terrain","terrain"],["provinces","provinces"],["commanderies","commanderies"]])if(key in value.map){const decoded=MapGrid.decodeLayer(value.map,key,width,height);if(!decoded)throw new Error(`${key==="terrain"?"地形":key==="provinces"?"州域":"郡域"}分层不能为空`);candidate[field]=decoded}
       for(const key of ["waterways","landmarks","roads","commanderySeats"])if(key in value.map&&(!Array.isArray(value.map[key])||value.map[key].some(item=>!item||typeof item!=="object"||Array.isArray(item))))throw new Error("道路、治所、水道与地标需为对象列表");
       if("waterways" in value.map)candidate.waterways=MapEditor.editableWaterways(value.map.waterways);
@@ -251,7 +293,7 @@ window.MapEditor = class MapEditor {
     if(value.rules&&"city_graph" in value.rules)candidate.graph=structuredClone(value.rules.city_graph);
     for(const key of ["cities","counties"])if(key in value){if(!Array.isArray(value[key])||value[key].some(item=>!item||typeof item!=="object"||Array.isArray(item)))throw new Error("据点与县治需为对象列表");candidate[key]=structuredClone(value[key])}
     if(value.administrativeDivisions){if(typeof value.administrativeDivisions!=="object"||Array.isArray(value.administrativeDivisions))throw new Error("行政数据需为对象");candidate.divisions={...candidate.divisions,...structuredClone(value.administrativeDivisions)};if(!("counties" in value)&&Array.isArray(value.administrativeDivisions.county_seats))candidate.counties=structuredClone(value.administrativeDivisions.county_seats)}
-    candidate.syncRegionMembership({checkpoint:false});
+    candidate.syncAdministrativeRegions();
     const validation=candidate.validate();if(!validation.ok)throw new Error(`导入校验失败：${validation.errors.slice(0,5).join("；")}`);
     if(JSON.stringify(candidate.snapshot())===JSON.stringify(this.snapshot()))return this;
     this.endEdit();this.checkpoint();this.restore(candidate.snapshot());
@@ -259,7 +301,7 @@ window.MapEditor = class MapEditor {
   }
   importText(text){return this.importPatch(typeof text==="string"?JSON.parse(text):text)}
   importScenario(value){return this.load({...this.source,...(typeof value==="string"?JSON.parse(value):value)})}
-  applyTo(data){const patch=this.exportPatch();Object.assign(data.map,patch.map);data.rules=data.rules||{};data.rules.city_graph=patch.rules.city_graph;data.cities=patch.cities;data.counties=patch.counties;data.administrativeDivisions=patch.administrativeDivisions;this.map=structuredClone(data.map);this.divisions=structuredClone(data.administrativeDivisions);this.markApplied();return data}
+  applyTo(data){const patch=this.exportPatch();data.map=structuredClone(patch.map);data.rules=data.rules||{};data.rules.city_graph=patch.rules.city_graph;data.cities=patch.cities;data.counties=patch.counties;data.administrativeDivisions=patch.administrativeDivisions;this.map=structuredClone(data.map);this.divisions=structuredClone(data.administrativeDivisions);this.markApplied();return data}
   stats(){const terrain={};for(const value of this.terrain)terrain[value]=(terrain[value]||0)+1;const result=this.validate();return {width:this.width,height:this.height,cities:this.cities.length,counties:this.counties.length,roads:this.roads().length,terrain,errors:result.errors,warnings:result.warnings}}
 };
 
@@ -269,9 +311,11 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   const source=()=>getData?getData():(state?.data||{});
   const view=()=>{const value=getMapView?getMapView():mapView;return typeof value==="function"?value():value};
   const editor=new MapEditor(source()),canvas=$("mapEditorCanvas"),ctx=canvas?.getContext?.("2d")||null,overlay=$("mapEditorOverlay"),overlayCtx=overlay?.getContext?.("2d")||null,readout=$("mapEditorHover"),cell=14,hover={x:-1,y:-1},brushMemory={},roadPick={from:"",to:""};
+  const terrainCanvas=$("mapEditorTerrain"),terrainCtx=terrainCanvas?.getContext?.("2d")||ctx,referenceCanvas=$("mapEditorReferenceCanvas"),referenceCtx=referenceCanvas?.getContext?.("2d")||null;
   let pathDraft=null,riverDraft=null,selectedRoadId="",selectedRiverId="",adjustingLine=null,selectedRiverPoint=-1,zoom=1,fitScale=1,panMode=false,spacePan=false,panState=null,movingCity=false,gesture=null,drawFrame=null,draftKey="",pendingRecovery=null,draftTimer=null,draftSaved=false,initialized=false;
   const escaped=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
   let activeTool="layer";
+  let pickingCommandery=false;
   const elementPresets={layer:{grid:true,cities:true,roads:false,counties:false,waterways:true,landmarks:true},province:{grid:true,cities:true,roads:false,counties:false,waterways:true,landmarks:false,provinceBorders:true},commandery:{grid:true,cities:true,roads:false,counties:true,waterways:true,landmarks:false,commanderyBorders:true},city:{grid:true,cities:true,roads:false,counties:true,waterways:false,landmarks:false},road:{grid:true,cities:true,roads:true,counties:false,waterways:false,landmarks:false},river:{grid:true,cities:true,roads:false,counties:false,waterways:true,landmarks:false}};
   const elementState=Object.fromEntries(Object.entries(elementPresets).map(([name,preset])=>[name,{...preset}]));
   const elementProfile=()=>activeTool==="layer"&&kind()!=="terrain"?kind():activeTool;
@@ -282,13 +326,14 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   const kind=()=>$("mapEditorLayer").value;
   const tool=()=>activeTool;
   const cap=name=>name[0].toUpperCase()+name.slice(1);
-  const toolHint=()=>adjustingLine?"拖动方形节点调整走向 · Esc 退出调整":({layer:kind()==="terrain"?"拖动绘制 · Alt 点击取值 · 空格拖动地图":"拖动划定区域 · 城市按坐标自动归属 · Alt 取值",city:movingCity?"点击目标空格安置据点 · Esc 取消":"点击选择据点，按「移动据点」后放置。",road:pathDraft?"拖动连续铺路 · 返回上一格撤回 · Esc 取消":"点击道路选择，或点击两个节点绘制新路。",river:riverDraft?"点击落点或拖动描线 · 完成并保存 · Esc 取消":"点击河流选择 · 绘制或拖动节点调整走向"}[activeTool]);
+  const toolHint=()=>reference?.adjusting?"拖动底图 · 滚轮缩放底图 · 完成调整后描绘":pickingCommandery?"点击县治或郡域取值 · Esc 取消":adjustingLine?"拖动方形节点调整走向 · Esc 退出调整":({layer:kind()==="terrain"?"拖动绘制 · Alt 点击取值 · 空格拖动地图":kind()==="commandery"?"点击县治选郡 · 左键添加 · 右键归邻郡 · 空格拖动":"州域自动合成 · 点击选郡 · 调整郡属州",city:movingCity?"点击目标空格安置据点 · Esc 取消":"点击选择据点，按「移动据点」后放置。",road:pathDraft?"拖动连续铺路 · 返回上一格撤回 · Esc 取消":"点击道路选择，或点击两个节点绘制新路。",river:riverDraft?"点击落点或拖动描线 · 完成并保存 · Esc 取消":"点击河流选择 · 绘制或拖动节点调整走向"}[activeTool]);
   const cityFields=["Name","Force","Type","Level","X","Y","Population","Garrison","Agriculture","Commerce","Order"].map(name=>`mapEditorCity${name}`);
   let cityFormDirty=false,cityEditingId="",armedAction=null,storageWarning=false,loadingDraft=false,applying=false,draftRevision=0;
   const scenarioMaps=scenarioStore||(window.ScenarioMapStore&&document.defaultView?new ScenarioMapStore():null);
   let savedScenarioRecord=null;
   const draftStore=window.MapEditorDraftStore?new window.MapEditorDraftStore():null;
   const contextKey=()=>`sanguo.map-editor.draft.v1.${source()?.scenario?.id||"scenario"}.${source()?.map?.id||"map"}.${view()?(getState?.()||state)?.saveSlot||"live":"scenario"}`;
+  const reference=window.MapEditorReference?new MapEditorReference({$,grid:()=>({width:editor.width,height:editor.height}),output,beforeAdjust:()=>{endGesture();panMode=false;spacePan=false;pickingCommandery=false;movingCity=false;adjustingLine=null},onChange:()=>{syncPanCursor();const hint=$("mapEditorToolHint");if(hint)hint.textContent=toolHint();requestDraw(false)}}):null;
   const fingerprint=value=>{let hash=2166136261;for(const char of value){hash^=char.charCodeAt(0);hash=Math.imul(hash,16777619)}return (hash>>>0).toString(16)};
   async function saveDraftNow(){
     clearTimeout(draftTimer);draftTimer=null;
@@ -314,6 +359,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     for(const line of ["road","river"]){const button=$(`mapEditor${cap(line)}Adjust`);button.classList.toggle("active",adjustingLine===line);button.setAttribute("aria-pressed",String(adjustingLine===line))}
     $("mapEditorMoveCity").classList.toggle("active",movingCity);$("mapEditorMoveCity").setAttribute("aria-pressed",String(movingCity));
     const hint=$("mapEditorToolHint");if(hint)hint.textContent=toolHint();
+    const resize=$("mapEditorResize100");if(resize)resize.disabled=loadingDraft||applying||!!reference?.loading||editor.width>=100||editor.height>=100;
     syncPanCursor();
     if(persist&&!editor._edit&&!loadingDraft){draftRevision++;draftSaved=false;clearTimeout(draftTimer);draftTimer=setTimeout(saveDraftNow,250)}
   }
@@ -333,10 +379,11 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     if(!document.defaultView||!draftStore)return;
     const key=draftKey;
     loadingDraft=true;const scroll=dialog.querySelector?.(".map-editor-side-scroll");if(scroll)scroll.inert=true;updateStatus(false);
-    try{const record=await draftStore.get(key);if(key!==draftKey||!record||record.version!==1)return;pendingRecovery=record;if(record.base===fingerprint(editor._applied))restoreDraft(record);else{$("mapEditorDraftNotice").hidden=false;output("舆图数据已变化，可恢复或放弃上次的编辑草稿。")}}catch{pendingRecovery??={invalid:true};$("mapEditorDraftNotice").hidden=false;output("旧草稿无法读取，可先放弃旧草稿再保存新编辑。")}
+    try{const record=await draftStore.get(key);if(key!==draftKey||!record||record.version!==1)return;pendingRecovery=record;if(record.base===fingerprint(editor._applied)||record.base===fingerprint(editor._legacyApplied))restoreDraft(record);else{$("mapEditorDraftNotice").hidden=false;output("舆图数据已变化，可恢复或放弃上次的编辑草稿。")}}catch{pendingRecovery??={invalid:true};$("mapEditorDraftNotice").hidden=false;output("旧草稿无法读取，可先放弃旧草稿再保存新编辑。")}
     finally{loadingDraft=false;if(scroll)scroll.inert=false;updateStatus()}
   }
-  function requestDraw(){if(drawFrame!==null)return;if(!window.requestAnimationFrame){drawCanvas();return}drawFrame=window.requestAnimationFrame(()=>{drawFrame=null;drawCanvas()})}
+  let drawFramePersist=false;
+  function requestDraw(persist=true){drawFramePersist=drawFramePersist||persist;if(drawFrame!==null)return;if(!window.requestAnimationFrame){drawFramePersist=false;drawCanvas(persist);return}drawFrame=window.requestAnimationFrame(()=>{const persist=drawFramePersist;drawFramePersist=false;drawFrame=null;drawCanvas(persist)})}
   function confirmAction(key,message,run){if(armedAction?.key===key&&armedAction.until>Date.now()){armedAction=null;run();return}armedAction={key,until:Date.now()+5000};output(`${message}；再次点击同一按钮确认。`)}
   function readyForTransfer(){if(loadingDraft||applying)return false;endGesture();if(pathDraft||riverDraft){output(`请先完成并保存或取消正在绘制的${pathDraft?"道路":"河流"}。`);return false}if(cityFormDirty){output("请先保存据点表单，或点击「还原表单」。");return false}return true}
   function setApplying(value){applying=value;for(const selector of [".map-editor-content",".dialog-title"]){const element=dialog.querySelector?.(selector);if(element)element.inert=value}updateStatus(false)}
@@ -357,7 +404,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     if(view()||!readyForTransfer()||!scenarioMaps)return;setApplying(true);
     try{
       const target=source(),base=await originalScenario(),record=await scenarioMaps.get(base.scenario.id);if(!record)throw new Error("此剧本尚未保存地图");
-      if((editor.hasChanges()||record.baseFingerprint!==ScenarioMapStore.fingerprint(base))&&!(armedAction?.key==="load-scenario"&&armedAction.until>Date.now())){armedAction={key:"load-scenario",until:Date.now()+5000};output("载入将替换当前编辑；再次点击「载入已保存地图」确认。");return}
+      if((editor.hasChanges()||!ScenarioMapStore.matchesBase(base,record.baseFingerprint))&&!(armedAction?.key==="load-scenario"&&armedAction.until>Date.now())){armedAction={key:"load-scenario",until:Date.now()+5000};output("载入将替换当前编辑；再次点击「载入已保存地图」确认。");return}
       armedAction=null;const prepared=ScenarioMapStore.prepare(base,record,{allowBaseChange:true});if(view()||source()!==target)throw new Error("编辑上下文已变化，请重新打开编辑器");
       replaceScenario(prepared);savedScenarioRecord=record;scenarioStatus();await saveDraftNow();output("已载入保存的剧本地图。");
     }catch(error){output(`载入失败：${error.message}`)}finally{setApplying(false);updateStatus()}
@@ -384,28 +431,54 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     const viewport=canvas.closest?.(".map-editor-viewport"),wrap=canvas.closest?.(".map-editor-canvas-wrap");
     if(remeasure||!fitScale){const width=Number(viewport?.clientWidth)||canvas.width,height=Number(viewport?.clientHeight)||canvas.height;fitScale=Math.max(.05,Math.min(width/canvas.width,height/canvas.height))}
     const width=Math.max(1,Math.round(canvas.width*fitScale*zoom)),height=Math.max(1,Math.round(canvas.height*fitScale*zoom));
-    for(const target of [canvas,overlay,wrap])if(target){target.style.width=`${width}px`;target.style.height=`${height}px`}
+    for(const target of [canvas,overlay,terrainCanvas,wrap])if(target){target.style.width=`${width}px`;target.style.height=`${height}px`}
     const label=$("mapEditorZoomValue");if(label)label.textContent=zoom===1?"适配":`${Math.round(zoom*100)}%`;
+    requestReferenceDraw();
+  }
+  // Only the visible image crop has a high-DPI backing store. Grid geometry stays fixed.
+  let referenceFrame=null;
+  function requestReferenceDraw(){
+    if(referenceFrame!==null)return;
+    if(!window.requestAnimationFrame){drawReference();return}
+    referenceFrame=window.requestAnimationFrame(()=>{referenceFrame=null;drawReference()});
+  }
+  function drawReference(){
+    if(!referenceCtx||!referenceCanvas)return;
+    const visible=!!(reference?.image&&!reference.loading&&reference.placement?.visible);
+    referenceCanvas.hidden=!visible;if(!visible)return;
+    const rect=canvas.getBoundingClientRect(),viewport=canvas.closest?.(".map-editor-viewport"),bounds=viewport?.getBoundingClientRect?.()||rect;
+    const left=Math.max(rect.left,bounds.left+(viewport?.clientLeft||0)),top=Math.max(rect.top,bounds.top+(viewport?.clientTop||0));
+    const right=Math.min(rect.right,bounds.left+(viewport?.clientLeft||0)+(viewport?.clientWidth||bounds.width)),bottom=Math.min(rect.bottom,bounds.top+(viewport?.clientTop||0)+(viewport?.clientHeight||bounds.height));
+    const width=Math.max(0,right-left),height=Math.max(0,bottom-top),dpr=window.devicePixelRatio||1;
+    if(!width||!height){referenceCanvas.hidden=true;return}
+    const pixelWidth=Math.ceil(width*dpr),pixelHeight=Math.ceil(height*dpr);
+    if(referenceCanvas.width!==pixelWidth)referenceCanvas.width=pixelWidth;
+    if(referenceCanvas.height!==pixelHeight)referenceCanvas.height=pixelHeight;
+    const x=left-rect.left,y=top-rect.top;
+    Object.assign(referenceCanvas.style,{left:`${x}px`,top:`${y}px`,width:`${width}px`,height:`${height}px`});
+    referenceCtx.clearRect(0,0,pixelWidth,pixelHeight);
+    reference.draw(referenceCtx,rect.width/editor.width,{x,y,width,height,dpr});
   }
   function changeZoom(value,event=null,fit=false){
     if(!canvas)return;
     const viewport=canvas.closest?.(".map-editor-viewport"),before=canvas.getBoundingClientRect(),rect=viewport?.getBoundingClientRect?.()||before;
     const clientX=event?.clientX??rect.left+rect.width/2,clientY=event?.clientY??rect.top+rect.height/2;
     const pointX=Math.max(0,Math.min(1,(clientX-before.left)/(before.width||canvas.width))),pointY=Math.max(0,Math.min(1,(clientY-before.top)/(before.height||canvas.height)));
-    zoom=fit?1:Math.max(.5,Math.min(4,Math.round(value*4)/4));applyCanvasZoom(fit);if(!viewport)return;
+    zoom=fit?1:Math.max(.5,Math.min(8,Math.round(value*4)/4));applyCanvasZoom(fit);if(!viewport)return;
     if(fit){viewport.scrollLeft=0;viewport.scrollTop=0;return}
     const after=canvas.getBoundingClientRect();
     viewport.scrollLeft=(Number(viewport.scrollLeft)||0)+after.left+pointX*after.width-clientX;
     viewport.scrollTop=(Number(viewport.scrollTop)||0)+after.top+pointY*after.height-clientY;
   }
-  function drawCanvas(){
+  function drawCanvas(persist=true){
     if(!ctx)return;
     const layer=kind(),values=editor.layer(layer);
     if(!values)return;
     const resized=canvas.width!==editor.width*cell||canvas.height!==editor.height*cell;if(resized){canvas.width=editor.width*cell;canvas.height=editor.height*cell}
-    if(overlay){if(overlay.width!==canvas.width)overlay.width=canvas.width;if(overlay.height!==canvas.height)overlay.height=canvas.height}applyCanvasZoom(resized);
+    for(const target of [overlay,terrainCanvas])if(target){if(target.width!==canvas.width)target.width=canvas.width;if(target.height!==canvas.height)target.height=canvas.height}applyCanvasZoom(resized);
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    for(let y=0;y<editor.height;y++)for(let x=0;x<editor.width;x++){ctx.fillStyle=colorFor(layer,values[editor.index(x,y)]);ctx.fillRect(x*cell,y*cell,cell,cell)}
+    for(let y=0;y<editor.height;y++)for(let x=0;x<editor.width;x++){const index=editor.index(x,y),sea=editor.terrain[index]==="ocean";terrainCtx.fillStyle=sea?colorFor("terrain","ocean"):colorFor(layer,values[index]);terrainCtx.fillRect(x*cell,y*cell,cell,cell)}
+    if(!referenceCtx)reference?.draw(ctx,cell);
     if(elementVisible("grid"))drawGrid();
     if(elementVisible("commanderyBorders"))drawRegionBorders("commandery",editor.commanderies);
     if(elementVisible("provinceBorders"))drawRegionBorders("province",editor.provinces);
@@ -417,7 +490,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     if(elementVisible("landmarks"))drawLandmarks();
     if(elementVisible("cities"))drawCities();
     if(adjustingLine){const points=selectedLine(adjustingLine)?.points||[];ctx.save();ctx.fillStyle="#0a100b";ctx.strokeStyle="#f5df94";ctx.lineWidth=1;points.forEach(([x,y],index)=>{if(adjustingLine==="road"&&(index===0||index===points.length-1))return;ctx.fillRect((x+.5)*cell-2,(y+.5)*cell-2,4,4);ctx.strokeRect((x+.5)*cell-2,(y+.5)*cell-2,4,4)});ctx.restore()}
-    drawHover();updateReadout();updateStatus();
+    drawHover();updateReadout();updateStatus(persist);
   }
   function drawGrid(){
     ctx.lineWidth=1;ctx.strokeStyle="rgba(0,0,0,.32)";
@@ -468,8 +541,9 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   function drawHover(){
     if(!overlayCtx)return;
     overlayCtx.clearRect(0,0,overlay.width,overlay.height);
+    if(reference?.adjusting)return;
     if(!editor.inBounds(hover.x,hover.y))return;
-    const x=hover.x,y=hover.y,radius=activeTool==="layer"&&!(kind()!=="terrain"&&$("mapEditorRegionFill")?.checked)?Math.floor((Number($("mapEditorBrushSize")?.value)||1)/2):0,left=Math.max(0,x-radius),top=Math.max(0,y-radius),width=Math.min(editor.width-1,x+radius)-left+1,height=Math.min(editor.height-1,y+radius)-top+1;
+    const x=hover.x,y=hover.y,radius=activeTool==="layer"&&!pickingCommandery&&(!(kind()!=="terrain"&&$("mapEditorRegionFill")?.checked)||gesture?.kind==="cede")?Math.floor((Number($("mapEditorBrushSize")?.value)||1)/2):0,left=Math.max(0,x-radius),top=Math.max(0,y-radius),width=Math.min(editor.width-1,x+radius)-left+1,height=Math.min(editor.height-1,y+radius)-top+1;
     overlayCtx.fillStyle="rgba(244,226,160,.15)";overlayCtx.fillRect(left*cell,top*cell,width*cell,height*cell);
     overlayCtx.strokeStyle="rgba(244,226,160,.28)";overlayCtx.lineWidth=1;
     overlayCtx.beginPath();overlayCtx.moveTo(0,y*cell+.5);overlayCtx.lineTo(overlay.width,y*cell+.5);overlayCtx.moveTo(x*cell+.5,0);overlayCtx.lineTo(x*cell+.5,overlay.height);overlayCtx.stroke();
@@ -486,9 +560,14 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   }
   function syncValueOptions(){
     const select=$("mapEditorValue"),layer=kind();
-    const administrative=layer==="province"||layer==="commandery",nameRow=$("mapEditorRegionNameRow"),regionActions=$("mapEditorRegionActions"),nameInput=$("mapEditorRegionName"),addRegion=$("mapEditorAddRegion");
-    $("mapEditorLayerTitle").textContent={terrain:"地形图层",province:"州域图层",commandery:"郡域图层"}[layer];
-    $("mapEditorRegionHint").textContent=administrative?"城市与县治按坐标自动归属 · 不改动其他图层":"按住 Alt 点击取值 · 每次拖绘可整笔撤销";
+    const administrative=layer==="commandery",nameRow=$("mapEditorRegionNameRow"),regionActions=$("mapEditorRegionActions"),nameInput=$("mapEditorRegionName"),addRegion=$("mapEditorAddRegion");
+    $("mapEditorLayerTitle").textContent={terrain:"地形图层",province:"州域（自动）",commandery:"郡域图层"}[layer];
+    $("mapEditorRegionHint").textContent=layer==="commandery"?"左键添加 · 右键随机归邻郡 · 州界随郡属州更新":layer==="province"?"州域由所属郡域合成 · 点击地图选郡":"按住 Alt 点击取值 · 每次拖绘可整笔撤销";
+    for(const id of ["mapEditorBrushValueRow","mapEditorBrushSizeRow","mapEditorLayerActions"])if($(id))$(id).hidden=layer==="province";
+    if($("mapEditorProvinceAssignment"))$("mapEditorProvinceAssignment").hidden=layer==="terrain";
+    $("mapEditorFill").disabled=layer==="province";$("mapEditorResetLayer").disabled=layer==="province";
+    const pickButton=$("mapEditorPickCommandery");if(pickButton)pickButton.hidden=layer!=="commandery";
+    const pickRow=$("mapEditorPickCommanderyRow");if(pickRow)pickRow.hidden=layer!=="commandery";
     if(nameRow)nameRow.hidden=!administrative;if(regionActions)regionActions.hidden=!administrative;if(nameInput)nameInput.placeholder=layer==="province"?"输入州名":"输入郡名";if(addRegion)addRegion.textContent=layer==="province"?"加入州域列表":"加入郡域列表";
     if(!select)return;
     const entries=editor.valueOptions(layer),preferred=brushMemory[layer]??editor.dominant(layer);if(preferred&&!entries.some(entry=>entry.value===preferred))entries.push({value:preferred,label:preferred});
@@ -496,7 +575,9 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     const chosen=entries.some(entry=>entry.value===preferred)?preferred:entries[0]?.value;
     if(chosen!==undefined)select.value=chosen;
     syncSelect(select);
+    syncProvinceAssignment();
   }
+  function syncProvinceAssignment(){const commandery=$("mapEditorAssignmentCommandery"),province=$("mapEditorCommanderyProvince");if(!commandery||!province)return;const name=kind()==="commandery"?brush():commandery.value||editor.dominant("commandery"),names=editor.commanderyNames();options(commandery,[...new Set([...names,...(name?[name]:[])])],name);options(province,editor.provinceNames(),editor.commanderyProvince(commandery.value));$("mapEditorAssignProvince").disabled=!names.includes(commandery.value)||!province.value;syncSelect(commandery);syncSelect(province)}
   function options(select,entries,value){
     if(!select)return;
     select.innerHTML=entries.map(entry=>`<option value="${escaped(entry.id??entry)}">${escaped(entry.name??entry)}</option>`).join("");
@@ -592,12 +673,14 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   }
   function finishRiverDraft(){if(!riverDraft)return;try{const river=editor.saveWaterway(riverDraft.id,$("mapEditorRiverName").value,riverDraft.points);selectedRiverId=river.id;riverDraft=null;refresh();output("河流路径已保存。")}catch(error){output(`河流未保存：${error.message}`)}}
   function refresh(){
+    reference?.syncGrid();
     syncValueOptions();syncCitySelects();if(!cityFormDirty)syncCityForm();syncLineSelects();syncRoadInfo();syncTool();
     const stats=editor.stats();
     output(`舆图 ${stats.width}×${stats.height}｜据点 ${stats.cities}｜县治 ${stats.counties}｜道路 ${stats.roads}｜校验 ${stats.errors.length?"失败":"通过"}`);
   }
   function syncTool(){
     syncPanCursor();
+    const pickButton=$("mapEditorPickCommandery");if(pickButton){pickButton.classList.toggle("active",pickingCommandery);pickButton.setAttribute("aria-pressed",String(pickingCommandery))}
     for(const name of ["layer","city","road","river"]){const button=$(`mapEditorTool${cap(name)}`);button?.classList.toggle("active",name==="layer"?activeTool==="layer"&&kind()==="terrain":name===activeTool);const panel=$(`mapEditorPanel${cap(name)}`);if(panel)panel.hidden=name!==activeTool}
     for(const name of ["province","commandery"])$(`mapEditorTool${cap(name)}`).classList.toggle("active",activeTool==="layer"&&kind()===name);
     const hint=$("mapEditorToolHint");if(hint)hint.textContent=toolHint();
@@ -609,8 +692,8 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     if(!host)return;
     for(const input of host.querySelectorAll("[data-editor-element]"))input.checked=elementState[elementProfile()]?.[input.getAttribute("data-editor-element")]===true;
   }
-  function setTool(name){if(!["layer","city","road","river"].includes(name)||name===activeTool)return;endGesture();movingCity=false;adjustingLine=null;activeTool=name;if(name!=="layer"){$("mapEditorLayer").value="terrain";syncSelect($("mapEditorLayer"));syncValueOptions()}if(name==="city"){syncCitySelects();if(!cityFormDirty)syncCityForm()}syncPanCursor();syncTool()}
-  function setLayer(layer){endGesture();$("mapEditorLayer").value=layer;syncSelect($("mapEditorLayer"));setTool("layer");syncValueOptions();syncTool()}
+  function setTool(name){if(!["layer","city","road","river"].includes(name))return;reference?.setAdjusting(false);if(name===activeTool)return;endGesture();pickingCommandery=false;movingCity=false;adjustingLine=null;activeTool=name;if(name!=="layer"){$("mapEditorLayer").value="terrain";syncSelect($("mapEditorLayer"));syncValueOptions()}if(name==="city"){syncCitySelects();if(!cityFormDirty)syncCityForm()}syncPanCursor();syncTool()}
+  function setLayer(layer){endGesture();reference?.setAdjusting(false);pickingCommandery=false;$("mapEditorLayer").value=layer;syncSelect($("mapEditorLayer"));setTool("layer");syncValueOptions();syncTool()}
   function cityAt(x,y){return editor.cities.find(city=>city.x===x&&city.y===y)||null}
   function placeCity(x,y){
     const target=cityAt(x,y);
@@ -640,35 +723,48 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   }
   function finishRoadDraft(){if(!pathDraft)return output("当前没有正在绘制的道路");try{const route=editor.saveRoadPath(pathDraft.from,pathDraft.to,pathDraft.points,{id:pathDraft.id,kind:pathDraft.kind});selectedRoadId=route.id;pathDraft=null;refresh();output("道路路径已保存。")}catch(error){output(`道路未保存：${error.message}`)}}
   function paintCell(x,y,value){if(!value)return false;const radius=Math.floor((Number($("mapEditorBrushSize")?.value)||1)/2),changed=editor.paint(kind(),x-radius,y-radius,x+radius,y+radius,value);if(changed)requestDraw();return !!changed}
+  function cedeCell(x,y){const radius=Math.floor((Number($("mapEditorBrushSize")?.value)||1)/2),changed=editor.cedeCommandery(x-radius,y-radius,x+radius,y+radius,{visited:gesture?.visited});if(changed)requestDraw();return !!changed}
+  function pickCommandery(x,y){
+    const value=editor.commanderyAt(x,y);if(!value){output("此格未划定郡域，请点选其他县治或郡域。");return}
+    brushMemory.commandery=value;pickingCommandery=false;syncValueOptions();syncTool();
+    const county=editor.countyAt(x,y),city=editor.cityAt(x,y);output(`已选中「${value}」${county||city?` · ${county?.name||city.name}`:""}。左键添加，右键归邻郡。`);
+  }
   function applyTool(x,y){
     if(activeTool==="city")return placeCity(x,y);
     if(activeTool==="road")return pathDraft?appendRoadPoint(x,y):pickRoad(x,y);
     if(activeTool==="river"){if(riverDraft)return appendRiverPoint(x,y);const river=lineAt("river",x,y);if(river)selectLine("river",river.id);else output("点击河流可选择；新建请按「绘制／重画」。");return}
-    return paintCell(x,y,brush());
+    return gesture?.kind==="cede"?cedeCell(x,y):paintCell(x,y,gesture?.kind==="paint"?gesture.value:brush());
   }
   $("mapEditorZoomOut").onclick=()=>changeZoom(zoom-.25);
   $("mapEditorZoomIn").onclick=()=>changeZoom(zoom+.25);
   $("mapEditorZoomFit").onclick=()=>changeZoom(1,null,true);
-  const cellAt=event=>{const rect=canvas.getBoundingClientRect(),scaleX=canvas.width/(rect.width||canvas.width),scaleY=canvas.height/(rect.height||canvas.height);return {x:Math.floor((event.clientX-rect.left)*scaleX/cell),y:Math.floor((event.clientY-rect.top)*scaleY/cell)}};
+  const mapPointAt=event=>{const rect=canvas.getBoundingClientRect(),scaleX=canvas.width/(rect.width||canvas.width),scaleY=canvas.height/(rect.height||canvas.height);return {x:(event.clientX-rect.left)*scaleX/cell,y:(event.clientY-rect.top)*scaleY/cell}};
+  const cellAt=event=>{const point=mapPointAt(event);return {x:Math.floor(point.x),y:Math.floor(point.y)}};
   const viewport=canvas?.closest?.(".map-editor-viewport");
-  const syncPanCursor=()=>{const button=$("mapEditorPanToggle"),enabled=panMode||spacePan;if(button){button.classList.toggle("active",panMode);button.setAttribute("aria-pressed",String(panMode))}if(canvas)canvas.style.cursor=panState?"grabbing":enabled?"grab":movingCity||adjustingLine?"move":activeTool==="city"||(["road","river"].includes(activeTool)&&!pathDraft&&!riverDraft)?"pointer":"crosshair"};
+  viewport?.addEventListener?.("scroll",requestReferenceDraw,{passive:true});
+  const syncPanCursor=()=>{const button=$("mapEditorPanToggle"),enabled=panMode||spacePan;if(button){button.classList.toggle("active",panMode);button.setAttribute("aria-pressed",String(panMode))}if(canvas)canvas.style.cursor=panState?"grabbing":enabled?"grab":reference?.adjusting||movingCity||adjustingLine?"move":activeTool==="city"||(["road","river"].includes(activeTool)&&!pathDraft&&!riverDraft)?"pointer":"crosshair"};
   const endPan=()=>{panState=null;syncPanCursor()};
-  function endGesture(event){if(event?.pointerId!==undefined&&((gesture&&gesture.pointerId!==event.pointerId)||(panState&&panState.pointerId!==event.pointerId)))return;const vertexEdit=gesture?.kind==="vertex";gesture=null;editor.endEdit();if(vertexEdit){syncLineSelects();syncRoadInfo()}endPan();updateStatus();saveDraftNow()}
+  function endGesture(event){if(event?.pointerId!==undefined&&((gesture&&gesture.pointerId!==event.pointerId)||(panState&&panState.pointerId!==event.pointerId)))return;const vertexEdit=gesture?.kind==="vertex",regionEdit=gesture?.kind==="paint"||gesture?.kind==="cede";gesture=null;reference?.endDrag(event?.type==="pointercancel");editor.endEdit();if(vertexEdit){syncLineSelects();syncRoadInfo()}if(regionEdit){syncProvinceAssignment();if(!cityFormDirty)syncCityForm()}endPan();updateStatus();saveDraftNow()}
   $("mapEditorPanToggle").onclick=()=>{endGesture();panMode=!panMode;syncPanCursor();output(panMode?"拖动模式：按住左键移动舆图，再按一次恢复编辑":"已恢复编辑模式")};
   if(canvas){
-    canvas.addEventListener("wheel",event=>{if(!event.ctrlKey)return;event.preventDefault();changeZoom(zoom+(event.deltaY<0?.25:-.25),event)},{passive:false});
-    canvas.addEventListener("contextmenu",event=>event.preventDefault());
+    canvas.addEventListener("wheel",event=>{if(reference?.adjusting&&!event.ctrlKey){event.preventDefault();reference.zoomTo(reference.placement.scale*(event.deltaY<0?1.1:1/1.1),mapPointAt(event));return}if(!event.ctrlKey)return;event.preventDefault();changeZoom(zoom+(event.deltaY<0?.25:-.25),event)},{passive:false});
+    canvas.addEventListener("contextmenu",event=>{event.preventDefault();event.stopPropagation?.()});
     canvas.addEventListener("pointerdown",event=>{
-      if(loadingDraft||applying)return;
-      const button=event.button??0;if(button!==0&&button!==1)return;
+      if(loadingDraft||applying||reference?.loading)return;
+      const button=event.button??0,erase=button===2&&!reference?.adjusting&&activeTool==="layer"&&kind()==="commandery"&&!panMode&&!spacePan;
+      if(button!==0&&button!==1&&!erase)return;
       endGesture();canvas.focus?.({preventScroll:true});event.preventDefault?.();
       if(viewport&&((button===0&&(panMode||spacePan))||button===1)){panState={pointerId:event.pointerId,x:event.clientX,y:event.clientY,left:Number(viewport.scrollLeft)||0,top:Number(viewport.scrollTop)||0};canvas.setPointerCapture?.(event.pointerId);syncPanCursor();return}
-      if(button!==0)return;
+      if(button!==0&&!erase)return;
+      if(reference?.adjusting&&reference.beginDrag(mapPointAt(event))){gesture={pointerId:event.pointerId,kind:"reference"};canvas.setPointerCapture?.(event.pointerId);return}
       const {x,y}=cellAt(event);setHover(x,y);if(!editor.inBounds(x,y))return;
+      if(activeTool==="layer"&&kind()==="province"){const name=editor.commanderyAt(x,y);if(name){$("mapEditorAssignmentCommandery").value=name;syncProvinceAssignment();output(`已选中「${name}」 · ${editor.commanderyProvince(name)||"未分配州"}`)}return}
       if(adjustingLine&&beginLineAdjustment(event,x,y))return;
+      if(erase){pickingCommandery=false;editor.beginEdit();gesture={pointerId:event.pointerId,kind:"cede",visited:new Set(),last:{x,y}};canvas.setPointerCapture?.(event.pointerId);syncTool();cedeCell(x,y);return}
+      if(activeTool==="layer"&&kind()==="commandery"&&(pickingCommandery||(!event.altKey&&!event.shiftKey&&!$("mapEditorRegionFill")?.checked&&((elementVisible("counties")&&editor.countyAt(x,y))||(elementVisible("cities")&&editor.cityAt(x,y)))))){pickCommandery(x,y);return}
       if(activeTool==="layer"&&event.altKey){const value=editor.at(kind(),x,y);if(value){brushMemory[kind()]=value;syncValueOptions();output(`已取值「${$("mapEditorValue").selectedOptions?.[0]?.textContent||value}」。`)}return}
       const layer=kind();if(activeTool==="layer"&&$("mapEditorRegionFill")?.checked&&(layer==="province"||layer==="commandery")){if(!brush())return;const changed=editor.relabelRegion(layer,x,y,brush());output(changed?`已将相连的 ${changed} 格改属「${brush()}」`:"该相连区域已属于所选区域");drawCanvas();return}
-      if(activeTool==="layer"){if(!brush())return;editor.beginEdit();gesture={pointerId:event.pointerId,kind:"paint",last:{x,y}}}
+      if(activeTool==="layer"){if(!brush())return;editor.beginEdit();gesture={pointerId:event.pointerId,kind:"paint",value:brush(),last:{x,y}}}
       else if(activeTool==="road"&&pathDraft){const last=pathDraft.points.at(-1);if(Math.abs(x-last[0])+Math.abs(y-last[1])<=1)gesture={pointerId:event.pointerId,kind:"road",last:{x,y}}}
       else if(activeTool==="river"&&riverDraft)gesture={pointerId:event.pointerId,kind:"river",last:{x,y}};
       canvas.setPointerCapture?.(event.pointerId);applyTool(x,y);
@@ -676,8 +772,9 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     canvas.addEventListener("pointermove",event=>{
       if(panState&&panState.pointerId===event.pointerId){viewport.scrollLeft=panState.left-(event.clientX-panState.x);viewport.scrollTop=panState.top-(event.clientY-panState.y);return}
       const {x,y}=cellAt(event);setHover(x,y);if(!gesture||gesture.pointerId!==event.pointerId)return;
+      if(gesture.kind==="reference"){reference.moveDrag(mapPointAt(event));return}
       if(!editor.inBounds(x,y)){gesture.last=null;return}
-      if(gesture.kind==="paint"){for(const [px,py] of gesture.last?MapEditor.gridLine(gesture.last.x,gesture.last.y,x,y):[[x,y]])paintCell(px,py,brush())}
+      if(gesture.kind==="paint"||gesture.kind==="cede"){for(const [px,py] of gesture.last?MapEditor.gridLine(gesture.last.x,gesture.last.y,x,y):[[x,y]])applyTool(px,py)}
       else if(gesture.kind==="road"&&pathDraft){const last=pathDraft.points.at(-1);for(const [px,py] of MapEditor.gridLine(last[0],last[1],x,y).slice(1))if(!appendRoadPoint(px,py))break}
       else if(gesture.kind==="river")appendRiverPoint(x,y);
       else if(gesture.kind==="vertex")moveLineVertex(x,y);
@@ -690,25 +787,30 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   document.addEventListener?.("keydown",event=>{
     const focusedDialog=event.target?.closest?.("dialog")||document.querySelector?.("dialog.is-active");if(!dialog.open||loadingDraft||applying||(focusedDialog&&focusedDialog!==dialog)||isTyping(event))return;
     const key=String(event.key||"").toLowerCase(),modifier=event.ctrlKey||event.metaKey;
+    if(event.key==="Escape"&&reference?.adjusting){event.preventDefault();event.stopPropagation?.();reference.endDrag(true);gesture=null;reference.setAdjusting(false);output("已锁定参考底图。");return}
     if(event.code==="Space"){event.preventDefault();event.stopPropagation?.();if(gesture)endGesture();spacePan=true;syncPanCursor()}
     else if(modifier&&(key==="z"||key==="y")){event.preventDefault();event.stopPropagation?.();if(!event.repeat)(key==="y"||event.shiftKey?$("mapEditorRedo"):$("mapEditorUndo")).onclick()}
     else if((event.key==="Delete"||event.key==="Backspace")&&["road","river"].includes(activeTool)&&event.target===canvas&&!pathDraft&&!riverDraft){event.preventDefault();event.stopPropagation?.();deleteSelectedLine(activeTool)}
-    else if(event.key==="Escape"&&(pathDraft||riverDraft||adjustingLine||movingCity||gesture)){event.preventDefault();event.stopPropagation?.();editor.cancelEdit();gesture=null;pathDraft=null;riverDraft=null;adjustingLine=null;selectedRiverPoint=-1;movingCity=false;endPan();refresh();output("已取消当前操作。")}
+    else if(event.key==="Escape"&&(pickingCommandery||pathDraft||riverDraft||adjustingLine||movingCity||gesture)){event.preventDefault();event.stopPropagation?.();editor.cancelEdit();gesture=null;pickingCommandery=false;pathDraft=null;riverDraft=null;adjustingLine=null;selectedRiverPoint=-1;movingCity=false;endPan();refresh();output("已取消当前操作。")}
   },true);
   document.addEventListener?.("keyup",event=>{if(event.code!=="Space")return;spacePan=false;syncPanCursor()},true);
-  dialog.addEventListener?.("close",()=>{endGesture();spacePan=false;panMode=false;movingCity=false;endPan();saveDraftNow()});
+  dialog.addEventListener?.("close",()=>{endGesture();reference?.setAdjusting(false);reference?.flush();pickingCommandery=false;spacePan=false;panMode=false;movingCity=false;endPan();saveDraftNow()});
   dialog.addEventListener?.("cancel",event=>{if(applying)event.preventDefault()});
-  window.addEventListener?.("blur",()=>{spacePan=false;endGesture()});
-  window.addEventListener?.("pagehide",()=>{endGesture();saveDraftNow()});
+  window.addEventListener?.("blur",()=>{spacePan=false;endGesture();reference?.flush()});
+  window.addEventListener?.("pagehide",()=>{endGesture();saveDraftNow();reference?.flush()});
   $("mapEditorToolLayer").onclick=()=>setLayer("terrain");
   $("mapEditorToolProvince").onclick=()=>setLayer("province");$("mapEditorToolCommandery").onclick=()=>setLayer("commandery");
+  if($("mapEditorPickCommandery"))$("mapEditorPickCommandery").onclick=()=>{endGesture();reference?.setAdjusting(false);pickingCommandery=!pickingCommandery;syncTool();output(pickingCommandery?"点击县治或郡域选取所属郡。":"已恢复郡域绘制。")};
   for(const input of ($("mapEditorElements")?.querySelectorAll("[data-editor-element]")||[]))input.onchange=()=>{const key=input.getAttribute("data-editor-element"),profile=elementProfile();if(!key||!elementState[profile])return;elementState[profile][key]=!!input.checked;drawCanvas()};
   $("mapEditorToolCity").onclick=()=>setTool("city");
   $("mapEditorToolRoad").onclick=()=>setTool("road");
   $("mapEditorToolRiver").onclick=()=>setTool("river");
   $("mapEditorLayer").onchange=()=>{endGesture();armedAction=null;syncValueOptions();syncTool()};
-  $("mapEditorAddRegion").onclick=()=>{try{const layer=kind(),name=MapEditor.regionName($("mapEditorRegionName").value);if(!["province","commandery"].includes(layer))return;const select=$("mapEditorValue"),exists=[...select.options].some(option=>option.value===name);if(!exists){const option=document.createElement("option");option.value=name;option.textContent=name;select.append(option)}select.value=name;brushMemory[layer]=name;syncSelect(select);output(`已选中区域「${name}」。`)}catch(error){output(error.message)}};
-  $("mapEditorValue").onchange=()=>{endGesture();brushMemory[kind()]=$("mapEditorValue").value;armedAction=null};
+  $("mapEditorAddRegion").onclick=()=>{try{const layer=kind(),name=MapEditor.regionName($("mapEditorRegionName").value);if(layer!=="commandery")return;const select=$("mapEditorValue"),exists=[...select.options].some(option=>option.value===name);if(!exists){const option=document.createElement("option");option.value=name;option.textContent=name;select.append(option)}select.value=name;brushMemory[layer]=name;syncSelect(select);syncProvinceAssignment();output(`已选中区域「${name}」。`)}catch(error){output(error.message)}};
+  $("mapEditorValue").onchange=()=>{endGesture();brushMemory[kind()]=$("mapEditorValue").value;armedAction=null;syncProvinceAssignment()};
+  if($("mapEditorAssignmentCommandery"))$("mapEditorAssignmentCommandery").onchange=()=>{if(kind()==="commandery"){brushMemory.commandery=$("mapEditorAssignmentCommandery").value;syncValueOptions()}else syncProvinceAssignment()};
+  if($("mapEditorCommanderyProvince"))$("mapEditorCommanderyProvince").onchange=()=>{$("mapEditorAssignProvince").disabled=!editor.commanderyNames().includes($("mapEditorAssignmentCommandery").value)||!$("mapEditorCommanderyProvince").value};
+  if($("mapEditorAssignProvince"))$("mapEditorAssignProvince").onclick=()=>{if(!readyForTransfer())return;try{const name=$("mapEditorAssignmentCommandery").value,province=$("mapEditorCommanderyProvince").value,changed=editor.assignCommanderyProvince(name,province);refresh();output(changed?`「${name}」已划入${province}，州界已更新，可撤销。`:"郡属州未变化。")}catch(error){output(error.message)}};
   $("mapEditorBrushSize").onchange=()=>{endGesture();drawHover()};
   $("mapEditorRegionFill").onchange=()=>{endGesture();drawHover()};
   $("mapEditorFill").onclick=()=>{if(!readyForTransfer())return;const layer=kind(),value=brush();if(!value)return toast("请先选择笔刷取值");confirmAction(`fill:${layer}:${value}`,"将覆盖当前图层的全部格子",()=>{const changed=editor.fill(layer,value);drawCanvas();output(`整层填充 ${changed} 格。`)})};
@@ -784,6 +886,12 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     finally{setApplying(false);updateStatus()}
   };
   $("mapEditorLoadScenario").onclick=loadSavedScenario;$("mapEditorResetScenario").onclick=resetScenario;
+  if($("mapEditorResize100"))$("mapEditorResize100").onclick=()=>{
+    if(!readyForTransfer()||reference?.loading)return;
+    confirmAction("resize-grid","转换当前舆图为100×100，可撤销",()=>{try{
+      reference?.setAdjusting(false);editor.resize(100,100);movingCity=false;adjustingLine=null;selectedRiverPoint=-1;reference?.syncGrid();refresh();changeZoom(1,null,true);output(`已映射到100×100 · ${editor.cities.length}据点 · ${editor.counties.length}县治 · 可撤销`);
+    }catch(error){output(`转换失败：${error.message}`)}});
+  };
   $("mapEditorExportPatch").onclick=()=>{if(!readyForTransfer())return;try{const patch=editor.exportPatch();$("mapEditorJson").value=JSON.stringify(patch,null,2);downloadJson?.(patch,"map-editor.patch.json");output("已导出地图补丁，包含地形、州郡、据点、县治与道路。")}catch(error){output(`导出失败：${error.message}`)}};
   $("mapEditorExportScenario").onclick=()=>{if(!readyForTransfer())return;try{const scenario=editor.exportScenario();$("mapEditorJson").value=JSON.stringify(scenario,null,2);downloadJson?.(scenario,`${source().scenario?.id||"scenario"}-map.json`);output("已导出完整剧本。")}catch(error){output(`导出失败：${error.message}`)}};
   function importText(text){if(!readyForTransfer())return;try{if(text.length>12*1024*1024)throw new Error("文件超过 12 MB");editor.importText(text);movingCity=false;refresh();output("已导入并通过校验，可撤销此次导入。")}catch(error){output(`导入失败：${error.message}`)}}
@@ -799,9 +907,9 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     $("mapEditorApply").textContent=view()?"应用并保存":"保存剧本";
     $("mapEditorApply").dataset.tip=view()?"保存当前战局的地图":"保存此剧本的地图，新开局自动使用";
     if(!dialog.open)dialog.showModal();if(!initialized){dialog.classList.add("os-dialog-maximized");initialized=true}
-    refresh();if(contextChanged||!dialog.dataset.editorLoaded){dialog.dataset.editorLoaded="true";await loadDraft()}await loadScenarioInfo();
+    const referenceLoading=reference?.load(nextKey);refresh();if(referenceLoading)await referenceLoading;if(contextChanged||!dialog.dataset.editorLoaded){dialog.dataset.editorLoaded="true";await loadDraft()}await loadScenarioInfo();
     applyCanvasZoom(true);drawCanvas();
   }
-  if(window.ResizeObserver&&viewport)new window.ResizeObserver(()=>{if(dialog.open&&zoom===1)applyCanvasZoom(true)}).observe(viewport);
-  return {editor,open,refresh};
+  if(window.ResizeObserver&&viewport)new window.ResizeObserver(()=>{if(!dialog.open)return;if(zoom===1)applyCanvasZoom(true);else requestReferenceDraw()}).observe(viewport);
+  return {editor,reference,open,refresh};
 };

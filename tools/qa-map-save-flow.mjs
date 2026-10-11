@@ -31,7 +31,7 @@ const reload=async ready=>{const oldId=await evaluate("const id=window.__qaDocum
 const setup=`
   const $=id=>document.getElementById(id),canvas=$('mapEditorCanvas');
   function exported(){const click=HTMLAnchorElement.prototype.click;HTMLAnchorElement.prototype.click=()=>{};try{$('mapEditorExportPatch').click();return JSON.parse($('mapEditorJson').value)}finally{HTMLAnchorElement.prototype.click=click}}
-  function clickCell(x,y){const rect=canvas.getBoundingClientRect(),capture=canvas.setPointerCapture;canvas.setPointerCapture=()=>{};const event={bubbles:true,pointerId:7,button:0,clientX:rect.left+(x+.5)*rect.width/60,clientY:rect.top+(y+.5)*rect.height/60};try{canvas.dispatchEvent(new PointerEvent('pointerdown',event));canvas.dispatchEvent(new PointerEvent('pointerup',event))}finally{canvas.setPointerCapture=capture}}
+  function clickCell(x,y){const rect=canvas.getBoundingClientRect(),capture=canvas.setPointerCapture;canvas.setPointerCapture=()=>{};const event={bubbles:true,pointerId:7,button:0,shiftKey:true,clientX:rect.left+(x+.5)*rect.width/(canvas.width/14),clientY:rect.top+(y+.5)*rect.height/(canvas.height/14)};try{canvas.dispatchEvent(new PointerEvent('pointerdown',event));canvas.dispatchEvent(new PointerEvent('pointerup',event))}finally{canvas.setPointerCapture=capture}}
 `;
 const openEditor=()=>run("await document.getElementById('openMapEditor').onclick();return true");
 try{
@@ -42,7 +42,7 @@ try{
   await openEditor();const original=await evaluate(`${setup}return exported()`);
   const edited=await evaluate(`${setup}
     $('mapEditorValue').value='forest';$('mapEditorValue').onchange();clickCell(0,0);
-    const city=exported().cities.find(item=>item.id==='xuchang');$('mapEditorToolProvince').click();$('mapEditorRegionName').value='持久州';$('mapEditorAddRegion').click();clickCell(city.x,city.y);
+    const city=exported().cities.find(item=>item.id==='xuchang');$('mapEditorToolProvince').click();clickCell(city.x,city.y);$('mapEditorCommanderyProvince').value='荆州';$('mapEditorAssignProvince').click();
     $('mapEditorToolCommandery').click();$('mapEditorRegionName').value='持久郡';$('mapEditorAddRegion').click();clickCell(city.x,city.y);
     $('mapEditorToolCity').click();$('mapEditorCity').value=city.id;$('mapEditorCity').onchange();$('mapEditorCityName').value='持久城';$('mapEditorCityName').dispatchEvent(new Event('input',{bubbles:true}));$('mapEditorSaveCity').click();
     $('mapEditorToolRiver').click();$('mapEditorRiverSelect').selectedIndex=1;$('mapEditorRiverSelect').onchange();$('mapEditorRiverName').value='持久河';$('mapEditorRiverRename').click();

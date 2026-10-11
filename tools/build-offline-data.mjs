@@ -7,6 +7,7 @@ const read=path=>JSON.parse(fs.readFileSync(path,"utf8"));
 const scenario=read("game/data/history/scenarios/200_guandu.json"),map=read("game/data/map/central_plains.json"),commands=read("game/data/common/commands.json"),terrain=read("game/data/common/terrain.json");
 const payload={
   scenario,map:{...map.grid,...map,id:map.id},
+  mapLayouts:map.layout_archive_files?Object.fromEntries(Object.entries(map.layout_archive_files).map(([revision,file])=>[revision,read(file)])):map.layout_archive_file?{[map.legacy_revision]:read(map.layout_archive_file)}:{},
   terrainDefs:Object.fromEntries(Object.entries(terrain.terrains).map(([id,value])=>[id,value])),
   unitTypes:read("game/data/common/unit_types.json").unit_types,
   items:read("game/data/common/items.json").items,

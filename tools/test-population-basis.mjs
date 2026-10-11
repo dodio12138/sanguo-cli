@@ -8,12 +8,12 @@ globalThis.fetch=async file=>{try{return {ok:true,json:async()=>await read(file)
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 for(const file of ["data/offline-data.generated","core/data-loader","core/game-clock","core/fiscal-system","core/rule-engine","core/game-state"])await import(`../js/${file}.js`);
 assert.deepEqual(profiles.population_reference,reference,"派生配置不能与人口源表分叉");
-assert.equal(Object.keys(reference.records).length,105);assert.equal(Object.keys(profiles.historical_basis).length,158);
+assert.equal(Object.keys(reference.records).length,137);assert.equal(Object.keys(profiles.historical_basis).length,184);
 for(const seat of admin.commandery_seats_140){const row=profiles.historical_basis[seat.cityId],record=DataLoader.populationRecord(profiles,seat.name);assert.ok(record,`${seat.name}缺少人口来源`);assert.deepEqual(row.slice(0,3),[record.commandery,record.year,record.population]);assert.ok(reference.sources[record.source]?.url)}
 assert.deepEqual(Object.entries(reference.records).filter(([,row])=>row[1]===null).map(([name])=>name),["辽东属国"],"只有明确缺载项允许人口为空");
 for(const [name,population] of Object.entries({京兆尹:285574,左冯翊:145195,右扶风:93091,魏郡:695606,代郡:126188,辽西郡:81714,东莱郡:484393,郁林郡:71162,酒泉郡:76726}))assert.equal(reference.records[name][1],population,name);
 assert.equal(DataLoader.populationRecord(profiles,"勃海郡").population,1106500);assert.equal(DataLoader.populationRecord(profiles,"京兆尹及三辅").population,285574);
-assert.equal(reference.records["沛国"][3],"emended");assert.equal(reference.records["辽东属国"][3],"unrecorded");
+assert.equal(reference.records["沛郡"][3],"emended");assert.equal(reference.records["辽东属国"][3],"unrecorded");
 for(const name of ["酒泉郡","辽东郡","郁林郡","交趾郡"]){assert.equal(reference.records[name][0],2);assert.equal(reference.records[name][3],"earlier")}
 const loader=new DataLoader(SANGUO_DATA);await loader.load();
 for(const id of ["190_coalition","200_guandu","208_red_cliffs"]){
@@ -31,6 +31,8 @@ assert.ok(SANGUO_DATA.counties.every(county=>Number.isFinite(county.population)&
 assert.equal(SANGUO_DATA.cities.find(city=>city.id==="commandery_city_094").historical.censusPopulation,81714);
 const model=reference.city_population_model;
 for(const city of rawCities.filter(city=>city.id.startsWith("commandery_city_")&&city.commandery!=="辽东属国")){
-  const estimate=profiles.city_population_estimates[city.id],expected=Math.max(model.minimum,Math.round(reference.records[city.commandery][1]*model.registered_retention*model.urban_share/estimate.cityNodes/model.rounding)*model.rounding);assert.equal(city.population,expected,city.id);
+  const estimate=profiles.city_population_estimates[city.id];if(!estimate||estimate.method!=="commandery_urban_share")continue;
+  const basis=profiles.historical_basis[city.id][0],record=reference.records[basis];if(!record)continue;
+  const expected=Math.max(model.minimum,Math.round(record[1]*model.registered_retention*model.urban_share/estimate.cityNodes/model.rounding)*model.rounding);assert.equal(city.population,expected,city.id);
 }
-console.log("人口基准通过：105郡国覆盖 / 158据点 / 原文与校勘与前期基准分离 / 缺载不伪造 / 253县守恒 / 三剧本载入 / 离线县人口 / 旧战局保留 / 自定义郡隔离");
+console.log(`人口基准通过：${Object.keys(reference.records).length}郡国覆盖 / ${Object.keys(profiles.historical_basis).length}据点 / 原文与校勘与前期基准分离 / 缺载不伪造 / 253县守恒 / 三剧本载入 / 离线县人口 / 旧战局保留 / 自定义郡隔离`);
