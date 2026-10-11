@@ -49,6 +49,8 @@
 
 用户在编辑器中定稿100×100陆海与郡域手绘后，该成果冻结为当前基准 `commandery-119-grid-100-v1`（几何在 `game/data/map/central_plains.json`），郡域轮廓保存在 `game/data/history/commandery_boundaries_119.json`。119个郡国的治所从这份地形重新推理落格：119个治所全部落在本郡陆地格，属郡据点175个，越界据点9个（保留原有稳定ID与郡属结构，仅落在相邻格），越界县治0个。253个县治中需要服务据点的与据点同格复用。塞外2048格不计入州郡，不引入第二套州界；州域仍由 `map.commandery_provinces` 的郡属州关系合成。
 
+同一版次下，190、200、208 三个剧本共用这套几何，各据点初始归属不再逐剧本手改，而由 `node tools/build-scenario-ownership.mjs --write` 按郡国归属表统一生成（200 年写入 `cities/200_guandu.json`，190/208 写入各自 `patch.city_forces`），并同步 `forces[].cities` 据点数。运行时不加 `--write` 只打印统计。归属的选择与取舍见 `game/data/history/scenarios/SCENARIO_NOTES.md`。
+
 郡域轮廓为119块、128个环；东海国、广汉郡、汉中郡、会稽郡、南海郡、蜀郡、左冯翊是多环郡国（含挖空与离散块），面积核对按有向环净面积计算，挖空环为反向绕行。`node tools/test-commandery-boundaries.mjs` 逐郡核对轮廓面积等于郡域格数、据点与治所落本郡、县治与服务据点同格、48条道路逐格连续不跨海，以及重建道路不改写地形。
 
 ### 用户参考图的105郡域校正（历史版）
