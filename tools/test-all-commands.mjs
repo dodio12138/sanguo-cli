@@ -1,7 +1,7 @@
 globalThis.window=globalThis;
 if(typeof globalThis.CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 await import("../js/data/offline-data.generated.js");
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
 const fallback=/未通过规则路由|尚在规划/;

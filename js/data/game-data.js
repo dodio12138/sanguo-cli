@@ -64,5 +64,6 @@ window.SANGUO_DATA = (() => {
     {id:"quiet",name:"境内无事",weight:4,effect:{},text:"本旬境内无大事。"}
   ];
   const unitTypes={infantry:{name:"步兵",attack:1,defence:1,supply:1},cavalry:{name:"骑兵",attack:1.35,defence:.9,supply:1.5},archers:{name:"弓兵",attack:1.15,defence:.8,supply:1.1}};
-  return {version:"0.7.0",map:{width:40,height:32,seed:200,id:"china_40x32"},terrainDefs,unitTypes,forces,cities,officers,items,armies,rules,events,commandCatalog:window.SANGUO_COMMAND_CATALOG,provinces};
+  for(const city of cities){city.x=Math.round((city.x+.5)*60/40-.5);city.y=Math.round((city.y+.5)*60/32-.5)}
+  return {version:"0.7.0",map:{width:60,height:60,seed:200,id:"china_pixel_60x60"},terrainDefs,unitTypes,forces,cities,officers,items,armies,rules,events,commandCatalog:window.SANGUO_COMMAND_CATALOG,provinces};
 })();

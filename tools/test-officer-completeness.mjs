@@ -6,7 +6,7 @@ import {pathToFileURL} from "node:url";
 const root=path.resolve(new URL("..",import.meta.url).pathname),read=file=>JSON.parse(fs.readFileSync(path.join(root,file),"utf8"));
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};globalThis.fetch=async url=>{const file=path.join(root,String(url).replace(/^\//,""));try{return {ok:true,status:200,json:async()=>JSON.parse(fs.readFileSync(file,"utf8"))}}catch{return {ok:false,status:404,json:async()=>({})}}};
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
-await import(pathToFileURL(path.join(root,"js/core/data-loader.js")));await import(pathToFileURL(path.join(root,"js/core/rule-engine.js")));await import(pathToFileURL(path.join(root,"js/core/game-state.js")));
+await import(pathToFileURL(path.join(root,"js/core/data-loader.js")));await import(pathToFileURL(path.join(root,"js/core/game-clock.js")));await import(pathToFileURL(path.join(root,"js/core/fiscal-system.js")));await import(pathToFileURL(path.join(root,"js/core/rule-engine.js")));await import(pathToFileURL(path.join(root,"js/core/game-state.js")));
 const sandbox={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,"js/data/offline-data.generated.js"),"utf8"),sandbox);
 const loader=new DataLoader(sandbox.window.SANGUO_DATA),data=await loader.load(),reference=read("game/data/reference/officers-san11.json").officers;
 const expected=reference.filter(officer=>!officer.deathYear||officer.deathYear>=200),byId=new Map(data.officers.map(officer=>[officer.id,officer]));

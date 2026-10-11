@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 globalThis.window=globalThis;
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 
 const cities=[
   {id:"a",name:"甲城",force:"cao",type:"city",garrison:6000,localFood:5000,storage:10000,x:1,y:1},

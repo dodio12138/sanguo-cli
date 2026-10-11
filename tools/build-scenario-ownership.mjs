@@ -1,0 +1,181 @@
+import fs from "node:fs";
+import path from "node:path";
+import {fileURLToPath} from "node:url";
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const write=process.argv.includes("--write");
+const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),"utf8"));
+
+// 郡国 → [200 官渡, 190 反董卓联合, 208 赤壁] 归属；郡国名取自 cities/200_guandu.json 的 commandery 字段。
+// 依据：《后汉书·郡国志》建置与汉末各州牧守实际控制范围，逐郡按公元 200/190/208 年史实指定。
+const COMMANDERY_OWNERS={
+  "河南尹":["cao","dong","cao"],"恒农郡":["cao","dong","cao"],"京兆尹":["cao","dong","cao"],
+  "左冯翊":["cao","dong","cao"],"右扶风":["cao","dong","cao"],"汉兴郡":["cao","dong","cao"],
+  "河东郡":["cao","dong","cao"],"河内郡":["cao","neutral","cao"],
+  "颍川郡":["cao","neutral","cao"],"汝南郡":["cao","yuan_shu","cao"],"梁国":["cao","neutral","cao"],
+  "陈郡":["cao","neutral","cao"],"鲁国":["cao","neutral","cao"],"谯郡":["cao","cao","cao"],
+  "沛郡":["liu","cao","cao"],"弋阳郡":["cao","yuan_shu","cao"],"蕲新郡":["cao","yuan_shu","sun"],
+  "陈留郡":["cao","cao","cao"],"东郡":["cao","liu_dai","cao"],"济阴国":["cao","liu_dai","cao"],
+  "山阳国":["cao","liu_dai","cao"],"任城国":["cao","liu_dai","cao"],"东平国":["cao","liu_dai","cao"],
+  "济北国":["cao","cao","cao"],"泰山郡":["cao","neutral","cao"],
+  "下邳国":["liu","tao_qian","cao"],"彭城国":["liu","tao_qian","cao"],"琅邪国":["liu","tao_qian","cao"],
+  "东海国":["liu","tao_qian","cao"],"东莞郡":["liu","tao_qian","cao"],"利城郡":["liu","tao_qian","cao"],
+  "城阳郡":["liu","tao_qian","cao"],"广陵郡":["liu","tao_qian","cao"],
+  "魏郡":["yuan","han_fu","cao"],"渤海郡":["yuan","yuan","cao"],"常山国":["yuan","han_fu","cao"],
+  "中山国":["yuan","han_fu","cao"],"安平国":["yuan","han_fu","cao"],"河间国":["yuan","han_fu","cao"],
+  "甘陵郡":["yuan","han_fu","cao"],"赵郡":["yuan","han_fu","cao"],"巨鹿郡":["yuan","han_fu","cao"],
+  "博陵国":["yuan","han_fu","cao"],"章武郡":["yuan","han_fu","cao"],
+  "太原郡":["yuan","neutral","cao"],"上党郡":["yuan","neutral","cao"],"雁门郡":["yuan","neutral","cao"],
+  "新兴郡":["yuan","neutral","cao"],"乐平郡":["yuan","neutral","cao"],
+  "右北平郡":["yuan","gongsun","cao"],"代郡":["yuan","liu_yu","cao"],"广阳郡":["yuan","liu_yu","cao"],
+  "涿郡":["yuan","liu_yu","cao"],"上谷郡":["yuan","liu_yu","cao"],"渔阳郡":["yuan","liu_yu","cao"],
+  "辽东郡":["gongsun_du","gongsun_du","gongsun_kang"],"辽西郡":["gongsun_du","gongsun_du","gongsun_kang"],
+  "辽东属国":["gongsun_du","gongsun_du","gongsun_kang"],
+  "平原郡":["yuan","yuan","cao"],"北海国":["yuan","kong_rong","cao"],"齐郡":["yuan","kong_rong","cao"],
+  "济南国":["yuan","kong_rong","cao"],"安乐国":["yuan","kong_rong","cao"],"东莱郡":["yuan","kong_rong","cao"],
+  "乐陵郡":["yuan","kong_rong","cao"],
+  "武威郡":["ma_teng","ma_teng","neutral"],"汉阳郡":["ma_teng","ma_teng","neutral"],
+  "陇西郡":["ma_teng","ma_teng","neutral"],"西郡":["ma_teng","ma_teng","neutral"],
+  "金城郡":["han_sui","han_sui","neutral"],"安定郡":["han_sui","han_sui","neutral"],
+  "北地郡":["han_sui","han_sui","neutral"],"西平郡":["han_sui","han_sui","neutral"],
+  "武都郡":["zhang_lu","neutral","zhang_lu"],"汉中郡":["zhang_lu","liu_yan","zhang_lu"],
+  "上庸郡":["zhang_lu","liu_yan","zhang_lu"],"西城郡":["zhang_lu","liu_yan","zhang_lu"],
+  "房陵郡":["liu_biao","liu_biao","zhang_lu"],
+  "梓潼郡":["liu_zhang","liu_yan","liu_zhang"],"蜀郡":["liu_zhang","liu_yan","liu_zhang"],
+  "巴郡":["liu_zhang","liu_yan","liu_zhang"],"巴西郡":["liu_zhang","liu_yan","liu_zhang"],
+  "巴东属国":["liu_zhang","liu_yan","liu_zhang"],"广汉郡":["liu_zhang","liu_yan","liu_zhang"],
+  "广汉属国":["liu_zhang","liu_yan","liu_zhang"],"蜀郡属国":["liu_zhang","liu_yan","liu_zhang"],
+  "犍为郡":["liu_zhang","liu_yan","liu_zhang"],"犍为属国":["liu_zhang","liu_yan","liu_zhang"],
+  "越巂郡":["liu_zhang","liu_yan","liu_zhang"],"益州郡":["liu_zhang","liu_yan","liu_zhang"],
+  "江阳郡":["liu_zhang","liu_yan","liu_zhang"],"汶山郡":["liu_zhang","liu_yan","liu_zhang"],
+  "宕渠郡":["liu_zhang","liu_yan","liu_zhang"],"阴平郡":["liu_zhang","liu_yan","liu_zhang"],
+  "朱提郡":["liu_zhang","liu_yan","liu_zhang"],"固陵郡":["liu_zhang","liu_yan","liu_zhang"],
+  "南阳郡":["cao","yuan_shu","cao"],"襄阳郡":["liu_biao","liu_biao","cao"],
+  "南郡":["liu_biao","liu_biao","cao"],"江夏郡":["liu_biao","liu_biao","liu"],
+  "章陵郡":["liu_biao","liu_biao","cao"],"南乡郡":["liu_biao","yuan_shu","cao"],
+  "宜都郡":["liu_biao","liu_biao","cao"],"武陵郡":["liu_biao","liu_biao","jin_xuan"],
+  "长沙郡":["liu_biao","sun_jian","han_xuan"],"零陵郡":["liu_biao","liu_biao","liu_du"],
+  "桂阳郡":["liu_biao","liu_biao","zhao_fan"],
+  "丹阳郡":["sun","neutral","sun"],"吴郡":["sun","neutral","sun"],"会稽郡":["sun","neutral","sun"],
+  "豫章郡":["sun","neutral","sun"],"庐江郡":["sun","yuan_shu","sun"],"庐陵郡":["sun","neutral","sun"],
+  "鄱阳郡":["sun","neutral","sun"],"九江郡":["cao","yuan_shu","cao"],
+  "交趾郡":["liu_biao","neutral","neutral"],"南海郡":["liu_biao","neutral","neutral"],
+  "郁林郡":["liu_biao","neutral","neutral"],"合浦郡":["liu_biao","neutral","neutral"]
+};
+
+// 个别据点在所属郡之外单独归属：渡津、关隘、郡治兼战略节点、史籍错配的县治与塞外据点。
+const CITY_OWNERS={
+  "200_guandu":{
+    "qiao":"cao","xiaopei":"liu","xinye":"liu_biao","wan":"cao","wuguan":"cao",
+    "commandery_city_011":"liu","commandery_city_105":"neutral","commandery_city_100":"liu_biao","cangwu":"liu_biao",
+    "baima":"cao","yanjin":"cao","puyang":"cao","xuchang":"cao","guandu":"cao","hulao":"cao","hangu":"cao",
+    "tongguan":"cao","changan":"cao","luoyang":"cao","mengjin":"cao","henei":"cao","shangyong":"zhang_lu",
+    "yiling":"liu_biao","yongan":"liu_zhang","fuling":"liu_zhang","jianmen":"liu_zhang",
+    "commandery_city_074":"ma_teng","commandery_city_075":"ma_teng","commandery_city_076":"ma_teng",
+    "commandery_city_078":"ma_teng","commandery_city_081":"yuan","commandery_city_082":"yuan",
+    "commandery_city_084":"yuan","commandery_city_085":"yuan","commandery_city_087":"yuan"
+  },
+  "190_coalition":{
+    "qiao":"cao","xiaopei":"tao_qian","xinye":"liu_biao","wan":"yuan_shu","wuguan":"dong",
+    "commandery_city_011":"tao_qian","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
+    "xiapi":"tao_qian","pengcheng":"tao_qian","langya":"tao_qian","guangling":"tao_qian","runan":"yuan_shu",
+    "hulao":"dong","hangu":"dong","tongguan":"dong","changan":"dong","luoyang":"dong","mengjin":"dong",
+    "henei":"neutral","shangyong":"liu_yan","yiling":"liu_biao","yongan":"liu_yan",
+    "fuling":"liu_yan","jianmen":"liu_yan","chenliu":"cao","baima":"liu_dai","yanjin":"liu_dai","puyang":"liu_dai",
+    "commandery_city_074":"ma_teng","commandery_city_075":"ma_teng","commandery_city_076":"ma_teng",
+    "commandery_city_078":"ma_teng","commandery_city_081":"neutral","commandery_city_082":"neutral",
+    "commandery_city_084":"neutral","commandery_city_085":"neutral","commandery_city_087":"neutral"
+  },
+  "208_red_cliffs":{
+    "qiao":"cao","xiaopei":"cao","xinye":"cao","wan":"cao","wuguan":"cao",
+    "commandery_city_011":"cao","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
+    "xiakou":"liu","yiling":"cao","chaisang":"sun","pukou":"sun","shouchun":"cao","hefei":"cao",
+    "hulao":"cao","hangu":"cao","tongguan":"cao","changan":"cao","luoyang":"cao","mengjin":"cao","henei":"cao",
+    "shangyong":"zhang_lu","yongan":"liu_zhang","fuling":"liu_zhang","jianmen":"liu_zhang","hanzhong":"zhang_lu",
+    "yangping":"zhang_lu","commandery_city_074":"neutral","commandery_city_075":"neutral",
+    "commandery_city_076":"neutral","commandery_city_078":"neutral","commandery_city_081":"cao",
+    "commandery_city_082":"cao","commandery_city_084":"cao","commandery_city_085":"cao","commandery_city_087":"cao"
+  }
+};
+
+const SCENARIOS=[{id:"200_guandu",index:0},{id:"190_coalition",index:1},{id:"208_red_cliffs",index:2}];
+const citiesFile=read("game/data/history/cities/200_guandu.json");
+const defined=new Set(citiesFile.cities.map(city=>city.commandery));
+const missing=[...defined].filter(name=>name!=="塞外区域"&&!COMMANDERY_OWNERS[name]);
+if(missing.length)throw new Error(`缺少郡国归属定义：${missing.join("、")}`);
+const unknown=[...Object.keys(COMMANDERY_OWNERS)].filter(name=>!defined.has(name));
+if(unknown.length)throw new Error(`归属表含未知郡国：${unknown.join("、")}`);
+
+function ownersFor(scenario){
+  const overrides=CITY_OWNERS[scenario.id]||{},owners={};
+  for(const city of citiesFile.cities){
+    const value=overrides[city.id]||COMMANDERY_OWNERS[city.commandery]?.[scenario.index];
+    if(!value)throw new Error(`据点缺少归属：${city.id} ${city.name} (${city.commandery}) @${scenario.id}`);
+    owners[city.id]=value;
+  }
+  const extra=Object.keys(overrides).filter(id=>!citiesFile.cities.some(city=>city.id===id));
+  if(extra.length)throw new Error(`${scenario.id} 覆盖表含未知据点：${extra.join("、")}`);
+  return owners;
+}
+
+function replaceInlineObject(text,key,value){
+  const marker=`"${key}":`;
+  const start=text.indexOf(marker);
+  if(start<0)throw new Error(`未找到 ${key}`);
+  let index=start+marker.length;while(/\s/.test(text[index]))index++;
+  if(text[index]!=="{")throw new Error(`${key} 不是内联对象`);
+  let depth=0,end=index,inString=false,escaped=false;
+  for(;end<text.length;end++){
+    const char=text[end];
+    if(inString){if(escaped)escaped=false;else if(char==="\\")escaped=true;else if(char==='"')inString=false;continue}
+    if(char==='"'){inString=true;continue}
+    if(char==="{")depth++;
+    else if(char==="}"&&--depth===0){end++;break}
+  }
+  return text.slice(0,index)+JSON.stringify(value)+text.slice(end);
+}
+
+// forces 条目的 "cities" 是各势力初始据点数，用于开局府库与占领计数；按归属派生后写回，避免沿用旧图遗留值。
+function seatCounts(owners){
+  const counts={};
+  for(const city of citiesFile.cities)if((city.type||"city")==="city")counts[owners[city.id]]=(counts[owners[city.id]]||0)+1;
+  return counts;
+}
+function syncForceCounts(text,counts){
+  const missing=[];
+  const out=text.replace(/\{"id":"([a-z_]+)","name":"[^"]*","color":"#[0-9a-fA-F]+","soldiers":\d+,"cities":\d+\}/gu,(match,id)=>{
+    if(!(id in counts)&&id!=="neutral")missing.push(id);
+    return match.replace(/"cities":\d+(?=\})/u,`"cities":${counts[id]||0}`);
+  });
+  return {out,missing};
+}
+
+const report=[];
+for(const scenario of SCENARIOS){
+  const owners=ownersFor(scenario);
+  const counts={};for(const value of Object.values(owners))counts[value]=(counts[value]||0)+1;
+  report.push({scenario:scenario.id,total:Object.keys(owners).length,forces:Object.keys(counts).length,counts});
+  if(!write)continue;
+  if(scenario.id==="200_guandu"){
+    const data=read("game/data/history/cities/200_guandu.json");
+    for(const city of data.cities)city.force=owners[city.id];
+    fs.writeFileSync(path.join(root,"game/data/history/cities/200_guandu.json"),JSON.stringify(data,null,2)+"\n");
+    const forcesPath="game/data/history/forces/200_guandu.json";
+    const forcesText=fs.readFileSync(path.join(root,forcesPath),"utf8");
+    const synced=syncForceCounts(forcesText,seatCounts(owners));
+    if(synced.missing.length)throw new Error(`200_guandu 势力缺少据点计数：${synced.missing.join("、")}`);
+    fs.writeFileSync(path.join(root,forcesPath),synced.out);
+  }else{
+    const relative=`game/data/history/scenarios/${scenario.id}.json`;
+    let text=fs.readFileSync(path.join(root,relative),"utf8");
+    const planned={};
+    for(const city of citiesFile.cities)planned[city.id]=owners[city.id];
+    const sorted=Object.fromEntries(Object.keys(planned).sort().map(id=>[id,planned[id]]));
+    text=replaceInlineObject(text,"city_forces",sorted);
+    const synced=syncForceCounts(text,seatCounts(owners));
+    if(synced.missing.length)throw new Error(`${scenario.id} 势力缺少据点计数：${synced.missing.join("、")}`);
+    fs.writeFileSync(path.join(root,relative),synced.out);
+  }
+}
+console.log(JSON.stringify(report,null,1));
+console.log(write?"已写入归属":"（演练模式，加 --write 才写入）");

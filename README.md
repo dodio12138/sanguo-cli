@@ -4,7 +4,7 @@
 
 ## 启动游戏
 
-在线游玩：[<<<三国](https://dodio12138.github.io/sanguo-cli/)。网页版无需安装或配置 AI，存档保存在当前浏览器；清理网站数据会删除存档。通过“帮助 → 高级工具 → 数据与模组工具”导出、导入存档，可在本地版和网页版之间迁移。
+在线游玩：[<<<三国](https://dodio12138.github.io/sanguo-cli/)。
 
 macOS 下双击项目根目录的 `启动游戏.command`。
 
@@ -19,7 +19,7 @@ node tools/start-game.mjs
 ## 主要内容
 
 - 190 反董卓、200 官渡、208 赤壁三个剧本
-- 75 个战略据点、253 个县治和 565 名人物
+- 184 个可操作城市与关津据点（含119个郡国治所）、253 个县治和 565 名人物
 - 城市治理、人才任用、军团编制、外交与科技系统
 - 行军、补给、野战、围城、俘虏与占领机制
 - 不同性格和战略倾向的诸侯 AI
@@ -32,12 +32,6 @@ node tools/start-game.mjs
 如需使用 AI 军师和史官，将 `.env.example` 复制为 `.env`，填写 `AI_API_KEY` 后重新启动游戏。没有配置 AI 时，完整游戏仍可正常游玩。
 
 详细配置见 [AI 接入说明](docs/AI_API.md)。
-
-## GitHub Pages 发布
-
-运行 `node tools/build-pages.mjs`，将生成的 `.pages-dist/` 发布到 `gh-pages` 分支根目录。该目录只含游戏静态资源，不包含 `.env`、本地存档或服务器。Pages 选择 `gh-pages` 分支的根目录作为来源；生成的 `.nojekyll` 会关闭 Jekyll 处理。
-
-发布版使用纯浏览器存档并隐藏外部 AI 入口。本地 `node tools/start-game.mjs` 的存档服务和可选 AI 功能仍然可用。
 
 ## 项目目录
 

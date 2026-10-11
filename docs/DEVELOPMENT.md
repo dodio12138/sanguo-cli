@@ -11,7 +11,7 @@
 ## 2. 技术选择
 
 - 原生 HTML、CSS、JavaScript，无构建步骤与第三方依赖。
-- Canvas 绘制 40×32 汉末主要战略区网格地图（参考用户提供的地图重新安排城市、关隘、渡口和河流；同色相邻格不显示边线），DOM 承载面板和无障碍文本。
+- Canvas 绘制 60×60 汉末战略区网格地图（由用户提供的 30×30 像素底图逐像素放大两倍；同色相邻格不显示边线），DOM 承载面板和无障碍文本。
 - 单一 `GameState` 作为原型状态容器，以事件方式通知 UI。
 - 数据定义与存档状态分开，避免平衡数值散落在视图代码中。
 
@@ -640,6 +640,159 @@ submit_orders()
 - [x] 候选涵盖军事行动、战果、外交关系、天下格局和重要人物，明确排除农业、商业、财政及其他内政日常。
 - [x] 历史补录按最近四个已结束季度扫描；史官档案展示季度标签，并保留旧版月录可读性。
 - [x] 网关提示词与旧版 `chronicle_month` 回退支持季度数据；验证季度聚合、外交保留、内政过滤和旧网关兼容。
+
+### P59（舆图本方疆域描边）
+
+- [x] 本方势力的影响范围在战略舆图上以虚线描边单独勾勒，边界不再只靠色块区分。
+- [x] 描边收敛为细虚线双线（深色底衬加势力色高光），线宽随格子缩放，避免压住地形与单位。
+- [x] 悬停光标框改为在描边之上绘制，选中反馈不再被疆域线覆盖；疆域归属按最近城池统一计算，海洋与域外不计入。
+- [x] 观察者模式、图例隐藏本方势力或未选择势力时不绘制；专项测试覆盖描边与光标框绘制顺序。
+
+### P60（桌面图标与档案情报入口）
+
+- [x] 桌面图标统一为 `assets/icons/*.svg` 像素徽记：八个常驻窗口、军政六档档案、战报、日报、史官档案与军师入口全部就位。
+- [x] 补齐史官档案入口图标，档案与情报类应用可从「漢」菜单或右键创建桌面快捷方式，军师窗口沿用军师徽记。
+- [x] 桌面默认只保留舆图、本势力、军令三个图标，其余应用按需创建；快捷方式清单键升级为 `sanguo.os-desktop-shortcuts.v4`。
+- [x] 回归测试覆盖默认三图标、全量图标资源与创建顺序、动态创建去重、存档恢复与移除。
+
+### P61（新编军团就仓）
+
+- [x] 修复新建军团没有军仓的问题：编军时补上 `stores`，并由驻地城市存粮就仓，面板即时显示钱币／粮食／布帛，不再出现空仓储。
+- [x] 抽出 `FiscalSystem.stockArmy`，编军、敌军 AI 编军与每日军粮消耗共用同一套就仓与补粮逻辑，避免同一处逻辑分叉。
+- [x] 回归测试补充「编军必带军仓且粮食来自驻地存粮」断言，全量 48 项测试通过。
+
+### P62（欠缴补缴不得抽干本地军粮）
+
+- [x] 修复「反复运粮到陈留却始终缺粮」：欠缴补缴追缴原本在本地消耗与军团就仓之前执行，会把刚到城的粮食当回合原样搬回首都，驻军与军团因此日日断粮。
+- [x] `settle` 补缴前先算本地保底（`FiscalSystem.localFoodReserve`＝驻军口粮与官僚口粮，加同城军团 60 天就仓缺口），只把超出保底的余粮按补缴运出；钱币与布帛仍即时清欠。
+- [x] 抽出 `FiscalSystem.armyDailyNeed` / `armyFoodTarget`，就仓、每日耗粮与保底计算共用同一套口径；补缴发生时追加一条带留底量的财政提示（同一城最多每旬一条），玩家能看到粮食去向。
+- [x] 回归测试补充「补缴不夺军团就仓粮、未超保底不抽粮、持续运粮不出现缺粮事件且欠缴逐步清偿」断言。
+
+### P63（府库收入来源图与欠缴政策）
+
+- [x] 府库收支面板新增「收入来源（按郡县占比）」：按钱币、粮食、布帛三行堆叠条显示最近一次征收各郡县的收入额与占比，同一城市在不同资源行使用同一颜色，图例补充上缴、留用与欠缴量。
+- [x] `FiscalSystem.incomeSources` 按资源取最近一次征收回合聚合各城（田租与商税合并为钱币行），`pendingArrears` 汇总势力欠缴余额；旧存档已有的 `lastCollection` 直接可用。
+- [x] 新增欠缴政策 `arrears`：`补缴至首都`（默认，追缴欠额）与 `地方留用`（不再补缴，欠额核销登记）。可在府库面板一键切换，也可在「征收制度」命令中选择；非法取值被拒绝且不改变现行制度。
+- [x] `settle` 按政策分支：地方留用清空欠额且不再发出补缴运输，只改变归属、不凭空生成粮食；补缴分支仍保留本地保底。留用金额按资源分别累计到 `fiscal.arrearsRetained`，府库面板据此显示「累计转地方留用」，避免欠额无声消失。
+- [x] 回归测试覆盖来源占比（合并、降序、占比之和为 1）、留用政策（清空欠额、无补缴运输、军粮照常就仓）与非法政策拒绝。
+
+### P64（舆图情报图层与军队优先就食城粮）
+
+- [x] 舆图新增第六层「情报」：只显示本方已查明的敌情——驻军按兵力热力分级着色（守军薄弱／一般／雄厚／重兵），并在已知据点下方标注「守 约X千／约X.X万」，情报等级不足或未知者一律不显示、不透露数值。
+- [x] 情报层沿用 `state.intelligence.cities` 得知等级（本方城池恒为已知），行军中的敌军在情报等级足够时标注「<军团名> <兵力>」；`MapView.intelBand` 返回 `{label,limit,heat}` 供着色与图例复用，未知与已知混合时图例自动隐藏。
+- [x] 修正情报着色取值错误（此前读取数组下标导致色值 NaN），并将悬停光标框改到情报／围城／战斗／军团等所有叠加层之后绘制，选中反馈不再被任何图层覆盖；情报层下军团标签由 `drawIntel` 独占，`drawArmies` 不再重复绘制。
+- [x] 军队粮草改为「先城后军」：驻于本方城池的军团每日先消耗该城民仓粮，民仓不足才动用随军军仓（`consumeArmy` 记录 `lastConsumption.{fromCity,fromStores,source}`），缺粮时才触发断粮事件。
+- [x] 开拔与编军即仓：军团离城时按 `supplyCity`（本方、未被围）一次性就仓至随军满仓并记「开拔就仓，自X领粮 N 石」，新编军团编成时同样就仓并显示领粮量；`stockArmy`／`stationedCity`／`hasLedger` 拆分，便于就仓与消耗共用同一口径，且精简引擎状态不再因缺少财政账本而崩溃。
+- [x] 军情面板与军团详情补充随军满仓、每日军粮、就食来源与「城市粮仓／随军军仓」口径，军队仓储表新增「就食」列；专项测试 `tools/test-map-intel.mjs` 覆盖热力分级、情报等级、兵力取整、图例隐藏、标签绘制与悬停绘制顺序，财政测试重写为城优先口径。
+
+### P65（情报图层接线：边境探马与敌城档案遮蔽）
+
+- [x] 修复「点击敌城能看到驻扎军团、情报图层却空白」：舆图情报层严格按 `state.intelligence` 判定，而敌城档案面板完全不看情报等级，长期直出守军、军团、将领与仓储，构成战争迷雾泄漏。
+- [x] 引擎新增边境探马例行 `runBorderScouting`（每旬随战略系统结算）：与本方据点道路相邻的敌方据点自动获得一级情报，回报「边境探马回报：X、Y 驻军已得概数」；隔城不探、既有更高等级不被降级，观察者模式不回报。
+- [x] 情报层与军政台账统一改用「城池情报 ∪ 军团情报」取高值：驻城敌军按兵团标记与概数显示，一级给五千米粒度概数（`MapView.intelEstimate`），二级起才给千位实数与姓名。
+- [x] 新增敌城档案视图 `openEnemyCityDetail`：非本方据点且情报未满三级时改用遮蔽视图——零级未探明、一级只见守军概数与军团数量、二级可见主将与实数、三级才进入完整档案；概数卡片禁用，避免越级打开军团详情。
+- [x] 专项测试补充边境探马（邻接探明、隔城不探、不重复回报、不降级）、一级概数取整与敌城档案遮蔽接线断言。
+
+
+### P66（舆图道路：全量路网与缩放稳定折线）
+
+- [x] 修复「行军路线不沿既定道路」：道路图层此前用最小生成树裁剪路网，200 年剧本 161 条道路只绘制 74 条，军团沿被裁掉的边行军时脚下根本没有道路。`roadEdges` 改为返回路网全部双向边，与军令寻路 `RuleEngine.path` 完全同源。
+- [x] 修复「道路随缩放跳动」：折线弯折方向原先在像素坐标上比较 `|Δx| >= |Δy|`，受 `startX` 偏移与浮点抵消影响，42 条道路（陈留—官渡、官渡—许昌、白马—延津等）会随缩放翻转折向。改在格子坐标上判定弯折角点，几何与缩放、平移无关。
+- [x] 行军路线、围城线、补给线与规划路线统一复用 `traceOrthogonal(c,m,格子点)`，行军折线与道路完全重合；虚线间距与线宽随 `cell` 缩放，避免缩小时糊成一团。
+- [x] 新增 `tools/test-map-roads.mjs`：全量路网覆盖、12 档缩放下折向不变、行军路线与道路几何一致、围城与补给线同源。
+
+### P67（寻路取近路：道路相连不再绕道）
+
+- [x] 修复「地界明明道路相连却要绕道」：`RuleEngine.path`/`coalitionPath`/`logisticsPath` 原先的 BFS 只按跳数搜索、并以邻接表顺序决定谁先到达，同跳数的候选路线里被 `seen` 抢先标记的往往是几何上最远的绕行路（寿春→许昌绕下邳、洛阳→潼关绕安定、合肥→许昌绕下邳等）。
+- [x] 新增 `RuleEngine.searchRoute(from,to,allow)`：分层 BFS 保证跳数最小，层内按 `groundDistance`（城池格子坐标 `Math.hypot` 实距，非像素）取最近路线，并以稳定顺序、严格更优才替换的方式保证结果可复现；`path` 的敌据点阻断、`logisticsPath` 的己方安全据点约束、`coalitionPath` 的成员/中立通行规则全部保留（终点始终可入）。
+- [x] 行军天数（`route.length-1`）、补贴给养预算与 AI 战力排序口径不变：200 年剧本 75 据点 2775 组城池对实测跳数零变化、绕行距离单调不增，其中 2059 组路线被改短，寿春→许昌由 13 格缩短到 4 格、洛阳→潼关由 18 格缩短到 6 格。
+- [x] 新增 `tools/test-route-choice.mjs`：同跳数取近路、反向与原地返回、粮道/联军共用同一寻路、敌境据点不得穿越、真实剧本连通性与跳数不回归。
+
+### P68（存档来源优先级：刷新不再丢占领区）
+
+- [x] 修复「占领区刷新后全没了」：浏览器 localStorage 每个域约 5MB，而本机三槽存档正文实测合计约 2.55M 字符（UTF-16 约 5.1MB）已经越过上限，槽 1 再增长就写不进浏览器副本，浏览器副本从此停在最后一次写得下的旧战局（`setItem` 抛 `QuotaExceededError`，`persistenceWarning` 只提示一次）。
+- [x] 载入侧此前只要浏览器副本存在就直接返回，`synchronizeHostSaves` 算出的最新服务端存档仅写入 `hostSaveCache`，回填浏览器副本失败时就被彻底跳过；于是刷新后按旧副本恢复，最近攻下的城池与占领管制（`occupiedUntil`）全部回退。占领区本身不是独立存档对象，丢失即整局状态回退。
+- [x] `GameState.newestSave` 统一「按 `savedAt` 取最新」口径；`readSlot` 改为在浏览器副本与服务端缓存之间取最新，主菜单槽位列表、刷新续玩与存档管理器同源。
+- [x] `loadSafely` 在「主存档／自动备份／旧版存档／服务端存档」之间统一按 `savedAt` 取最新，`lastRecovery.source` 记录实际来源（如 `sanguo-cli.host.1`）；最优副本为备份时仍回填主存档键，损坏主存档回退备份的既有行为不变。
+- [x] `queueHostSave` 写入本地游戏服务前先把快照记入 `this.hostSaves`，同局内浏览器副本写满也能载入较新的战局；无本地服务（静态托管）时仍按浏览器副本与备份恢复，最坏情况退回原有提示。
+- [x] 新增 `tools/test-save-source-priority.mjs`：配额写满后降级本地服务、同局载入取最新、跨刷新保留占领区与领地数量、无服务端时仍按副本载入；`js/ui/app.js` 与 `js/core/game-state.js` 缓存版本更新到 `20261010-06`。
+
+### P69（舆图图例：并入舆图窗口底部）
+
+- [x] 按需求把独立「图例」窗口并入「战略舆图」窗口：图例条改为舆图窗口最下方一行（`#mapLegend.legend.map-legend`），军令侧栏不再保留「图例」页签，窗口管理器移除 `situationRailPanel` 窗口定义（窗口数 8 → 7）。
+- [x] 去掉图例标题：删除卡片标题行 `<span>图例</span><small id="layerName">地形</small>` 与随标题行显示的图层名，当前图层改由舆图工具栏页签高亮表达；`renderLayer()` 只重建 `#mapLegend` 的显隐开关，图例仍可点击切换要素（`data-legend-key` / `aria-pressed` 不变）。
+- [x] 图例条随窗口缩放：`flex:none;max-height:92px;overflow:auto` 放在 `.map-frame` 与 `.map-footer` 之后，条目过多时自行滚动，不压缩舆图工具栏与状态栏。
+- [x] 清理死代码：`css/style.css`、`css/hierarchy.css`、`css/os-desktop.css` 中 `.legend-card` / `.legend-window-body` 规则全部移除。
+- [x] 同步测试：`tools/test-os-window-ui.mjs`（窗口数 8 → 7、图例并入舆图且无独立标题断言）、`tools/test-desktop-apps.mjs`（桌面应用清单去掉图例窗口）、`tools/qa-county-map.mjs`（图层名改读工具栏高亮页签）。
+- [x] `css/style.css`、`css/hierarchy.css`、`css/os-desktop.css`、`js/ui/app.js` 缓存版本更新；`ui-polish.css` 未改动。
+
+### P70（舆图编辑器：网格全要素编辑与补丁导出）
+
+- [x] 抽出纯数据层 `js/core/map-grid.js`：把原先只存在于 `js/ui/map-view.js` 绘制代码里的网格生成公式（地形/州域/郡域/水路/地标）、分层 RLE 编解码、路网读写与统一校验收敛为唯一实现；`MapView` 改为委托调用，画面输出保持原样。
+- [x] 新增 `js/ui/map-editor.js`（`window.MapEditor`）：可编辑**地形 / 州域 / 郡域**三层逐格取值（铅笔、矩形拖拽、整层填充、恢复默认），并支持据点增删改（名称、势力、郡属、坐标、人口、守军）、道路连通/断开/切换、撤销重做（上限 40 步）。
+- [x] 编辑结果不直接落存档：`校验舆图` 统一检查分层长度、未知地形、据点越界/重叠/缺名缺势力、单向道路与悬空节点（海面据点、海面县治只警告）；`应用到当前局` 只热更新本局内存并刷新舆图，`导出模组补丁` 产出可直接放入 `mods/` 的 manifest+patch，`导出剧本 JSON` 产出内联分层后的完整剧本（含 `< 4×4` 尺寸、补丁尺寸不一致等非法输入拒绝）。
+- [x] 入口：开始界面主菜单的「舆图编辑器」（P71 从调试工具条移入），弹窗纳入窗口管理器（最小化/最大化/关闭/任务栏与版面预设恢复），`#mapEditorDialog[open]` 计入全局快捷键屏蔽。
+- [x] 新增 `tools/test-map-editor.mjs`：RLE 往返（重复值/单值/空值与损坏数据）、笔刷与整层填充、撤销重做栈上限、据点增删改、道路双向与连通区、校验纠错（未知地形/越界/重叠/单双向/悬空/海面警告）、补丁与模组导入回读、`applyTo` 只改坐标不增删据点。
+- [x] `css/ui-polish.css`、`js/ui/map-view.js`、`js/ui/app.js`、`js/ui/os-window-manager.js` 缓存版本更新（`map-grid.js` / `map-editor.js` 为新引用）。
+
+### P71（开始界面：剧本确认后再选势力，舆图编辑器入口前置）
+
+- [x] 开始界面的「新建战局」改为两段式：首屏只展示剧本卡片与提示 `#scenarioStepHint`，势力区块 `#startForceStep` 默认 `hidden`，点击任一剧本后才展开（`scenarioPicked` 控制，重复点击当前已选剧本同样会展开）；未选剧本时页脚摘要显示「请先选择剧本」。
+- [x] 舆图编辑器入口从调试工具条移到开始界面主菜单（`#startHomeView` 的 `.home-actions`，按钮仍为 `#openMapEditor`），仍在调试工具条之外；打开时若正在开始界面，则编辑**当前所选剧本**的数据。
+- [x] `MapEditor.install` 改为取值函数注入：`install({$,getData,getMapView,state,mapView,toast,downloadJson})`，`mapView` 允许为空（开始界面未创建 `MapView`）。空视图时「应用到当前局」改写为「已写入所选剧本数据，导出剧本 JSON 后生效」；有视图时保持热更新道路/水道/地标并刷新补给。切换剧本后再次打开会按新剧本重新载入网格尺寸与分层。
+- [x] 布局：`#startNewView.scenario-pending` 折叠为单列，剧本卡片保持高亮；窄屏沿用单列。
+- [x] 测试：`tools/test-start-screen.mjs` 增补「势力区块默认隐藏」「点击剧本后展开」「编辑器入口位于开始界面且绑定所选剧本数据」三类断言；`tools/test-map-editor.mjs` 覆盖不变，另以 DOM 冒烟验证 `getData/getMapView` 形式的安装、空视图应用与剧本切换重载。
+
+### P72（舆图编辑器：悬停格子信息与指示框）
+
+- [x] 纯数据层新增 `cellInfo(x,y)` / `cellSummary(x,y)` / `forceName(id)` / `cityAt` / `countyAt` / `roadsOf`：`cellInfo` 汇总地形（名称/行军消耗/防御加成）、州域、郡域、据点（势力/守军/人口/接路条数）与县治，并按上下左右邻居推导 `州界`/`郡界`/`水滨` 标记；越界返回 `null`，`cellSummary` 越界返回「超出舆图范围。」
+- [x] 悬停指示框：主画布之上新增 `#mapEditorOverlay` 叠加层（`pointer-events:none`，位图随主画布同步重设以保持像素对齐），`drawHover()` 绘制半透明格底 + 十字准星虚线 + 亮色描边指示框，只覆盖当前格，不遮挡光标与据点标签。
+- [x] 读数：`#mapEditorHover` 单行摘要随光标实时刷新（坐标 · 地形 · 州域 · 郡域 · 县治 · 行军/防御 · 据点与势力 · 守军/人口 · 接路条数 · 边界标记），`pointerleave` 与越界自动恢复提示语；格子被笔刷改动后读数同步重算。
+- [x] 布局：`<canvas>` 包进 `.map-editor-canvas-wrap`（`position:relative`）承载绝对定位叠加层，读数条 `#mapEditorHover` 置于棋盘下方常驻可见（不随 `overflow:auto` 滚动）。
+- [x] 测试：`tools/test-map-editor.mjs` 增补悬停断言（越界 `null`/`cellSummary` 越界文案、势力名回落、地形名与行军/防御、州域/郡域、据点与县治、接路条数、`州界/郡界/水滨` 推导、无据点格不虚构字段、摘要逐字段包含）；`tools/test-start-screen.mjs` 静态校验弹窗内 `#mapEditorCanvas`/`#mapEditorOverlay`/`#mapEditorHover` 元素、叠加层次序与包裹层类名；DOM 冒烟验证叠加层位图同步、悬停读数、越界与移出清除、按下保持。
+- [x] `css/ui-polish.css`、`js/ui/map-editor.js` 缓存版本更新（`tools/test-command-dialog-layout.mjs`、`tools/test-diplomacy-network.mjs` 同步）。
+
+### P73（舆图编辑器：笔刷取值候选与打开即最大化）
+
+- [x] 笔刷取值补全候选：地形候选改为「已登记 `terrainDefs` ∪ 分层里实际出现过的取值」，州域/郡域候选在分层现存取值之外并入剧本数据声明（县治/据点的 `province`、`commandery`，以及 `administrativeDivisions.commandery_counties` 的登记郡名），未登记但已存在的取值不再无法选中。
+- [x] 取值选择器：收敛为单个 `#mapEditorValue` 下拉，把该图层的全部取值一次性列进去（不再有文本输入 + `datalist` 或第二个「已有取值」下拉）；`syncValueOptions()` 在图层切换时重建选项，默认选中该层出现次数最多的取值（`MapEditor.dominant(kind)`），并用 `brushMemory` 记住每层上次的选择。
+- [x] 可读标签：新增 `MapEditor.valueOptions(kind)`，地形以「名称（ID）」（如 `平原（plains）`）标注，州域/郡域直接显示名称。
+- [x] 打开即最大化：`open()` 在 `showModal()` 后加上 `os-dialog-maximized`（沿用窗口管理器最大化语义与标题栏「□」还原），并清除内联 `left/top/margin`；`dialog#mapEditorDialog.os-dialog-maximized .map-editor-board{max-height:none}` 让棋盘在最大化时不再被 90vh 上限压缩。
+- [x] 测试：`tools/test-map-editor.mjs` 增补地形并集候选、`valueOptions` 标签与去重、县治声明州域进入候选、行政划分登记郡名进入候选；`tools/test-start-screen.mjs` 增补单个 `#mapEditorValue` 下拉、`valueOptions(` 与最大化类名的源码断言；DOM 冒烟覆盖真实数据下「11 项地形（带标签）/ 51 项郡域 / 州域含数据声明 / 打开即最大化 / 默认取最常见值 / 跨图层记忆选择」。
+- [x] `css/ui-polish.css`、`js/ui/map-editor.js` 缓存版本更新（`tools/test-command-dialog-layout.mjs`、`tools/test-diplomacy-network.mjs` 同步）。
+
+### P74（舆图编辑器：图层 / 据点 / 道路 工具分区）
+
+- [x] 工具分区：侧栏顶部新增 `#mapEditorToolLayer` / `#mapEditorToolCity` / `#mapEditorToolRoad` 工具切换，三个面板 `#mapEditorPanelLayer`（默认可见）、`#mapEditorPanelCity`、`#mapEditorPanelRoad`（默认 `hidden`）随之显示/隐藏，当前工具按钮高亮；`#mapEditorToolHint` 与读数条提示语随工具切换。
+- [x] 画布分派：指针事件统一走 `applyTool(x,y)`，按 `activeTool` 分派——图层工具沿用笔刷绘制（仅此时 `painting` 为真，支持拖拽连画），据点工具点击据点格选中、点击空白格移动当前据点，道路工具依次点击两个据点格拾取起点/终点；后两者都不再改写图层。
+- [x] 道路可视化：道路工具下起点/终点据点以绿/橙圈标注，两点间绘制虚线预览（已连通为绿、未连通为橙）；下拉框与画布拾取双向同步（`roadPick` + `syncRoadPick`），`连通 / 断开 / 切换` 三个按钮沿用。
+- [x] 交互收敛：移除原先与图层混用的「放置模式」按钮（`#mapEditorPickCity`），据点工具本身即为放置/移动语义。
+- [x] 测试：`tools/test-start-screen.mjs` 增补三个工具按钮与三个面板元素、非当前面板默认 `hidden`、面板顺序与「画布按工具分派」的源码断言；DOM 冒烟覆盖「工具切换高亮与面板显隐 / 据点工具选中与移动不改写图层 / 道路工具拾取起终点不改写图层 / 切回图层工具后正常绘制」。
+- [x] `css/ui-polish.css`、`js/ui/map-editor.js` 缓存版本更新（`tools/test-command-dialog-layout.mjs`、`tools/test-diplomacy-network.mjs` 同步）。
+
+### P75（舆图编辑器：笔刷取值下拉空白修复）
+
+- [x] 根因：自绘下拉 `TerminalSelect` 在页面加载时就按当时可见的 `<option>` 建好按钮列表，之后只在下拉自身触发 `change` 时重建。`#mapEditorValue` 在 HTML 里是空 `select`，编辑器打开时才用 `innerHTML` 写入全部取值，程序改写既不触发 `change` 也不在任何观察范围内，界面上的下拉因此永远是「请选择」，表现为「笔刷值啥都没有」。
+- [x] 根因修复：`js/ui/terminal-select.js` 的 body 观察器在新增节点属于已增强的 `select` 时重建该控件，自绘选项自动跟随选项变化，任何动态填充的下拉都不再漏同步。
+- [x] 局部同步：`js/ui/map-editor.js` 在 `syncValueOptions()` / `options()` / `syncCitySelects()` 写完选项后显式调用 `window.TerminalSelect.refresh(...)`，与 `js/ui/app.js` 中 `newSaveSlotChoice` 的既有写法一致。
+- [x] 测试：新增 `tools/test-map-editor-select.mjs`（真实 `TerminalSelect` + 桩 DOM），断言空下拉增强后自动重建、笔刷取值自绘选项与原生选项逐项一致且无空项、据点/势力/道路下拉同步、切换图层后重建并回落最常见取值；逐项验证去掉任一层修复都会失败。
+- [x] `index.html` 中 `js/ui/terminal-select.js` 缓存版本更新。
+
+### P76（舆图编辑器：按工具显示地图元素并可手动固定）
+
+- [x] 「不要全部都显示」：画布原先无论当前工具是什么都同时叠加网格、道路与据点，三个工具看上去完全一样。现在按工具给出默认显示集合——图层笔刷（网格 / 水道 / 地标 / 据点）、据点（网格 / 据点 / 县治）、道路（网格 / 据点 / 道路），其余元素不再默认叠加。
+- [x] 「也可以手动」：侧栏新增「显示元素」分组 `#mapEditorElements`，六个勾选框（网格 / 据点 / 道路 / 县治 / 水道 / 地标，标注 `data-editor-element`），勾选即固定显示；状态按工具分别记忆（`elementState` + `elementPresets`），切换工具时恢复该工具自己的设置，无需「自动 / 手动」双态，`syncElements()` 负责把当前工具的状态写回勾选框。
+- [x] 新增元素绘制：`drawWaterways()`（`editor.waterways` 折线，`#4f9bbd`）、`drawLandmarks()`（`editor.landmarks` 圆点与名称，`#c9c19c`）、`drawCounties()`（`editor.counties` 菱形，按 `rank` 取色）；`drawCanvas()` 拆成 `drawGrid` / `drawWaterways` / `drawRoads` / `drawRoadPreview` / `drawCounties` / `drawLandmarks` / `drawCities`，除道路预览外一律由 `elementVisible(key)` 控制。
+- [x] 道路预览（道路工具下的起终点虚线）属于交互反馈，不受「道路」勾选框影响：手动隐藏道路后仍能看到拾取结果。
+- [x] 测试：新增 `tools/test-map-editor-elements.mjs`（桩 DOM + 记录型 2D 上下文），断言三工具的默认勾选状态与逐项绘制调用（网格 `rgba(0,0,0,.32)`、水道 `#4f9bbd`、地标名称 `#c9c19c`、县治 `#9f9a7c`、道路 `#e7c463`）、手动勾选只影响当前工具且跨工具切换记忆、道路预览不被道路开关屏蔽；`tools/test-start-screen.mjs` 增补显示元素分组与六个开关元素、`elementPresets={layer:`/`elementState`/`elementVisible(`/`syncElements(` 源码断言。
+- [x] `css/ui-polish.css`、`js/ui/map-editor.js` 缓存版本更新（`tools/test-command-dialog-layout.mjs`、`tools/test-diplomacy-network.mjs` 同步）。
+
+### P77（30×30 位图双倍网格与城池迁移）
+
+- [x] 将 `game/data/map/00_bit.bmp` 作为地图源文件，严格按 1 位 BMP 调色板将黑格解释为陆地、白格解释为水域，每个源像素展开为 2×2 格，地图与像素掩码均为 60×60。
+- [x] 全部 75 座据点、253 处县治、河流、地标和地图标注迁移到新网格；海格上的县治自动挪到最近陆格，并保持对应郡治与城市坐标一致。三套剧本统一引用 `china_pixel_60x60`。
+- [x] 地图编辑器的“恢复默认”读取地图原始分层；旧存档版本迁移所选格坐标，城池和县治位置由新地图基准数据恢复。
+- [x] `tools/import-pixel-map.mjs` 可从源 BMP 重建网格和坐标；县治网格生成器改为使用同一张位图陆海掩码。
 
 ## 7. 完成标准
 

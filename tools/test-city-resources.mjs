@@ -8,9 +8,10 @@ const rawCities=read("game/data/history/cities/200_guandu.json").cities,profiles
 const load=id=>{const data={scenario:{id},cities:structuredClone(rawCities),cityResourceProfiles:profiles};loader.applyCityResources(data,id);return data.cities};
 const scenarios=Object.fromEntries(["190_coalition","200_guandu","208_red_cliffs"].map(id=>[id,load(id)])),byId=(id,scenario="200_guandu")=>scenarios[scenario].find(city=>city.id===id);
 
-if(Object.keys(profiles.historical_basis).length!==rawCities.length)throw new Error("并非每个据点都有史籍人口基准");
+if(Object.keys(profiles.historical_basis).length!==rawCities.length||rawCities.some(city=>!profiles.historical_basis[city.id]))throw new Error("据点人口基准缺项或存在已移除节点");
 for(const [scenario,cities] of Object.entries(scenarios))for(const city of cities){
-  if(!city.historical?.commandery||!city.historical?.censusPopulation)throw new Error(`${scenario}/${city.id} 缺少郡国人口依据`);
+  if(!city.historical?.commandery)throw new Error(`${scenario}/${city.id} 缺少郡国人口依据`);
+  if(!city.historical.censusPopulation&&!(city.historical.commandery==="辽东属国"&&city.historical.populationStatus==="unrecorded"&&city.historical.note&&city.population>0))throw new Error(`${scenario}/${city.id} 人口缺载未正确标注`);
   if(city.population<1000||city.garrison<100||city.storage<5000)throw new Error(`${scenario}/${city.id} 资源值超出合理下限`);
   if(city.localFood<0||city.localFood>city.storage||city.localGold<0)throw new Error(`${scenario}/${city.id} 地方库存无效`);
   for(const key of ["agriculture","commerce","order"])if(city[key]<0||city[key]>100)throw new Error(`${scenario}/${city.id} 的 ${key} 超出 0—100`);
@@ -24,4 +25,4 @@ if(byId("xiangyang","208_red_cliffs").garrison<=byId("xiangyang").garrison||byId
 if(byId("runan").agriculture<=byId("shangdang").agriculture||byId("panyu").commerce<=byId("fuling").commerce)throw new Error("农产大郡与海贸港口的资源特征不明显");
 if(byId("hulao").storage!==7000||byId("baima").storage!==8000||byId("panyu").storage!==30000)throw new Error("关隘、渡口与港口仓储等级不正确");
 
-console.log("城市资源通过：75 据点史籍基准 / 190·200·208 年人口差异 / 农商治安 / 守军战备 / 地方金粮 / 分级仓储");
+console.log(`城市资源通过：${rawCities.length} 据点 / 105郡国人口依据与缺载标识 / 190·200·208 年人口差异 / 农商治安 / 守军战备 / 地方金粮 / 分级仓储`);

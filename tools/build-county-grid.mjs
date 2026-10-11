@@ -1,16 +1,21 @@
 import fs from "node:fs";
+import path from "node:path";
+import {fileURLToPath} from "node:url";
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const bitmap=fs.readFileSync(path.join(root,"game/data/map/00_bit.bmp"));
+const bitmapWidth=bitmap.readInt32LE(18),bitmapHeight=Math.abs(bitmap.readInt32LE(22)),pixelOffset=bitmap.readUInt32LE(10),rowStride=Math.ceil(bitmapWidth/32)*4;
+if(bitmapWidth!==30||bitmapHeight!==30||bitmap.readUInt16LE(28)!==1||bitmap.readUInt32LE(30)!==0)throw new Error("县治网格生成需要未压缩 30×30 单色位图");
 
 const adminPath="game/data/history/administrative_divisions.json";
 const admin=JSON.parse(fs.readFileSync(adminPath,"utf8"));
 const cities=JSON.parse(fs.readFileSync("game/data/history/cities/200_guandu.json","utf8")).cities;
 const profiles=JSON.parse(fs.readFileSync("game/data/history/city_resource_profiles.json","utf8"));
-const width=38,height=32;
+if(JSON.parse(fs.readFileSync("game/data/map/central_plains.json","utf8")).commandery_reference)throw new Error("当前基准已有人工校正郡域，不能再用最近邻重排县治；请在编辑器中修改郡域后运行 node tools/freeze-map-layout.mjs --write。");
+const width=60,height=60;
 
 for(const city of cities)city.commandery=profiles.historical_basis?.[city.id]?.[0]||"史籍未详";
-const isLand=(x,y)=>{
-  const spans=[[0,31],[0,34],[0,34],[0,33],[0,32],[0,31],[0,29],[0,28],[0,28],[0,28],[0,29],[0,30],[0,30],[0,29],[0,29],[0,29],[0,30],[0,30],[0,30],[0,30],[0,31],[0,31],[0,31],[0,32],[0,33],[0,32],[0,30],[0,28],[0,25],[0,24],[0,23],[0,22]];
-  return y>=0&&y<spans.length&&x>=0&&x<=spans[y][1]||(y>=29&&y<=30&&x>=21&&x<=23)||(y>=20&&y<=24&&x>=36&&x<=37);
-};
+const isLand=(x,y)=>{if(x<0||y<0||x>=width||y>=height)return false;const imageX=Math.floor(x/2),imageY=bitmapHeight-1-Math.floor(y/2),bit=(bitmap[pixelOffset+imageY*rowStride+(imageX>>3)]>>(7-(imageX&7)))&1;return bit===1};
 const normalize=name=>String(name||"").replace(/[縣县郡國国城關关津口]$/u,"").replace("雒","洛");
 const commanderies=Object.keys(admin.commandery_counties),cityGroups=new Map(commanderies.map(name=>[name,cities.filter(city=>city.commandery===name)]));
 const usedCities=new Set,occupied=new Set(cities.map(city=>`${city.x},${city.y}`)),seats=[],pending=new Map;
@@ -33,7 +38,7 @@ const anchors=new Map(commanderies.map(name=>{
 }));
 const distanceTo=(name,x,y)=>Math.min(...(anchors.get(name)||[]).map(point=>Math.hypot(point.x-x,point.y-y)));
 const ownerAt=(x,y)=>commanderies.map(name=>({name,distance:distanceTo(name,x,y)})).sort((a,b)=>a.distance-b.distance||commanderies.indexOf(a.name)-commanderies.indexOf(b.name))[0]?.name;
-const allCells=[];for(let y=0;y<height;y++)for(let x=0;x<width;x++)if(isLand(x,y)&&x<36)allCells.push({x,y,owner:ownerAt(x,y)});
+const allCells=[];for(let y=0;y<height;y++)for(let x=0;x<width;x++)if(isLand(x,y))allCells.push({x,y,owner:ownerAt(x,y)});
 const maxPending=Math.max(...[...pending.values()].map(list=>list.length));
 for(let round=0;round<maxPending;round++)for(const commandery of commanderies){
   const seat=pending.get(commandery)?.[round];if(!seat)continue;

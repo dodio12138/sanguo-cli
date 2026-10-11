@@ -1,5 +1,5 @@
 globalThis.window=globalThis;
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 
 const data={forces:[{id:"cao",name:"曹操"},{id:"yuan",name:"袁绍"},{id:"neutral",name:"无主"}],cities:[
   {id:"a",name:"甲",force:"cao",garrison:5000},{id:"b",name:"乙",force:"yuan",garrison:5000},{id:"c",name:"丙",force:"yuan",garrison:5000}

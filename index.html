@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10150f">
   <title>&lt;&lt;&lt;三国</title>
-  <link rel="stylesheet" href="css/style.css?v=20261009-47">
-  <link rel="stylesheet" href="css/observer.css?v=20261005-04">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261009-18">
+  <link rel="stylesheet" href="css/style.css?v=20261010-01">
+  <link rel="stylesheet" href="css/observer.css?v=20261009-02">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261011-03">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
-  <link rel="stylesheet" href="css/hierarchy.css?v=20261009-02">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261009-21">
+  <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261011-01">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -21,13 +21,13 @@
     <div class="start-terminal main-menu">
       <header class="menu-header"><span class="brand-mark">漢</span><div><h1>&lt;&lt;&lt;三国</h1></div><span class="menu-build">本地存档 · 离线可用</span></header>
       <nav class="start-nav" aria-label="主菜单"><button class="selected" data-start-view="home">主菜单</button><button data-start-view="new">新建战局</button><button data-start-view="load">载入存档</button><button data-start-view="settings">设置</button><button data-start-view="exit">退出</button></nav>
-      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button></div></div></section>
+      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button><button id="openMapEditor" disabled data-tip="编辑据点与逐格手绘道路路径">舆图编辑器</button></div></div></section>
       <section id="startNewView" class="start-view start-grid" hidden>
-        <section><h2>01 / 选择剧本</h2><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
-        <section><h2>02 / 选择势力</h2><div id="forceChoices" class="force-choices"></div><p id="startHistoricalBrief" class="start-historical-brief">选择势力后显示历史局势与阶段目标。</p></section>
+        <section><h2>01 / 选择剧本</h2><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div><p id="scenarioStepHint" class="start-hint">点击剧本后展开势力选择。</p></section>
+        <section id="startForceStep" hidden><h2>02 / 选择势力</h2><div id="forceChoices" class="force-choices"></div><p id="startHistoricalBrief" class="start-historical-brief">选择势力后显示历史局势与阶段目标。</p></section>
       </section>
       <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
-      <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>观察者推进速度<select id="observerDefaultSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="confirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
+      <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="observerDefaultSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="confirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
       <section id="startExitView" class="start-view exit-view" hidden><div class="exit-card"><span class="brand-mark">終</span><h2>退出 &lt;&lt;&lt;三国</h2><p>当前进度已保存。</p><button data-start-view="home">返回主菜单</button></div></section>
       <footer class="start-footer"><span id="startSummary">本地游戏 · 等待选择</span><span class="menu-footer-actions"><button id="startBackButton" data-start-view="home">返回</button><label id="newSaveSlotWrap" class="new-save-slot" hidden>新局存入<select id="newSaveSlotChoice"></select></label><button id="startGameButton" disabled>进入乱世 ▷</button></span></footer>
     </div>
@@ -43,9 +43,9 @@
         <div class="os-calendar-body">
           <div class="os-calendar-selectors">
             <span id="eraLabel">建安五年</span>
-            <strong id="dateLabel">200年 1月 上旬</strong>
+            <strong id="dateLabel">200年 1月 1日</strong>
           </div>
-          <div class="os-calendar-week" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+          <div class="os-calendar-cycle" id="calendarCycle">岁次 庚辰</div>
           <div class="os-calendar-days" id="calendarDays" aria-label="本月历法"></div>
           <span class="status-dot">● 筹划阶段</span>
         </div>
@@ -53,8 +53,8 @@
     </header>
 
     <nav class="main-nav panel-line" aria-label="主菜单">
-      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">旬报</button><button id="commandBookButton" class="nav-command-book" data-tip="按分类浏览全部可用命令并选择目标">命令簿</button>
-      <div id="observerControls" class="observer-controls" hidden><span>● 观察演进</span><select id="observerSpeed" aria-label="观察推进速度"><option value="5000">5 秒/旬</option><option value="3000" selected>3 秒/旬</option><option value="1000">1 秒/旬</option></select><button id="observerToggle">暂停</button><button id="observerStep">单步</button></div>
+      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button>
+      <div id="observerControls" class="observer-controls" hidden><button id="observerToggle" type="button" aria-label="继续模拟"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L17 8L9 13Z"/></svg></button><button id="simulationSpeedButton" type="button" class="simulation-speed-button" aria-label="切换模拟速度"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L15 8L9 13Z"/></svg></button><select id="observerSpeed" aria-label="模拟速度" data-terminal-select="true" hidden><option value="3000" selected>3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></div>
       <div class="nav-end save-tools"><button id="saveButton" data-tip="选择本地存档槽保存当前战局">存档</button><button id="loadButton" data-tip="选择本地存档槽载入战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
     </nav>
 
@@ -62,17 +62,18 @@
       <section id="resourcePanel" class="terminal-card resource-window" aria-label="势力资源">
         <div class="card-title"><span>府库</span></div>
         <div class="resource-window-body">
-          <button type="button" data-resource-detail="gold" aria-label="查看金钱收支" data-tip="查看税收、商业收入与军费的计算明细"><i>金</i><b id="goldValue">12,480</b></button>
-          <button type="button" data-resource-detail="food" aria-label="查看粮食收支" data-tip="查看粮食收成、军粮消耗与城内储备"><i>粮</i><b id="foodValue">38,600</b></button>
-          <button type="button" data-resource-detail="prestige" aria-label="查看府库与势力明细" data-tip="查看势力资源、人口和本回合收支预估"><i>望</i><b id="prestigeValue">276</b></button>
+          <button type="button" data-resource-detail="gold" aria-label="查看钱币财政" data-tip="查看田租、商业税、收入来源占比与中央入库"><i>钱</i><b id="goldValue">0贯</b></button>
+          <button type="button" data-resource-detail="food" aria-label="查看粮食财政" data-tip="查看秋收、收入来源占比、军需与运输损耗"><i>粮</i><b id="foodValue">0石</b></button>
+          <button type="button" data-resource-detail="silk" aria-label="查看布帛财政" data-tip="查看布帛征收、收入来源占比与在途上缴"><i>帛</i><b id="silkValue">0品</b></button>
+          <button type="button" data-resource-detail="labor" aria-label="查看徭役与工程" data-tip="查看徭役人日、生产占用与遣散"><i>役</i><b id="laborValue">0人日</b></button>
         </div>
       </section>
       <aside class="left-rail">
         <nav class="rail-tabs" aria-label="战略侧栏分组"><button class="active" data-rail-tab="factionPanel">我方</button><button data-rail-tab="selectionRailPanel">所选</button><button data-rail-tab="forcesRailPanel">群雄</button></nav>
         <section id="factionPanel" data-rail-panel class="terminal-card faction-card">
-          <div class="card-title"><span>己方势力</span></div>
+          <div class="card-title"><span>本势力</span></div>
           <div class="ruler-row"><div id="rulerSeal" class="portrait">曹</div><div><h2 id="rulerName">曹操</h2><p id="rulerTitle">势力君主</p></div></div>
-          <div class="stat-grid"><span>城池<b id="playerCityCount">00</b></span><span>武将<b id="playerOfficerCount">00</b></span><span>兵力<b id="playerSoldiers">0</b></span><span>民心<b>71</b></span></div>
+          <div class="stat-grid"><button type="button" data-faction-view="domestic">城池<b id="playerCityCount">00</b></button><button type="button" data-faction-view="officers">武将<b id="playerOfficerCount">00</b></button><button type="button" data-faction-view="military">兵力<b id="playerSoldiers">0</b></button><span>民心<b>71</b></span></div>
         </section>
 
         <section id="selectionRailPanel" data-rail-panel class="terminal-card" hidden>
@@ -82,23 +83,24 @@
 
         <section id="forcesRailPanel" data-rail-panel class="terminal-card compact-list" hidden>
           <div class="card-title"><span>天下态势</span></div>
-          <nav class="world-tabs" aria-label="天下态势内容"><button id="worldForcesTab" type="button" class="active" data-world-tab="forces">天下</button><button id="worldReportTab" type="button" data-world-tab="report">旬报</button></nav>
+          <nav class="world-tabs" aria-label="天下态势内容"><button id="worldForcesTab" type="button" class="active" data-world-tab="forces">天下</button><button id="worldReportTab" type="button" data-world-tab="report">日报</button></nav>
           <section class="world-tab-panel world-forces-panel" data-world-panel="forces"><div id="forceList"></div></section>
           <section class="world-tab-panel world-report-panel" data-world-panel="report" hidden>
             <p id="campaignObjective" class="campaign-objective"></p>
-            <p id="turnReport" class="turn-report">暂无旬报。提交命令后结束本旬。</p>
+            <p id="turnReport" class="turn-report">暂无日报。提交命令后结束本日。</p>
           </section>
         </section>
       </aside>
 
       <section class="map-column">
-        <div class="map-toolbar panel-line">
+        <div class="map-titlebar card-title"><span class="os-map-caption">战略舆图</span></div>
+        <div class="map-toolbar panel-line" aria-label="舆图工具">
           <div class="layer-tabs" role="tablist" aria-label="地图模式">
             <button data-layer="terrain" class="active">地形</button>
             <button data-layer="political">势力</button>
             <button data-layer="province">州域</button>
             <button data-layer="commandery">郡域</button>
-            <button data-layer="supply">补给</button>
+            <button data-layer="supply">补给</button><button data-layer="intel">情报</button>
           </div>
           <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
         </div>
@@ -109,32 +111,25 @@
           <div class="map-compass" aria-hidden="true"><b>北</b><span>╱│╲<br>─┼─<br>╲│╱</span></div>
         </div>
         <div class="map-footer panel-line"><span id="cursorInfo">坐标 --,-- · 等待选择</span><span>拖动舆图 · 滚轮缩放 · 单击选择 · 双击查看城池</span></div>
+        <div id="mapLegend" class="legend map-legend" aria-label="地图图例"></div>
       </section>
 
       <aside class="right-rail">
-        <nav class="rail-tabs" aria-label="军令侧栏分组"><button class="active" data-rail-tab="commandsRailPanel">军令</button><button data-rail-tab="situationRailPanel">图例</button></nav>
         <section id="commandsRailPanel" data-rail-panel class="terminal-card command-card">
           <div class="card-title"><span>军令</span></div>
           <div class="terminal-log" id="terminalLog" aria-live="polite">
             <p><span class="prompt">军师&gt;</span> 主公，请下达军令。</p>
           </div>
           <form id="commandForm" class="command-input">
-            <label for="commandText">命令输入</label>
+            <header class="command-entry-header"><label for="commandText">命令输入</label><button id="commandBookButton" type="button" class="command-book-button" data-tip="按分类浏览全部可用命令并选择目标">命令簿</button></header>
             <div><span>&gt;</span><input id="commandText" autocomplete="off" placeholder="例：命夏侯惇领兵八千移驻官渡"><button type="submit">加入</button></div>
           </form>
           <div class="control-mode"><label for="controlMode">控制</label><select id="controlMode"><option value="manual">纯手动</option><option value="assist">军师辅助</option><option value="delegate">军师托管</option></select><span id="aiConnectionState">军师未连接</span><button id="aiSettingsButton">设置</button></div>
-          <button id="askAdvisorButton" class="advisor-button" disabled>请军师筹划本旬</button>
+          <button id="askAdvisorButton" class="advisor-button" disabled>请军师筹划本日</button>
           <section id="ordersRailPanel" class="orders-pane order-card">
-            <div class="orders-pane-title"><span>本旬命令</span><small><b id="orderCount">0</b> / 8</small></div>
+            <div class="orders-pane-title"><span>本日命令</span><small><b id="orderCount">0</b> / 8</small></div>
             <div id="orderQueue" class="order-queue"><p class="empty">尚无待执行命令</p></div>
-            <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">结束本旬 ▷</button></div>
-          </section>
-        </section>
-
-        <section id="situationRailPanel" data-rail-panel class="terminal-card legend-card" hidden>
-          <div class="card-title"><span>图例</span><small id="layerName">地形</small></div>
-          <section class="legend-window-body">
-            <div id="mapLegend" class="legend"></div>
+            <div class="order-actions"><button id="clearOrders">清空</button><button id="endTurn" class="primary">暂停</button></div>
           </section>
         </section>
       </aside>
@@ -148,15 +143,15 @@
   </dialog>
   <dialog id="gameSettingsDialog" class="settings-dialog">
     <div class="dialog-title">游戏设置 <button data-close="gameSettingsDialog">×</button></div>
-    <div class="dialog-content settings-grid"><label>观察者推进速度<select id="gameObserverSpeed"><option value="5000">5 秒 / 旬</option><option value="3000">3 秒 / 旬</option><option value="1000">1 秒 / 旬</option></select></label><label class="setting-check"><input id="gameConfirmEndTurn" type="checkbox">结束本旬前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
+    <div class="dialog-content settings-grid"><label>模拟速度<select id="gameObserverSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="gameConfirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
   </dialog>
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
-    <div class="dialog-title"><span>结束当前旬</span></div><div class="dialog-content"><p>提交本旬队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一旬</button></div></div>
+    <div class="dialog-title"><span>结束当前日</span></div><div class="dialog-content"><p>提交本日队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一日</button></div></div>
   </dialog>
   <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
   <dialog id="helpDialog">
     <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
-    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每回合做什么</h3><p>查看府库与局势，安排任命或军事行动，将命令加入队列，再结束当前回合统一结算。</p><button id="openTurnMapButton" type="button">查看可视化回合流程</button></section><section><h3>快捷操作</h3><p>F1～F5 切换舆图；回车查看所选城市；O 打开城市命令；M 规划行军；B 查看战报；Ctrl/⌘+S 保存。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
+    <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每日模拟</h3><p>运行时逐日推进；暂停后查看府库与局势，安排任命或军事行动，继续后执行待办军令。任务栏右侧播放键暂停／继续；速度键单击循环切换 3、1、0.5 秒／日。</p><button id="openTurnMapButton" type="button">查看可视化每日流程</button></section><section><h3>快捷操作</h3><p>空格：暂停／继续；[／]：减速／加速；F1～F6：切换舆图；回车：所选城市详情；O：城市命令；M：规划行军；C：命令簿；B：战报；R：日报；I：情报；H：帮助；Esc：关闭最前窗口；Ctrl/⌘+S：保存。输入、命令编辑与事件抉择时不触发模拟快捷键。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
   </dialog>
 
   <dialog id="resourceDetailDialog" class="wide-dialog resource-detail-dialog">
@@ -180,7 +175,7 @@
   </dialog>
 
   <dialog id="reportDialog" class="wide-dialog">
-    <div class="dialog-title">旬报档案 <span class="dialog-tools"><button id="openChronicleButton" hidden>史官月录</button><button data-close="reportDialog">×</button></span></div>
+    <div class="dialog-title">日报档案 <span class="dialog-tools"><button id="openChronicleButton" hidden>史官月录</button><button data-close="reportDialog">×</button></span></div>
     <div id="reportHistory" class="dialog-content report-history"></div>
   </dialog>
 
@@ -221,6 +216,107 @@
     </div>
   </dialog>
 
+  <dialog id="mapEditorDialog" class="wide-dialog map-editor-dialog">
+    <div class="dialog-title"><span>舆图编辑</span> <button data-close="mapEditorDialog">×</button></div>
+    <div class="dialog-content map-editor-content">
+      <div class="map-editor-column"><div class="map-editor-board"><div class="map-editor-zoom" role="group" aria-label="地图缩放与移动"><button id="mapEditorZoomOut" type="button" aria-label="缩小地图">−</button><output id="mapEditorZoomValue">适配</output><button id="mapEditorZoomIn" type="button" aria-label="放大地图">＋</button><button id="mapEditorZoomFit" type="button">适配窗口</button><button id="mapEditorPanToggle" type="button" aria-pressed="false">拖动地图</button><span>Ctrl+滚轮缩放 · 空格/中键拖动</span></div><div class="map-editor-viewport"><div class="map-editor-canvas-wrap"><canvas id="mapEditorTerrain" aria-hidden="true"></canvas><canvas id="mapEditorReferenceCanvas" aria-hidden="true"></canvas><canvas id="mapEditorCanvas" tabindex="0" aria-label="舆图网格"></canvas><canvas id="mapEditorOverlay" aria-hidden="true"></canvas></div></div><p id="mapEditorHover" class="map-editor-hover">将光标移到舆图上查看格子信息。</p></div></div>
+      <aside class="map-editor-side">
+        <section><h3>编辑工具</h3>
+          <div class="map-editor-tools" role="group" aria-label="舆图编辑工具">
+            <button id="mapEditorToolLayer" class="active">地形</button>
+            <button id="mapEditorToolProvince" data-tip="查看按郡属州自动合成的州域">州域</button>
+            <button id="mapEditorToolCommandery">郡域</button>
+            <button id="mapEditorToolCity">据点</button>
+            <button id="mapEditorToolRoad">道路</button>
+            <button id="mapEditorToolRiver">河流</button>
+          </div>
+          <p id="mapEditorToolHint" class="map-editor-info">选择图层与取值，在舆图上按住拖拽绘制。</p>
+        </section>
+        <div class="map-editor-side-scroll">
+        <section><h3>地图网格</h3><div class="map-editor-actions"><button id="mapEditorResize100" type="button" data-tip="同步映射地形、州郡、据点、县治、道路与河流">转换为100×100</button></div></section>
+        <section id="mapEditorReferenceSection"><h3>参考底图</h3>
+          <p id="mapEditorReferenceInfo" class="map-editor-info">未添加底图</p>
+          <div class="map-editor-actions"><button id="mapEditorReferenceAdd" type="button">添加底图</button><button id="mapEditorReferenceRemove" type="button" disabled>移除底图</button></div>
+          <input id="mapEditorReferenceFile" type="file" accept="image/png,image/jpeg,image/webp,image/bmp,.bmp" hidden>
+          <div id="mapEditorReferenceControls" hidden>
+            <label class="map-editor-region-fill"><input id="mapEditorReferenceVisible" type="checkbox" checked>显示底图</label>
+            <label>底图不透明度（%）<input id="mapEditorReferenceOpacity" type="range" min="0" max="100" value="65"></label>
+            <label>底图缩放（%）<input id="mapEditorReferenceScale" type="number" min="10" max="1000" step="1" value="100"></label>
+            <div class="map-editor-coords"><label>横向位置（格）<input id="mapEditorReferenceX" type="number" step="0.1" value="0"></label><label>纵向位置（格）<input id="mapEditorReferenceY" type="number" step="0.1" value="0"></label></div>
+            <div class="map-editor-actions"><button id="mapEditorReferenceAdjust" type="button" aria-pressed="false">调整底图</button><button id="mapEditorReferenceReset" type="button">底图居中</button></div>
+            <p class="map-editor-info">调整时拖动底图、滚轮缩放；完成后描绘地图。</p>
+          </div>
+        </section>
+        <section id="mapEditorScenarioSection"><h3>剧本地图</h3><p id="mapEditorScenarioStatus" class="map-editor-info">原始地图</p><div class="map-editor-actions"><button id="mapEditorLoadScenario">载入已保存地图</button><button id="mapEditorResetScenario">恢复原始地图</button></div></section>
+        <section id="mapEditorDraftNotice" hidden><h3>未应用的草稿</h3><p class="map-editor-info">这张舆图有上次保存的编辑草稿。</p><div class="map-editor-actions"><button id="mapEditorRestoreDraft" type="button">恢复草稿</button><button id="mapEditorDiscardDraft" type="button">放弃旧草稿</button></div></section>
+        <section><h3>显示元素</h3>
+          <div class="map-editor-elements" id="mapEditorElements" role="group" aria-label="舆图显示元素">
+            <label><input type="checkbox" id="mapEditorElementGrid" data-editor-element="grid" checked>网格</label>
+            <label><input type="checkbox" id="mapEditorElementCities" data-editor-element="cities" checked>据点</label>
+            <label><input type="checkbox" id="mapEditorElementRoads" data-editor-element="roads">道路</label>
+            <label><input type="checkbox" id="mapEditorElementCounties" data-editor-element="counties">县治</label>
+            <label><input type="checkbox" id="mapEditorElementWaterways" data-editor-element="waterways" checked>水道</label>
+            <label><input type="checkbox" id="mapEditorElementLandmarks" data-editor-element="landmarks" checked>地标</label>
+            <label><input type="checkbox" id="mapEditorElementProvinceBorders" data-editor-element="provinceBorders">州界</label>
+            <label><input type="checkbox" id="mapEditorElementCommanderyBorders" data-editor-element="commanderyBorders">郡界</label>
+          </div>
+        </section>
+        <section id="mapEditorPanelLayer"><h3 id="mapEditorLayerTitle">地形图层</h3>
+          <label class="map-editor-layer-select" hidden>编辑图层<select id="mapEditorLayer"><option value="terrain">地形</option><option value="province">州域</option><option value="commandery">郡域</option></select></label>
+          <label id="mapEditorRegionNameRow" hidden>新增区域名称<input id="mapEditorRegionName" spellcheck="false" placeholder="输入州名或郡名"></label>
+          <div class="map-editor-actions" id="mapEditorRegionActions" hidden><button id="mapEditorAddRegion" type="button">加入区域列表</button><label class="map-editor-region-fill"><input id="mapEditorRegionFill" type="checkbox">点击改整片相连区域</label></div>
+          <label id="mapEditorBrushValueRow">笔刷取值<select id="mapEditorValue"></select></label>
+          <div id="mapEditorPickCommanderyRow" class="map-editor-actions" hidden><button id="mapEditorPickCommandery" type="button" hidden aria-pressed="false">点选郡域</button></div>
+          <label id="mapEditorBrushSizeRow">笔刷宽度<select id="mapEditorBrushSize"><option value="1">1 格</option><option value="3">3 格</option><option value="5">5 格</option></select></label>
+          <div id="mapEditorProvinceAssignment" hidden>
+            <label>郡域<select id="mapEditorAssignmentCommandery"></select></label>
+            <label>所属州<select id="mapEditorCommanderyProvince"></select></label>
+            <div class="map-editor-actions"><button id="mapEditorAssignProvince" type="button">调整郡属州</button></div>
+          </div>
+          <p id="mapEditorRegionHint" class="map-editor-info">按住 Alt 点击取值 · 每次拖绘可整笔撤销</p>
+          <div id="mapEditorLayerActions" class="map-editor-actions"><button id="mapEditorFill">整层填充</button><button id="mapEditorResetLayer">还原本层</button></div>
+        </section>
+        <section id="mapEditorPanelCity" hidden><h3>据点</h3>
+          <label>据点<select id="mapEditorCity"></select></label>
+          <label>名称<input id="mapEditorCityName" spellcheck="false"></label>
+          <label>所属势力<select id="mapEditorCityForce"></select></label>
+          <label>郡属（按坐标）<input id="mapEditorCityCommandery" readonly></label>
+          <label>州属（按坐标）<input id="mapEditorCityProvince" readonly></label>
+          <div class="map-editor-coords"><label>据点类型<select id="mapEditorCityType"><option value="city">郡城</option><option value="pass">关隘</option><option value="ford">渡口</option><option value="port">港口</option></select></label><label>等级<input id="mapEditorCityLevel" type="number" min="1" max="5" step="1"></label></div>
+          <div class="map-editor-coords"><label>坐标 X<input id="mapEditorCityX" type="number" min="0" step="1"></label><label>坐标 Y<input id="mapEditorCityY" type="number" min="0" step="1"></label></div>
+          <div class="map-editor-coords"><label>人口<input id="mapEditorCityPopulation" type="number" min="0" step="1000"></label><label>守军<input id="mapEditorCityGarrison" type="number" min="0" step="100"></label></div>
+          <div class="map-editor-coords"><label>农产<input id="mapEditorCityAgriculture" type="number" min="0" max="100" step="1"></label><label>商业<input id="mapEditorCityCommerce" type="number" min="0" max="100" step="1"></label></div>
+          <label>治安<input id="mapEditorCityOrder" type="number" min="0" max="100" step="1"></label>
+          <p id="mapEditorCityInfo" class="map-editor-info"></p>
+          <div class="map-editor-actions"><button id="mapEditorLocateCity">定位据点</button><button id="mapEditorMoveCity" aria-pressed="false">移动据点</button><button id="mapEditorAddCity">新增据点</button><button id="mapEditorSaveCity">保存据点</button><button id="mapEditorDiscardCityForm">还原表单</button><button id="mapEditorRemoveCity">删除据点</button></div>
+        </section>
+        <section id="mapEditorPanelRoad" hidden><h3>道路路径</h3>
+          <label>道路<select id="mapEditorRoadSelect"></select></label>
+          <div class="map-editor-coords"><label>起点<select id="mapEditorRoadFrom"></select></label><label>终点<select id="mapEditorRoadTo"></select></label></div>
+          <div class="map-editor-actions"><button id="mapEditorRoadConnect">建立通行关系</button><button id="mapEditorRoadDisconnect">断开并删路</button></div>
+          <div class="map-editor-actions"><button id="mapEditorRoadDraw">绘制／重画</button><button id="mapEditorRoadUndoPoint">撤销路径点</button><button id="mapEditorRoadFinish">完成并保存</button><button id="mapEditorRoadCancel">取消</button></div>
+          <div class="map-editor-actions"><button id="mapEditorRoadAdjust" aria-pressed="false">调整节点</button><button id="mapEditorRoadDelete">删除所选道路</button><button id="mapEditorRoadClear">清空全部道路</button></div>
+          <p id="mapEditorRoadInfo" class="map-editor-info">选择起点和终点后绘制，按住拖动可连续铺路；沿末端返回可撤回路径。</p>
+        </section>
+        <section id="mapEditorPanelRiver" hidden><h3>河流路径</h3>
+          <label>河流<select id="mapEditorRiverSelect"></select></label>
+          <label>名称<input id="mapEditorRiverName" spellcheck="false" maxlength="40"></label>
+          <div class="map-editor-actions"><button id="mapEditorRiverDraw">绘制／重画</button><button id="mapEditorRiverRename">保存名称</button><button id="mapEditorRiverAdjust" aria-pressed="false">调整节点</button></div>
+          <div class="map-editor-actions"><button id="mapEditorRiverUndoPoint">撤销路径点</button><button id="mapEditorRiverFinish">完成并保存</button><button id="mapEditorRiverCancel">取消</button></div>
+          <div class="map-editor-actions"><button id="mapEditorRiverDeletePoint">删除所选节点</button><button id="mapEditorRiverDelete">删除所选河流</button><button id="mapEditorRiverClear">清空全部河流</button></div>
+          <p id="mapEditorRiverInfo" class="map-editor-info">点击落点或拖动绘制；调整节点时可拖动方形控制点。</p>
+        </section>
+        <section><h3>导入与导出</h3>
+          <div class="map-editor-actions"><button id="mapEditorExportPatch">导出地图补丁</button><button id="mapEditorExportScenario">导出完整剧本</button><button id="mapEditorImportFile">导入文件</button><button id="mapEditorImport">导入下方内容</button><button id="mapEditorCopyJson">复制内容</button></div>
+          <input id="mapEditorFile" type="file" accept=".json,application/json" hidden>
+          <textarea id="mapEditorJson" class="json-editor" spellcheck="false" aria-label="舆图 JSON"></textarea>
+        </section>
+        </div>
+        <section class="map-editor-footer"><output id="mapEditorStatus" aria-live="polite">没有未应用改动</output><div class="map-editor-actions"><button id="mapEditorUndo" data-tip="撤销上一次编辑（Ctrl 或 ⌘ Z）">撤销</button><button id="mapEditorRedo" data-tip="重做（Ctrl 或 ⌘ Shift Z）">重做</button><button id="mapEditorValidate">校验舆图</button><button id="mapEditorApply">应用到当前局</button></div><pre id="mapEditorOutput" aria-live="polite">等待操作。</pre></section>
+      </aside>
+    </div>
+  </dialog>
+
   <dialog id="eventDialog" class="event-dialog">
     <div class="dialog-title"><span>天下事件</span></div>
     <div class="event-window-body">
@@ -234,16 +330,16 @@
   </dialog>
 
   <dialog id="turnBriefingDialog" class="turn-briefing-dialog">
-    <div class="dialog-title"><span>本旬简报</span><button id="closeTurnBriefing" type="button">×</button></div>
+    <div class="dialog-title"><span>本日简报</span><button id="closeTurnBriefing" type="button">×</button></div>
     <div class="turn-briefing-body">
       <small id="turnBriefingDate" class="briefing-date"></small>
-      <h2>上一旬回顾</h2>
+      <h2>上一日回顾</h2>
       <section><h3>已下达命令</h3><div id="turnBriefingOrders"></div></section>
       <section><h3>府库与兵民变化</h3><div id="turnBriefingResources"></div></section>
       <section><h3>命令反馈</h3><div id="turnBriefingFeedback"></div></section>
       <section><h3>相关军事行动</h3><div id="turnBriefingMilitary"></div></section>
     </div>
-    <div class="turn-briefing-footer"><button id="ackTurnBriefing" type="button">阅毕，进入本旬</button></div>
+    <div class="turn-briefing-footer"><button id="ackTurnBriefing" type="button">阅毕，进入本日</button></div>
   </dialog>
 
   <dialog id="aiDialog" class="wide-dialog ai-dialog">
@@ -252,7 +348,7 @@
       <p class="ai-security">模型密钥只由本机网关读取，不会发送到游戏页面。</p>
       <label>网关地址<input id="aiEndpoint" value="http://127.0.0.1:8787" spellcheck="false"></label>
       <div class="ai-actions"><button id="aiConnectButton">连接并检测</button><button id="aiDisconnectButton">断开</button><span id="aiHealthText">尚未检测</span></div>
-      <section><h3>本旬建议</h3><div id="aiSuggestions"><p class="empty">连接后可请军师筹划；辅助模式不会自动加入命令。</p></div></section>
+      <section><h3>本日建议</h3><div id="aiSuggestions"><p class="empty">连接后可请军师筹划；辅助模式不会自动加入命令。</p></div></section>
       <label>给军师的战略指令<textarea id="aiInstruction" rows="3" maxlength="1000" placeholder="例如：先守住许昌，不要主动宣战；优先整顿补给。"></textarea></label>
       <button id="aiInstructionButton" class="advisor-button">按此意图重新筹划</button>
       <section><h3>工具审计</h3><div id="aiAudit"><p class="empty">暂无调用。</p></div></section>
@@ -275,18 +371,30 @@
 
   <script src="js/data/command-catalog.js?v=20260930-78"></script>
   <script src="js/data/game-data.js?v=20260928-16"></script>
-  <script src="js/data/offline-data.generated.js?v=20260930-78"></script>
-  <script src="js/core/data-loader.js?v=20260930-78"></script>
-  <script src="js/core/rule-engine.js?v=20261008-11"></script>
-  <script src="js/core/ai-bridge.js?v=20260929-46"></script>
+  <script src="js/data/offline-data.generated.js?v=20261011-03"></script>
+  <script src="js/core/data-loader.js?v=20261011-03"></script>
+  <script src="js/core/game-clock.js?v=20261009-01"></script>
+  <script src="js/core/simulation-clock.js?v=20261009-02"></script>
+  <script src="js/core/fiscal-system.js?v=20261010-03"></script>
+  <script src="js/core/rule-engine.js?v=20261011-01"></script>
+  <script src="js/core/ai-bridge.js?v=20261009-02"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/game-state.js?v=20261009-01"></script>
-  <script src="js/ui/map-view.js?v=20261009-01"></script>
-  <script src="js/ui/terminal-select.js?v=20260929-66"></script>
-  <script src="js/ui/command-planner.js?v=20260930-78"></script>
+  <script src="js/core/game-state.js?v=20261011-05"></script>
+  <script src="js/core/map-grid.js?v=20261011-02"></script>
+  <script src="js/core/map-editor-drafts.js?v=20261010-02"></script>
+  <script src="js/core/scenario-map-store.js?v=20261011-01"></script>
+  <script src="js/ui/map-view.js?v=20261011-05"></script>
+  <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
+  <script src="js/ui/map-editor.js?v=20261011-09"></script>
+  <script src="js/ui/terminal-select.js?v=20261010-10"></script>
+  <script src="js/ui/fiscal-ui.js?v=20261010-03"></script>
+  <script src="js/ui/command-planner.js?v=20261009-01"></script>
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
-  <script src="js/ui/app.js?v=20261009-23"></script>
-  <script src="js/ui/os-window-manager.js?v=20261009-22"></script>
+  <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
+  <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
+  <script src="js/ui/app.js?v=20261011-02"></script>
+  <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
+  <script src="js/ui/os-window-manager.js?v=20261011-02"></script>
 </body>
 </html>

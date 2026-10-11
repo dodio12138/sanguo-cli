@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+globalThis.window=globalThis;
+globalThis.CustomEvent??=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
+await import('../js/data/offline-data.generated.js');
+await import('../js/core/game-clock.js');
+await import('../js/core/fiscal-system.js');
+await import('../js/core/rule-engine.js');
+await import('../js/core/game-state.js');
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:'cao'});
+const snapshot=()=>JSON.stringify({garrisons:state.data.cities.map(c=>c.garrison),armies:state.data.armies.map(a=>[a.id,a.soldiers,a.route])});
+state.random=()=>.999999;const before=snapshot(),quiet=[];state.engine.runRivalAI(state,quiet);
+assert.equal(snapshot(),before,'未命中概率时，不补兵、编军或行军');
+state.random=()=>0;const active=[];state.engine.runRivalAI(state,active);
+assert.notEqual(snapshot(),before,'同一天命中概率也能行动，不受固定日期限制');
+assert(active.some(e=>e.phase==='诸侯'));
+assert(!state.engine.runRivalAI.toString().includes('%'),'诸侯决策不能保留日期取模间隔');
+console.log('每日 AI 概率回归通过：未命中不行动、同日命中可行动、无固定日期间隔');

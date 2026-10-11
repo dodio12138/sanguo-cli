@@ -1,0 +1,17 @@
+import assert from "node:assert/strict";
+globalThis.window=globalThis;globalThis.CustomEvent??=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
+await import("../js/data/offline-data.generated.js");await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");await import("../js/core/game-state.js");
+assert.deepEqual(GameClock.next({year:200,month:1,day:31}),{year:200,month:2,day:1,xun:0});
+assert.equal(GameClock.daysInMonth(204,2),29);assert.equal(GameClock.daysInMonth(200,2),28);
+assert.deepEqual(GameClock.next({year:200,month:12,day:31}),{year:201,month:1,day:1,xun:0});
+assert.equal(GameClock.era({year:190,month:1}),"初平元年");assert.equal(GameClock.era({year:200,month:1}),"建安五年");assert.equal(GameClock.era({year:208,month:1}),"建安十三年");
+assert.equal(GameClock.yearStem({year:200}),"庚辰");assert.equal(GameClock.dayStem({year:2000,month:1,day:7}),"甲子");assert.equal(GameClock.dayStem({year:2000,month:1,day:8}),"乙丑");
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),called={};
+for(const key of ["resolveEconomies","applyStrategicSystems","auditSupplyRoutes","adjustCommonEnemyRelations","releaseLateVassals","resolveWorldDiplomacy","resolveWorldVassals","runDelegatedCorps","runCoalitions","resolveAdministration","recoverIdleArmies","runRivalAI","resolveSieges","advanceArmies","consumeLocalSupplies","resolveOfficerDynamics","runMilestone","runEvent","evaluateGameOver"])state.engine[key]=()=>called[key]=(called[key]||0)+1;
+state.endTurn();assert.equal(state.dateLabel,"200年 1月 2日");assert.equal(called.resolveEconomies,1);assert.equal(called.advanceArmies,1);assert.equal(called.runRivalAI,1,"诸侯每天评估行动");assert.equal(called.consumeLocalSupplies,1);assert.equal(called.resolveAdministration,undefined);assert.equal(called.resolveSieges,undefined);
+state.date.day=10;state.endTurn();assert.equal(called.resolveAdministration,1);assert.equal(called.resolveSieges,1);
+state.date={year:204,month:2,day:28,xun:2};assert(!GameClock.isMonthEnd(state));state.date.day=29;assert(GameClock.isMonthEnd(state));state.endTurn();assert.equal(state.dateLabel,"204年 3月 1日");
+const old={version:16,turn:7,date:{year:200,month:3,xun:1},policies:{eventHistory:[]},world:{cities:[{occupiedUntil:10,administration:{boosts:{agriculture:12}}}],armies:[],officers:[{injuredUntil:9}]},diplomacy:{treaties:[{expiresTurn:20}]}};
+GameClock.migrate(old);assert.equal(old.date.day,11);assert.equal(old.world.cities[0].occupiedUntil,37);assert.equal(old.world.cities[0].administration.boosts.agriculture,57);assert.equal(old.world.officers[0].injuredUntil,27);assert.equal(old.diplomacy.treaties[0].expiresTurn,137);assert.equal(GameClock.legacyTurn({...old,turn:17}),8);
+const migrated=JSON.stringify(old);GameClock.migrate(old);assert.equal(JSON.stringify(old),migrated,"日存档不能重复换算");
+console.log("日周期回归通过：逐日推进 / 月年与闰年边界 / 每日与十日调度 / 月末判断 / 年号与干支 / 旧存档剩余期限换算且不重复迁移");

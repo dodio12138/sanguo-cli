@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 globalThis.window=globalThis;
 globalThis.CustomEvent??=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
-await import("../js/data/offline-data.generated.js");await import("../js/core/rule-engine.js");await import("../js/core/game-state.js");
+await import("../js/data/offline-data.generated.js");await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");await import("../js/core/game-state.js");
 const slots=new Map();globalThis.localStorage={getItem:k=>slots.get(k)??null,setItem:(k,v)=>slots.set(k,String(v)),removeItem:k=>slots.delete(k)};
 globalThis.location={protocol:"https:",hostname:"dodio12138.github.io"};
 let requests=0;globalThis.fetch=async()=>{requests++;return {ok:true}};

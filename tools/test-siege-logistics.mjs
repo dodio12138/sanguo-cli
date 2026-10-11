@@ -1,5 +1,5 @@
 globalThis.window=globalThis;
-await import("../js/core/rule-engine.js");
+await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 
 const siege={breach_ratio:.55,supply_drain_per_xun:7,supplied_attacker_drain_per_xun:2,defender_morale_start:72,pressure_morale_loss_per_xun:4,isolated_morale_loss_per_xun:2,starvation_morale_loss_per_xun:14,garrison_food_divisor:18,army_food_divisor:24,population_food_divisor:800,starvation_garrison_loss_ratio:.05,surrender_morale:0};
 const cities=[
@@ -15,7 +15,7 @@ const data={
   forces:[{id:"cao",name:"曹操",cities:1,resources:{gold:10000,food:30000}},{id:"yuan",name:"袁绍",cities:3,resources:{gold:10000,food:30000}},{id:"neutral",name:"无主",cities:0}],unitTypes:{infantry:{attack:1}},terrainDefs:{plains:{defence:0}},combatDoctrines:{},
   rules:{city_graph:{core_a:["core_b"],core_b:["core_a"],island:["staging"],staging:["island"]},balance:{siege,economy:{food_harvest_per_agriculture:3.5,population_base_growth_per_xun:0,population_order_growth_per_point:0,population_occupation_growth_per_xun:0}},movement:{}}
 };
-const engine=new RuleEngine(data),state={turn:1,date:{month:7},playerForceId:"cao",difficulty:"normal",resources:data.forces[0].resources,policies:{taxRate:10,economyHistory:[]},technology:{points:0,levels:{}},infrastructure:{supplyRoutes:[],routeStatuses:{}},corps:[],random:()=>.9};
+const engine=new RuleEngine(data),state={data,engine,turn:1,date:{year:200,month:7,xun:0},playerForceId:"cao",difficulty:"normal",resources:data.forces[0].resources,policies:{taxRate:10,economyHistory:[]},technology:{points:0,levels:{}},infrastructure:{supplyRoutes:[],routeStatuses:{}},corps:[],random:()=>.9};
 
 if(!engine.isIsolatedCity("island","yuan")||engine.isIsolatedCity("core_a","yuan"))throw new Error("飞地识别不正确");
 if(engine.logisticsPath("core_a","island","yuan"))throw new Error("飞地错误连入本土粮道");

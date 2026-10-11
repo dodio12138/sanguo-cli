@@ -1,40 +1,2917 @@
 {
-  "schema_version": 1,
-  "basis_fields": ["commandery", "census_year", "census_population", "resource_region"],
-  "methodology": "郡国人口优先采用《后汉书·郡国志》永和五年（140）口数；原表缺载时采用《汉书》元始二年（2）口数。游戏人口是分配到战略节点的战时编户估算，不等同于整郡口数。",
+  "schema_version": 2,
+  "basis_fields": [
+    "commandery",
+    "census_year",
+    "census_population",
+    "resource_region"
+  ],
+  "methodology": "郡国人口是整郡户籍基准，不是城邑人口或190、200、208年的实测人口。以《后汉书·郡国志》为主；口数缺载或明确存疑时保留前期统计或校勘标识，未载独立数字的辽东属国不伪造口数。县级拆分和城邑人口均为游戏估算。定稿舆图未绘制的140年郡国（塞外、废并）保留原条目，供边地节点的人口出处使用。",
   "historical_basis": {
-    "xuchang":["颍川郡",140,1436513,"central"],"chenliu":["陈留郡",140,869433,"central"],"luoyang":["河南尹",140,1010827,"central"],"ye":["魏郡",140,695660,"north"],"beiping":["右北平郡",140,53475,"north"],
-    "baima":["东郡",140,603393,"central"],"guandu":["颍川郡",140,1436513,"central"],"mengjin":["河南尹",140,1010827,"central"],"xiapi":["下邳国",140,611083,"xuzhou"],"xinye":["南阳郡",140,2439618,"jingzhou"],
-    "xiangyang":["南郡",140,747604,"jingzhou"],"xiakou":["江夏郡",140,265464,"jingzhou"],"jianye":["丹阳郡",140,630545,"jiangdong"],"shouchun":["九江郡",140,432426,"huainan"],"xiliang":["武威郡",140,34226,"northwest"],
-    "jincheng":["金城郡",140,18947,"northwest"],"daixian":["代郡",140,20123,"north"],"xiangping":["辽东郡",2,272539,"liaodong"],"jinyang":["太原郡",140,200124,"north"],"nanpi":["勃海郡",140,1106500,"north"],
-    "pingyuan":["平原郡",140,1002658,"north"],"beihai":["北海国",140,853604,"north"],"anding":["安定郡",140,29060,"northwest"],"tianshui":["汉阳郡",140,130138,"northwest"],"hongnong":["弘农郡",140,199113,"central"],
-    "changan":["京兆尹及三辅",140,523860,"central"],"wan":["南阳郡",140,2439618,"jingzhou"],"puyang":["东郡",140,603393,"central"],"qiao":["沛国",140,1251393,"central"],"shangyong":["汉中郡",140,267402,"jingzhou"],
-    "hanzhong":["汉中郡",140,267402,"yizhou"],"zitong":["广汉郡",140,509438,"yizhou"],"chengdu":["蜀郡",140,1350476,"yizhou"],"yongan":["巴郡",140,1086049,"yizhou"],"jiangzhou":["巴郡",140,1086049,"yizhou"],
-    "jianing":["益州郡",140,110802,"yizhou"],"yunnan":["益州郡",140,110802,"yizhou"],"jiangling":["南郡",140,747604,"jingzhou"],"wuling":["武陵郡",140,250913,"jingzhou"],"changsha":["长沙郡",140,1059372,"jingzhou"],
-    "lingling":["零陵郡",140,1001578,"jingzhou"],"guiyang":["桂阳郡",140,501403,"jingzhou"],"lujiang":["庐江郡",140,424683,"huainan"],"chaisang":["豫章郡",140,1668906,"jiangdong"],"wu":["吴郡",140,700782,"jiangdong"],
-    "tongguan":["弘农郡",140,199113,"central"],"hangu":["河南尹",140,1010827,"central"],"hulao":["河南尹",140,1010827,"central"],"wuguan":["南阳郡",140,2439618,"jingzhou"],"jianmen":["广汉郡",140,509438,"yizhou"],
-    "yangping":["汉中郡",140,267402,"yizhou"],"yiling":["南郡",140,747604,"jingzhou"],"yanjin":["东郡",140,603393,"central"],"pukou":["庐江郡",140,424683,"huainan"],"lelang":["乐浪郡",140,257050,"liaodong"],
-    "ji":["广阳郡",140,280600,"north"],"shangdang":["上党郡",140,127403,"north"],"henei":["河内郡",140,801558,"central"],"linzi":["齐国",140,491765,"north"],"langya":["琅邪国",140,570967,"xuzhou"],
-    "pengcheng":["彭城国",140,493027,"xuzhou"],"xiaopei":["沛国",140,1251393,"xuzhou"],"runan":["汝南郡",140,2100788,"central"],"guangling":["广陵郡",140,410190,"xuzhou"],"hefei":["九江郡",140,432426,"huainan"],
-    "longxi":["陇西郡",140,29637,"northwest"],"langzhong":["巴郡",140,1086049,"yizhou"],"badong":["巴郡",140,1086049,"yizhou"],"fuling":["巴郡",140,1086049,"yizhou"],"kuaiji":["会稽郡",140,481196,"jiangdong"],
-    "yuzhang":["豫章郡",140,1668906,"jiangdong"],"jianan":["会稽郡",140,481196,"jiangdong"],"jiaozhi":["交趾郡",2,746237,"jiaozhou"],"cangwu":["苍梧郡",140,466975,"jiaozhou"],"panyu":["南海郡",140,250282,"jiaozhou"]
+    "xuchang": [
+      "颍川郡",
+      140,
+      1436513,
+      "central"
+    ],
+    "chenliu": [
+      "陈留郡",
+      140,
+      869433,
+      "central"
+    ],
+    "luoyang": [
+      "河南尹",
+      140,
+      1010827,
+      "central"
+    ],
+    "ye": [
+      "魏郡",
+      140,
+      695606,
+      "north"
+    ],
+    "beiping": [
+      "右北平郡",
+      140,
+      53475,
+      "north"
+    ],
+    "baima": [
+      "东郡",
+      140,
+      603393,
+      "central"
+    ],
+    "guandu": [
+      "颍川郡",
+      140,
+      1436513,
+      "central"
+    ],
+    "mengjin": [
+      "河南尹",
+      140,
+      1010827,
+      "central"
+    ],
+    "xiapi": [
+      "下邳国",
+      140,
+      611083,
+      "xuzhou"
+    ],
+    "xinye": [
+      "南阳郡",
+      140,
+      2439618,
+      "jingzhou"
+    ],
+    "xiangyang": [
+      "襄阳郡",
+      140,
+      747604,
+      "jingzhou"
+    ],
+    "xiakou": [
+      "江夏郡",
+      140,
+      265464,
+      "jingzhou"
+    ],
+    "jianye": [
+      "丹阳郡",
+      140,
+      630545,
+      "jiangdong"
+    ],
+    "shouchun": [
+      "九江郡",
+      140,
+      432426,
+      "huainan"
+    ],
+    "xiliang": [
+      "武威郡",
+      140,
+      34226,
+      "northwest"
+    ],
+    "jincheng": [
+      "金城郡",
+      140,
+      18947,
+      "northwest"
+    ],
+    "daixian": [
+      "代郡",
+      140,
+      126188,
+      "north"
+    ],
+    "xiangping": [
+      "辽东郡",
+      2,
+      272539,
+      "liaodong"
+    ],
+    "jinyang": [
+      "太原郡",
+      140,
+      200124,
+      "north"
+    ],
+    "nanpi": [
+      "渤海郡",
+      140,
+      1106500,
+      "north"
+    ],
+    "pingyuan": [
+      "平原郡",
+      140,
+      1002658,
+      "north"
+    ],
+    "beihai": [
+      "北海国",
+      140,
+      853604,
+      "north"
+    ],
+    "anding": [
+      "安定郡",
+      140,
+      29060,
+      "northwest"
+    ],
+    "tianshui": [
+      "汉阳郡",
+      140,
+      130138,
+      "northwest"
+    ],
+    "hongnong": [
+      "恒农郡",
+      140,
+      199113,
+      "central"
+    ],
+    "changan": [
+      "京兆尹",
+      140,
+      285574,
+      "central"
+    ],
+    "wan": [
+      "南阳郡",
+      140,
+      2439618,
+      "jingzhou"
+    ],
+    "puyang": [
+      "东郡",
+      140,
+      603393,
+      "central"
+    ],
+    "qiao": [
+      "沛郡",
+      140,
+      1251393,
+      "central"
+    ],
+    "shangyong": [
+      "上庸郡",
+      140,
+      267402,
+      "jingzhou"
+    ],
+    "hanzhong": [
+      "汉中郡",
+      140,
+      267402,
+      "yizhou"
+    ],
+    "zitong": [
+      "梓潼郡",
+      140,
+      509438,
+      "yizhou"
+    ],
+    "chengdu": [
+      "蜀郡",
+      140,
+      1350476,
+      "yizhou"
+    ],
+    "yongan": [
+      "巴郡",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "jiangzhou": [
+      "巴郡",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "jianing": [
+      "益州郡",
+      140,
+      110802,
+      "yizhou"
+    ],
+    "yunnan": [
+      "益州郡",
+      140,
+      110802,
+      "yizhou"
+    ],
+    "jiangling": [
+      "南郡",
+      140,
+      747604,
+      "jingzhou"
+    ],
+    "wuling": [
+      "武陵郡",
+      140,
+      250913,
+      "jingzhou"
+    ],
+    "changsha": [
+      "长沙郡",
+      140,
+      1059372,
+      "jingzhou"
+    ],
+    "lingling": [
+      "零陵郡",
+      140,
+      1001578,
+      "jingzhou"
+    ],
+    "guiyang": [
+      "桂阳郡",
+      140,
+      501403,
+      "jingzhou"
+    ],
+    "lujiang": [
+      "庐江郡",
+      140,
+      424683,
+      "huainan"
+    ],
+    "chaisang": [
+      "豫章郡",
+      140,
+      1668906,
+      "jiangdong"
+    ],
+    "wu": [
+      "吴郡",
+      140,
+      700782,
+      "jiangdong"
+    ],
+    "tongguan": [
+      "恒农郡",
+      140,
+      199113,
+      "central"
+    ],
+    "hangu": [
+      "河南尹",
+      140,
+      1010827,
+      "central"
+    ],
+    "hulao": [
+      "河南尹",
+      140,
+      1010827,
+      "central"
+    ],
+    "wuguan": [
+      "南阳郡",
+      140,
+      2439618,
+      "jingzhou"
+    ],
+    "jianmen": [
+      "广汉郡",
+      140,
+      509438,
+      "yizhou"
+    ],
+    "yangping": [
+      "汉中郡",
+      140,
+      267402,
+      "yizhou"
+    ],
+    "yiling": [
+      "南郡",
+      140,
+      747604,
+      "jingzhou"
+    ],
+    "yanjin": [
+      "东郡",
+      140,
+      603393,
+      "central"
+    ],
+    "pukou": [
+      "庐江郡",
+      140,
+      424683,
+      "huainan"
+    ],
+    "ji": [
+      "广阳郡",
+      140,
+      280600,
+      "north"
+    ],
+    "shangdang": [
+      "上党郡",
+      140,
+      127403,
+      "north"
+    ],
+    "henei": [
+      "河内郡",
+      140,
+      801558,
+      "central"
+    ],
+    "linzi": [
+      "齐郡",
+      140,
+      491765,
+      "north"
+    ],
+    "langya": [
+      "琅邪国",
+      140,
+      570967,
+      "xuzhou"
+    ],
+    "pengcheng": [
+      "彭城国",
+      140,
+      493027,
+      "xuzhou"
+    ],
+    "xiaopei": [
+      "沛郡",
+      140,
+      1251393,
+      "xuzhou"
+    ],
+    "runan": [
+      "汝南郡",
+      140,
+      2100788,
+      "central"
+    ],
+    "guangling": [
+      "广陵郡",
+      140,
+      410190,
+      "xuzhou"
+    ],
+    "hefei": [
+      "九江郡",
+      140,
+      432426,
+      "huainan"
+    ],
+    "longxi": [
+      "陇西郡",
+      140,
+      29637,
+      "northwest"
+    ],
+    "langzhong": [
+      "巴西郡",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "badong": [
+      "巴郡",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "fuling": [
+      "巴东属国",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "kuaiji": [
+      "会稽郡",
+      140,
+      481196,
+      "jiangdong"
+    ],
+    "yuzhang": [
+      "豫章郡",
+      140,
+      1668906,
+      "jiangdong"
+    ],
+    "jianan": [
+      "会稽郡",
+      140,
+      481196,
+      "jiangdong"
+    ],
+    "jiaozhi": [
+      "交趾郡",
+      2,
+      746237,
+      "jiaozhou"
+    ],
+    "panyu": [
+      "南海郡",
+      140,
+      250282,
+      "jiaozhou"
+    ],
+    "commandery_city_002": [
+      "河内郡",
+      140,
+      801558,
+      "central"
+    ],
+    "commandery_city_003": [
+      "河东郡",
+      140,
+      570803,
+      "central"
+    ],
+    "commandery_city_006": [
+      "左冯翊",
+      140,
+      145195,
+      "central"
+    ],
+    "commandery_city_007": [
+      "右扶风",
+      140,
+      93091,
+      "central"
+    ],
+    "commandery_city_008": [
+      "颍川郡",
+      140,
+      1436513,
+      "central"
+    ],
+    "commandery_city_009": [
+      "汝南郡",
+      140,
+      2100788,
+      "central"
+    ],
+    "commandery_city_010": [
+      "梁国",
+      140,
+      431283,
+      "central"
+    ],
+    "commandery_city_011": [
+      "沛郡",
+      140,
+      1251393,
+      "central"
+    ],
+    "commandery_city_012": [
+      "陈郡",
+      140,
+      1547572,
+      "central"
+    ],
+    "commandery_city_013": [
+      "鲁国",
+      140,
+      411590,
+      "central"
+    ],
+    "commandery_city_015": [
+      "巨鹿郡",
+      140,
+      602096,
+      "north"
+    ],
+    "commandery_city_016": [
+      "常山国",
+      140,
+      631184,
+      "north"
+    ],
+    "commandery_city_017": [
+      "中山国",
+      140,
+      658195,
+      "north"
+    ],
+    "commandery_city_018": [
+      "安平国",
+      140,
+      655118,
+      "north"
+    ],
+    "commandery_city_019": [
+      "河间国",
+      140,
+      634421,
+      "north"
+    ],
+    "commandery_city_020": [
+      "甘陵郡",
+      140,
+      760418,
+      "north"
+    ],
+    "commandery_city_021": [
+      "赵郡",
+      140,
+      188381,
+      "north"
+    ],
+    "commandery_city_025": [
+      "东平国",
+      140,
+      448270,
+      "central"
+    ],
+    "commandery_city_026": [
+      "任城国",
+      140,
+      194156,
+      "central"
+    ],
+    "commandery_city_027": [
+      "泰山郡",
+      140,
+      437317,
+      "central"
+    ],
+    "commandery_city_028": [
+      "济北国",
+      140,
+      235897,
+      "central"
+    ],
+    "commandery_city_029": [
+      "山阳国",
+      140,
+      606091,
+      "central"
+    ],
+    "commandery_city_030": [
+      "济阴国",
+      140,
+      657554,
+      "central"
+    ],
+    "commandery_city_031": [
+      "东海国",
+      140,
+      706416,
+      "xuzhou"
+    ],
+    "commandery_city_032": [
+      "琅邪国",
+      140,
+      570967,
+      "xuzhou"
+    ],
+    "commandery_city_036": [
+      "济南国",
+      140,
+      453308,
+      "north"
+    ],
+    "commandery_city_038": [
+      "安乐国",
+      140,
+      424075,
+      "north"
+    ],
+    "commandery_city_039": [
+      "北海国",
+      140,
+      853604,
+      "north"
+    ],
+    "commandery_city_040": [
+      "东莱郡",
+      140,
+      484393,
+      "north"
+    ],
+    "commandery_city_044": [
+      "江夏郡",
+      140,
+      265464,
+      "jingzhou"
+    ],
+    "commandery_city_045": [
+      "零陵郡",
+      140,
+      1001578,
+      "jingzhou"
+    ],
+    "commandery_city_046": [
+      "桂阳郡",
+      140,
+      501403,
+      "jingzhou"
+    ],
+    "commandery_city_047": [
+      "武陵郡",
+      140,
+      250913,
+      "jingzhou"
+    ],
+    "commandery_city_048": [
+      "长沙郡",
+      140,
+      1059372,
+      "jingzhou"
+    ],
+    "commandery_city_049": [
+      "九江郡",
+      140,
+      432426,
+      "huainan"
+    ],
+    "commandery_city_050": [
+      "丹阳郡",
+      140,
+      630545,
+      "jiangdong"
+    ],
+    "commandery_city_051": [
+      "庐江郡",
+      140,
+      424683,
+      "huainan"
+    ],
+    "commandery_city_052": [
+      "会稽郡",
+      140,
+      481196,
+      "jiangdong"
+    ],
+    "commandery_city_054": [
+      "豫章郡",
+      140,
+      1668906,
+      "jiangdong"
+    ],
+    "commandery_city_055": [
+      "汉中郡",
+      140,
+      267402,
+      "yizhou"
+    ],
+    "commandery_city_057": [
+      "广汉郡",
+      140,
+      509438,
+      "yizhou"
+    ],
+    "commandery_city_059": [
+      "犍为郡",
+      140,
+      411378,
+      "yizhou"
+    ],
+    "commandery_city_061": [
+      "越巂郡",
+      140,
+      623418,
+      "yizhou"
+    ],
+    "commandery_city_062": [
+      "益州郡",
+      140,
+      110802,
+      "yizhou"
+    ],
+    "commandery_city_064": [
+      "广汉属国",
+      140,
+      205652,
+      "yizhou"
+    ],
+    "commandery_city_065": [
+      "蜀郡属国",
+      140,
+      475629,
+      "yizhou"
+    ],
+    "commandery_city_066": [
+      "犍为属国",
+      140,
+      37187,
+      "yizhou"
+    ],
+    "commandery_city_067": [
+      "陇西郡",
+      140,
+      29637,
+      "northwest"
+    ],
+    "commandery_city_068": [
+      "汉阳郡",
+      140,
+      130138,
+      "northwest"
+    ],
+    "commandery_city_069": [
+      "武都郡",
+      140,
+      81728,
+      "northwest"
+    ],
+    "commandery_city_070": [
+      "金城郡",
+      140,
+      18947,
+      "northwest"
+    ],
+    "commandery_city_071": [
+      "安定郡",
+      140,
+      29060,
+      "northwest"
+    ],
+    "commandery_city_072": [
+      "北地郡",
+      140,
+      18637,
+      "northwest"
+    ],
+    "commandery_city_079": [
+      "上党郡",
+      140,
+      127403,
+      "north"
+    ],
+    "commandery_city_086": [
+      "雁门郡",
+      140,
+      249000,
+      "north"
+    ],
+    "commandery_city_088": [
+      "涿郡",
+      140,
+      633754,
+      "north"
+    ],
+    "commandery_city_090": [
+      "代郡",
+      140,
+      126188,
+      "north"
+    ],
+    "commandery_city_091": [
+      "上谷郡",
+      140,
+      51204,
+      "north"
+    ],
+    "commandery_city_092": [
+      "渔阳郡",
+      140,
+      435740,
+      "north"
+    ],
+    "commandery_city_093": [
+      "右北平郡",
+      140,
+      53475,
+      "north"
+    ],
+    "commandery_city_094": [
+      "辽西郡",
+      140,
+      81714,
+      "north"
+    ],
+    "commandery_city_098": [
+      "辽东属国",
+      null,
+      null,
+      "liaodong"
+    ],
+    "commandery_city_101": [
+      "郁林郡",
+      2,
+      71162,
+      "jiaozhou"
+    ],
+    "commandery_city_102": [
+      "合浦郡",
+      140,
+      86617,
+      "jiaozhou"
+    ],
+    "commandery_city_103": [
+      "交趾郡",
+      2,
+      746237,
+      "jiaozhou"
+    ],
+    "lelang": [
+      "乐浪郡",
+      140,
+      257050,
+      "liaodong"
+    ],
+    "cangwu": [
+      "苍梧郡",
+      140,
+      466975,
+      "jiaozhou"
+    ],
+    "commandery_city_060": [
+      "牂柯郡",
+      140,
+      267253,
+      "yizhou"
+    ],
+    "commandery_city_063": [
+      "永昌郡",
+      140,
+      1897344,
+      "yizhou"
+    ],
+    "commandery_city_077": [
+      "张掖属国",
+      140,
+      16952,
+      "northwest"
+    ],
+    "commandery_city_096": [
+      "玄菟郡",
+      140,
+      43163,
+      "liaodong"
+    ],
+    "commandery_city_097": [
+      "乐浪郡",
+      140,
+      257050,
+      "liaodong"
+    ],
+    "commandery_city_100": [
+      "苍梧郡",
+      140,
+      466975,
+      "jiaozhou"
+    ],
+    "commandery_city_104": [
+      "九真郡",
+      140,
+      209894,
+      "jiaozhou"
+    ],
+    "commandery_city_105": [
+      "日南郡",
+      140,
+      100676,
+      "jiaozhou"
+    ],
+    "commandery_city_106": [
+      "博陵国",
+      140,
+      633754,
+      "north"
+    ],
+    "commandery_city_107": [
+      "宕渠郡",
+      140,
+      1086049,
+      "yizhou"
+    ],
+    "commandery_city_108": [
+      "东莞郡",
+      140,
+      570967,
+      "xuzhou"
+    ],
+    "commandery_city_109": [
+      "房陵郡",
+      140,
+      267402,
+      "yizhou"
+    ],
+    "commandery_city_110": [
+      "固陵郡",
+      140,
+      1086049,
+      "jingzhou"
+    ],
+    "commandery_city_111": [
+      "汉兴郡",
+      140,
+      267402,
+      "central"
+    ],
+    "commandery_city_112": [
+      "江阳郡",
+      140,
+      411378,
+      "yizhou"
+    ],
+    "commandery_city_113": [
+      "乐陵郡",
+      140,
+      1002658,
+      "north"
+    ],
+    "commandery_city_114": [
+      "乐平郡",
+      140,
+      127403,
+      "north"
+    ],
+    "commandery_city_115": [
+      "利城郡",
+      140,
+      570967,
+      "xuzhou"
+    ],
+    "commandery_city_116": [
+      "庐陵郡",
+      140,
+      1668906,
+      "jiangdong"
+    ],
+    "commandery_city_117": [
+      "南乡郡",
+      140,
+      2439618,
+      "jingzhou"
+    ],
+    "commandery_city_118": [
+      "鄱阳郡",
+      140,
+      1668906,
+      "jiangdong"
+    ],
+    "commandery_city_119": [
+      "蕲新郡",
+      140,
+      265464,
+      "jiangdong"
+    ],
+    "commandery_city_120": [
+      "谯郡",
+      140,
+      1251393,
+      "central"
+    ],
+    "commandery_city_121": [
+      "汶山郡",
+      140,
+      1350476,
+      "yizhou"
+    ],
+    "commandery_city_122": [
+      "西城郡",
+      140,
+      267402,
+      "yizhou"
+    ],
+    "commandery_city_123": [
+      "西郡",
+      140,
+      26040,
+      "northwest"
+    ],
+    "commandery_city_124": [
+      "西平郡",
+      140,
+      18947,
+      "northwest"
+    ],
+    "commandery_city_125": [
+      "宜都郡",
+      140,
+      747604,
+      "jingzhou"
+    ],
+    "commandery_city_126": [
+      "弋阳郡",
+      140,
+      2100788,
+      "central"
+    ],
+    "commandery_city_127": [
+      "阴平郡",
+      140,
+      81728,
+      "yizhou"
+    ],
+    "commandery_city_128": [
+      "章陵郡",
+      140,
+      2439618,
+      "jingzhou"
+    ],
+    "commandery_city_129": [
+      "章武郡",
+      140,
+      1106500,
+      "north"
+    ],
+    "commandery_city_130": [
+      "朱提郡",
+      140,
+      37187,
+      "yizhou"
+    ],
+    "commandery_city_083": [
+      "新兴郡",
+      140,
+      200124,
+      "north"
+    ],
+    "commandery_city_074": [
+      "张掖郡",
+      140,
+      26040,
+      "northwest"
+    ],
+    "commandery_city_075": [
+      "酒泉郡",
+      2,
+      76726,
+      "northwest"
+    ],
+    "commandery_city_076": [
+      "敦煌郡",
+      140,
+      29170,
+      "northwest"
+    ],
+    "commandery_city_078": [
+      "张掖居延属国",
+      140,
+      4733,
+      "northwest"
+    ],
+    "commandery_city_081": [
+      "上郡",
+      140,
+      28599,
+      "north"
+    ],
+    "commandery_city_082": [
+      "西河郡",
+      140,
+      20838,
+      "north"
+    ],
+    "commandery_city_084": [
+      "云中郡",
+      140,
+      26430,
+      "north"
+    ],
+    "commandery_city_085": [
+      "定襄郡",
+      140,
+      13571,
+      "north"
+    ],
+    "commandery_city_087": [
+      "朔方郡",
+      140,
+      7843,
+      "north"
+    ],
+    "custom_1": [
+      "城阳郡",
+      140,
+      570967,
+      "xuzhou"
+    ]
   },
-  "storage_by_level": {"1":10000,"2":18000,"3":28000,"4":40000,"5":52000},
-  "type_storage": {"pass":7000,"ford":8000,"port":30000},
+  "storage_by_level": {
+    "1": 10000,
+    "2": 18000,
+    "3": 28000,
+    "4": 40000,
+    "5": 52000
+  },
+  "type_storage": {
+    "pass": 7000,
+    "ford": 8000,
+    "port": 30000
+  },
   "scenarios": {
     "190_coalition": {
-      "default":{"population":1.08,"garrison":0.82,"agriculture":2,"commerce":1,"order":3,"food_stock":0.82,"gold_stock":1.0},
-      "regions":{"north":{"population":1.12},"central":{"population":1.15},"xuzhou":{"population":1.18},"jingzhou":{"population":1.06},"jiangdong":{"population":0.90,"agriculture":-2,"commerce":-3},"huainan":{"population":1.05},"northwest":{"population":1.08},"yizhou":{"population":1.02},"liaodong":{"population":1.04},"jiaozhou":{"population":1.0}},
-      "cities":{"luoyang":{"population":1.55,"garrison":1.8,"commerce":10,"order":-8},"changan":{"population":1.25,"garrison":1.25},"xuchang":{"population":0.92,"garrison":0.55,"commerce":-6},"ye":{"population":1.10,"garrison":0.82},"jianye":{"population":0.78,"commerce":-7},"wu":{"population":0.90}}
+      "default": {
+        "population": 1.08,
+        "garrison": 0.82,
+        "agriculture": 2,
+        "commerce": 1,
+        "order": 3,
+        "food_stock": 0.82,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.12
+        },
+        "central": {
+          "population": 1.15
+        },
+        "xuzhou": {
+          "population": 1.18
+        },
+        "jingzhou": {
+          "population": 1.06
+        },
+        "jiangdong": {
+          "population": 0.9,
+          "agriculture": -2,
+          "commerce": -3
+        },
+        "huainan": {
+          "population": 1.05
+        },
+        "northwest": {
+          "population": 1.08
+        },
+        "yizhou": {
+          "population": 1.02
+        },
+        "liaodong": {
+          "population": 1.04
+        },
+        "jiaozhou": {
+          "population": 1
+        }
+      },
+      "cities": {
+        "luoyang": {
+          "population": 1.55,
+          "garrison": 1.8,
+          "commerce": 10,
+          "order": -8
+        },
+        "changan": {
+          "population": 1.25,
+          "garrison": 1.25
+        },
+        "xuchang": {
+          "population": 0.92,
+          "garrison": 0.55,
+          "commerce": -6
+        },
+        "ye": {
+          "population": 1.1,
+          "garrison": 0.82
+        },
+        "jianye": {
+          "population": 0.78,
+          "commerce": -7
+        },
+        "wu": {
+          "population": 0.9
+        }
+      }
     },
     "200_guandu": {
-      "default":{"population":1.0,"garrison":1.0,"agriculture":0,"commerce":0,"order":0,"food_stock":0.74,"gold_stock":1.0},
-      "regions":{},"cities":{}
+      "default": {
+        "population": 1,
+        "garrison": 1,
+        "agriculture": 0,
+        "commerce": 0,
+        "order": 0,
+        "food_stock": 0.74,
+        "gold_stock": 1
+      },
+      "regions": {},
+      "cities": {}
     },
     "208_red_cliffs": {
-      "default":{"population":0.96,"garrison":1.08,"agriculture":1,"commerce":1,"order":2,"food_stock":0.68,"gold_stock":0.95},
-      "regions":{"north":{"population":0.92,"order":4},"central":{"population":0.88,"order":3},"xuzhou":{"population":0.78,"agriculture":-2,"order":1},"jingzhou":{"population":0.92,"garrison":1.2,"order":0},"jiangdong":{"population":1.12,"garrison":1.16,"agriculture":4,"commerce":5,"order":5,"food_stock":0.82,"gold_stock":1.12},"huainan":{"population":0.9,"garrison":1.2},"northwest":{"population":0.85,"order":1},"yizhou":{"population":1.06,"agriculture":3,"order":5,"food_stock":0.84},"liaodong":{"population":1.02,"order":4},"jiaozhou":{"population":1.04,"agriculture":3,"commerce":3,"order":4,"food_stock":0.8}},
-      "cities":{"xuchang":{"population":1.05,"garrison":1.25,"commerce":6,"order":7},"luoyang":{"population":0.62,"garrison":0.85,"commerce":-8,"order":-4},"ye":{"population":0.86,"garrison":1.2},"runan":{"population":0.75,"agriculture":-4},"xiangyang":{"population":0.84,"garrison":1.55,"order":-5},"jiangling":{"population":0.88,"garrison":1.45,"order":-4},"xiakou":{"population":0.82,"garrison":1.5,"order":-4},"chaisang":{"population":1.16,"garrison":1.7,"commerce":6},"jianye":{"population":1.18,"garrison":1.35,"commerce":8},"changsha":{"population":1.08,"agriculture":5}}
+      "default": {
+        "population": 0.96,
+        "garrison": 1.08,
+        "agriculture": 1,
+        "commerce": 1,
+        "order": 2,
+        "food_stock": 0.68,
+        "gold_stock": 0.95
+      },
+      "regions": {
+        "north": {
+          "population": 0.92,
+          "order": 4
+        },
+        "central": {
+          "population": 0.88,
+          "order": 3
+        },
+        "xuzhou": {
+          "population": 0.78,
+          "agriculture": -2,
+          "order": 1
+        },
+        "jingzhou": {
+          "population": 0.92,
+          "garrison": 1.2,
+          "order": 0
+        },
+        "jiangdong": {
+          "population": 1.12,
+          "garrison": 1.16,
+          "agriculture": 4,
+          "commerce": 5,
+          "order": 5,
+          "food_stock": 0.82,
+          "gold_stock": 1.12
+        },
+        "huainan": {
+          "population": 0.9,
+          "garrison": 1.2
+        },
+        "northwest": {
+          "population": 0.85,
+          "order": 1
+        },
+        "yizhou": {
+          "population": 1.06,
+          "agriculture": 3,
+          "order": 5,
+          "food_stock": 0.84
+        },
+        "liaodong": {
+          "population": 1.02,
+          "order": 4
+        },
+        "jiaozhou": {
+          "population": 1.04,
+          "agriculture": 3,
+          "commerce": 3,
+          "order": 4,
+          "food_stock": 0.8
+        }
+      },
+      "cities": {
+        "xuchang": {
+          "population": 1.05,
+          "garrison": 1.25,
+          "commerce": 6,
+          "order": 7
+        },
+        "luoyang": {
+          "population": 0.62,
+          "garrison": 0.85,
+          "commerce": -8,
+          "order": -4
+        },
+        "ye": {
+          "population": 0.86,
+          "garrison": 1.2
+        },
+        "runan": {
+          "population": 0.75,
+          "agriculture": -4
+        },
+        "xiangyang": {
+          "population": 0.84,
+          "garrison": 1.55,
+          "order": -5
+        },
+        "jiangling": {
+          "population": 0.88,
+          "garrison": 1.45,
+          "order": -4
+        },
+        "xiakou": {
+          "population": 0.82,
+          "garrison": 1.5,
+          "order": -4
+        },
+        "chaisang": {
+          "population": 1.16,
+          "garrison": 1.7,
+          "commerce": 6
+        },
+        "jianye": {
+          "population": 1.18,
+          "garrison": 1.35,
+          "commerce": 8
+        },
+        "changsha": {
+          "population": 1.08,
+          "agriculture": 5
+        }
+      }
+    }
+  },
+  "population_reference": {
+    "schema_version": 1,
+    "record_fields": [
+      "year",
+      "population",
+      "source",
+      "status",
+      "note"
+    ],
+    "methodology": "郡国人口是整郡户籍基准，不是城邑人口或190、200、208年的实测人口。以《后汉书·郡国志》为主；口数缺载或明确存疑时保留前期统计或校勘标识，未载独立数字的辽东属国不伪造口数。县级拆分和城邑人口均为游戏估算。定稿舆图未绘制的140年郡国（塞外、废并）保留原条目，供边地节点的人口出处使用。",
+    "aliases": {
+      "勃海郡": "渤海郡",
+      "京兆尹及三辅": "京兆尹",
+      "牂牁郡": "牂柯郡",
+      "东海郡": "东海国",
+      "济南郡": "济南国",
+      "琅琊国": "琅邪国",
+      "天水郡": "汉阳郡",
+      "弘农郡": "恒农郡",
+      "沛国": "沛郡",
+      "陈国": "陈郡",
+      "齐国": "齐郡",
+      "赵国": "赵郡",
+      "济阴郡": "济阴国",
+      "山阳郡": "山阳国",
+      "清河国": "甘陵郡",
+      "乐安国": "安乐国"
+    },
+    "city_population_model": {
+      "base_year": 200,
+      "registered_retention": 0.32,
+      "urban_share": 0.12,
+      "minimum": 1000,
+      "rounding": 500,
+      "scope": "仅为新增郡治生成基础城邑人口；同郡城市节点均分城邑份额。原有战略节点保留既有平衡值，统计缺载时保留已有城邑估值。剧本倍率由city_resource_profiles.scenarios应用。"
+    },
+    "sources": {
+      "houhan_1": {
+        "title": "后汉书·郡国一",
+        "url": "https://zh.wikisource.org/zh-hans/後漢書/卷109"
+      },
+      "houhan_2": {
+        "title": "后汉书·郡国二",
+        "url": "https://zh.wikisource.org/zh-hans/後漢書/卷110"
+      },
+      "houhan_3": {
+        "title": "后汉书·郡国三",
+        "url": "https://zh.wikisource.org/zh-hans/後漢書/卷111"
+      },
+      "houhan_4": {
+        "title": "后汉书·郡国四",
+        "url": "https://zh.wikisource.org/zh-hans/後漢書/卷112"
+      },
+      "houhan_5": {
+        "title": "后汉书·郡国五",
+        "url": "https://zh.wikisource.org/zh-hans/後漢書/卷113"
+      },
+      "hanshu_28": {
+        "title": "汉书·地理志",
+        "url": "https://zh.wikisource.org/zh-hans/漢書/卷028"
+      },
+      "population_emendation": {
+        "title": "正史脞论小记：郡国志户口校勘",
+        "url": "https://www.cuhk.edu.hk/ics/journal/articles/v16p017.pdf"
+      }
+    },
+    "records": {
+      "安定郡": [
+        140,
+        29060,
+        "houhan_5",
+        "recorded"
+      ],
+      "安乐国": [
+        140,
+        424075,
+        "houhan_4",
+        "recorded"
+      ],
+      "安平国": [
+        140,
+        655118,
+        "houhan_2",
+        "recorded"
+      ],
+      "巴东属国": [
+        140,
+        1086049,
+        "houhan_5",
+        "emended",
+        "巴东属国于永和五年（140）尚属巴郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "巴郡": [
+        140,
+        1086049,
+        "houhan_5",
+        "recorded"
+      ],
+      "巴西郡": [
+        140,
+        1086049,
+        "houhan_5",
+        "emended",
+        "巴西郡于永和五年（140）尚属巴郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "北地郡": [
+        140,
+        18637,
+        "houhan_5",
+        "recorded"
+      ],
+      "北海国": [
+        140,
+        853604,
+        "houhan_4",
+        "recorded"
+      ],
+      "博陵国": [
+        140,
+        633754,
+        "houhan_5",
+        "emended",
+        "博陵国于永和五年（140）尚属涿郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "渤海郡": [
+        140,
+        1106500,
+        "houhan_2",
+        "recorded"
+      ],
+      "常山国": [
+        140,
+        631184,
+        "houhan_2",
+        "recorded"
+      ],
+      "陈郡": [
+        140,
+        1547572,
+        "houhan_2",
+        "recorded",
+        "户口比例存疑，保留原文口数，未擅自删百字。"
+      ],
+      "陈留郡": [
+        140,
+        869433,
+        "houhan_3",
+        "recorded"
+      ],
+      "城阳郡": [
+        140,
+        570967,
+        "houhan_3",
+        "emended",
+        "城阳郡于永和五年（140）尚属琅邪国，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "代郡": [
+        140,
+        126188,
+        "houhan_5",
+        "recorded",
+        "20123为户数，不能当作人口。"
+      ],
+      "丹阳郡": [
+        140,
+        630545,
+        "houhan_4",
+        "recorded"
+      ],
+      "宕渠郡": [
+        140,
+        1086049,
+        "houhan_5",
+        "emended",
+        "宕渠郡于永和五年（140）尚属巴郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "东莞郡": [
+        140,
+        570967,
+        "houhan_3",
+        "emended",
+        "东莞郡于永和五年（140）尚属琅邪国，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "东海国": [
+        140,
+        706416,
+        "houhan_3",
+        "recorded",
+        "底本条目称东海郡，游戏按郡国名录称东海国。"
+      ],
+      "东郡": [
+        140,
+        603393,
+        "houhan_3",
+        "recorded"
+      ],
+      "东莱郡": [
+        140,
+        484393,
+        "houhan_4",
+        "recorded"
+      ],
+      "东平国": [
+        140,
+        448270,
+        "houhan_3",
+        "recorded"
+      ],
+      "房陵郡": [
+        140,
+        267402,
+        "houhan_5",
+        "emended",
+        "房陵郡于永和五年（140）尚属汉中郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "甘陵郡": [
+        140,
+        760418,
+        "houhan_2",
+        "recorded"
+      ],
+      "固陵郡": [
+        140,
+        1086049,
+        "houhan_5",
+        "emended",
+        "固陵郡于永和五年（140）尚属巴郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "广汉郡": [
+        140,
+        509438,
+        "houhan_5",
+        "recorded"
+      ],
+      "广汉属国": [
+        140,
+        205652,
+        "houhan_5",
+        "recorded"
+      ],
+      "广陵郡": [
+        140,
+        410190,
+        "houhan_3",
+        "recorded"
+      ],
+      "广阳郡": [
+        140,
+        280600,
+        "houhan_5",
+        "recorded"
+      ],
+      "桂阳郡": [
+        140,
+        501403,
+        "houhan_4",
+        "recorded"
+      ],
+      "汉兴郡": [
+        140,
+        267402,
+        "houhan_5",
+        "emended",
+        "汉兴郡于永和五年（140）尚属汉中郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "汉阳郡": [
+        140,
+        130138,
+        "houhan_5",
+        "recorded"
+      ],
+      "汉中郡": [
+        140,
+        267402,
+        "houhan_5",
+        "recorded"
+      ],
+      "合浦郡": [
+        140,
+        86617,
+        "houhan_5",
+        "recorded"
+      ],
+      "河东郡": [
+        140,
+        570803,
+        "houhan_1",
+        "recorded"
+      ],
+      "河间国": [
+        140,
+        634421,
+        "houhan_2",
+        "recorded"
+      ],
+      "河南尹": [
+        140,
+        1010827,
+        "houhan_1",
+        "recorded"
+      ],
+      "河内郡": [
+        140,
+        801558,
+        "houhan_1",
+        "recorded"
+      ],
+      "恒农郡": [
+        140,
+        199113,
+        "houhan_1",
+        "recorded"
+      ],
+      "会稽郡": [
+        140,
+        481196,
+        "houhan_4",
+        "recorded"
+      ],
+      "济北国": [
+        140,
+        235897,
+        "houhan_3",
+        "recorded"
+      ],
+      "济南国": [
+        140,
+        453308,
+        "houhan_4",
+        "recorded"
+      ],
+      "济阴国": [
+        140,
+        657554,
+        "houhan_3",
+        "recorded"
+      ],
+      "犍为郡": [
+        140,
+        411378,
+        "houhan_5",
+        "recorded"
+      ],
+      "犍为属国": [
+        140,
+        37187,
+        "houhan_5",
+        "recorded"
+      ],
+      "江夏郡": [
+        140,
+        265464,
+        "houhan_4",
+        "recorded"
+      ],
+      "江阳郡": [
+        140,
+        411378,
+        "houhan_5",
+        "emended",
+        "江阳郡于永和五年（140）尚属犍为郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "交趾郡": [
+        2,
+        746237,
+        "hanshu_28",
+        "earlier",
+        "后汉书缺载户口，采用汉书前期基准。"
+      ],
+      "金城郡": [
+        140,
+        18947,
+        "houhan_5",
+        "recorded"
+      ],
+      "京兆尹": [
+        140,
+        285574,
+        "houhan_1",
+        "recorded",
+        "仅京兆尹，不合并左冯翊、右扶风。"
+      ],
+      "九江郡": [
+        140,
+        432426,
+        "houhan_4",
+        "recorded"
+      ],
+      "巨鹿郡": [
+        140,
+        602096,
+        "houhan_2",
+        "recorded"
+      ],
+      "琅邪国": [
+        140,
+        570967,
+        "houhan_3",
+        "recorded"
+      ],
+      "乐陵郡": [
+        140,
+        1002658,
+        "houhan_4",
+        "emended",
+        "乐陵郡于永和五年（140）尚属平原郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "乐平郡": [
+        140,
+        127403,
+        "houhan_5",
+        "emended",
+        "乐平郡于永和五年（140）尚属上党郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "利城郡": [
+        140,
+        570967,
+        "houhan_3",
+        "emended",
+        "利城郡于永和五年（140）尚属琅邪国，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "梁国": [
+        140,
+        431283,
+        "houhan_2",
+        "recorded"
+      ],
+      "辽东郡": [
+        2,
+        272539,
+        "hanshu_28",
+        "earlier",
+        "后汉书载81714口，与64158户比例存疑；沿用汉书前期基准，非140年实数。"
+      ],
+      "辽东属国": [
+        null,
+        null,
+        "houhan_5",
+        "unrecorded",
+        "原文列六城而未载独立户口；保留游戏城邑估算，不把辽东郡人口重复算入属国。"
+      ],
+      "辽西郡": [
+        140,
+        81714,
+        "houhan_5",
+        "recorded"
+      ],
+      "零陵郡": [
+        140,
+        1001578,
+        "houhan_4",
+        "recorded"
+      ],
+      "陇西郡": [
+        140,
+        29637,
+        "houhan_5",
+        "recorded"
+      ],
+      "庐江郡": [
+        140,
+        424683,
+        "houhan_4",
+        "recorded"
+      ],
+      "庐陵郡": [
+        140,
+        1668906,
+        "houhan_4",
+        "emended",
+        "庐陵郡于永和五年（140）尚属豫章郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "鲁国": [
+        140,
+        411590,
+        "houhan_2",
+        "recorded"
+      ],
+      "南海郡": [
+        140,
+        250282,
+        "houhan_5",
+        "recorded"
+      ],
+      "南郡": [
+        140,
+        747604,
+        "houhan_4",
+        "recorded"
+      ],
+      "南乡郡": [
+        140,
+        2439618,
+        "houhan_4",
+        "emended",
+        "南乡郡于永和五年（140）尚属南阳郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "南阳郡": [
+        140,
+        2439618,
+        "houhan_4",
+        "recorded"
+      ],
+      "沛郡": [
+        140,
+        1251393,
+        "population_emendation",
+        "emended",
+        "原文作251393口；采用口字后脱百字的校勘值1251393，非原文直接记数。"
+      ],
+      "彭城国": [
+        140,
+        493027,
+        "houhan_3",
+        "recorded"
+      ],
+      "平原郡": [
+        140,
+        1002658,
+        "houhan_4",
+        "recorded"
+      ],
+      "鄱阳郡": [
+        140,
+        1668906,
+        "houhan_4",
+        "emended",
+        "鄱阳郡于永和五年（140）尚属豫章郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "齐郡": [
+        140,
+        491765,
+        "houhan_4",
+        "recorded"
+      ],
+      "蕲新郡": [
+        140,
+        265464,
+        "houhan_4",
+        "emended",
+        "蕲新郡于永和五年（140）尚属江夏郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "谯郡": [
+        140,
+        1251393,
+        "population_emendation",
+        "emended",
+        "谯郡于永和五年（140）尚属沛郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "任城国": [
+        140,
+        194156,
+        "houhan_3",
+        "recorded"
+      ],
+      "汝南郡": [
+        140,
+        2100788,
+        "houhan_2",
+        "recorded"
+      ],
+      "山阳国": [
+        140,
+        606091,
+        "houhan_3",
+        "recorded"
+      ],
+      "上党郡": [
+        140,
+        127403,
+        "houhan_5",
+        "recorded"
+      ],
+      "上谷郡": [
+        140,
+        51204,
+        "houhan_5",
+        "recorded"
+      ],
+      "上庸郡": [
+        140,
+        267402,
+        "houhan_5",
+        "emended",
+        "上庸郡于永和五年（140）尚属汉中郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "蜀郡": [
+        140,
+        1350476,
+        "houhan_5",
+        "recorded"
+      ],
+      "蜀郡属国": [
+        140,
+        475629,
+        "houhan_5",
+        "recorded"
+      ],
+      "太原郡": [
+        140,
+        200124,
+        "houhan_5",
+        "recorded"
+      ],
+      "泰山郡": [
+        140,
+        437317,
+        "houhan_3",
+        "recorded",
+        "户数及末位口数存在版本异文，此处保留所列底本口数。"
+      ],
+      "魏郡": [
+        140,
+        695606,
+        "houhan_2",
+        "recorded"
+      ],
+      "汶山郡": [
+        140,
+        1350476,
+        "houhan_5",
+        "emended",
+        "汶山郡于永和五年（140）尚属蜀郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "吴郡": [
+        140,
+        700782,
+        "houhan_4",
+        "recorded"
+      ],
+      "武都郡": [
+        140,
+        81728,
+        "houhan_5",
+        "recorded"
+      ],
+      "武陵郡": [
+        140,
+        250913,
+        "houhan_4",
+        "recorded"
+      ],
+      "武威郡": [
+        140,
+        34226,
+        "houhan_5",
+        "recorded"
+      ],
+      "西城郡": [
+        140,
+        267402,
+        "houhan_5",
+        "emended",
+        "西城郡于永和五年（140）尚属汉中郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "西郡": [
+        140,
+        26040,
+        "houhan_5",
+        "emended",
+        "西郡于永和五年（140）尚属张掖郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "西平郡": [
+        140,
+        18947,
+        "houhan_5",
+        "emended",
+        "西平郡于永和五年（140）尚属金城郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "下邳国": [
+        140,
+        611083,
+        "houhan_3",
+        "recorded"
+      ],
+      "襄阳郡": [
+        140,
+        747604,
+        "houhan_4",
+        "emended",
+        "襄阳郡于永和五年（140）尚属南郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "新兴郡": [
+        140,
+        200124,
+        "houhan_5",
+        "emended",
+        "新兴郡于永和五年（140）尚属太原郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "雁门郡": [
+        140,
+        249000,
+        "houhan_5",
+        "recorded"
+      ],
+      "宜都郡": [
+        140,
+        747604,
+        "houhan_4",
+        "emended",
+        "宜都郡于永和五年（140）尚属南郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "弋阳郡": [
+        140,
+        2100788,
+        "houhan_2",
+        "emended",
+        "弋阳郡于永和五年（140）尚属汝南郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "益州郡": [
+        140,
+        110802,
+        "houhan_5",
+        "recorded"
+      ],
+      "阴平郡": [
+        140,
+        81728,
+        "houhan_5",
+        "emended",
+        "阴平郡于永和五年（140）尚属武都郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "颍川郡": [
+        140,
+        1436513,
+        "houhan_2",
+        "recorded"
+      ],
+      "右北平郡": [
+        140,
+        53475,
+        "houhan_5",
+        "recorded"
+      ],
+      "右扶风": [
+        140,
+        93091,
+        "houhan_1",
+        "recorded"
+      ],
+      "渔阳郡": [
+        140,
+        435740,
+        "houhan_5",
+        "recorded"
+      ],
+      "郁林郡": [
+        2,
+        71162,
+        "hanshu_28",
+        "earlier",
+        "后汉书缺载户口，采用汉书前期基准。"
+      ],
+      "豫章郡": [
+        140,
+        1668906,
+        "houhan_4",
+        "recorded"
+      ],
+      "越巂郡": [
+        140,
+        623418,
+        "houhan_5",
+        "recorded"
+      ],
+      "章陵郡": [
+        140,
+        2439618,
+        "houhan_4",
+        "emended",
+        "章陵郡于永和五年（140）尚属南阳郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "章武郡": [
+        140,
+        1106500,
+        "houhan_2",
+        "emended",
+        "章武郡于永和五年（140）尚属渤海郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "长沙郡": [
+        140,
+        1059372,
+        "houhan_4",
+        "recorded"
+      ],
+      "赵郡": [
+        140,
+        188381,
+        "houhan_2",
+        "recorded"
+      ],
+      "中山国": [
+        140,
+        658195,
+        "houhan_2",
+        "recorded"
+      ],
+      "朱提郡": [
+        140,
+        37187,
+        "houhan_5",
+        "emended",
+        "朱提郡于永和五年（140）尚属犍为属国，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "涿郡": [
+        140,
+        633754,
+        "houhan_5",
+        "recorded"
+      ],
+      "梓潼郡": [
+        140,
+        509438,
+        "houhan_5",
+        "emended",
+        "梓潼郡于永和五年（140）尚属广汉郡，本条沿用母郡口数作为估算基准，未按分置比例拆分。"
+      ],
+      "左冯翊": [
+        140,
+        145195,
+        "houhan_1",
+        "recorded"
+      ],
+      "牂柯郡": [
+        140,
+        267253,
+        "houhan_5",
+        "recorded"
+      ],
+      "永昌郡": [
+        140,
+        1897344,
+        "houhan_5",
+        "recorded",
+        "户口比例存疑，保留原文口数，不作无依据缩减。"
+      ],
+      "张掖郡": [
+        140,
+        26040,
+        "houhan_5",
+        "recorded"
+      ],
+      "酒泉郡": [
+        2,
+        76726,
+        "hanshu_28",
+        "earlier",
+        "后汉书仅列12706户，口数缺载，采用汉书前期口数，不标为140年统计。"
+      ],
+      "敦煌郡": [
+        140,
+        29170,
+        "houhan_5",
+        "recorded"
+      ],
+      "张掖属国": [
+        140,
+        16952,
+        "houhan_5",
+        "recorded"
+      ],
+      "张掖居延属国": [
+        140,
+        4733,
+        "houhan_5",
+        "recorded"
+      ],
+      "上郡": [
+        140,
+        28599,
+        "houhan_5",
+        "recorded"
+      ],
+      "西河郡": [
+        140,
+        20838,
+        "houhan_5",
+        "recorded"
+      ],
+      "五原郡": [
+        140,
+        22957,
+        "houhan_5",
+        "recorded"
+      ],
+      "云中郡": [
+        140,
+        26430,
+        "houhan_5",
+        "recorded"
+      ],
+      "定襄郡": [
+        140,
+        13571,
+        "houhan_5",
+        "recorded"
+      ],
+      "朔方郡": [
+        140,
+        7843,
+        "houhan_5",
+        "recorded"
+      ],
+      "玄菟郡": [
+        140,
+        43163,
+        "houhan_5",
+        "recorded"
+      ],
+      "乐浪郡": [
+        140,
+        257050,
+        "houhan_5",
+        "recorded"
+      ],
+      "苍梧郡": [
+        140,
+        466975,
+        "houhan_5",
+        "recorded"
+      ],
+      "九真郡": [
+        140,
+        209894,
+        "houhan_5",
+        "recorded"
+      ],
+      "日南郡": [
+        140,
+        100676,
+        "houhan_5",
+        "recorded"
+      ]
+    }
+  },
+  "city_population_estimates": {
+    "commandery_city_002": {
+      "baseYear": 200,
+      "population": 15500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_003": {
+      "baseYear": 200,
+      "population": 22000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_006": {
+      "baseYear": 200,
+      "population": 5500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_007": {
+      "baseYear": 200,
+      "population": 3500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_008": {
+      "baseYear": 200,
+      "population": 27500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_009": {
+      "baseYear": 200,
+      "population": 40500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_010": {
+      "baseYear": 200,
+      "population": 16500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_011": {
+      "baseYear": 200,
+      "population": 16000,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_012": {
+      "baseYear": 200,
+      "population": 59500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_013": {
+      "baseYear": 200,
+      "population": 16000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_015": {
+      "baseYear": 200,
+      "population": 23000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_016": {
+      "baseYear": 200,
+      "population": 24000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_017": {
+      "baseYear": 200,
+      "population": 25500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_018": {
+      "baseYear": 200,
+      "population": 25000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_019": {
+      "baseYear": 200,
+      "population": 24500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_020": {
+      "baseYear": 200,
+      "population": 29000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_021": {
+      "baseYear": 200,
+      "population": 7000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_025": {
+      "baseYear": 200,
+      "population": 17000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_026": {
+      "baseYear": 200,
+      "population": 7500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_027": {
+      "baseYear": 200,
+      "population": 17000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_028": {
+      "baseYear": 200,
+      "population": 9000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_029": {
+      "baseYear": 200,
+      "population": 23500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_030": {
+      "baseYear": 200,
+      "population": 25500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_031": {
+      "baseYear": 200,
+      "population": 27000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_032": {
+      "baseYear": 200,
+      "population": 11000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_036": {
+      "baseYear": 200,
+      "population": 17500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_038": {
+      "baseYear": 200,
+      "population": 16500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_039": {
+      "baseYear": 200,
+      "population": 16500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_040": {
+      "baseYear": 200,
+      "population": 18500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_044": {
+      "baseYear": 200,
+      "population": 10000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_045": {
+      "baseYear": 200,
+      "population": 19000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_046": {
+      "baseYear": 200,
+      "population": 5000,
+      "cityNodes": 4,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_047": {
+      "baseYear": 200,
+      "population": 5000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_048": {
+      "baseYear": 200,
+      "population": 20500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_049": {
+      "baseYear": 200,
+      "population": 5500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_050": {
+      "baseYear": 200,
+      "population": 12000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_051": {
+      "baseYear": 200,
+      "population": 8000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_052": {
+      "baseYear": 200,
+      "population": 6000,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_054": {
+      "baseYear": 200,
+      "population": 21500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_055": {
+      "baseYear": 200,
+      "population": 5000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_057": {
+      "baseYear": 200,
+      "population": 19500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_059": {
+      "baseYear": 200,
+      "population": 16000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_061": {
+      "baseYear": 200,
+      "population": 24000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_062": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 4,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_064": {
+      "baseYear": 200,
+      "population": 8000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_065": {
+      "baseYear": 200,
+      "population": 18500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_066": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_067": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_068": {
+      "baseYear": 200,
+      "population": 2500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_069": {
+      "baseYear": 200,
+      "population": 3000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_070": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_071": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_072": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_079": {
+      "baseYear": 200,
+      "population": 2500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_086": {
+      "baseYear": 200,
+      "population": 9500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_088": {
+      "baseYear": 200,
+      "population": 24500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_090": {
+      "baseYear": 200,
+      "population": 2500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_091": {
+      "baseYear": 200,
+      "population": 2000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_092": {
+      "baseYear": 200,
+      "population": 16500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_093": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_094": {
+      "baseYear": 200,
+      "population": 1500,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_098": {
+      "baseYear": 200,
+      "population": 15000,
+      "cityNodes": 1,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_101": {
+      "baseYear": 200,
+      "population": 2500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_102": {
+      "baseYear": 200,
+      "population": 3500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_103": {
+      "baseYear": 200,
+      "population": 9500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_060": {
+      "baseYear": 200,
+      "population": 3500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_063": {
+      "baseYear": 200,
+      "population": 18000,
+      "cityNodes": 4,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_077": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_096": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 2,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_097": {
+      "baseYear": 200,
+      "population": 3500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_100": {
+      "baseYear": 200,
+      "population": 4500,
+      "cityNodes": 4,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_104": {
+      "baseYear": 200,
+      "population": 2500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_105": {
+      "baseYear": 200,
+      "population": 1500,
+      "cityNodes": 3,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_106": {
+      "baseYear": 200,
+      "population": 24500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_107": {
+      "baseYear": 200,
+      "population": 41500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_108": {
+      "baseYear": 200,
+      "population": 22000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_109": {
+      "baseYear": 200,
+      "population": 10500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_110": {
+      "baseYear": 200,
+      "population": 41500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_111": {
+      "baseYear": 200,
+      "population": 10500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_112": {
+      "baseYear": 200,
+      "population": 16000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_113": {
+      "baseYear": 200,
+      "population": 38500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_114": {
+      "baseYear": 200,
+      "population": 5000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_115": {
+      "baseYear": 200,
+      "population": 22000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_116": {
+      "baseYear": 200,
+      "population": 64000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_117": {
+      "baseYear": 200,
+      "population": 93500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_118": {
+      "baseYear": 200,
+      "population": 64000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_119": {
+      "baseYear": 200,
+      "population": 10000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_120": {
+      "baseYear": 200,
+      "population": 48000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_121": {
+      "baseYear": 200,
+      "population": 52000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_122": {
+      "baseYear": 200,
+      "population": 10500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_123": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_124": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_125": {
+      "baseYear": 200,
+      "population": 28500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_126": {
+      "baseYear": 200,
+      "population": 80500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_127": {
+      "baseYear": 200,
+      "population": 3000,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_128": {
+      "baseYear": 200,
+      "population": 93500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_129": {
+      "baseYear": 200,
+      "population": 42500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_130": {
+      "baseYear": 200,
+      "population": 1500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_083": {
+      "baseYear": 200,
+      "population": 7500,
+      "cityNodes": 1,
+      "method": "commandery_urban_share"
+    },
+    "commandery_city_074": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_075": {
+      "baseYear": 200,
+      "population": 3000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_076": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_078": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_081": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_082": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_084": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_085": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
+    },
+    "commandery_city_087": {
+      "baseYear": 200,
+      "population": 1000,
+      "cityNodes": 9,
+      "method": "existing_game_estimate"
     }
   }
 }

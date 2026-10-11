@@ -4,7 +4,7 @@ window.SANGUO_COMMAND_CATALOG = (() => {
     search_talent:"派人搜索据点周边未出仕人物；发现者会加入可登庸名单",recruit_officer:"游说指定在野、已发现或被俘人物加入己方；俘虏可能拒绝",release_prisoner:"释放己方关押的指定俘虏；若其原势力仍存，可改善双方关系",poach_officer:"派人策动敌方在职武将倒戈，结果受忠诚与关系影响",transfer_officer:"将己方武将调往另一座己方城市任职",recall_officer:"召回外派或在外执行任务的己方武将",exile_officer:"解除指定武将的己方身份，使其离开势力",reward_officer:"赏赐己方武将以提高其忠诚",punish_officer:"惩处己方武将，压低其忠诚并可能引发后续风险",grant_item:"把己方未持有者的宝物授予指定武将",confiscate_item:"从持有者处收回其宝物并归入己方库存",
     appoint_office:"为己方武将任命具体官职，调整其身份与职责",dismiss_office:"免去指定武将当前官职，但不改变其所属势力",promote_office:"提升指定武将的官职等级",demote_office:"下调指定武将的官职等级",designate_heir:"指定君主继承人，明确势力继承顺序",set_advisor:"任命己方武将为军师，供政务与决策参考",
     create_corps:"以负责人、所属军队和辖区城市建立军团编制",disband_corps:"撤销指定军团组织；所属城市与军队回归常规管理",adjust_jurisdiction:"将指定己方城市划入军团辖区，调整其管理范围",set_leader:"更换军团负责人，由指定己方武将统辖",
-    agriculture:"督查劝农官，令农业自然增长速度提高六旬",commerce:"督查市曹，令商业自然增长速度提高六旬",public_order:"督查功曹，令治安自然改善速度提高六旬",population:"清查户籍，令人口恢复速度提高六旬",city_defense:"督修城防，令城防损伤恢复速度提高六旬",recruit_troops:"提高城市守军目标并督促兵曹逐旬征募，速度取决于任官能力",train_troops:"督练驻城军团六旬，训练速度取决于督练官能力",collect_tax:"向指定城市征收税款，取得收入并承担民心影响",
+    agriculture:"督查劝农官，令农业自然增长速度提高六十日",commerce:"督查市曹，令商业自然增长速度提高六十日",public_order:"督查功曹，令治安自然改善速度提高六十日",population:"清查户籍，令人口恢复速度提高六十日",city_defense:"督修城防，令城防损伤恢复速度提高六十日",recruit_troops:"提高城市守军目标并督促兵曹每十日征募，速度取决于任官能力",train_troops:"督练驻城军团六十日，训练速度取决于督练官能力",collect_tax:"向指定城市征收税款，取得收入并承担民心影响",
     construct_building:"在指定城市选择并建造设施，按建筑类型消耗资源",repair:"修复受损设施或城防，恢复其可用状态",build_road:"连接两座己方城市修建道路，改善往来与运输",build_warehouse:"在指定城市建造仓库，提升储粮与物资存放能力",fortify:"加固指定城市城墙与防御工事",waterworks:"修建水利设施，改善农业灌溉与相关产出",
     buy_food:"按指定数量购入粮食，消耗资金补充库存",sell_food:"出售指定数量的粮食换取资金",transfer_gold:"将指定金额从一座己方城市调拨至另一座",transfer_food:"将指定数量的粮食在两座己方城市间转运",set_tax_rate:"设定己方税率；税收与民心将受税率共同影响",
     transport:"将指定数量的物资从起点城市运往目标城市",establish_supply_route:"在两座己方城市间设置常态补给线，供后续运输使用",set_storage:"设定城市仓储保留比例，决定可调出物资的余量",requisition_labor:"征用指定城市民夫投入工程或后勤，影响当地民生",
@@ -18,7 +18,7 @@ window.SANGUO_COMMAND_CATALOG = (() => {
     visit:"派己方人物拜访另一人物，建立或改善个人关系",banquet:"设宴款待指定人物，增进亲近与交往",give_gift:"赠送礼物给目标人物，改善双方好感",sworn_brotherhood:"促成两名人物结为义兄弟，建立长期人际纽带",marriage:"安排两名人物成婚，建立家族与政治关系",recommend:"由己方人物举荐另一人物，推动其获得任用机会",
     study:"安排人物研习指定内容，积累知识或提升相关能力",personal_training:"安排人物进行个人训练，锻炼其能力或体能",travel:"派人物前往指定城市，执行出行或拜访安排",personal_investigation:"由人物亲自调查指定城市，获取个人任务所需信息",rest:"让人物休息恢复精力，暂缓其他个人行动"
   };
-  window.SANGUO_COMMAND_DESCRIPTION=(id,name,categoryId)=>`${name}：${details[id]||categoryDescriptions[categoryId]||"将该行动加入本旬命令队列"}。`;
+  window.SANGUO_COMMAND_DESCRIPTION=(id,name,categoryId)=>`${name}：${details[id]||categoryDescriptions[categoryId]||"将该行动加入本日命令队列"}。`;
   const groups={
     personnel:["人事",[["search_talent","搜索人才"],["recruit_officer","登庸"],["release_prisoner","释放俘虏"],["poach_officer","挖角"],["transfer_officer","调任"],["recall_officer","召回"],["exile_officer","放逐"],["reward_officer","赏赐"],["punish_officer","惩罚"],["grant_item","授予宝物"],["confiscate_item","没收宝物"]]],
     office:["官职",[["appoint_office","任命"],["dismiss_office","罢免"],["promote_office","升官"],["demote_office","降职"],["designate_heir","指定继承人"],["set_advisor","设置军师"]]],
