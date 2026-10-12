@@ -8,10 +8,10 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261010-01">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261011-03">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261012-05">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261011-01">
+  <link rel="stylesheet" href="css/os-desktop.css?v=20261012-02">
   <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -21,16 +21,17 @@
   <section id="startScreen" class="start-screen" aria-label="开始游戏">
     <div class="start-terminal main-menu">
       <header class="menu-header"><span class="brand-mark">漢</span><div><h1>&lt;&lt;&lt;三国</h1></div><span class="menu-build">本地存档 · 离线可用</span></header>
-      <nav class="start-nav" aria-label="主菜单"><button class="selected" data-start-view="home">主菜单</button><button data-start-view="new">新建战局</button><button data-start-view="load">载入存档</button><button data-start-view="settings">设置</button><button data-start-view="exit">退出</button></nav>
-      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button><button id="openMapEditor" disabled data-tip="编辑据点与逐格手绘道路路径">舆图编辑器</button></div></div></section>
-      <section id="startNewView" class="start-view start-grid" hidden>
-        <section><h2>01 / 选择剧本</h2><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div><p id="scenarioStepHint" class="start-hint">点击剧本后展开势力选择。</p></section>
-        <section id="startForceStep" hidden><h2>02 / 选择势力</h2><div id="forceChoices" class="force-choices"></div><p id="startHistoricalBrief" class="start-historical-brief">选择势力后显示历史局势与阶段目标。</p></section>
+      <section id="startHomeView" class="start-view menu-home"><div class="home-mark">漢</div><div class="home-copy"><h2>天下未定，<br>请君入局。</h2><div class="home-actions"><button id="continueGameButton" class="menu-primary">继续游戏 <span id="continueGameMeta">检查本地存档…</span></button><button data-start-view="new">开始新游戏</button><button id="openMapEditor" disabled data-tip="编辑据点与逐格手绘道路路径">舆图编辑器</button></div><div class="home-utilities"><button data-start-view="load">载入存档</button><button data-start-view="settings">设置</button><button data-start-view="exit">退出</button></div></div></section>
+      <section id="startNewView" class="start-view campaign-flow" hidden>
+        <nav class="campaign-steps" aria-label="开局步骤"><button data-campaign-step="1">一 · 选择剧本</button><button data-campaign-step="2" disabled>二 · 选择势力</button><button data-campaign-step="3" disabled>三 · 开局设置</button></nav>
+        <section id="startScenarioStep" class="campaign-pane"><div class="campaign-heading"><h2 tabindex="-1">选择剧本</h2><p id="scenarioStepHint">选择一段历史，进入天下局势。</p></div><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
+        <section id="startForceStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">选择势力</h2><p id="campaignScenarioName"></p></div><div class="campaign-force-layout"><div id="forceChoices" class="force-choices"></div><aside class="campaign-brief" aria-label="势力介绍"><h3 id="startBriefTitle"></h3><p id="startHistoricalBrief" class="start-historical-brief"></p><h4>阶段目标</h4><p id="startForceObjective"></p></aside></div></section>
+        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label></div></div></section>
       </section>
       <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
       <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="observerDefaultSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="confirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
       <section id="startExitView" class="start-view exit-view" hidden><div class="exit-card"><span class="brand-mark">終</span><h2>退出 &lt;&lt;&lt;三国</h2><p>当前进度已保存。</p><button data-start-view="home">返回主菜单</button></div></section>
-      <footer class="start-footer"><span id="startSummary">本地游戏 · 等待选择</span><span class="menu-footer-actions"><button id="startBackButton" data-start-view="home">返回</button><label id="newSaveSlotWrap" class="new-save-slot" hidden>新局存入<select id="newSaveSlotChoice"></select></label><button id="startGameButton" disabled>进入乱世 ▷</button></span></footer>
+      <footer class="start-footer"><span id="startSummary" aria-live="polite">等待选择</span><span class="menu-footer-actions"><button id="startBackButton" hidden>返回</button><label id="newSaveSlotWrap" class="new-save-slot" hidden>档案名称<input id="newSaveName" type="text" maxlength="60" placeholder="自动命名"></label><button id="startGameButton" hidden disabled>下一步</button></span></footer>
     </div>
   </section>
   <div class="app-shell">
@@ -56,7 +57,7 @@
     <nav class="main-nav panel-line" aria-label="主菜单">
       <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button>
       <div id="observerControls" class="observer-controls" hidden><button id="observerToggle" type="button" aria-label="继续模拟"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L17 8L9 13Z"/></svg></button><button id="simulationSpeedButton" type="button" class="simulation-speed-button" aria-label="切换模拟速度"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L15 8L9 13Z"/></svg></button><select id="observerSpeed" aria-label="模拟速度" data-terminal-select="true" hidden><option value="3000" selected>3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></div>
-      <div class="nav-end save-tools"><button id="saveButton" data-tip="选择本地存档槽保存当前战局">存档</button><button id="loadButton" data-tip="选择本地存档槽载入战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
+      <div class="nav-end save-tools"><button id="saveButton" data-tip="更新当前档案或另存为新档案">存档</button><button id="loadButton" data-tip="选择已保存的战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
     </nav>
 
     <main class="workspace">
@@ -140,7 +141,7 @@
 
   <dialog id="saveManagerDialog" class="save-manager-dialog">
     <div class="dialog-title"><span id="saveManagerTitle">本地存档</span><button data-close="saveManagerDialog">×</button></div>
-    <div class="dialog-content"><p class="save-manager-note">存档同时保存在浏览器与项目本机文件。自动保存会更新当前战局所在槽位。</p><div id="gameSaveSlots" class="save-slots game-save-slots"></div></div>
+    <div class="dialog-content"><p class="save-manager-note">自动保存更新当前档案。</p><div id="saveManagerActions" class="save-library-actions"><input id="gameSaveName" type="text" maxlength="60" aria-label="档案名称"><button id="updateCurrentSave">更新当前档案</button><button id="createSaveCopy">另存为新档案</button></div><div id="gameSaveSlots" class="save-slots game-save-slots"></div></div>
   </dialog>
   <dialog id="gameSettingsDialog" class="settings-dialog">
     <div class="dialog-title">游戏设置 <button data-close="gameSettingsDialog">×</button></div>
@@ -372,8 +373,8 @@
 
   <script src="js/data/command-catalog.js?v=20260930-78"></script>
   <script src="js/data/game-data.js?v=20260928-16"></script>
-  <script src="js/data/offline-data.generated.js?v=20261011-03"></script>
-  <script src="js/core/data-loader.js?v=20261011-03"></script>
+  <script src="js/data/offline-data.generated.js?v=20261012-04"></script>
+  <script src="js/core/data-loader.js?v=20261012-04"></script>
   <script src="js/core/game-clock.js?v=20261009-01"></script>
   <script src="js/core/simulation-clock.js?v=20261009-02"></script>
   <script src="js/core/fiscal-system.js?v=20261010-03"></script>
@@ -381,11 +382,12 @@
   <script src="js/core/ai-bridge.js?v=20261009-02"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/game-state.js?v=20261011-05"></script>
+  <script src="js/core/save-library.js?v=20261012-01"></script>
+  <script src="js/core/game-state.js?v=20261012-02"></script>
   <script src="js/core/map-grid.js?v=20261011-02"></script>
   <script src="js/core/map-editor-drafts.js?v=20261010-02"></script>
   <script src="js/core/scenario-map-store.js?v=20261011-01"></script>
-  <script src="js/ui/map-view.js?v=20261011-05"></script>
+  <script src="js/ui/map-view.js?v=20261012-01"></script>
   <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
   <script src="js/ui/map-editor.js?v=20261011-09"></script>
   <script src="js/ui/terminal-select.js?v=20261010-10"></script>
@@ -394,7 +396,7 @@
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
   <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261011-02"></script>
+  <script src="js/ui/app.js?v=20261012-06"></script>
   <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
   <script src="js/ui/os-window-manager.js?v=20261011-02"></script>
 </body>
