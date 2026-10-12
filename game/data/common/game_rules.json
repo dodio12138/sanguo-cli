@@ -334,6 +334,94 @@
           "distance": 1.08,
           "city_value": 1.02,
           "combat": 0.78
+        },
+        "shi_xie": {
+          "name": "士燮守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "zhang_jin": {
+          "name": "张津守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "handan_shang": {
+          "name": "邯郸商守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "zhang_meng": {
+          "name": "张猛守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "wei_duan": {
+          "name": "韦端守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "ma_chao": {
+          "name": "关中骑阵",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 1.08,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "wei_kang": {
+          "name": "韦康守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
+        },
+        "wu_ju": {
+          "name": "吴巨守境",
+          "growth": 1,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.8,
+          "defence": 1.1,
+          "distance": 1.1,
+          "city_value": 1,
+          "combat": 1
         }
       }
     }

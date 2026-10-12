@@ -4,23 +4,25 @@ import {fileURLToPath} from "node:url";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const write=process.argv.includes("--write");
+const scenarioId=process.argv.find(arg=>arg.startsWith("--scenario="))?.slice("--scenario=".length);
 const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),"utf8"));
 
 // 郡国 → [200 官渡, 190 反董卓联合, 208 赤壁] 归属；郡国名取自 cities/200_guandu.json 的 commandery 字段。
-// 依据：《后汉书·郡国志》建置与汉末各州牧守实际控制范围，逐郡按公元 200/190/208 年史实指定。
+// 《后汉书·郡国志》建置与汉末牧守传记的战略投影；后设郡沿母郡继承，非逐县实控考证。
+// 190 年据《三国志》卷一、七、四十九及《后汉书》卷五十补齐，取舍见 SCENARIO_NOTES.md。
 const COMMANDERY_OWNERS={
   "河南尹":["cao","dong","cao"],"恒农郡":["cao","dong","cao"],"京兆尹":["cao","dong","cao"],
-  "左冯翊":["cao","dong","cao"],"右扶风":["cao","dong","cao"],"汉兴郡":["cao","dong","cao"],
-  "河东郡":["cao","dong","cao"],"河内郡":["cao","neutral","cao"],
-  "颍川郡":["cao","neutral","cao"],"汝南郡":["cao","yuan_shu","cao"],"梁国":["cao","neutral","cao"],
-  "陈郡":["cao","neutral","cao"],"鲁国":["cao","neutral","cao"],"谯郡":["cao","cao","cao"],
-  "沛郡":["liu","cao","cao"],"弋阳郡":["cao","yuan_shu","cao"],"蕲新郡":["cao","yuan_shu","sun"],
-  "陈留郡":["cao","cao","cao"],"东郡":["cao","liu_dai","cao"],"济阴国":["cao","liu_dai","cao"],
-  "山阳国":["cao","liu_dai","cao"],"任城国":["cao","liu_dai","cao"],"东平国":["cao","liu_dai","cao"],
-  "济北国":["cao","cao","cao"],"泰山郡":["cao","neutral","cao"],
+  "左冯翊":["cao","dong","cao"],"右扶风":["ma_teng","dong","ma_chao"],"汉兴郡":["cao","dong","cao"],
+  "河东郡":["cao","dong","cao"],"河内郡":["cao","wang_kuang","cao"],
+  "颍川郡":["cao","kong_zhou","cao"],"汝南郡":["cao","yuan_shu","cao"],"梁国":["cao","kong_zhou","cao"],
+  "陈郡":["cao","liu_chong","cao"],"鲁国":["cao","kong_zhou","cao"],"谯郡":["cao","cao","cao"],
+  "沛郡":["liu","kong_zhou","cao"],"弋阳郡":["cao","yuan_shu","cao"],"蕲新郡":["cao","yuan_shu","sun"],
+  "陈留郡":["cao","zhang_miao","cao"],"东郡":["cao","qiao_mao","cao"],"济阴国":["cao","liu_dai","cao"],
+  "山阳国":["cao","yuan_yi","cao"],"任城国":["cao","liu_dai","cao"],"东平国":["cao","liu_dai","cao"],
+  "济北国":["cao","bao_xin","cao"],"泰山郡":["cao","liu_dai","cao"],
   "下邳国":["liu","tao_qian","cao"],"彭城国":["liu","tao_qian","cao"],"琅邪国":["liu","tao_qian","cao"],
   "东海国":["liu","tao_qian","cao"],"东莞郡":["liu","tao_qian","cao"],"利城郡":["liu","tao_qian","cao"],
-  "城阳郡":["liu","tao_qian","cao"],"广陵郡":["liu","tao_qian","cao"],
+  "城阳郡":["liu","tao_qian","cao"],"广陵郡":["liu","zhang_chao","cao"],
   "魏郡":["yuan","han_fu","cao"],"渤海郡":["yuan","yuan","cao"],"常山国":["yuan","han_fu","cao"],
   "中山国":["yuan","han_fu","cao"],"安平国":["yuan","han_fu","cao"],"河间国":["yuan","han_fu","cao"],
   "甘陵郡":["yuan","han_fu","cao"],"赵郡":["yuan","han_fu","cao"],"巨鹿郡":["yuan","han_fu","cao"],
@@ -29,15 +31,15 @@ const COMMANDERY_OWNERS={
   "新兴郡":["yuan","neutral","cao"],"乐平郡":["yuan","neutral","cao"],
   "右北平郡":["yuan","gongsun","cao"],"代郡":["yuan","liu_yu","cao"],"广阳郡":["yuan","liu_yu","cao"],
   "涿郡":["yuan","liu_yu","cao"],"上谷郡":["yuan","liu_yu","cao"],"渔阳郡":["yuan","liu_yu","cao"],
-  "辽东郡":["gongsun_du","gongsun_du","gongsun_kang"],"辽西郡":["gongsun_du","gongsun_du","gongsun_kang"],
+  "辽东郡":["gongsun_du","gongsun_du","gongsun_kang"],"辽西郡":["yuan","liu_yu","cao"],
   "辽东属国":["gongsun_du","gongsun_du","gongsun_kang"],
-  "平原郡":["yuan","yuan","cao"],"北海国":["yuan","kong_rong","cao"],"齐郡":["yuan","kong_rong","cao"],
-  "济南国":["yuan","kong_rong","cao"],"安乐国":["yuan","kong_rong","cao"],"东莱郡":["yuan","kong_rong","cao"],
-  "乐陵郡":["yuan","kong_rong","cao"],
-  "武威郡":["ma_teng","ma_teng","neutral"],"汉阳郡":["ma_teng","ma_teng","neutral"],
-  "陇西郡":["ma_teng","ma_teng","neutral"],"西郡":["ma_teng","ma_teng","neutral"],
-  "金城郡":["han_sui","han_sui","neutral"],"安定郡":["han_sui","han_sui","neutral"],
-  "北地郡":["han_sui","han_sui","neutral"],"西平郡":["han_sui","han_sui","neutral"],
+  "平原郡":["yuan","jiao_he","cao"],"北海国":["yuan","kong_rong","cao"],"齐郡":["yuan","jiao_he","cao"],
+  "济南国":["yuan","jiao_he","cao"],"安乐国":["yuan","jiao_he","cao"],"东莱郡":["yuan","jiao_he","cao"],
+  "乐陵郡":["yuan","jiao_he","cao"],
+  "武威郡":["zhang_meng","ma_teng","zhang_meng"],"汉阳郡":["wei_duan","ma_teng","wei_kang"],
+  "陇西郡":["wei_duan","ma_teng","wei_kang"],"西郡":["handan_shang","ma_teng","zhang_meng"],
+  "金城郡":["han_sui","han_sui","han_sui"],"安定郡":["han_sui","han_sui","han_sui"],
+  "北地郡":["han_sui","han_sui","han_sui"],"西平郡":["han_sui","han_sui","han_sui"],
   "武都郡":["zhang_lu","neutral","zhang_lu"],"汉中郡":["zhang_lu","liu_yan","zhang_lu"],
   "上庸郡":["zhang_lu","liu_yan","zhang_lu"],"西城郡":["zhang_lu","liu_yan","zhang_lu"],
   "房陵郡":["liu_biao","liu_biao","zhang_lu"],
@@ -56,49 +58,50 @@ const COMMANDERY_OWNERS={
   "宜都郡":["liu_biao","liu_biao","cao"],"武陵郡":["liu_biao","liu_biao","jin_xuan"],
   "长沙郡":["liu_biao","sun_jian","han_xuan"],"零陵郡":["liu_biao","liu_biao","liu_du"],
   "桂阳郡":["liu_biao","liu_biao","zhao_fan"],
-  "丹阳郡":["sun","neutral","sun"],"吴郡":["sun","neutral","sun"],"会稽郡":["sun","neutral","sun"],
-  "豫章郡":["sun","neutral","sun"],"庐江郡":["sun","yuan_shu","sun"],"庐陵郡":["sun","neutral","sun"],
-  "鄱阳郡":["sun","neutral","sun"],"九江郡":["cao","yuan_shu","cao"],
-  "交趾郡":["liu_biao","neutral","neutral"],"南海郡":["liu_biao","neutral","neutral"],
-  "郁林郡":["liu_biao","neutral","neutral"],"合浦郡":["liu_biao","neutral","neutral"]
+  "丹阳郡":["sun","zhou_xin","sun"],"吴郡":["sun","chen_wen","sun"],"会稽郡":["sun","chen_wen","sun"],
+  "豫章郡":["sun","chen_wen","sun"],"庐江郡":["sun","chen_wen","sun"],"庐陵郡":["sun","chen_wen","sun"],
+  "鄱阳郡":["sun","chen_wen","sun"],"九江郡":["cao","chen_wen","cao"],
+  "交趾郡":["shi_xie","shi_xie","shi_xie"],"南海郡":["shi_xie","neutral","shi_xie"],
+  "郁林郡":["zhang_jin","neutral","shi_xie"],"合浦郡":["shi_xie","neutral","shi_xie"]
 };
 
 // 个别据点在所属郡之外单独归属：渡津、关隘、郡治兼战略节点、史籍错配的县治与塞外据点。
 const CITY_OWNERS={
   "200_guandu":{
     "qiao":"cao","xiaopei":"liu","xinye":"liu_biao","wan":"cao","wuguan":"cao",
-    "commandery_city_011":"liu","commandery_city_105":"neutral","commandery_city_100":"liu_biao","cangwu":"liu_biao",
+    "commandery_city_011":"liu","commandery_city_105":"neutral","commandery_city_100":"zhang_jin","cangwu":"zhang_jin",
     "baima":"cao","yanjin":"cao","puyang":"cao","xuchang":"cao","guandu":"cao","hulao":"cao","hangu":"cao",
     "tongguan":"cao","changan":"cao","luoyang":"cao","mengjin":"cao","henei":"cao","shangyong":"zhang_lu",
     "yiling":"liu_biao","yongan":"liu_zhang","fuling":"liu_zhang","jianmen":"liu_zhang",
-    "commandery_city_074":"ma_teng","commandery_city_075":"ma_teng","commandery_city_076":"ma_teng",
-    "commandery_city_078":"ma_teng","commandery_city_081":"yuan","commandery_city_082":"yuan",
+    "commandery_city_074":"handan_shang","commandery_city_075":"handan_shang","commandery_city_076":"handan_shang",
+    "commandery_city_078":"handan_shang","commandery_city_081":"yuan","commandery_city_082":"yuan",
     "commandery_city_084":"yuan","commandery_city_085":"yuan","commandery_city_087":"yuan"
   },
   "190_coalition":{
     "qiao":"cao","xiaopei":"tao_qian","xinye":"liu_biao","wan":"yuan_shu","wuguan":"dong",
-    "commandery_city_011":"tao_qian","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
-    "xiapi":"tao_qian","pengcheng":"tao_qian","langya":"tao_qian","guangling":"tao_qian","runan":"yuan_shu",
+    "commandery_city_011":"kong_zhou","commandery_city_104":"neutral","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
+    "xiapi":"tao_qian","pengcheng":"tao_qian","langya":"tao_qian","guangling":"zhang_chao","runan":"yuan_shu",
     "hulao":"dong","hangu":"dong","tongguan":"dong","changan":"dong","luoyang":"dong","mengjin":"dong",
-    "henei":"neutral","shangyong":"liu_yan","yiling":"liu_biao","yongan":"liu_yan",
-    "fuling":"liu_yan","jianmen":"liu_yan","chenliu":"cao","baima":"liu_dai","yanjin":"liu_dai","puyang":"liu_dai",
+    "henei":"wang_kuang","shangyong":"liu_yan","yiling":"liu_biao","yongan":"liu_yan",
+    "fuling":"liu_yan","jianmen":"liu_yan","chenliu":"zhang_miao","baima":"qiao_mao","yanjin":"qiao_mao","puyang":"qiao_mao",
     "commandery_city_074":"ma_teng","commandery_city_075":"ma_teng","commandery_city_076":"ma_teng",
     "commandery_city_078":"ma_teng","commandery_city_081":"neutral","commandery_city_082":"neutral",
     "commandery_city_084":"neutral","commandery_city_085":"neutral","commandery_city_087":"neutral"
   },
   "208_red_cliffs":{
     "qiao":"cao","xiaopei":"cao","xinye":"cao","wan":"cao","wuguan":"cao",
-    "commandery_city_011":"cao","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
+    "commandery_city_011":"cao","commandery_city_105":"neutral","commandery_city_100":"wu_ju","cangwu":"wu_ju",
     "xiakou":"liu","yiling":"cao","chaisang":"sun","pukou":"sun","shouchun":"cao","hefei":"cao",
     "hulao":"cao","hangu":"cao","tongguan":"cao","changan":"cao","luoyang":"cao","mengjin":"cao","henei":"cao",
     "shangyong":"zhang_lu","yongan":"liu_zhang","fuling":"liu_zhang","jianmen":"liu_zhang","hanzhong":"zhang_lu",
-    "yangping":"zhang_lu","commandery_city_074":"neutral","commandery_city_075":"neutral",
-    "commandery_city_076":"neutral","commandery_city_078":"neutral","commandery_city_081":"cao",
+    "yangping":"zhang_lu","commandery_city_074":"zhang_meng","commandery_city_075":"zhang_meng",
+    "commandery_city_076":"zhang_meng","commandery_city_078":"zhang_meng","commandery_city_081":"cao",
     "commandery_city_082":"cao","commandery_city_084":"cao","commandery_city_085":"cao","commandery_city_087":"cao"
   }
 };
 
 const SCENARIOS=[{id:"200_guandu",index:0},{id:"190_coalition",index:1},{id:"208_red_cliffs",index:2}];
+if(scenarioId&&!SCENARIOS.some(scenario=>scenario.id===scenarioId))throw new Error(`未知剧本：${scenarioId}`);
 const citiesFile=read("game/data/history/cities/200_guandu.json");
 const defined=new Set(citiesFile.cities.map(city=>city.commandery));
 const missing=[...defined].filter(name=>name!=="塞外区域"&&!COMMANDERY_OWNERS[name]);
@@ -143,15 +146,16 @@ function seatCounts(owners){
 }
 function syncForceCounts(text,counts){
   const missing=[];
-  const out=text.replace(/\{"id":"([a-z_]+)","name":"[^"]*","color":"#[0-9a-fA-F]+","soldiers":\d+,"cities":\d+\}/gu,(match,id)=>{
+  const out=text.replace(/\{\s*"id"\s*:\s*"([a-z_]+)"\s*,\s*"name"\s*:\s*"[^"]*"\s*,\s*"color"\s*:\s*"#[0-9a-fA-F]+"\s*,\s*"soldiers"\s*:\s*\d+\s*,\s*"cities"\s*:\s*\d+\s*\}/gu,(match,id)=>{
     if(!(id in counts)&&id!=="neutral")missing.push(id);
-    return match.replace(/"cities":\d+(?=\})/u,`"cities":${counts[id]||0}`);
+    return match.replace(/("cities"\s*:\s*)\d+(?=\s*\})/u,(_,prefix)=>prefix+(counts[id]||0));
   });
   return {out,missing};
 }
 
 const report=[];
 for(const scenario of SCENARIOS){
+  if(scenarioId&&scenario.id!==scenarioId)continue;
   const owners=ownersFor(scenario);
   const counts={};for(const value of Object.values(owners))counts[value]=(counts[value]||0)+1;
   report.push({scenario:scenario.id,total:Object.keys(owners).length,forces:Object.keys(counts).length,counts});

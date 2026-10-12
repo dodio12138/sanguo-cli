@@ -1,0 +1,14 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+globalThis.window=globalThis;await import("../js/ui/map-view.js");
+const city={id:"xu",name:"许昌",x:3,y:4,force:"cao",province:"豫州",commandery:"颍川郡"},county={name:"许县",cityId:"xu",population:12345,agriculture:50,commerce:60,order:70};
+const view=Object.create(MapView.prototype);Object.assign(view,{territoryRadius:8,state:{layer:"political",data:{cities:[city],counties:[county],forces:[{id:"cao",name:"曹操"}]}},politicalOwner:()=>({force:{name:"袁绍"},distance:0,administrative:true}),terrainDef:()=>({name:"平原"})});
+const point={x:3,y:4,terrain:"plains",province:"豫州",commandery:"颍川郡",county};
+let text=view.tooltipText(point);assert.match(text,/所属势力：曹操/);assert.match(text,/豫州 · 颍川郡/);assert.match(text,/县治：许县/);assert(!/编户|12345|农50|商60/.test(text));assert(text.includes("\n"));
+text=view.tooltipText({...point,x:5,county:null});assert.match(text,/所属势力：袁绍/);assert.match(text,/县治：未详/);
+view.politicalOwner=()=>({force:{name:"曹操"},distance:99});assert.match(view.tooltipText({...point,x:5,county:null}),/所属势力：无主/);
+assert.equal(view.tooltipText({...point,terrain:"ocean"}),"海域");
+view.state.layer="terrain";assert.match(view.tooltipText(point),/编户 12,345/);
+const tip={style:{},offsetWidth:120,offsetHeight:80};globalThis.document={getElementById:()=>tip};view.hover=point;view.size={w:200,h:150};view.tooltip(false,199,149);assert.equal(tip.style.left,"75px");assert.equal(tip.style.top,"65px");view.tooltip(true);assert(tip.hidden);
+const css=fs.readFileSync(new URL("../css/os-desktop.css",import.meta.url),"utf8"),legend=css.split("\n").find(line=>line.startsWith(".game-started .map-column .map-legend{"));for(const rule of ["flex:0 0 74px","height:74px","align-content:flex-start","overflow:auto","scrollbar-gutter:stable"])assert(legend.includes(rule),`图例必须稳定占位：${rule}`);
+console.log("舆图提示与布局通过：势力和州郡县 / 不暴露户数 / 城池实际所属 / 野外控制范围 / 海域无势力 / 其他图层保留信息 / 提示不溢出 / 图例固定占位");

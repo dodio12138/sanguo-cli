@@ -17,13 +17,13 @@
   --desktop-bottom-gap:46px;
 }
 
-/* Shared square scrollbar for all desktop window contents. */
-:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar{width:12px;height:12px}
-:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-track{background:var(--scrollbar-track);box-shadow:inset 1px 0 #030503}
-:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-thumb{min-height:24px;border:1px solid var(--scrollbar-edge);border-radius:0;background:var(--scrollbar-thumb);box-shadow:inset 1px 1px #a7af89,inset -1px -1px #263020}
-:where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-corner{background:var(--scrollbar-track)}
+/* One square scrollbar theme for desktop windows, the start menu and portalled dropdowns. */
+:where(.start-screen,.start-screen *,.terminal-select-list,.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar{width:12px;height:12px}
+:where(.start-screen,.start-screen *,.terminal-select-list,.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-track{background:var(--scrollbar-track);box-shadow:inset 1px 0 #030503}
+:where(.start-screen,.start-screen *,.terminal-select-list,.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-thumb{min-height:24px;border:1px solid var(--scrollbar-edge);border-radius:0;background:var(--scrollbar-thumb);box-shadow:inset 1px 1px #a7af89,inset -1px -1px #263020}
+:where(.start-screen,.start-screen *,.terminal-select-list,.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *)::-webkit-scrollbar-corner{background:var(--scrollbar-track)}
 @supports not selector(::-webkit-scrollbar){
-  :where(.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *){scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
+  :where(.start-screen,.start-screen *,.terminal-select-list,.os-window,.os-window *,dialog.os-dialog-window,dialog.os-dialog-window *, .os-start-menu,.os-start-menu *){scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
 }
 
 /* UI chrome should drag and click like a desktop, without accidental text selection. */
@@ -258,8 +258,8 @@ body.game-started{
 .game-started .map-column .map-footer>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .game-started .map-column .map-footer>span:first-child{flex:1}
 .game-started .map-column .map-footer>span:last-child{flex:0 1 auto;max-width:50%}
-.game-started .map-column .map-legend{max-height:88px;gap:4px 9px;padding:4px 16px 4px 8px;background:#0a100b;border-top:1px solid #3c4635}
-.game-started .map-tooltip{max-width:200px;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.game-started .map-column .map-legend{flex:0 0 74px;height:74px;min-height:74px;max-height:74px;align-content:flex-start;overflow:auto;scrollbar-gutter:stable;overscroll-behavior:contain;gap:4px 9px;padding:4px 16px 4px 8px;background:#0a100b;border-top:1px solid #3c4635}
+.game-started .map-tooltip{max-width:200px;white-space:pre-line;overflow-wrap:anywhere;line-height:1.45}
 
 .os-start-button{display:grid!important;place-items:center;flex:none;width:26px;min-width:26px!important;height:26px;border-color:#87916e!important;padding:0!important;background:#2d3929!important;color:#f0d983!important;font:700 15px/1 serif!important;box-shadow:inset 1px 1px #a9b08e,inset -1px -1px #080b08}
 .os-start-button[aria-expanded="true"]{box-shadow:inset 1px 1px #080b08,inset -1px -1px #899171}

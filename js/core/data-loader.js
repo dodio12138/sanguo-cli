@@ -57,7 +57,7 @@ window.DataLoader = class DataLoader {
       if(!explicit.has(city.id)&&(!force||force==="neutral")){const parent=cities.get(data.rules?.city_graph?.[city.id]?.[0]);force=parent?resolve(parent):"neutral"}
       const value=force||"neutral";cache.set(city.id,value);return value
     };
-    for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;city.force=resolve(city);city.governor="—"}
+    for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;city.force=resolve(city);city.governor=data.scenario?.patch?.governors?.[city.id]||city.governor||"—"}
     return data;
   }
   applyCountyResources(data,scenarioId=data.scenario?.id||"200_guandu"){
@@ -80,7 +80,10 @@ window.DataLoader = class DataLoader {
   }
   buildScenarioOfficers(data,scenario,reference){
     const year=Number(String(scenario.start_date).split("-")[0]),assignments=scenario.patch?.officer_assignments||{},assignedNames=new Set(),sources=[...(reference.officers||[])],knownIds=new Set(sources.map(officer=>officer.id));
-    for(const officer of data.officers||[])if(!knownIds.has(officer.id))sources.push(officer);
+    for(const officer of data.officers||[])if(!knownIds.has(officer.id)){sources.push(officer);knownIds.add(officer.id)}
+    // 老剧本的 extra_officers 是姓名清单；只有完整记录才补入名册，参考库已有的人物不重复创建。
+    const knownNames=new Set(sources.map(officer=>officer.name));
+    for(const officer of scenario.patch?.extra_officers||[]){if(!officer||typeof officer!=="object"||!officer.name||knownNames.has(officer.name)||officer.id&&knownIds.has(officer.id))continue;sources.push(officer);knownNames.add(officer.name);if(officer.id)knownIds.add(officer.id)}
     const officers=[];for(const [index,source] of sources.entries()){
       const assignment=!assignedNames.has(source.name)?assignments[source.name]:null,alive=!source.deathYear||source.deathYear>=year;if(!assignment&&!alive)continue;if(assignment)assignedNames.add(source.name);
       const officer=structuredClone(source);officer.id=officer.id||`scenario_${scenario.id}_${index+1}`;

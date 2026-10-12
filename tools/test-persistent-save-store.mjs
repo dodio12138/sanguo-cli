@@ -9,6 +9,8 @@ try{
   await store.write("1",{save:first,meta:{kind:"manual"}});await store.write("1",{save:second,meta:{kind:"auto"}});await store.write("2",{save:{...second,turn:9},meta:{kind:"manual"}});
   const restored=await new FileSaveStore(file).read();
   if(restored.slots["1"]?.save?.turn!==5||restored.slots["1"]?.backup?.turn!==4||restored.slots["2"]?.save?.turn!==9)throw new Error("跨实例读取、槽位或备份没有持久化");
-  let rejected=false;try{await store.write("9",{save:second})}catch{rejected=true}if(!rejected)throw new Error("非法槽位未被拒绝");
-  console.log("启动器持久存档通过：跨实例读取 / 三槽隔离 / 上一版本备份 / 非法槽位拒绝");
+  for(let i=4;i<=12;i++)await store.write(`save_test_${i}`,{save:{...second,turn:i}});
+  const library=await new FileSaveStore(file).read();if(Object.keys(library.slots).length!==11||library.slots.save_test_12.save.turn!==12)throw new Error("多档案未持久化");
+  for(const id of ["../bad","__proto__","constructor","save_","0"]){let rejected=false;try{await store.write(id,{save:second})}catch{rejected=true}if(!rejected)throw new Error(`非法编号未被拒绝：${id}`)}
+  console.log("启动器持久存档通过：跨实例读取 / 多档案隔离 / 上一版本备份 / 非法编号拒绝");
 }finally{await fs.rm(directory,{recursive:true,force:true})}

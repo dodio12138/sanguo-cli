@@ -7,8 +7,12 @@ if(/;paint\(\)\s*$/.test(paintBody.trim()))throw new Error("paint 函数发生�
 if(!source.includes('{id:"observer",name:"观察者"'))throw new Error("开局界面缺少观察者选项");
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 for(const id of ["startHomeView","startNewView","startLoadView","startSettingsView","startExitView","startSaveSlots","gameSaveSlots","gameSettingsDialog","chronicleEnabled","gameChronicleEnabled"])if(!html.includes(`id="${id}"`))throw new Error(`1.0 主菜单缺少页面或控件：${id}`);
-if(!html.includes('id="startForceStep" hidden'))throw new Error("1.0 主菜单势力选择未默认隐藏，剧本点击前不应显示");
-if(!source.includes('$("startForceStep").hidden=!scenarioPicked')||!source.includes("scenarioPicked=true"))throw new Error("1.0 主菜单未在点击剧本后展开势力选择");
+for(const id of ["startForceStep","startSetupStep"])if(!new RegExp(`<section[^>]*id="${id}"[^>]*\\bhidden\\b`).test(html))throw new Error(`${id} 必须默认隐藏`);
+for(const id of ["startScenarioStep","campaignDifficultyChoice","campaignSpeedChoice","startBriefTitle","startForceObjective"])if(!html.includes(`id="${id}"`))throw new Error(`分步开局缺少 ${id}`);
+for(const code of ['$("startScenarioStep").hidden=newStep!==1','$("startForceStep").hidden=newStep!==2','$("startSetupStep").hidden=newStep!==3',"scenarioPicked=true","if(newStep===2){newStep=3","if(newStep!==3)return",'newStep===3?"开始战局":"下一步"',"newStep--;paint();focusStep()"]){if(!source.includes(code))throw new Error(`分步流程未覆盖 ${code}`)}
+if(!source.includes('loading||!scenarioPicked||!force')||!source.includes('newStep!==3'))throw new Error("未确认剧本或未到设置步骤时不得直接建立战局");
+if(!html.includes('id="forceChoices" class="force-choices"></div><aside class="campaign-brief"'))throw new Error("势力介绍必须在独立区域，不能追加到势力长列表末尾");
+if(source.includes("startBriefObserver"))throw new Error("开局介绍不能残留已移除观察器的声明或清理调用，否则进入战局会失败");
 const startScreenAt=html.indexOf('id="startScreen"'),shellAt=html.indexOf('class="app-shell"'),editorButtonAt=html.indexOf('id="openMapEditor"');
 if(!(startScreenAt>=0&&editorButtonAt>startScreenAt&&editorButtonAt<shellAt))throw new Error("1.0 舆图编辑器入口未放在开始界面");
 if(!source.includes("window.MapEditor?.install(")||!source.includes("editorSource=()=>scenarioData"))throw new Error("1.0 开始界面舆图编辑器未绑定所选剧本数据");
@@ -32,7 +36,17 @@ if(!editorSource.includes("elementPresets={layer:")||!editorSource.includes("ele
 if(!editorSource.includes("syncElements("))throw new Error("舆图编辑器显示元素开关未与工具联动");
 if(editorSource.includes("mapEditorValuePick"))throw new Error("舆图编辑器仍残留已废弃的取值选择器");
 const css=fs.readFileSync(new URL("../css/ui-polish.css",import.meta.url),"utf8");if(!css.includes(".start-screen [hidden]{display:none!important}"))throw new Error("主菜单的隐藏页面可能被 flex/grid 样式重新显示");
+const desktopCss=fs.readFileSync(new URL("../css/os-desktop.css",import.meta.url),"utf8");
+for(const pseudo of ["scrollbar","scrollbar-track","scrollbar-thumb","scrollbar-corner"]){const rule=desktopCss.split("\n").find(line=>line.includes(`::-webkit-${pseudo}{`));if(!rule?.includes(".start-screen *")||!rule?.includes(".terminal-select-list")||!rule?.includes(".os-window"))throw new Error(`开局面板、下拉列表与桌面窗口未共用 ${pseudo} 主题`)}
+if(!css.includes(".start-grid>section{min-width:0;scrollbar-gutter:stable;overscroll-behavior:contain;"))throw new Error("开局滚动面板未保留滚动槽与独立滚动边界");
+for(const rule of [".campaign-pane{display:flex;flex:1;flex-direction:column;min-width:0;min-height:0;", ".campaign-brief{min-width:0;min-height:0;overflow:auto;", ".campaign-force-layout{display:grid;", ".start-screen .start-footer{flex:0 0 auto!important;"]){if(!css.includes(rule))throw new Error(`分步布局缺少裁切与滚动约束：${rule}`)}
 if(!source.includes("sanguo-cli.slot.")||!source.includes("resumeSlot"))throw new Error("缺少本地多槽存档管理");
+for(const id of ["newSaveName","gameSaveName","updateCurrentSave","createSaveCopy"])if(!html.includes(`id="${id}"`))throw new Error(`命名档案管理缺少 ${id}`);
+if(html.includes('id="newSaveSlotChoice"')||source.includes('rows=["1","2","3"]'))throw new Error("存档界面不能保留固定三卡槽");
+if(!source.includes('pendingNewSlot=SaveLibrary.newId();beginNewGame()')||!source.includes('await SaveLibrary.initialize()'))throw new Error("新游戏必须使用独立编号且先加载旧存档库");
+const catalog=JSON.parse(fs.readFileSync(new URL("../game/data/history/scenarios/index.json",import.meta.url),"utf8"));
+if(catalog.scenarios.map(item=>item.id).join(",")!=="190_coalition,200_guandu,208_red_cliffs")throw new Error("剧本未按时间排列");
+if(!source.includes('scenarios.find(s=>s.id===data.scenario.id)'))throw new Error("更改列表顺序后必须保持选中剧本与实际数据一致");
 if(!source.includes('activeSessionKey="sanguo.active-session.v1"')||!source.includes("queueMicrotask(()=>resumeSlot(refreshSlot))")||!source.includes("clearActive();location.reload()"))throw new Error("缺少刷新自动恢复与显式返回主菜单逻辑");
 if(!html.includes('document.documentElement.classList.add("resume-pending")')||!html.includes("html.resume-pending .start-screen")||!source.includes('finishResume=()=>document.documentElement.classList.remove("resume-pending")'))throw new Error("刷新恢复期间仍可能闪现主菜单");
-console.log("1.0 开局界面通过：主菜单视图 / 刷新恢复战局 / 观察者 / 本地存档槽 / 设置入口均存在");
+console.log("开局界面结构通过：三步互斥显示 / 独立势力介绍 / 上一步 / 阻止跳步开局 / 设置与多槽存档 / 刷新恢复战局");
