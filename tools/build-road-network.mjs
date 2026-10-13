@@ -30,20 +30,9 @@ if(!map.commandery_reference)for(let y=0;y<height;y++)for(let x=0;x<width;x++){
   provinces[index]=best?.province||null;commanderies[index]=best?.name||null;
 }
 if(!map.commandery_reference){map.provinces=window.MapGrid.encode(provinces);map.commanderies=window.MapGrid.encode(commanderies)}map.commanderySeats=commanderySeats;runtimeMap.provinces=map.provinces;runtimeMap.commanderies=map.commanderies;
-const historicalCorridors=[
-  ["changan","tongguan","hongnong","luoyang","hangu","hulao","henei"],
-  ["luoyang","henei","puyang","yanjin","baima","chenliu","qiao","xuchang"],
-  ["jinyang","daixian","ji","beiping","xiangping"],
-  ["ye","nanpi","pingyuan","linzi","beihai","langya","xiapi"],
-  ["luoyang","wan","xinye","xiangyang","jiangling","yiling"],
-  ["hanzhong","zitong","jianmen","chengdu","jiangzhou","yongan","yiling"],
-  ["xuchang","qiao","shouchun","hefei","jianye","wu","kuaiji","jianan"],
-  ["xiangyang","xiakou","chaisang","jianye"],
-  ["changsha","wuling","jiangling"],
-  ["guiyang","cangwu","panyu"],
-  ["beiping","xiangping","lelang"]
-];
-const curatedGraph={};for(const corridor of historicalCorridors)for(let index=1;index<corridor.length;index++){const from=corridor[index-1],to=corridor[index];if(!graph[from]?.includes(to))throw new Error(`历史干线缺少相邻交通节点：${from}—${to}`);curatedGraph[from]??=[];curatedGraph[to]??=[];curatedGraph[from].push(to);curatedGraph[to].push(from)}
+// 陆路走向取自 route_network.json（驿道、道路、山道、栈道、渡口）；水路与海路不画成陆上道路。
+const network=JSON.parse(fs.readFileSync("game/data/map/route_network.json","utf8")),landKinds=new Set(Object.entries(network.kinds).filter(([,kind])=>kind.mode==="land").map(([id])=>id));
+const curatedGraph={};for(const route of network.routes){if(!landKinds.has(route.kind))continue;if(!graph[route.a]?.includes(route.b))throw new Error(`陆路缺少相邻交通节点：${route.a}—${route.b}`);(curatedGraph[route.a]??=[]).push(route.b);(curatedGraph[route.b]??=[]).push(route.a)}
 const roadMap={...runtimeMap,commanderySeats:[]};
 map.roads=window.MapGrid.serializeRoadNetwork(window.MapGrid.generateRoadNetwork(roadMap,cities,[],curatedGraph));
 divisions.commandery_seats_140=commanderySeats;delete divisions.commandery_seat_grid_140;

@@ -48,7 +48,8 @@ for(const county of admin.county_seats){
 }
 
 const nodes=new Map([...cities,...admin.county_seats,...admin.commandery_seats_140].map(node=>[node.id,node]));
-assert.equal(source.roads.length,48,"道路段数不能增减");
+const network=JSON.parse(fs.readFileSync(new URL("../game/data/map/route_network.json",import.meta.url),"utf8")),landKinds=new Set(Object.entries(network.kinds).filter(([,kind])=>kind.mode==="land").map(([id])=>id));
+assert.equal(source.roads.length,network.routes.filter(route=>landKinds.has(route.kind)).length,"道路段数须与路网陆路一致");
 for(const road of source.roads){
   const from=nodes.get(road.from),to=nodes.get(road.to),points=MapGrid.decodeRoadPath(road);
   assert(from&&to,`道路端点缺失：${road.id}`);
@@ -59,10 +60,10 @@ for(const road of source.roads){
 
 const scratch=fs.mkdtempSync(path.join(os.tmpdir(),"commandery-boundaries-"));
 try{
-  for(const file of ["game/data/map/central_plains.json","game/data/history/cities/200_guandu.json","game/data/history/administrative_divisions.json","game/data/common/game_rules.json"]){const target=path.join(scratch,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(new URL(`../${file}`,import.meta.url),target)}
+  for(const file of ["game/data/map/central_plains.json","game/data/map/route_network.json","game/data/history/cities/200_guandu.json","game/data/history/administrative_divisions.json","game/data/common/game_rules.json"]){const target=path.join(scratch,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(new URL(`../${file}`,import.meta.url),target)}
   execFileSync(process.execPath,[fileURLToPath(new URL("./build-road-network.mjs",import.meta.url))],{cwd:scratch,stdio:"pipe"});
   const rebuilt=JSON.parse(fs.readFileSync(path.join(scratch,"game/data/map/central_plains.json"),"utf8"));
   for(const key of ["provinces","commanderies","commanderySeats","terrain","waterways"])assert.deepEqual(rebuilt[key],source[key],`重建道路不能改写${key}`);
 }finally{fs.rmSync(scratch,{recursive:true,force:true})}
 
-console.log("郡域边界通过：119 郡国轮廓面积与郡域格数逐一相符 / 据点与治所落在本郡 / 县治与据点同格 / 48 条道路逐格连续且不跨海 / 重建道路不改写地形");
+console.log("郡域边界通过：119 郡国轮廓面积与郡域格数逐一相符 / 据点与治所落在本郡 / 县治与据点同格 / 全部陆路逐格连续且不跨海 / 重建道路不改写地形");

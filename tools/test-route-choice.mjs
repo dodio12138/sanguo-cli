@@ -37,8 +37,8 @@ for(const from of cities)for(const to of cities){
 assert.ok(sameHops,"同跳数规则必须保持：行军天数与补给预算不得变化");
 assert.ok(noWorse,"新路线不得比旧路线绕远");
 assert.ok(shorter>500,`应大量修正绕远路线，实际修正 ${shorter} 组`);
-assert.ok(geo(real.path("shouchun","xuchang"))<geo(bfs("shouchun","xuchang")),`寿春→许昌应改走 ${real.path("shouchun","xuchang").map(id=>site(id).name).join("→")} 而非绕经下邳`);
-assert.ok(geo(real.path("luoyang","tongguan"))<geo(bfs("luoyang","tongguan")),`洛阳→潼关应改走 ${real.path("luoyang","tongguan").map(id=>site(id).name).join("→")} 而非绕经安定`);
+assert.deepEqual(real.path("luoyang","tongguan"),["luoyang","hangu","hongnong","tongguan"],"洛阳→潼关应循崤函道经函谷关、弘农");
+assert.deepEqual(real.path("shouchun","xuchang"),["shouchun","xuchang"],"寿春→许昌应循颍水直达");
 
 for(const forceId of ["cao","yuan"]){
   const throughEnemy=route=>route.slice(1,-1).some(id=>{const target=site(id);return target?.force&&![forceId,"neutral"].includes(target.force)});

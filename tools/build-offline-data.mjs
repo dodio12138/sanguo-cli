@@ -16,6 +16,7 @@ const payload={
   combatDoctrines:read("game/data/common/combat_doctrines.json"),
   cityResourceProfiles:read("game/data/history/city_resource_profiles.json"),
   administrativeDivisions:read("game/data/history/administrative_divisions.json"),
+  routeNetwork:read("game/data/map/route_network.json"),
   forces:read(scenario.data_files.forces).forces,cities:read(scenario.data_files.cities).cities,
   officers:read(scenario.data_files.officers).officers,armies:read(scenario.data_files.armies).armies,
   commandCatalog:{schemaVersion:commands.schema_version,categories:commands.categories.map(({id,name})=>({id,name})),commands:commands.categories.flatMap(category=>category.commands.map(entry=>{const [id,name,status="active"]=entry;return {id,name,status,description:window.SANGUO_COMMAND_DESCRIPTION(id,name,category.id),categoryId:category.id,categoryName:category.name,parameters:["actor_id","target_ids","amount","options"]}}))}

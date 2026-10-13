@@ -1,0 +1,1734 @@
+{
+  "schema_version": 1,
+  "basis": "东汉驿道、蜀道、太行八陉、运河与江河水系的战略投影；一格约二十公里（约四十八汉里）。路段为相邻据点间的主要通路，同一对据点可同时有陆路与水路。",
+  "li_per_cell": 48,
+  "kinds": {
+    "post": {
+      "name": "驿道",
+      "mode": "land",
+      "winding": 1.15,
+      "speed_li": 40,
+      "capacity": 3,
+      "frontage": 3,
+      "note": "郡国间官修大道，车骑并行，置亭传邮驿"
+    },
+    "road": {
+      "name": "道路",
+      "mode": "land",
+      "winding": 1.3,
+      "speed_li": 30,
+      "capacity": 2,
+      "frontage": 2,
+      "note": "郡县间一般道路；常行军日行三十里（一舍）"
+    },
+    "mountain": {
+      "name": "山道",
+      "mode": "land",
+      "winding": 1.6,
+      "speed_li": 20,
+      "capacity": 1,
+      "frontage": 1,
+      "note": "太行诸陉、武关道、祁山道等山间谷道，仅容单列"
+    },
+    "plank": {
+      "name": "栈道",
+      "mode": "land",
+      "winding": 1.8,
+      "speed_li": 12,
+      "capacity": 0.5,
+      "frontage": 0.5,
+      "note": "褒斜、子午、故道、阴平等阁道，险窄易断"
+    },
+    "ford": {
+      "name": "渡口",
+      "mode": "land",
+      "winding": 1.25,
+      "speed_li": 30,
+      "capacity": 1,
+      "frontage": 1,
+      "crossing_days": 2,
+      "note": "道路需渡大河，受舟楫数量限制"
+    },
+    "river": {
+      "name": "水路",
+      "mode": "water",
+      "winding": 1.35,
+      "speed_li_down": 120,
+      "speed_li_up": 30,
+      "capacity": 2,
+      "frontage": 1,
+      "embark_days": 1,
+      "note": "顺流舟行日百余里，逆流牵挽日行三十里"
+    },
+    "sea": {
+      "name": "海路",
+      "mode": "water",
+      "winding": 1.3,
+      "speed_li": 80,
+      "capacity": 1,
+      "frontage": 1,
+      "embark_days": 2,
+      "note": "近海帆行，受风候影响"
+    }
+  },
+  "routes": [
+    {
+      "a": "changan",
+      "b": "commandery_city_007",
+      "kind": "post",
+      "name": "渭北道"
+    },
+    {
+      "a": "commandery_city_007",
+      "b": "commandery_city_111",
+      "kind": "post",
+      "name": "渭北道"
+    },
+    {
+      "a": "changan",
+      "b": "commandery_city_006",
+      "kind": "post",
+      "name": "渭北道"
+    },
+    {
+      "a": "commandery_city_006",
+      "b": "commandery_city_072",
+      "kind": "road",
+      "name": "北地道"
+    },
+    {
+      "a": "changan",
+      "b": "tongguan",
+      "kind": "post",
+      "name": "崤函道"
+    },
+    {
+      "a": "tongguan",
+      "b": "hongnong",
+      "kind": "post",
+      "name": "崤函道"
+    },
+    {
+      "a": "hongnong",
+      "b": "hangu",
+      "kind": "post",
+      "name": "崤函道"
+    },
+    {
+      "a": "hangu",
+      "b": "luoyang",
+      "kind": "post",
+      "name": "崤函道"
+    },
+    {
+      "a": "changan",
+      "b": "wuguan",
+      "kind": "mountain",
+      "name": "武关道"
+    },
+    {
+      "a": "wuguan",
+      "b": "wan",
+      "kind": "road",
+      "name": "武关道"
+    },
+    {
+      "a": "wuguan",
+      "b": "commandery_city_117",
+      "kind": "road",
+      "name": "丹水道"
+    },
+    {
+      "a": "commandery_city_006",
+      "b": "anding",
+      "kind": "road",
+      "name": "回中道"
+    },
+    {
+      "a": "anding",
+      "b": "commandery_city_071",
+      "kind": "road",
+      "name": "回中道"
+    },
+    {
+      "a": "commandery_city_111",
+      "b": "commandery_city_068",
+      "kind": "mountain",
+      "name": "陇关道"
+    },
+    {
+      "a": "commandery_city_068",
+      "b": "tianshui",
+      "kind": "road",
+      "name": "陇右道"
+    },
+    {
+      "a": "tianshui",
+      "b": "longxi",
+      "kind": "road",
+      "name": "陇右道"
+    },
+    {
+      "a": "longxi",
+      "b": "commandery_city_067",
+      "kind": "road",
+      "name": "陇右道"
+    },
+    {
+      "a": "commandery_city_067",
+      "b": "jincheng",
+      "kind": "road",
+      "name": "陇右道"
+    },
+    {
+      "a": "jincheng",
+      "b": "commandery_city_070",
+      "kind": "road",
+      "name": "湟中道"
+    },
+    {
+      "a": "commandery_city_070",
+      "b": "commandery_city_124",
+      "kind": "road",
+      "name": "湟中道"
+    },
+    {
+      "a": "commandery_city_071",
+      "b": "jincheng",
+      "kind": "mountain",
+      "name": "萧关道"
+    },
+    {
+      "a": "jincheng",
+      "b": "xiliang",
+      "kind": "mountain",
+      "name": "令居道"
+    },
+    {
+      "a": "xiliang",
+      "b": "commandery_city_077",
+      "kind": "post",
+      "name": "河西道"
+    },
+    {
+      "a": "commandery_city_077",
+      "b": "commandery_city_074",
+      "kind": "post",
+      "name": "河西道"
+    },
+    {
+      "a": "commandery_city_074",
+      "b": "commandery_city_123",
+      "kind": "road",
+      "name": "河西道"
+    },
+    {
+      "a": "commandery_city_074",
+      "b": "commandery_city_075",
+      "kind": "post",
+      "name": "河西道"
+    },
+    {
+      "a": "commandery_city_075",
+      "b": "commandery_city_076",
+      "kind": "post",
+      "name": "河西道"
+    },
+    {
+      "a": "commandery_city_074",
+      "b": "commandery_city_078",
+      "kind": "road",
+      "name": "弱水道"
+    },
+    {
+      "a": "tianshui",
+      "b": "commandery_city_069",
+      "kind": "mountain",
+      "name": "祁山道"
+    },
+    {
+      "a": "commandery_city_069",
+      "b": "commandery_city_127",
+      "kind": "mountain",
+      "name": "阴平道"
+    },
+    {
+      "a": "commandery_city_127",
+      "b": "commandery_city_064",
+      "kind": "road",
+      "name": "阴平道"
+    },
+    {
+      "a": "commandery_city_064",
+      "b": "commandery_city_121",
+      "kind": "mountain",
+      "name": "汶山道"
+    },
+    {
+      "a": "commandery_city_111",
+      "b": "yangping",
+      "kind": "plank",
+      "name": "故道"
+    },
+    {
+      "a": "commandery_city_007",
+      "b": "commandery_city_055",
+      "kind": "plank",
+      "name": "褒斜道"
+    },
+    {
+      "a": "changan",
+      "b": "commandery_city_055",
+      "kind": "plank",
+      "name": "子午道"
+    },
+    {
+      "a": "hanzhong",
+      "b": "commandery_city_055",
+      "kind": "post",
+      "name": "汉中道"
+    },
+    {
+      "a": "hanzhong",
+      "b": "yangping",
+      "kind": "road",
+      "name": "汉中道"
+    },
+    {
+      "a": "yangping",
+      "b": "jiameng",
+      "kind": "mountain",
+      "name": "金牛道"
+    },
+    {
+      "a": "jiameng",
+      "b": "jianmen",
+      "kind": "mountain",
+      "name": "金牛道"
+    },
+    {
+      "a": "jianmen",
+      "b": "zitong",
+      "kind": "mountain",
+      "name": "金牛道"
+    },
+    {
+      "a": "zitong",
+      "b": "commandery_city_057",
+      "kind": "road",
+      "name": "金牛道"
+    },
+    {
+      "a": "commandery_city_057",
+      "b": "chengdu",
+      "kind": "post",
+      "name": "金牛道"
+    },
+    {
+      "a": "commandery_city_127",
+      "b": "jiangyou",
+      "kind": "plank",
+      "name": "阴平道"
+    },
+    {
+      "a": "jiangyou",
+      "b": "commandery_city_057",
+      "kind": "road",
+      "name": "涪水道"
+    },
+    {
+      "a": "jiangyou",
+      "b": "zitong",
+      "kind": "road",
+      "name": "涪水道"
+    },
+    {
+      "a": "commandery_city_121",
+      "b": "chengdu",
+      "kind": "road",
+      "name": "湔氐道"
+    },
+    {
+      "a": "commandery_city_055",
+      "b": "commandery_city_107",
+      "kind": "mountain",
+      "name": "米仓道"
+    },
+    {
+      "a": "commandery_city_107",
+      "b": "langzhong",
+      "kind": "road",
+      "name": "巴西道"
+    },
+    {
+      "a": "langzhong",
+      "b": "zitong",
+      "kind": "road",
+      "name": "巴西道"
+    },
+    {
+      "a": "chengdu",
+      "b": "commandery_city_059",
+      "kind": "road",
+      "name": "南安道"
+    },
+    {
+      "a": "chengdu",
+      "b": "commandery_city_065",
+      "kind": "road",
+      "name": "青衣道"
+    },
+    {
+      "a": "commandery_city_065",
+      "b": "commandery_city_061",
+      "kind": "mountain",
+      "name": "灵关道"
+    },
+    {
+      "a": "commandery_city_061",
+      "b": "yunnan",
+      "kind": "mountain",
+      "name": "越巂道"
+    },
+    {
+      "a": "yunnan",
+      "b": "commandery_city_063",
+      "kind": "road",
+      "name": "永昌道"
+    },
+    {
+      "a": "yunnan",
+      "b": "commandery_city_062",
+      "kind": "road",
+      "name": "滇池道"
+    },
+    {
+      "a": "commandery_city_062",
+      "b": "jianing",
+      "kind": "road",
+      "name": "滇池道"
+    },
+    {
+      "a": "jianing",
+      "b": "commandery_city_066",
+      "kind": "mountain",
+      "name": "五尺道"
+    },
+    {
+      "a": "commandery_city_066",
+      "b": "commandery_city_112",
+      "kind": "mountain",
+      "name": "五尺道"
+    },
+    {
+      "a": "commandery_city_066",
+      "b": "commandery_city_130",
+      "kind": "road",
+      "name": "朱提道"
+    },
+    {
+      "a": "jianing",
+      "b": "commandery_city_060",
+      "kind": "mountain",
+      "name": "牂柯道"
+    },
+    {
+      "a": "commandery_city_060",
+      "b": "jiangzhou",
+      "kind": "mountain",
+      "name": "牂柯道"
+    },
+    {
+      "a": "jiangzhou",
+      "b": "badong",
+      "kind": "road",
+      "name": "巴郡道"
+    },
+    {
+      "a": "jiangzhou",
+      "b": "commandery_city_107",
+      "kind": "road",
+      "name": "巴郡道"
+    },
+    {
+      "a": "commandery_city_055",
+      "b": "commandery_city_122",
+      "kind": "mountain",
+      "name": "汉水道"
+    },
+    {
+      "a": "commandery_city_122",
+      "b": "shangyong",
+      "kind": "mountain",
+      "name": "汉水道"
+    },
+    {
+      "a": "shangyong",
+      "b": "commandery_city_109",
+      "kind": "road",
+      "name": "房陵道"
+    },
+    {
+      "a": "commandery_city_109",
+      "b": "xiangyang",
+      "kind": "road",
+      "name": "房陵道"
+    },
+    {
+      "a": "commandery_city_110",
+      "b": "commandery_city_109",
+      "kind": "mountain",
+      "name": "巫山道"
+    },
+    {
+      "a": "luoyang",
+      "b": "mengjin",
+      "kind": "road",
+      "name": "孟津道"
+    },
+    {
+      "a": "mengjin",
+      "b": "henei",
+      "kind": "ford",
+      "name": "孟津"
+    },
+    {
+      "a": "henei",
+      "b": "commandery_city_002",
+      "kind": "post",
+      "name": "河内道"
+    },
+    {
+      "a": "luoyang",
+      "b": "hulao",
+      "kind": "post",
+      "name": "成皋道"
+    },
+    {
+      "a": "hulao",
+      "b": "guandu",
+      "kind": "post",
+      "name": "荥阳道"
+    },
+    {
+      "a": "guandu",
+      "b": "chenliu",
+      "kind": "post",
+      "name": "鸿沟道"
+    },
+    {
+      "a": "guandu",
+      "b": "xuchang",
+      "kind": "road",
+      "name": "中牟道"
+    },
+    {
+      "a": "luoyang",
+      "b": "commandery_city_008",
+      "kind": "road",
+      "name": "轘辕道"
+    },
+    {
+      "a": "commandery_city_008",
+      "b": "xuchang",
+      "kind": "post",
+      "name": "颍川道"
+    },
+    {
+      "a": "luoyang",
+      "b": "wan",
+      "kind": "road",
+      "name": "鲁阳道"
+    },
+    {
+      "a": "xuchang",
+      "b": "wan",
+      "kind": "road",
+      "name": "方城道"
+    },
+    {
+      "a": "henei",
+      "b": "commandery_city_003",
+      "kind": "mountain",
+      "name": "轵关陉"
+    },
+    {
+      "a": "commandery_city_003",
+      "b": "hongnong",
+      "kind": "ford",
+      "name": "茅津"
+    },
+    {
+      "a": "commandery_city_003",
+      "b": "tongguan",
+      "kind": "ford",
+      "name": "蒲坂津"
+    },
+    {
+      "a": "commandery_city_003",
+      "b": "jinyang",
+      "kind": "road",
+      "name": "汾水道"
+    },
+    {
+      "a": "henei",
+      "b": "shangdang",
+      "kind": "mountain",
+      "name": "太行陉"
+    },
+    {
+      "a": "shangdang",
+      "b": "commandery_city_079",
+      "kind": "road",
+      "name": "上党道"
+    },
+    {
+      "a": "jinyang",
+      "b": "commandery_city_079",
+      "kind": "mountain",
+      "name": "铜鞮道"
+    },
+    {
+      "a": "commandery_city_002",
+      "b": "ye",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "guandu",
+      "b": "yanjin",
+      "kind": "road",
+      "name": "延津道"
+    },
+    {
+      "a": "yanjin",
+      "b": "ye",
+      "kind": "ford",
+      "name": "延津"
+    },
+    {
+      "a": "puyang",
+      "b": "baima",
+      "kind": "road",
+      "name": "白马道"
+    },
+    {
+      "a": "baima",
+      "b": "ye",
+      "kind": "ford",
+      "name": "白马津"
+    },
+    {
+      "a": "chenliu",
+      "b": "yanjin",
+      "kind": "road",
+      "name": "延津道"
+    },
+    {
+      "a": "ye",
+      "b": "commandery_city_021",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "commandery_city_021",
+      "b": "commandery_city_015",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "commandery_city_015",
+      "b": "commandery_city_016",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "commandery_city_016",
+      "b": "commandery_city_017",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "commandery_city_017",
+      "b": "commandery_city_088",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "commandery_city_088",
+      "b": "ji",
+      "kind": "post",
+      "name": "河北大道"
+    },
+    {
+      "a": "ye",
+      "b": "commandery_city_020",
+      "kind": "road",
+      "name": "清河道"
+    },
+    {
+      "a": "commandery_city_020",
+      "b": "pingyuan",
+      "kind": "road",
+      "name": "清河道"
+    },
+    {
+      "a": "commandery_city_020",
+      "b": "commandery_city_018",
+      "kind": "road",
+      "name": "清河道"
+    },
+    {
+      "a": "commandery_city_018",
+      "b": "commandery_city_015",
+      "kind": "road",
+      "name": "巨鹿道"
+    },
+    {
+      "a": "commandery_city_018",
+      "b": "commandery_city_106",
+      "kind": "road",
+      "name": "安平道"
+    },
+    {
+      "a": "commandery_city_106",
+      "b": "commandery_city_017",
+      "kind": "road",
+      "name": "中山道"
+    },
+    {
+      "a": "commandery_city_106",
+      "b": "commandery_city_019",
+      "kind": "road",
+      "name": "河间道"
+    },
+    {
+      "a": "commandery_city_019",
+      "b": "nanpi",
+      "kind": "road",
+      "name": "河间道"
+    },
+    {
+      "a": "nanpi",
+      "b": "commandery_city_129",
+      "kind": "road",
+      "name": "渤海道"
+    },
+    {
+      "a": "commandery_city_129",
+      "b": "ji",
+      "kind": "road",
+      "name": "泉州道"
+    },
+    {
+      "a": "nanpi",
+      "b": "pingyuan",
+      "kind": "road",
+      "name": "渤海道"
+    },
+    {
+      "a": "commandery_city_019",
+      "b": "commandery_city_088",
+      "kind": "road",
+      "name": "河间道"
+    },
+    {
+      "a": "shangdang",
+      "b": "ye",
+      "kind": "mountain",
+      "name": "滏口陉"
+    },
+    {
+      "a": "jinyang",
+      "b": "commandery_city_114",
+      "kind": "mountain",
+      "name": "井陉"
+    },
+    {
+      "a": "commandery_city_114",
+      "b": "commandery_city_016",
+      "kind": "mountain",
+      "name": "井陉"
+    },
+    {
+      "a": "jinyang",
+      "b": "commandery_city_083",
+      "kind": "road",
+      "name": "雁门道"
+    },
+    {
+      "a": "commandery_city_083",
+      "b": "commandery_city_086",
+      "kind": "road",
+      "name": "雁门道"
+    },
+    {
+      "a": "commandery_city_086",
+      "b": "commandery_city_085",
+      "kind": "road",
+      "name": "雁门道"
+    },
+    {
+      "a": "commandery_city_085",
+      "b": "commandery_city_084",
+      "kind": "road",
+      "name": "云中道"
+    },
+    {
+      "a": "commandery_city_086",
+      "b": "daixian",
+      "kind": "mountain",
+      "name": "平城道"
+    },
+    {
+      "a": "daixian",
+      "b": "commandery_city_090",
+      "kind": "road",
+      "name": "代郡道"
+    },
+    {
+      "a": "commandery_city_090",
+      "b": "commandery_city_091",
+      "kind": "road",
+      "name": "上谷道"
+    },
+    {
+      "a": "commandery_city_091",
+      "b": "ji",
+      "kind": "mountain",
+      "name": "居庸关道"
+    },
+    {
+      "a": "daixian",
+      "b": "commandery_city_017",
+      "kind": "mountain",
+      "name": "飞狐陉"
+    },
+    {
+      "a": "jinyang",
+      "b": "commandery_city_082",
+      "kind": "mountain",
+      "name": "西河道"
+    },
+    {
+      "a": "commandery_city_082",
+      "b": "commandery_city_081",
+      "kind": "ford",
+      "name": "西河渡"
+    },
+    {
+      "a": "commandery_city_081",
+      "b": "commandery_city_084",
+      "kind": "road",
+      "name": "上郡道"
+    },
+    {
+      "a": "commandery_city_084",
+      "b": "commandery_city_087",
+      "kind": "road",
+      "name": "河南道"
+    },
+    {
+      "a": "ji",
+      "b": "commandery_city_092",
+      "kind": "post",
+      "name": "渔阳道"
+    },
+    {
+      "a": "ji",
+      "b": "commandery_city_093",
+      "kind": "post",
+      "name": "右北平道"
+    },
+    {
+      "a": "commandery_city_092",
+      "b": "beiping",
+      "kind": "road",
+      "name": "右北平道"
+    },
+    {
+      "a": "commandery_city_093",
+      "b": "beiping",
+      "kind": "road",
+      "name": "右北平道"
+    },
+    {
+      "a": "beiping",
+      "b": "commandery_city_094",
+      "kind": "mountain",
+      "name": "卢龙塞道"
+    },
+    {
+      "a": "commandery_city_094",
+      "b": "commandery_city_098",
+      "kind": "road",
+      "name": "辽西道"
+    },
+    {
+      "a": "commandery_city_098",
+      "b": "xiangping",
+      "kind": "ford",
+      "name": "辽水"
+    },
+    {
+      "a": "xiangping",
+      "b": "lelang",
+      "kind": "road",
+      "name": "辽东道"
+    },
+    {
+      "a": "lelang",
+      "b": "commandery_city_097",
+      "kind": "road",
+      "name": "乐浪道"
+    },
+    {
+      "a": "xiangping",
+      "b": "commandery_city_096",
+      "kind": "mountain",
+      "name": "玄菟道"
+    },
+    {
+      "a": "puyang",
+      "b": "commandery_city_030",
+      "kind": "road",
+      "name": "东郡道"
+    },
+    {
+      "a": "puyang",
+      "b": "commandery_city_025",
+      "kind": "road",
+      "name": "东郡道"
+    },
+    {
+      "a": "chenliu",
+      "b": "commandery_city_030",
+      "kind": "post",
+      "name": "济阴道"
+    },
+    {
+      "a": "commandery_city_030",
+      "b": "commandery_city_029",
+      "kind": "post",
+      "name": "济阴道"
+    },
+    {
+      "a": "commandery_city_029",
+      "b": "commandery_city_026",
+      "kind": "road",
+      "name": "山阳道"
+    },
+    {
+      "a": "commandery_city_026",
+      "b": "commandery_city_013",
+      "kind": "road",
+      "name": "鲁国道"
+    },
+    {
+      "a": "commandery_city_026",
+      "b": "commandery_city_025",
+      "kind": "road",
+      "name": "东平道"
+    },
+    {
+      "a": "commandery_city_025",
+      "b": "commandery_city_028",
+      "kind": "road",
+      "name": "济北道"
+    },
+    {
+      "a": "commandery_city_013",
+      "b": "commandery_city_027",
+      "kind": "road",
+      "name": "泰山道"
+    },
+    {
+      "a": "commandery_city_027",
+      "b": "commandery_city_028",
+      "kind": "road",
+      "name": "泰山道"
+    },
+    {
+      "a": "commandery_city_028",
+      "b": "commandery_city_036",
+      "kind": "post",
+      "name": "济南道"
+    },
+    {
+      "a": "commandery_city_036",
+      "b": "linzi",
+      "kind": "post",
+      "name": "齐国道"
+    },
+    {
+      "a": "linzi",
+      "b": "commandery_city_039",
+      "kind": "post",
+      "name": "北海道"
+    },
+    {
+      "a": "commandery_city_039",
+      "b": "beihai",
+      "kind": "road",
+      "name": "北海道"
+    },
+    {
+      "a": "beihai",
+      "b": "commandery_city_040",
+      "kind": "road",
+      "name": "东莱道"
+    },
+    {
+      "a": "linzi",
+      "b": "commandery_city_038",
+      "kind": "road",
+      "name": "乐安道"
+    },
+    {
+      "a": "commandery_city_038",
+      "b": "commandery_city_113",
+      "kind": "road",
+      "name": "乐安道"
+    },
+    {
+      "a": "commandery_city_113",
+      "b": "nanpi",
+      "kind": "road",
+      "name": "渤海道"
+    },
+    {
+      "a": "pingyuan",
+      "b": "commandery_city_036",
+      "kind": "ford",
+      "name": "平原津"
+    },
+    {
+      "a": "beihai",
+      "b": "custom_1",
+      "kind": "road",
+      "name": "琅邪道"
+    },
+    {
+      "a": "custom_1",
+      "b": "commandery_city_108",
+      "kind": "road",
+      "name": "琅邪道"
+    },
+    {
+      "a": "commandery_city_108",
+      "b": "commandery_city_039",
+      "kind": "mountain",
+      "name": "沂山道"
+    },
+    {
+      "a": "commandery_city_108",
+      "b": "langya",
+      "kind": "road",
+      "name": "琅邪道"
+    },
+    {
+      "a": "langya",
+      "b": "commandery_city_032",
+      "kind": "road",
+      "name": "琅邪道"
+    },
+    {
+      "a": "commandery_city_032",
+      "b": "commandery_city_115",
+      "kind": "road",
+      "name": "东海道"
+    },
+    {
+      "a": "commandery_city_032",
+      "b": "commandery_city_031",
+      "kind": "road",
+      "name": "东海道"
+    },
+    {
+      "a": "commandery_city_031",
+      "b": "xiapi",
+      "kind": "post",
+      "name": "东海道"
+    },
+    {
+      "a": "xiapi",
+      "b": "pengcheng",
+      "kind": "post",
+      "name": "彭城道"
+    },
+    {
+      "a": "pengcheng",
+      "b": "xiaopei",
+      "kind": "post",
+      "name": "沛国道"
+    },
+    {
+      "a": "xiaopei",
+      "b": "commandery_city_013",
+      "kind": "road",
+      "name": "鲁国道"
+    },
+    {
+      "a": "xiaopei",
+      "b": "commandery_city_011",
+      "kind": "road",
+      "name": "沛国道"
+    },
+    {
+      "a": "commandery_city_011",
+      "b": "qiao",
+      "kind": "road",
+      "name": "沛国道"
+    },
+    {
+      "a": "qiao",
+      "b": "commandery_city_120",
+      "kind": "road",
+      "name": "沛国道"
+    },
+    {
+      "a": "commandery_city_120",
+      "b": "commandery_city_010",
+      "kind": "road",
+      "name": "梁国道"
+    },
+    {
+      "a": "commandery_city_010",
+      "b": "chenliu",
+      "kind": "post",
+      "name": "汴渠道"
+    },
+    {
+      "a": "chenliu",
+      "b": "commandery_city_012",
+      "kind": "road",
+      "name": "陈国道"
+    },
+    {
+      "a": "commandery_city_012",
+      "b": "xuchang",
+      "kind": "road",
+      "name": "陈国道"
+    },
+    {
+      "a": "commandery_city_012",
+      "b": "commandery_city_120",
+      "kind": "road",
+      "name": "陈国道"
+    },
+    {
+      "a": "xuchang",
+      "b": "commandery_city_009",
+      "kind": "road",
+      "name": "汝南道"
+    },
+    {
+      "a": "commandery_city_009",
+      "b": "runan",
+      "kind": "road",
+      "name": "汝南道"
+    },
+    {
+      "a": "runan",
+      "b": "commandery_city_126",
+      "kind": "road",
+      "name": "汝南道"
+    },
+    {
+      "a": "runan",
+      "b": "shouchun",
+      "kind": "ford",
+      "name": "淮水"
+    },
+    {
+      "a": "qiao",
+      "b": "shouchun",
+      "kind": "ford",
+      "name": "涡口"
+    },
+    {
+      "a": "xiapi",
+      "b": "guangling",
+      "kind": "post",
+      "name": "邗沟道"
+    },
+    {
+      "a": "guangling",
+      "b": "commandery_city_049",
+      "kind": "road",
+      "name": "九江道"
+    },
+    {
+      "a": "commandery_city_049",
+      "b": "shouchun",
+      "kind": "road",
+      "name": "九江道"
+    },
+    {
+      "a": "shouchun",
+      "b": "hefei",
+      "kind": "road",
+      "name": "肥水道"
+    },
+    {
+      "a": "hefei",
+      "b": "commandery_city_051",
+      "kind": "road",
+      "name": "庐江道"
+    },
+    {
+      "a": "commandery_city_051",
+      "b": "lujiang",
+      "kind": "road",
+      "name": "庐江道"
+    },
+    {
+      "a": "lujiang",
+      "b": "commandery_city_119",
+      "kind": "road",
+      "name": "庐江道"
+    },
+    {
+      "a": "guangling",
+      "b": "jianye",
+      "kind": "ford",
+      "name": "广陵渡"
+    },
+    {
+      "a": "jianye",
+      "b": "commandery_city_050",
+      "kind": "road",
+      "name": "丹阳道"
+    },
+    {
+      "a": "jianye",
+      "b": "wu",
+      "kind": "road",
+      "name": "曲阿道"
+    },
+    {
+      "a": "wu",
+      "b": "commandery_city_052",
+      "kind": "ford",
+      "name": "浙江渡"
+    },
+    {
+      "a": "commandery_city_052",
+      "b": "kuaiji",
+      "kind": "road",
+      "name": "会稽道"
+    },
+    {
+      "a": "kuaiji",
+      "b": "jianan",
+      "kind": "mountain",
+      "name": "东越道"
+    },
+    {
+      "a": "commandery_city_050",
+      "b": "commandery_city_118",
+      "kind": "mountain",
+      "name": "山越道"
+    },
+    {
+      "a": "commandery_city_118",
+      "b": "commandery_city_054",
+      "kind": "road",
+      "name": "豫章道"
+    },
+    {
+      "a": "commandery_city_054",
+      "b": "yuzhang",
+      "kind": "road",
+      "name": "豫章道"
+    },
+    {
+      "a": "commandery_city_116",
+      "b": "guiyang",
+      "kind": "mountain",
+      "name": "大庾岭道"
+    },
+    {
+      "a": "wan",
+      "b": "xinye",
+      "kind": "post",
+      "name": "荆襄道"
+    },
+    {
+      "a": "xinye",
+      "b": "xiangyang",
+      "kind": "ford",
+      "name": "樊津"
+    },
+    {
+      "a": "wan",
+      "b": "commandery_city_128",
+      "kind": "road",
+      "name": "舂陵道"
+    },
+    {
+      "a": "commandery_city_128",
+      "b": "xiangyang",
+      "kind": "road",
+      "name": "舂陵道"
+    },
+    {
+      "a": "wan",
+      "b": "commandery_city_117",
+      "kind": "road",
+      "name": "丹水道"
+    },
+    {
+      "a": "xiangyang",
+      "b": "jiangling",
+      "kind": "post",
+      "name": "荆襄道"
+    },
+    {
+      "a": "jiangling",
+      "b": "yiling",
+      "kind": "road",
+      "name": "夷陵道"
+    },
+    {
+      "a": "yiling",
+      "b": "commandery_city_125",
+      "kind": "ford",
+      "name": "夷陵渡"
+    },
+    {
+      "a": "jiangling",
+      "b": "commandery_city_047",
+      "kind": "ford",
+      "name": "油江口"
+    },
+    {
+      "a": "commandery_city_047",
+      "b": "wuling",
+      "kind": "road",
+      "name": "武陵道"
+    },
+    {
+      "a": "commandery_city_048",
+      "b": "changsha",
+      "kind": "road",
+      "name": "长沙道"
+    },
+    {
+      "a": "changsha",
+      "b": "commandery_city_046",
+      "kind": "road",
+      "name": "耒水道"
+    },
+    {
+      "a": "commandery_city_046",
+      "b": "guiyang",
+      "kind": "mountain",
+      "name": "骑田岭道"
+    },
+    {
+      "a": "commandery_city_045",
+      "b": "lingling",
+      "kind": "road",
+      "name": "零陵道"
+    },
+    {
+      "a": "guiyang",
+      "b": "commandery_city_100",
+      "kind": "road",
+      "name": "苍梧道"
+    },
+    {
+      "a": "commandery_city_100",
+      "b": "cangwu",
+      "kind": "road",
+      "name": "苍梧道"
+    },
+    {
+      "a": "commandery_city_101",
+      "b": "commandery_city_102",
+      "kind": "road",
+      "name": "郁林道"
+    },
+    {
+      "a": "jiaozhi",
+      "b": "commandery_city_103",
+      "kind": "road",
+      "name": "交趾道"
+    },
+    {
+      "a": "jiaozhi",
+      "b": "commandery_city_104",
+      "kind": "road",
+      "name": "九真道"
+    },
+    {
+      "a": "commandery_city_104",
+      "b": "commandery_city_105",
+      "kind": "road",
+      "name": "日南道"
+    },
+    {
+      "a": "xiakou",
+      "b": "commandery_city_044",
+      "kind": "road",
+      "name": "江夏道"
+    },
+    {
+      "a": "xiakou",
+      "b": "commandery_city_128",
+      "kind": "road",
+      "name": "云杜道"
+    },
+    {
+      "a": "commandery_city_044",
+      "b": "commandery_city_119",
+      "kind": "road",
+      "name": "江夏道"
+    },
+    {
+      "a": "commandery_city_112",
+      "b": "jiangzhou",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "jiangzhou",
+      "b": "fuling",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "fuling",
+      "b": "yongan",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "yongan",
+      "b": "commandery_city_110",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_110",
+      "b": "yiling",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "yiling",
+      "b": "jiangling",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "jiangling",
+      "b": "xiakou",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "xiakou",
+      "b": "commandery_city_044",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_044",
+      "b": "commandery_city_119",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_119",
+      "b": "chaisang",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "chaisang",
+      "b": "pukou",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "pukou",
+      "b": "jianye",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_059",
+      "b": "commandery_city_112",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "chengdu",
+      "b": "commandery_city_059",
+      "kind": "river",
+      "name": "江水",
+      "flow": "a>b"
+    },
+    {
+      "a": "langzhong",
+      "b": "jiangzhou",
+      "kind": "river",
+      "name": "西汉水",
+      "flow": "a>b"
+    },
+    {
+      "a": "jiameng",
+      "b": "langzhong",
+      "kind": "river",
+      "name": "西汉水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_055",
+      "b": "commandery_city_122",
+      "kind": "river",
+      "name": "沔水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_122",
+      "b": "shangyong",
+      "kind": "river",
+      "name": "沔水",
+      "flow": "a>b"
+    },
+    {
+      "a": "shangyong",
+      "b": "commandery_city_117",
+      "kind": "river",
+      "name": "沔水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_117",
+      "b": "xiangyang",
+      "kind": "river",
+      "name": "沔水",
+      "flow": "a>b"
+    },
+    {
+      "a": "xiangyang",
+      "b": "xiakou",
+      "kind": "river",
+      "name": "沔水",
+      "flow": "a>b"
+    },
+    {
+      "a": "wan",
+      "b": "xinye",
+      "kind": "river",
+      "name": "淯水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_126",
+      "b": "shouchun",
+      "kind": "river",
+      "name": "淮水",
+      "flow": "a>b"
+    },
+    {
+      "a": "shouchun",
+      "b": "xiapi",
+      "kind": "river",
+      "name": "淮水",
+      "flow": "a>b"
+    },
+    {
+      "a": "pengcheng",
+      "b": "xiapi",
+      "kind": "river",
+      "name": "泗水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_010",
+      "b": "pengcheng",
+      "kind": "river",
+      "name": "获水",
+      "flow": "a>b"
+    },
+    {
+      "a": "chenliu",
+      "b": "commandery_city_010",
+      "kind": "river",
+      "name": "汴水",
+      "flow": "a>b"
+    },
+    {
+      "a": "guandu",
+      "b": "chenliu",
+      "kind": "river",
+      "name": "鸿沟",
+      "flow": "a>b"
+    },
+    {
+      "a": "xuchang",
+      "b": "shouchun",
+      "kind": "river",
+      "name": "颍水",
+      "flow": "a>b"
+    },
+    {
+      "a": "hefei",
+      "b": "pukou",
+      "kind": "river",
+      "name": "施水濡须水",
+      "flow": "a>b"
+    },
+    {
+      "a": "lingling",
+      "b": "commandery_city_045",
+      "kind": "river",
+      "name": "湘水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_045",
+      "b": "commandery_city_048",
+      "kind": "river",
+      "name": "湘水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_048",
+      "b": "jiangling",
+      "kind": "river",
+      "name": "湘水洞庭",
+      "flow": "a>b"
+    },
+    {
+      "a": "wuling",
+      "b": "commandery_city_047",
+      "kind": "river",
+      "name": "沅水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_116",
+      "b": "yuzhang",
+      "kind": "river",
+      "name": "赣水",
+      "flow": "a>b"
+    },
+    {
+      "a": "yuzhang",
+      "b": "commandery_city_054",
+      "kind": "river",
+      "name": "赣水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_054",
+      "b": "chaisang",
+      "kind": "river",
+      "name": "赣水彭蠡",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_101",
+      "b": "cangwu",
+      "kind": "river",
+      "name": "郁水",
+      "flow": "a>b"
+    },
+    {
+      "a": "cangwu",
+      "b": "panyu",
+      "kind": "river",
+      "name": "郁水",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_111",
+      "b": "changan",
+      "kind": "river",
+      "name": "渭水",
+      "flow": "a>b"
+    },
+    {
+      "a": "changan",
+      "b": "tongguan",
+      "kind": "river",
+      "name": "渭水",
+      "flow": "a>b"
+    },
+    {
+      "a": "mengjin",
+      "b": "yanjin",
+      "kind": "river",
+      "name": "河水",
+      "flow": "a>b"
+    },
+    {
+      "a": "yanjin",
+      "b": "baima",
+      "kind": "river",
+      "name": "河水",
+      "flow": "a>b"
+    },
+    {
+      "a": "jianye",
+      "b": "wu",
+      "kind": "river",
+      "name": "江南河",
+      "flow": "a>b"
+    },
+    {
+      "a": "commandery_city_040",
+      "b": "xiangping",
+      "kind": "sea",
+      "name": "渤海北渡"
+    },
+    {
+      "a": "wu",
+      "b": "kuaiji",
+      "kind": "sea",
+      "name": "东海"
+    },
+    {
+      "a": "kuaiji",
+      "b": "jianan",
+      "kind": "sea",
+      "name": "东海"
+    },
+    {
+      "a": "jianan",
+      "b": "panyu",
+      "kind": "sea",
+      "name": "南海"
+    },
+    {
+      "a": "panyu",
+      "b": "commandery_city_102",
+      "kind": "sea",
+      "name": "南海"
+    },
+    {
+      "a": "commandery_city_102",
+      "b": "jiaozhi",
+      "kind": "sea",
+      "name": "南海"
+    }
+  ]
+}
