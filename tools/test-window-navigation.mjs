@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 
 globalThis.window=globalThis;
 await import("../js/data/offline-data.generated.js");
-await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
+await import("../js/core/map-grid.js");await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 await import("../js/ui/fiscal-ui.js");
 const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});
@@ -50,7 +50,7 @@ let z=10;
 const elements=new Map();
 const $=id=>{if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id)};
 const document={querySelectorAll:()=>[...elements.values()].filter(element=>element.open)};
-const context=vm.createContext({$,state,document,getComputedStyle:element=>element.style,
+const context=vm.createContext({$,state,document,MapGrid,getComputedStyle:element=>element.style,
   forceBy:id=>state.data.forces.find(force=>force.id===id),esc:value=>String(value??""),
   toast(){},submit:()=>true,FiscalUI,openResourceDetail(){},warPlanHtml:()=>"",aiBridge:{audit:[]},map:{setPlannedRoute(){}},
   cityTargetCommandIds:new Set(state.data.commandCatalog.commands.map(command=>command.id)),loader:{}});

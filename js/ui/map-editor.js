@@ -532,14 +532,22 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     for(const mark of editor.landmarks){
       if(!editor.inBounds(mark.x,mark.y))continue;
       const x=(mark.x+.5)*cell,y=(mark.y+.5)*cell;
-      ctx.fillStyle=mark.type==="lake"?"#78b4c6":mark.type==="battle"?"#c9714f":"#b7ac8b";ctx.beginPath();ctx.arc(x,y,1.9,0,Math.PI*2);ctx.fill();
+      if(mark.type==="battle"){ctx.strokeStyle="#d98b6a";ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.stroke()}else{ctx.fillStyle=mark.type==="lake"?"#78b4c6":"#b7ac8b";ctx.beginPath();ctx.arc(x,y,1.9,0,Math.PI*2);ctx.fill()}
       ctx.fillStyle="#c9c19c";ctx.fillText(mark.name,x,y-4);
     }
     ctx.restore();
   }
+  // 与战略地图一致：县邑为方块（郡治加内方、州治加外框），关隘为叉，渡口为桥形双竖线。
+  function drawNodeMark(kind,rank,x,y,size,color){
+    ctx.save();ctx.lineJoin="miter";
+    if(kind==="pass"){ctx.beginPath();ctx.moveTo(x-size,y-size);ctx.lineTo(x+size,y+size);ctx.moveTo(x-size,y+size);ctx.lineTo(x+size,y-size);ctx.strokeStyle="#2b2411";ctx.lineWidth=3.2;ctx.stroke();ctx.strokeStyle=color;ctx.lineWidth=1.6;ctx.stroke()}
+    else if(kind==="ford"){const gap=size*.5,flare=size*.38;ctx.beginPath();for(const side of [-1,1]){const bx=x+side*gap;ctx.moveTo(bx+side*flare,y-size);ctx.lineTo(bx,y-size*.62);ctx.lineTo(bx,y+size*.62);ctx.lineTo(bx+side*flare,y+size)}ctx.strokeStyle="#2b2411";ctx.lineWidth=3.2;ctx.stroke();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.stroke()}
+    else{if(rank==="province"){ctx.strokeStyle=color;ctx.lineWidth=1;ctx.strokeRect(x-size-2.5,y-size-2.5,size*2+5,size*2+5)}ctx.fillStyle="#2b2411";ctx.fillRect(x-size,y-size,size*2,size*2);ctx.strokeStyle=color;ctx.lineWidth=1.3;ctx.strokeRect(x-size,y-size,size*2,size*2);if(rank!=="county"){const inner=size*.45;ctx.fillStyle=color;ctx.fillRect(x-inner,y-inner,inner*2,inner*2)}}
+    ctx.restore();
+  }
   function drawCities(){
     ctx.textAlign="center";ctx.font="9px serif";
-    for(const city of editor.cities){const selected=city.id===$("mapEditorCity").value,x=(city.x+.5)*cell,y=(city.y+.5)*cell;ctx.fillStyle=selected?"#fff6c4":"#f0cf7d";ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fill();ctx.strokeStyle="#2b2411";ctx.lineWidth=1;ctx.stroke();if(tool()==="road"&&(city.id===roadPick.from||city.id===roadPick.to)){ctx.strokeStyle=city.id===roadPick.from?"#8fd07a":"#d98a6a";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.stroke()}ctx.fillStyle=selected?"#ffe9a8":"#d8d2a4";ctx.fillText(city.name||city.id,x,y-6)}
+    for(const city of editor.cities){const selected=city.id===$("mapEditorCity").value,x=(city.x+.5)*cell,y=(city.y+.5)*cell,kind=MapGrid.nodeKind(city),rank=MapGrid.nodeRank(city,editor.divisions),size=rank==="province"?4:rank==="commandery"?3.4:2.8,color=selected?"#fff6c4":"#f0cf7d";drawNodeMark(kind,rank,x,y,size,color);if(tool()==="road"&&(city.id===roadPick.from||city.id===roadPick.to)){ctx.strokeStyle=city.id===roadPick.from?"#8fd07a":"#d98a6a";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.stroke()}ctx.fillStyle=selected?"#ffe9a8":"#d8d2a4";ctx.fillText(city.name||city.id,x,y-6)}
   }
   function drawHover(){
     if(!overlayCtx)return;

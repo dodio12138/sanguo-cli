@@ -78,7 +78,7 @@ const CITY_OWNERS={
     "commandery_city_084":"yuan","commandery_city_085":"yuan","commandery_city_087":"yuan"
   },
   "190_coalition":{
-    "qiao":"cao","xiaopei":"tao_qian","xinye":"liu_biao","wan":"yuan_shu","wuguan":"dong",
+    "qiao":"cao","xiaopei":"tao_qian","xinye":"liu_biao","wan":"yuan_shu","wuguan":"dong","guandu":"kong_zhou",
     "commandery_city_011":"kong_zhou","commandery_city_104":"neutral","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
     "xiapi":"tao_qian","pengcheng":"tao_qian","langya":"tao_qian","guangling":"zhang_chao","runan":"yuan_shu",
     "hulao":"dong","hangu":"dong","tongguan":"dong","changan":"dong","luoyang":"dong","mengjin":"dong",

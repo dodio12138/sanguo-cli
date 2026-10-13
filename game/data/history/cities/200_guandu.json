@@ -295,7 +295,7 @@
     {
       "id": "xiakou",
       "name": "夏口",
-      "type": "port",
+      "type": "city",
       "x": 57,
       "y": 67,
       "force": "liu_biao",
@@ -308,7 +308,8 @@
       "agriculture": 22,
       "order": 68,
       "commandery": "江夏郡",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "harbor": true
     },
     {
       "id": "jianye",
@@ -1767,7 +1768,7 @@
     {
       "id": "panyu",
       "name": "番禺",
-      "type": "port",
+      "type": "city",
       "x": 66,
       "y": 98,
       "force": "shi_xie",
@@ -1802,7 +1803,8 @@
       "commanderySeatNode": true,
       "commanderySeatId": "commandery_seat_099",
       "commanderySeatName": "番禺",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "harbor": true
     },
     {
       "id": "commandery_city_002",

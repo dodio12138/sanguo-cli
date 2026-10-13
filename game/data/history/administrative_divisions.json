@@ -6448,5 +6448,21 @@
       "populationSource": "houhan_4",
       "coordinateQuality": "reference-map-aligned"
     }
-  ]
+  ],
+  "province_seats_basis": "汉末（190—208）州刺史、州牧治所：司隶校尉治洛阳；冀州牧袁绍、曹操治邺；徐州自陶谦后期治下邳；扬州治寿春；凉州治冀县；益州刘焉、刘璋治成都；荆州刘表治襄阳；交州以番禺为战略治所。",
+  "province_seats": {
+    "司隶": "luoyang",
+    "豫州": "qiao",
+    "兖州": "commandery_city_029",
+    "徐州": "xiapi",
+    "青州": "linzi",
+    "冀州": "ye",
+    "幽州": "ji",
+    "并州": "jinyang",
+    "凉州": "commandery_city_068",
+    "益州": "chengdu",
+    "荆州": "xiangyang",
+    "扬州": "shouchun",
+    "交州": "panyu"
+  }
 }
