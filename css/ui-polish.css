@@ -497,3 +497,17 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 /* 战报档案：每场战事可打开战况窗口；野战窗口的历次交战 */
 .battle-open{display:flex;justify-content:flex-end;margin:4px 0}
 .battle-history{border:1px dotted var(--line-dim);padding:4px 6px;margin:4px 0}.battle-history summary{cursor:pointer;color:var(--amber)}
+/* 消息分级：紧急、重要标签与消息汇总窗口 */
+.message-level{display:inline-block;margin-right:4px;padding:0 4px;border:1px solid var(--line-dim);font-size:8px;color:var(--muted)}
+.lv-3 .message-level,.lv-chip.lv-3{border-color:var(--red);color:var(--red)}
+.lv-2 .message-level,.lv-chip.lv-2{border-color:var(--amber);color:var(--amber)}
+.lv-chip{display:inline-block;margin-right:6px;padding:0 4px;border:1px solid var(--line-dim);font-weight:normal;font-style:normal}
+li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
+.message-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}.message-list li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px;font-size:9px;line-height:1.5}
+.message-list small{color:var(--muted)}.message-actions{margin-left:auto;display:inline-flex;gap:4px}
+.message-center-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.message-center-list{max-height:60vh;overflow:auto;display:grid;gap:8px}
+.message-day h4{margin:0 0 4px;color:var(--amber);font-size:9px}.message-day h4 em{margin-left:6px;color:var(--red);font-style:normal}
+.message-tray b{margin-left:4px;padding:0 4px;background:var(--amber);color:#11170f;font-size:8px}.message-tray.has-urgent b{background:var(--red);color:#fff}
+.briefing-alerts{border:1px solid var(--amber)}
+.report-filter{float:right;display:inline-flex;align-items:center;gap:4px;color:var(--muted)}

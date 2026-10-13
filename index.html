@@ -7,7 +7,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=a3ce7e78d8">
   <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
-  <link rel="stylesheet" href="css/ui-polish.css?v=b450614750">
+  <link rel="stylesheet" href="css/ui-polish.css?v=f62fcfb163">
   <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=df25456342">
@@ -54,7 +54,7 @@
     </header>
 
     <nav class="main-nav panel-line" aria-label="主菜单">
-      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button>
+      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button><button id="messageCenterButton" class="message-tray" type="button" data-tip="查看紧急与重要消息汇总">消息<b id="messageUnreadCount" hidden>0</b></button>
       <div id="observerControls" class="observer-controls" hidden><button id="observerToggle" type="button" aria-label="继续模拟"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L17 8L9 13Z"/></svg></button><button id="simulationSpeedButton" type="button" class="simulation-speed-button" aria-label="切换模拟速度"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L15 8L9 13Z"/></svg></button><select id="observerSpeed" aria-label="模拟速度" data-terminal-select="true" hidden><option value="3000" selected>3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></div>
       <div class="nav-end save-tools"><button id="saveButton" data-tip="更新当前档案或另存为新档案">存档</button><button id="loadButton" data-tip="选择已保存的战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
     </nav>
@@ -144,7 +144,7 @@
   </dialog>
   <dialog id="gameSettingsDialog" class="settings-dialog">
     <div class="dialog-title">游戏设置 <button data-close="gameSettingsDialog">×</button></div>
-    <div class="dialog-content settings-grid"><label>模拟速度<select id="gameObserverSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="gameConfirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
+    <div class="dialog-content settings-grid"><label>模拟速度<select id="gameObserverSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="gameConfirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check"><input id="gamePauseOnUrgent" type="checkbox">自动模拟遇紧急军情时暂停并弹出汇总</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
   </dialog>
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
     <div class="dialog-title"><span>结束当前日</span></div><div class="dialog-content"><p>提交本日队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一日</button></div></div>
@@ -339,11 +339,20 @@
     </div>
   </dialog>
 
+  <dialog id="messageCenterDialog" class="wide-dialog message-center-dialog">
+    <div class="dialog-title">消息汇总 <button data-close="messageCenterDialog">×</button></div>
+    <div class="dialog-content">
+      <div class="message-center-tools"><label>显示<select id="messageLevelFilter"><option value="2">重要及紧急</option><option value="3">只看紧急</option></select></label><button id="messageMarkRead" type="button">全部标为已读</button></div>
+      <div id="messageCenterList" class="message-center-list"></div>
+    </div>
+  </dialog>
+
   <dialog id="turnBriefingDialog" class="turn-briefing-dialog">
     <div class="dialog-title"><span>本日简报</span><button id="closeTurnBriefing" type="button">×</button></div>
     <div class="turn-briefing-body">
       <small id="turnBriefingDate" class="briefing-date"></small>
       <h2>上一日回顾</h2>
+      <section id="turnBriefingAlertsSection" class="briefing-alerts" hidden><h3>军情要报</h3><div id="turnBriefingAlerts"></div></section>
       <section><h3>已下达命令</h3><div id="turnBriefingOrders"></div></section>
       <section><h3>府库与兵民变化</h3><div id="turnBriefingResources"></div></section>
       <section><h3>命令反馈</h3><div id="turnBriefingFeedback"></div></section>
@@ -386,9 +395,9 @@
   <script src="js/core/game-clock.js?v=f26b12b5b8"></script>
   <script src="js/core/simulation-clock.js?v=e1c04e8ed0"></script>
   <script src="js/core/fiscal-system.js?v=5631947bf8"></script>
-  <script src="js/core/rule-engine.js?v=f6e1807b1f"></script>
+  <script src="js/core/rule-engine.js?v=57ebf7a803"></script>
   <script src="js/core/engine/movement.js?v=a979496a3c"></script>
-  <script src="js/core/engine/siege.js?v=9f18b6e87b"></script>
+  <script src="js/core/engine/siege.js?v=e4899f2920"></script>
   <script src="js/core/engine/diplomacy.js?v=4b3e8ca120"></script>
   <script src="js/core/engine/events.js?v=8104cb9e2a"></script>
   <script src="js/core/engine/ai.js?v=6e61ce3140"></script>
@@ -402,7 +411,7 @@
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=1029743e0e"></script>
   <script src="js/core/scenario-officer-store.js?v=00a1f6ae1a"></script>
-  <script src="js/ui/map-view.js?v=3b3453900a"></script>
+  <script src="js/ui/map-view.js?v=58ba93c2c5"></script>
   <script src="js/ui/map-editor-reference.js?v=1abff8a11b"></script>
   <script src="js/ui/map-editor.js?v=8e6f205fec"></script>
   <script src="js/ui/officer-editor.js?v=5a89959de4"></script>
@@ -412,8 +421,9 @@
   <script src="js/ui/button-feedback.js?v=4866e2dd45"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
   <script src="js/ui/simulation-speed-control.js?v=286b6b6e76"></script>
-  <script src="js/ui/app.js?v=447e68e4f9"></script>
+  <script src="js/ui/message-center.js?v=a56caaf5e6"></script>
+  <script src="js/ui/app.js?v=34b5bbb6e5"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
-  <script src="js/ui/os-window-manager.js?v=6d0029c101"></script>
+  <script src="js/ui/os-window-manager.js?v=cbeec7c1f4"></script>
 </body>
 </html>

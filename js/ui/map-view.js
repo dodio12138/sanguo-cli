@@ -73,6 +73,8 @@ window.MapView = class MapView {
   pick(e){const r=this.canvas.getBoundingClientRect(),marker=this.onBattlePick?this.battleMarkerAt(e.clientX-r.left,e.clientY-r.top):null;if(marker){this.onBattlePick(marker);return}const army=this.onArmyPick?this.armyAt(e.clientX-r.left,e.clientY-r.top):null;if(army){this.onArmyPick(army);return}const cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
   setZoom(value){this.scale=Math.max(.65,Math.min(3.4,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
   center(){this.offset={x:0,y:0};this.setZoom(1);}
+  // 定位据点：放大到可辨认的比例，并把该据点移到视野中央。
+  focusOn(city){if(!city)return;this.setZoom(Math.max(this.scale||1,1.8));const {width,height}=this.state.data.map,cell=this.metrics().cell;this.offset={x:width*cell/2-(city.x+.5)*cell,y:height*cell/2-(city.y+.5)*cell};this.draw()}
   setPlannedRoute(cityIds=[]){this.plannedRoute=cityIds;this.draw()}
   setLegendVisibility(key,visible){if(visible)this.hiddenLegendItems.delete(key);else this.hiddenLegendItems.add(key);this.invalidateColors();this.draw()}
   legendHidden(key){return this.hiddenLegendItems.has(key)}
