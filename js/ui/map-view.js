@@ -196,10 +196,10 @@ window.MapView = class MapView {
     if(this.state.layer==="political"){
       if(cell.terrain==="ocean")return "海域";
       const owner=this.politicalOwner(cell),controlled=cell.province!=="域外"&&(owner.administrative||owner.distance<this.territoryRadius),force=city?this.state.data.forces.find(item=>item.id===city.force):controlled?owner.force:null;
-      return [city?.name,`所属势力：${force?.name||"无主"}`,`州郡：${cell.province||city?.province||county?.province||"州属未详"} · ${commandery||"郡属未详"}`,county?`县治：${county.name}`:""].filter(Boolean).join("\n");
+      return [city?.name,`所属势力：${force?.name||"无主"}`,`州郡：${cell.province||city?.province||county?.province||"州属未详"} · ${commandery||"郡属未详"}`].filter(Boolean).join("\n");
     }
     const siege=city?.siegeTurns?`｜围城 ${city.siegeTurns*(Number.isInteger(this.state.date?.day)?10:1)}日｜城防 ${Math.max(0,100-(city.defenseDamage||0))}%`:"",battle=city?.lastBattleTurn&&this.state.turn-city.lastBattleTurn<=1?`｜${city.lastBattle}`:"",occupation=city?.occupiedUntil&&city.occupiedUntil>this.state.turn?`｜占领管制 ${city.occupiedUntil-this.state.turn}日`:"",countyInfo=county?`｜编户 ${(county.population||0).toLocaleString()}｜农${county.agriculture} 商${county.commerce} 治${county.order}`:"";
-    return city?`${city.name}${county?`（${county.name}县治）`:""}｜${cell.province||city.province} · ${commandery||"郡属未详"}${countyInfo}${siege}${battle}${occupation}`:`${this.provinceLabel(cell)}${commandery?` · ${commandery}`:""}${county?` · ${county.name}县治`:""}${countyInfo}｜${this.terrainDef(cell.terrain).name}`;
+    return city?`${city.name}｜${cell.province||city.province} · ${commandery||"郡属未详"}${countyInfo}${siege}${battle}${occupation}`:`${this.provinceLabel(cell)}${commandery?` · ${commandery}`:""}${county?` · ${county.name}`:""}${countyInfo}｜${this.terrainDef(cell.terrain).name}`;
   }
   tooltip(hide,x=0,y=0){
     const tip=document.getElementById("mapTooltip");tip.hidden=hide;if(hide||!this.hover)return;tip.textContent=this.tooltipText(this.hover);
