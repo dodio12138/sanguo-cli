@@ -475,6 +475,83 @@
           "distance": 1.1,
           "city_value": 1,
           "combat": 1
+        },
+        "lu_bu": {
+          "name": "吕布骁骑",
+          "growth": 0.9,
+          "formation": 1.08,
+          "army_density": 1.08,
+          "aggression": 1.22,
+          "defence": 0.82,
+          "distance": 0.84,
+          "city_value": 1.04,
+          "combat": 1.16
+        },
+        "li_jue": {
+          "name": "李郭纵掠",
+          "growth": 0.86,
+          "formation": 1.04,
+          "army_density": 1.04,
+          "aggression": 1.12,
+          "defence": 0.9,
+          "distance": 0.92,
+          "city_value": 0.96,
+          "combat": 1.06
+        },
+        "liu_yao": {
+          "name": "扬州守江",
+          "growth": 1.02,
+          "formation": 0.92,
+          "army_density": 0.94,
+          "aggression": 0.84,
+          "defence": 1.14,
+          "distance": 1.1,
+          "city_value": 0.96,
+          "combat": 0.94
+        },
+        "wang_lang": {
+          "name": "会稽守成",
+          "growth": 1.06,
+          "formation": 0.86,
+          "army_density": 0.88,
+          "aggression": 0.72,
+          "defence": 1.18,
+          "distance": 1.2,
+          "city_value": 0.94,
+          "combat": 0.9
+        },
+        "zhang_yang": {
+          "name": "河内周旋",
+          "growth": 0.98,
+          "formation": 0.9,
+          "army_density": 0.9,
+          "aggression": 0.82,
+          "defence": 1.08,
+          "distance": 1.1,
+          "city_value": 0.96,
+          "combat": 0.96
+        },
+        "zhang_yan": {
+          "name": "黑山游击",
+          "growth": 0.88,
+          "formation": 0.96,
+          "army_density": 1,
+          "aggression": 1.04,
+          "defence": 1.04,
+          "distance": 0.9,
+          "city_value": 0.92,
+          "combat": 1.02
+        },
+        "liu_chong": {
+          "name": "陈国强弩",
+          "growth": 1.04,
+          "formation": 0.92,
+          "army_density": 0.92,
+          "aggression": 0.84,
+          "defence": 1.2,
+          "distance": 1.16,
+          "city_value": 0.94,
+          "combat": 1.06
         }
       },
       "food_reserve_per_city": 4000

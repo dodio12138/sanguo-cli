@@ -89,9 +89,10 @@ window.DataLoader = class DataLoader {
     const knownNames=new Set(sources.map(officer=>officer.name));
     for(const officer of scenario.patch?.extra_officers||[]){if(!officer||typeof officer!=="object"||!officer.name||knownNames.has(officer.name)||officer.id&&knownIds.has(officer.id))continue;sources.push(officer);knownNames.add(officer.name);if(officer.id)knownIds.add(officer.id)}
     const officers=[];for(const [index,source] of sources.entries()){
+      // 参考库卒年与史传冲突时，剧本可在 officer_assignments 中给出 deathYear 校正（null 表示卒年不详），取舍写入 SCENARIO_NOTES.md。
       const assignment=!assignedNames.has(source.name)?assignments[source.name]:null,alive=!source.deathYear||source.deathYear>=year;if(!assignment&&!alive)continue;if(assignment)assignedNames.add(source.name);
       const officer=structuredClone(source);officer.id=officer.id||`scenario_${scenario.id}_${index+1}`;
-      if(assignment){officer.force=assignment.force;officer.city=assignment.city;officer.status="serving";officer.loyalty=assignment.loyalty||80}
+      if(assignment){officer.force=assignment.force;officer.city=assignment.city;officer.status="serving";officer.loyalty=assignment.loyalty||80;if(Object.hasOwn(assignment,"deathYear")){if(Number.isFinite(assignment.deathYear))officer.deathYear=assignment.deathYear;else delete officer.deathYear}}
       else{const availableYear=officer.debutYear||officer.birthYear&&officer.birthYear+15||year;officer.force="neutral";officer.city=this.resolveOfficerCity(data,officer,index);officer.status=availableYear>year?"not_appeared":"hidden";officer.loyalty=0}
       officer.merit??=0;officer.office??="无";officer.officeRank??=0;officer.stamina??=100;officer.experience??=0;officer.skills??=officer.skill?[officer.skill]:[];officers.push(officer);
     }
