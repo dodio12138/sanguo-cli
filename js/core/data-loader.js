@@ -62,6 +62,7 @@ window.DataLoader = class DataLoader {
   }
   applyCountyResources(data,scenarioId=data.scenario?.id||"200_guandu"){
     const profiles=data.cityResourceProfiles||{},scenario=profiles.scenarios?.[scenarioId]||profiles.scenarios?.["200_guandu"]||{},eraRatio={"190_coalition":.36,"200_guandu":.32,"208_red_cliffs":.29}[scenarioId]??.32;
+    if(window.MapGrid?.assignCountyJurisdiction)MapGrid.assignCountyJurisdiction(data.counties||[],data.cities||[],data.administrativeDivisions);
     for(const county of data.counties||[]){
       const city=(data.cities||[]).find(item=>item.id===county.jurisdictionCityId)||(data.cities||[]).filter(item=>item.commandery===county.commandery).sort((a,b)=>Math.hypot(a.x-county.x,a.y-county.y)-Math.hypot(b.x-county.x,b.y-county.y))[0];
       if(!city)continue;county.jurisdictionCityId=city.id;county.force=city.force;const region=city.resourceRegion||"other",adjustment={...(scenario.default||{}),...(scenario.regions?.[region]||{}),...(scenario.cities?.[city.id]||{})},seed=[...county.id].reduce((sum,char)=>sum+char.charCodeAt(0),0),variation=seed%9-4;

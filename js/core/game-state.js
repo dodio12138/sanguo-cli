@@ -90,6 +90,8 @@ window.GameState = class GameState extends EventTarget {
     for(const city of this.data.cities.filter(item=>!edited&&!savedCities.has(item.id))){const links=baseGraph[city.id]||[];if(!Object.hasOwn(savedGraph,city.id))graph[city.id]=links.filter(next=>cityIds.has(next));for(const next of graph[city.id]||[])if(cityIds.has(next)){graph[next]??=[];if(!graph[next].includes(city.id))graph[next].push(city.id)}}
     this.data.rules.city_graph=graph;
     if(window.MapGrid)MapGrid.syncAdministrativeRegions(this.data);
+    // 旧存档的县仍挂在普通县据点下，读档时按县级层级重新归属，只改归属不动人口。
+    if(window.MapGrid?.assignCountyJurisdiction){MapGrid.assignCountyJurisdiction(this.data.counties||[],this.data.cities,this.data.administrativeDivisions);for(const county of this.data.counties||[]){const city=this.data.cities.find(item=>item.id===county.jurisdictionCityId);if(city)county.force=city.force}}
   }
   load(slot="1"){
     return this.loadSafely(slot)

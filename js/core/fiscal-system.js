@@ -46,7 +46,7 @@ window.FiscalSystem=class FiscalSystem {
     const ability=(governor.score+county.score+finance.score+households.score)/4;
     const efficiency=this.clamp(.48+ability/180-(city.fiscal?.attention||0)/250,.25,.98);
     const corruption=this.clamp((city.fiscal?.corruption??25)/100-(governor.score+finance.score)/700,.01,.45);
-    const population=(city.population||0)+engine.countyPopulation(city.id),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
+    const population=(city.population||0)+engine.countiesForCity(city.id).reduce((sum,county)=>sum+(county.population||0),0),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
     return {efficiency,corruption,support,ability,agriculture:agriculture.score,bureaucracy,population};
   }
   static route(state,from,to,forceId){return state.engine.logisticsPath(from,to,forceId)}
@@ -192,14 +192,12 @@ window.FiscalSystem=class FiscalSystem {
   }
   static dismissLabor(state,cityId,events,groupId=null){
     const ledger=this.initialize(state);
-    for(const group of ledger.laborGroups.filter(group=>group.cityId===cityId&&group.status==="服役"&&(!groupId||group.id===groupId))){for(const origin of group.origins){const county=state.data.counties.find(county=>county.id===origin.countyId);if(county)county.population+=origin.people}group.status="遣散";group.dismissedTurn=state.turn;events.push({phase:"徭役",siteId:cityId,text:`徭役遣散 ${group.people}人，返还原县编户；已服役 ${group.usedDays}人日`})}
+    for(const group of ledger.laborGroups.filter(group=>group.cityId===cityId&&group.status==="服役"&&(!groupId||group.id===groupId))){for(const origin of group.origins){const home=origin.countyId?state.data.counties.find(county=>county.id===origin.countyId):state.data.cities.find(item=>item.id===origin.cityId);if(home)home.population+=origin.people}group.status="遣散";group.dismissedTurn=state.turn;events.push({phase:"徭役",siteId:cityId,text:`徭役遣散 ${group.people}人，返还原县编户；已服役 ${group.usedDays}人日`})}
   }
   static levyLabor(state,city,personDays,events,projectId=null){
     const ledger=this.initialize(state),needed=Math.ceil(personDays/10),cap=Math.floor(state.engine.countyPopulation(city.id)*.02),people=Math.min(needed,cap),cost=Math.ceil(people*.04);
     if(!people||city.localGold<cost)return null;
-    let remaining=people;const origins=[];
-    for(const county of state.engine.countiesForCity(city.id).sort((a,b)=>b.population-a.population)){const taken=Math.min(remaining,Math.max(0,county.population-500));if(taken){county.population-=taken;origins.push({countyId:county.id,people:taken});remaining-=taken}if(!remaining)break}
-    const actual=people-remaining;if(!actual)return null;
+    const origins=[],actual=state.engine.drawCountyPopulation(city.id,people,origins);if(!actual)return null;
     city.localGold-=cost;city.publicSupport=this.clamp(city.publicSupport-2,0,100);
     const group={id:`labor-${++ledger.sequence}`,forceId:city.force,cityId:city.id,origins,people:actual,totalDays:personDays,usedDays:0,projectId,status:"服役",startedTurn:state.turn};ledger.laborGroups.push(group);events.push({phase:"徭役",siteId:city.id,text:`${city.name}从辖县征发 ${actual}人、目标 ${personDays}人日，地方支出 ${cost}贯；服役人口暂离生产`});return group;
   }

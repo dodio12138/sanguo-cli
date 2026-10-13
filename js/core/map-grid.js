@@ -174,6 +174,13 @@ window.MapGrid = class MapGrid {
   static nodeKind(node){const type=node?.type||"city";return type==="pass"||type==="ford"?type:"city"}
   static nodeRank(node,divisions){if(MapGrid.nodeKind(node)!=="city")return null;if(Object.values(divisions?.province_seats||{}).includes(node.id))return "province";return node.commanderySeatNode?"commandery":"county"}
   static nodeLabel(node,divisions){const kind=MapGrid.nodeKind(node);return kind==="city"?MapGrid.NODE_RANK_NAMES[MapGrid.nodeRank(node,divisions)]:MapGrid.NODE_KIND_NAMES[kind]}
+  // 县级层级只有普通县、郡治、州治：每个县邑据点只领有与自身对应的一县（同 cityId、同格或同名同郡），
+  // 没有据点的县归本郡郡治（州治兼郡治）直辖；普通县不再下辖其他县。关隘、渡口不领县。
+  static assignCountyJurisdiction(counties=[],cities=[],divisions=null){const towns=cities.filter(city=>MapGrid.nodeKind(city)==="city"),norm=name=>String(name||"").replace(/[（(][^）)]*[）)]/gu,"").replace(/[縣县城]$/u,"").trim(),own=new Map(),taken=new Set();
+    for(const match of [(county,town)=>county.cityId===town.id,(county,town)=>county.x===town.x&&county.y===town.y&&county.commandery===town.commandery,(county,town)=>norm(county.name)===norm(town.name)&&county.commandery===town.commandery])for(const county of counties){if(own.has(county.id))continue;const town=towns.find(item=>!taken.has(item.id)&&match(county,item));if(town){own.set(county.id,town);taken.add(town.id)}}
+    const seats=new Map();for(const town of towns){const rank=MapGrid.nodeRank(town,divisions);if(rank==="county")continue;const current=seats.get(town.commandery);if(!current||town.commanderySeatNode&&!current.commanderySeatNode)seats.set(town.commandery,town)}
+    for(const county of counties){const town=own.get(county.id)||seats.get(county.commandery)||towns.filter(item=>item.commandery===county.commandery).sort((a,b)=>Math.hypot(a.x-county.x,a.y-county.y)-Math.hypot(b.x-county.x,b.y-county.y))[0];if(town)county.jurisdictionCityId=town.id;if(own.has(county.id))county.ownCityId=town.id;else delete county.ownCityId}
+    return counties}
   static isCornerRiver(river){return river?.anchor==="corner"}
   static riverCorners(river){const points=Array.isArray(river?.points)?river.points:[];if(!MapGrid.isCornerRiver(river))return structuredClone(points);const path=[];for(const [x,y] of points){const last=path.at(-1);if(!last){path.push([x,y]);continue}path.push(...MapGrid.gridLine(last[0],last[1],x,y).slice(1))}return path}
   static riverEdgeCells(a,b){return a[1]===b[1]?[[Math.min(a[0],b[0]),a[1]-1],[Math.min(a[0],b[0]),a[1]]]:[[a[0]-1,Math.min(a[1],b[1])],[a[0],Math.min(a[1],b[1])]]}

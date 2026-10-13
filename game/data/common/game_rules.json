@@ -508,6 +508,16 @@
         "county": 2,
         "pass": 1
       }
+    },
+    "reinforcement": {
+      "note": "军团补员兵源按驻地级别：普通县、关隘、渡口只抽本地守军；郡治抽本郡我方县邑；州治抽本州我方县邑。各城保留守城底数，每城只计一次",
+      "reserve": {
+        "province": 1500,
+        "commandery": 1000,
+        "county": 500,
+        "pass": 500,
+        "ford": 300
+      }
     }
   },
   "buildings": {
