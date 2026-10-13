@@ -19,6 +19,11 @@ window.FiscalSystem=class FiscalSystem {
     const ledger=state.policies.fiscalAccounts;
     ledger.forces??={};ledger.shipments??=[];ledger.laborGroups??=[];ledger.projects??=[];ledger.sequence??=0;
     state.resources.silk??=0;
+    for(const army of data.armies){army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0}
+    // 一回合内只做一次完整初始化（据点逾三百，逐次遍历开销大）；势力账户与各城财政字段在此补齐。
+    const playerForce=data.forces.find(force=>force.id===state.playerForceId);if(playerForce)playerForce.resources=state.resources;
+    this.initStamps??=new WeakMap();const stamp=`${state.turn}|${state.playerForceId}|${data.cities.length}|${data.forces.length}`;if(this.initStamps.get(ledger)===stamp)return ledger;this.initStamps.set(ledger,stamp);
+    for(const city of data.cities){city.localSilk??=0;city.publicSupport??=city.order??60;city.fiscal??={};const fiscal=city.fiscal;fiscal.accrued??={land:0,commercial:0,food:0,silk:0};fiscal.lastCollected??={};fiscal.pendingRemittance??={gold:0,food:0,silk:0};fiscal.attention??=0;fiscal.corruption??=25;fiscal.cropAccrued??=0;fiscal.cropYear??=state.date.year;fiscal.lastHarvestYear??=null;fiscal.localConsumption??={gold:0,food:0}}
     if(data.commandCatalog)for(const [id,name,categoryId,categoryName,description] of this.commands)if(!data.commandCatalog.commands.some(command=>command.id===id))data.commandCatalog.commands.push({id,name,categoryId,categoryName,description,status:"active",parameters:["actor_id","target_ids","amount","options"]});
     for(const force of data.forces.filter(force=>force.id!=="neutral")){
       const owned=data.cities.filter(city=>city.force===force.id),defaults=this.defaults();
@@ -30,14 +35,8 @@ window.FiscalSystem=class FiscalSystem {
       if(force.id===state.playerForceId)force.resources=state.resources;
       else force.resources??={gold:Math.max(6000,(force.cities||1)*3000),food:Math.max(18000,(force.soldiers||20000)*.45),silk:0,prestige:200};
       force.resources.silk??=0;
-      for(const city of owned){
-        city.localSilk??=0;city.publicSupport??=city.order??60;
-        city.fiscal??={};const fiscal=city.fiscal;
-        fiscal.accrued??={land:0,commercial:0,food:0,silk:0};
-        fiscal.lastCollected??={};fiscal.pendingRemittance??={gold:0,food:0,silk:0};fiscal.attention??=0;fiscal.corruption??=25;fiscal.cropAccrued??=0;fiscal.cropYear??=state.date.year;fiscal.lastHarvestYear??=null;fiscal.localConsumption??={gold:0,food:0};
-      }
     }
-    for(const army of data.armies){army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0}
+
     return ledger;
   }
   static account(state,forceId=state.playerForceId){return this.initialize(state).forces[forceId]}

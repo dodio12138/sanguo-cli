@@ -68,70 +68,70 @@
         "name": "曹操",
         "color": "#b89044",
         "soldiers": 180000,
-        "cities": 87
+        "cities": 186
       },
       {
         "id": "liu",
         "name": "刘备",
         "color": "#637fa5",
         "soldiers": 18000,
-        "cities": 2
+        "cities": 5
       },
       {
         "id": "sun",
         "name": "孙权",
         "color": "#a35448",
         "soldiers": 65000,
-        "cities": 14
+        "cities": 35
       },
       {
         "id": "liu_zhang",
         "name": "刘璋",
         "color": "#83765c",
         "soldiers": 38000,
-        "cities": 24
+        "cities": 35
       },
       {
         "id": "zhang_lu",
         "name": "张鲁",
         "color": "#8a7548",
         "soldiers": 12000,
-        "cities": 6
+        "cities": 9
       },
       {
         "id": "gongsun_kang",
         "name": "公孙康",
         "color": "#647d83",
         "soldiers": 9000,
-        "cities": 4
+        "cities": 12
       },
       {
         "id": "han_xuan",
         "name": "韩玄",
         "color": "#887c58",
         "soldiers": 9000,
-        "cities": 2
+        "cities": 8
       },
       {
         "id": "liu_du",
         "name": "刘度",
         "color": "#6e8568",
         "soldiers": 7000,
-        "cities": 2
+        "cities": 5
       },
       {
         "id": "zhao_fan",
         "name": "赵范",
         "color": "#7d718c",
         "soldiers": 6500,
-        "cities": 2
+        "cities": 10
       },
       {
         "id": "jin_xuan",
         "name": "金旋",
         "color": "#927354",
         "soldiers": 6000,
-        "cities": 2
+        "cities": 6
       },
       {
         "id": "ma_chao",
@@ -145,28 +145,28 @@
         "name": "韩遂",
         "color": "#8e6d59",
         "soldiers": 7000,
-        "cities": 6
+        "cities": 13
       },
       {
         "id": "zhang_meng",
         "name": "张猛",
         "color": "#97694e",
         "soldiers": 5000,
-        "cities": 7
+        "cities": 11
       },
       {
         "id": "wei_kang",
         "name": "韦康",
         "color": "#8d8760",
         "soldiers": 4000,
-        "cities": 4
+        "cities": 13
       },
       {
         "id": "shi_xie",
         "name": "士燮",
         "color": "#759585",
         "soldiers": 6000,
-        "cities": 6
+        "cities": 14
       },
       {
         "id": "wu_ju",
@@ -183,7 +183,7 @@
         "cities": 1
       }
     ],
-    "city_forces": {"anding":"han_sui","badong":"liu_zhang","baima":"cao","beihai":"cao","beiping":"cao","cangwu":"wu_ju","chaisang":"sun","changan":"cao","changsha":"han_xuan","chengdu":"liu_zhang","chenliu":"cao","commandery_city_002":"cao","commandery_city_003":"cao","commandery_city_006":"cao","commandery_city_007":"ma_chao","commandery_city_008":"cao","commandery_city_009":"cao","commandery_city_010":"cao","commandery_city_011":"cao","commandery_city_012":"cao","commandery_city_013":"cao","commandery_city_015":"cao","commandery_city_016":"cao","commandery_city_017":"cao","commandery_city_018":"cao","commandery_city_019":"cao","commandery_city_020":"cao","commandery_city_021":"cao","commandery_city_025":"cao","commandery_city_026":"cao","commandery_city_027":"cao","commandery_city_028":"cao","commandery_city_029":"cao","commandery_city_030":"cao","commandery_city_031":"cao","commandery_city_032":"cao","commandery_city_036":"cao","commandery_city_038":"cao","commandery_city_039":"cao","commandery_city_040":"cao","commandery_city_044":"liu","commandery_city_045":"liu_du","commandery_city_046":"zhao_fan","commandery_city_047":"jin_xuan","commandery_city_048":"han_xuan","commandery_city_049":"cao","commandery_city_050":"sun","commandery_city_051":"sun","commandery_city_052":"sun","commandery_city_054":"sun","commandery_city_055":"zhang_lu","commandery_city_057":"liu_zhang","commandery_city_059":"liu_zhang","commandery_city_060":"liu_zhang","commandery_city_061":"liu_zhang","commandery_city_062":"liu_zhang","commandery_city_063":"liu_zhang","commandery_city_064":"liu_zhang","commandery_city_065":"liu_zhang","commandery_city_066":"liu_zhang","commandery_city_067":"wei_kang","commandery_city_068":"wei_kang","commandery_city_069":"zhang_lu","commandery_city_070":"han_sui","commandery_city_071":"han_sui","commandery_city_072":"han_sui","commandery_city_074":"zhang_meng","commandery_city_075":"zhang_meng","commandery_city_076":"zhang_meng","commandery_city_077":"zhang_meng","commandery_city_078":"zhang_meng","commandery_city_079":"cao","commandery_city_081":"cao","commandery_city_082":"cao","commandery_city_083":"cao","commandery_city_084":"cao","commandery_city_085":"cao","commandery_city_086":"cao","commandery_city_087":"cao","commandery_city_088":"cao","commandery_city_090":"cao","commandery_city_091":"cao","commandery_city_092":"cao","commandery_city_093":"cao","commandery_city_094":"cao","commandery_city_096":"cao","commandery_city_097":"gongsun_kang","commandery_city_098":"gongsun_kang","commandery_city_100":"wu_ju","commandery_city_101":"shi_xie","commandery_city_102":"shi_xie","commandery_city_103":"shi_xie","commandery_city_104":"shi_xie","commandery_city_105":"neutral","commandery_city_106":"cao","commandery_city_107":"liu_zhang","commandery_city_108":"cao","commandery_city_109":"zhang_lu","commandery_city_110":"liu_zhang","commandery_city_111":"cao","commandery_city_112":"liu_zhang","commandery_city_113":"cao","commandery_city_114":"cao","commandery_city_115":"cao","commandery_city_116":"sun","commandery_city_117":"cao","commandery_city_118":"sun","commandery_city_119":"sun","commandery_city_120":"cao","commandery_city_121":"liu_zhang","commandery_city_122":"zhang_lu","commandery_city_123":"zhang_meng","commandery_city_124":"han_sui","commandery_city_125":"cao","commandery_city_126":"cao","commandery_city_127":"liu_zhang","commandery_city_128":"cao","commandery_city_129":"cao","commandery_city_130":"liu_zhang","custom_1":"cao","daixian":"cao","fuling":"liu_zhang","guandu":"cao","guangling":"cao","guiyang":"zhao_fan","hangu":"cao","hanzhong":"zhang_lu","hefei":"cao","henei":"cao","hongnong":"cao","hulao":"cao","ji":"cao","jiameng":"liu_zhang","jianan":"sun","jiangling":"cao","jiangyou":"liu_zhang","jiangzhou":"liu_zhang","jianing":"liu_zhang","jianmen":"liu_zhang","jianye":"sun","jiaozhi":"shi_xie","jincheng":"han_sui","jinyang":"cao","kuaiji":"sun","langya":"cao","langzhong":"liu_zhang","lelang":"gongsun_kang","lingling":"liu_du","linzi":"cao","longxi":"wei_kang","lujiang":"sun","luoyang":"cao","mengjin":"cao","nanpi":"cao","panyu":"shi_xie","pengcheng":"cao","pingyuan":"cao","pukou":"sun","puyang":"cao","qiao":"cao","runan":"cao","shangdang":"cao","shangyong":"zhang_lu","shouchun":"cao","tianshui":"wei_kang","tongguan":"cao","wan":"cao","wu":"sun","wuguan":"cao","wuling":"jin_xuan","xiakou":"liu","xiangping":"gongsun_kang","xiangyang":"cao","xiaopei":"cao","xiapi":"cao","xiliang":"zhang_meng","xinye":"cao","xuchang":"cao","yangping":"zhang_lu","yanjin":"cao","ye":"cao","yiling":"cao","yongan":"liu_zhang","yunnan":"liu_zhang","yuzhang":"sun","zitong":"liu_zhang"},
+    "city_forces": {"anding":"han_sui","badong":"liu_zhang","baima":"cao","beihai":"cao","beiping":"cao","cangwu":"wu_ju","chaisang":"sun","changan":"cao","changsha":"han_xuan","chengdu":"liu_zhang","chenliu":"cao","commandery_city_002":"cao","commandery_city_003":"cao","commandery_city_006":"cao","commandery_city_007":"ma_chao","commandery_city_008":"cao","commandery_city_009":"cao","commandery_city_010":"cao","commandery_city_011":"cao","commandery_city_012":"cao","commandery_city_013":"cao","commandery_city_015":"cao","commandery_city_016":"cao","commandery_city_017":"cao","commandery_city_018":"cao","commandery_city_019":"cao","commandery_city_020":"cao","commandery_city_021":"cao","commandery_city_025":"cao","commandery_city_026":"cao","commandery_city_027":"cao","commandery_city_028":"cao","commandery_city_029":"cao","commandery_city_030":"cao","commandery_city_031":"cao","commandery_city_032":"cao","commandery_city_036":"cao","commandery_city_038":"cao","commandery_city_039":"cao","commandery_city_040":"cao","commandery_city_044":"liu","commandery_city_045":"liu_du","commandery_city_046":"zhao_fan","commandery_city_047":"jin_xuan","commandery_city_048":"han_xuan","commandery_city_049":"cao","commandery_city_050":"sun","commandery_city_051":"sun","commandery_city_052":"sun","commandery_city_054":"sun","commandery_city_055":"zhang_lu","commandery_city_057":"liu_zhang","commandery_city_059":"liu_zhang","commandery_city_060":"liu_zhang","commandery_city_061":"liu_zhang","commandery_city_062":"liu_zhang","commandery_city_063":"liu_zhang","commandery_city_064":"liu_zhang","commandery_city_065":"liu_zhang","commandery_city_066":"liu_zhang","commandery_city_067":"wei_kang","commandery_city_068":"wei_kang","commandery_city_069":"zhang_lu","commandery_city_070":"han_sui","commandery_city_071":"han_sui","commandery_city_072":"han_sui","commandery_city_074":"zhang_meng","commandery_city_075":"zhang_meng","commandery_city_076":"zhang_meng","commandery_city_077":"zhang_meng","commandery_city_078":"zhang_meng","commandery_city_079":"cao","commandery_city_081":"cao","commandery_city_082":"cao","commandery_city_083":"cao","commandery_city_084":"cao","commandery_city_085":"cao","commandery_city_086":"cao","commandery_city_087":"cao","commandery_city_088":"cao","commandery_city_090":"cao","commandery_city_091":"cao","commandery_city_092":"cao","commandery_city_093":"cao","commandery_city_094":"cao","commandery_city_096":"cao","commandery_city_097":"gongsun_kang","commandery_city_098":"gongsun_kang","commandery_city_100":"wu_ju","commandery_city_101":"shi_xie","commandery_city_102":"shi_xie","commandery_city_103":"shi_xie","commandery_city_104":"shi_xie","commandery_city_105":"neutral","commandery_city_106":"cao","commandery_city_107":"liu_zhang","commandery_city_108":"cao","commandery_city_109":"zhang_lu","commandery_city_110":"liu_zhang","commandery_city_111":"cao","commandery_city_112":"liu_zhang","commandery_city_113":"cao","commandery_city_114":"cao","commandery_city_115":"cao","commandery_city_116":"sun","commandery_city_117":"cao","commandery_city_118":"sun","commandery_city_119":"sun","commandery_city_120":"cao","commandery_city_121":"liu_zhang","commandery_city_122":"zhang_lu","commandery_city_123":"zhang_meng","commandery_city_124":"han_sui","commandery_city_125":"cao","commandery_city_126":"cao","commandery_city_127":"liu_zhang","commandery_city_128":"cao","commandery_city_129":"cao","commandery_city_130":"liu_zhang","custom_1":"cao","daixian":"cao","fuling":"liu_zhang","guandu":"cao","guangling":"cao","guiyang":"zhao_fan","hangu":"cao","hanzhong":"zhang_lu","hefei":"cao","henei":"cao","hongnong":"cao","hulao":"cao","ji":"cao","jiameng":"liu_zhang","jianan":"sun","jiangling":"cao","jiangyou":"liu_zhang","jiangzhou":"liu_zhang","jianing":"liu_zhang","jianmen":"liu_zhang","jianye":"sun","jiaozhi":"shi_xie","jincheng":"han_sui","jinyang":"cao","kuaiji":"sun","langya":"cao","langzhong":"liu_zhang","lelang":"gongsun_kang","lingling":"liu_du","linzi":"cao","longxi":"wei_kang","lujiang":"sun","luoyang":"cao","mengjin":"cao","nanpi":"cao","panyu":"shi_xie","pengcheng":"cao","pingyuan":"cao","pukou":"sun","puyang":"cao","qiao":"cao","runan":"cao","shangdang":"cao","shangyong":"zhang_lu","shouchun":"cao","tianshui":"wei_kang","tongguan":"cao","wan":"cao","wu":"sun","wuguan":"cao","wuling":"jin_xuan","xiakou":"liu","xian_01_03":"cao","xian_01_04":"cao","xian_01_05":"cao","xian_02_02":"cao","xian_02_03":"cao","xian_02_04":"cao","xian_02_05":"cao","xian_03_02":"cao","xian_03_03":"cao","xian_03_04":"cao","xian_03_05":"cao","xian_04_02":"cao","xian_04_03":"cao","xian_04_04":"cao","xian_04_05":"cao","xian_05_02":"cao","xian_05_03":"cao","xian_05_04":"cao","xian_06_03":"cao","xian_06_04":"cao","xian_06_05":"cao","xian_07_02":"cao","xian_07_03":"cao","xian_07_04":"cao","xian_08_03":"cao","xian_08_04":"cao","xian_08_05":"cao","xian_08_06":"cao","xian_09_04":"cao","xian_09_05":"cao","xian_10_03":"liu","xian_10_04":"liu","xian_10_05":"liu","xian_11_03":"sun","xian_11_04":"sun","xian_11_05":"sun","xian_12_03":"cao","xian_12_05":"cao","xian_13_02":"zhang_meng","xian_13_03":"zhang_meng","xian_13_04":"zhang_meng","xian_13_05":"zhang_meng","xian_14_03":"han_sui","xian_14_04":"han_sui","xian_14_05":"han_sui","xian_15_03":"cao","xian_15_04":"cao","xian_16_02":"gongsun_kang","xian_16_03":"gongsun_kang","xian_16_04":"gongsun_kang","xian_16_05":"gongsun_kang","xian_17_02":"cao","xian_17_03":"cao","xian_17_04":"cao","xian_17_05":"cao","xian_18_02":"cao","xian_18_03":"cao","xian_18_04":"cao","xian_18_05":"cao","xian_19_02":"cao","xian_19_03":"cao","xian_19_04":"cao","xian_19_05":"cao","xian_20_02":"cao","xian_20_03":"cao","xian_20_04":"cao","xian_20_05":"cao","xian_21_02":"han_sui","xian_21_03":"han_sui","xian_21_04":"han_sui","xian_21_05":"han_sui","xian_22_02":"wei_kang","xian_22_03":"wei_kang","xian_22_04":"wei_kang","xian_22_05":"wei_kang","xian_23_02":"cao","xian_23_03":"cao","xian_23_04":"cao","xian_23_05":"cao","xian_24_02":"cao","xian_24_03":"cao","xian_24_04":"cao","xian_24_05":"cao","xian_25_04":"cao","xian_25_05":"cao","xian_26_03":"zhang_lu","xian_26_04":"zhang_lu","xian_26_05":"zhang_lu","xian_27_03":"liu_zhang","xian_27_04":"liu_zhang","xian_27_05":"liu_zhang","xian_28_02":"liu_zhang","xian_28_03":"liu_zhang","xian_28_04":"liu_zhang","xian_28_05":"liu_zhang","xian_29_04":"liu_zhang","xian_30_03":"liu_zhang","xian_30_04":"liu_zhang","xian_30_05":"liu_zhang","xian_31_02":"jin_xuan","xian_31_03":"jin_xuan","xian_31_04":"jin_xuan","xian_31_05":"jin_xuan","xian_32_02":"han_xuan","xian_32_03":"han_xuan","xian_32_04":"han_xuan","xian_32_05":"han_xuan","xian_33_03":"liu_du","xian_33_04":"liu_du","xian_33_05":"liu_du","xian_34_02":"zhao_fan","xian_34_03":"zhao_fan","xian_34_04":"zhao_fan","xian_34_05":"zhao_fan","xian_35_03":"sun","xian_35_04":"sun","xian_35_05":"sun","xian_36_03":"sun","xian_36_04":"sun","xian_36_05":"sun","xian_37_02":"sun","xian_37_03":"sun","xian_37_04":"sun","xian_37_05":"sun","xian_38_02":"gongsun_kang","xian_38_03":"gongsun_kang","xian_38_04":"gongsun_kang","xian_38_05":"gongsun_kang","xian_39_02":"cao","xian_39_03":"cao","xian_39_04":"cao","xian_40_01":"cao","xian_40_03":"cao","xian_40_04":"cao","xian_40_05":"cao","xian_41_02":"cao","xian_41_03":"cao","xian_41_04":"cao","xian_41_05":"cao","xian_42_02":"cao","xian_42_03":"cao","xian_42_04":"cao","xian_42_05":"cao","xian_43_02":"cao","xian_43_03":"cao","xian_43_04":"cao","xian_43_05":"cao","xian_44_02":"cao","xian_44_03":"cao","xian_44_04":"cao","xian_44_05":"cao","xian_45_02":"cao","xian_45_03":"cao","xian_45_04":"cao","xian_45_05":"cao","xian_46_02":"cao","xian_46_03":"cao","xian_46_04":"cao","xian_46_05":"cao","xian_47_02":"wei_kang","xian_47_03":"wei_kang","xian_47_04":"wei_kang","xian_47_05":"wei_kang","xian_48_02":"sun","xian_48_03":"sun","xian_48_04":"sun","xian_48_06":"sun","xian_49_02":"shi_xie","xian_49_03":"shi_xie","xian_49_04":"shi_xie","xian_49_05":"shi_xie","xian_50_02":"zhao_fan","xian_50_03":"zhao_fan","xian_50_04":"zhao_fan","xian_50_05":"zhao_fan","xian_51_02":"shi_xie","xian_51_03":"shi_xie","xian_51_04":"shi_xie","xian_51_05":"shi_xie","xian_extra_01":"cao","xian_extra_02":"cao","xian_extra_03":"cao","xian_extra_04":"cao","xian_extra_05":"cao","xian_extra_06":"cao","xian_extra_07":"cao","xian_extra_08":"cao","xian_extra_09":"sun","xian_extra_10":"sun","xian_extra_11":"sun","xian_extra_12":"sun","xian_extra_13":"wei_kang","xian_extra_14":"han_xuan","xian_extra_15":"han_xuan","xiangping":"gongsun_kang","xiangyang":"cao","xiaopei":"cao","xiapi":"cao","xiliang":"zhang_meng","xinye":"cao","xuchang":"cao","yangping":"zhang_lu","yanjin":"cao","ye":"cao","yiling":"cao","yongan":"liu_zhang","yunnan":"liu_zhang","yuzhang":"sun","zitong":"liu_zhang"},
     "governors": {
       "xuchang": "荀彧",
       "xiangyang": "曹操",

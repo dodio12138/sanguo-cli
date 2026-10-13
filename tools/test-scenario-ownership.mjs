@@ -43,7 +43,8 @@ if(checked<3)throw new Error("剧本归属回归至少需要覆盖三个剧本")
 const coalition=await loader.loadScenario("190_coalition",{useSavedMap:false}),original=await loader.loadScenario("200_guandu",{useSavedMap:false});
 const expected={chenliu:"zhang_miao",qiao:"cao",henei:"wang_kuang",commandery_city_002:"wang_kuang",xuchang:"kong_zhou",guandu:"kong_zhou",commandery_city_008:"kong_zhou",commandery_city_010:"kong_zhou",commandery_city_012:"liu_chong",puyang:"qiao_mao",baima:"qiao_mao",yanjin:"qiao_mao",commandery_city_029:"yuan_yi",commandery_city_028:"bao_xin",guangling:"zhang_chao",jianye:"zhou_xin",commandery_city_050:"zhou_xin",shouchun:"chen_wen",hefei:"chen_wen",lujiang:"chen_wen",wu:"chen_wen",kuaiji:"chen_wen",chaisang:"chen_wen",yuzhang:"chen_wen",linzi:"jiao_he",beihai:"kong_rong",jiaozhi:"shi_xie",commandery_city_103:"shi_xie"};
 for(const [id,force] of Object.entries(expected))assert.equal(coalition.cities.find(city=>city.id===id)?.force,force,`190 年 ${id} 的归属不能缺失或提前到后期`);
-assert.equal(coalition.cities.filter(city=>city.force==="neutral").length,19,"剩余地方官府仅限待考、边郡与史籍错配节点");
+assert.equal(coalition.cities.filter(city=>city.force==="neutral"&&!city.countyNode).length,19,"剩余地方官府仅限待考、边郡与史籍错配节点");
+for(const county of coalition.cities.filter(city=>city.countyNode)){const seat=coalition.cities.find(city=>city.commanderySeatNode&&city.commandery===county.commandery);if(seat)assert.equal(county.force,seat.force,`190 年县邑${county.name}应随${county.commandery}治所归属`)}
 for(const [name,assignment] of Object.entries(coalition.scenario.patch.officer_assignments)){
   const officers=coalition.officers.filter(officer=>officer.name===name&&officer.status==="serving");
   assert.equal(officers.length,1,`${name} 必须真正载入且不能重复`);assert.equal(officers[0].force,assignment.force);assert.equal(officers[0].city,assignment.city);

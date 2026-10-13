@@ -2128,13 +2128,14 @@
       "x": 55,
       "y": 48,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_008",
+      "jurisdictionCityId": "xian_01_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 209710,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_01_03"
     },
     {
       "id": "county_01_04",
@@ -2144,13 +2145,14 @@
       "x": 55,
       "y": 51,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_008",
+      "jurisdictionCityId": "xian_01_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 209710,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_01_04"
     },
     {
       "id": "county_01_05",
@@ -2160,13 +2162,14 @@
       "x": 56,
       "y": 51,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_008",
+      "jurisdictionCityId": "xian_01_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 209710,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_01_05"
     },
     {
       "id": "county_02_01",
@@ -2193,13 +2196,14 @@
       "x": 60,
       "y": 44,
       "province": "兖州",
-      "jurisdictionCityId": "chenliu",
+      "jurisdictionCityId": "xian_02_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 166487,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_02_02"
     },
     {
       "id": "county_02_03",
@@ -2209,13 +2213,14 @@
       "x": 60,
       "y": 46,
       "province": "兖州",
-      "jurisdictionCityId": "chenliu",
+      "jurisdictionCityId": "xian_02_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 123324,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_02_03"
     },
     {
       "id": "county_02_04",
@@ -2225,13 +2230,14 @@
       "x": 60,
       "y": 47,
       "province": "兖州",
-      "jurisdictionCityId": "chenliu",
+      "jurisdictionCityId": "xian_02_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 123324,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_02_04"
     },
     {
       "id": "county_02_05",
@@ -2241,13 +2247,14 @@
       "x": 62,
       "y": 44,
       "province": "兖州",
-      "jurisdictionCityId": "chenliu",
+      "jurisdictionCityId": "xian_02_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 123324,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_02_05"
     },
     {
       "id": "county_03_01",
@@ -2274,13 +2281,14 @@
       "x": 55,
       "y": 45,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_03_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 180744,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_03_02"
     },
     {
       "id": "county_03_03",
@@ -2290,13 +2298,14 @@
       "x": 55,
       "y": 47,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_03_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 133885,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_03_03"
     },
     {
       "id": "county_03_04",
@@ -2306,13 +2315,14 @@
       "x": 57,
       "y": 46,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_03_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 133885,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_03_04"
     },
     {
       "id": "county_03_05",
@@ -2322,13 +2332,14 @@
       "x": 50,
       "y": 47,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_03_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 133885,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_03_05"
     },
     {
       "id": "county_04_01",
@@ -2355,13 +2366,14 @@
       "x": 63,
       "y": 38,
       "province": "冀州",
-      "jurisdictionCityId": "ye",
+      "jurisdictionCityId": "xian_04_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 143369,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_04_02"
     },
     {
       "id": "county_04_03",
@@ -2371,13 +2383,14 @@
       "x": 62,
       "y": 36,
       "province": "冀州",
-      "jurisdictionCityId": "ye",
+      "jurisdictionCityId": "xian_04_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 106200,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_04_03"
     },
     {
       "id": "county_04_04",
@@ -2387,13 +2400,14 @@
       "x": 61,
       "y": 36,
       "province": "冀州",
-      "jurisdictionCityId": "ye",
+      "jurisdictionCityId": "xian_04_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 106200,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_04_04"
     },
     {
       "id": "county_04_05",
@@ -2403,13 +2417,14 @@
       "x": 60,
       "y": 38,
       "province": "冀州",
-      "jurisdictionCityId": "ye",
+      "jurisdictionCityId": "xian_04_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 106198,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_04_05"
     },
     {
       "id": "county_05_01",
@@ -2436,13 +2451,14 @@
       "x": 74,
       "y": 13,
       "province": "幽州",
-      "jurisdictionCityId": "commandery_city_093",
+      "jurisdictionCityId": "xian_05_02",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 10284,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_05_02"
     },
     {
       "id": "county_05_03",
@@ -2452,13 +2468,14 @@
       "x": 75,
       "y": 17,
       "province": "幽州",
-      "jurisdictionCityId": "commandery_city_093",
+      "jurisdictionCityId": "xian_05_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 10284,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_05_03"
     },
     {
       "id": "county_05_04",
@@ -2468,13 +2485,14 @@
       "x": 74,
       "y": 15,
       "province": "幽州",
-      "jurisdictionCityId": "commandery_city_093",
+      "jurisdictionCityId": "xian_05_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 10283,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_05_04"
     },
     {
       "id": "county_06_01",
@@ -2502,7 +2520,7 @@
       "y": 41,
       "cityId": "baima",
       "province": "兖州",
-      "jurisdictionCityId": "puyang",
+      "jurisdictionCityId": "baima",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 135456,
@@ -2518,13 +2536,14 @@
       "x": 60,
       "y": 40,
       "province": "兖州",
-      "jurisdictionCityId": "puyang",
+      "jurisdictionCityId": "xian_06_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 82095,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_06_03"
     },
     {
       "id": "county_06_04",
@@ -2534,13 +2553,14 @@
       "x": 67,
       "y": 37,
       "province": "兖州",
-      "jurisdictionCityId": "puyang",
+      "jurisdictionCityId": "xian_06_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 82095,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_06_04"
     },
     {
       "id": "county_06_05",
@@ -2550,13 +2570,14 @@
       "x": 64,
       "y": 36,
       "province": "兖州",
-      "jurisdictionCityId": "puyang",
+      "jurisdictionCityId": "xian_06_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 82094,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_06_05"
     },
     {
       "id": "county_07_01",
@@ -2583,13 +2604,14 @@
       "x": 76,
       "y": 52,
       "province": "徐州",
-      "jurisdictionCityId": "xiapi",
+      "jurisdictionCityId": "xian_07_02",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 117516,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_07_02"
     },
     {
       "id": "county_07_03",
@@ -2599,13 +2621,14 @@
       "x": 75,
       "y": 51,
       "province": "徐州",
-      "jurisdictionCityId": "xiapi",
+      "jurisdictionCityId": "xian_07_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 117516,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_07_03"
     },
     {
       "id": "county_07_04",
@@ -2615,13 +2638,14 @@
       "x": 76,
       "y": 54,
       "province": "徐州",
-      "jurisdictionCityId": "xiapi",
+      "jurisdictionCityId": "xian_07_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 117516,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_07_04"
     },
     {
       "id": "county_08_01",
@@ -2665,13 +2689,14 @@
       "x": 52,
       "y": 53,
       "province": "荆州",
-      "jurisdictionCityId": "wan",
+      "jurisdictionCityId": "xian_08_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 292169,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_08_03"
     },
     {
       "id": "county_08_04",
@@ -2681,13 +2706,14 @@
       "x": 50,
       "y": 54,
       "province": "荆州",
-      "jurisdictionCityId": "wan",
+      "jurisdictionCityId": "xian_08_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 292169,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_08_04"
     },
     {
       "id": "county_08_05",
@@ -2697,13 +2723,14 @@
       "x": 51,
       "y": 53,
       "province": "荆州",
-      "jurisdictionCityId": "wan",
+      "jurisdictionCityId": "xian_08_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 292169,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_08_05"
     },
     {
       "id": "county_08_06",
@@ -2713,13 +2740,14 @@
       "x": 52,
       "y": 54,
       "province": "荆州",
-      "jurisdictionCityId": "wan",
+      "jurisdictionCityId": "xian_08_06",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 292170,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_08_06"
     },
     {
       "id": "county_09_01",
@@ -2764,7 +2792,7 @@
       "y": 67,
       "cityId": "yiling",
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "yiling",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 130018,
@@ -2780,13 +2808,14 @@
       "x": 52,
       "y": 71,
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "xian_09_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 78799,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_09_04"
     },
     {
       "id": "county_09_05",
@@ -2796,13 +2825,14 @@
       "x": 51,
       "y": 71,
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "xian_09_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 78799,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_09_05"
     },
     {
       "id": "county_10_01",
@@ -2846,13 +2876,14 @@
       "x": 58,
       "y": 65,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_044",
+      "jurisdictionCityId": "xian_10_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38754,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_10_03"
     },
     {
       "id": "county_10_04",
@@ -2862,13 +2893,14 @@
       "x": 56,
       "y": 65,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_044",
+      "jurisdictionCityId": "xian_10_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38754,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_10_04"
     },
     {
       "id": "county_10_05",
@@ -2878,13 +2910,14 @@
       "x": 58,
       "y": 66,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_044",
+      "jurisdictionCityId": "xian_10_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38753,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_10_05"
     },
     {
       "id": "county_11_01",
@@ -2928,13 +2961,14 @@
       "x": 76,
       "y": 68,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_050",
+      "jurisdictionCityId": "xian_11_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 85788,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_11_03"
     },
     {
       "id": "county_11_04",
@@ -2944,13 +2978,14 @@
       "x": 75,
       "y": 66,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_050",
+      "jurisdictionCityId": "xian_11_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 85788,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_11_04"
     },
     {
       "id": "county_11_05",
@@ -2960,13 +2995,14 @@
       "x": 76,
       "y": 72,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_050",
+      "jurisdictionCityId": "xian_11_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 85789,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_11_05"
     },
     {
       "id": "county_12_01",
@@ -3010,13 +3046,14 @@
       "x": 70,
       "y": 58,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_049",
+      "jurisdictionCityId": "xian_12_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 63128,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_12_03"
     },
     {
       "id": "county_12_04",
@@ -3043,13 +3080,14 @@
       "x": 72,
       "y": 60,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_049",
+      "jurisdictionCityId": "xian_12_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 63128,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_12_05"
     },
     {
       "id": "county_13_01",
@@ -3076,13 +3114,14 @@
       "x": 12,
       "y": 24,
       "province": "凉州",
-      "jurisdictionCityId": "xiliang",
+      "jurisdictionCityId": "xian_13_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 7054,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_13_02"
     },
     {
       "id": "county_13_03",
@@ -3092,13 +3131,14 @@
       "x": 12,
       "y": 32,
       "province": "凉州",
-      "jurisdictionCityId": "xiliang",
+      "jurisdictionCityId": "xian_13_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 5225,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_13_03"
     },
     {
       "id": "county_13_04",
@@ -3108,13 +3148,14 @@
       "x": 10,
       "y": 29,
       "province": "凉州",
-      "jurisdictionCityId": "xiliang",
+      "jurisdictionCityId": "xian_13_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 5225,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_13_04"
     },
     {
       "id": "county_13_05",
@@ -3124,13 +3165,14 @@
       "x": 5,
       "y": 27,
       "province": "凉州",
-      "jurisdictionCityId": "xiliang",
+      "jurisdictionCityId": "xian_13_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 5226,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_13_05"
     },
     {
       "id": "county_14_01",
@@ -3174,13 +3216,14 @@
       "x": 9,
       "y": 33,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_070",
+      "jurisdictionCityId": "xian_14_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 2766,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_14_03"
     },
     {
       "id": "county_14_04",
@@ -3190,13 +3233,14 @@
       "x": 8,
       "y": 33,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_070",
+      "jurisdictionCityId": "xian_14_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 2766,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_14_04"
     },
     {
       "id": "county_14_05",
@@ -3206,13 +3250,14 @@
       "x": 7,
       "y": 34,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_070",
+      "jurisdictionCityId": "xian_14_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 2766,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_14_05"
     },
     {
       "id": "county_15_01",
@@ -3256,13 +3301,14 @@
       "x": 60,
       "y": 16,
       "province": "幽州",
-      "jurisdictionCityId": "commandery_city_090",
+      "jurisdictionCityId": "xian_15_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 24268,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_15_03"
     },
     {
       "id": "county_15_04",
@@ -3272,13 +3318,14 @@
       "x": 58,
       "y": 15,
       "province": "幽州",
-      "jurisdictionCityId": "commandery_city_090",
+      "jurisdictionCityId": "xian_15_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 24262,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_15_04"
     },
     {
       "id": "county_16_01",
@@ -3305,13 +3352,14 @@
       "x": 93,
       "y": 5,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_16_02",
       "rank": "major",
       "censusYear": 2,
       "historicalPopulation": 28907,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_16_02"
     },
     {
       "id": "county_16_03",
@@ -3321,13 +3369,14 @@
       "x": 96,
       "y": 12,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_16_03",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 21413,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_16_03"
     },
     {
       "id": "county_16_04",
@@ -3337,13 +3386,14 @@
       "x": 96,
       "y": 10,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_16_04",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 21413,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_16_04"
     },
     {
       "id": "county_16_05",
@@ -3353,13 +3403,14 @@
       "x": 97,
       "y": 13,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_16_05",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 21413,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_16_05"
     },
     {
       "id": "county_17_01",
@@ -3386,13 +3437,14 @@
       "x": 48,
       "y": 31,
       "province": "并州",
-      "jurisdictionCityId": "jinyang",
+      "jurisdictionCityId": "xian_17_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 41247,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_17_02"
     },
     {
       "id": "county_17_03",
@@ -3402,13 +3454,14 @@
       "x": 47,
       "y": 31,
       "province": "并州",
-      "jurisdictionCityId": "jinyang",
+      "jurisdictionCityId": "xian_17_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30553,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_17_03"
     },
     {
       "id": "county_17_04",
@@ -3418,13 +3471,14 @@
       "x": 46,
       "y": 31,
       "province": "并州",
-      "jurisdictionCityId": "jinyang",
+      "jurisdictionCityId": "xian_17_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30553,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_17_04"
     },
     {
       "id": "county_17_05",
@@ -3434,13 +3488,14 @@
       "x": 50,
       "y": 29,
       "province": "并州",
-      "jurisdictionCityId": "jinyang",
+      "jurisdictionCityId": "xian_17_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30554,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_17_05"
     },
     {
       "id": "county_18_01",
@@ -3467,13 +3522,14 @@
       "x": 71,
       "y": 25,
       "province": "冀州",
-      "jurisdictionCityId": "nanpi",
+      "jurisdictionCityId": "xian_18_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 228057,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_18_02"
     },
     {
       "id": "county_18_03",
@@ -3483,13 +3539,14 @@
       "x": 72,
       "y": 27,
       "province": "冀州",
-      "jurisdictionCityId": "nanpi",
+      "jurisdictionCityId": "xian_18_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 168931,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_18_03"
     },
     {
       "id": "county_18_04",
@@ -3499,13 +3556,14 @@
       "x": 69,
       "y": 28,
       "province": "冀州",
-      "jurisdictionCityId": "nanpi",
+      "jurisdictionCityId": "xian_18_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 168931,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_18_04"
     },
     {
       "id": "county_18_05",
@@ -3515,13 +3573,14 @@
       "x": 72,
       "y": 26,
       "province": "冀州",
-      "jurisdictionCityId": "nanpi",
+      "jurisdictionCityId": "xian_18_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 168932,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_18_05"
     },
     {
       "id": "county_19_01",
@@ -3548,13 +3607,14 @@
       "x": 71,
       "y": 30,
       "province": "青州",
-      "jurisdictionCityId": "pingyuan",
+      "jurisdictionCityId": "xian_19_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 206655,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_19_02"
     },
     {
       "id": "county_19_03",
@@ -3564,13 +3624,14 @@
       "x": 69,
       "y": 34,
       "province": "青州",
-      "jurisdictionCityId": "pingyuan",
+      "jurisdictionCityId": "xian_19_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 153078,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_19_03"
     },
     {
       "id": "county_19_04",
@@ -3580,13 +3641,14 @@
       "x": 68,
       "y": 34,
       "province": "青州",
-      "jurisdictionCityId": "pingyuan",
+      "jurisdictionCityId": "xian_19_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 153078,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_19_04"
     },
     {
       "id": "county_19_05",
@@ -3596,13 +3658,14 @@
       "x": 70,
       "y": 33,
       "province": "青州",
-      "jurisdictionCityId": "pingyuan",
+      "jurisdictionCityId": "xian_19_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 153076,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_19_05"
     },
     {
       "id": "county_20_01",
@@ -3629,13 +3692,14 @@
       "x": 79,
       "y": 35,
       "province": "青州",
-      "jurisdictionCityId": "commandery_city_039",
+      "jurisdictionCityId": "xian_20_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 175934,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_20_02"
     },
     {
       "id": "county_20_03",
@@ -3645,13 +3709,14 @@
       "x": 85,
       "y": 34,
       "province": "青州",
-      "jurisdictionCityId": "commandery_city_039",
+      "jurisdictionCityId": "xian_20_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 130321,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_20_03"
     },
     {
       "id": "county_20_04",
@@ -3661,13 +3726,14 @@
       "x": 86,
       "y": 34,
       "province": "青州",
-      "jurisdictionCityId": "commandery_city_039",
+      "jurisdictionCityId": "xian_20_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 130321,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_20_04"
     },
     {
       "id": "county_20_05",
@@ -3677,13 +3743,14 @@
       "x": 87,
       "y": 33,
       "province": "青州",
-      "jurisdictionCityId": "commandery_city_039",
+      "jurisdictionCityId": "xian_20_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 130321,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_20_05"
     },
     {
       "id": "county_21_01",
@@ -3710,13 +3777,14 @@
       "x": 22,
       "y": 38,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_071",
+      "jurisdictionCityId": "xian_21_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 5989,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_21_02"
     },
     {
       "id": "county_21_03",
@@ -3726,13 +3794,14 @@
       "x": 23,
       "y": 40,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_071",
+      "jurisdictionCityId": "xian_21_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4437,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_21_03"
     },
     {
       "id": "county_21_04",
@@ -3742,13 +3811,14 @@
       "x": 23,
       "y": 39,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_071",
+      "jurisdictionCityId": "xian_21_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4437,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_21_04"
     },
     {
       "id": "county_21_05",
@@ -3758,13 +3828,14 @@
       "x": 25,
       "y": 39,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_071",
+      "jurisdictionCityId": "xian_21_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4436,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_21_05"
     },
     {
       "id": "county_22_01",
@@ -3791,13 +3862,14 @@
       "x": 20,
       "y": 41,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_068",
+      "jurisdictionCityId": "xian_22_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 24920,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_22_02"
     },
     {
       "id": "county_22_03",
@@ -3807,13 +3879,14 @@
       "x": 20,
       "y": 46,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_068",
+      "jurisdictionCityId": "xian_22_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18459,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_22_03"
     },
     {
       "id": "county_22_04",
@@ -3823,13 +3896,14 @@
       "x": 17,
       "y": 44,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_068",
+      "jurisdictionCityId": "xian_22_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18459,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_22_04"
     },
     {
       "id": "county_22_05",
@@ -3839,13 +3913,14 @@
       "x": 21,
       "y": 45,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_068",
+      "jurisdictionCityId": "xian_22_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18461,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_22_05"
     },
     {
       "id": "county_23_01",
@@ -3872,13 +3947,14 @@
       "x": 44,
       "y": 50,
       "province": "司隶",
-      "jurisdictionCityId": "hongnong",
+      "jurisdictionCityId": "xian_23_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 41039,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_23_02"
     },
     {
       "id": "county_23_03",
@@ -3888,13 +3964,14 @@
       "x": 43,
       "y": 47,
       "province": "司隶",
-      "jurisdictionCityId": "hongnong",
+      "jurisdictionCityId": "xian_23_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30399,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_23_03"
     },
     {
       "id": "county_23_04",
@@ -3904,13 +3981,14 @@
       "x": 43,
       "y": 49,
       "province": "司隶",
-      "jurisdictionCityId": "hongnong",
+      "jurisdictionCityId": "xian_23_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30399,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_23_04"
     },
     {
       "id": "county_23_05",
@@ -3920,13 +3998,14 @@
       "x": 44,
       "y": 48,
       "province": "司隶",
-      "jurisdictionCityId": "hongnong",
+      "jurisdictionCityId": "xian_23_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 30398,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_23_05"
     },
     {
       "id": "county_24_01",
@@ -3953,13 +4032,14 @@
       "x": 36,
       "y": 48,
       "province": "司隶",
-      "jurisdictionCityId": "changan",
+      "jurisdictionCityId": "xian_24_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 58859,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_24_02"
     },
     {
       "id": "county_24_03",
@@ -3969,13 +4049,14 @@
       "x": 37,
       "y": 48,
       "province": "司隶",
-      "jurisdictionCityId": "changan",
+      "jurisdictionCityId": "xian_24_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 43599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_24_03"
     },
     {
       "id": "county_24_04",
@@ -3985,13 +4066,14 @@
       "x": 35,
       "y": 48,
       "province": "司隶",
-      "jurisdictionCityId": "changan",
+      "jurisdictionCityId": "xian_24_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 43599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_24_04"
     },
     {
       "id": "county_24_05",
@@ -4001,13 +4083,14 @@
       "x": 39,
       "y": 49,
       "province": "司隶",
-      "jurisdictionCityId": "changan",
+      "jurisdictionCityId": "xian_24_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 43599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_24_05"
     },
     {
       "id": "county_25_01",
@@ -4068,13 +4151,14 @@
       "x": 72,
       "y": 52,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_011",
+      "jurisdictionCityId": "xian_25_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 166852,
       "populationBasisStatus": "emended",
       "populationSource": "population_emendation",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_25_04"
     },
     {
       "id": "county_25_05",
@@ -4084,13 +4168,14 @@
       "x": 70,
       "y": 46,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_011",
+      "jurisdictionCityId": "xian_25_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 166854,
       "populationBasisStatus": "emended",
       "populationSource": "population_emendation",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_25_05"
     },
     {
       "id": "county_26_01",
@@ -4134,13 +4219,14 @@
       "x": 28,
       "y": 54,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_055",
+      "jurisdictionCityId": "xian_26_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39037,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_26_03"
     },
     {
       "id": "county_26_04",
@@ -4150,13 +4236,14 @@
       "x": 25,
       "y": 54,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_055",
+      "jurisdictionCityId": "xian_26_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39037,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_26_04"
     },
     {
       "id": "county_26_05",
@@ -4166,13 +4253,14 @@
       "x": 26,
       "y": 55,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_055",
+      "jurisdictionCityId": "xian_26_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39036,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_26_05"
     },
     {
       "id": "county_27_01",
@@ -4216,13 +4304,14 @@
       "x": 17,
       "y": 66,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_057",
+      "jurisdictionCityId": "xian_27_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 74371,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_27_03"
     },
     {
       "id": "county_27_04",
@@ -4232,13 +4321,14 @@
       "x": 18,
       "y": 67,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_057",
+      "jurisdictionCityId": "xian_27_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 74371,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_27_04"
     },
     {
       "id": "county_27_05",
@@ -4248,13 +4338,14 @@
       "x": 17,
       "y": 67,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_057",
+      "jurisdictionCityId": "xian_27_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 74370,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_27_05"
     },
     {
       "id": "county_28_01",
@@ -4281,13 +4372,14 @@
       "x": 9,
       "y": 67,
       "province": "益州",
-      "jurisdictionCityId": "chengdu",
+      "jurisdictionCityId": "xian_28_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 278342,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_28_02"
     },
     {
       "id": "county_28_03",
@@ -4297,13 +4389,14 @@
       "x": 9,
       "y": 74,
       "province": "益州",
-      "jurisdictionCityId": "chengdu",
+      "jurisdictionCityId": "xian_28_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 206180,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_28_03"
     },
     {
       "id": "county_28_04",
@@ -4313,13 +4406,14 @@
       "x": 9,
       "y": 69,
       "province": "益州",
-      "jurisdictionCityId": "chengdu",
+      "jurisdictionCityId": "xian_28_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 206180,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_28_04"
     },
     {
       "id": "county_28_05",
@@ -4329,13 +4423,14 @@
       "x": 11,
       "y": 68,
       "province": "益州",
-      "jurisdictionCityId": "chengdu",
+      "jurisdictionCityId": "xian_28_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 206179,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_28_05"
     },
     {
       "id": "county_29_01",
@@ -4396,13 +4491,14 @@
       "x": 26,
       "y": 72,
       "province": "益州",
-      "jurisdictionCityId": "jiangzhou",
+      "jurisdictionCityId": "xian_29_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 133258,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_29_04"
     },
     {
       "id": "county_29_05",
@@ -4463,13 +4559,14 @@
       "x": 9,
       "y": 93,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_062",
+      "jurisdictionCityId": "xian_30_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 16175,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_30_03"
     },
     {
       "id": "county_30_04",
@@ -4479,13 +4576,14 @@
       "x": 9,
       "y": 94,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_062",
+      "jurisdictionCityId": "xian_30_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 16175,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_30_04"
     },
     {
       "id": "county_30_05",
@@ -4495,13 +4593,14 @@
       "x": 9,
       "y": 95,
       "province": "益州",
-      "jurisdictionCityId": "commandery_city_062",
+      "jurisdictionCityId": "xian_30_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 16176,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_30_05"
     },
     {
       "id": "county_31_01",
@@ -4528,13 +4627,14 @@
       "x": 43,
       "y": 77,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_047",
+      "jurisdictionCityId": "xian_31_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 51715,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_31_02"
     },
     {
       "id": "county_31_03",
@@ -4544,13 +4644,14 @@
       "x": 38,
       "y": 86,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_047",
+      "jurisdictionCityId": "xian_31_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38307,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_31_03"
     },
     {
       "id": "county_31_04",
@@ -4560,13 +4661,14 @@
       "x": 41,
       "y": 81,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_047",
+      "jurisdictionCityId": "xian_31_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38307,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_31_04"
     },
     {
       "id": "county_31_05",
@@ -4576,13 +4678,14 @@
       "x": 45,
       "y": 76,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_047",
+      "jurisdictionCityId": "xian_31_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38308,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_31_05"
     },
     {
       "id": "county_32_01",
@@ -4609,13 +4712,14 @@
       "x": 52,
       "y": 79,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_32_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 189424,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_32_02"
     },
     {
       "id": "county_32_03",
@@ -4625,13 +4729,14 @@
       "x": 55,
       "y": 87,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_32_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 140314,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_32_03"
     },
     {
       "id": "county_32_04",
@@ -4641,13 +4746,14 @@
       "x": 55,
       "y": 86,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_32_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 140314,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_32_04"
     },
     {
       "id": "county_32_05",
@@ -4657,13 +4763,14 @@
       "x": 55,
       "y": 85,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_32_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 140314,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_32_05"
     },
     {
       "id": "county_33_01",
@@ -4707,13 +4814,14 @@
       "x": 39,
       "y": 95,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_045",
+      "jurisdictionCityId": "xian_33_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 146216,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_33_03"
     },
     {
       "id": "county_33_04",
@@ -4723,13 +4831,14 @@
       "x": 39,
       "y": 94,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_045",
+      "jurisdictionCityId": "xian_33_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 146216,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_33_04"
     },
     {
       "id": "county_33_05",
@@ -4739,13 +4848,14 @@
       "x": 43,
       "y": 93,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_045",
+      "jurisdictionCityId": "xian_33_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 146215,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_33_05"
     },
     {
       "id": "county_34_01",
@@ -4772,13 +4882,14 @@
       "x": 54,
       "y": 91,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_34_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 53509,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_34_02"
     },
     {
       "id": "county_34_03",
@@ -4788,13 +4899,14 @@
       "x": 56,
       "y": 98,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_34_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_34_03"
     },
     {
       "id": "county_34_04",
@@ -4804,13 +4916,14 @@
       "x": 51,
       "y": 92,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_34_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_34_04"
     },
     {
       "id": "county_34_05",
@@ -4820,13 +4933,14 @@
       "x": 55,
       "y": 95,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_34_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_34_05"
     },
     {
       "id": "county_35_01",
@@ -4870,13 +4984,14 @@
       "x": 68,
       "y": 61,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_051",
+      "jurisdictionCityId": "xian_35_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 57780,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_35_03"
     },
     {
       "id": "county_35_04",
@@ -4886,13 +5001,14 @@
       "x": 67,
       "y": 61,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_051",
+      "jurisdictionCityId": "xian_35_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 57780,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_35_04"
     },
     {
       "id": "county_35_05",
@@ -4902,13 +5018,14 @@
       "x": 71,
       "y": 64,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_051",
+      "jurisdictionCityId": "xian_35_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 57779,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_35_05"
     },
     {
       "id": "county_36_01",
@@ -4952,13 +5069,14 @@
       "x": 64,
       "y": 75,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_054",
+      "jurisdictionCityId": "xian_36_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 243636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_36_03"
     },
     {
       "id": "county_36_04",
@@ -4968,13 +5086,14 @@
       "x": 60,
       "y": 81,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_054",
+      "jurisdictionCityId": "xian_36_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 243636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_36_04"
     },
     {
       "id": "county_36_05",
@@ -4984,13 +5103,14 @@
       "x": 60,
       "y": 77,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_054",
+      "jurisdictionCityId": "xian_36_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 243636,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_36_05"
     },
     {
       "id": "county_37_01",
@@ -5017,13 +5137,14 @@
       "x": 85,
       "y": 66,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_37_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 125305,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_37_02"
     },
     {
       "id": "county_37_03",
@@ -5033,13 +5154,14 @@
       "x": 83,
       "y": 72,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_37_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 92819,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_37_03"
     },
     {
       "id": "county_37_04",
@@ -5049,13 +5171,14 @@
       "x": 82,
       "y": 72,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_37_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 92819,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_37_04"
     },
     {
       "id": "county_37_05",
@@ -5065,13 +5188,14 @@
       "x": 87,
       "y": 67,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_37_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 92818,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_37_05"
     },
     {
       "id": "county_38_01",
@@ -5098,13 +5222,14 @@
       "x": 95,
       "y": 14,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_38_02",
       "rank": "major",
       "censusYear": 2,
       "historicalPopulation": 27265,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_38_02"
     },
     {
       "id": "county_38_03",
@@ -5114,13 +5239,14 @@
       "x": 92,
       "y": 17,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_38_03",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 20196,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_38_03"
     },
     {
       "id": "county_38_04",
@@ -5130,13 +5256,14 @@
       "x": 97,
       "y": 12,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_38_04",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 20196,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_38_04"
     },
     {
       "id": "county_38_05",
@@ -5146,13 +5273,14 @@
       "x": 93,
       "y": 17,
       "province": "幽州",
-      "jurisdictionCityId": "xiangping",
+      "jurisdictionCityId": "xian_38_05",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 20196,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_38_05"
     },
     {
       "id": "county_39_01",
@@ -5179,13 +5307,14 @@
       "x": 68,
       "y": 14,
       "province": "幽州",
-      "jurisdictionCityId": "ji",
+      "jurisdictionCityId": "xian_39_02",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 53962,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_39_02"
     },
     {
       "id": "county_39_03",
@@ -5195,13 +5324,14 @@
       "x": 69,
       "y": 19,
       "province": "幽州",
-      "jurisdictionCityId": "ji",
+      "jurisdictionCityId": "xian_39_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 53962,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_39_03"
     },
     {
       "id": "county_39_04",
@@ -5211,13 +5341,14 @@
       "x": 66,
       "y": 15,
       "province": "幽州",
-      "jurisdictionCityId": "ji",
+      "jurisdictionCityId": "xian_39_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 53961,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_39_04"
     },
     {
       "id": "county_40_01",
@@ -5227,13 +5358,14 @@
       "x": 53,
       "y": 37,
       "province": "并州",
-      "jurisdictionCityId": "commandery_city_079",
+      "jurisdictionCityId": "xian_40_01",
       "rank": "commandery",
       "censusYear": 140,
       "historicalPopulation": 40918,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_40_01"
     },
     {
       "id": "county_40_02",
@@ -5260,13 +5392,14 @@
       "x": 53,
       "y": 36,
       "province": "并州",
-      "jurisdictionCityId": "commandery_city_079",
+      "jurisdictionCityId": "xian_40_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_40_03"
     },
     {
       "id": "county_40_04",
@@ -5276,13 +5409,14 @@
       "x": 52,
       "y": 38,
       "province": "并州",
-      "jurisdictionCityId": "commandery_city_079",
+      "jurisdictionCityId": "xian_40_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_40_04"
     },
     {
       "id": "county_40_05",
@@ -5292,13 +5426,14 @@
       "x": 52,
       "y": 37,
       "province": "并州",
-      "jurisdictionCityId": "commandery_city_079",
+      "jurisdictionCityId": "xian_40_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 18599,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_40_05"
     },
     {
       "id": "county_41_01",
@@ -5325,13 +5460,14 @@
       "x": 52,
       "y": 43,
       "province": "司隶",
-      "jurisdictionCityId": "commandery_city_002",
+      "jurisdictionCityId": "xian_41_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 165207,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_41_02"
     },
     {
       "id": "county_41_03",
@@ -5341,13 +5477,14 @@
       "x": 52,
       "y": 44,
       "province": "司隶",
-      "jurisdictionCityId": "commandery_city_002",
+      "jurisdictionCityId": "xian_41_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 122375,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_41_03"
     },
     {
       "id": "county_41_04",
@@ -5357,13 +5494,14 @@
       "x": 51,
       "y": 44,
       "province": "司隶",
-      "jurisdictionCityId": "commandery_city_002",
+      "jurisdictionCityId": "xian_41_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 122375,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_41_04"
     },
     {
       "id": "county_41_05",
@@ -5373,13 +5511,14 @@
       "x": 56,
       "y": 41,
       "province": "司隶",
-      "jurisdictionCityId": "commandery_city_002",
+      "jurisdictionCityId": "xian_41_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 122375,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_41_05"
     },
     {
       "id": "county_42_01",
@@ -5406,13 +5545,14 @@
       "x": 75,
       "y": 33,
       "province": "青州",
-      "jurisdictionCityId": "linzi",
+      "jurisdictionCityId": "xian_42_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 101356,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_42_02"
     },
     {
       "id": "county_42_03",
@@ -5422,13 +5562,14 @@
       "x": 75,
       "y": 35,
       "province": "青州",
-      "jurisdictionCityId": "linzi",
+      "jurisdictionCityId": "xian_42_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75079,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_42_03"
     },
     {
       "id": "county_42_04",
@@ -5438,13 +5579,14 @@
       "x": 77,
       "y": 32,
       "province": "青州",
-      "jurisdictionCityId": "linzi",
+      "jurisdictionCityId": "xian_42_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75079,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_42_04"
     },
     {
       "id": "county_42_05",
@@ -5454,13 +5596,14 @@
       "x": 77,
       "y": 31,
       "province": "青州",
-      "jurisdictionCityId": "linzi",
+      "jurisdictionCityId": "xian_42_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75078,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_42_05"
     },
     {
       "id": "county_43_01",
@@ -5487,13 +5630,14 @@
       "x": 76,
       "y": 42,
       "province": "徐州",
-      "jurisdictionCityId": "commandery_city_032",
+      "jurisdictionCityId": "xian_43_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 117680,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_43_02"
     },
     {
       "id": "county_43_03",
@@ -5503,13 +5647,14 @@
       "x": 76,
       "y": 43,
       "province": "徐州",
-      "jurisdictionCityId": "commandery_city_032",
+      "jurisdictionCityId": "xian_43_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 87171,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_43_03"
     },
     {
       "id": "county_43_04",
@@ -5519,13 +5664,14 @@
       "x": 74,
       "y": 43,
       "province": "徐州",
-      "jurisdictionCityId": "commandery_city_032",
+      "jurisdictionCityId": "xian_43_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 87171,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_43_04"
     },
     {
       "id": "county_43_05",
@@ -5535,13 +5681,14 @@
       "x": 76,
       "y": 41,
       "province": "徐州",
-      "jurisdictionCityId": "commandery_city_032",
+      "jurisdictionCityId": "xian_43_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 87170,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_43_05"
     },
     {
       "id": "county_44_01",
@@ -5568,13 +5715,14 @@
       "x": 72,
       "y": 46,
       "province": "徐州",
-      "jurisdictionCityId": "pengcheng",
+      "jurisdictionCityId": "xian_44_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 101616,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_44_02"
     },
     {
       "id": "county_44_03",
@@ -5584,13 +5732,14 @@
       "x": 72,
       "y": 49,
       "province": "徐州",
-      "jurisdictionCityId": "pengcheng",
+      "jurisdictionCityId": "xian_44_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75271,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_44_03"
     },
     {
       "id": "county_44_04",
@@ -5600,13 +5749,14 @@
       "x": 75,
       "y": 46,
       "province": "徐州",
-      "jurisdictionCityId": "pengcheng",
+      "jurisdictionCityId": "xian_44_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75271,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_44_04"
     },
     {
       "id": "county_44_05",
@@ -5616,13 +5766,14 @@
       "x": 73,
       "y": 48,
       "province": "徐州",
-      "jurisdictionCityId": "pengcheng",
+      "jurisdictionCityId": "xian_44_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 75272,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_44_05"
     },
     {
       "id": "county_45_01",
@@ -5649,13 +5800,14 @@
       "x": 59,
       "y": 52,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_009",
+      "jurisdictionCityId": "xian_45_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 432987,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_45_02"
     },
     {
       "id": "county_45_03",
@@ -5665,13 +5817,14 @@
       "x": 63,
       "y": 53,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_009",
+      "jurisdictionCityId": "xian_45_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 320731,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_45_03"
     },
     {
       "id": "county_45_04",
@@ -5681,13 +5834,14 @@
       "x": 60,
       "y": 54,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_009",
+      "jurisdictionCityId": "xian_45_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 320731,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_45_04"
     },
     {
       "id": "county_45_05",
@@ -5697,13 +5851,14 @@
       "x": 59,
       "y": 54,
       "province": "豫州",
-      "jurisdictionCityId": "commandery_city_009",
+      "jurisdictionCityId": "xian_45_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 320731,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_2",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_45_05"
     },
     {
       "id": "county_46_01",
@@ -5730,13 +5885,14 @@
       "x": 82,
       "y": 52,
       "province": "徐州",
-      "jurisdictionCityId": "guangling",
+      "jurisdictionCityId": "xian_46_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 84543,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_46_02"
     },
     {
       "id": "county_46_03",
@@ -5746,13 +5902,14 @@
       "x": 80,
       "y": 54,
       "province": "徐州",
-      "jurisdictionCityId": "guangling",
+      "jurisdictionCityId": "xian_46_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 62624,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_46_03"
     },
     {
       "id": "county_46_04",
@@ -5762,13 +5919,14 @@
       "x": 81,
       "y": 54,
       "province": "徐州",
-      "jurisdictionCityId": "guangling",
+      "jurisdictionCityId": "xian_46_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 62624,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_46_04"
     },
     {
       "id": "county_46_05",
@@ -5778,13 +5936,14 @@
       "x": 82,
       "y": 56,
       "province": "徐州",
-      "jurisdictionCityId": "guangling",
+      "jurisdictionCityId": "xian_46_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 62625,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_46_05"
     },
     {
       "id": "county_47_01",
@@ -5811,13 +5970,14 @@
       "x": 11,
       "y": 43,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_067",
+      "jurisdictionCityId": "xian_47_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 6108,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_47_02"
     },
     {
       "id": "county_47_03",
@@ -5827,13 +5987,14 @@
       "x": 12,
       "y": 46,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_067",
+      "jurisdictionCityId": "xian_47_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4525,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_47_03"
     },
     {
       "id": "county_47_04",
@@ -5843,13 +6004,14 @@
       "x": 10,
       "y": 44,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_067",
+      "jurisdictionCityId": "xian_47_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4525,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_47_04"
     },
     {
       "id": "county_47_05",
@@ -5859,13 +6021,14 @@
       "x": 12,
       "y": 44,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_067",
+      "jurisdictionCityId": "xian_47_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 4525,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_47_05"
     },
     {
       "id": "county_48_01",
@@ -5892,13 +6055,14 @@
       "x": 73,
       "y": 85,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_052",
+      "jurisdictionCityId": "xian_48_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 79221,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_48_02"
     },
     {
       "id": "county_48_03",
@@ -5908,13 +6072,14 @@
       "x": 78,
       "y": 76,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_052",
+      "jurisdictionCityId": "xian_48_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 58682,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_48_03"
     },
     {
       "id": "county_48_04",
@@ -5924,13 +6089,14 @@
       "x": 80,
       "y": 76,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_052",
+      "jurisdictionCityId": "xian_48_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 58682,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_48_04"
     },
     {
       "id": "county_48_05",
@@ -5957,13 +6123,14 @@
       "x": 74,
       "y": 83,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_052",
+      "jurisdictionCityId": "xian_48_06",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 58684,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_48_06"
     },
     {
       "id": "county_49_01",
@@ -5990,13 +6157,14 @@
       "x": 32,
       "y": 94,
       "province": "交州",
-      "jurisdictionCityId": "commandery_city_103",
+      "jurisdictionCityId": "xian_49_02",
       "rank": "major",
       "censusYear": 2,
       "historicalPopulation": 153805,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_49_02"
     },
     {
       "id": "county_49_03",
@@ -6006,13 +6174,14 @@
       "x": 29,
       "y": 97,
       "province": "交州",
-      "jurisdictionCityId": "commandery_city_103",
+      "jurisdictionCityId": "xian_49_03",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 113929,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_49_03"
     },
     {
       "id": "county_49_04",
@@ -6022,13 +6191,14 @@
       "x": 33,
       "y": 98,
       "province": "交州",
-      "jurisdictionCityId": "commandery_city_103",
+      "jurisdictionCityId": "xian_49_04",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 113929,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_49_04"
     },
     {
       "id": "county_49_05",
@@ -6038,13 +6208,14 @@
       "x": 28,
       "y": 98,
       "province": "交州",
-      "jurisdictionCityId": "commandery_city_103",
+      "jurisdictionCityId": "xian_49_05",
       "rank": "county",
       "censusYear": 2,
       "historicalPopulation": 113930,
       "populationBasisStatus": "earlier",
       "populationSource": "hanshu_28",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_49_05"
     },
     {
       "id": "county_50_01",
@@ -6071,13 +6242,14 @@
       "x": 49,
       "y": 96,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_50_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 49834,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_50_02"
     },
     {
       "id": "county_50_03",
@@ -6087,13 +6259,14 @@
       "x": 52,
       "y": 97,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_50_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 36914,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_50_03"
     },
     {
       "id": "county_50_04",
@@ -6103,13 +6276,14 @@
       "x": 55,
       "y": 96,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_50_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 36914,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_50_04"
     },
     {
       "id": "county_50_05",
@@ -6119,13 +6293,14 @@
       "x": 52,
       "y": 95,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_046",
+      "jurisdictionCityId": "xian_50_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 36913,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_50_05"
     },
     {
       "id": "county_51_01",
@@ -6152,13 +6327,14 @@
       "x": 66,
       "y": 99,
       "province": "交州",
-      "jurisdictionCityId": "panyu",
+      "jurisdictionCityId": "xian_51_02",
       "rank": "major",
       "censusYear": 140,
       "historicalPopulation": 51585,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_51_02"
     },
     {
       "id": "county_51_03",
@@ -6168,13 +6344,14 @@
       "x": 67,
       "y": 98,
       "province": "交州",
-      "jurisdictionCityId": "panyu",
+      "jurisdictionCityId": "xian_51_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38211,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_51_03"
     },
     {
       "id": "county_51_04",
@@ -6184,13 +6361,14 @@
       "x": 66,
       "y": 97,
       "province": "交州",
-      "jurisdictionCityId": "panyu",
+      "jurisdictionCityId": "xian_51_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38211,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_51_04"
     },
     {
       "id": "county_51_05",
@@ -6200,13 +6378,14 @@
       "x": 70,
       "y": 98,
       "province": "交州",
-      "jurisdictionCityId": "panyu",
+      "jurisdictionCityId": "xian_51_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 38211,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "authored-grid-projected"
+      "coordinateQuality": "authored-grid-projected",
+      "cityId": "xian_51_05"
     },
     {
       "id": "county_extra_01",
@@ -6216,13 +6395,14 @@
       "x": 57,
       "y": 42,
       "province": "兖州",
-      "jurisdictionCityId": "chenliu",
+      "jurisdictionCityId": "xian_extra_01",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 61662,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_01"
     },
     {
       "id": "county_extra_02",
@@ -6232,13 +6412,14 @@
       "x": 57,
       "y": 45,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_extra_02",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 66942,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_02"
     },
     {
       "id": "county_extra_03",
@@ -6248,13 +6429,14 @@
       "x": 53,
       "y": 44,
       "province": "司隶",
-      "jurisdictionCityId": "luoyang",
+      "jurisdictionCityId": "xian_extra_03",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 66941,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_1",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_03"
     },
     {
       "id": "county_extra_04",
@@ -6264,13 +6446,14 @@
       "x": 63,
       "y": 40,
       "province": "兖州",
-      "jurisdictionCityId": "puyang",
+      "jurisdictionCityId": "xian_extra_04",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 41046,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_3",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_04"
     },
     {
       "id": "county_extra_05",
@@ -6280,13 +6463,14 @@
       "x": 47,
       "y": 59,
       "province": "荆州",
-      "jurisdictionCityId": "wan",
+      "jurisdictionCityId": "xian_extra_05",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 146087,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_05"
     },
     {
       "id": "county_extra_06",
@@ -6296,13 +6480,14 @@
       "x": 47,
       "y": 66,
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "xian_extra_06",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 65009,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_06"
     },
     {
       "id": "county_extra_07",
@@ -6312,13 +6497,14 @@
       "x": 48,
       "y": 66,
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "xian_extra_07",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 52204,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_07"
     },
     {
       "id": "county_extra_08",
@@ -6328,13 +6514,14 @@
       "x": 48,
       "y": 70,
       "province": "荆州",
-      "jurisdictionCityId": "jiangling",
+      "jurisdictionCityId": "xian_extra_08",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 39399,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_08"
     },
     {
       "id": "county_extra_09",
@@ -6344,13 +6531,14 @@
       "x": 68,
       "y": 67,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_051",
+      "jurisdictionCityId": "xian_extra_09",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 28891,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_09"
     },
     {
       "id": "county_extra_10",
@@ -6360,13 +6548,14 @@
       "x": 82,
       "y": 59,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_extra_10",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 46410,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_10"
     },
     {
       "id": "county_extra_11",
@@ -6376,13 +6565,14 @@
       "x": 82,
       "y": 60,
       "province": "扬州",
-      "jurisdictionCityId": "wu",
+      "jurisdictionCityId": "xian_extra_11",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 46410,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_11"
     },
     {
       "id": "county_extra_12",
@@ -6392,13 +6582,14 @@
       "x": 77,
       "y": 62,
       "province": "扬州",
-      "jurisdictionCityId": "commandery_city_050",
+      "jurisdictionCityId": "xian_extra_12",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 42894,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_12"
     },
     {
       "id": "county_extra_13",
@@ -6408,13 +6599,14 @@
       "x": 19,
       "y": 45,
       "province": "凉州",
-      "jurisdictionCityId": "commandery_city_068",
+      "jurisdictionCityId": "xian_extra_13",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 9229,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_5",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_13"
     },
     {
       "id": "county_extra_14",
@@ -6424,13 +6616,14 @@
       "x": 55,
       "y": 72,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_extra_14",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 70157,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_14"
     },
     {
       "id": "county_extra_15",
@@ -6440,13 +6633,14 @@
       "x": 52,
       "y": 74,
       "province": "荆州",
-      "jurisdictionCityId": "commandery_city_048",
+      "jurisdictionCityId": "xian_extra_15",
       "rank": "county",
       "censusYear": 140,
       "historicalPopulation": 70157,
       "populationBasisStatus": "recorded",
       "populationSource": "houhan_4",
-      "coordinateQuality": "reference-map-aligned"
+      "coordinateQuality": "reference-map-aligned",
+      "cityId": "xian_extra_15"
     }
   ],
   "province_seats_basis": "汉末（190—208）州刺史、州牧治所：司隶校尉治洛阳；冀州牧袁绍、曹操治邺；徐州自陶谦后期治下邳；扬州治寿春；凉州治冀县；益州刘焉、刘璋治成都；荆州刘表治襄阳；交州以番禺为战略治所。",

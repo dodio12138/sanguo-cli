@@ -2212,6 +2212,13 @@
       "path": "24,40:NEN"
     },
     {
+      "id": "main:anding|xian_21_03",
+      "from": "anding",
+      "to": "xian_21_03",
+      "kind": "main",
+      "path": "24,40:W"
+    },
+    {
       "id": "main:badong|jiangzhou",
       "from": "badong",
       "to": "jiangzhou",
@@ -2219,11 +2226,18 @@
       "path": "26,73:W"
     },
     {
+      "id": "main:badong|xian_29_04",
+      "from": "badong",
+      "to": "xian_29_04",
+      "kind": "main",
+      "path": "26,73:N"
+    },
+    {
       "id": "main:badong|yongan",
       "from": "badong",
       "to": "yongan",
       "kind": "main",
-      "path": "26,73:NNENNE"
+      "path": "26,73:ENNNEN"
     },
     {
       "id": "main:baima|puyang",
@@ -2231,6 +2245,13 @@
       "to": "puyang",
       "kind": "main",
       "path": "59,41:ENEE"
+    },
+    {
+      "id": "main:baima|xian_06_03",
+      "from": "baima",
+      "to": "xian_06_03",
+      "kind": "main",
+      "path": "59,41:NE"
     },
     {
       "id": "main:baima|ye",
@@ -2261,6 +2282,13 @@
       "path": "83,34:SSSWWS"
     },
     {
+      "id": "main:beihai|xian_20_03",
+      "from": "beihai",
+      "to": "xian_20_03",
+      "kind": "main",
+      "path": "83,34:EE"
+    },
+    {
       "id": "main:beiping|commandery_city_092",
       "from": "beiping",
       "to": "commandery_city_092",
@@ -2282,11 +2310,25 @@
       "path": "75,14:EEEEEEENEENNNNNENEENNE"
     },
     {
+      "id": "main:beiping|xian_05_02",
+      "from": "beiping",
+      "to": "xian_05_02",
+      "kind": "main",
+      "path": "75,14:NW"
+    },
+    {
       "id": "main:cangwu|commandery_city_100",
       "from": "cangwu",
       "to": "commandery_city_100",
       "kind": "main",
       "path": "55,98:EN"
+    },
+    {
+      "id": "main:cangwu|xian_34_03",
+      "from": "cangwu",
+      "to": "xian_34_03",
+      "kind": "main",
+      "path": "55,98:E"
     },
     {
       "id": "main:chaisang|commandery_city_054",
@@ -2338,6 +2380,13 @@
       "path": "34,48:SSSSSEEEEEEEEN"
     },
     {
+      "id": "main:changan|xian_24_04",
+      "from": "changan",
+      "to": "xian_24_04",
+      "kind": "main",
+      "path": "34,48:E"
+    },
+    {
       "id": "main:changsha|commandery_city_045",
       "from": "changsha",
       "to": "commandery_city_045",
@@ -2357,6 +2406,13 @@
       "to": "commandery_city_048",
       "kind": "main",
       "path": "52,83:NWNN"
+    },
+    {
+      "id": "main:changsha|xian_32_05",
+      "from": "changsha",
+      "to": "xian_32_05",
+      "kind": "main",
+      "path": "52,83:EEESS"
     },
     {
       "id": "main:chengdu|commandery_city_057",
@@ -2387,6 +2443,20 @@
       "path": "10,67:ENEENNWNNWWWWW"
     },
     {
+      "id": "main:chengdu|xian_28_02",
+      "from": "chengdu",
+      "to": "xian_28_02",
+      "kind": "main",
+      "path": "10,67:W"
+    },
+    {
+      "id": "main:chengdu|xian_28_05",
+      "from": "chengdu",
+      "to": "xian_28_05",
+      "kind": "main",
+      "path": "10,67:ES"
+    },
+    {
       "id": "main:chenliu|commandery_city_010",
       "from": "chenliu",
       "to": "commandery_city_010",
@@ -2415,6 +2485,20 @@
       "path": "60,45:WNWWSW"
     },
     {
+      "id": "main:chenliu|xian_02_02",
+      "from": "chenliu",
+      "to": "xian_02_02",
+      "kind": "main",
+      "path": "60,45:N"
+    },
+    {
+      "id": "main:chenliu|xian_02_03",
+      "from": "chenliu",
+      "to": "xian_02_03",
+      "kind": "main",
+      "path": "60,45:S"
+    },
+    {
       "id": "main:chenliu|yanjin",
       "from": "chenliu",
       "to": "yanjin",
@@ -2429,11 +2513,18 @@
       "path": "53,43:WN"
     },
     {
+      "id": "main:commandery_city_002|xian_41_05",
+      "from": "commandery_city_002",
+      "to": "xian_41_05",
+      "kind": "main",
+      "path": "53,43:ENNEE"
+    },
+    {
       "id": "main:commandery_city_002|ye",
       "from": "commandery_city_002",
       "to": "ye",
       "kind": "main",
-      "path": "53,43:ENNENNNNEENNE"
+      "path": "53,43:NNNNENNNEEENE"
     },
     {
       "id": "main:commandery_city_003|henei",
@@ -2492,6 +2583,13 @@
       "path": "54,48:WNWNWW"
     },
     {
+      "id": "main:commandery_city_008|xian_01_03",
+      "from": "commandery_city_008",
+      "to": "xian_01_03",
+      "kind": "main",
+      "path": "54,48:E"
+    },
+    {
       "id": "main:commandery_city_008|xuchang",
       "from": "commandery_city_008",
       "to": "xuchang",
@@ -2506,11 +2604,25 @@
       "path": "59,53:EEESSS"
     },
     {
+      "id": "main:commandery_city_009|xian_45_02",
+      "from": "commandery_city_009",
+      "to": "xian_45_02",
+      "kind": "main",
+      "path": "59,53:N"
+    },
+    {
+      "id": "main:commandery_city_009|xian_45_05",
+      "from": "commandery_city_009",
+      "to": "xian_45_05",
+      "kind": "main",
+      "path": "59,53:S"
+    },
+    {
       "id": "main:commandery_city_009|xuchang",
       "from": "commandery_city_009",
       "to": "xuchang",
       "kind": "main",
-      "path": "59,53:NNNNWW"
+      "path": "59,53:WNNNNW"
     },
     {
       "id": "main:commandery_city_010|commandery_city_120",
@@ -2525,6 +2637,13 @@
       "to": "qiao",
       "kind": "main",
       "path": "69,49:WSW"
+    },
+    {
+      "id": "main:commandery_city_011|xian_25_04",
+      "from": "commandery_city_011",
+      "to": "xian_25_04",
+      "kind": "main",
+      "path": "69,49:SESESE"
     },
     {
       "id": "main:commandery_city_011|xiaopei",
@@ -2545,7 +2664,7 @@
       "from": "commandery_city_012",
       "to": "xuchang",
       "kind": "main",
-      "path": "62,49:WWNWWWS"
+      "path": "62,49:WWWNWWS"
     },
     {
       "id": "main:commandery_city_013|commandery_city_026",
@@ -2765,6 +2884,13 @@
       "path": "77,42:WSW"
     },
     {
+      "id": "main:commandery_city_032|xian_43_02",
+      "from": "commandery_city_032",
+      "to": "xian_43_02",
+      "kind": "main",
+      "path": "77,42:W"
+    },
+    {
       "id": "main:commandery_city_036|linzi",
       "from": "commandery_city_036",
       "to": "linzi",
@@ -2807,6 +2933,13 @@
       "path": "78,34:WWN"
     },
     {
+      "id": "main:commandery_city_039|xian_20_02",
+      "from": "commandery_city_039",
+      "to": "xian_20_02",
+      "kind": "main",
+      "path": "78,34:ES"
+    },
+    {
       "id": "main:commandery_city_044|commandery_city_119",
       "from": "commandery_city_044",
       "to": "commandery_city_119",
@@ -2821,6 +2954,13 @@
       "path": "59,66:WWS"
     },
     {
+      "id": "main:commandery_city_044|xian_10_05",
+      "from": "commandery_city_044",
+      "to": "xian_10_05",
+      "kind": "main",
+      "path": "59,66:W"
+    },
+    {
       "id": "main:commandery_city_045|lingling",
       "from": "commandery_city_045",
       "to": "lingling",
@@ -2833,6 +2973,20 @@
       "to": "guiyang",
       "kind": "main",
       "path": "52,92:WWWSSSSS"
+    },
+    {
+      "id": "main:commandery_city_046|xian_34_02",
+      "from": "commandery_city_046",
+      "to": "xian_34_02",
+      "kind": "main",
+      "path": "52,92:EEN"
+    },
+    {
+      "id": "main:commandery_city_046|xian_34_04",
+      "from": "commandery_city_046",
+      "to": "xian_34_04",
+      "kind": "main",
+      "path": "52,92:W"
     },
     {
       "id": "main:commandery_city_047|commandery_city_048",
@@ -2854,6 +3008,20 @@
       "to": "wuling",
       "kind": "main",
       "path": "46,75:WWWWSSSSSSSWWS"
+    },
+    {
+      "id": "main:commandery_city_047|xian_31_05",
+      "from": "commandery_city_047",
+      "to": "xian_31_05",
+      "kind": "main",
+      "path": "46,75:SW"
+    },
+    {
+      "id": "main:commandery_city_048|xian_32_02",
+      "from": "commandery_city_048",
+      "to": "xian_32_02",
+      "kind": "main",
+      "path": "51,80:EN"
     },
     {
       "id": "main:commandery_city_049|guangling",
@@ -2882,6 +3050,13 @@
       "to": "jianye",
       "kind": "main",
       "path": "78,65:NNNN"
+    },
+    {
+      "id": "main:commandery_city_050|xian_11_04",
+      "from": "commandery_city_050",
+      "to": "xian_11_04",
+      "kind": "main",
+      "path": "78,65:SWWW"
     },
     {
       "id": "main:commandery_city_051|hefei",
@@ -2926,6 +3101,13 @@
       "path": "65,77:EENNEE"
     },
     {
+      "id": "main:commandery_city_054|xian_36_03",
+      "from": "commandery_city_054",
+      "to": "xian_36_03",
+      "kind": "main",
+      "path": "65,77:WNN"
+    },
+    {
       "id": "main:commandery_city_054|yuzhang",
       "from": "commandery_city_054",
       "to": "yuzhang",
@@ -2954,6 +3136,13 @@
       "path": "25,55:W"
     },
     {
+      "id": "main:commandery_city_055|xian_26_05",
+      "from": "commandery_city_055",
+      "to": "xian_26_05",
+      "kind": "main",
+      "path": "25,55:E"
+    },
+    {
       "id": "main:commandery_city_057|jiangyou",
       "from": "commandery_city_057",
       "to": "jiangyou",
@@ -2961,11 +3150,18 @@
       "path": "12,65:EENNNNNN"
     },
     {
+      "id": "main:commandery_city_057|xian_27_03",
+      "from": "commandery_city_057",
+      "to": "xian_27_03",
+      "kind": "main",
+      "path": "12,65:SSEEENEE"
+    },
+    {
       "id": "main:commandery_city_057|zitong",
       "from": "commandery_city_057",
       "to": "zitong",
       "kind": "main",
-      "path": "12,65:SSEENEEENNNNN"
+      "path": "12,65:NENNNNNNEESSSEE"
     },
     {
       "id": "main:commandery_city_060|jiangzhou",
@@ -3080,6 +3276,13 @@
       "path": "17,45:NEEE"
     },
     {
+      "id": "main:commandery_city_068|xian_22_04",
+      "from": "commandery_city_068",
+      "to": "xian_22_04",
+      "kind": "main",
+      "path": "17,45:N"
+    },
+    {
       "id": "main:commandery_city_069|commandery_city_127",
       "from": "commandery_city_069",
       "to": "commandery_city_127",
@@ -3108,11 +3311,25 @@
       "path": "6,37:EEE"
     },
     {
+      "id": "main:commandery_city_070|xian_14_05",
+      "from": "commandery_city_070",
+      "to": "xian_14_05",
+      "kind": "main",
+      "path": "6,37:NENN"
+    },
+    {
       "id": "main:commandery_city_071|jincheng",
       "from": "commandery_city_071",
       "to": "jincheng",
       "kind": "main",
       "path": "25,38:WWNWWWWWWWWWWWWWW"
+    },
+    {
+      "id": "main:commandery_city_071|xian_21_05",
+      "from": "commandery_city_071",
+      "to": "xian_21_05",
+      "kind": "main",
+      "path": "25,38:S"
     },
     {
       "id": "main:commandery_city_074|commandery_city_075",
@@ -3150,6 +3367,20 @@
       "path": "7,15:WWNWWWNNNN"
     },
     {
+      "id": "main:commandery_city_077|xian_13_02",
+      "from": "commandery_city_077",
+      "to": "xian_13_02",
+      "kind": "main",
+      "path": "9,25:EEEN"
+    },
+    {
+      "id": "main:commandery_city_077|xian_13_04",
+      "from": "commandery_city_077",
+      "to": "xian_13_04",
+      "kind": "main",
+      "path": "9,25:SESSS"
+    },
+    {
       "id": "main:commandery_city_077|xiliang",
       "from": "commandery_city_077",
       "to": "xiliang",
@@ -3161,14 +3392,28 @@
       "from": "commandery_city_079",
       "to": "jinyang",
       "kind": "main",
-      "path": "52,36:WNNNNNWNNWN"
+      "path": "52,36:WNNNNNWWNNN"
     },
     {
       "id": "main:commandery_city_079|shangdang",
       "from": "commandery_city_079",
       "to": "shangdang",
       "kind": "main",
-      "path": "52,36:ESSSW"
+      "path": "52,36:ESSWS"
+    },
+    {
+      "id": "main:commandery_city_079|xian_40_03",
+      "from": "commandery_city_079",
+      "to": "xian_40_03",
+      "kind": "main",
+      "path": "52,36:E"
+    },
+    {
+      "id": "main:commandery_city_079|xian_40_05",
+      "from": "commandery_city_079",
+      "to": "xian_40_05",
+      "kind": "main",
+      "path": "52,36:S"
     },
     {
       "id": "main:commandery_city_081|commandery_city_082",
@@ -3255,6 +3500,13 @@
       "path": "59,15:S"
     },
     {
+      "id": "main:commandery_city_090|xian_15_04",
+      "from": "commandery_city_090",
+      "to": "xian_15_04",
+      "kind": "main",
+      "path": "59,15:W"
+    },
+    {
       "id": "main:commandery_city_091|ji",
       "from": "commandery_city_091",
       "to": "ji",
@@ -3276,6 +3528,20 @@
       "path": "75,15:SSSWWWWWWWWNNN"
     },
     {
+      "id": "main:commandery_city_093|xian_05_03",
+      "from": "commandery_city_093",
+      "to": "xian_05_03",
+      "kind": "main",
+      "path": "75,15:ESSW"
+    },
+    {
+      "id": "main:commandery_city_093|xian_05_04",
+      "from": "commandery_city_093",
+      "to": "xian_05_04",
+      "kind": "main",
+      "path": "75,15:W"
+    },
+    {
       "id": "main:commandery_city_094|commandery_city_098",
       "from": "commandery_city_094",
       "to": "commandery_city_098",
@@ -3295,6 +3561,13 @@
       "to": "lelang",
       "kind": "main",
       "path": "94,16:NNNEE"
+    },
+    {
+      "id": "main:commandery_city_097|xian_38_05",
+      "from": "commandery_city_097",
+      "to": "xian_38_05",
+      "kind": "main",
+      "path": "94,16:WS"
     },
     {
       "id": "main:commandery_city_098|xiangping",
@@ -3325,6 +3598,13 @@
       "path": "56,97:NEESEEEEEEEES"
     },
     {
+      "id": "main:commandery_city_100|xian_50_04",
+      "from": "commandery_city_100",
+      "to": "xian_50_04",
+      "kind": "main",
+      "path": "56,97:WN"
+    },
+    {
       "id": "main:commandery_city_101|commandery_city_102",
       "from": "commandery_city_101",
       "to": "commandery_city_102",
@@ -3336,7 +3616,7 @@
       "from": "commandery_city_102",
       "to": "jiaozhi",
       "kind": "main",
-      "path": "59,99:NNNNWWWWWWWWWWWWWWWWSWSWWSWWWWWW"
+      "path": "59,99:NNNNWWWWWWWWWWWWWWSSWWWWWSWWWWWW"
     },
     {
       "id": "main:commandery_city_103|jiaozhi",
@@ -3358,6 +3638,20 @@
       "to": "jiaozhi",
       "kind": "main",
       "path": "29,98:EEEEE"
+    },
+    {
+      "id": "main:commandery_city_104|xian_49_03",
+      "from": "commandery_city_104",
+      "to": "xian_49_03",
+      "kind": "main",
+      "path": "29,98:N"
+    },
+    {
+      "id": "main:commandery_city_104|xian_49_05",
+      "from": "commandery_city_104",
+      "to": "xian_49_05",
+      "kind": "main",
+      "path": "29,98:W"
     },
     {
       "id": "main:commandery_city_107|jiangzhou",
@@ -3434,14 +3728,14 @@
       "from": "commandery_city_114",
       "to": "jinyang",
       "kind": "main",
-      "path": "54,29:NNWNWWWWSS"
+      "path": "54,29:WWWWNW"
     },
     {
       "id": "main:commandery_city_116|guiyang",
       "from": "commandery_city_116",
       "to": "guiyang",
       "kind": "main",
-      "path": "60,87:WWWWSSSWSSSSSSWWWWWWS"
+      "path": "60,87:WWWWSSSWSSSSWWWWWSSWS"
     },
     {
       "id": "main:commandery_city_116|yuzhang",
@@ -3504,7 +3798,7 @@
       "from": "commandery_city_127",
       "to": "jiangyou",
       "kind": "main",
-      "path": "12,55:SESSSE"
+      "path": "12,55:SESESS"
     },
     {
       "id": "main:commandery_city_128|wan",
@@ -3542,6 +3836,13 @@
       "path": "68,22:EESESSW"
     },
     {
+      "id": "main:daixian|xian_15_03",
+      "from": "daixian",
+      "to": "xian_15_03",
+      "kind": "main",
+      "path": "59,16:E"
+    },
+    {
       "id": "main:fuling|jiangzhou",
       "from": "fuling",
       "to": "jiangzhou",
@@ -3556,6 +3857,20 @@
       "path": "56,45:WWWW"
     },
     {
+      "id": "main:guandu|xian_03_02",
+      "from": "guandu",
+      "to": "xian_03_02",
+      "kind": "main",
+      "path": "56,45:W"
+    },
+    {
+      "id": "main:guandu|xian_extra_02",
+      "from": "guandu",
+      "to": "xian_extra_02",
+      "kind": "main",
+      "path": "56,45:E"
+    },
+    {
       "id": "main:guandu|xuchang",
       "from": "guandu",
       "to": "xuchang",
@@ -3567,7 +3882,7 @@
       "from": "guandu",
       "to": "yanjin",
       "kind": "main",
-      "path": "56,45:NNNNEE"
+      "path": "56,45:NNNENE"
     },
     {
       "id": "main:guangling|jianye",
@@ -3577,18 +3892,39 @@
       "path": "81,57:WWSWSSS"
     },
     {
+      "id": "main:guangling|xian_46_05",
+      "from": "guangling",
+      "to": "xian_46_05",
+      "kind": "main",
+      "path": "81,57:EN"
+    },
+    {
       "id": "main:guangling|xiapi",
       "from": "guangling",
       "to": "xiapi",
       "kind": "main",
-      "path": "81,57:ENNWWWNWWWWNNWNNNN"
+      "path": "81,57:SEENNNWWWWNWWWWNNWNNNN"
     },
     {
       "id": "main:guiyang|panyu",
       "from": "guiyang",
       "to": "panyu",
       "kind": "main",
-      "path": "49,97:SEEEEEEEEEEEEEEEEE"
+      "path": "49,97:WNNNNEEEEEEEESEEEEEESSEEEEESSW"
+    },
+    {
+      "id": "main:guiyang|xian_50_02",
+      "from": "guiyang",
+      "to": "xian_50_02",
+      "kind": "main",
+      "path": "49,97:N"
+    },
+    {
+      "id": "main:guiyang|xian_50_03",
+      "from": "guiyang",
+      "to": "xian_50_03",
+      "kind": "main",
+      "path": "49,97:SEEEN"
     },
     {
       "id": "main:hangu|hongnong",
@@ -3619,6 +3955,13 @@
       "path": "72,59:NWWWN"
     },
     {
+      "id": "main:hefei|xian_12_05",
+      "from": "hefei",
+      "to": "xian_12_05",
+      "kind": "main",
+      "path": "72,59:S"
+    },
+    {
       "id": "main:henei|mengjin",
       "from": "henei",
       "to": "mengjin",
@@ -3630,7 +3973,14 @@
       "from": "henei",
       "to": "shangdang",
       "kind": "main",
-      "path": "52,42:ENNWN"
+      "path": "52,42:NNN"
+    },
+    {
+      "id": "main:henei|xian_41_02",
+      "from": "henei",
+      "to": "xian_41_02",
+      "kind": "main",
+      "path": "52,42:S"
     },
     {
       "id": "main:hongnong|tongguan",
@@ -3640,11 +3990,46 @@
       "path": "42,46:WW"
     },
     {
+      "id": "main:hongnong|xian_23_03",
+      "from": "hongnong",
+      "to": "xian_23_03",
+      "kind": "main",
+      "path": "42,46:SE"
+    },
+    {
       "id": "main:hulao|luoyang",
       "from": "hulao",
       "to": "luoyang",
       "kind": "main",
       "path": "52,45:WWS"
+    },
+    {
+      "id": "main:hulao|xian_extra_03",
+      "from": "hulao",
+      "to": "xian_extra_03",
+      "kind": "main",
+      "path": "52,45:NE"
+    },
+    {
+      "id": "main:ji|xian_39_02",
+      "from": "ji",
+      "to": "xian_39_02",
+      "kind": "main",
+      "path": "67,15:EN"
+    },
+    {
+      "id": "main:ji|xian_39_03",
+      "from": "ji",
+      "to": "xian_39_03",
+      "kind": "main",
+      "path": "67,15:EESSSS"
+    },
+    {
+      "id": "main:ji|xian_39_04",
+      "from": "ji",
+      "to": "xian_39_04",
+      "kind": "main",
+      "path": "67,15:W"
     },
     {
       "id": "main:jiameng|jianmen",
@@ -3668,6 +4053,20 @@
       "path": "71,89:NNNNNNNNNNNEEEENENEEEEN"
     },
     {
+      "id": "main:jianan|xian_48_02",
+      "from": "jianan",
+      "to": "xian_48_02",
+      "kind": "main",
+      "path": "71,89:ENNENN"
+    },
+    {
+      "id": "main:jiangling|xian_extra_08",
+      "from": "jiangling",
+      "to": "xian_extra_08",
+      "kind": "main",
+      "path": "48,69:S"
+    },
+    {
       "id": "main:jiangling|xiangyang",
       "from": "jiangling",
       "to": "xiangyang",
@@ -3686,42 +4085,140 @@
       "from": "jiangyou",
       "to": "zitong",
       "kind": "main",
-      "path": "14,59:ESSEE"
+      "path": "14,59:EESES"
+    },
+    {
+      "id": "main:jianing|xian_30_04",
+      "from": "jianing",
+      "to": "xian_30_04",
+      "kind": "main",
+      "path": "10,94:W"
     },
     {
       "id": "main:jianmen|zitong",
       "from": "jianmen",
       "to": "zitong",
       "kind": "main",
-      "path": "18,58:WSSS"
+      "path": "18,58:SSSW"
     },
     {
       "id": "main:jianye|wu",
       "from": "jianye",
       "to": "wu",
       "kind": "main",
-      "path": "78,61:EEEEEEEESSS"
+      "path": "78,61:EEESEEESSEE"
+    },
+    {
+      "id": "main:jianye|xian_extra_12",
+      "from": "jianye",
+      "to": "xian_extra_12",
+      "kind": "main",
+      "path": "78,61:WS"
+    },
+    {
+      "id": "main:jiaozhi|xian_49_04",
+      "from": "jiaozhi",
+      "to": "xian_49_04",
+      "kind": "main",
+      "path": "34,98:W"
     },
     {
       "id": "main:jincheng|xiliang",
       "from": "jincheng",
       "to": "xiliang",
       "kind": "main",
-      "path": "9,37:NNWWWWWNNNNNNNN"
+      "path": "9,37:NNNWNWWWWNNNNNN"
+    },
+    {
+      "id": "main:jinyang|xian_17_05",
+      "from": "jinyang",
+      "to": "xian_17_05",
+      "kind": "main",
+      "path": "49,28:SE"
+    },
+    {
+      "id": "main:kuaiji|xian_48_04",
+      "from": "kuaiji",
+      "to": "xian_48_04",
+      "kind": "main",
+      "path": "80,75:S"
+    },
+    {
+      "id": "main:langya|xian_43_03",
+      "from": "langya",
+      "to": "xian_43_03",
+      "kind": "main",
+      "path": "75,43:E"
+    },
+    {
+      "id": "main:langya|xian_43_04",
+      "from": "langya",
+      "to": "xian_43_04",
+      "kind": "main",
+      "path": "75,43:W"
     },
     {
       "id": "main:langzhong|zitong",
       "from": "langzhong",
       "to": "zitong",
       "kind": "main",
-      "path": "21,68:WNNWNNNNNWW"
+      "path": "21,68:WNNWNWNWNNN"
+    },
+    {
+      "id": "main:lelang|xian_16_03",
+      "from": "lelang",
+      "to": "xian_16_03",
+      "kind": "main",
+      "path": "96,13:N"
+    },
+    {
+      "id": "main:lelang|xian_16_05",
+      "from": "lelang",
+      "to": "xian_16_05",
+      "kind": "main",
+      "path": "96,13:E"
+    },
+    {
+      "id": "main:lelang|xian_38_02",
+      "from": "lelang",
+      "to": "xian_38_02",
+      "kind": "main",
+      "path": "96,13:SW"
     },
     {
       "id": "main:lelang|xiangping",
       "from": "lelang",
       "to": "xiangping",
       "kind": "main",
-      "path": "96,13:NNNNNEEEN"
+      "path": "96,13:NNNNEENEN"
+    },
+    {
+      "id": "main:lingling|xian_33_04",
+      "from": "lingling",
+      "to": "xian_33_04",
+      "kind": "main",
+      "path": "41,92:WWSS"
+    },
+    {
+      "id": "main:lingling|xian_33_05",
+      "from": "lingling",
+      "to": "xian_33_05",
+      "kind": "main",
+      "path": "41,92:SEE"
+    },
+    {
+      "id": "main:linzi|xian_42_02",
+      "from": "linzi",
+      "to": "xian_42_02",
+      "kind": "main",
+      "path": "76,33:W"
+    },
+    {
+      "id": "main:linzi|xian_42_04",
+      "from": "linzi",
+      "to": "xian_42_04",
+      "kind": "main",
+      "path": "76,33:EN"
     },
     {
       "id": "main:longxi|tianshui",
@@ -3729,6 +4226,34 @@
       "to": "tianshui",
       "kind": "main",
       "path": "11,45:EENEENNEEEEEESSW"
+    },
+    {
+      "id": "main:longxi|xian_47_03",
+      "from": "longxi",
+      "to": "xian_47_03",
+      "kind": "main",
+      "path": "11,45:SE"
+    },
+    {
+      "id": "main:longxi|xian_47_04",
+      "from": "longxi",
+      "to": "xian_47_04",
+      "kind": "main",
+      "path": "11,45:WN"
+    },
+    {
+      "id": "main:longxi|xian_47_05",
+      "from": "longxi",
+      "to": "xian_47_05",
+      "kind": "main",
+      "path": "11,45:EN"
+    },
+    {
+      "id": "main:lujiang|xian_extra_09",
+      "from": "lujiang",
+      "to": "xian_extra_09",
+      "kind": "main",
+      "path": "67,66:ES"
     },
     {
       "id": "main:luoyang|mengjin",
@@ -3745,11 +4270,67 @@
       "path": "50,46:SWSSSSSSS"
     },
     {
+      "id": "main:luoyang|xian_03_05",
+      "from": "luoyang",
+      "to": "xian_03_05",
+      "kind": "main",
+      "path": "50,46:S"
+    },
+    {
       "id": "main:nanpi|pingyuan",
       "from": "nanpi",
       "to": "pingyuan",
       "kind": "main",
       "path": "70,25:WSSSWSSSS"
+    },
+    {
+      "id": "main:nanpi|xian_18_02",
+      "from": "nanpi",
+      "to": "xian_18_02",
+      "kind": "main",
+      "path": "70,25:E"
+    },
+    {
+      "id": "main:nanpi|xian_18_04",
+      "from": "nanpi",
+      "to": "xian_18_04",
+      "kind": "main",
+      "path": "70,25:SSSW"
+    },
+    {
+      "id": "main:panyu|xian_51_02",
+      "from": "panyu",
+      "to": "xian_51_02",
+      "kind": "main",
+      "path": "66,98:S"
+    },
+    {
+      "id": "main:panyu|xian_51_03",
+      "from": "panyu",
+      "to": "xian_51_03",
+      "kind": "main",
+      "path": "66,98:E"
+    },
+    {
+      "id": "main:panyu|xian_51_04",
+      "from": "panyu",
+      "to": "xian_51_04",
+      "kind": "main",
+      "path": "66,98:N"
+    },
+    {
+      "id": "main:pengcheng|xian_44_02",
+      "from": "pengcheng",
+      "to": "xian_44_02",
+      "kind": "main",
+      "path": "71,48:ENN"
+    },
+    {
+      "id": "main:pengcheng|xian_44_03",
+      "from": "pengcheng",
+      "to": "xian_44_03",
+      "kind": "main",
+      "path": "71,48:SE"
     },
     {
       "id": "main:pengcheng|xiaopei",
@@ -3766,6 +4347,27 @@
       "path": "71,48:EEE"
     },
     {
+      "id": "main:pingyuan|xian_19_04",
+      "from": "pingyuan",
+      "to": "xian_19_04",
+      "kind": "main",
+      "path": "68,32:SS"
+    },
+    {
+      "id": "main:pukou|xian_35_05",
+      "from": "pukou",
+      "to": "xian_35_05",
+      "kind": "main",
+      "path": "72,64:W"
+    },
+    {
+      "id": "main:puyang|xian_extra_04",
+      "from": "puyang",
+      "to": "xian_extra_04",
+      "kind": "main",
+      "path": "62,40:E"
+    },
+    {
       "id": "main:qiao|shouchun",
       "from": "qiao",
       "to": "shouchun",
@@ -3780,11 +4382,53 @@
       "path": "62,56:EEEESEEE"
     },
     {
+      "id": "main:runan|xian_45_03",
+      "from": "runan",
+      "to": "xian_45_03",
+      "kind": "main",
+      "path": "62,56:ENNN"
+    },
+    {
+      "id": "main:shangdang|xian_40_04",
+      "from": "shangdang",
+      "to": "xian_40_04",
+      "kind": "main",
+      "path": "52,39:N"
+    },
+    {
       "id": "main:shangdang|ye",
       "from": "shangdang",
       "to": "ye",
       "kind": "main",
-      "path": "52,39:EENNNEENEE"
+      "path": "52,39:WNNWNNEEEEEEEE"
+    },
+    {
+      "id": "main:shouchun|xian_12_03",
+      "from": "shouchun",
+      "to": "xian_12_03",
+      "kind": "main",
+      "path": "69,57:ES"
+    },
+    {
+      "id": "main:tianshui|xian_22_02",
+      "from": "tianshui",
+      "to": "xian_22_02",
+      "kind": "main",
+      "path": "20,44:SEENNNNWW"
+    },
+    {
+      "id": "main:tianshui|xian_22_05",
+      "from": "tianshui",
+      "to": "xian_22_05",
+      "kind": "main",
+      "path": "20,44:ES"
+    },
+    {
+      "id": "main:tianshui|xian_extra_13",
+      "from": "tianshui",
+      "to": "xian_extra_13",
+      "kind": "main",
+      "path": "20,44:WS"
     },
     {
       "id": "main:wan|wuguan",
@@ -3792,6 +4436,13 @@
       "to": "wuguan",
       "kind": "main",
       "path": "49,54:WWWWWNNNWWS"
+    },
+    {
+      "id": "main:wan|xian_08_04",
+      "from": "wan",
+      "to": "xian_08_04",
+      "kind": "main",
+      "path": "49,54:E"
     },
     {
       "id": "main:wan|xinye",
@@ -3805,21 +4456,728 @@
       "from": "wan",
       "to": "xuchang",
       "kind": "main",
-      "path": "49,54:ENEEEENNEENEN"
+      "path": "49,54:NEEEEENNEENEN"
+    },
+    {
+      "id": "main:wu|xian_37_02",
+      "from": "wu",
+      "to": "xian_37_02",
+      "kind": "main",
+      "path": "86,64:SWS"
+    },
+    {
+      "id": "main:wu|xian_extra_11",
+      "from": "wu",
+      "to": "xian_extra_11",
+      "kind": "main",
+      "path": "86,64:NWNNWWNW"
+    },
+    {
+      "id": "main:wuling|xian_31_03",
+      "from": "wuling",
+      "to": "xian_31_03",
+      "kind": "main",
+      "path": "40,83:WWSSS"
+    },
+    {
+      "id": "main:wuling|xian_31_04",
+      "from": "wuling",
+      "to": "xian_31_04",
+      "kind": "main",
+      "path": "40,83:ENN"
+    },
+    {
+      "id": "main:xian_01_04|xian_01_05",
+      "from": "xian_01_04",
+      "to": "xian_01_05",
+      "kind": "main",
+      "path": "55,51:E"
+    },
+    {
+      "id": "main:xian_01_05|xuchang",
+      "from": "xian_01_05",
+      "to": "xuchang",
+      "kind": "main",
+      "path": "56,51:ENN"
+    },
+    {
+      "id": "main:xian_02_02|xian_02_05",
+      "from": "xian_02_02",
+      "to": "xian_02_05",
+      "kind": "main",
+      "path": "60,44:EE"
+    },
+    {
+      "id": "main:xian_02_02|xian_extra_01",
+      "from": "xian_02_02",
+      "to": "xian_extra_01",
+      "kind": "main",
+      "path": "60,44:WNNWW"
+    },
+    {
+      "id": "main:xian_02_03|xian_02_04",
+      "from": "xian_02_03",
+      "to": "xian_02_04",
+      "kind": "main",
+      "path": "60,46:S"
+    },
+    {
+      "id": "main:xian_03_02|xian_03_03",
+      "from": "xian_03_02",
+      "to": "xian_03_03",
+      "kind": "main",
+      "path": "55,45:SS"
+    },
+    {
+      "id": "main:xian_03_04|xian_extra_02",
+      "from": "xian_03_04",
+      "to": "xian_extra_02",
+      "kind": "main",
+      "path": "57,46:N"
+    },
+    {
+      "id": "main:xian_04_02|xian_04_03",
+      "from": "xian_04_02",
+      "to": "xian_04_03",
+      "kind": "main",
+      "path": "63,38:WNN"
+    },
+    {
+      "id": "main:xian_04_03|xian_04_04",
+      "from": "xian_04_03",
+      "to": "xian_04_04",
+      "kind": "main",
+      "path": "62,36:W"
+    },
+    {
+      "id": "main:xian_04_04|xian_04_05",
+      "from": "xian_04_04",
+      "to": "xian_04_05",
+      "kind": "main",
+      "path": "61,36:WSS"
+    },
+    {
+      "id": "main:xian_04_04|ye",
+      "from": "xian_04_04",
+      "to": "ye",
+      "kind": "main",
+      "path": "61,36:SSSWWNNNNW"
+    },
+    {
+      "id": "main:xian_06_04|xian_06_05",
+      "from": "xian_06_04",
+      "to": "xian_06_05",
+      "kind": "main",
+      "path": "67,37:WWNW"
+    },
+    {
+      "id": "main:xian_06_05|xian_extra_04",
+      "from": "xian_06_05",
+      "to": "xian_extra_04",
+      "kind": "main",
+      "path": "64,36:SSSWS"
+    },
+    {
+      "id": "main:xian_07_02|xian_07_03",
+      "from": "xian_07_02",
+      "to": "xian_07_03",
+      "kind": "main",
+      "path": "76,52:NW"
+    },
+    {
+      "id": "main:xian_07_02|xian_07_04",
+      "from": "xian_07_02",
+      "to": "xian_07_04",
+      "kind": "main",
+      "path": "76,52:SS"
+    },
+    {
+      "id": "main:xian_07_03|xiapi",
+      "from": "xian_07_03",
+      "to": "xiapi",
+      "kind": "main",
+      "path": "75,51:NNWN"
+    },
+    {
+      "id": "main:xian_08_03|xian_08_05",
+      "from": "xian_08_03",
+      "to": "xian_08_05",
+      "kind": "main",
+      "path": "52,53:W"
+    },
+    {
+      "id": "main:xian_08_03|xian_08_06",
+      "from": "xian_08_03",
+      "to": "xian_08_06",
+      "kind": "main",
+      "path": "52,53:S"
+    },
+    {
+      "id": "main:xian_08_04|xian_08_05",
+      "from": "xian_08_04",
+      "to": "xian_08_05",
+      "kind": "main",
+      "path": "50,54:EN"
+    },
+    {
+      "id": "main:xian_09_04|xian_09_05",
+      "from": "xian_09_04",
+      "to": "xian_09_05",
+      "kind": "main",
+      "path": "52,71:W"
+    },
+    {
+      "id": "main:xian_09_05|xian_extra_08",
+      "from": "xian_09_05",
+      "to": "xian_extra_08",
+      "kind": "main",
+      "path": "51,71:WWWN"
+    },
+    {
+      "id": "main:xian_10_03|xian_10_04",
+      "from": "xian_10_03",
+      "to": "xian_10_04",
+      "kind": "main",
+      "path": "58,65:WW"
+    },
+    {
+      "id": "main:xian_10_03|xian_10_05",
+      "from": "xian_10_03",
+      "to": "xian_10_05",
+      "kind": "main",
+      "path": "58,65:S"
+    },
+    {
+      "id": "main:xian_11_03|xian_11_04",
+      "from": "xian_11_03",
+      "to": "xian_11_04",
+      "kind": "main",
+      "path": "76,68:WNN"
+    },
+    {
+      "id": "main:xian_11_03|xian_11_05",
+      "from": "xian_11_03",
+      "to": "xian_11_05",
+      "kind": "main",
+      "path": "76,68:SWSSSE"
+    },
+    {
+      "id": "main:xian_13_03|xian_13_04",
+      "from": "xian_13_03",
+      "to": "xian_13_04",
+      "kind": "main",
+      "path": "12,32:WNNWN"
+    },
+    {
+      "id": "main:xian_13_05|xiliang",
+      "from": "xian_13_05",
+      "to": "xiliang",
+      "kind": "main",
+      "path": "5,27:W"
+    },
+    {
+      "id": "main:xian_14_03|xian_14_04",
+      "from": "xian_14_03",
+      "to": "xian_14_04",
+      "kind": "main",
+      "path": "9,33:W"
+    },
+    {
+      "id": "main:xian_14_04|xian_14_05",
+      "from": "xian_14_04",
+      "to": "xian_14_05",
+      "kind": "main",
+      "path": "8,33:SW"
+    },
+    {
+      "id": "main:xian_16_02|xian_16_04",
+      "from": "xian_16_02",
+      "to": "xian_16_04",
+      "kind": "main",
+      "path": "93,5:ESSSSESE"
+    },
+    {
+      "id": "main:xian_16_03|xian_16_04",
+      "from": "xian_16_03",
+      "to": "xian_16_04",
+      "kind": "main",
+      "path": "96,12:ENNW"
+    },
+    {
+      "id": "main:xian_16_03|xian_38_04",
+      "from": "xian_16_03",
+      "to": "xian_38_04",
+      "kind": "main",
+      "path": "96,12:E"
+    },
+    {
+      "id": "main:xian_17_02|xian_17_03",
+      "from": "xian_17_02",
+      "to": "xian_17_03",
+      "kind": "main",
+      "path": "48,31:W"
+    },
+    {
+      "id": "main:xian_17_02|xian_17_05",
+      "from": "xian_17_02",
+      "to": "xian_17_05",
+      "kind": "main",
+      "path": "48,31:NEEN"
+    },
+    {
+      "id": "main:xian_17_03|xian_17_04",
+      "from": "xian_17_03",
+      "to": "xian_17_04",
+      "kind": "main",
+      "path": "47,31:W"
+    },
+    {
+      "id": "main:xian_18_02|xian_18_05",
+      "from": "xian_18_02",
+      "to": "xian_18_05",
+      "kind": "main",
+      "path": "71,25:ES"
+    },
+    {
+      "id": "main:xian_18_03|xian_18_05",
+      "from": "xian_18_03",
+      "to": "xian_18_05",
+      "kind": "main",
+      "path": "72,27:N"
+    },
+    {
+      "id": "main:xian_19_02|xian_19_05",
+      "from": "xian_19_02",
+      "to": "xian_19_05",
+      "kind": "main",
+      "path": "71,30:WSSS"
+    },
+    {
+      "id": "main:xian_19_03|xian_19_04",
+      "from": "xian_19_03",
+      "to": "xian_19_04",
+      "kind": "main",
+      "path": "69,34:W"
+    },
+    {
+      "id": "main:xian_19_03|xian_19_05",
+      "from": "xian_19_03",
+      "to": "xian_19_05",
+      "kind": "main",
+      "path": "69,34:NE"
+    },
+    {
+      "id": "main:xian_20_03|xian_20_04",
+      "from": "xian_20_03",
+      "to": "xian_20_04",
+      "kind": "main",
+      "path": "85,34:E"
+    },
+    {
+      "id": "main:xian_20_04|xian_20_05",
+      "from": "xian_20_04",
+      "to": "xian_20_05",
+      "kind": "main",
+      "path": "86,34:EN"
+    },
+    {
+      "id": "main:xian_21_02|xian_21_04",
+      "from": "xian_21_02",
+      "to": "xian_21_04",
+      "kind": "main",
+      "path": "22,38:SE"
+    },
+    {
+      "id": "main:xian_21_03|xian_21_04",
+      "from": "xian_21_03",
+      "to": "xian_21_04",
+      "kind": "main",
+      "path": "23,40:N"
+    },
+    {
+      "id": "main:xian_22_03|xian_22_05",
+      "from": "xian_22_03",
+      "to": "xian_22_05",
+      "kind": "main",
+      "path": "20,46:EN"
+    },
+    {
+      "id": "main:xian_23_02|xian_23_04",
+      "from": "xian_23_02",
+      "to": "xian_23_04",
+      "kind": "main",
+      "path": "44,50:WN"
+    },
+    {
+      "id": "main:xian_23_03|xian_23_05",
+      "from": "xian_23_03",
+      "to": "xian_23_05",
+      "kind": "main",
+      "path": "43,47:SE"
+    },
+    {
+      "id": "main:xian_23_04|xian_23_05",
+      "from": "xian_23_04",
+      "to": "xian_23_05",
+      "kind": "main",
+      "path": "43,49:EN"
+    },
+    {
+      "id": "main:xian_24_02|xian_24_03",
+      "from": "xian_24_02",
+      "to": "xian_24_03",
+      "kind": "main",
+      "path": "36,48:E"
+    },
+    {
+      "id": "main:xian_24_02|xian_24_04",
+      "from": "xian_24_02",
+      "to": "xian_24_04",
+      "kind": "main",
+      "path": "36,48:W"
+    },
+    {
+      "id": "main:xian_24_03|xian_24_05",
+      "from": "xian_24_03",
+      "to": "xian_24_05",
+      "kind": "main",
+      "path": "37,48:SEE"
+    },
+    {
+      "id": "main:xian_25_05|xiaopei",
+      "from": "xian_25_05",
+      "to": "xiaopei",
+      "kind": "main",
+      "path": "70,46:N"
+    },
+    {
+      "id": "main:xian_26_03|xian_26_05",
+      "from": "xian_26_03",
+      "to": "xian_26_05",
+      "kind": "main",
+      "path": "28,54:WWS"
+    },
+    {
+      "id": "main:xian_26_04|yangping",
+      "from": "xian_26_04",
+      "to": "yangping",
+      "kind": "main",
+      "path": "25,54:W"
+    },
+    {
+      "id": "main:xian_27_03|xian_27_05",
+      "from": "xian_27_03",
+      "to": "xian_27_05",
+      "kind": "main",
+      "path": "17,66:S"
+    },
+    {
+      "id": "main:xian_27_04|xian_27_05",
+      "from": "xian_27_04",
+      "to": "xian_27_05",
+      "kind": "main",
+      "path": "18,67:W"
+    },
+    {
+      "id": "main:xian_28_02|xian_28_04",
+      "from": "xian_28_02",
+      "to": "xian_28_04",
+      "kind": "main",
+      "path": "9,67:SS"
+    },
+    {
+      "id": "main:xian_28_03|xian_28_04",
+      "from": "xian_28_03",
+      "to": "xian_28_04",
+      "kind": "main",
+      "path": "9,74:NNNNN"
+    },
+    {
+      "id": "main:xian_30_03|xian_30_04",
+      "from": "xian_30_03",
+      "to": "xian_30_04",
+      "kind": "main",
+      "path": "9,93:S"
+    },
+    {
+      "id": "main:xian_30_04|xian_30_05",
+      "from": "xian_30_04",
+      "to": "xian_30_05",
+      "kind": "main",
+      "path": "9,94:S"
+    },
+    {
+      "id": "main:xian_31_02|xian_31_05",
+      "from": "xian_31_02",
+      "to": "xian_31_05",
+      "kind": "main",
+      "path": "43,77:EEN"
+    },
+    {
+      "id": "main:xian_32_02|xian_extra_15",
+      "from": "xian_32_02",
+      "to": "xian_extra_15",
+      "kind": "main",
+      "path": "52,79:NNNNN"
+    },
+    {
+      "id": "main:xian_32_03|xian_32_04",
+      "from": "xian_32_03",
+      "to": "xian_32_04",
+      "kind": "main",
+      "path": "55,87:N"
+    },
+    {
+      "id": "main:xian_32_04|xian_32_05",
+      "from": "xian_32_04",
+      "to": "xian_32_05",
+      "kind": "main",
+      "path": "55,86:N"
+    },
+    {
+      "id": "main:xian_33_03|xian_33_04",
+      "from": "xian_33_03",
+      "to": "xian_33_04",
+      "kind": "main",
+      "path": "39,95:N"
+    },
+    {
+      "id": "main:xian_34_05|xian_50_04",
+      "from": "xian_34_05",
+      "to": "xian_50_04",
+      "kind": "main",
+      "path": "55,95:S"
+    },
+    {
+      "id": "main:xian_35_03|xian_35_04",
+      "from": "xian_35_03",
+      "to": "xian_35_04",
+      "kind": "main",
+      "path": "68,61:W"
+    },
+    {
+      "id": "main:xian_35_03|xian_35_05",
+      "from": "xian_35_03",
+      "to": "xian_35_05",
+      "kind": "main",
+      "path": "68,61:ESSSEE"
+    },
+    {
+      "id": "main:xian_36_04|xian_36_05",
+      "from": "xian_36_04",
+      "to": "xian_36_05",
+      "kind": "main",
+      "path": "60,81:NNNN"
+    },
+    {
+      "id": "main:xian_36_04|yuzhang",
+      "from": "xian_36_04",
+      "to": "yuzhang",
+      "kind": "main",
+      "path": "60,81:ENNEEES"
+    },
+    {
+      "id": "main:xian_37_02|xian_37_03",
+      "from": "xian_37_02",
+      "to": "xian_37_03",
+      "kind": "main",
+      "path": "85,66:WSSSSSWS"
+    },
+    {
+      "id": "main:xian_37_02|xian_37_05",
+      "from": "xian_37_02",
+      "to": "xian_37_05",
+      "kind": "main",
+      "path": "85,66:SEE"
+    },
+    {
+      "id": "main:xian_37_03|xian_37_04",
+      "from": "xian_37_03",
+      "to": "xian_37_04",
+      "kind": "main",
+      "path": "83,72:W"
+    },
+    {
+      "id": "main:xian_38_03|xian_38_05",
+      "from": "xian_38_03",
+      "to": "xian_38_05",
+      "kind": "main",
+      "path": "92,17:E"
+    },
+    {
+      "id": "main:xian_40_01|xian_40_03",
+      "from": "xian_40_01",
+      "to": "xian_40_03",
+      "kind": "main",
+      "path": "53,37:N"
+    },
+    {
+      "id": "main:xian_41_02|xian_41_03",
+      "from": "xian_41_02",
+      "to": "xian_41_03",
+      "kind": "main",
+      "path": "52,43:S"
+    },
+    {
+      "id": "main:xian_41_03|xian_41_04",
+      "from": "xian_41_03",
+      "to": "xian_41_04",
+      "kind": "main",
+      "path": "52,44:W"
+    },
+    {
+      "id": "main:xian_42_02|xian_42_03",
+      "from": "xian_42_02",
+      "to": "xian_42_03",
+      "kind": "main",
+      "path": "75,33:SS"
+    },
+    {
+      "id": "main:xian_42_04|xian_42_05",
+      "from": "xian_42_04",
+      "to": "xian_42_05",
+      "kind": "main",
+      "path": "77,32:N"
+    },
+    {
+      "id": "main:xian_43_02|xian_43_05",
+      "from": "xian_43_02",
+      "to": "xian_43_05",
+      "kind": "main",
+      "path": "76,42:N"
+    },
+    {
+      "id": "main:xian_44_03|xian_44_05",
+      "from": "xian_44_03",
+      "to": "xian_44_05",
+      "kind": "main",
+      "path": "72,49:EN"
+    },
+    {
+      "id": "main:xian_44_04|xian_44_05",
+      "from": "xian_44_04",
+      "to": "xian_44_05",
+      "kind": "main",
+      "path": "75,46:WWSS"
+    },
+    {
+      "id": "main:xian_45_04|xian_45_05",
+      "from": "xian_45_04",
+      "to": "xian_45_05",
+      "kind": "main",
+      "path": "60,54:W"
+    },
+    {
+      "id": "main:xian_46_02|xian_46_04",
+      "from": "xian_46_02",
+      "to": "xian_46_04",
+      "kind": "main",
+      "path": "82,52:WSS"
+    },
+    {
+      "id": "main:xian_46_03|xian_46_04",
+      "from": "xian_46_03",
+      "to": "xian_46_04",
+      "kind": "main",
+      "path": "80,54:E"
+    },
+    {
+      "id": "main:xian_46_04|xian_46_05",
+      "from": "xian_46_04",
+      "to": "xian_46_05",
+      "kind": "main",
+      "path": "81,54:ESS"
+    },
+    {
+      "id": "main:xian_47_02|xian_47_04",
+      "from": "xian_47_02",
+      "to": "xian_47_04",
+      "kind": "main",
+      "path": "11,43:WS"
+    },
+    {
+      "id": "main:xian_48_02|xian_48_06",
+      "from": "xian_48_02",
+      "to": "xian_48_06",
+      "kind": "main",
+      "path": "73,85:NNE"
+    },
+    {
+      "id": "main:xian_48_03|xian_48_04",
+      "from": "xian_48_03",
+      "to": "xian_48_04",
+      "kind": "main",
+      "path": "78,76:SEEN"
+    },
+    {
+      "id": "main:xian_49_02|xian_49_04",
+      "from": "xian_49_02",
+      "to": "xian_49_04",
+      "kind": "main",
+      "path": "32,94:ESSSS"
+    },
+    {
+      "id": "main:xian_50_03|xian_50_05",
+      "from": "xian_50_03",
+      "to": "xian_50_05",
+      "kind": "main",
+      "path": "52,97:NN"
+    },
+    {
+      "id": "main:xian_51_03|xian_51_05",
+      "from": "xian_51_03",
+      "to": "xian_51_05",
+      "kind": "main",
+      "path": "67,98:EEE"
+    },
+    {
+      "id": "main:xian_extra_05|xinye",
+      "from": "xian_extra_05",
+      "to": "xinye",
+      "kind": "main",
+      "path": "47,59:ENNE"
+    },
+    {
+      "id": "main:xian_extra_06|xian_extra_07",
+      "from": "xian_extra_06",
+      "to": "xian_extra_07",
+      "kind": "main",
+      "path": "47,66:E"
+    },
+    {
+      "id": "main:xian_extra_06|yiling",
+      "from": "xian_extra_06",
+      "to": "yiling",
+      "kind": "main",
+      "path": "47,66:S"
+    },
+    {
+      "id": "main:xian_extra_10|xian_extra_11",
+      "from": "xian_extra_10",
+      "to": "xian_extra_11",
+      "kind": "main",
+      "path": "82,59:S"
+    },
+    {
+      "id": "main:xian_extra_14|xian_extra_15",
+      "from": "xian_extra_14",
+      "to": "xian_extra_15",
+      "kind": "main",
+      "path": "55,72:WSSWW"
     },
     {
       "id": "main:xiangyang|xinye",
       "from": "xiangyang",
       "to": "xinye",
       "kind": "main",
-      "path": "47,60:NENNE"
+      "path": "47,60:NNNEE"
     },
     {
       "id": "main:yanjin|ye",
       "from": "yanjin",
       "to": "ye",
       "kind": "main",
-      "path": "58,41:NENNNNWN"
+      "path": "58,41:NWNNNNEN"
     }
   ],
   "commanderySeats": [
