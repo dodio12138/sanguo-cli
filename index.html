@@ -7,7 +7,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261010-01">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261013-14">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261013-15">
   <link rel="stylesheet" href="css/chronicle.css?v=20261013-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
   <link rel="stylesheet" href="css/os-desktop.css?v=20261012-02">
@@ -229,7 +229,7 @@
   <dialog id="mapEditorDialog" class="wide-dialog map-editor-dialog">
     <div class="dialog-title"><span>舆图编辑</span> <button data-close="mapEditorDialog">×</button></div>
     <div class="dialog-content map-editor-content">
-      <div class="map-editor-column"><div class="map-editor-board"><div class="map-editor-zoom" role="group" aria-label="地图缩放与移动"><button id="mapEditorZoomOut" type="button" aria-label="缩小地图">−</button><output id="mapEditorZoomValue">适配</output><button id="mapEditorZoomIn" type="button" aria-label="放大地图">＋</button><button id="mapEditorZoomFit" type="button">适配窗口</button><button id="mapEditorPanToggle" type="button" aria-pressed="false">拖动地图</button><span>Ctrl+滚轮缩放 · 空格/中键拖动</span></div><div class="map-editor-viewport"><div class="map-editor-canvas-wrap"><canvas id="mapEditorTerrain" aria-hidden="true"></canvas><canvas id="mapEditorReferenceCanvas" aria-hidden="true"></canvas><canvas id="mapEditorCanvas" tabindex="0" aria-label="舆图网格"></canvas><canvas id="mapEditorOverlay" aria-hidden="true"></canvas></div></div><p id="mapEditorHover" class="map-editor-hover">将光标移到舆图上查看格子信息。</p></div></div>
+      <div class="map-editor-column"><div class="map-editor-board"><div class="map-editor-zoom" role="group" aria-label="地图缩放与移动"><button id="mapEditorZoomOut" type="button" aria-label="缩小地图">−</button><output id="mapEditorZoomValue">适配</output><button id="mapEditorZoomIn" type="button" aria-label="放大地图">＋</button><button id="mapEditorZoomFit" type="button">适配窗口</button><button id="mapEditorPanToggle" type="button" aria-pressed="false">拖动地图</button><input id="mapEditorFind" list="mapEditorFindList" placeholder="检索据点" aria-label="检索据点" spellcheck="false"><datalist id="mapEditorFindList"></datalist><span>Ctrl+滚轮缩放 · 空格/中键拖动</span></div><div class="map-editor-viewport"><div class="map-editor-canvas-wrap"><canvas id="mapEditorTerrain" aria-hidden="true"></canvas><canvas id="mapEditorReferenceCanvas" aria-hidden="true"></canvas><canvas id="mapEditorCanvas" tabindex="0" aria-label="舆图网格"></canvas><canvas id="mapEditorOverlay" aria-hidden="true"></canvas></div></div><p id="mapEditorHover" class="map-editor-hover">将光标移到舆图上查看格子信息。</p></div></div>
       <aside class="map-editor-side">
         <section><h3>编辑工具</h3>
           <div class="map-editor-tools" role="group" aria-label="舆图编辑工具">
@@ -243,7 +243,7 @@
           <p id="mapEditorToolHint" class="map-editor-info">选择图层与取值，在舆图上按住拖拽绘制。</p>
         </section>
         <div class="map-editor-side-scroll">
-        <section><h3>地图网格</h3><div class="map-editor-actions"><button id="mapEditorResize100" type="button" data-tip="同步映射地形、州郡、据点、县治、道路与河流">转换为100×100</button></div></section>
+        <section id="mapEditorGridSection"><h3>地图网格</h3><div class="map-editor-actions"><button id="mapEditorResize100" type="button" data-tip="同步映射地形、州郡、据点、县治、道路与河流">转换为100×100</button></div></section>
         <section id="mapEditorReferenceSection"><h3>参考底图</h3>
           <p id="mapEditorReferenceInfo" class="map-editor-info">未添加底图</p>
           <div class="map-editor-actions"><button id="mapEditorReferenceAdd" type="button">添加底图</button><button id="mapEditorReferenceRemove" type="button" disabled>移除底图</button></div>
@@ -398,7 +398,7 @@
   <script src="js/core/scenario-officer-store.js?v=20261013-01"></script>
   <script src="js/ui/map-view.js?v=20261013-14"></script>
   <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
-  <script src="js/ui/map-editor.js?v=20261013-04"></script>
+  <script src="js/ui/map-editor.js?v=20261013-07"></script>
   <script src="js/ui/officer-editor.js?v=20261013-01"></script>
   <script src="js/ui/terminal-select.js?v=20261010-10"></script>
   <script src="js/ui/fiscal-ui.js?v=20261010-03"></script>

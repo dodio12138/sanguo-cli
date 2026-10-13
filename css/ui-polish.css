@@ -484,3 +484,4 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .officer-editor-form-actions button,.officer-editor-actions button{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:4px 10px;font:inherit;font-size:10px;cursor:pointer}
 .officer-editor-form-actions button.primary,.officer-editor-actions button.primary{border-color:var(--amber);background:#252b19;color:#e2cc78}
 @media (max-width:760px){.officer-editor-main{grid-template-columns:1fr}.officer-editor-content{height:auto}}
+.map-editor-zoom input{width:120px;min-height:22px;border:1px solid #303a2d;background:#101710;color:var(--text);font:10px var(--mono);padding:2px 6px}
