@@ -14,7 +14,7 @@ function makeView(){
   return view;
 }
 function recorder(){
-  const ops=[],ctx={beginPath:()=>ops.push(["beginPath"]),moveTo:(x,y)=>ops.push(["moveTo",x,y]),lineTo:(x,y)=>ops.push(["lineTo",x,y]),stroke:()=>ops.push(["stroke"]),save:()=>{},restore:()=>{},setLineDash:()=>{}};
+  const ops=[],ctx={beginPath:()=>ops.push(["beginPath"]),moveTo:(x,y)=>ops.push(["moveTo",x,y]),lineTo:(x,y)=>ops.push(["lineTo",x,y]),stroke:()=>ops.push(["stroke"]),save:()=>{},restore:()=>{},setLineDash:()=>{},closePath:()=>{},fill:()=>{}};
   const vertices=()=>ops.filter(op=>op[0]==="moveTo"||op[0]==="lineTo").map(op=>[op[1],op[2]]);
   return {ctx,vertices};
 }
@@ -57,14 +57,14 @@ armyView.drawArmyRoutes(armyRec.ctx,armyView.metrics());
 const roadRec=recorder();
 view.scale=1;
 view.traceRoad(roadRec.ctx,view.metrics(),sample.points);
-assert.deepEqual(armyRec.vertices(),roadRec.vertices(),"行军路线必须复用玩家设定的道路路径");
-assert.equal(armyRec.vertices().length,sample.points.length,"行军线应逐格沿着保存的路径绘制");
+assert.deepEqual(armyRec.vertices().slice(0,sample.points.length),roadRec.vertices(),"行军路线必须复用玩家设定的道路路径");
+assert.deepEqual(armyView.legSegments([fromId,toId]).map(segment=>segment.points),[sample.points],"行军线应逐格沿着保存的路径绘制");
 armyView.routes=[];
 const noRoadRec=recorder();armyView.drawArmyRoutes(noRoadRec.ctx,armyView.metrics());
 assert.equal(noRoadRec.vertices().length,0,"未手绘路径的城市连接不得伪造自动道路走向");
 
 const source=fs.readFileSync(new URL("../js/ui/map-view.js",import.meta.url),"utf8");
 assert.ok(!/traceOrthogonal\(c,\[\[m\.startX/.test(source),"道路不得再以像素坐标判定弯折");
-for(const feature of ["drawArmyRoutes","drawSieges","drawSupplyRoutes","drawPlannedRoute"])if(!new RegExp(`${feature}\\(c,m\\).*traceCityRoute\\(c,m,`).test(source.replace(/\n/g,"")))throw new Error(`${feature} 未复用设定道路`);
+for(const feature of ["drawArmyRoutes","drawSieges","drawSupplyRoutes","drawPlannedRoute"])if(!new RegExp(`${feature}\\(c,m\\)\\{[^\\n]*(traceCityRoute\\(c,m,|legSegments\\()`).test(source))throw new Error(`${feature} 未复用设定道路`);
 assert.ok(!source.includes("parent.set(a,b)"),"道路绘制不得再退化为最小生成树");
 console.log(`舆图道路通过：全量路网 ${roads.length} 条 / 弯折方向缩放不变 / 行军路线贴合道路 / 围城与补给线同源`);

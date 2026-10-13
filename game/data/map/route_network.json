@@ -1729,6 +1729,84 @@
       "b": "jiaozhi",
       "kind": "sea",
       "name": "南海"
+    },
+    {
+      "a": "commandery_city_048",
+      "b": "commandery_city_047",
+      "kind": "road",
+      "name": "益阳道"
+    },
+    {
+      "a": "changsha",
+      "b": "commandery_city_045",
+      "kind": "road",
+      "name": "湘水道"
+    },
+    {
+      "a": "commandery_city_116",
+      "b": "yuzhang",
+      "kind": "road",
+      "name": "赣水道"
+    },
+    {
+      "a": "chaisang",
+      "b": "commandery_city_054",
+      "kind": "road",
+      "name": "彭蠡道"
+    },
+    {
+      "a": "chaisang",
+      "b": "commandery_city_119",
+      "kind": "ford",
+      "name": "寻阳渡"
+    },
+    {
+      "a": "pukou",
+      "b": "commandery_city_051",
+      "kind": "road",
+      "name": "濡须道"
+    },
+    {
+      "a": "yongan",
+      "b": "badong",
+      "kind": "road",
+      "name": "巴郡道"
+    },
+    {
+      "a": "yongan",
+      "b": "commandery_city_110",
+      "kind": "mountain",
+      "name": "峡路"
+    },
+    {
+      "a": "fuling",
+      "b": "jiangzhou",
+      "kind": "road",
+      "name": "巴郡道"
+    },
+    {
+      "a": "panyu",
+      "b": "guiyang",
+      "kind": "mountain",
+      "name": "阳山道"
+    },
+    {
+      "a": "panyu",
+      "b": "commandery_city_100",
+      "kind": "road",
+      "name": "西江道"
+    },
+    {
+      "a": "commandery_city_102",
+      "b": "commandery_city_100",
+      "kind": "road",
+      "name": "合浦道"
+    },
+    {
+      "a": "jiaozhi",
+      "b": "commandery_city_102",
+      "kind": "mountain",
+      "name": "交州海滨道"
     }
   ]
 }

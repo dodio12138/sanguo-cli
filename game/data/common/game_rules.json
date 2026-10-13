@@ -611,7 +611,8 @@
     "commandery_city_052:wu": "river",
     "xiangyang:xinye": "river",
     "commandery_city_125:yiling": "river",
-    "commandery_city_047:jiangling": "river"
+    "commandery_city_047:jiangling": "river",
+    "chaisang:commandery_city_119": "river"
   },
   "city_graph": {
     "xuchang": [
@@ -811,7 +812,8 @@
     ],
     "yongan": [
       "fuling",
-      "commandery_city_110"
+      "commandery_city_110",
+      "badong"
     ],
     "jiangzhou": [
       "commandery_city_060",
@@ -843,7 +845,8 @@
     ],
     "changsha": [
       "commandery_city_048",
-      "commandery_city_046"
+      "commandery_city_046",
+      "commandery_city_045"
     ],
     "lingling": [
       "commandery_city_045"
@@ -851,7 +854,8 @@
     "guiyang": [
       "commandery_city_116",
       "commandery_city_046",
-      "commandery_city_100"
+      "commandery_city_100",
+      "panyu"
     ],
     "lujiang": [
       "commandery_city_051",
@@ -909,7 +913,8 @@
     "pukou": [
       "chaisang",
       "jianye",
-      "hefei"
+      "hefei",
+      "commandery_city_051"
     ],
     "ji": [
       "commandery_city_088",
@@ -974,7 +979,8 @@
       "jiameng"
     ],
     "badong": [
-      "jiangzhou"
+      "jiangzhou",
+      "yongan"
     ],
     "fuling": [
       "jiangzhou",
@@ -1001,7 +1007,9 @@
     "panyu": [
       "cangwu",
       "jianan",
-      "commandery_city_102"
+      "commandery_city_102",
+      "guiyang",
+      "commandery_city_100"
     ],
     "commandery_city_002": [
       "henei",
@@ -1146,7 +1154,8 @@
     ],
     "commandery_city_045": [
       "lingling",
-      "commandery_city_048"
+      "commandery_city_048",
+      "changsha"
     ],
     "commandery_city_046": [
       "changsha",
@@ -1154,12 +1163,14 @@
     ],
     "commandery_city_047": [
       "jiangling",
-      "wuling"
+      "wuling",
+      "commandery_city_048"
     ],
     "commandery_city_048": [
       "changsha",
       "commandery_city_045",
-      "jiangling"
+      "jiangling",
+      "commandery_city_047"
     ],
     "commandery_city_049": [
       "guangling",
@@ -1171,7 +1182,8 @@
     ],
     "commandery_city_051": [
       "hefei",
-      "lujiang"
+      "lujiang",
+      "pukou"
     ],
     "commandery_city_052": [
       "wu",
@@ -1287,7 +1299,8 @@
     "commandery_city_102": [
       "commandery_city_101",
       "panyu",
-      "jiaozhi"
+      "jiaozhi",
+      "commandery_city_100"
     ],
     "commandery_city_103": [
       "jiaozhi"
@@ -1320,7 +1333,9 @@
     ],
     "commandery_city_100": [
       "guiyang",
-      "cangwu"
+      "cangwu",
+      "panyu",
+      "commandery_city_102"
     ],
     "commandery_city_104": [
       "jiaozhi",

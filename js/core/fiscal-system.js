@@ -218,7 +218,7 @@ window.FiscalSystem=class FiscalSystem {
     if(project.type==="fortify")city.level=Math.min(5,city.level+1);
     if(project.type==="waterworks"){city.agriculture+=2;city.floodResistance=Math.min(80,(city.floodResistance||0)+20);city.buildings.push("水利")}
     if(project.type==="relieve_fire"){city.fireDamage=0;city.defenseDamage=Math.max(0,city.defenseDamage-10)}
-    if(project.type==="build_road"){const graph=state.data.rules.city_graph,target=project.targetCityId;graph[city.id]??=[];graph[target]??=[];if(!graph[city.id].includes(target))graph[city.id].push(target);if(!graph[target].includes(city.id))graph[target].push(city.id)}
+    if(project.type==="build_road"){const graph=state.data.rules.city_graph,target=project.targetCityId;graph[city.id]??=[];graph[target]??=[];if(!graph[city.id].includes(target))graph[city.id].push(target);if(!graph[target].includes(city.id))graph[target].push(city.id);(state.data.builtRoads??=[]).push([city.id,target])}
   }
   static handleOrder(state,order,events){
     if(!["set_collection_policy","set_capital","dispatch_resources","dismiss_labor","relieve_fire","collect_tax","set_tax_rate","reward_officer","requisition_labor","transfer_gold","transfer_food","transport","construct_building","repair","build_road","build_warehouse","fortify","waterworks"].includes(order.type))return false;
