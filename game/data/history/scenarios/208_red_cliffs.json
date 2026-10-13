@@ -75,7 +75,7 @@
         "name": "刘备",
         "color": "#637fa5",
         "soldiers": 18000,
-        "cities": 1
+        "cities": 2
       },
       {
         "id": "sun",
@@ -166,7 +166,7 @@
         "name": "士燮",
         "color": "#759585",
         "soldiers": 6000,
-        "cities": 5
+        "cities": 6
       },
       {
         "id": "wu_ju",

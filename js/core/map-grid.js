@@ -168,6 +168,12 @@ window.MapGrid = class MapGrid {
   }
   static waterways(map){return Array.isArray(map?.waterways)?structuredClone(map.waterways):structuredClone(MapGrid.DEFAULT_WATERWAYS)}
   // 角点河流（anchor:"corner"）的控制点落在格子角上，相邻控制点之间沿格线按台阶展开；旧河流仍以格心折线表示。
+  // 据点统一为县邑、关隘、渡口三类（旧港口按县邑处理）；县邑再按州治、郡治、普通县邑分级。战场为地标，不是据点。
+  static NODE_KIND_NAMES={city:"县邑",pass:"关隘",ford:"渡口",battle:"战场"};
+  static NODE_RANK_NAMES={province:"州治",commandery:"郡治",county:"县邑"};
+  static nodeKind(node){const type=node?.type||"city";return type==="pass"||type==="ford"?type:"city"}
+  static nodeRank(node,divisions){if(MapGrid.nodeKind(node)!=="city")return null;if(Object.values(divisions?.province_seats||{}).includes(node.id))return "province";return node.commanderySeatNode?"commandery":"county"}
+  static nodeLabel(node,divisions){const kind=MapGrid.nodeKind(node);return kind==="city"?MapGrid.NODE_RANK_NAMES[MapGrid.nodeRank(node,divisions)]:MapGrid.NODE_KIND_NAMES[kind]}
   static isCornerRiver(river){return river?.anchor==="corner"}
   static riverCorners(river){const points=Array.isArray(river?.points)?river.points:[];if(!MapGrid.isCornerRiver(river))return structuredClone(points);const path=[];for(const [x,y] of points){const last=path.at(-1);if(!last){path.push([x,y]);continue}path.push(...MapGrid.gridLine(last[0],last[1],x,y).slice(1))}return path}
   static riverEdgeCells(a,b){return a[1]===b[1]?[[Math.min(a[0],b[0]),a[1]-1],[Math.min(a[0],b[0]),a[1]]]:[[a[0]-1,Math.min(a[1],b[1])],[a[0],Math.min(a[1],b[1])]]}
