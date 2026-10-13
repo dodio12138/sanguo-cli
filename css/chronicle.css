@@ -8,3 +8,7 @@
 .chronicle-entry p{margin:0;color:#d4cfaa;font:15px/1.9 "Songti SC","Noto Serif CJK SC",serif;letter-spacing:.04em;white-space:pre-wrap}
 .chronicle-entry .chronicle-error{margin-top:7px;color:var(--red);font:10px var(--mono)}
 .chronicle-entry.pending p{color:var(--muted);font-size:11px}
+/* 史官档案范围页签，样式与天下形势页签一致 */
+.chronicle-scopes{display:flex;gap:2px;border-bottom:1px solid #3d4737;padding:3px 5px;background:#111811}
+.chronicle-scopes button{flex:1;border:1px solid transparent;padding:3px 6px;background:transparent;color:#777f6d;font:10px/1.2 var(--mono);cursor:pointer}
+.chronicle-scopes button.active{border-color:#59634e;background:#273322;color:#e5cf7c;box-shadow:inset 1px 1px #77806444}

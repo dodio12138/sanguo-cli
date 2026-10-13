@@ -1,5 +1,5 @@
 window.DataLoader = class DataLoader {
-  constructor(fallback){this.fallback=fallback;this.sources=[];this.warnings=[];this.modReports=[];this.patchOwners=new Map();this.scenarioMaps=window.ScenarioMapStore&&window.MapEditor?new ScenarioMapStore():null;}
+  constructor(fallback){this.fallback=fallback;this.sources=[];this.warnings=[];this.modReports=[];this.patchOwners=new Map();this.scenarioMaps=window.ScenarioMapStore&&window.MapEditor?new ScenarioMapStore():null;this.scenarioOfficers=window.ScenarioOfficerStore?new ScenarioOfficerStore():null;}
   async load({useSavedMap=true}={}){
     if(location.protocol==="file:"){this.sources.push("embedded:file-fallback");this.scenarioBase=structuredClone(this.fallback);return this.finishScenario(structuredClone(this.scenarioBase),useSavedMap);}
     try{
@@ -98,7 +98,10 @@ window.DataLoader = class DataLoader {
     return officers;
   }
   async loadScenario(id,{useSavedMap=true}={}){if(id==="200_guandu")return this.finishScenario(structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),useSavedMap);if(location.protocol==="file:")throw new Error("多剧本需要通过静态服务器运行");const scenario=await this.loadScenarioDefinition(id),base=structuredClone(this.scenarioBase||await this.load({useSavedMap:false})),patch=scenario.patch;if(!patch)throw new Error(`${scenario.name}尚未提供剧本数据`);base.scenario=scenario;base.forces=structuredClone(patch.forces);base.cities=base.cities.map(city=>({...city,force:patch.city_forces[city.id]||"neutral",governor:patch.governors?.[city.id]||"—"}));this.applyCityResources(base,id);this.assignCommanderySeatOwners(base,new Set(Object.keys(patch.city_forces||{})));this.applyCountyResources(base,id);const reference=await this.loadOfficerReference();base.officers=this.buildScenarioOfficers(base,scenario,reference);base.armies=structuredClone(patch.armies||[]);base.scenario.player_force=scenario.default_player_force;base.scenario.playable_forces=scenario.playable_forces;await this.discoverMods(base);return this.finishScenario(base,useSavedMap);}
-  async finishScenario(data,useSavedMap){
+  async finishScenario(data,useSavedMap){return this.applySavedOfficers(await this.finishScenarioMap(data,useSavedMap),useSavedMap)}
+  // 剧本模板的人物修改在地图之后套用；无效条目跳过并记入警告，不阻止开局。
+  async applySavedOfficers(data,useSaved){if(!useSaved||!this.scenarioOfficers||!data?.scenario?.id)return data;try{const record=await this.scenarioOfficers.get(data.scenario.id);if(record){const result=ScenarioOfficerStore.apply(data,record);this.sources.push(`saved-officers:${data.scenario.id}`);if(result.skipped.length)this.warnings.push(`人物修改有 ${result.skipped.length} 项未套用：${result.skipped.slice(0,3).join("；")}`);data.meta={...data.meta,scenarioOfficers:{applied:result.applied,skipped:result.skipped.length}}}}catch(error){this.warnings.push(`人物修改未自动载入：${error.message}`)}return data}
+  async finishScenarioMap(data,useSavedMap){
     this.validate(data);
     if(!useSavedMap||!this.scenarioMaps)return data;
     const baseFingerprint=ScenarioMapStore.fingerprint(data);

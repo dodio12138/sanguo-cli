@@ -21,6 +21,9 @@
   const loader=new DataLoader(window.SANGUO_DATA);let data;
   try{data=await loader.load()}catch(error){document.body.innerHTML=`<pre style="color:#c66;padding:20px">启动失败：${error.message}</pre>`;return}
   const scenarioCatalog=await loader.loadScenarioCatalog().catch(()=>({scenarios:[{id:"200_guandu",name:"官渡",date:"建安五年 / 200年",description:"曹袁决战前夜，中原群雄并立。",enabled:true}]}));
+  // 人物编辑器：开局画面编辑剧本模板，游戏内（数据与模组工具）编辑当前战局。
+  const officerEditor=window.OfficerEditor?new OfficerEditor({dialog:$("officerEditorDialog"),toast:message=>toast(message),loadScenario:id=>loader.loadScenario(id,{useSavedMap:false}),catalog:()=>scenarioCatalog.scenarios.filter(item=>item.enabled!==false)}):null;
+  if($("openOfficerEditor")){$("openOfficerEditor").disabled=!officerEditor;$("openOfficerEditor").onclick=()=>officerEditor?.openScenario(data?.scenario?.id).catch(error=>toast(`人物编辑器载入失败：${error.message}`))}
   async function synchronizeHostSaves(){try{const response=await fetch("/api/saves",{cache:"no-store"});if(!response.ok)return;const payload=await response.json();for(const [slot,remote] of Object.entries(payload.slots||{})){if(!SaveLibrary.validId(slot)||!remote?.save)continue;let local=SaveLibrary.get(slot);const save=GameState.newestSave(local,remote.save);hostSaveCache[slot]=save;if(save===local){if((Date.parse(local.savedAt)||0)>(Date.parse(remote.save.savedAt)||0))await fetch(`/api/saves/${slot}`,{method:"PUT",headers:{"content-type":"application/json"},body:JSON.stringify({save:local,meta:null})}).catch(()=>{});continue}SaveLibrary.remember(slot,save,remote.backup);if(SaveLibrary.enabled)await SaveLibrary.put(slot,save);else safeLocalSet(`sanguo-cli.slot.${slot}`,JSON.stringify(save))}}catch{}}
   await SaveLibrary.initialize();if(GameState.hostSaveAvailable())await synchronizeHostSaves();
   const settingsKey="sanguo.settings.v1";let userSettings={difficulty:"normal",observerDelay:3000,confirmEndTurn:false,chronicleEnabled:false,globalHistorianEnabled:false};try{userSettings={...userSettings,...JSON.parse(localStorage.getItem(settingsKey)||"{}")}}catch{};
@@ -425,6 +428,7 @@
   editorSource=()=>state.data;editorView=map;editorPause=()=>simulation.pause();
   state.addEventListener("mapEdited",()=>{loader.refreshPopulationHistory(state.data);renderSelection();renderPlayer();renderForces();renderResources();renderObjective()});
   $("modToolsButton").onclick=()=>{renderModTools();bindModControls();$("modToolsDialog").showModal()};
+  $("openOfficerEditorGame").onclick=()=>{if(!officerEditor)return;$("modToolsDialog").close();officerEditor.getState=()=>state;officerEditor.onGameChange=()=>{renderPlayer();renderSelection();state.save("manual",state.saveSlot||"1")};officerEditor.openGame()};
   $("openMapEditor").onclick=()=>mapEditor?.open();
   $("openMapEditor").disabled=!mapEditor;
   $("loadScenarioJson").onclick=()=>{$("scenarioEditor").value=JSON.stringify(state.data,null,2);$("debugOutput").textContent="已将当前运行数据载入编辑器；这里只校验和导出，不会热修改正在进行的战局。"};

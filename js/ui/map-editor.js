@@ -362,7 +362,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     for(const line of ["road","river"]){const button=$(`mapEditor${cap(line)}Adjust`);button.classList.toggle("active",adjustingLine===line);button.setAttribute("aria-pressed",String(adjustingLine===line))}
     $("mapEditorMoveCity").classList.toggle("active",movingCity);$("mapEditorMoveCity").setAttribute("aria-pressed",String(movingCity));
     const hint=$("mapEditorToolHint");if(hint)hint.textContent=toolHint();
-    const resize=$("mapEditorResize100");if(resize)resize.disabled=loadingDraft||applying||!!reference?.loading||editor.width>=100||editor.height>=100;
+    const resize=$("mapEditorResize100");if(resize)resize.disabled=loadingDraft||applying||!!reference?.loading||editor.width>=100||editor.height>=100;const gridSection=$("mapEditorGridSection");if(gridSection)gridSection.hidden=editor.width>=100&&editor.height>=100;
     syncPanCursor();
     if(persist&&!editor._edit&&!loadingDraft){draftRevision++;draftSaved=false;clearTimeout(draftTimer);draftTimer=setTimeout(saveDraftNow,250)}
   }
@@ -429,6 +429,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     const hue=[...(value||"?")].reduce((sum,char)=>sum+char.charCodeAt(0),0)%360;
     return `hsl(${hue},32%,32%)`;
   };
+  let lastLabelBucket=null;
   function applyCanvasZoom(remeasure=false){
     if(!canvas)return;
     const viewport=canvas.closest?.(".map-editor-viewport"),wrap=canvas.closest?.(".map-editor-canvas-wrap");
@@ -436,6 +437,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     const width=Math.max(1,Math.round(canvas.width*fitScale*zoom)),height=Math.max(1,Math.round(canvas.height*fitScale*zoom));
     for(const target of [canvas,overlay,terrainCanvas,wrap])if(target){target.style.width=`${width}px`;target.style.height=`${height}px`}
     const label=$("mapEditorZoomValue");if(label)label.textContent=zoom===1?"适配":`${Math.round(zoom*100)}%`;
+    const bucket=`${labelBucket()}:${zoom}:${Math.round((fitScale||1)*100)}`;if(bucket!==lastLabelBucket){lastLabelBucket=bucket;(globalThis.requestAnimationFrame||(callback=>setTimeout(callback,0)))(()=>drawCanvas(false))}
     requestReferenceDraw();
   }
   // Only the visible image crop has a high-DPI backing store. Grid geometry stays fixed.
@@ -518,9 +520,10 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   function drawCounties(){
     const seats=editor.counties||[];
     if(!seats.length)return;
+    const nodeIds=new Set(editor.cities.map(city=>city.id));
     ctx.save();
     for(const seat of seats){
-      if(!editor.inBounds(seat.x,seat.y))continue;
+      if(!editor.inBounds(seat.x,seat.y)||seat.cityId&&nodeIds.has(seat.cityId))continue;
       const x=(seat.x+.5)*cell,y=(seat.y+.5)*cell,size=seat.rank==="commandery"?2.8:seat.rank==="major"?2.5:2.1;
       ctx.fillStyle=seat.rank==="commandery"?"#f0cf7d":seat.rank==="major"?"#d6c17e":"#9f9a7c";
       ctx.strokeStyle="#15170f";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y-size);ctx.lineTo(x+size,y);ctx.lineTo(x,y+size);ctx.lineTo(x-size,y);ctx.closePath();ctx.fill();ctx.stroke();
@@ -547,9 +550,13 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     ctx.restore();
   }
   function drawCities(){
-    ctx.textAlign="center";ctx.font="9px serif";
-    for(const city of editor.cities){const selected=city.id===$("mapEditorCity").value,x=(city.x+.5)*cell,y=(city.y+.5)*cell,kind=MapGrid.nodeKind(city),rank=MapGrid.nodeRank(city,editor.divisions),size=rank==="province"?4:rank==="commandery"?3.4:2.8,color=selected?"#fff6c4":"#f0cf7d";drawNodeMark(kind,rank,x,y,size,color);if(tool()==="road"&&(city.id===roadPick.from||city.id===roadPick.to)){ctx.strokeStyle=city.id===roadPick.from?"#8fd07a":"#d98a6a";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.stroke()}ctx.fillStyle=selected?"#ffe9a8":"#d8d2a4";ctx.fillText(city.name||city.id,x,y-6)}
+    const fontSize=Math.max(4,Math.min(20,11/((fitScale||1)*zoom)));ctx.textAlign="center";ctx.font=`${fontSize}px serif`;
+    for(const city of editor.cities){const selected=city.id===$("mapEditorCity").value,x=(city.x+.5)*cell,y=(city.y+.5)*cell,kind=MapGrid.nodeKind(city),rank=MapGrid.nodeRank(city,editor.divisions),size=rank==="province"?4:rank==="commandery"?3.4:2.8,color=selected?"#fff6c4":"#f0cf7d";drawNodeMark(kind,rank,x,y,size,color);if(tool()==="road"&&(city.id===roadPick.from||city.id===roadPick.to)){ctx.strokeStyle=city.id===roadPick.from?"#8fd07a":"#d98a6a";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.stroke()}if(selected||labelVisible(kind,rank)){ctx.fillStyle=selected?"#ffe9a8":"#d8d2a4";ctx.fillText(city.name||city.id,x,y-Math.max(4,fontSize*.7))}}
   }
+  // 城名按屏幕上实际格宽分级显示：州治始终显示，郡治约 7 像素起，关隘渡口约 9 像素起，普通县邑约 11 像素起，与游戏大地图一致。
+  function displayedCell(){return cell*(fitScale||1)*zoom}
+  function labelBucket(){const size=displayedCell();return size>=11?3:size>=9?2:size>=7?1:0}
+  function labelVisible(kind,rank){const bucket=labelBucket();return rank==="province"||rank==="commandery"&&bucket>=1||kind!=="city"&&bucket>=2||bucket>=3}
   function drawHover(){
     if(!overlayCtx)return;
     overlayCtx.clearRect(0,0,overlay.width,overlay.height);
@@ -750,6 +757,8 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   $("mapEditorZoomOut").onclick=()=>changeZoom(zoom-.25);
   $("mapEditorZoomIn").onclick=()=>changeZoom(zoom+.25);
   $("mapEditorZoomFit").onclick=()=>changeZoom(1,null,true);
+  // 据点检索：输入名称回车或从候选中选取，切到据点工具、选中并居中显示。
+  const findInput=$("mapEditorFind");if(findInput){findInput.onfocus=()=>{const list=$("mapEditorFindList");if(list)list.innerHTML=editor.cities.map(city=>`<option value="${String(city.name||city.id).replace(/"/g,"&quot;")}">${String(city.commandery||"").replace(/</g,"&lt;")}</option>`).join("")};const locate=()=>{const query=findInput.value.trim();if(!query)return;const city=editor.cities.find(item=>item.name===query)||editor.cities.find(item=>String(item.name||"").includes(query));if(!city)return output(`未找到据点：${query}`);if(cityFormDirty)return output("请先保存或还原据点表单。");setTool("city");$("mapEditorCity").value=city.id;syncSelect?.($("mapEditorCity"));$("mapEditorCity").onchange();if(zoom<3)changeZoom(3);const viewport=canvas.closest?.(".map-editor-viewport");if(viewport){const size=displayedCell();viewport.scrollLeft=Math.max(0,(city.x+.5)*size-viewport.clientWidth/2);viewport.scrollTop=Math.max(0,(city.y+.5)*size-viewport.clientHeight/2)}output(`已定位：${city.name}（${city.commandery||"郡属未详"}）`)};findInput.onchange=locate;findInput.onkeydown=event=>{if(event.key==="Enter"){event.preventDefault();locate()}}}
   const mapPointAt=event=>{const rect=canvas.getBoundingClientRect(),scaleX=canvas.width/(rect.width||canvas.width),scaleY=canvas.height/(rect.height||canvas.height);return {x:(event.clientX-rect.left)*scaleX/cell,y:(event.clientY-rect.top)*scaleY/cell}};
   const cellAt=event=>{const point=mapPointAt(event);return {x:Math.floor(point.x),y:Math.floor(point.y)}};
   // 角点河流取最近的格子角点；旧格心河流仍按格子取点。
