@@ -42,7 +42,55 @@
       "army_food_divisor": 24,
       "population_food_divisor": 800,
       "starvation_garrison_loss_ratio": 0.05,
-      "surrender_morale": 0
+      "surrender_morale": 0,
+      "encircle_ratio": 2.5,
+      "parley_morale": 25,
+      "methods": {
+        "blockade": {
+          "name": "围困",
+          "prep_xun": 0,
+          "wall": 2,
+          "attacker_loss": 0.004,
+          "garrison_loss": 0.004,
+          "morale": 0,
+          "note": "深沟高垒断其粮道，待城中粮尽人心离散；成都围数十日刘璋出降，江陵周瑜围曹仁岁余"
+        },
+        "assault": {
+          "name": "强攻",
+          "prep_xun": 1,
+          "wall": 4,
+          "wall_ratio": 5,
+          "unprepared": 0.35,
+          "attacker_loss": 0.03,
+          "garrison_loss": 0.025,
+          "morale": 2,
+          "note": "先造云梯冲车井阑，再四面并进；郝昭以千余人守陈仓二十余日，诸葛亮攻具皆不能克",
+          "ratio_cap": 3
+        },
+        "flood": {
+          "name": "水攻",
+          "prep_xun": 2,
+          "wall": 14,
+          "attacker_loss": 0.006,
+          "garrison_loss": 0.006,
+          "morale": 5,
+          "food_spoil": 0.12,
+          "requires": "river",
+          "note": "筑堤开渠引河灌城，城中粮秣浸坏；曹操决泗沂灌下邳、引漳水灌邺"
+        },
+        "tunnel": {
+          "name": "地道",
+          "prep_xun": 3,
+          "rough_prep_xun": 2,
+          "wall": 1,
+          "attacker_loss": 0.006,
+          "garrison_loss": 0.004,
+          "morale": 1,
+          "success": 0.35,
+          "fail_loss": 0.02,
+          "note": "掘地道直抵城下崩其楼橹；袁绍以此陷易京，守方可掘地横截"
+        }
+      }
     },
     "ai": {
       "decisive_phase_turn": 72,
@@ -424,6 +472,42 @@
           "combat": 1
         }
       }
+    },
+    "logistics": {
+      "note": "道路通行量：每单位通行量（见路网 capacity）约容一万五千人同日通过，超出则队列拉长，每段按超出单位各延误约半日、至多为本段日程一半；转运损耗按里程与路段类型计，漕运最省，栈道最费",
+      "column_men_per_capacity": 15000,
+      "cargo_per_capacity": 20000,
+      "cargo_delay": 0.5,
+      "loss_per_100li": {
+        "food": 0.015,
+        "silk": 0.007,
+        "gold": 0.005
+      },
+      "kind_loss": {
+        "post": 0.8,
+        "road": 1,
+        "mountain": 1.8,
+        "plank": 2.6,
+        "ford": 1.2,
+        "river": 0.3,
+        "sea": 0.6
+      },
+      "max_loss": 0.6,
+      "column_days_per_unit": 0.6,
+      "column_max_ratio": 0.5
+    },
+    "frontage": {
+      "note": "战场宽度：每单位宽度（见路网 frontage）约容八千人同时接战，余众轮换只按比例出力；关隘一单位，城墙按州治、郡治、县邑递减",
+      "men_per_frontage": 8000,
+      "reserve_share": 0.25,
+      "open_field": 4,
+      "pass": 1,
+      "walls": {
+        "province": 4,
+        "commandery": 3,
+        "county": 2,
+        "pass": 1
+      }
     }
   },
   "buildings": {
@@ -611,7 +695,8 @@
     "commandery_city_052:wu": "river",
     "xiangyang:xinye": "river",
     "commandery_city_125:yiling": "river",
-    "commandery_city_047:jiangling": "river"
+    "commandery_city_047:jiangling": "river",
+    "chaisang:commandery_city_119": "river"
   },
   "city_graph": {
     "xuchang": [
@@ -811,7 +896,8 @@
     ],
     "yongan": [
       "fuling",
-      "commandery_city_110"
+      "commandery_city_110",
+      "badong"
     ],
     "jiangzhou": [
       "commandery_city_060",
@@ -843,7 +929,8 @@
     ],
     "changsha": [
       "commandery_city_048",
-      "commandery_city_046"
+      "commandery_city_046",
+      "commandery_city_045"
     ],
     "lingling": [
       "commandery_city_045"
@@ -851,7 +938,8 @@
     "guiyang": [
       "commandery_city_116",
       "commandery_city_046",
-      "commandery_city_100"
+      "commandery_city_100",
+      "panyu"
     ],
     "lujiang": [
       "commandery_city_051",
@@ -909,7 +997,8 @@
     "pukou": [
       "chaisang",
       "jianye",
-      "hefei"
+      "hefei",
+      "commandery_city_051"
     ],
     "ji": [
       "commandery_city_088",
@@ -974,7 +1063,8 @@
       "jiameng"
     ],
     "badong": [
-      "jiangzhou"
+      "jiangzhou",
+      "yongan"
     ],
     "fuling": [
       "jiangzhou",
@@ -1001,7 +1091,9 @@
     "panyu": [
       "cangwu",
       "jianan",
-      "commandery_city_102"
+      "commandery_city_102",
+      "guiyang",
+      "commandery_city_100"
     ],
     "commandery_city_002": [
       "henei",
@@ -1146,7 +1238,8 @@
     ],
     "commandery_city_045": [
       "lingling",
-      "commandery_city_048"
+      "commandery_city_048",
+      "changsha"
     ],
     "commandery_city_046": [
       "changsha",
@@ -1154,12 +1247,14 @@
     ],
     "commandery_city_047": [
       "jiangling",
-      "wuling"
+      "wuling",
+      "commandery_city_048"
     ],
     "commandery_city_048": [
       "changsha",
       "commandery_city_045",
-      "jiangling"
+      "jiangling",
+      "commandery_city_047"
     ],
     "commandery_city_049": [
       "guangling",
@@ -1171,7 +1266,8 @@
     ],
     "commandery_city_051": [
       "hefei",
-      "lujiang"
+      "lujiang",
+      "pukou"
     ],
     "commandery_city_052": [
       "wu",
@@ -1287,7 +1383,8 @@
     "commandery_city_102": [
       "commandery_city_101",
       "panyu",
-      "jiaozhi"
+      "jiaozhi",
+      "commandery_city_100"
     ],
     "commandery_city_103": [
       "jiaozhi"
@@ -1320,7 +1417,9 @@
     ],
     "commandery_city_100": [
       "guiyang",
-      "cangwu"
+      "cangwu",
+      "panyu",
+      "commandery_city_102"
     ],
     "commandery_city_104": [
       "jiaozhi",

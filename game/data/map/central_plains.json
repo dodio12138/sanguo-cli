@@ -2219,6 +2219,13 @@
       "path": "26,73:W"
     },
     {
+      "id": "main:badong|yongan",
+      "from": "badong",
+      "to": "yongan",
+      "kind": "main",
+      "path": "26,73:NNENNE"
+    },
+    {
       "id": "main:baima|puyang",
       "from": "baima",
       "to": "puyang",
@@ -2282,6 +2289,20 @@
       "path": "55,98:EN"
     },
     {
+      "id": "main:chaisang|commandery_city_054",
+      "from": "chaisang",
+      "to": "commandery_city_054",
+      "kind": "main",
+      "path": "65,72:SSSSS"
+    },
+    {
+      "id": "main:chaisang|commandery_city_119",
+      "from": "chaisang",
+      "to": "commandery_city_119",
+      "kind": "main",
+      "path": "65,72:NNNNNWWWWN"
+    },
+    {
       "id": "main:changan|commandery_city_006",
       "from": "changan",
       "to": "commandery_city_006",
@@ -2317,11 +2338,18 @@
       "path": "34,48:SSSSSEEEEEEEEN"
     },
     {
+      "id": "main:changsha|commandery_city_045",
+      "from": "changsha",
+      "to": "commandery_city_045",
+      "kind": "main",
+      "path": "52,83:WWWWWWSSSSSSS"
+    },
+    {
       "id": "main:changsha|commandery_city_046",
       "from": "changsha",
       "to": "commandery_city_046",
       "kind": "main",
-      "path": "52,83:WSSSSSSSSSE"
+      "path": "52,83:SSSSSSSSS"
     },
     {
       "id": "main:changsha|commandery_city_048",
@@ -2804,7 +2832,14 @@
       "from": "commandery_city_046",
       "to": "guiyang",
       "kind": "main",
-      "path": "52,92:SWWWSSSS"
+      "path": "52,92:WWWSSSSS"
+    },
+    {
+      "id": "main:commandery_city_047|commandery_city_048",
+      "from": "commandery_city_047",
+      "to": "commandery_city_048",
+      "kind": "main",
+      "path": "46,75:EEESESESSS"
     },
     {
       "id": "main:commandery_city_047|jiangling",
@@ -2818,7 +2853,7 @@
       "from": "commandery_city_047",
       "to": "wuling",
       "kind": "main",
-      "path": "46,75:WWWWSSSSSWSSWS"
+      "path": "46,75:WWWWSSSSSSSWWS"
     },
     {
       "id": "main:commandery_city_049|guangling",
@@ -2863,6 +2898,13 @@
       "path": "71,65:WWWWS"
     },
     {
+      "id": "main:commandery_city_051|pukou",
+      "from": "commandery_city_051",
+      "to": "pukou",
+      "kind": "main",
+      "path": "71,65:EN"
+    },
+    {
       "id": "main:commandery_city_052|kuaiji",
       "from": "commandery_city_052",
       "to": "kuaiji",
@@ -2881,7 +2923,7 @@
       "from": "commandery_city_054",
       "to": "commandery_city_118",
       "kind": "main",
-      "path": "65,77:NEEEEN"
+      "path": "65,77:EENNEE"
     },
     {
       "id": "main:commandery_city_054|yuzhang",
@@ -3262,11 +3304,25 @@
       "path": "90,7:EEEEEEEEE"
     },
     {
+      "id": "main:commandery_city_100|commandery_city_102",
+      "from": "commandery_city_100",
+      "to": "commandery_city_102",
+      "kind": "main",
+      "path": "56,97:ESSEE"
+    },
+    {
       "id": "main:commandery_city_100|guiyang",
       "from": "commandery_city_100",
       "to": "guiyang",
       "kind": "main",
       "path": "56,97:WWWWWWW"
+    },
+    {
+      "id": "main:commandery_city_100|panyu",
+      "from": "commandery_city_100",
+      "to": "panyu",
+      "kind": "main",
+      "path": "56,97:NEESEEEEEEEES"
     },
     {
       "id": "main:commandery_city_101|commandery_city_102",
@@ -3276,11 +3332,18 @@
       "path": "46,96:SSSEEEEEEEEEEEEE"
     },
     {
+      "id": "main:commandery_city_102|jiaozhi",
+      "from": "commandery_city_102",
+      "to": "jiaozhi",
+      "kind": "main",
+      "path": "59,99:NNNNWWWWWWWWWWWWWWWWSWSWWSWWWWWW"
+    },
+    {
       "id": "main:commandery_city_103|jiaozhi",
       "from": "commandery_city_103",
       "to": "jiaozhi",
       "kind": "main",
-      "path": "37,98:WWW"
+      "path": "37,98:SWWWN"
     },
     {
       "id": "main:commandery_city_104|commandery_city_105",
@@ -3346,6 +3409,13 @@
       "path": "42,59:EEEESE"
     },
     {
+      "id": "main:commandery_city_110|yongan",
+      "from": "commandery_city_110",
+      "to": "yongan",
+      "kind": "main",
+      "path": "35,64:SWWWWWSSSWWS"
+    },
+    {
       "id": "main:commandery_city_111|yangping",
       "from": "commandery_city_111",
       "to": "yangping",
@@ -3372,6 +3442,13 @@
       "to": "guiyang",
       "kind": "main",
       "path": "60,87:WWWWSSSWSSSSSSWWWWWWS"
+    },
+    {
+      "id": "main:commandery_city_116|yuzhang",
+      "from": "commandery_city_116",
+      "to": "yuzhang",
+      "kind": "main",
+      "path": "60,87:NENENNNNNEE"
     },
     {
       "id": "main:commandery_city_117|wan",
@@ -3465,6 +3542,13 @@
       "path": "68,22:EESESSW"
     },
     {
+      "id": "main:fuling|jiangzhou",
+      "from": "fuling",
+      "to": "jiangzhou",
+      "kind": "main",
+      "path": "31,73:WSWWWWWN"
+    },
+    {
       "id": "main:guandu|hulao",
       "from": "guandu",
       "to": "hulao",
@@ -3498,6 +3582,13 @@
       "to": "xiapi",
       "kind": "main",
       "path": "81,57:ENNWWWNWWWWNNWNNNN"
+    },
+    {
+      "id": "main:guiyang|panyu",
+      "from": "guiyang",
+      "to": "panyu",
+      "kind": "main",
+      "path": "49,97:SEEEEEEEEEEEEEEEEE"
     },
     {
       "id": "main:hangu|hongnong",
