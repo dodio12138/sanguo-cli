@@ -13,7 +13,7 @@ for(const route of network.routes){
   const kind=network.kinds[route.kind];if(kind.mode!=="water")continue;
   const a=cities.get(route.a),b=cities.get(route.b);
   if(route.kind==="sea"){const path=MapGrid.seaPath(map,a,b);if(!path)continue;for(const [x,y] of path.slice(1,-1))assert.equal(terrain[y*width+x],"ocean",`${route.name} 航线不得穿越陆地`);seas++;continue}
-  const path=MapGrid.riverPath(map,a,b)||MapGrid.riverPath(map,a,b,12);if(!path)continue;
+  const path=MapGrid.riverPath(map,a,b)||MapGrid.riverPath(map,a,b,6)||MapGrid.riverPath(map,a,b,12);if(!path)continue;
   assert.deepEqual(path[0],[a.x,a.y]);assert.deepEqual(path.at(-1),[b.x,b.y]);
   for(const [x,y] of path.slice(1,-1))assert.ok(corners.has(`${x},${y}`),`${route.name} ${a.name}—${b.name} 水路折点必须落在河道角点上`);
   rivers++;

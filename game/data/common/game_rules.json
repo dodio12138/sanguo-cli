@@ -42,7 +42,55 @@
       "army_food_divisor": 24,
       "population_food_divisor": 800,
       "starvation_garrison_loss_ratio": 0.05,
-      "surrender_morale": 0
+      "surrender_morale": 0,
+      "encircle_ratio": 2.5,
+      "parley_morale": 25,
+      "methods": {
+        "blockade": {
+          "name": "围困",
+          "prep_xun": 0,
+          "wall": 2,
+          "attacker_loss": 0.004,
+          "garrison_loss": 0.004,
+          "morale": 0,
+          "note": "深沟高垒断其粮道，待城中粮尽人心离散；成都围数十日刘璋出降，江陵周瑜围曹仁岁余"
+        },
+        "assault": {
+          "name": "强攻",
+          "prep_xun": 1,
+          "wall": 4,
+          "wall_ratio": 5,
+          "unprepared": 0.35,
+          "attacker_loss": 0.03,
+          "garrison_loss": 0.025,
+          "morale": 2,
+          "note": "先造云梯冲车井阑，再四面并进；郝昭以千余人守陈仓二十余日，诸葛亮攻具皆不能克",
+          "ratio_cap": 3
+        },
+        "flood": {
+          "name": "水攻",
+          "prep_xun": 2,
+          "wall": 14,
+          "attacker_loss": 0.006,
+          "garrison_loss": 0.006,
+          "morale": 5,
+          "food_spoil": 0.12,
+          "requires": "river",
+          "note": "筑堤开渠引河灌城，城中粮秣浸坏；曹操决泗沂灌下邳、引漳水灌邺"
+        },
+        "tunnel": {
+          "name": "地道",
+          "prep_xun": 3,
+          "rough_prep_xun": 2,
+          "wall": 1,
+          "attacker_loss": 0.006,
+          "garrison_loss": 0.004,
+          "morale": 1,
+          "success": 0.35,
+          "fail_loss": 0.02,
+          "note": "掘地道直抵城下崩其楼橹；袁绍以此陷易京，守方可掘地横截"
+        }
+      }
     },
     "ai": {
       "decisive_phase_turn": 72,
