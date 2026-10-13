@@ -8,6 +8,7 @@ import {FileSaveStore} from "../server/save-store.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const smokeTest=process.argv.includes("--smoke-test");
+const noAiGateway=process.argv.includes("--no-ai-gateway");
 const noOpen=process.argv.includes("--no-open"),argumentValue=name=>{const index=process.argv.indexOf(`--${name}`);return index>=0?process.argv[index+1]:null};
 const mime={".css":"text/css; charset=utf-8",".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".json":"application/json; charset=utf-8",".png":"image/png",".svg":"image/svg+xml",".webp":"image/webp"};
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -46,7 +47,8 @@ if(smokeTest){
   try{for(const asset of ["/","/css/ui-polish.css","/js/ui/app.js","/js/data/offline-data.generated.js","/game/data/common/game_rules.json"]){const response=await fetch(`http://127.0.0.1:${port}${asset}`);if(!response.ok)throw new Error(`${asset} 返回 HTTP ${response.status}`);const body=await response.text();if(asset==="/"&&(!body.includes("startScreen")||!body.includes("20260930-78")))throw new Error("主页未包含当前启动界面或脚本版本")}const saves=await fetch(`http://127.0.0.1:${port}/api/saves`).then(response=>response.json());if(!saves.ok||!saves.slots)throw new Error("持久存档 API 未正常响应");for(const asset of ["/.env","/server/.env.example","/.git/config","/.local/saves.json"]){const response=await fetch(`http://127.0.0.1:${port}${asset}`);if(response.status!==403)throw new Error(`${asset} 未被静态服务器拒绝（HTTP ${response.status}）`)}console.log(`启动器冒烟测试通过：主页、样式、游戏脚本、离线数据与存档 API 可访问，私有文件不可访问（${url}）`)}finally{server.closeAllConnections();server.close()}
 }else{
   let aiGateway=null,stopping=false;
-  if(await isAiGatewayReady(aiPort))console.log(`本地 AI 网关已在运行：http://127.0.0.1:${aiPort}`);
+  if(noAiGateway)console.log("已跳过 AI 网关启动。");
+  else if(await isAiGatewayReady(aiPort))console.log(`本地 AI 网关已在运行：http://127.0.0.1:${aiPort}`);
   else{
     aiGateway=spawn(process.execPath,[path.join(root,"server/ai-gateway.mjs")],{cwd:root,stdio:"inherit"});
     aiGateway.on("error",error=>console.error(`AI 网关未能启动：${error.message}；游戏仍可手动游玩。`));
@@ -54,7 +56,7 @@ if(smokeTest){
     let ready=false;for(let attempt=0;attempt<20;attempt++){if(await isAiGatewayReady(aiPort)){ready=true;break}if(aiGateway.exitCode!==null)break;await delay(150)}
     if(!ready)console.warn(`AI 网关暂未就绪（端口 ${aiPort}）。游戏仍会正常打开，可检查 .env 或在 AI 设置中调整网关地址。`);
   }
-  console.log(`九州棋局已启动：${url}`);console.log("游戏与本地 AI 网关由此启动器一并管理；保持窗口开启，按 Ctrl+C 可同时停止。");
+  console.log(`九州棋局已启动：${url}`);console.log(noAiGateway?"保持窗口开启，按 Ctrl+C 可停止游戏服务。":"游戏与本地 AI 网关由此启动器一并管理；保持窗口开启，按 Ctrl+C 可同时停止。");
     if(!noOpen){const browser=spawn("open",[url],{detached:true,stdio:"ignore"});browser.on("error",error=>console.error(`未能自动打开浏览器：${error.message}\n请手动访问 ${url}`));browser.unref()}
   const stop=()=>{if(stopping)return;stopping=true;if(aiGateway&&aiGateway.exitCode===null)aiGateway.kill("SIGTERM");server.close(()=>process.exit(0))};process.once("SIGINT",stop);process.once("SIGTERM",stop);
 }
