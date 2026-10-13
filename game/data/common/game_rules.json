@@ -697,7 +697,9 @@
     "rest_recovery": 6,
     "rest_morale_recovery": 3,
     "camp_recovery": 18,
-    "isolated_cost": 12
+    "isolated_cost": 12,
+    "fed_recovery": 25,
+    "friendly_supply_factor": 0.5
   },
   "edge_modifiers": {
     "henei:mengjin": "river",
