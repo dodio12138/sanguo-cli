@@ -24,19 +24,17 @@ new Function(fs.readFileSync(new URL("../js/data/offline-data.generated.js",impo
 const data=globalThis.SANGUO_DATA,real=new window.RuleEngine(data),graph=data.rules.city_graph,cities=data.cities,site=id=>cities.find(c=>c.id===id);
 const bfs=(from,to)=>{const queue=[[from]],seen=new Set([from]);while(queue.length){const route=queue.shift();if(route.at(-1)===to)return route;for(const next of graph[route.at(-1)]||[])if(!seen.has(next)){seen.add(next);queue.push([...route,next])}}return null};
 const geo=route=>route.slice(1).reduce((total,id,index)=>total+Math.hypot(site(id).x-site(route[index]).x,site(id).y-site(route[index]).y),0);
-let shorter=0,sameHops=true,noWorse=true;
+let faster=0,noSlower=true;
 for(const from of cities)for(const to of cities){
   if(from.id===to.id)continue;
   const legacy=bfs(from.id,to.id),route=real.path(from.id,to.id);
   if(Boolean(legacy)!==Boolean(route))throw new Error(`连通性改变：${from.id} → ${to.id}`);
   if(!route)continue;
-  if(route.length!==legacy.length)sameHops=false;
-  if(geo(route)>geo(legacy)+1e-9)noWorse=false;
-  if(geo(route)<geo(legacy)-1e-9)shorter++;
+  if(real.routeDays(route)>real.routeDays(legacy))noSlower=false;
+  if(real.routeDays(route)<real.routeDays(legacy))faster++;
 }
-assert.ok(sameHops,"同跳数规则必须保持：行军天数与补给预算不得变化");
-assert.ok(noWorse,"新路线不得比旧路线绕远");
-assert.ok(shorter>500,`应大量修正绕远路线，实际修正 ${shorter} 组`);
+assert.ok(noSlower,"按行军天数选路，不得比最少段数路线更慢");
+assert.ok(faster>100,`应有大量路线因驿道、水路更快而改道，实际 ${faster} 组`);
 assert.deepEqual(real.path("luoyang","tongguan"),["luoyang","hangu","hongnong","tongguan"],"洛阳→潼关应循崤函道经函谷关、弘农");
 assert.deepEqual(real.path("shouchun","xuchang"),["shouchun","xuchang"],"寿春→许昌应循颍水直达");
 
@@ -44,4 +42,4 @@ for(const forceId of ["cao","yuan"]){
   const throughEnemy=route=>route.slice(1,-1).some(id=>{const target=site(id);return target?.force&&![forceId,"neutral"].includes(target.force)});
   for(const from of cities.filter(c=>c.force===forceId))for(const to of cities)if(from.id!==to.id){const route=real.path(from.id,to.id,forceId);if(route&&throughEnemy(route))throw new Error(`敌境据点仍被穿越：${from.id} → ${to.id}`)}
 }
-console.log(`路线选择通过：同跳数取近路（修正 ${shorter} 组）/ 敌军据点阻断 / 粮道与联军共用 / 行军天数不变`);
+console.log(`路线选择通过：按行军天数择路（提速 ${faster} 组）/ 敌军据点阻断 / 粮道与联军共用 / 按里程计日`);

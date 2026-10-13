@@ -24,8 +24,8 @@
     "mountain": {
       "name": "山道",
       "mode": "land",
-      "winding": 1.6,
-      "speed_li": 20,
+      "winding": 1.4,
+      "speed_li": 25,
       "capacity": 1,
       "frontage": 1,
       "note": "太行诸陉、武关道、祁山道等山间谷道，仅容单列"
@@ -33,8 +33,8 @@
     "plank": {
       "name": "栈道",
       "mode": "land",
-      "winding": 1.8,
-      "speed_li": 12,
+      "winding": 1.5,
+      "speed_li": 18,
       "capacity": 0.5,
       "frontage": 0.5,
       "note": "褒斜、子午、故道、阴平等阁道，险窄易断"
