@@ -456,3 +456,31 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 /* 面板内按钮统一：区块末尾整行按钮同“任命官员”样式；数据行内小按钮同一种小号样式 */
 .detail-content .biography>button,.detail-content .detail-section>button{width:100%;margin-top:7px;border:1px solid #665832;background:#192117;color:#d6c77f;padding:7px;cursor:pointer;font:inherit;font-size:10px}
 .detail-content .data-row button,.fiscal-arrears button{margin-left:6px;border:1px solid var(--line);background:#1a2418;color:var(--green);padding:1px 8px;font:inherit;font-size:9px;cursor:pointer}
+
+/* 人物编辑器 */
+.officer-editor-dialog{width:min(1100px,96vw);max-width:96vw}
+.officer-editor-content{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;height:min(78vh,760px);padding:10px}
+.officer-editor-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:10px;color:var(--muted)}
+.officer-editor-bar label,.officer-editor-fields label{display:flex;gap:6px;align-items:center}
+.officer-editor-bar select,.officer-editor-bar input,.officer-editor-fields select,.officer-editor-fields input{background:#101710;color:var(--text);border:1px solid var(--line);font:inherit;font-size:10px;padding:3px 5px}
+.officer-editor-main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:10px;min-height:0}
+.officer-editor-list{overflow:auto;border:1px solid #2c3428;background:#0d130d}
+.officer-editor-table tr[data-oe-pick]{cursor:pointer}
+.officer-editor-table tr.selected td{background:#243121;color:#e5cf7c}
+.officer-editor-table small{color:#b99c54;font-size:8px}
+.officer-editor-form{overflow:auto;border:1px solid #2c3428;background:#0f150f;padding:8px 10px}
+.officer-editor-form h3{margin:0 0 8px;color:#e5cf7c;font-size:13px}
+.officer-editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;font-size:10px;color:var(--muted)}
+.officer-editor-fields label{justify-content:space-between}
+.officer-editor-fields input[type=number]{width:72px}
+.officer-editor-fields .wide{grid-column:1/-1}
+.officer-editor-fields fieldset{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;border:1px solid #2c3428;padding:4px 6px;margin:0}
+.officer-editor-fields legend{color:#b7b08e;font-size:9px}
+.officer-editor-errors{min-height:12px;margin:0;color:#e3a08a}
+.officer-editor-form-actions,.officer-editor-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.officer-editor-actions{justify-content:flex-end;border-top:1px dotted #343c2e;padding-top:7px}
+.officer-editor-actions .officer-editor-note{margin-right:auto}
+.officer-editor-note{color:#858a75;font-size:9px}
+.officer-editor-form-actions button,.officer-editor-actions button{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:4px 10px;font:inherit;font-size:10px;cursor:pointer}
+.officer-editor-form-actions button.primary,.officer-editor-actions button.primary{border-color:var(--amber);background:#252b19;color:#e2cc78}
+@media (max-width:760px){.officer-editor-main{grid-template-columns:1fr}.officer-editor-content{height:auto}}
