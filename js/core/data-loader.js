@@ -38,7 +38,7 @@ window.DataLoader = class DataLoader {
     for(const city of data.cities||[]){
       const raw=config.historical_basis?.[city.id],basis=raw?Object.fromEntries(fields.map((field,index)=>[field,raw[index]])):{};
       const adjustment={...defaults,...(regions[basis.resource_region]||{}),...(overrides[city.id]||{})},basePopulation=Number(city.population)||1000,baseGarrison=Number(city.garrison)||0;
-      const commandery=basis.commandery||"史籍未详",counties=data.administrativeDivisions?.commandery_counties?.[commandery]||[city.name];
+      const commandery=basis.commandery||city.commandery||"史籍未详",counties=city.countyNode?[city.name]:data.administrativeDivisions?.commandery_counties?.[commandery]||[city.name];
       city.historical=DataLoader.populationHistory(config,commandery,basis);city.commandery=commandery;if(!city.province)city.province=data.administrativeDivisions?.frontier_commandery_provinces?.[commandery]||data.administrativeDivisions?.commandery_seats_140?.find(seat=>seat.name===commandery)?.province||"";city.counties=[...counties];city.resourceRegion=basis.resource_region||"other";city.resourceScenario=scenarioId;
       city.population=Math.max(1000,Math.round(basePopulation*(adjustment.population??1)/500)*500);city.garrison=Math.max(city.type==="city"?500:100,Math.round(baseGarrison*(adjustment.garrison??1)/100)*100);
       city.agriculture=Math.max(0,Math.min(100,Math.round((city.agriculture||0)+(adjustment.agriculture||0))));city.commerce=Math.max(0,Math.min(100,Math.round((city.commerce||0)+(adjustment.commerce||0))));city.order=Math.max(0,Math.min(100,Math.round((city.order||0)+(adjustment.order||0))));
@@ -58,10 +58,14 @@ window.DataLoader = class DataLoader {
       const value=force||"neutral";cache.set(city.id,value);return value
     };
     for(const city of data.cities||[]){if(!city.id.startsWith("commandery_city_"))continue;city.force=resolve(city);city.governor=data.scenario?.patch?.governors?.[city.id]||city.governor||"—"}
+    // 由县治升格的普通县邑随本郡治所归属；剧本补丁显式指定者除外。
+    const seats=new Map();for(const city of data.cities||[])if(city.commanderySeatNode&&!seats.has(city.commandery))seats.set(city.commandery,city);
+    for(const city of data.cities||[]){if(!city.countyNode)continue;if(!explicit.has(city.id)||!city.force||city.force==="neutral"){const seat=seats.get(city.commandery)||[...(data.cities||[])].filter(item=>!item.countyNode&&item.commandery===city.commandery).sort((a,b)=>Math.hypot(a.x-city.x,a.y-city.y)-Math.hypot(b.x-city.x,b.y-city.y))[0];city.force=seat?.force||"neutral"}city.governor=data.scenario?.patch?.governors?.[city.id]||city.governor||"—"}
     return data;
   }
   applyCountyResources(data,scenarioId=data.scenario?.id||"200_guandu"){
     const profiles=data.cityResourceProfiles||{},scenario=profiles.scenarios?.[scenarioId]||profiles.scenarios?.["200_guandu"]||{},eraRatio={"190_coalition":.36,"200_guandu":.32,"208_red_cliffs":.29}[scenarioId]??.32;
+    if(window.MapGrid?.assignCountyJurisdiction)MapGrid.assignCountyJurisdiction(data.counties||[],data.cities||[],data.administrativeDivisions);
     for(const county of data.counties||[]){
       const city=(data.cities||[]).find(item=>item.id===county.jurisdictionCityId)||(data.cities||[]).filter(item=>item.commandery===county.commandery).sort((a,b)=>Math.hypot(a.x-county.x,a.y-county.y)-Math.hypot(b.x-county.x,b.y-county.y))[0];
       if(!city)continue;county.jurisdictionCityId=city.id;county.force=city.force;const region=city.resourceRegion||"other",adjustment={...(scenario.default||{}),...(scenario.regions?.[region]||{}),...(scenario.cities?.[city.id]||{})},seed=[...county.id].reduce((sum,char)=>sum+char.charCodeAt(0),0),variation=seed%9-4;

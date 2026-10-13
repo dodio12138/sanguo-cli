@@ -422,3 +422,23 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
   .campaign-select .campaign-brief{max-height:none}
 }
 @media(max-width:420px){#startScenarioStep .start-choices{grid-template-columns:1fr}.campaign-select .campaign-force-layout{grid-template-rows:180px auto auto}}
+
+/* 战况窗口 */
+.battle-meters{display:grid;gap:6px;}
+.battle-meter{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:10px;color:var(--muted);}
+.battle-meter b{color:#ddd5aa;font-size:10px;text-align:right;white-space:nowrap;}
+.battle-meter .army-meter{height:6px;}
+.battle-meter.wall .army-meter i{background:#b99c54;}
+.battle-meter.morale .army-meter i{background:#c76b4f;}
+.battle-meter.food .army-meter i{background:#91a15b;}
+.battle-meter.ring .army-meter i{background:#6f8fb0;}
+.battle-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 6px;}
+.battle-actions label{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--muted);}
+.battle-actions button,[data-open-siege]{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:4px 9px;cursor:pointer;font-size:10px;}
+.battle-actions select{background:#101710;color:var(--text);border:1px solid var(--line);font-size:10px;padding:2px 4px;}
+.battle-actions button.danger{border-color:#7d3a2c;color:#e3a08a;}
+.battle-log{margin:4px 0;padding:4px 6px;border-left:2px solid #3b4434;font-size:10px;line-height:1.5;color:#c9c1a0;}
+.battle-log small{display:block;color:#7f866f;font-size:8px;}
+.battle-log.victory{border-left-color:#8fae5b;}
+.battle-log.defeat{border-left-color:#b65c46;}
+[data-open-siege]{margin-left:6px;padding:0 6px;font-size:9px;}
