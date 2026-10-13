@@ -472,6 +472,42 @@
           "combat": 1
         }
       }
+    },
+    "logistics": {
+      "note": "道路通行量：每单位通行量（见路网 capacity）约容一万五千人同日通过，超出则队列拉长，每段按超出单位各延误约半日、至多为本段日程一半；转运损耗按里程与路段类型计，漕运最省，栈道最费",
+      "column_men_per_capacity": 15000,
+      "cargo_per_capacity": 20000,
+      "cargo_delay": 0.5,
+      "loss_per_100li": {
+        "food": 0.015,
+        "silk": 0.007,
+        "gold": 0.005
+      },
+      "kind_loss": {
+        "post": 0.8,
+        "road": 1,
+        "mountain": 1.8,
+        "plank": 2.6,
+        "ford": 1.2,
+        "river": 0.3,
+        "sea": 0.6
+      },
+      "max_loss": 0.6,
+      "column_days_per_unit": 0.6,
+      "column_max_ratio": 0.5
+    },
+    "frontage": {
+      "note": "战场宽度：每单位宽度（见路网 frontage）约容八千人同时接战，余众轮换只按比例出力；关隘一单位，城墙按州治、郡治、县邑递减",
+      "men_per_frontage": 8000,
+      "reserve_share": 0.25,
+      "open_field": 4,
+      "pass": 1,
+      "walls": {
+        "province": 4,
+        "commandery": 3,
+        "county": 2,
+        "pass": 1
+      }
     }
   },
   "buildings": {

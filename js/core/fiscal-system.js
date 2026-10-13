@@ -54,8 +54,10 @@ window.FiscalSystem=class FiscalSystem {
     const ledger=this.initialize(state),route=this.route(state,sourceCityId,targetCityId,forceId);
     if(!route)return null;
     const source=state.data.cities.find(city=>city.id===sourceCityId),score=this.governance(state,source).ability,distance=Math.max(0,route.length-1);
-    const lossRate=this.clamp(distance*(resource==="food"?.025:resource==="silk"?.012:.008)*(1-score/160),0,.45),loss=Math.floor(amount*lossRate);
-    const edgeDays=GameClock.isDaily(state)?10:1,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,segmentRemainingDays:route.length>1?edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,distance*edgeDays),purpose,status:"在途"};
+    // 转运按路段里程与类型计损耗与日程：漕运最省，栈道山道最费；大宗粮秣超出道路通行量时车队延误。
+    const cfg=state.data.rules.balance?.logistics||{},legs=state.data.routeNetwork&&state.engine.legInfo?route.slice(1).map((id,index)=>state.engine.legInfo(route[index],id)):null,baseRate=resource==="food"?.025:resource==="silk"?.012:.008;
+    const rawLoss=legs?legs.reduce((sum,leg)=>sum+(leg.li?leg.li/100*(cfg.loss_per_100li?.[resource]??baseRate*.6)*(cfg.kind_loss?.[leg.kind]??1):baseRate),0):distance*baseRate,lossRate=this.clamp(rawLoss*(1-score/160),0,cfg.max_loss??.45),loss=Math.floor(amount*lossRate);
+    const daily=GameClock.isDaily(state),edgeDays=daily?10:1,legDays=daily&&legs?legs.map(leg=>{const convoy=amount/Math.max(.1,(leg.capacity??1)*(cfg.cargo_per_capacity??20000));return Math.max(1,Math.ceil(leg.days*(convoy<=1?1:1+(convoy-1)*(cfg.cargo_delay??.5))))}):null,travel=legDays?legDays.reduce((sum,days)=>sum+days,0):distance*edgeDays,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,...(legDays?{legDays}:{}),segmentRemainingDays:route.length>1?legDays?.[0]??edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,travel),purpose,status:"在途"};
     ledger.shipments.push(shipment);return shipment;
   }
   static advanceShipments(state,events){
@@ -66,7 +68,7 @@ window.FiscalSystem=class FiscalSystem {
       if(destination?.force!==cargo.forceId){cargo.status="没收";cargo.completedTurn=state.turn;if(destination){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[cargo.resource];destination[key]=(destination[key]||0)+cargo.delivered}if(cargo.laborId)this.dismissLabor(state,cargo.sourceCityId,events,cargo.laborId);events.push({phase:"财政",text:`${cargo.purpose}运输目的地失守，${cargo.delivered}${this.units[cargo.resource]}被当地势力没收`});continue}
       const current=cargo.route[cargo.nextIndex],edgeOpen=next===current||(state.data.rules.city_graph[current]||[]).includes(next);
       if(!edgeOpen||!next||state.data.cities.find(city=>city.id===next)?.force!==cargo.forceId||state.engine.isCityBesieged(next)||state.data.armies.some(army=>army.city===next&&army.force!==cargo.forceId&&!army.siegeTarget)||!source){cargo.status="受阻";cargo.arriveTurn+=1;continue}
-      cargo.status="在途";cargo.segmentRemainingDays??=1;cargo.segmentRemainingDays-=1;if(cargo.segmentRemainingDays>0)continue;cargo.nextIndex=Math.min(cargo.nextIndex+1,cargo.route.length-1);cargo.segmentRemainingDays=cargo.edgeDays||1;
+      cargo.status="在途";cargo.segmentRemainingDays??=1;cargo.segmentRemainingDays-=1;if(cargo.segmentRemainingDays>0)continue;cargo.nextIndex=Math.min(cargo.nextIndex+1,cargo.route.length-1);cargo.segmentRemainingDays=cargo.legDays?.[cargo.nextIndex]??cargo.edgeDays??1;
       if(cargo.nextIndex<cargo.route.length-1)continue;
       let pool;
       if(cargo.targetKind==="central")pool=state.data.forces.find(force=>force.id===cargo.forceId)?.resources;
