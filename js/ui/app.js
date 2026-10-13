@@ -89,7 +89,6 @@
     $("startBackButton").onclick=()=>{if(loading)return;if(currentView==="new"&&newStep>2){newStep--;paint();focusStep()}else switchView("home")};
     $("campaignDifficultyChoice").onchange=()=>{$("difficultyChoice").value=$("campaignDifficultyChoice").value;$("difficultyChoice").dispatchEvent(new Event("change"))};$("campaignSpeedChoice").onchange=()=>{$("observerDefaultSpeed").value=$("campaignSpeedChoice").value;$("observerDefaultSpeed").dispatchEvent(new Event("change"))};
     $("difficultyChoice").onchange=()=>{userSettings.difficulty=$("difficultyChoice").value;safeLocalSet(settingsKey,JSON.stringify(userSettings))};$("observerDefaultSpeed").onchange=()=>{userSettings.observerDelay=Number($("observerDefaultSpeed").value)||3000;safeLocalSet(settingsKey,JSON.stringify(userSettings))};$("confirmEndTurn").onchange=()=>{userSettings.confirmEndTurn=$("confirmEndTurn").checked;safeLocalSet(settingsKey,JSON.stringify(userSettings))};$("chronicleEnabled").onchange=()=>{userSettings.chronicleEnabled=$("chronicleEnabled").checked;safeLocalSet(settingsKey,JSON.stringify(userSettings))};$("globalHistorianEnabled").onchange=()=>{userSettings.globalHistorianEnabled=$("globalHistorianEnabled").checked;safeLocalSet(settingsKey,JSON.stringify(userSettings))};
-    $("cancelOverwrite").onclick=()=>$("overwriteSaveDialog").close();
     const refreshSlot=activeSlot();if(refreshSlot&&readSlot(refreshSlot))queueMicrotask(()=>resumeSlot(refreshSlot));else{if(refreshSlot)clearActive();finishResume();paint()}
   })}
   const campaign=await chooseCampaign();
@@ -434,7 +433,7 @@
   $("closeTurnBriefing").onclick=()=>$("turnBriefingDialog").close();$("ackTurnBriefing").onclick=()=>$("turnBriefingDialog").close();
   $("helpButton").onclick=()=>$("helpDialog").showModal();$("closeHelp").onclick=()=>$("helpDialog").close();$("openTurnMapButton").onclick=()=>window.open("docs/game-turn-map.html?v=20261009-02","_blank","noopener");document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).close());
   $("restartGame").onclick=()=>{returningToTitle=true;simulation.pause();clearActive();location.reload()};
-  window.addEventListener("keydown",GameShortcuts.createHandler({document,citySelected:()=>state.selected.type==="city",blocked:()=>!!state.policies.pendingEvent||!!state.gameOver||!!document.querySelector("#plannerDialog[open],#commandDialog[open],#overwriteSaveDialog[open],#saveManagerDialog[open],#gameSettingsDialog[open],#aiDialog[open],#modToolsDialog[open],#mapEditorDialog[open]"),actions:{
+  window.addEventListener("keydown",GameShortcuts.createHandler({document,citySelected:()=>state.selected.type==="city",blocked:()=>!!state.policies.pendingEvent||!!state.gameOver||!!document.querySelector("#plannerDialog[open],#commandDialog[open],#saveManagerDialog[open],#gameSettingsDialog[open],#aiDialog[open],#modToolsDialog[open],#mapEditorDialog[open]"),actions:{
     toggle:()=>simulation.toggle(),layer:index=>state.setLayer(["terrain","political","province","commandery","supply","intel"][index]),
     commands:()=>{if(!state.observerMode){simulation.pause();$("commandBookButton").click()}},
     battles:()=>$("battleReportButton").click(),reports:()=>$("reportButton").click(),intelligence:()=>openLedger("intelligence"),help:()=>$("helpButton").click(),

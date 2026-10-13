@@ -8,7 +8,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=20261010-01">
   <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261013-08">
+  <link rel="stylesheet" href="css/ui-polish.css?v=20261013-09">
   <link rel="stylesheet" href="css/chronicle.css?v=20260929-01">
   <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
   <link rel="stylesheet" href="css/os-desktop.css?v=20261012-02">
@@ -150,7 +150,6 @@
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
     <div class="dialog-title"><span>结束当前日</span></div><div class="dialog-content"><p>提交本日队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一日</button></div></div>
   </dialog>
-  <dialog id="overwriteSaveDialog" class="confirm-turn-dialog"><div class="dialog-title"><span>覆盖本地存档？</span></div><div class="dialog-content"><p id="overwriteSaveText">所选槽位已有存档。</p><div class="confirm-actions"><button id="cancelOverwrite">返回</button><button id="confirmOverwrite">确认覆盖</button></div></div></dialog>
   <dialog id="helpDialog">
     <div class="dialog-title">系统帮助 <button id="closeHelp">×</button></div>
     <div class="dialog-content help-content"><section><h3>基本操作</h3><p>单击舆图选择据点，双击打开详情；拖动标题栏移动窗口，双击标题栏切换最大化，拖动右下角改变大小。</p></section><section><h3>每日模拟</h3><p>运行时逐日推进；暂停后查看府库与局势，安排任命或军事行动，继续后执行待办军令。任务栏右侧播放键暂停／继续；速度键单击循环切换 3、1、0.5 秒／日。</p><button id="openTurnMapButton" type="button">查看可视化每日流程</button></section><section><h3>快捷操作</h3><p>空格：暂停／继续；[／]：减速／加速；F1～F6：切换舆图；回车：所选城市详情；O：城市命令；M：规划行军；C：命令簿；B：战报；R：日报；I：情报；H：帮助；Esc：关闭最前窗口；Ctrl/⌘+S：保存。输入、命令编辑与事件抉择时不触发模拟快捷键。</p></section><details class="advanced-tools"><summary>高级工具</summary><button id="modToolsButton">打开数据与模组工具</button></details></div>
@@ -378,21 +377,21 @@
 
   <script src="js/data/command-catalog.js?v=20260930-78"></script>
   <script src="js/data/game-data.js?v=20260928-16"></script>
-  <script src="js/data/offline-data.generated.js?v=20261013-14"></script>
+  <script src="js/data/offline-data.generated.js?v=20261013-15"></script>
   <script src="js/core/data-loader.js?v=20261013-05"></script>
   <script src="js/core/game-clock.js?v=20261009-01"></script>
   <script src="js/core/simulation-clock.js?v=20261009-02"></script>
-  <script src="js/core/fiscal-system.js?v=20261013-03"></script>
+  <script src="js/core/fiscal-system.js?v=20261013-04"></script>
   <script src="js/core/rule-engine.js?v=20261013-07"></script>
   <script src="js/core/ai-bridge.js?v=20261009-02"></script>
   <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
   <script src="js/core/ai-controller.js?v=20261005-08"></script>
   <script src="js/core/save-library.js?v=20261012-01"></script>
-  <script src="js/core/game-state.js?v=20261013-03"></script>
+  <script src="js/core/game-state.js?v=20261013-04"></script>
   <script src="js/core/map-grid.js?v=20261013-08"></script>
   <script src="js/core/map-editor-drafts.js?v=20261010-02"></script>
   <script src="js/core/scenario-map-store.js?v=20261011-01"></script>
-  <script src="js/ui/map-view.js?v=20261013-13"></script>
+  <script src="js/ui/map-view.js?v=20261013-14"></script>
   <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
   <script src="js/ui/map-editor.js?v=20261013-04"></script>
   <script src="js/ui/terminal-select.js?v=20261010-10"></script>
@@ -401,7 +400,7 @@
   <script src="js/ui/button-feedback.js?v=20261009-03"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
   <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261013-13"></script>
+  <script src="js/ui/app.js?v=20261013-14"></script>
   <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
   <script src="js/ui/os-window-manager.js?v=20261011-02"></script>
 </body>
