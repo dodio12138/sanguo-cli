@@ -57,7 +57,7 @@ assert.equal(stationed.stores.lastConsumption.source,"随军军仓");
 delete stationed.route;state.data.cities[0].force="yuan";stationed.stores.food=500;const foreignFood=city.localFood;
 FiscalSystem.consumeArmy(state,stationed,[]);
 assert.equal(city.localFood,foreignFood,"客地不得消耗他城粮食");
-assert.equal(stationed.stores.food,500-ration);
+assert.ok(stationed.stores.food>=500-ration,"客地军仓可由最近的己方城池续运");if(stationed.stores.food>500-ration)assert.ok(stationed.stores.lastResupply?.cityId&&state.data.cities.find(c=>c.id===stationed.stores.lastResupply.cityId)?.force===stationed.force,"续运须出自己方城池");
 state=fixture();{const fed=state.data.armies[0],home=state.data.cities.find(c=>c.id===fed.city);fed.stores.food=0;home.localFood=0;const centralBefore=state.resources.food;FiscalSystem.consumeArmy(state,fed,[]);assert.equal(fed.stores.lastConsumption.short,0,"本城无粮时应就近调粮");assert.ok(fed.stores.lastConsumption.fromRegion>0,"调粮来自本郡或中央");assert.ok(state.data.cities.some(c=>c.id!==home.id&&c.force===home.force)||state.resources.food<centralBefore)}
 state=fixture();const hungry=state.data.armies[0];hungry.stores.food=0;for(const c of state.data.cities)if(c.force===state.playerForceId)c.localFood=0;state.resources.food=0;const hungerEvents=[];
 FiscalSystem.consumeArmy(state,hungry,hungerEvents);

@@ -485,3 +485,12 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .officer-editor-form-actions button.primary,.officer-editor-actions button.primary{border-color:var(--amber);background:#252b19;color:#e2cc78}
 @media (max-width:760px){.officer-editor-main{grid-template-columns:1fr}.officer-editor-content{height:auto}}
 .map-editor-zoom input{width:120px;min-height:22px;border:1px solid #303a2d;background:#101710;color:var(--text);font:10px var(--mono);padding:2px 6px}
+/* 行军路线方案：自定义停留节点与逐段路况 */
+.planner-stops{display:grid;gap:6px;border:1px solid var(--line-dim);padding:8px}
+.planner-stop-add{display:flex;gap:6px}.planner-stop-add input{flex:1;min-width:0}
+.planner-stops ol{margin:0;padding-left:18px;display:grid;gap:4px;max-height:132px;overflow:auto}
+.planner-stops li{display:flex;align-items:center;gap:6px;color:var(--text);font-size:9px}.planner-stops li span{flex:1}
+.planner-hint{color:var(--muted);font-size:8px;margin:0}
+.planner-legs{width:100%;margin-top:6px;border-collapse:collapse;font-size:8px;color:var(--text)}
+.planner-legs th,.planner-legs td{border-bottom:1px dotted var(--line-dim);padding:3px 4px;text-align:left}.planner-legs th{color:var(--muted);font-weight:normal}
+.planner-legs td:nth-child(3),.planner-legs td:nth-child(4),.planner-legs th:nth-child(3),.planner-legs th:nth-child(4){text-align:right}
