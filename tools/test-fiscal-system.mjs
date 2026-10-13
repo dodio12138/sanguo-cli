@@ -58,7 +58,8 @@ delete stationed.route;state.data.cities[0].force="yuan";stationed.stores.food=5
 FiscalSystem.consumeArmy(state,stationed,[]);
 assert.equal(city.localFood,foreignFood,"客地不得消耗他城粮食");
 assert.equal(stationed.stores.food,500-ration);
-state=fixture();const hungry=state.data.armies[0];hungry.stores.food=0;state.data.cities[0].localFood=0;const hungerEvents=[];
+state=fixture();{const fed=state.data.armies[0],home=state.data.cities.find(c=>c.id===fed.city);fed.stores.food=0;home.localFood=0;const centralBefore=state.resources.food;FiscalSystem.consumeArmy(state,fed,[]);assert.equal(fed.stores.lastConsumption.short,0,"本城无粮时应就近调粮");assert.ok(fed.stores.lastConsumption.fromRegion>0,"调粮来自本郡或中央");assert.ok(state.data.cities.some(c=>c.id!==home.id&&c.force===home.force)||state.resources.food<centralBefore)}
+state=fixture();const hungry=state.data.armies[0];hungry.stores.food=0;for(const c of state.data.cities)if(c.force===state.playerForceId)c.localFood=0;state.resources.food=0;const hungerEvents=[];
 FiscalSystem.consumeArmy(state,hungry,hungerEvents);
 assert.equal(hungry.stores.lastConsumption.short,ration);assert.equal(hungry.stores.lastConsumption.source,"缺粮");
 assert(hungerEvents.some(event=>/缺粮/.test(event.text)),"断粮必须产生缺粮事件");

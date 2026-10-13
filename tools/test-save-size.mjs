@@ -20,4 +20,8 @@ const saved=state.serialize();assert.equal(saved.world.cities.find(city=>city.id
 const restored=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});restored.applySave(restored.migrateSave(structuredClone(saved)));
 for(const city of state.data.cities){const back=restored.data.cities.find(item=>item.id===city.id);assert.ok(back,`读档缺少据点 ${city.name}`);for(const key of ["name","x","y","commandery","force","garrison","population"])assert.deepEqual(back[key],city[key],`${city.name}.${key} 读档不一致`);assert.ok(back.historical,`${city.name} 史籍字段未补回`)}
 for(const officer of state.data.officers.slice(0,50)){const back=restored.data.officers.find(item=>item.id===officer.id);assert.deepEqual(back.aptitude,officer.aptitude);assert.equal(back.force,officer.force);assert.equal(back.status,officer.status)}
+// v17 及更早存档的存粮按口粮标定同比放大 4 倍。
+const legacy=JSON.parse(JSON.stringify(saved));legacy.version=17;const before=JSON.parse(JSON.stringify(legacy)),migrated=restored.migrateSave(legacy),city=before.world.cities.find(item=>item.localFood>0);
+assert.equal(migrated.resources.food,Math.round(before.resources.food*4),"旧存档中央存粮换算");assert.equal(migrated.world.cities.find(item=>item.id===city.id).localFood,Math.round(city.localFood*4),"旧存档地方存粮换算");
+const fresh=JSON.parse(JSON.stringify(saved));assert.equal(restored.migrateSave(fresh).resources.food,fresh.resources.food,"新存档不重复换算");
 console.log(`存档体积通过：半年 ${(half/1024)|0}KB / 一年 ${(full/1024)|0}KB / 转运 ${ledger.shipments.length} 条 / 战报 ${state.reports.length} 份 / 紧凑存档读回一致`);
