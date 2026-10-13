@@ -11,7 +11,7 @@ import {execFileSync} from "node:child_process";
 import {fileURLToPath} from "node:url";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),".."),args=process.argv.slice(2),flag=name=>args.includes(name),option=name=>{const index=args.indexOf(name);return index>=0?args[index+1]:null};
-const run=(command,list,options={})=>execFileSync(command,list,{cwd:root,encoding:"utf8",stdio:options.quiet?"pipe":["ignore","pipe","inherit"],...options}).trim();
+const run=(command,list,options={})=>String(execFileSync(command,list,{cwd:root,encoding:"utf8",stdio:options.quiet?"pipe":["ignore","pipe","inherit"],...options})??"").trim();
 const git=(...list)=>run("git",list),step=text=>console.log(`\n▶ ${text}`);
 const branch=git("rev-parse","--abbrev-ref","HEAD");if(branch!=="main")throw new Error(`请在 main 分支发布（当前 ${branch}）`);
 if(git("status","--porcelain"))throw new Error("工作区有未提交的改动，请先提交");
