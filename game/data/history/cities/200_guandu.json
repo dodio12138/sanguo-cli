@@ -2423,7 +2423,7 @@
       "y": 66,
       "force": "liu_biao",
       "province": "荆州",
-      "population": 10000,
+      "population": 5000,
       "garrison": 2500,
       "governor": "—",
       "level": 1,
@@ -3911,8 +3911,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "outside-authored-commandery-grid"
+      "commandery": "张掖郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "凉州"
     },
     {
       "id": "commandery_city_075",
@@ -3928,8 +3929,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "outside-authored-commandery-grid"
+      "commandery": "酒泉郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "凉州"
     },
     {
       "id": "commandery_city_076",
@@ -3945,8 +3947,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "outside-authored-commandery-grid"
+      "commandery": "敦煌郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "凉州"
     },
     {
       "id": "commandery_city_078",
@@ -3962,8 +3965,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "outside-authored-commandery-grid"
+      "commandery": "张掖居延属国",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "凉州"
     },
     {
       "id": "commandery_city_081",
@@ -3979,8 +3983,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "reference-map-aligned"
+      "commandery": "上郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "并州"
     },
     {
       "id": "commandery_city_082",
@@ -3996,8 +4001,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "reference-map-aligned"
+      "commandery": "西河郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "并州"
     },
     {
       "id": "commandery_city_084",
@@ -4013,8 +4019,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "outside-authored-commandery-grid"
+      "commandery": "云中郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "并州"
     },
     {
       "id": "commandery_city_085",
@@ -4030,8 +4037,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "reference-map-aligned"
+      "commandery": "定襄郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "并州"
     },
     {
       "id": "commandery_city_087",
@@ -4047,8 +4055,9 @@
       "commerce": 30,
       "agriculture": 38,
       "order": 54,
-      "commandery": "塞外区域",
-      "coordinateQuality": "reference-map-aligned"
+      "commandery": "朔方郡",
+      "coordinateQuality": "outside-authored-commandery-grid",
+      "province": "并州"
     },
     {
       "type": "city",
@@ -4101,6 +4110,42 @@
       "commanderySeatNode": true,
       "commanderySeatId": "commandery_seat_109",
       "commanderySeatName": "东武",
+      "coordinateQuality": "reference-map-aligned"
+    },
+    {
+      "id": "jiameng",
+      "name": "葭萌关",
+      "type": "pass",
+      "x": 19,
+      "y": 58,
+      "force": "liu_zhang",
+      "province": "益州",
+      "population": 2400,
+      "garrison": 800,
+      "governor": "—",
+      "level": 1,
+      "commerce": 2,
+      "agriculture": 6,
+      "order": 60,
+      "commandery": "梓潼郡",
+      "coordinateQuality": "reference-map-aligned"
+    },
+    {
+      "id": "jiangyou",
+      "name": "江油关",
+      "type": "pass",
+      "x": 14,
+      "y": 59,
+      "force": "liu_zhang",
+      "province": "益州",
+      "population": 2400,
+      "garrison": 500,
+      "governor": "—",
+      "level": 1,
+      "commerce": 2,
+      "agriculture": 6,
+      "order": 60,
+      "commandery": "汶山郡",
       "coordinateQuality": "reference-map-aligned"
     }
   ]
