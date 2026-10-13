@@ -1,0 +1,23 @@
+import assert from "node:assert/strict";
+globalThis.window=globalThis;globalThis.localStorage={getItem:()=>null,setItem:()=>{},removeItem:()=>{}};
+await import("../js/data/offline-data.generated.js");
+await import("../js/core/map-grid.js");await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
+try{await import("../js/core/ai-controller.js")}catch{}await import("../js/core/game-state.js");
+
+// 浏览器本地存储约 5MB，主档与备份并存：开局一年后单档须小于 1MB，且转运、战报不随时间无限增长。
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});state.date={year:200,month:1,day:1};
+const size=()=>JSON.stringify(state.serialize()).length;let half=0;
+for(let day=1;day<=360;day++){state.endTurn();if(day===180)half=size()}
+const full=size(),ledger=state.policies.fiscalAccounts;
+assert.ok(full<1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1MB`);
+assert.ok(full-half<half*.4,`下半年存档增长 ${((full-half)/1024)|0}KB，增长过快`);
+assert.ok(ledger.shipments.length<200,`在途与近期转运 ${ledger.shipments.length} 条，应有上限`);
+assert.ok(Object.keys(ledger.archive||{}).length,"已结束转运应并入汇总");
+assert.ok(state.reports.length<=GameState.REPORT_MAX&&state.reports.slice(GameState.REPORT_FULL).every(report=>report.pruned&&!report.resourceDelta),"旧战报只留战事条目");
+assert.ok(ledger.shipments.every(cargo=>cargo.status!=="在途"||cargo.amount>=FiscalSystem.minRemittance(state,cargo.resource)||cargo.purpose!=="上缴"),"零星上缴应攒批起运");
+// 紧凑存档读回：静态字段由基础数据补回，动态字段保持。
+const saved=state.serialize();assert.equal(saved.world.cities.find(city=>city.id==="xian_01_03").historical,undefined,"存档不重复保存史籍字段");
+const restored=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});restored.applySave(restored.migrateSave(structuredClone(saved)));
+for(const city of state.data.cities){const back=restored.data.cities.find(item=>item.id===city.id);assert.ok(back,`读档缺少据点 ${city.name}`);for(const key of ["name","x","y","commandery","force","garrison","population"])assert.deepEqual(back[key],city[key],`${city.name}.${key} 读档不一致`);assert.ok(back.historical,`${city.name} 史籍字段未补回`)}
+for(const officer of state.data.officers.slice(0,50)){const back=restored.data.officers.find(item=>item.id===officer.id);assert.deepEqual(back.aptitude,officer.aptitude);assert.equal(back.force,officer.force);assert.equal(back.status,officer.status)}
+console.log(`存档体积通过：半年 ${(half/1024)|0}KB / 一年 ${(full/1024)|0}KB / 转运 ${ledger.shipments.length} 条 / 战报 ${state.reports.length} 份 / 紧凑存档读回一致`);

@@ -23,7 +23,7 @@ for(const id of ["190_coalition","200_guandu","208_red_cliffs"]){
   assert.ok(game.data.counties.every(county=>county.population>0));
 }
 const baseline=await loader.loadScenario("200_guandu"),game=new GameState(structuredClone(baseline)),save=game.serialize();
-const savedCity=save.world.cities.find(city=>city.id==="commandery_city_094"),county=save.world.counties[0];savedCity.population=4321;savedCity.historical.censusPopulation=null;county.population=1234;
+const savedCity=save.world.cities.find(city=>city.id==="commandery_city_094"),county=save.world.counties[0];savedCity.population=4321;(savedCity.historical??={}).censusPopulation=null;county.population=1234;
 const restored=new GameState(structuredClone(baseline));restored.applySave(restored.migrateSave(save));loader.refreshPopulationHistory(restored.data);
 assert.equal(restored.data.cities.find(city=>city.id===savedCity.id).population,4321,"更新来源不能重算战局人口");assert.equal(restored.data.cities.find(city=>city.id===savedCity.id).historical.censusPopulation,81714);assert.equal(restored.data.counties.find(item=>item.id===county.id).population,1234);
 const custom=restored.data.cities.find(city=>city.id===savedCity.id);custom.commandery="用户自定郡";loader.refreshPopulationHistory(restored.data);assert.equal(custom.historical.censusPopulation,null,"自定义郡不能套用原郡人口");assert.equal(custom.population,4321);

@@ -18,7 +18,12 @@
       "population_base_growth_per_xun": 0.00008,
       "population_order_growth_per_point": 0.000006,
       "population_occupation_growth_per_xun": -0.0005,
-      "food_harvest_per_agriculture": 3.5
+      "food_harvest_per_agriculture": 3.5,
+      "min_remittance": {
+        "gold": 100,
+        "food": 600,
+        "silk": 20
+      }
     },
     "administration": {
       "default_official_ability": 45,

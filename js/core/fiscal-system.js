@@ -13,6 +13,7 @@ window.FiscalSystem=class FiscalSystem {
     ["dismiss_labor","遣散徭役","logistics","后勤","遣散指定城市的徭役，返还原县人口并停止其生产占用"],
     ["relieve_fire","扑救火灾","construction","建设","征发徭役清理火灾损伤，工程完成后自动遣散民夫"]
   ];
+  static minRemittance(state,resource){return state.data.rules.balance?.economy?.min_remittance?.[resource]??({gold:100,food:600,silk:20})[resource]??1}
   static initialize(state){
     const data=state.data;
     state.policies.fiscalAccounts??={version:1,forces:{},shipments:[],laborGroups:[],projects:[],sequence:0};
@@ -77,7 +78,10 @@ window.FiscalSystem=class FiscalSystem {
       if(cargo.laborId)this.dismissLabor(state,cargo.sourceCityId,events,cargo.laborId);
       if(cargo.forceId===state.playerForceId)events.push({phase:"财政",siteId:destination.id,text:`${cargo.purpose}入库：${cargo.delivered}${this.units[cargo.resource]}${this.names[cargo.resource]}（路损 ${cargo.transportLoss}，行程 ${cargo.route.length-1} 段）`});
     }
-    ledger.shipments=ledger.shipments.filter(cargo=>!["完成","没收"].includes(cargo.status)||state.turn-(cargo.completedTurn||cargo.departedTurn)<36);
+    // 已结束的转运只留一旬、每势力至多 30 条备查，其余并入分势力、分物资的累计汇总，存档不随据点数与时间无限增长。
+    const keepTurns=GameClock.duration(state,1),finished=cargo=>["完成","没收"].includes(cargo.status),recent=new Map();ledger.archive??={};
+    for(const cargo of [...ledger.shipments].reverse()){if(!finished(cargo))continue;const count=recent.get(cargo.forceId)||0,fresh=state.turn-(cargo.completedTurn||cargo.departedTurn)<keepTurns;if(fresh&&count<30){recent.set(cargo.forceId,count+1);continue}cargo.archived=true;const bucket=((ledger.archive[cargo.forceId]??={})[cargo.resource]??={shipments:0,amount:0,delivered:0,loss:0,confiscated:0});bucket.shipments++;bucket.amount+=cargo.amount||0;bucket.delivered+=cargo.status==="完成"?cargo.delivered||0:0;bucket.loss+=cargo.transportLoss||0;if(cargo.status==="没收")bucket.confiscated+=cargo.delivered||0}
+    ledger.shipments=ledger.shipments.filter(cargo=>!cargo.archived);
   }
   static collect(state,city,type,events,manual=false){
     const fiscal=city.fiscal,account=this.account(state,city.force),engine=state.engine,month=this.monthIndex(state.date),last=fiscal.lastCollected[type];
@@ -92,11 +96,12 @@ window.FiscalSystem=class FiscalSystem {
     const requestedRetention=Math.floor((net-localUse)*keepRate),retained=resource==="food"?Math.floor(Math.min(net-localUse,Math.max(0,Math.min(city.storage||20000,Math.max(requestedRetention,g.population*.03+(city.garrison||0)/250*18+g.bureaucracy*6))-(city.localFood||0)))):requestedRetention,remittable=net-localUse-retained;
     city.localGold-=cost;fiscal.accrued[type]-=gross;fiscal.lastCollected[type]=month;fiscal.attention=this.clamp(fiscal.attention+12,0,100);
     const key={gold:"localGold",food:"localFood",silk:"localSilk"}[resource];city[key]=(city[key]||0)+retained;
-    const shipment=this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount:remittable});
+    // 零星上缴先记为待解，攒满一批（见 balance.economy.min_remittance）再起运，免得数百辆小车同时在途。
+    const batched=remittable>0&&remittable<this.minRemittance(state,resource),shipment=batched?null:this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount:remittable});
     if(!shipment){city[key]+=remittable;fiscal.pendingRemittance[resource]+=remittable}
     fiscal.lastCollection??={};fiscal.lastCollection[type]={turn:state.turn,gross,resource,cost,inefficiencyLoss,corruptionLoss,localUse,retained,remitted:shipment?remittable:0,pending:shipment?0:remittable,transportLoss:shipment?.transportLoss||0,expected:shipment?.delivered||0};
     city.publicSupport=this.clamp(city.publicSupport-(manual?1:.15)-Math.max(0,(type==="land"?account.landRate:type==="commercial"?account.commercialRate:account.silkRate)-15)*.12,0,100);
-    if(city.force===state.playerForceId)events.push({phase:"财政",siteId:city.id,text:`${city.name}${{land:"田租",commercial:"商业税",food:"粮食",silk:"布帛"}[type]}征收 ${gross}${this.units[resource]}：行政损耗 ${inefficiencyLoss}、贪污 ${corruptionLoss}、地方耗用 ${localUse}、留用 ${retained}、${shipment?"上缴在途":"道路不通留存"} ${remittable}；征收经费 ${cost}贯`});
+    if(city.force===state.playerForceId)events.push({phase:"财政",siteId:city.id,text:`${city.name}${{land:"田租",commercial:"商业税",food:"粮食",silk:"布帛"}[type]}征收 ${gross}${this.units[resource]}：行政损耗 ${inefficiencyLoss}、贪污 ${corruptionLoss}、地方耗用 ${localUse}、留用 ${retained}、${shipment?"上缴在途":batched?"零星待解":"道路不通留存"} ${remittable}；征收经费 ${cost}贯`});
     return {ok:true,...fiscal.lastCollection[type]};
   }
   static settle(state,events){
@@ -111,7 +116,7 @@ window.FiscalSystem=class FiscalSystem {
         const foodReserve=this.localFoodReserve(state,city,g),keepArrears=account.arrears==="retain";let arrearLine="";
         for(const resource of ["gold","food","silk"]){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[resource],owed=fiscal.pendingRemittance[resource]||0;if(owed<=0)continue;
           if(keepArrears){fiscal.pendingRemittance[resource]=0;fiscal.arrearsRetained={gold:0,food:0,silk:0,...(typeof fiscal.arrearsRetained==="object"?fiscal.arrearsRetained:null)};fiscal.arrearsRetained[resource]+=owed;arrearLine+=`${arrearLine?"、":""}${this.names[resource]} ${owed}${this.units[resource]}`;continue}
-          const amount=Math.min(owed,Math.max(0,(city[key]||0)-(resource==="food"?foodReserve:0)));if(amount<=0)continue;const shipment=this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount,purpose:"补缴"});if(shipment){city[key]-=amount;fiscal.pendingRemittance[resource]-=amount;arrearLine+=`${arrearLine?"、":""}${this.names[resource]} ${amount}${this.units[resource]}`}}
+          const amount=Math.min(owed,Math.max(0,(city[key]||0)-(resource==="food"?foodReserve:0)));if(amount<this.minRemittance(state,resource))continue;const shipment=this.enqueue(state,{forceId:city.force,sourceCityId:city.id,targetCityId:account.capitalId,resource,amount,purpose:"补缴"});if(shipment){city[key]-=amount;fiscal.pendingRemittance[resource]-=amount;arrearLine+=`${arrearLine?"、":""}${this.names[resource]} ${amount}${this.units[resource]}`}}
         if(arrearLine&&city.force===state.playerForceId&&(keepArrears||(fiscal.arrearsNoticeTurn??-999)+30<=state.turn)){fiscal.arrearsNoticeTurn=state.turn;events.push({phase:"财政",siteId:city.id,text:keepArrears?`${city.name}欠额 ${arrearLine}不再补缴，转为地方留用`:`${city.name}以本地余粮补缴欠额 ${arrearLine}${foodReserve?`，本地留底粮食 ${foodReserve}石优先保障驻军与军团`:""}`})}
         const countyPopulation=counties.reduce((sum,county)=>sum+(county.population||0),0),rural=(counties.length?countyPopulation+(city.population||0)*.15:(city.population||0)),agriculture=(city.agriculture||40)/50,commerce=(city.commerce||30)/50;
         const activeLabor=this.initialize(state).laborGroups.filter(group=>group.cityId===city.id&&group.status==="服役").reduce((sum,group)=>sum+group.people,0),laborFactor=this.clamp(1-activeLabor/Math.max(1,rural+activeLabor)*2,.1,1);
