@@ -46,7 +46,7 @@ for(const id of ["newSaveName","gameSaveName","updateCurrentSave","createSaveCop
 if(html.includes('id="newSaveSlotChoice"')||source.includes('rows=["1","2","3"]'))throw new Error("存档界面不能保留固定三卡槽");
 if(!source.includes('pendingNewSlot=SaveLibrary.newId();beginNewGame()')||!source.includes('await SaveLibrary.initialize()'))throw new Error("新游戏必须使用独立编号且先加载旧存档库");
 const catalog=JSON.parse(fs.readFileSync(new URL("../game/data/history/scenarios/index.json",import.meta.url),"utf8"));
-if(catalog.scenarios.map(item=>item.id).join(",")!=="190_coalition,200_guandu,208_red_cliffs")throw new Error("剧本未按时间排列");
+{const years=catalog.scenarios.map(item=>Number(item.id.split("_")[0]));if(catalog.scenarios.length<6||years.some((year,index)=>index&&year<=years[index-1]))throw new Error("剧本未按时间排列")}
 if(!source.includes('scenarios.find(s=>s.id===data.scenario.id)'))throw new Error("更改列表顺序后必须保持选中剧本与实际数据一致");
 if(!source.includes('activeSessionKey="sanguo.active-session.v1"')||!source.includes("queueMicrotask(()=>resumeSlot(refreshSlot))")||!source.includes("clearActive();location.reload()"))throw new Error("缺少刷新自动恢复与显式返回主菜单逻辑");
 if(!html.includes('document.documentElement.classList.add("resume-pending")')||!html.includes("html.resume-pending .start-screen")||!source.includes('finishResume=()=>document.documentElement.classList.remove("resume-pending")'))throw new Error("刷新恢复期间仍可能闪现主菜单");

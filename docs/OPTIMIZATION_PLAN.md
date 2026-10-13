@@ -124,6 +124,8 @@
 
 ### 10. 新剧本
 
+> 已完成（2026-10-13）：濮阳 194（22 个可选势力、210 名在任人物）、潼关 211（9 个、195 名）、襄阳 219（5 个、154 名），各有开局军团、郡治官员、资源时点与 AI 性格，由 `test-scenario-ownership`、`test-scenario-rosters` 把关。
+
 - 按 `SCENARIO_ROADMAP.md` 推进濮阳（194）、潼关（211）、襄阳（219）。
 - 194 个县邑的归属随郡派生；如有个别县的归属需要与本郡不同，在 `build-scenario-ownership.mjs` 的 `CITY_OWNERS` 中补充。
 

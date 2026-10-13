@@ -2503,6 +2503,255 @@
           "agriculture": 5
         }
       }
+    },
+    "194_puyang": {
+      "default": {
+        "population": 0.98,
+        "garrison": 0.9,
+        "agriculture": -2,
+        "commerce": -1,
+        "order": -2,
+        "food_stock": 0.56,
+        "gold_stock": 0.9
+      },
+      "regions": {
+        "central": {
+          "population": 0.86,
+          "agriculture": -6,
+          "order": -6,
+          "food_stock": 0.42
+        },
+        "xuzhou": {
+          "population": 0.88,
+          "agriculture": -4,
+          "order": -4,
+          "food_stock": 0.5
+        },
+        "north": {
+          "population": 1.04,
+          "order": 1
+        },
+        "northwest": {
+          "population": 0.92,
+          "agriculture": -3,
+          "order": -3,
+          "food_stock": 0.48
+        },
+        "jingzhou": {
+          "population": 1.1,
+          "agriculture": 2,
+          "order": 4,
+          "food_stock": 0.72
+        },
+        "yizhou": {
+          "population": 1.04,
+          "agriculture": 2,
+          "order": 2,
+          "food_stock": 0.76
+        },
+        "jiangdong": {
+          "population": 0.96,
+          "order": -1
+        },
+        "huainan": {
+          "population": 1.02,
+          "food_stock": 0.5
+        }
+      },
+      "cities": {
+        "luoyang": {
+          "population": 0.42,
+          "garrison": 0.6,
+          "commerce": -14,
+          "order": -12
+        },
+        "changan": {
+          "population": 0.82,
+          "garrison": 1.3,
+          "agriculture": -6,
+          "order": -8
+        },
+        "puyang": {
+          "garrison": 1.5
+        },
+        "xiangyang": {
+          "population": 1.1,
+          "garrison": 1.2,
+          "commerce": 4,
+          "order": 5
+        }
+      }
+    },
+    "211_tongguan": {
+      "default": {
+        "population": 0.98,
+        "garrison": 1.1,
+        "agriculture": 2,
+        "commerce": 1,
+        "order": 3,
+        "food_stock": 0.7,
+        "gold_stock": 0.98
+      },
+      "regions": {
+        "north": {
+          "population": 0.98,
+          "agriculture": 3,
+          "order": 5
+        },
+        "central": {
+          "population": 0.94,
+          "agriculture": 4,
+          "order": 4
+        },
+        "xuzhou": {
+          "population": 0.82,
+          "order": 2
+        },
+        "northwest": {
+          "population": 0.86,
+          "garrison": 1.2,
+          "order": -3
+        },
+        "jingzhou": {
+          "population": 0.94,
+          "garrison": 1.2,
+          "order": 1
+        },
+        "jiangdong": {
+          "population": 1.14,
+          "garrison": 1.15,
+          "agriculture": 4,
+          "commerce": 5,
+          "order": 5,
+          "food_stock": 0.8,
+          "gold_stock": 1.1
+        },
+        "huainan": {
+          "population": 0.8,
+          "garrison": 1.3
+        },
+        "yizhou": {
+          "population": 1.08,
+          "agriculture": 3,
+          "order": 3,
+          "food_stock": 0.84
+        },
+        "jiaozhou": {
+          "population": 1.04,
+          "agriculture": 3,
+          "commerce": 3,
+          "order": 3
+        }
+      },
+      "cities": {
+        "tongguan": {
+          "garrison": 2.2
+        },
+        "changan": {
+          "population": 0.78,
+          "garrison": 1.3,
+          "order": -6
+        },
+        "hongnong": {
+          "garrison": 1.6
+        },
+        "jiangling": {
+          "population": 0.92,
+          "garrison": 1.4
+        },
+        "hefei": {
+          "garrison": 1.6
+        },
+        "jianye": {
+          "population": 1.2,
+          "garrison": 1.3,
+          "commerce": 8
+        }
+      }
+    },
+    "219_xiangyang": {
+      "default": {
+        "population": 1,
+        "garrison": 1.12,
+        "agriculture": 3,
+        "commerce": 2,
+        "order": 3,
+        "food_stock": 0.72,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.02,
+          "agriculture": 4,
+          "order": 5
+        },
+        "central": {
+          "population": 1,
+          "agriculture": 5,
+          "order": 4
+        },
+        "northwest": {
+          "population": 0.8,
+          "order": 2
+        },
+        "jingzhou": {
+          "population": 0.9,
+          "garrison": 1.3,
+          "order": -2
+        },
+        "jiangdong": {
+          "population": 1.16,
+          "garrison": 1.15,
+          "agriculture": 5,
+          "commerce": 6,
+          "order": 5,
+          "food_stock": 0.82,
+          "gold_stock": 1.12
+        },
+        "huainan": {
+          "population": 0.72,
+          "garrison": 1.4
+        },
+        "yizhou": {
+          "population": 1.04,
+          "garrison": 1.12,
+          "agriculture": 3,
+          "order": 4,
+          "food_stock": 0.78
+        },
+        "jiaozhou": {
+          "population": 1.06,
+          "agriculture": 3,
+          "commerce": 4,
+          "order": 3
+        }
+      },
+      "cities": {
+        "xiangyang": {
+          "garrison": 1.6
+        },
+        "jiangling": {
+          "population": 0.94,
+          "garrison": 0.8,
+          "order": -4
+        },
+        "hanzhong": {
+          "population": 0.62,
+          "garrison": 1.4,
+          "order": -4
+        },
+        "changan": {
+          "population": 0.9,
+          "garrison": 1.3
+        },
+        "hefei": {
+          "garrison": 1.8
+        },
+        "wan": {
+          "population": 0.82,
+          "order": -8
+        }
+      }
     }
   },
   "population_reference": {

@@ -1,6 +1,6 @@
 # 剧本开发计划
 
-现有剧本：**洛阳**（190）、**官渡**（200）、**赤壁**（208）。本文列出后续可开发的剧本、优先级和每个剧本的制作清单。史料边界与现有剧本口径见 [`game/data/history/scenarios/SCENARIO_NOTES.md`](../game/data/history/scenarios/SCENARIO_NOTES.md)。
+现有剧本：**洛阳**（190）、**濮阳**（194）、**官渡**（200）、**赤壁**（208）、**潼关**（211）、**襄阳**（219）。本文列出后续可开发的剧本、优先级和每个剧本的制作清单。史料边界与现有剧本口径见 [`game/data/history/scenarios/SCENARIO_NOTES.md`](../game/data/history/scenarios/SCENARIO_NOTES.md)。
 
 ## 命名与选题原则
 
@@ -22,6 +22,8 @@
 ## 候选剧本
 
 ### 第一批：数据基础好、填补现有空档
+
+> 已完成（2026-10-13）：濮阳、潼关、襄阳三剧本上线，取舍见 `SCENARIO_NOTES.md`。剧本卡片字体子集尚待用字体源文件重新截取（见制作清单第 6 步）。
 
 | 剧本名 | 时点 | 地图节点 | 核心局势 | 主要势力 |
 | --- | --- | --- | --- | --- |
@@ -58,9 +60,9 @@
 
 ## 推荐顺序
 
-1. **濮阳**：190 与 200 之间相隔最久，补上后剧本链更完整；人物最充足。
-2. **潼关**：首次让马超、刘备入蜀前的局面可玩。
-3. **襄阳**：三分天下成形前的最后一次大变局。
+1. ~~**濮阳**~~（已完成）
+2. ~~**潼关**~~（已完成）
+3. ~~**襄阳**~~（已完成）
 4. **夷陵**、**天水**：开始三国鼎立阶段之前，先完成鼎立时期的 AI 与胜负调整。
 5. 第三批视人物补全进度再定。
 
@@ -68,7 +70,7 @@
 
 1. 在 `game/data/history/scenarios/` 新建剧本文件，结构与现有剧本相同：`name`（地名）、`start_date`、`playable_forces`、`historical_brief`、`force_briefs`、`objectives`，以及 `patch` 下的 `forces`、`city_forces`、`governors`、`extra_officers`、`officer_assignments`、`armies`。
 2. 在 `tools/build-scenario-ownership.mjs` 的 `SCENARIOS`、`COMMANDERY_OWNERS` 中加入新时点，逐郡给出归属；跨郡节点、关隘、渡口写入 `CITY_OWNERS`。用 `--scenario=<id> --write` 单独生成，避免改写其他剧本。
-3. 人物：过滤开局时已死或未出仕的人物；参考库缺的人物用 `extra_officers` 补，能力标 `statsBasis: game-estimate`，不杜撰生卒年。
+3. 人物：过滤开局时已死或未出仕的人物；参考库缺的人物用 `extra_officers` 补，能力标 `statsBasis: game-estimate`，不杜撰生卒年。参考库卒年早于开局、但史传明载其仍在世的人物，在 `officer_assignments` 中写 `deathYear` 校正（史有明文写年份，否则写 `null` 表示不详），并在 `SCENARIO_NOTES.md` 说明。
 4. 新君主在 `game/data/common/game_rules.json` 增加 AI 性格。
 5. 视需要在 `game/data/common/events.json` 加该时点的史实事件，例如濮阳的"陶谦让徐州"、襄阳的"吕蒙白衣渡江"。
 6. 在 `scenarios/index.json` 登记：剧本名、日期、简介。随后运行 `tools/subset-start-fonts.py` 重新截取剧本卡片字体子集，否则新字会显示成默认字体。

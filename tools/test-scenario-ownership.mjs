@@ -39,7 +39,7 @@ for(const entry of catalog.scenarios){
   for(const army of data.armies){const city=byId.get(army.city);if(city&&city.force!==army.force)throw new Error(`${entry.id} 军团 ${army.name} 驻地 ${army.city} 属于 ${city.force}`)}
   checked++;console.log(`${entry.id}: ${data.forces.length-1} 个势力 / ${data.cities.length} 据点归属与驻军一致（含塞外 ${data.cities.filter(city=>city.commandery==="塞外区域").length} 据点）`);
 }
-if(checked<3)throw new Error("剧本归属回归至少需要覆盖三个剧本");
+if(checked<6)throw new Error("剧本归属回归至少需要覆盖六个剧本");
 const coalition=await loader.loadScenario("190_coalition",{useSavedMap:false}),original=await loader.loadScenario("200_guandu",{useSavedMap:false});
 const expected={chenliu:"zhang_miao",qiao:"cao",henei:"wang_kuang",commandery_city_002:"wang_kuang",xuchang:"kong_zhou",guandu:"kong_zhou",commandery_city_008:"kong_zhou",commandery_city_010:"kong_zhou",commandery_city_012:"liu_chong",puyang:"qiao_mao",baima:"qiao_mao",yanjin:"qiao_mao",commandery_city_029:"yuan_yi",commandery_city_028:"bao_xin",guangling:"zhang_chao",jianye:"zhou_xin",commandery_city_050:"zhou_xin",shouchun:"chen_wen",hefei:"chen_wen",lujiang:"chen_wen",wu:"chen_wen",kuaiji:"chen_wen",chaisang:"chen_wen",yuzhang:"chen_wen",linzi:"jiao_he",beihai:"kong_rong",jiaozhi:"shi_xie",commandery_city_103:"shi_xie"};
 for(const [id,force] of Object.entries(expected))assert.equal(coalition.cities.find(city=>city.id===id)?.force,force,`190 年 ${id} 的归属不能缺失或提前到后期`);
@@ -74,4 +74,27 @@ for(const name of ["太史慈","凌操","巩志"])assert(!redCliffs.officers.som
 assert.equal(redCliffs.armies.find(army=>army.force==="han_xuan").commander,"黄忠");
 assert.equal(redCliffs.officers.find(officer=>officer.name==="马腾"&&officer.status==="serving")?.force,"cao","208 年马腾已经入朝，不与马超同时建立西北阵营");
 console.log("官渡、赤壁地方势力补全通过：15 / 16 个可选势力 / 各仅 1 个待考节点 / 西北与交州分期归属 / 赤壁名册时点校订");
-console.log("三剧本城池归属通过：生成器覆盖完整 / 据点数与归属一致 / 人物与军团驻地不越界");
+// 濮阳、潼关、襄阳：关键据点时点归属与人物卒年校正。
+for(const [id,expected] of Object.entries({
+  "194_puyang":{puyang:"lu_bu",chenliu:"lu_bu",xian_extra_04:"cao",xian_06_04:"cao",xiaopei:"liu",commandery_city_031:"tao_qian",shouchun:"yuan_shu",jianye:"liu_yao",kuaiji:"wang_lang",changan:"li_jue",henei:"zhang_yang",commandery_city_114:"zhang_yan",commandery_city_012:"liu_chong",hanzhong:"zhang_lu",linzi:"gongsun",beihai:"kong_rong",lujiang:"neutral"},
+  "211_tongguan":{tongguan:"ma_chao",changan:"ma_chao",hongnong:"cao",anding:"han_sui",jiangling:"liu",xian_extra_08:"liu",xian_extra_14:"sun",xiakou:"sun",lujiang:"cao",xian_35_05:"sun",hanzhong:"zhang_lu",chengdu:"liu_zhang",tianshui:"cao",cangwu:"sun",jiaozhi:"shi_xie"},
+  "219_xiangyang":{xiangyang:"cao",xian_extra_05:"cao",xian_09_04:"liu",jiangling:"liu",hanzhong:"liu",shangyong:"liu",changsha:"sun",guiyang:"sun",xian_extra_14:"sun",lujiang:"sun",hefei:"cao",panyu:"sun",jiaozhi:"shi_xie",xiangping:"gongsun_kang"}})){
+  const data=await loader.loadScenario(id,{useSavedMap:false});
+  for(const [cityId,force] of Object.entries(expected))assert.equal(data.cities.find(city=>city.id===cityId)?.force,force,`${id} ${cityId} 归属不符合开局时点`);
+  for(const forceId of data.scenario.playable_forces){assert(data.officers.some(officer=>officer.force===forceId&&officer.status==="serving"),`${id} ${forceId} 缺少在任人物`);assert(data.cities.some(city=>city.force===forceId&&(city.type||"city")==="city"),`${id} ${forceId} 缺少城市`)}
+  for(const county of data.counties){const city=data.cities.find(city=>city.id===county.jurisdictionCityId);if(city)assert.equal(county.force,city.force)}
+  for(const [name,assignment] of Object.entries(data.scenario.patch.officer_assignments)){const officers=data.officers.filter(officer=>officer.name===name&&officer.status==="serving");assert.equal(officers.length,1,`${id} ${name} 必须真正载入且不能重复`);assert.equal(officers[0].force,assignment.force)}
+  assert.deepEqual(data.map,original.map,`${id} 不改定稿几何`);
+}
+const tongguan=await loader.loadScenario("211_tongguan",{useSavedMap:false});
+assert.equal(tongguan.officers.find(officer=>officer.name==="张卫").deathYear,undefined,"张卫卒年与参考库冲突时按不详处理");
+assert(!tongguan.officers.some(officer=>["周瑜","太史慈","马超"].includes(officer.name)&&officer.status==="serving"&&officer.force==="cao"),"211 年名册时点");
+assert.equal(tongguan.officers.find(officer=>officer.name==="马腾").force,"cao","211 年马腾仍在邺城");
+const puyang=await loader.loadScenario("194_puyang",{useSavedMap:false});
+assert.equal(puyang.officers.find(officer=>officer.name==="樊稠").deathYear,195,"樊稠按《后汉书》兴平二年被杀");
+assert(!puyang.officers.some(officer=>["郭嘉","许褚","荀攸","诸葛亮","赵云"].includes(officer.name)&&officer.status==="serving"),"194 年尚未出仕者不得入列");
+const xiangyangScenario=await loader.loadScenario("219_xiangyang",{useSavedMap:false});
+assert(!xiangyangScenario.officers.some(officer=>["夏侯渊","鲁肃","庞统","周瑜","荀彧"].includes(officer.name)&&officer.status==="serving"),"219 年已故者不得入列");
+assert.equal(xiangyangScenario.armies.find(army=>army.id==="liu_guanyu").city,"xian_09_04","关羽北伐军驻宜城");
+console.log("濮阳、潼关、襄阳归属通过：22 / 9 / 5 个可选势力 / 关键据点时点 / 名册与卒年校正");
+console.log("六剧本城池归属通过：生成器覆盖完整 / 据点数与归属一致 / 人物与军团驻地不越界");

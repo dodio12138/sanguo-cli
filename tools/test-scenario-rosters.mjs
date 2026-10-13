@@ -20,7 +20,8 @@ const catalog=JSON.parse(fs.readFileSync(path.join(root,"game/data/history/scena
 for(const entry of catalog.scenarios){
   const data=await loader.loadScenario(entry.id),diagnostics=loader.diagnose(data);
   if(!diagnostics.ok)throw new Error(`${entry.id} 校验失败：${diagnostics.errors.join("；")}`);
-  if(data.officers.length<500)throw new Error(`${entry.id} 人物名册未完整载入：${data.officers.length}`);
+  // 已故人物不入名册，晚期剧本名册自然较短；在任者另按剧本断言。
+  if(data.officers.length<400)throw new Error(`${entry.id} 人物名册未完整载入：${data.officers.length}`);
   const playable=data.scenario.playable_forces||[];
   if(playable.length<3)throw new Error(`${entry.id} 可选势力不足`);
   for(const id of playable)if(!data.scenario.force_briefs?.[id]||!data.scenario.objectives?.[id])throw new Error(`${entry.id} 的可选势力 ${id} 缺少背景或目标`);
@@ -73,3 +74,10 @@ for(const [source,newIds] of [[guandu,["shi_xie","zhang_jin","handan_shang","zha
   const forceIds=new Set(next.data.forces.map(force=>force.id));for(const officer of next.data.officers)assert(forceIds.has(officer.force),`${source.scenario.id} 旧存档存在人物悬空势力引用：${officer.name}`);
 }
 console.log("官渡、赤壁新增势力与存档隔离通过：11 个新势力逐一开局 / 旧局势力、领地、人口、日期保留");
+for(const id of ["194_puyang","211_tongguan","219_xiangyang"]){
+  const source=await loader.loadScenario(id);
+  for(const forceId of source.scenario.playable_forces){const game=new GameState(structuredClone(source),{playerForceId:forceId});assert.equal(game.selected.value.force,forceId,`${id} ${forceId} 开局应选中己方城池`);game.endTurn();assert.equal(game.turn,2,`${id} ${forceId} 无法推进一日`)}
+  const serving=source.officers.filter(officer=>officer.status==="serving");
+  for(const forceId of source.scenario.playable_forces)assert(serving.some(officer=>officer.force===forceId&&officer.loyalty===100),`${id} ${forceId} 缺少君主`);
+  console.log(`${id}: ${source.scenario.playable_forces.length} 个可选势力逐一开局推进 / ${serving.length} 名在任人物`);
+}
