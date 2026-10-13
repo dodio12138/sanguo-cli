@@ -10,7 +10,7 @@ for(const style of [".diplomacy-network-map",".diplomacy-edge.relation-war",".di
 if(!app.includes("center=player||null")||!app.includes("ringIndex=center?index-1:index")||!app.includes("ringCount=center?ordered.length-1:ordered.length")||app.includes("center=player||[...forces].sort"))throw new Error("观察模式外交关系图中心未留空或势力未环形排列");
 if(!css.includes("max-width: min(900px, 94vw)"))throw new Error("外交关系网宽度未更新");
 for(const [asset,minimum] of [["ui-polish.css",11],["app.js",9],["game-state.js",6]]){
-  const version=html.match(new RegExp(`${asset.replaceAll(".","\\.")}\\?v=(\\d{8})-(\\d+)`));
-  if(!version||Number(version[1])<20261010||Number(version[1])===20261010&&Number(version[2])<minimum)throw new Error(`${asset} 缓存版本未更新`);
+  const version=html.match(new RegExp(`${asset.replaceAll(".","\\.")}\\?v=([\\w-]+)`));
+  if(!version)throw new Error(`${asset} 缺少缓存版本号`);// 版本号按内容哈希生成，新鲜度由 test-asset-versions 检查
 }
 console.log("外交关系网通过：势力节点 / 战争盟约连线 / 节点聚焦 / 关系明细");

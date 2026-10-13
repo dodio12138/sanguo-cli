@@ -14,7 +14,7 @@ for(const rule of [
 ])if(!css.includes(rule))throw new Error(`命令簿布局缺少防溢出规则：${rule}`);
 // 后续正常更新缓存版本不能让布局测试误报；仍拦截低于本次布局修复的版本。
 for(const [asset,minimum] of [["ui-polish.css",11],["app.js",9]]){
-  const version=html.match(new RegExp(`${asset.replaceAll(".","\\.")}\\?v=(\\d{8})-(\\d+)`));
-  if(!version||Number(version[1])<20261010||Number(version[1])===20261010&&Number(version[2])<minimum)throw new Error(`${asset} 缓存版本未更新`);
+  const version=html.match(new RegExp(`${asset.replaceAll(".","\\.")}\\?v=([\\w-]+)`));
+  if(!version)throw new Error(`${asset} 缺少缓存版本号`);// 版本号按内容哈希生成，新鲜度由 test-asset-versions 检查
 }
 console.log("命令簿布局通过：弹窗宽度限制 / 网格最小宽度 / 命令说明换行 / 窄屏单列");
