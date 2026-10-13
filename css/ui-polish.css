@@ -434,14 +434,13 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .battle-meter.ring .army-meter i{background:#6f8fb0;}
 .battle-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 6px;}
 .battle-actions label{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--muted);}
-.battle-actions button,[data-open-siege]{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:4px 9px;cursor:pointer;font-size:10px;}
+.battle-actions button{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:4px 9px;cursor:pointer;font-size:10px;}
 .battle-actions select{background:#101710;color:var(--text);border:1px solid var(--line);font-size:10px;padding:2px 4px;}
 .battle-actions button.danger{border-color:#7d3a2c;color:#e3a08a;}
 .battle-log{margin:4px 0;padding:4px 6px;border-left:2px solid #3b4434;font-size:10px;line-height:1.5;color:#c9c1a0;}
 .battle-log small{display:block;color:#7f866f;font-size:8px;}
 .battle-log.victory{border-left-color:#8fae5b;}
 .battle-log.defeat{border-left-color:#b65c46;}
-[data-open-siege]{margin-left:6px;padding:0 6px;font-size:9px;}
 
 /* 内政档案按郡折叠 */
 .commandery-groups{display:grid;gap:4px;margin:6px 0;}
@@ -449,7 +448,11 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .commandery-group>summary{display:flex;gap:10px;align-items:center;padding:5px 8px;cursor:pointer;font-size:10px;color:var(--muted);list-style:none;}
 .commandery-group>summary b{color:#ddd5aa;min-width:64px;}
 .commandery-group>summary span{flex:1;}
-.commandery-group>summary button,[data-delegate-toggle]{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:2px 8px;font-size:9px;cursor:pointer;}
+.commandery-group>summary button{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:2px 8px;font-size:9px;cursor:pointer;}
 .commandery-group>summary em{font-style:normal;color:#8a7d5b;font-size:9px;}
 .commandery-group[open]>summary{border-bottom:1px dotted #343c2e;}
 .commandery-group .ledger-table{margin:0;}
+
+/* 面板内按钮统一：区块末尾整行按钮同“任命官员”样式；数据行内小按钮同一种小号样式 */
+.detail-content .biography>button,.detail-content .detail-section>button{width:100%;margin-top:7px;border:1px solid #665832;background:#192117;color:#d6c77f;padding:7px;cursor:pointer;font:inherit;font-size:10px}
+.detail-content .data-row button,.fiscal-arrears button{margin-left:6px;border:1px solid var(--line);background:#1a2418;color:var(--green);padding:1px 8px;font:inherit;font-size:9px;cursor:pointer}
