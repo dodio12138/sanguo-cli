@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10150f">
   <title>&lt;&lt;&lt;三国</title>
-  <link rel="stylesheet" href="css/style.css?v=20261010-01">
-  <link rel="stylesheet" href="css/observer.css?v=20261009-02">
-  <link rel="stylesheet" href="css/ui-polish.css?v=20261013-18">
-  <link rel="stylesheet" href="css/chronicle.css?v=20261013-01">
-  <link rel="stylesheet" href="css/hierarchy.css?v=20261010-01">
-  <link rel="stylesheet" href="css/os-desktop.css?v=20261012-02">
-  <link rel="stylesheet" href="css/button-states.css?v=20261009-05">
+  <link rel="stylesheet" href="css/style.css?v=a3ce7e78d8">
+  <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
+  <link rel="stylesheet" href="css/ui-polish.css?v=b450614750">
+  <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
+  <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
+  <link rel="stylesheet" href="css/os-desktop.css?v=df25456342">
+  <link rel="stylesheet" href="css/button-states.css?v=5847234371">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
 </head>
@@ -379,35 +379,41 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="uiTooltip" class="ui-tooltip" role="tooltip" hidden></div>
 
-  <script src="js/data/command-catalog.js?v=20260930-78"></script>
-  <script src="js/data/game-data.js?v=20260928-16"></script>
-  <script src="js/data/offline-data.generated.js?v=20261013-22"></script>
-  <script src="js/core/data-loader.js?v=20261013-07"></script>
-  <script src="js/core/game-clock.js?v=20261009-01"></script>
-  <script src="js/core/simulation-clock.js?v=20261009-02"></script>
-  <script src="js/core/fiscal-system.js?v=20261013-06"></script>
-  <script src="js/core/rule-engine.js?v=20261013-14"></script>
-  <script src="js/core/ai-bridge.js?v=20261009-02"></script>
-  <script src="js/core/mcp-adapter.js?v=20260929-35"></script>
-  <script src="js/core/ai-controller.js?v=20261005-08"></script>
-  <script src="js/core/save-library.js?v=20261012-01"></script>
-  <script src="js/core/game-state.js?v=20261013-07"></script>
-  <script src="js/core/map-grid.js?v=20261013-09"></script>
-  <script src="js/core/map-editor-drafts.js?v=20261010-02"></script>
-  <script src="js/core/scenario-map-store.js?v=20261011-01"></script>
-  <script src="js/core/scenario-officer-store.js?v=20261013-01"></script>
-  <script src="js/ui/map-view.js?v=20261013-17"></script>
-  <script src="js/ui/map-editor-reference.js?v=20261011-03"></script>
-  <script src="js/ui/map-editor.js?v=20261013-07"></script>
-  <script src="js/ui/officer-editor.js?v=20261013-01"></script>
-  <script src="js/ui/terminal-select.js?v=20261010-10"></script>
-  <script src="js/ui/fiscal-ui.js?v=20261010-03"></script>
-  <script src="js/ui/command-planner.js?v=20261013-01"></script>
-  <script src="js/ui/button-feedback.js?v=20261009-03"></script>
-  <script src="js/ui/keyboard-shortcuts.js?v=20261010-03"></script>
-  <script src="js/ui/simulation-speed-control.js?v=20261009-02"></script>
-  <script src="js/ui/app.js?v=20261013-22"></script>
-  <script src="js/ui/desktop-context-menu.js?v=20261009-01"></script>
-  <script src="js/ui/os-window-manager.js?v=20261011-02"></script>
+  <script src="js/data/command-catalog.js?v=9f05a33354"></script>
+  <script src="js/data/game-data.js?v=8197ce8e9f"></script>
+  <script src="js/data/offline-data.generated.js?v=b45d8ec431"></script>
+  <script src="js/core/data-loader.js?v=35ae1ee497"></script>
+  <script src="js/core/game-clock.js?v=f26b12b5b8"></script>
+  <script src="js/core/simulation-clock.js?v=e1c04e8ed0"></script>
+  <script src="js/core/fiscal-system.js?v=1f95e611a8"></script>
+  <script src="js/core/rule-engine.js?v=c06895067a"></script>
+  <script src="js/core/engine/movement.js?v=a979496a3c"></script>
+  <script src="js/core/engine/siege.js?v=9f18b6e87b"></script>
+  <script src="js/core/engine/diplomacy.js?v=4b3e8ca120"></script>
+  <script src="js/core/engine/events.js?v=8104cb9e2a"></script>
+  <script src="js/core/engine/ai.js?v=6e61ce3140"></script>
+  <script src="js/core/engine/administration.js?v=1153842be6"></script>
+  <script src="js/core/ai-bridge.js?v=b0c1f4b2aa"></script>
+  <script src="js/core/mcp-adapter.js?v=2755278e35"></script>
+  <script src="js/core/ai-controller.js?v=d99b172770"></script>
+  <script src="js/core/save-library.js?v=8cf1ae0e94"></script>
+  <script src="js/core/game-state.js?v=715359face"></script>
+  <script src="js/core/map-grid.js?v=24cecc627e"></script>
+  <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
+  <script src="js/core/scenario-map-store.js?v=1029743e0e"></script>
+  <script src="js/core/scenario-officer-store.js?v=00a1f6ae1a"></script>
+  <script src="js/ui/map-view.js?v=3b3453900a"></script>
+  <script src="js/ui/map-editor-reference.js?v=1abff8a11b"></script>
+  <script src="js/ui/map-editor.js?v=8e6f205fec"></script>
+  <script src="js/ui/officer-editor.js?v=5a89959de4"></script>
+  <script src="js/ui/terminal-select.js?v=ddfadac352"></script>
+  <script src="js/ui/fiscal-ui.js?v=989ad5984e"></script>
+  <script src="js/ui/command-planner.js?v=30fe78d0bb"></script>
+  <script src="js/ui/button-feedback.js?v=4866e2dd45"></script>
+  <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
+  <script src="js/ui/simulation-speed-control.js?v=286b6b6e76"></script>
+  <script src="js/ui/app.js?v=447e68e4f9"></script>
+  <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
+  <script src="js/ui/os-window-manager.js?v=6d0029c101"></script>
 </body>
 </html>

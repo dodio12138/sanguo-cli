@@ -47,6 +47,47 @@ sanguo-cli/
 └── docs/               # 开发与扩展文档
 ```
 
+## 开发与发布
+
+改动脚本、样式或字体后：
+
+```bash
+node tools/sync-asset-versions.mjs
+```
+
+按文件内容哈希更新 `index.html` 与样式表里的 `?v=` 版本号，不必手工递增。
+
+日常快测，跳过 `tools/test-tiers.json` 中的长测：
+
+```bash
+node tools/run-tests.mjs --quick
+```
+
+全部测试并行执行；加 `--timing` 会按本次耗时更新长测名单：
+
+```bash
+node tools/run-tests.mjs
+```
+
+发布到 GitHub Pages：
+
+```bash
+node tools/deploy-pages.mjs --message "本次发布说明"
+```
+
+发布脚本依次检查版本号、跑快测、推送 main、生成并推送 gh-pages、合回 main，然后等待 Pages 构建完成；构建卡住超过 10 分钟会自动重新请求一次。
+
+`js/core/rule-engine.js` 只保留核心结算，其余按领域拆在 `js/core/engine/`：
+
+- 行军（movement）
+- 围城（siege）
+- 外交（diplomacy）
+- 事件（events）
+- 诸侯 AI（ai）
+- 行政（administration）
+
+浏览器按 `index.html` 顺序加载这些文件；Node 中引入 `rule-engine.js` 时会自动加载。
+
 ## 浏览器支持
 
 建议使用近期版本的 Chrome、Edge、Firefox 或 Safari。
