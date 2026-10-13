@@ -969,6 +969,7 @@
         "city": "lelang"
       }
     },
+    "treaties": [{"a": "cao", "b": "ma_chao", "type": "war"}, {"a": "cao", "b": "han_sui", "type": "war"}, {"a": "ma_chao", "b": "han_sui", "type": "alliance"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "war"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}, {"a": "shi_xie", "b": "sun", "type": "non_aggression"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],
     "armies": [
       {
         "id": "cao_west",

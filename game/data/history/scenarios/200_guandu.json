@@ -31,6 +31,7 @@
     "officers": "game/data/history/officers/200_guandu.json",
     "armies": "game/data/history/armies/200_guandu.json"
   },
+  "treaties": [{"a": "yuan", "b": "cao", "type": "war"}, {"a": "liu", "b": "cao", "type": "war"}, {"a": "yuan", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "liu_biao", "type": "non_aggression"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}],
   "description": "建安五年官渡战争初期；人物势力按公元200年前后校正。",
   "historical_brief": "曹操控制献帝与河南诸郡，袁绍据河北而兵粮占优；刘备、孙策与刘表仍各有立足之地。官渡一线的粮道、用人和决断将改变北方归属。",
   "force_briefs": {

@@ -2,7 +2,7 @@
   "schema_version": 2,
   "id": "219_xiangyang",
   "name": "襄阳",
-  "start_date": "219-08-01",
+  "start_date": "219-07-01",
   "map": "china_pixel_60x60",
   "default_player_force": "liu",
   "playable_forces": [
@@ -12,7 +12,7 @@
     "shi_xie",
     "gongsun_kang"
   ],
-  "description": "建安二十四年秋，关羽北围襄樊，曹军七军屯樊北；孙权谋袭荆州，刘备新得汉中。",
+  "description": "建安二十四年秋七月，关羽北围襄樊，曹军七军屯樊北；孙权谋袭荆州，刘备新得汉中。",
   "historical_brief": "刘备夺取汉中、自称汉中王，孟达、刘封取上庸三郡。关羽留糜芳守江陵、傅士仁守公安，率军北攻襄阳、樊城，曹仁固守，于禁、庞德率七军驻樊北。曹操自长安东返，徐晃率援军屯宛；孙权以吕蒙屯陆口，静候时机。以219年秋为开局，三分天下前的最后一次大变局。",
   "force_briefs": {
     "cao": "汉中之战失利后退回长安，夏侯渊已死；关羽北上围樊城，曹仁、满宠死守，于禁、庞德七军屯樊北。秋雨将至，汉水正涨。",
@@ -763,6 +763,7 @@
         "city": "lelang"
       }
     },
+    "treaties": [{"a": "cao", "b": "liu", "type": "war"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "non_aggression"}, {"a": "shi_xie", "b": "sun", "type": "alliance"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],
     "armies": [
       {
         "id": "cao_fan",

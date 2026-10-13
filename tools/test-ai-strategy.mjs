@@ -14,7 +14,7 @@ if(!home||!army)throw new Error("测试数据缺少本方边城或军团");
 army.city=home.id;army.soldiers=24000;army.units={infantry:24000};army.supply=100;army.morale=100;army.training=100;delete army.route;delete army.siegeTarget;target.garrison=1000;target.level=1;state.intelligence.cities[target.id]=2;state.controlMode="delegate";
 const bridge=new AIBridge(state),controller=new AIController(state,bridge);await controller.connect({name:"规则测试军师",generate:async()=>({message:"本旬处理军务",commands:[]})});
 const assessment=controller.militaryAssessment();if(!assessment.canExpand||assessment.recommended?.targetId!==target.id)throw new Error(`未识别可行军机：${JSON.stringify(assessment)}`);
-const first=await controller.plan();if(!state.orders.some(order=>order.type==="declare_war"&&order.forceIds.includes(target.force)))throw new Error("AI 遗漏可行目标的宣战前置命令");
+const atWar=state.diplomacy.wars.includes(target.force),first=await controller.plan();if(!atWar&&!state.orders.some(order=>order.type==="declare_war"&&order.forceIds.includes(target.force)))throw new Error("AI 遗漏可行目标的宣战前置命令");if(atWar&&state.orders.some(order=>order.type==="declare_war"&&order.forceIds.includes(target.force)))throw new Error("开局已交战的势力不应重复宣战");
 state.orders=[];state.diplomacy.wars=[target.force];state.turn++;
 const second=await controller.plan();if(!state.orders.some(order=>["move","forced_march"].includes(order.type)&&order.cityIds.includes(target.id)))throw new Error("宣战后 AI 未调用战争计划推进目标");
 state.intelligence.cities[target.id]=3;const scout=bridge.call("submit_command",{command_id:"scout_city",target_ids:[target.id]});home.level=5;const fortify=bridge.call("submit_command",{command_id:"fortify",target_ids:[home.id]});

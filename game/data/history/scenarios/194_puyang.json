@@ -1400,6 +1400,7 @@
         "loyalty": 100
       }
     },
+    "treaties": [{"a": "cao", "b": "lu_bu", "type": "war"}, {"a": "cao", "b": "tao_qian", "type": "war"}, {"a": "tao_qian", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "gongsun", "type": "war"}, {"a": "yuan", "b": "cao", "type": "alliance"}, {"a": "gongsun", "b": "tao_qian", "type": "alliance"}, {"a": "gongsun", "b": "yuan_shu", "type": "alliance"}, {"a": "yuan_shu", "b": "liu_yao", "type": "war"}, {"a": "yuan_shu", "b": "liu_biao", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}, {"a": "li_jue", "b": "ma_teng", "type": "war"}, {"a": "lu_bu", "b": "zhang_yang", "type": "non_aggression"}, {"a": "yuan", "b": "kong_rong", "type": "war"}],
     "armies": [
       {
         "id": "cao_main",
