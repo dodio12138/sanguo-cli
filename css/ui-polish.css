@@ -374,8 +374,8 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 #startScenarioStep{border-right:1px solid var(--line-dim);background:#0a0f0b;padding:16px 14px}
 #startScenarioStep .campaign-heading{flex-direction:column;align-items:flex-start;gap:5px;margin-bottom:12px}
 /* 剧本卡片：字体与卡面参照 Descent-Chart-Generator，竖排题名、书法水印、底部年号条 */
-@font-face{font-family:"Start WenYue";src:url("../assets/fonts/start-wenyue.woff2?v=20261013-02") format("woff2");font-display:swap}
-@font-face{font-family:"Start Daofeng";src:url("../assets/fonts/start-daofeng.woff2?v=20261013-02") format("woff2");font-display:swap}
+@font-face{font-family:"Start WenYue";src:url("../assets/fonts/start-wenyue.woff2?v=20261013-03") format("woff2");font-display:swap}
+@font-face{font-family:"Start Daofeng";src:url("../assets/fonts/start-daofeng.woff2?v=20261013-03") format("woff2");font-display:swap}
 #startScenarioStep .start-choices{grid-template-columns:1fr;grid-auto-rows:104px;gap:8px;padding:2px 4px 4px 2px}
 #startScenarioStep .scenario-card{position:relative;overflow:hidden;min-height:0;padding:0;border:1px solid var(--line-dim);border-radius:3px;background:#131b12;color:var(--text);font-family:"Start WenYue",serif;box-shadow:0 3px 10px #0000004d;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
 #startScenarioStep .scenario-card::before{content:attr(data-seal);position:absolute;top:-.1em;right:-.1em;color:#c6a15b1f;font:96px/1 "Start Daofeng",serif;pointer-events:none}
