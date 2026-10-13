@@ -14,7 +14,7 @@ window.SANGUO_COMMAND_CATALOG = (() => {
     scout_city:"派遣人员侦察目标城市，查明守军、城防或储备情报",scout_army:"追查指定敌军的兵力、将领与行军状态",investigate_person:"调查目标人物的身份、能力、忠诚或所在状况",investigate_route:"勘察两地之间的道路通行与沿途风险",investigate_terrain:"调查目标区域的地形特征及其行军、作战影响",counterintelligence:"加强己方防谍布置，降低敌方侦察与渗透成功机会",
     sow_discord:"离间目标势力中的人物关系，削弱其协作与忠诚",bribe:"以金钱收买敌方人物，尝试换取合作或动摇其立场",incite:"煽动目标城市民众不满，扰乱敌方统治秩序",establish_inside_contact:"在敌方内部发展内应，为情报或后续行动铺路",sabotage:"破坏敌方城市设施或军备，削弱其生产与防守",spread_rumor:"散布针对目标人物或势力的谣言，损害声望与信任",instigate_defection:"策动敌方人物或守军倒戈，尝试改变其效忠对象",
     set_development_policy:"设定农业、商业等长期发展重点，影响后续治理倾向",set_military_goal:"指定敌方城市或区域为战略目标，供军令与 AI 规划参考",set_diplomatic_policy:"确定亲善、结盟或观望等外交倾向",set_fiscal_policy:"设定财政取向，在收入、储备与支出间确定优先级",set_authority:"设置 AI 或军团可自行处理的命令范围与审批边界",
-    research:"投入科技点研究指定技术，提升对应领域等级",reform:"推行制度改革，改变势力治理或军政规则",promote_technology:"向指定城市推广已掌握技术，使成果逐步普及",
+    research:"投入科技点研究指定技术，提升对应领域等级",reform:"推行制度改革，改变势力治理或军政规则；粮政可切换军粮调运次序：就近调运、中央统筹或郡县自给",promote_technology:"向指定城市推广已掌握技术，使成果逐步普及",
     visit:"派己方人物拜访另一人物，建立或改善个人关系",banquet:"设宴款待指定人物，增进亲近与交往",give_gift:"赠送礼物给目标人物，改善双方好感",sworn_brotherhood:"促成两名人物结为义兄弟，建立长期人际纽带",marriage:"安排两名人物成婚，建立家族与政治关系",recommend:"由己方人物举荐另一人物，推动其获得任用机会",
     study:"安排人物研习指定内容，积累知识或提升相关能力",personal_training:"安排人物进行个人训练，锻炼其能力或体能",travel:"派人物前往指定城市，执行出行或拜访安排",personal_investigation:"由人物亲自调查指定城市，获取个人任务所需信息",rest:"让人物休息恢复精力，暂缓其他个人行动"
   };
