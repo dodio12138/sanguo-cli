@@ -78,7 +78,8 @@ window.MapGrid = class MapGrid {
     if(map.pixel_mask)map.pixel_mask=MapGrid.encode(MapGrid.resampleLayer(MapGrid.decode(map.pixel_mask,from.width*from.height),from,to));
     next.cities=(next.cities||[]).map(point);next.counties=(next.counties||next.administrativeDivisions?.county_seats||[]).map(point);
     const points=list=>list.map(([x,y])=>{const p=MapGrid.remapPoint(x,y,from,to);return [p.x,p.y]});
-    map.waterways=MapGrid.waterways(source.map).map(river=>({...river,points:points(river.points)}));map.landmarks=MapGrid.landmarks(source.map).map(point);
+    const corners=list=>list.map(([x,y])=>[Math.round(x*to.width/from.width),Math.round(y*to.height/from.height)]);
+    map.waterways=MapGrid.waterways(source.map).map(river=>({...river,points:MapGrid.isCornerRiver(river)?corners(river.points):points(river.points)}));map.landmarks=MapGrid.landmarks(source.map).map(point);
     map.commanderySeats=(map.commanderySeats||[]).map(point);
     map.roads=(source.map.roads||[]).map(route=>{
       const mapped=points(MapGrid.decodeRoadPath(route)),path=[];
@@ -166,6 +167,11 @@ window.MapGrid = class MapGrid {
     return layers;
   }
   static waterways(map){return Array.isArray(map?.waterways)?structuredClone(map.waterways):structuredClone(MapGrid.DEFAULT_WATERWAYS)}
+  // 角点河流（anchor:"corner"）的控制点落在格子角上，相邻控制点之间沿格线按台阶展开；旧河流仍以格心折线表示。
+  static isCornerRiver(river){return river?.anchor==="corner"}
+  static riverCorners(river){const points=Array.isArray(river?.points)?river.points:[];if(!MapGrid.isCornerRiver(river))return structuredClone(points);const path=[];for(const [x,y] of points){const last=path.at(-1);if(!last){path.push([x,y]);continue}path.push(...MapGrid.gridLine(last[0],last[1],x,y).slice(1))}return path}
+  static riverEdgeCells(a,b){return a[1]===b[1]?[[Math.min(a[0],b[0]),a[1]-1],[Math.min(a[0],b[0]),a[1]]]:[[a[0]-1,Math.min(a[1],b[1])],[a[0],Math.min(a[1],b[1])]]}
+  static riverCrossings(map){const {width}=MapGrid.dimensions(map),pairs=new Set();for(const river of MapGrid.waterways(map)){if(!MapGrid.isCornerRiver(river))continue;const path=MapGrid.riverCorners(river);for(let i=1;i<path.length;i++){const [[ax,ay],[bx,by]]=MapGrid.riverEdgeCells(path[i-1],path[i]),a=ay*width+ax,b=by*width+bx;pairs.add(a<b?`${a}|${b}`:`${b}|${a}`)}}return pairs}
   static landmarks(map){return Array.isArray(map?.landmarks)?structuredClone(map.landmarks):structuredClone(MapGrid.DEFAULT_LANDMARKS)}
   static roadEdges(graph={},cityIds=null){
     const edges=[];
@@ -181,7 +187,7 @@ window.MapGrid = class MapGrid {
     if(!inside(from)||!inside(to))return [];
     const layers=MapGrid.layers(map),length=width*height,start=from.y*width+from.x,goal=to.y*width+to.x;
     if(start===goal)return [[from.x,from.y]];
-    const terrainCost={plains:1,grassland:1.08,basin:1.12,hills:1.55,forest:1.8,plateau:2.25,desert:2.7,marsh:3.1,mountain:4.2,ocean:Infinity},riverCells=new Uint8Array(length),waterways=MapGrid.waterways(map);
+    const terrainCost={plains:1,grassland:1.08,basin:1.12,hills:1.55,forest:1.8,plateau:2.25,desert:2.7,marsh:3.1,mountain:4.2,ocean:Infinity},riverCells=new Uint8Array(length),waterways=MapGrid.waterways(map).filter(river=>!MapGrid.isCornerRiver(river)),crossings=MapGrid.riverCrossings(map);
     for(const river of waterways)for(let i=1;i<(river.points||[]).length;i++){
       let [x,y]=river.points[i-1], [tx,ty]=river.points[i];
       while(x!==tx||y!==ty){const index=y*width+x;if(index>=0&&index<length)riverCells[index]=1;if(x!==tx)x+=Math.sign(tx-x);else y+=Math.sign(ty-y)}
@@ -194,7 +200,7 @@ window.MapGrid = class MapGrid {
     const heuristic=index=>Math.abs(index%width-to.x)+Math.abs(Math.floor(index/width)-to.y);push({index:start,score:heuristic(start)});
     while(heap.length){const current=pop(),index=current.index;if(index===goal)break;if(current.score-heuristic(index)>distance[index]+1e-7)continue;const x=index%width,y=Math.floor(index/width);
       for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=width||ny>=height)continue;const next=ny*width+nx,terrain=layers.terrain[next],base=terrainCost[terrain]??1.7;if(!Number.isFinite(base)&&next!==goal)continue;
-        const reused=used[next]||0,river=riverCells[next]&&!riverCells[index]?1.7:riverCells[next]?1.2:0,boundary=(layers.commanderies[next]!==layers.commanderies[index]?0.22:0)+(layers.provinces[next]!==layers.provinces[index]?0.12:0),step=base+river+boundary+reused*24,candidate=distance[index]+step;
+        const reused=used[next]||0,river=crossings.has(index<next?`${index}|${next}`:`${next}|${index}`)?1.7:riverCells[next]&&!riverCells[index]?1.7:riverCells[next]?1.2:0,boundary=(layers.commanderies[next]!==layers.commanderies[index]?0.22:0)+(layers.provinces[next]!==layers.provinces[index]?0.12:0),step=base+river+boundary+reused*24,candidate=distance[index]+step;
         if(candidate>=distance[next])continue;distance[next]=candidate;previous[next]=index;push({index:next,score:candidate+heuristic(next)});
       }
     }

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "id": "208_red_cliffs",
-  "name": "赤壁前夕",
+  "name": "赤壁",
   "start_date": "208-10-01",
   "map": "china_pixel_60x60",
   "default_player_force": "liu",
