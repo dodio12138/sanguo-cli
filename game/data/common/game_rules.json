@@ -784,7 +784,25 @@
     "camp_recovery": 18,
     "isolated_cost": 12,
     "fed_recovery": 25,
-    "friendly_supply_factor": 0.5
+    "friendly_supply_factor": 0.5,
+    "offroad": {
+      "note": "没有官路的近处据点之间循地形穿行：日行约十八里，山地、沼泽更慢，渡河另加一日；通行量小，大军拉长队列更甚",
+      "speed_li": 18,
+      "winding": 1.1,
+      "max_cells": 7,
+      "neighbors": 4,
+      "crossing_cost": 3,
+      "crossing_days": 1,
+      "capacity": 0.5,
+      "frontage": 2,
+      "terrain_cost": {"plains": 1, "grassland": 1, "basin": 1, "river": 1.3, "desert": 1.3, "plateau": 1.4, "forest": 1.5, "hills": 1.6, "marsh": 2.2, "mountain": 2.8}
+    }
+  },
+  "succession": {
+    "陶谦": ["刘备"], "刘表": ["刘琮", "刘琦"], "公孙度": ["公孙康"], "公孙康": ["公孙恭"], "孙坚": ["孙策", "孙权"], "孙策": ["孙权"],
+    "袁绍": ["袁尚", "袁谭", "袁熙"], "刘焉": ["刘璋"], "刘璋": ["刘循"], "马腾": ["马超"], "曹操": ["曹丕", "曹植", "曹彰"], "刘备": ["刘禅"],
+    "孙权": ["孙登", "孙亮"], "董卓": ["李傕", "郭汜"], "李傕": ["郭汜"], "韦端": ["韦康"], "张鲁": ["张卫"], "公孙瓒": ["公孙续"],
+    "袁术": ["袁胤"], "刘繇": ["太史慈"], "张杨": ["眭固"], "韩遂": ["成公英"]
   },
   "edge_modifiers": {
     "henei:mengjin": "river",

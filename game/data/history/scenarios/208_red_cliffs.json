@@ -526,6 +526,7 @@
         "city": "xinye"
       }
     },
+    "treaties": [{"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "liu", "type": "war"}, {"a": "cao", "b": "sun", "type": "war"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}],
     "armies": [
       {
         "id": "cao_south",

@@ -1,23 +1,1917 @@
 {
   "schema_version": 2,
   "events": [
-    {"id":"coalition_oath","name":"关东盟誓","type":"historical","weight":100,"trigger":{"scenario_ids":["190_coalition"],"min_turn":2,"max_turn":2,"once":true,"exclude_forces":["dong"]},"text":"讨董檄文传至帐前，诸侯推举盟主，共议进兵。","choices":[{"id":"join","label":"会盟进兵","description":"耗费军资，提升威望与全军士气。","effect":{"gold":-500,"prestige":20,"armies":{"morale":5}}},{"id":"reserve","label":"谨慎应盟","description":"保全军资，但声望略有损失。","effect":{"prestige":-5,"food":300}}]},
-    {"id":"guandu_council","name":"官渡军议","type":"historical","weight":100,"trigger":{"scenario_ids":["200_guandu"],"player_forces":["cao","yuan"],"min_turn":2,"max_turn":2,"once":true},"text":"两军隔河相持，幕府诸将对速战与持久之策争论不休。","choices":[{"id":"decisive","label":"整军求战","description":"消耗粮秣，鼓舞军团士气。","effect":{"food":-800,"prestige":10,"armies":{"morale":6,"supply":-4}}},{"id":"endure","label":"固守待变","description":"补充粮秣，改善辖城防御。","effect":{"food":400,"cities":{"defenseDamage":-8,"order":2}}}]},
-    {"id":"red_cliffs_council","name":"江表决策","type":"historical","weight":100,"trigger":{"scenario_ids":["208_red_cliffs"],"min_turn":2,"max_turn":2,"once":true},"text":"大军临江，水陆攻守之策关系天下形势。","choices":[{"id":"prepare","label":"整备水陆","description":"投入金粮，提升军团训练与补给。","effect":{"gold":-400,"food":-500,"armies":{"training":4,"supply":8}}},{"id":"secure","label":"先固根本","description":"安定辖境，提升城市治安。","effect":{"prestige":-3,"cities":{"order":4}}}]},
-    {"id":"dong_move_changan","name":"迁都之议","type":"historical","weight":100,"trigger":{"scenario_ids":["190_coalition"],"player_forces":["dong"],"min_turn":4,"max_turn":4,"once":true},"text":"关东军势渐盛，幕府有人主张迁天子与府库西行，以关中险固避其锋芒。","choices":[{"id":"move","label":"西迁避锋","description":"保存粮秣并强化军队补给，但焚弃旧都损害威望与治安。","effect":{"food":900,"prestige":-18,"cities":{"order":-5},"armies":{"supply":8}}},{"id":"hold","label":"固守洛阳","description":"投入军资修城，维持朝廷威望。","effect":{"gold":-700,"food":-600,"prestige":8,"cities":{"defenseDamage":-15}}}]},
-    {"id":"coalition_luoyang_advance","name":"洛阳西望","type":"historical","weight":100,"trigger":{"scenario_ids":["190_coalition"],"min_turn":5,"max_turn":5,"once":true,"exclude_forces":["dong"]},"text":"洛阳方向烟尘蔽日，前军请示是否继续追击，诸侯则忧心粮道与后方。","choices":[{"id":"pursue","label":"乘势追击","description":"消耗粮秣，提升全军士气与声望。","effect":{"food":-900,"prestige":15,"armies":{"morale":7,"supply":-6}}},{"id":"restore","label":"收复郡县","description":"停止冒进，修复辖境并收拢流民。","effect":{"prestige":4,"cities":{"order":5,"population":800}}}]},
-    {"id":"coalition_fracture","name":"盟军离心","type":"historical","weight":100,"trigger":{"scenario_ids":["190_coalition"],"min_turn":8,"max_turn":8,"once":true,"exclude_forces":["dong"]},"text":"董军威胁未除，关东诸侯却已因粮运、地盘与号令相互猜疑。","choices":[{"id":"sustain","label":"维系盟约","description":"以财粮接济诸军，维持名望和士气。","effect":{"gold":-600,"food":-700,"prestige":18,"armies":{"morale":4}}},{"id":"secure_home","label":"经营本境","description":"退出共同进军，保全资源并恢复辖城。","effect":{"gold":350,"food":450,"prestige":-12,"cities":{"order":3}}}]},
-    {"id":"guandu_supply_crisis","name":"官渡粮道","type":"historical","weight":100,"trigger":{"scenario_ids":["200_guandu"],"player_forces":["cao","yuan"],"min_turn":5,"max_turn":5,"once":true},"text":"两军相持日久，前线消耗日增。斥候报告敌我运粮队频繁出没，幕府请定粮道方略。","choices":[{"id":"guard","label":"重兵护粮","description":"调拨粮草，提高全军补给并稳定辖城。","effect":{"food":-700,"armies":{"supply":12},"cities":{"order":2}}},{"id":"raid","label":"轻兵袭粮","description":"消耗补给发动冒险行动，提升士气和威望。","effect":{"food":-400,"prestige":12,"armies":{"morale":8,"supply":-8}}}]},
-    {"id":"guandu_counsel","name":"幕府进言","type":"historical","weight":100,"trigger":{"scenario_ids":["200_guandu"],"min_turn":8,"max_turn":8,"once":true},"text":"相持局面令幕府争论愈烈：有人主张出奇决胜，也有人坚持分兵持久。","choices":[{"id":"decide","label":"采纳奇策","description":"集中资源训练精锐，以一次决断争取战机。","effect":{"gold":-500,"food":-500,"prestige":10,"armies":{"training":5,"morale":5}}},{"id":"protract","label":"分兵持久","description":"加强地方生产和秩序，以长期国力取胜。","effect":{"prestige":-3,"cities":{"agriculture":2,"commerce":2,"order":2}}}]},
-    {"id":"sun_liu_envoys","name":"江上使者","type":"historical","weight":100,"trigger":{"scenario_ids":["208_red_cliffs"],"player_forces":["liu","sun"],"min_turn":4,"max_turn":4,"once":true},"text":"曹军压境，江上使者往来。联合抗曹可以互补兵势，却也意味着战后利益之争。","choices":[{"id":"ally","label":"协力拒曹","description":"投入军资，提升威望、训练和士气。","effect":{"gold":-400,"food":-500,"prestige":15,"armies":{"training":4,"morale":6}}},{"id":"independent","label":"独力经营","description":"保全资源并强化辖城，但失去联合声望。","effect":{"food":400,"prestige":-10,"cities":{"defenseDamage":-10,"order":3}}}]},
-    {"id":"cao_naval_preparations","name":"水军整备","type":"historical","weight":100,"trigger":{"scenario_ids":["208_red_cliffs"],"player_forces":["cao"],"min_turn":4,"max_turn":4,"once":true},"text":"北军初习水战，疫病与船阵成为幕府争论焦点。将领请求决定水寨方略。","choices":[{"id":"train_navy","label":"操练水军","description":"投入粮秣提高训练和补给。","effect":{"food":-900,"armies":{"training":7,"supply":8}}},{"id":"secure_camps","label":"分寨防疫","description":"放缓进军，恢复士气并稳定占领区。","effect":{"gold":-400,"armies":{"morale":5},"cities":{"order":4}}}]},
-    {"id":"red_cliffs_fire_plan","name":"赤壁火谋","type":"historical","weight":100,"trigger":{"scenario_ids":["208_red_cliffs"],"player_forces":["liu","sun"],"min_turn":7,"max_turn":7,"once":true},"text":"江风转急，水军将领提出以诈降和火船破敌。此计收益极大，失败也会耗尽精锐。","choices":[{"id":"fire_attack","label":"施行火攻","description":"消耗金粮，显著鼓舞军心并提升训练。","effect":{"gold":-600,"food":-700,"prestige":20,"armies":{"morale":10,"training":5,"supply":-5}}},{"id":"hold_river","label":"扼守江面","description":"避免冒险，增强补给和辖城防御。","effect":{"prestige":3,"armies":{"supply":10},"cities":{"defenseDamage":-12}}}]},
-    {"id":"red_cliffs_fire_defence","name":"江风示警","type":"historical","weight":100,"trigger":{"scenario_ids":["208_red_cliffs"],"player_forces":["cao"],"min_turn":7,"max_turn":7,"once":true},"text":"东南风起，斥候报告敌军船队异动。水寨是否拆分戒备，关系全军安危。","choices":[{"id":"disperse","label":"分散船阵","description":"牺牲进攻效率，改善补给与防火准备。","effect":{"gold":-400,"armies":{"supply":9,"morale":3},"cities":{"defenseDamage":-8}}},{"id":"press_attack","label":"乘势进攻","description":"维持集中船阵，提升士气但消耗补给。","effect":{"prestige":10,"armies":{"morale":8,"supply":-10}}}]},
-    {"id":"refugees_choice","name":"流民来归","type":"random","weight":3,"trigger":{"min_turn":3,"cooldown":12,"chance":0.45,"city_min":1},"text":"邻境流民扶老携幼来到治下，请求安置。","choices":[{"id":"accept","label":"开仓安置","description":"消耗粮食，增加人口并提升威望。","effect":{"food":-500,"prestige":8,"city":{"population":1800,"order":-2}}},{"id":"settle","label":"编户屯田","description":"耗费资金，增加人口与农业。","effect":{"gold":-300,"city":{"population":900,"agriculture":2}}},{"id":"refuse","label":"闭境拒纳","description":"不消耗资源，但损失威望。","effect":{"prestige":-10}}]},
-    {"id":"bandit_choice","name":"盗贼蜂起","type":"random","weight":2,"trigger":{"min_turn":4,"cooldown":12,"chance":0.4,"city_min":1},"text":"地方盗贼聚众，商旅断绝，郡县请发兵处置。","choices":[{"id":"suppress","label":"出兵清剿","description":"耗费资金，显著恢复治安。","effect":{"gold":-350,"prestige":5,"city":{"order":8}}},{"id":"amnesty","label":"招抚编民","description":"耗费粮食，小幅恢复治安和人口。","effect":{"food":-450,"city":{"order":3,"population":500}}},{"id":"ignore","label":"暂且不问","description":"城市治安与地方资金受损。","effect":{"city":{"order":-7,"localGold":-300}}}]},
-    {"id":"good_harvest","name":"五谷丰登","type":"random","weight":4,"trigger":{"chance":0.45,"cooldown":6},"effect":{"food":900},"text":"时雨应节，郡县秋粮增收。"},
-    {"id":"market_boom","name":"商旅云集","type":"random","weight":3,"trigger":{"chance":0.45,"cooldown":6},"effect":{"gold":600},"text":"道路渐安，四方商旅汇集。"},
-    {"id":"locusts","name":"蝗灾","type":"random","weight":1,"trigger":{"min_turn":4,"chance":0.35,"cooldown":12},"effect":{"food":-700},"text":"数县飞蝗蔽日，仓粮受损。"},
-    {"id":"flood","name":"水患","type":"random","weight":1,"trigger":{"min_turn":4,"chance":0.35,"cooldown":12,"city_min":1},"effect":{"food":-400,"city":{"order":-3}},"text":"连日大雨，沿河郡县受灾。"}
+    {
+      "id": "coalition_oath",
+      "name": "关东盟誓",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "190_coalition"
+        ],
+        "min_turn": 2,
+        "max_turn": 2,
+        "once": true,
+        "exclude_forces": [
+          "dong"
+        ]
+      },
+      "text": "讨董檄文传至帐前，诸侯推举盟主，共议进兵。",
+      "choices": [
+        {
+          "id": "join",
+          "label": "会盟进兵",
+          "description": "耗费军资，提升威望与全军士气。",
+          "effect": {
+            "gold": -500,
+            "prestige": 20,
+            "armies": {
+              "morale": 5
+            }
+          }
+        },
+        {
+          "id": "reserve",
+          "label": "谨慎应盟",
+          "description": "保全军资，但声望略有损失。",
+          "effect": {
+            "prestige": -5,
+            "food": 300
+          }
+        }
+      ]
+    },
+    {
+      "id": "guandu_council",
+      "name": "官渡军议",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu"
+        ],
+        "player_forces": [
+          "cao",
+          "yuan"
+        ],
+        "min_turn": 2,
+        "max_turn": 2,
+        "once": true
+      },
+      "text": "两军隔河相持，幕府诸将对速战与持久之策争论不休。",
+      "choices": [
+        {
+          "id": "decisive",
+          "label": "整军求战",
+          "description": "消耗粮秣，鼓舞军团士气。",
+          "effect": {
+            "food": -800,
+            "prestige": 10,
+            "armies": {
+              "morale": 6,
+              "supply": -4
+            }
+          }
+        },
+        {
+          "id": "endure",
+          "label": "固守待变",
+          "description": "补充粮秣，改善辖城防御。",
+          "effect": {
+            "food": 400,
+            "cities": {
+              "defenseDamage": -8,
+              "order": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "red_cliffs_council",
+      "name": "江表决策",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs"
+        ],
+        "min_turn": 2,
+        "max_turn": 2,
+        "once": true
+      },
+      "text": "大军临江，水陆攻守之策关系天下形势。",
+      "choices": [
+        {
+          "id": "prepare",
+          "label": "整备水陆",
+          "description": "投入金粮，提升军团训练与补给。",
+          "effect": {
+            "gold": -400,
+            "food": -500,
+            "armies": {
+              "training": 4,
+              "supply": 8
+            }
+          }
+        },
+        {
+          "id": "secure",
+          "label": "先固根本",
+          "description": "安定辖境，提升城市治安。",
+          "effect": {
+            "prestige": -3,
+            "cities": {
+              "order": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dong_move_changan",
+      "name": "迁都之议",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "190_coalition"
+        ],
+        "player_forces": [
+          "dong"
+        ],
+        "min_turn": 4,
+        "max_turn": 4,
+        "once": true
+      },
+      "text": "关东军势渐盛，幕府有人主张迁天子与府库西行，以关中险固避其锋芒。",
+      "choices": [
+        {
+          "id": "move",
+          "label": "西迁避锋",
+          "description": "保存粮秣并强化军队补给，但焚弃旧都损害威望与治安。",
+          "effect": {
+            "food": 900,
+            "prestige": -18,
+            "cities": {
+              "order": -5
+            },
+            "armies": {
+              "supply": 8
+            }
+          }
+        },
+        {
+          "id": "hold",
+          "label": "固守洛阳",
+          "description": "投入军资修城，维持朝廷威望。",
+          "effect": {
+            "gold": -700,
+            "food": -600,
+            "prestige": 8,
+            "cities": {
+              "defenseDamage": -15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "coalition_luoyang_advance",
+      "name": "洛阳西望",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "190_coalition"
+        ],
+        "min_turn": 5,
+        "max_turn": 5,
+        "once": true,
+        "exclude_forces": [
+          "dong"
+        ]
+      },
+      "text": "洛阳方向烟尘蔽日，前军请示是否继续追击，诸侯则忧心粮道与后方。",
+      "choices": [
+        {
+          "id": "pursue",
+          "label": "乘势追击",
+          "description": "消耗粮秣，提升全军士气与声望。",
+          "effect": {
+            "food": -900,
+            "prestige": 15,
+            "armies": {
+              "morale": 7,
+              "supply": -6
+            }
+          }
+        },
+        {
+          "id": "restore",
+          "label": "收复郡县",
+          "description": "停止冒进，修复辖境并收拢流民。",
+          "effect": {
+            "prestige": 4,
+            "cities": {
+              "order": 5,
+              "population": 800
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "coalition_fracture",
+      "name": "盟军离心",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "190_coalition"
+        ],
+        "min_turn": 8,
+        "max_turn": 8,
+        "once": true,
+        "exclude_forces": [
+          "dong"
+        ]
+      },
+      "text": "董军威胁未除，关东诸侯却已因粮运、地盘与号令相互猜疑。",
+      "choices": [
+        {
+          "id": "sustain",
+          "label": "维系盟约",
+          "description": "以财粮接济诸军，维持名望和士气。",
+          "effect": {
+            "gold": -600,
+            "food": -700,
+            "prestige": 18,
+            "armies": {
+              "morale": 4
+            }
+          }
+        },
+        {
+          "id": "secure_home",
+          "label": "经营本境",
+          "description": "退出共同进军，保全资源并恢复辖城。",
+          "effect": {
+            "gold": 350,
+            "food": 450,
+            "prestige": -12,
+            "cities": {
+              "order": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "guandu_supply_crisis",
+      "name": "官渡粮道",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu"
+        ],
+        "player_forces": [
+          "cao",
+          "yuan"
+        ],
+        "min_turn": 5,
+        "max_turn": 5,
+        "once": true
+      },
+      "text": "两军相持日久，前线消耗日增。斥候报告敌我运粮队频繁出没，幕府请定粮道方略。",
+      "choices": [
+        {
+          "id": "guard",
+          "label": "重兵护粮",
+          "description": "调拨粮草，提高全军补给并稳定辖城。",
+          "effect": {
+            "food": -700,
+            "armies": {
+              "supply": 12
+            },
+            "cities": {
+              "order": 2
+            }
+          }
+        },
+        {
+          "id": "raid",
+          "label": "轻兵袭粮",
+          "description": "消耗补给发动冒险行动，提升士气和威望。",
+          "effect": {
+            "food": -400,
+            "prestige": 12,
+            "armies": {
+              "morale": 8,
+              "supply": -8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "guandu_counsel",
+      "name": "幕府进言",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu"
+        ],
+        "min_turn": 8,
+        "max_turn": 8,
+        "once": true
+      },
+      "text": "相持局面令幕府争论愈烈：有人主张出奇决胜，也有人坚持分兵持久。",
+      "choices": [
+        {
+          "id": "decide",
+          "label": "采纳奇策",
+          "description": "集中资源训练精锐，以一次决断争取战机。",
+          "effect": {
+            "gold": -500,
+            "food": -500,
+            "prestige": 10,
+            "armies": {
+              "training": 5,
+              "morale": 5
+            }
+          }
+        },
+        {
+          "id": "protract",
+          "label": "分兵持久",
+          "description": "加强地方生产和秩序，以长期国力取胜。",
+          "effect": {
+            "prestige": -3,
+            "cities": {
+              "agriculture": 2,
+              "commerce": 2,
+              "order": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sun_liu_envoys",
+      "name": "江上使者",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs"
+        ],
+        "player_forces": [
+          "liu",
+          "sun"
+        ],
+        "min_turn": 4,
+        "max_turn": 4,
+        "once": true
+      },
+      "text": "曹军压境，江上使者往来。联合抗曹可以互补兵势，却也意味着战后利益之争。",
+      "choices": [
+        {
+          "id": "ally",
+          "label": "协力拒曹",
+          "description": "投入军资，提升威望、训练和士气。",
+          "effect": {
+            "gold": -400,
+            "food": -500,
+            "prestige": 15,
+            "armies": {
+              "training": 4,
+              "morale": 6
+            }
+          }
+        },
+        {
+          "id": "independent",
+          "label": "独力经营",
+          "description": "保全资源并强化辖城，但失去联合声望。",
+          "effect": {
+            "food": 400,
+            "prestige": -10,
+            "cities": {
+              "defenseDamage": -10,
+              "order": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cao_naval_preparations",
+      "name": "水军整备",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs"
+        ],
+        "player_forces": [
+          "cao"
+        ],
+        "min_turn": 4,
+        "max_turn": 4,
+        "once": true
+      },
+      "text": "北军初习水战，疫病与船阵成为幕府争论焦点。将领请求决定水寨方略。",
+      "choices": [
+        {
+          "id": "train_navy",
+          "label": "操练水军",
+          "description": "投入粮秣提高训练和补给。",
+          "effect": {
+            "food": -900,
+            "armies": {
+              "training": 7,
+              "supply": 8
+            }
+          }
+        },
+        {
+          "id": "secure_camps",
+          "label": "分寨防疫",
+          "description": "放缓进军，恢复士气并稳定占领区。",
+          "effect": {
+            "gold": -400,
+            "armies": {
+              "morale": 5
+            },
+            "cities": {
+              "order": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "red_cliffs_fire_plan",
+      "name": "赤壁火谋",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs"
+        ],
+        "player_forces": [
+          "liu",
+          "sun"
+        ],
+        "min_turn": 7,
+        "max_turn": 7,
+        "once": true
+      },
+      "text": "江风转急，水军将领提出以诈降和火船破敌。此计收益极大，失败也会耗尽精锐。",
+      "choices": [
+        {
+          "id": "fire_attack",
+          "label": "施行火攻",
+          "description": "消耗金粮，显著鼓舞军心并提升训练。",
+          "effect": {
+            "gold": -600,
+            "food": -700,
+            "prestige": 20,
+            "armies": {
+              "morale": 10,
+              "training": 5,
+              "supply": -5
+            }
+          }
+        },
+        {
+          "id": "hold_river",
+          "label": "扼守江面",
+          "description": "避免冒险，增强补给和辖城防御。",
+          "effect": {
+            "prestige": 3,
+            "armies": {
+              "supply": 10
+            },
+            "cities": {
+              "defenseDamage": -12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "red_cliffs_fire_defence",
+      "name": "江风示警",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs"
+        ],
+        "player_forces": [
+          "cao"
+        ],
+        "min_turn": 7,
+        "max_turn": 7,
+        "once": true
+      },
+      "text": "东南风起，斥候报告敌军船队异动。水寨是否拆分戒备，关系全军安危。",
+      "choices": [
+        {
+          "id": "disperse",
+          "label": "分散船阵",
+          "description": "牺牲进攻效率，改善补给与防火准备。",
+          "effect": {
+            "gold": -400,
+            "armies": {
+              "supply": 9,
+              "morale": 3
+            },
+            "cities": {
+              "defenseDamage": -8
+            }
+          }
+        },
+        {
+          "id": "press_attack",
+          "label": "乘势进攻",
+          "description": "维持集中船阵，提升士气但消耗补给。",
+          "effect": {
+            "prestige": 10,
+            "armies": {
+              "morale": 8,
+              "supply": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "refugees_choice",
+      "name": "流民来归",
+      "type": "random",
+      "weight": 3,
+      "trigger": {
+        "min_turn": 3,
+        "cooldown": 12,
+        "chance": 0.45,
+        "city_min": 1
+      },
+      "text": "邻境流民扶老携幼来到治下，请求安置。",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "开仓安置",
+          "description": "消耗粮食，增加人口并提升威望。",
+          "effect": {
+            "food": -500,
+            "prestige": 8,
+            "city": {
+              "population": 1800,
+              "order": -2
+            }
+          }
+        },
+        {
+          "id": "settle",
+          "label": "编户屯田",
+          "description": "耗费资金，增加人口与农业。",
+          "effect": {
+            "gold": -300,
+            "city": {
+              "population": 900,
+              "agriculture": 2
+            }
+          }
+        },
+        {
+          "id": "refuse",
+          "label": "闭境拒纳",
+          "description": "不消耗资源，但损失威望。",
+          "effect": {
+            "prestige": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "bandit_choice",
+      "name": "盗贼蜂起",
+      "type": "random",
+      "weight": 2,
+      "trigger": {
+        "min_turn": 4,
+        "cooldown": 12,
+        "chance": 0.4,
+        "city_min": 1
+      },
+      "text": "地方盗贼聚众，商旅断绝，郡县请发兵处置。",
+      "choices": [
+        {
+          "id": "suppress",
+          "label": "出兵清剿",
+          "description": "耗费资金，显著恢复治安。",
+          "effect": {
+            "gold": -350,
+            "prestige": 5,
+            "city": {
+              "order": 8
+            }
+          }
+        },
+        {
+          "id": "amnesty",
+          "label": "招抚编民",
+          "description": "耗费粮食，小幅恢复治安和人口。",
+          "effect": {
+            "food": -450,
+            "city": {
+              "order": 3,
+              "population": 500
+            }
+          }
+        },
+        {
+          "id": "ignore",
+          "label": "暂且不问",
+          "description": "城市治安与地方资金受损。",
+          "effect": {
+            "city": {
+              "order": -7,
+              "localGold": -300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "good_harvest",
+      "name": "五谷丰登",
+      "type": "random",
+      "weight": 4,
+      "trigger": {
+        "chance": 0.45,
+        "cooldown": 6
+      },
+      "effect": {
+        "food": 900
+      },
+      "text": "时雨应节，郡县秋粮增收。"
+    },
+    {
+      "id": "market_boom",
+      "name": "商旅云集",
+      "type": "random",
+      "weight": 3,
+      "trigger": {
+        "chance": 0.45,
+        "cooldown": 6
+      },
+      "effect": {
+        "gold": 600
+      },
+      "text": "道路渐安，四方商旅汇集。"
+    },
+    {
+      "id": "locusts",
+      "name": "蝗灾",
+      "type": "random",
+      "weight": 1,
+      "trigger": {
+        "min_turn": 4,
+        "chance": 0.35,
+        "cooldown": 12
+      },
+      "effect": {
+        "food": -700
+      },
+      "text": "数县飞蝗蔽日，仓粮受损。"
+    },
+    {
+      "id": "flood",
+      "name": "水患",
+      "type": "random",
+      "weight": 1,
+      "trigger": {
+        "min_turn": 4,
+        "chance": 0.35,
+        "cooldown": 12,
+        "city_min": 1
+      },
+      "effect": {
+        "food": -400,
+        "city": {
+          "order": -3
+        }
+      },
+      "text": "连日大雨，沿河郡县受灾。"
+    },
+    {
+      "id": "puyang_locusts",
+      "name": "蝗灾大饥",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "date_from": "194-08",
+        "date_to": "195-02"
+      },
+      "text": "是岁蝗虫起，百姓大饿，兖豫之间谷一斛五十余万钱。",
+      "world": [
+        {
+          "type": "region",
+          "provinces": [
+            "兖州",
+            "豫州"
+          ],
+          "food_ratio": 0.6,
+          "order": -6,
+          "agriculture": -4,
+          "note": "兖、豫诸郡仓廪减四成，民心浮动"
+        }
+      ]
+    },
+    {
+      "id": "puyang_night_battle",
+      "name": "濮阳夜战",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "cao"
+        ],
+        "date_from": "194-06",
+        "date_to": "194-08",
+        "cities_owned": {
+          "puyang": "lu_bu"
+        }
+      },
+      "text": "曹军夜袭濮阳西营，吕布亲自搏战，自旦至日昳数十合。青州兵奔溃，主公坠马烧手，典韦率应募者冒矢而进。",
+      "choices": [
+        {
+          "id": "press",
+          "label": "收兵再战",
+          "description": "整军再攻，士气受挫而训练有得。",
+          "effect": {
+            "food": -1500,
+            "armies": {
+              "morale": -6,
+              "training": 4
+            }
+          }
+        },
+        {
+          "id": "withdraw",
+          "label": "退守鄄城",
+          "description": "暂避锋芒，就粮休整。",
+          "effect": {
+            "prestige": -5,
+            "armies": {
+              "supply": 10,
+              "morale": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "puyang_lu_bu_defence",
+      "name": "曹军来攻",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "lu_bu"
+        ],
+        "date_from": "194-06",
+        "date_to": "194-08",
+        "cities_owned": {
+          "puyang": "lu_bu"
+        }
+      },
+      "text": "曹操自徐州回军，围攻濮阳。陈宫请出奇兵截其归路，诸将则主张凭城固守。",
+      "choices": [
+        {
+          "id": "sally",
+          "label": "出城邀击",
+          "description": "并州骑兵出击，士气大振而补给消耗。",
+          "effect": {
+            "prestige": 10,
+            "armies": {
+              "morale": 8,
+              "supply": -8
+            }
+          }
+        },
+        {
+          "id": "hold",
+          "label": "凭城固守",
+          "description": "加固城防，安抚新附郡县。",
+          "effect": {
+            "cities": {
+              "order": 3,
+              "defenseDamage": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tao_qian_entrusts",
+      "name": "陶谦属意",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "liu"
+        ],
+        "date_from": "194-11",
+        "date_to": "194-12",
+        "officers_serving": {
+          "陶谦": "tao_qian"
+        }
+      },
+      "text": "陶谦病笃，谓别驾糜竺曰：非刘备不能安此州也。徐州吏民亦多归心。",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "应其所托",
+          "description": "结好徐州，声望日隆。",
+          "effect": {
+            "prestige": 15,
+            "world": [
+              {
+                "type": "treaty",
+                "a": "liu",
+                "b": "tao_qian",
+                "kind": "alliance"
+              }
+            ]
+          }
+        },
+        {
+          "id": "decline",
+          "label": "谦辞不受",
+          "description": "以谦让得士人之心。",
+          "effect": {
+            "prestige": 8,
+            "cities": {
+              "order": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "emperor_leaves_changan",
+      "name": "天子东归",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "date_from": "195-07",
+        "date_to": "195-12",
+        "forces_alive": [
+          "li_jue"
+        ]
+      },
+      "text": "李傕、郭汜相攻于长安，天子乘乱东归，关中大乱。",
+      "world": [
+        {
+          "type": "army",
+          "force": "li_jue",
+          "morale": -12,
+          "supply": -10
+        },
+        {
+          "type": "region",
+          "provinces": [
+            "司隶"
+          ],
+          "order": -8,
+          "agriculture": -3,
+          "note": "三辅残破，司隶民心大乱"
+        }
+      ]
+    },
+    {
+      "id": "tongguan_estrangement",
+      "name": "离间韩马",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao",
+          "ma_chao",
+          "han_sui"
+        ],
+        "date_from": "211-09",
+        "date_to": "212-06",
+        "forces_alive": [
+          "cao",
+          "ma_chao",
+          "han_sui"
+        ],
+        "friendly": [
+          [
+            "ma_chao",
+            "han_sui"
+          ]
+        ],
+        "at_war": [
+          [
+            "cao",
+            "ma_chao"
+          ]
+        ]
+      },
+      "text": "曹操与韩遂交马语移时，又作书多所点窜，马超等疑韩遂，关西诸将由是离心。",
+      "world": [
+        {
+          "type": "break",
+          "a": "ma_chao",
+          "b": "han_sui",
+          "relation": -60
+        },
+        {
+          "type": "army",
+          "force": "han_sui",
+          "morale": -10
+        },
+        {
+          "type": "army",
+          "force": "ma_chao",
+          "morale": -8
+        }
+      ]
+    },
+    {
+      "id": "tongguan_jia_xu_plan",
+      "name": "贾诩之谋",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "player_forces": [
+          "cao"
+        ],
+        "date_from": "211-09",
+        "date_to": "212-06",
+        "forces_alive": [
+          "ma_chao",
+          "han_sui"
+        ],
+        "friendly": [
+          [
+            "ma_chao",
+            "han_sui"
+          ]
+        ],
+        "officers_serving": {
+          "贾诩": "cao"
+        }
+      },
+      "text": "关西诸将求割河以西请和。贾诩曰：可伪许之，离之而已。",
+      "choices": [
+        {
+          "id": "estrange",
+          "label": "伪许和、抹书离间",
+          "description": "韩、马自相猜疑，联军离心。",
+          "effect": {
+            "world": [
+              {
+                "type": "break",
+                "a": "ma_chao",
+                "b": "han_sui",
+                "relation": -60
+              },
+              {
+                "type": "army",
+                "force": "han_sui",
+                "morale": -10
+              },
+              {
+                "type": "army",
+                "force": "ma_chao",
+                "morale": -8
+              }
+            ]
+          }
+        },
+        {
+          "id": "battle",
+          "label": "拒和决战",
+          "description": "整军强攻，士气振奋。",
+          "effect": {
+            "armies": {
+              "morale": 6,
+              "supply": -5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tongguan_ma_chao_doubt",
+      "name": "韩遂会曹",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "player_forces": [
+          "ma_chao"
+        ],
+        "date_from": "211-09",
+        "date_to": "212-06",
+        "forces_alive": [
+          "han_sui"
+        ],
+        "friendly": [
+          [
+            "ma_chao",
+            "han_sui"
+          ]
+        ]
+      },
+      "text": "韩遂与曹操阵前交马语移时，曹公又遗遂书，多所点窜，似遂改定者。",
+      "choices": [
+        {
+          "id": "suspect",
+          "label": "心疑韩遂",
+          "description": "提防同盟，与韩遂分道。",
+          "effect": {
+            "world": [
+              {
+                "type": "break",
+                "a": "ma_chao",
+                "b": "han_sui",
+                "relation": -50
+              }
+            ]
+          }
+        },
+        {
+          "id": "trust",
+          "label": "推诚相待",
+          "description": "不为谗间所动，保全联军。",
+          "effect": {
+            "prestige": 5,
+            "armies": {
+              "morale": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tongguan_han_sui_letter",
+      "name": "曹公来书",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "player_forces": [
+          "han_sui"
+        ],
+        "date_from": "211-09",
+        "date_to": "212-06",
+        "forces_alive": [
+          "ma_chao"
+        ],
+        "friendly": [
+          [
+            "ma_chao",
+            "han_sui"
+          ]
+        ]
+      },
+      "text": "曹操遗书叙旧，言辞恳切，马超诸将见之，颇有疑色。",
+      "choices": [
+        {
+          "id": "separate",
+          "label": "与马超分道",
+          "description": "与曹操约为互不侵犯，退保西北。",
+          "effect": {
+            "world": [
+              {
+                "type": "break",
+                "a": "ma_chao",
+                "b": "han_sui",
+                "relation": -40
+              },
+              {
+                "type": "treaty",
+                "a": "han_sui",
+                "b": "cao",
+                "kind": "non_aggression",
+                "months": 12
+              }
+            ]
+          }
+        },
+        {
+          "id": "keep",
+          "label": "坚守盟约",
+          "description": "示诚于马超，联军同心。",
+          "effect": {
+            "armies": {
+              "morale": 5
+            },
+            "prestige": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "liu_zhang_invites",
+      "name": "刘璋迎客",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu",
+          "liu_zhang"
+        ],
+        "date_from": "211-12",
+        "date_to": "212-08",
+        "forces_alive": [
+          "liu",
+          "liu_zhang"
+        ],
+        "not_at_war": [
+          [
+            "liu",
+            "liu_zhang"
+          ]
+        ],
+        "officers_serving": {
+          "法正": "liu_zhang",
+          "张松": "liu_zhang"
+        }
+      },
+      "text": "刘璋闻曹操将遣钟繇向汉中，内怀恐惧。张松劝迎刘备讨张鲁，璋遣法正将四千人迎之，先主北至葭萌。",
+      "world": [
+        {
+          "type": "treaty",
+          "a": "liu",
+          "b": "liu_zhang",
+          "kind": "alliance",
+          "months": 18
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "jiameng"
+          ],
+          "from": "liu_zhang",
+          "to": "liu",
+          "governor": "刘备"
+        }
+      ]
+    },
+    {
+      "id": "liu_invited_to_shu",
+      "name": "法正来迎",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "player_forces": [
+          "liu"
+        ],
+        "date_from": "211-12",
+        "date_to": "212-08",
+        "forces_alive": [
+          "liu_zhang"
+        ],
+        "not_at_war": [
+          [
+            "liu",
+            "liu_zhang"
+          ]
+        ],
+        "officers_serving": {
+          "法正": "liu_zhang"
+        }
+      },
+      "text": "刘璋遣法正将兵四千来迎，请讨张鲁。法正私陈益州可取之策。",
+      "choices": [
+        {
+          "id": "enter",
+          "label": "应邀入蜀",
+          "description": "与刘璋结盟，进驻葭萌。",
+          "effect": {
+            "world": [
+              {
+                "type": "treaty",
+                "a": "liu",
+                "b": "liu_zhang",
+                "kind": "alliance",
+                "months": 18
+              },
+              {
+                "type": "transfer",
+                "cities": [
+                  "jiameng"
+                ],
+                "from": "liu_zhang",
+                "to": "liu",
+                "governor": "刘备"
+              }
+            ]
+          }
+        },
+        {
+          "id": "refuse",
+          "label": "婉辞不往",
+          "description": "专意经营荆州。",
+          "effect": {
+            "prestige": 4,
+            "cities": {
+              "order": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "zhang_song_counsel",
+      "name": "张松进策",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "player_forces": [
+          "liu_zhang"
+        ],
+        "date_from": "211-12",
+        "date_to": "212-08",
+        "forces_alive": [
+          "liu"
+        ],
+        "not_at_war": [
+          [
+            "liu",
+            "liu_zhang"
+          ]
+        ],
+        "officers_serving": {
+          "张松": "liu_zhang"
+        }
+      },
+      "text": "张松言：曹公兵强无敌，若因张鲁之资以取蜀土，谁能御之？刘豫州使君之宗室，可使讨鲁。黄权、王累苦谏不可。",
+      "choices": [
+        {
+          "id": "invite",
+          "label": "迎刘备讨张鲁",
+          "description": "与刘备结盟，葭萌交其驻守。",
+          "effect": {
+            "world": [
+              {
+                "type": "treaty",
+                "a": "liu",
+                "b": "liu_zhang",
+                "kind": "alliance",
+                "months": 18
+              },
+              {
+                "type": "transfer",
+                "cities": [
+                  "jiameng"
+                ],
+                "from": "liu_zhang",
+                "to": "liu",
+                "governor": "刘备"
+              }
+            ]
+          }
+        },
+        {
+          "id": "refuse",
+          "label": "从黄权之谏",
+          "description": "闭境自守，益州上下安心。",
+          "effect": {
+            "cities": {
+              "order": 3
+            },
+            "prestige": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "flooding_seven_armies",
+      "name": "水淹七军",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao",
+          "liu"
+        ],
+        "date_from": "219-08",
+        "date_to": "219-10",
+        "cities_owned": {
+          "xian_extra_05": "cao"
+        },
+        "officers_serving": {
+          "关羽": "liu",
+          "于禁": "cao"
+        },
+        "commanders_at": {
+          "关羽": [
+            "xian_09_04",
+            "xiangyang",
+            "xian_extra_05"
+          ],
+          "于禁": [
+            "xian_extra_05",
+            "xiangyang",
+            "wan"
+          ]
+        }
+      },
+      "text": "秋大霖雨，汉水溢，平地水数丈，于禁所督七军皆没。禁降关羽，庞德不屈被杀。",
+      "world": [
+        {
+          "type": "army",
+          "commander": "于禁",
+          "soldiers_ratio": 0.25,
+          "morale": -35,
+          "supply": -30
+        },
+        {
+          "type": "officer",
+          "name": "于禁",
+          "status": "prisoner"
+        },
+        {
+          "type": "officer",
+          "name": "庞德",
+          "status": "dead"
+        },
+        {
+          "type": "army",
+          "commander": "关羽",
+          "morale": 15
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "南阳郡",
+            "襄阳郡",
+            "章陵郡"
+          ],
+          "order": -8,
+          "note": "梁郏、陆浑群盗遥受关羽印号，许都以南震动"
+        }
+      ]
+    },
+    {
+      "id": "han_river_floods_cao",
+      "name": "汉水暴溢",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "cao"
+        ],
+        "date_from": "219-08",
+        "date_to": "219-10",
+        "officers_serving": {
+          "关羽": "liu",
+          "于禁": "cao"
+        },
+        "commanders_at": {
+          "于禁": [
+            "xian_extra_05",
+            "xiangyang",
+            "wan"
+          ]
+        }
+      },
+      "text": "秋雨连旬，汉水日涨，樊北七军营于平地。",
+      "choices": [
+        {
+          "id": "move",
+          "label": "移屯高地",
+          "description": "弃平地营垒，损失有限。",
+          "effect": {
+            "world": [
+              {
+                "type": "army",
+                "commander": "于禁",
+                "soldiers_ratio": 0.85,
+                "morale": -10,
+                "supply": -10
+              }
+            ]
+          }
+        },
+        {
+          "id": "stay",
+          "label": "坚守原营",
+          "description": "营垒不移，听天由命。",
+          "effect": {
+            "world": [
+              {
+                "type": "army",
+                "commander": "于禁",
+                "soldiers_ratio": 0.25,
+                "morale": -35,
+                "supply": -30
+              },
+              {
+                "type": "officer",
+                "name": "于禁",
+                "status": "prisoner"
+              },
+              {
+                "type": "officer",
+                "name": "庞德",
+                "status": "dead"
+              },
+              {
+                "type": "army",
+                "commander": "关羽",
+                "morale": 15
+              },
+              {
+                "type": "region",
+                "commanderies": [
+                  "南阳郡",
+                  "襄阳郡",
+                  "章陵郡"
+                ],
+                "order": -8,
+                "note": "梁郏、陆浑群盗遥受关羽印号，许都以南震动"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "han_river_floods_liu",
+      "name": "汉水暴溢",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "liu"
+        ],
+        "date_from": "219-08",
+        "date_to": "219-10",
+        "officers_serving": {
+          "关羽": "liu",
+          "于禁": "cao"
+        },
+        "commanders_at": {
+          "关羽": [
+            "xian_09_04",
+            "xiangyang",
+            "xian_extra_05"
+          ],
+          "于禁": [
+            "xian_extra_05",
+            "xiangyang",
+            "wan"
+          ]
+        }
+      },
+      "text": "秋雨连旬，汉水泛滥，曹军七军屯于樊北平地。",
+      "choices": [
+        {
+          "id": "strike",
+          "label": "乘大船攻七军",
+          "description": "水师乘涨攻其营垒。",
+          "effect": {
+            "prestige": 20,
+            "world": [
+              {
+                "type": "army",
+                "commander": "于禁",
+                "soldiers_ratio": 0.25,
+                "morale": -35,
+                "supply": -30
+              },
+              {
+                "type": "officer",
+                "name": "于禁",
+                "status": "prisoner"
+              },
+              {
+                "type": "officer",
+                "name": "庞德",
+                "status": "dead"
+              },
+              {
+                "type": "army",
+                "commander": "关羽",
+                "morale": 15
+              },
+              {
+                "type": "region",
+                "commanderies": [
+                  "南阳郡",
+                  "襄阳郡",
+                  "章陵郡"
+                ],
+                "order": -8,
+                "note": "梁郏、陆浑群盗遥受关羽印号，许都以南震动"
+              }
+            ]
+          }
+        },
+        {
+          "id": "wait",
+          "label": "按兵不动",
+          "description": "保存实力，静待其变。",
+          "effect": {
+            "armies": {
+              "supply": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sun_cao_accord",
+      "name": "孙曹通好",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao",
+          "sun"
+        ],
+        "date_from": "219-09",
+        "date_to": "220-03",
+        "forces_alive": [
+          "cao",
+          "sun",
+          "liu"
+        ],
+        "at_war": [
+          [
+            "cao",
+            "liu"
+          ]
+        ]
+      },
+      "text": "孙权遣使上书，请以讨关羽自效，曹操许之，并以其书射示关羽。",
+      "world": [
+        {
+          "type": "treaty",
+          "a": "cao",
+          "b": "sun",
+          "kind": "non_aggression",
+          "months": 24
+        }
+      ]
+    },
+    {
+      "id": "white_robed_crossing",
+      "name": "白衣渡江",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "sun",
+          "liu"
+        ],
+        "date_from": "219-10",
+        "date_to": "220-06",
+        "forces_alive": [
+          "sun",
+          "liu"
+        ],
+        "cities_owned": {
+          "jiangling": "liu",
+          "xian_extra_14": "sun"
+        },
+        "officers_serving": {
+          "吕蒙": "sun",
+          "糜芳": "liu"
+        },
+        "commanders_not_at": {
+          "关羽": [
+            "jiangling",
+            "xian_extra_08"
+          ]
+        }
+      },
+      "text": "吕蒙伏精兵于船舱中，使白衣摇橹，作商贾人服，昼夜兼行，尽收江边屯候。糜芳、傅士仁降，江陵、公安俱陷。",
+      "world": [
+        {
+          "type": "break",
+          "a": "sun",
+          "b": "liu",
+          "war": true,
+          "reason": "袭取荆州"
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "jiangling",
+            "xian_extra_08"
+          ],
+          "from": "liu",
+          "to": "sun"
+        },
+        {
+          "type": "officer",
+          "name": "糜芳",
+          "force": "sun",
+          "city": "jiangling",
+          "loyalty": 45
+        },
+        {
+          "type": "officer",
+          "name": "傅士仁",
+          "force": "sun",
+          "city": "xian_extra_08",
+          "loyalty": 45
+        },
+        {
+          "type": "army",
+          "commander": "关羽",
+          "morale": -25,
+          "supply": -20
+        }
+      ]
+    },
+    {
+      "id": "lu_meng_plan",
+      "name": "吕蒙之策",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "sun"
+        ],
+        "date_from": "219-10",
+        "date_to": "220-06",
+        "forces_alive": [
+          "liu"
+        ],
+        "cities_owned": {
+          "jiangling": "liu"
+        },
+        "officers_serving": {
+          "吕蒙": "sun",
+          "糜芳": "liu"
+        },
+        "commanders_not_at": {
+          "关羽": [
+            "jiangling",
+            "xian_extra_08"
+          ]
+        }
+      },
+      "text": "关羽北攻樊城，江陵留兵渐少。吕蒙称病还建业，陆逊代屯陆口，卑辞以骄关羽。蒙请以白衣渡江，袭取南郡。",
+      "choices": [
+        {
+          "id": "strike",
+          "label": "依计偷袭",
+          "description": "与刘备决裂，夺取江陵、公安。",
+          "effect": {
+            "world": [
+              {
+                "type": "break",
+                "a": "sun",
+                "b": "liu",
+                "war": true,
+                "reason": "袭取荆州"
+              },
+              {
+                "type": "transfer",
+                "cities": [
+                  "jiangling",
+                  "xian_extra_08"
+                ],
+                "from": "liu",
+                "to": "sun"
+              },
+              {
+                "type": "officer",
+                "name": "糜芳",
+                "force": "sun",
+                "city": "jiangling",
+                "loyalty": 45
+              },
+              {
+                "type": "officer",
+                "name": "傅士仁",
+                "force": "sun",
+                "city": "xian_extra_08",
+                "loyalty": 45
+              },
+              {
+                "type": "army",
+                "commander": "关羽",
+                "morale": -25,
+                "supply": -20
+              }
+            ]
+          }
+        },
+        {
+          "id": "keep",
+          "label": "维持盟好",
+          "description": "守湘水之约。",
+          "effect": {
+            "prestige": -3,
+            "cities": {
+              "order": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "jiangling_warning",
+      "name": "江陵危殆",
+      "type": "historical",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "player_forces": [
+          "liu"
+        ],
+        "date_from": "219-10",
+        "date_to": "220-06",
+        "forces_alive": [
+          "sun"
+        ],
+        "cities_owned": {
+          "jiangling": "liu",
+          "xian_extra_14": "sun"
+        },
+        "officers_serving": {
+          "糜芳": "liu",
+          "吕蒙": "sun"
+        },
+        "commanders_not_at": {
+          "关羽": [
+            "jiangling",
+            "xian_extra_08"
+          ]
+        }
+      },
+      "text": "吕蒙称病，陆逊代屯陆口，来书卑辞。糜芳、傅士仁供给军资不足，关羽言还当治之，二人怀惧。",
+      "choices": [
+        {
+          "id": "reinforce",
+          "label": "抚慰糜芳、增兵江陵",
+          "description": "北伐军士气略减，江陵人心稍安。",
+          "effect": {
+            "armies": {
+              "morale": -4
+            },
+            "cities": {
+              "order": 3
+            }
+          }
+        },
+        {
+          "id": "press",
+          "label": "尽抽江陵兵北上",
+          "description": "北伐军得增援；若江陵守军单薄，恐为吴所乘。",
+          "effect": {
+            "armies": {
+              "morale": 6
+            },
+            "world": [
+              {
+                "type": "break",
+                "a": "sun",
+                "b": "liu",
+                "war": true,
+                "reason": "乘虚袭荆州"
+              },
+              {
+                "type": "transfer",
+                "cities": [
+                  "jiangling",
+                  "xian_extra_08"
+                ],
+                "from": "liu",
+                "to": "sun",
+                "max_garrison": 6000
+              },
+              {
+                "type": "officer",
+                "name": "糜芳",
+                "force": "sun",
+                "city": "jiangling",
+                "loyalty": 45
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wei_feng_plot",
+      "name": "魏讽之乱",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "219_xiangyang"
+        ],
+        "once": true,
+        "date_from": "219-09",
+        "date_to": "219-12",
+        "cities_owned": {
+          "ye": "cao"
+        }
+      },
+      "text": "西曹掾魏讽潜结徒党，谋袭邺都，事泄伏诛，连坐者数千人。",
+      "world": [
+        {
+          "type": "region",
+          "commanderies": [
+            "魏郡"
+          ],
+          "order": -8,
+          "note": "邺都人心浮动"
+        }
+      ]
+    }
   ]
 }
