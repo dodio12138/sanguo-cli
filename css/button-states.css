@@ -40,6 +40,3 @@ button:disabled{
 @media (prefers-reduced-motion:reduce){
   button{transition:none}
 }
-
-/* 战况窗口指令按钮 */
-.battle-actions button:hover:not(:disabled){background:#243121;}
