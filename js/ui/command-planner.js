@@ -28,9 +28,9 @@ window.CommandPlanner = class CommandPlanner {
     if(command.id==="siege_action"){const sieges=[...new Set(state.data.armies.filter(a=>a.siegeTarget).map(a=>a.siegeTarget))].map(id=>state.data.cities.find(c=>c.id===id)).filter(c=>c&&(c.force===state.playerForceId||state.data.armies.some(a=>a.siegeTarget===c.id&&a.force===state.playerForceId)));add("city1","围城战场",sieges,contextCity?.id);add("choice","行动",[["storm","总攻（攻方）"],["parley","劝降（攻方）"],["lift","撤围（攻方）"],["sortie","出城突击（守方）"],["rally","激励固守（守方）"]].map(([id,name])=>({id,name})))}
     if(command.id==="grant_item")add("item1","授予宝物",items.filter(i=>!i.owner));
     if(command.id==="confiscate_item")add("item1","没收宝物",items.filter(i=>i.owner));
-    const choices={set_development_policy:["均衡","农业优先","商业优先"],set_diplomatic_policy:["中立","强硬"],set_fiscal_policy:["稳健","扩张"],set_authority:["逐项审批","自动执行"],research:["农政","军制","转运","吏治"],reform:["农政","军制","转运","吏治"]};
+    const choices={set_development_policy:["均衡","农业优先","商业优先"],set_diplomatic_policy:["中立","强硬"],set_fiscal_policy:["稳健","扩张"],set_authority:["逐项审批","自动执行"],research:["农政","军制","转运","吏治"],reform:["农政","军制","转运","吏治",...Object.values(typeof FiscalSystem==="undefined"?{}:FiscalSystem.GRAIN_DISPATCH||{}).map(name=>`粮政·${name}`)]};
     if(command.id==="construct_building")add("building","建筑类型",Object.entries(state.data.rules.buildings||{}).map(([id,def])=>({id,name:`${def.name} · ${def.cost}金`})));
-    if(choices[command.id])add("choice","执行选项",choices[command.id].map(name=>({id:name,name})));
+    if(choices[command.id]){const current=typeof FiscalSystem==="undefined"?null:FiscalSystem.GRAIN_DISPATCH?.[FiscalSystem.grainDispatch(state,state.playerForceId)];add("choice","执行选项",choices[command.id].map(name=>({id:name,name:name===`粮政·${current}`?`${name}（现行）`:name.startsWith("粮政·")?`${name}（切换，不耗技术点）`:name})))}
     if(command.id==="set_military_goal")add("city1","军事目标",enemyCities);
     if(amountCommands.has(command.id))fields.push({name:"amount",label:command.id==="set_tax_rate"?"税率 %":command.id==="set_storage"?"保留比例 %":"数量",number:true,value:command.id==="set_tax_rate"?15:command.id==="set_storage"?40:1000});
     if(!fields.length)return false;

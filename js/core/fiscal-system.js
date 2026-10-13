@@ -182,12 +182,17 @@ window.FiscalSystem=class FiscalSystem {
     const extra=city&&army.stores.food<target?this.drawRegionalFood(state,city,target-army.stores.food,army.force):0;army.stores.food+=extra;
     return fill+extra;
   }
-  // 驻军所在城粮仓不足时就近调粮：先取本郡（州）各城余粮（各留本城守军三十日口粮），再按远近取境内其他城仓余粮（各留六十日口粮，途损随里程增加），最后才由中央府库转运（途损一成）。
+  // 调粮次序（粮政）：本郡（州）各城余粮总是最先取用（各留本城守军三十日口粮）。其后按玩家改革所定的粮政：
+  // 就近调运（默认）——境内其他城仓（各留六十日口粮，途损随里程）→ 中央府库（途损一成）；
+  // 中央统筹——中央府库 → 境内其他城仓；郡县自给——只动中央府库，不跨郡调运。AI 势力一律就近调运。
+  static GRAIN_DISPATCH={nearby:"就近调运",central:"中央统筹",local:"郡县自给"};
+  static grainDispatch(state,forceId){const mode=forceId===state.playerForceId?state.policies?.grainDispatch:null;return this.GRAIN_DISPATCH[mode]?mode:"nearby"}
   static haulRules(state){return {haul_cells:30,haul_loss_per_cell:.008,haul_max_loss:.3,haul_reserve_days:60,field_resupply_days:20,...(state?.data?.rules?.balance?.food||{})}}
   static drawRegionalFood(state,city,amount,forceId=city.force){let remaining=Math.max(0,Math.ceil(amount));const local=new Set([city.id]);for(const source of state.engine.reinforcementSources?.(city,forceId)||[]){local.add(source.city.id);if(!remaining)break;const other=source.city;if(other.id===city.id)continue;const spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*30)),taken=Math.min(remaining,spare);if(taken){other.localFood-=taken;remaining-=taken}}
-    if(remaining){const cfg=this.haulRules(state),near=state.data.cities.filter(other=>other.force===forceId&&!local.has(other.id)&&!state.engine.isCityBesieged(other)).map(other=>({other,distance:Math.hypot(other.x-city.x,other.y-city.y)})).filter(item=>item.distance<=cfg.haul_cells).sort((a,b)=>a.distance-b.distance);
-      for(const {other,distance} of near){if(!remaining)break;const keep=1-Math.min(cfg.haul_max_loss,distance*cfg.haul_loss_per_cell),spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*cfg.haul_reserve_days)),shipped=Math.min(spare,Math.ceil(remaining/keep));if(shipped<=0)continue;other.localFood-=shipped;remaining=Math.max(0,remaining-Math.floor(shipped*keep))}}
-    const force=state.data.forces.find(item=>item.id===forceId),pool=force?.id===state.playerForceId?state.resources:force?.resources;if(remaining&&pool){const cost=Math.ceil(remaining/.9),paid=Math.min(cost,Math.max(0,Math.floor(pool.food||0)));pool.food-=paid;remaining-=Math.min(remaining,Math.floor(paid*.9))}
+    const haul=()=>{if(!remaining)return;const cfg=this.haulRules(state),near=state.data.cities.filter(other=>other.force===forceId&&!local.has(other.id)&&!state.engine.isCityBesieged(other)).map(other=>({other,distance:Math.hypot(other.x-city.x,other.y-city.y)})).filter(item=>item.distance<=cfg.haul_cells).sort((a,b)=>a.distance-b.distance);
+      for(const {other,distance} of near){if(!remaining)break;const keep=1-Math.min(cfg.haul_max_loss,distance*cfg.haul_loss_per_cell),spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*cfg.haul_reserve_days)),shipped=Math.min(spare,Math.ceil(remaining/keep));if(shipped<=0)continue;other.localFood-=shipped;remaining=Math.max(0,remaining-Math.floor(shipped*keep))}};
+    const central=()=>{const force=state.data.forces.find(item=>item.id===forceId),pool=force?.id===state.playerForceId?state.resources:force?.resources;if(remaining&&pool){const cost=Math.ceil(remaining/.9),paid=Math.min(cost,Math.max(0,Math.floor(pool.food||0)));pool.food-=paid;remaining-=Math.min(remaining,Math.floor(paid*.9))}};
+    const mode=this.grainDispatch(state,forceId);if(mode==="central"){central();haul()}else if(mode==="local")central();else{haul();central()}
     return Math.max(0,Math.ceil(amount)-remaining)}
   // 行军与围城中的军团：随军军仓不足二十日时，由距其最近的己方城池沿补给线续运。
   static fieldAnchor(state,army){const here=state.data.cities.find(city=>city.id===army.city);if(!here)return null;if(here.force===army.force&&!state.engine.isCityBesieged(here))return here;const cfg=this.haulRules(state);let best=null;for(const city of state.data.cities){if(city.force!==army.force||state.engine.isCityBesieged(city))continue;const distance=Math.hypot(city.x-here.x,city.y-here.y);if(distance<=cfg.haul_cells&&(!best||distance<best.distance))best={city,distance}}return best?.city||null}
