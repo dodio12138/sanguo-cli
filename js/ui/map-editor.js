@@ -142,7 +142,8 @@ window.MapEditor = class MapEditor {
   syncRegionMembership({checkpoint=true}={}){
     const places=[...this.cities,...this.counties],seats=this.map.commanderySeats||[],changes=[];
     for(const place of [...places,...seats])if(this.inBounds(place.x,place.y)){
-      const province=this.provinceAt(place.x,place.y)||"",commandery=this.commanderyAt(place.x,place.y)||"";
+      // 定稿郡界外（塞外区域）的废并郡国据点保留原郡名，州按对照表补足。
+      const cellCommandery=this.commanderyAt(place.x,place.y)||"",frontier=(!cellCommandery||cellCommandery==="塞外区域")&&(place.historical?.commandery||(place.commandery&&place.commandery!=="塞外区域"?place.commandery:"")),commandery=frontier||cellCommandery,province=this.provinceAt(place.x,place.y)||(frontier?this.divisions?.frontier_commandery_provinces?.[commandery]||"":"");
       if(place.province!==province||place.commandery!==commandery||(seats.includes(place)&&place.mapProvince!==province))changes.push({place,province,commandery});
     }
     if(!changes.length)return 0;if(checkpoint)this.checkpoint();

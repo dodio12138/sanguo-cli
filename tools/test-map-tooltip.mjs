@@ -5,7 +5,7 @@ const city={id:"xu",name:"许昌",x:3,y:4,force:"cao",province:"豫州",commande
 const view=Object.create(MapView.prototype);Object.assign(view,{territoryRadius:8,state:{layer:"political",data:{cities:[city],counties:[county],forces:[{id:"cao",name:"曹操"}]}},politicalOwner:()=>({force:{name:"袁绍"},distance:0,administrative:true}),terrainDef:()=>({name:"平原"})});
 const point={x:3,y:4,terrain:"plains",province:"豫州",commandery:"颍川郡",county};
 let text=view.tooltipText(point);assert.match(text,/所属势力：曹操/);assert.match(text,/豫州 · 颍川郡/);assert.match(text,/县治：许县/);assert(!/编户|12345|农50|商60/.test(text));assert(text.includes("\n"));
-text=view.tooltipText({...point,x:5,county:null});assert.match(text,/所属势力：袁绍/);assert.match(text,/县治：未详/);
+text=view.tooltipText({...point,x:5,county:null});assert.match(text,/所属势力：袁绍/);assert.doesNotMatch(text,/县治/);
 view.politicalOwner=()=>({force:{name:"曹操"},distance:99});assert.match(view.tooltipText({...point,x:5,county:null}),/所属势力：无主/);
 assert.equal(view.tooltipText({...point,terrain:"ocean"}),"海域");
 view.state.layer="terrain";assert.match(view.tooltipText(point),/编户 12,345/);

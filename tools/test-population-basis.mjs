@@ -8,7 +8,7 @@ globalThis.fetch=async file=>{try{return {ok:true,json:async()=>await read(file)
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 for(const file of ["data/offline-data.generated","core/data-loader","core/game-clock","core/fiscal-system","core/rule-engine","core/game-state"])await import(`../js/${file}.js`);
 assert.deepEqual(profiles.population_reference,reference,"派生配置不能与人口源表分叉");
-assert.equal(Object.keys(reference.records).length,137);assert.equal(Object.keys(profiles.historical_basis).length,184);
+assert.equal(Object.keys(reference.records).length,137);assert.equal(Object.keys(profiles.historical_basis).length,186);
 for(const seat of admin.commandery_seats_140){const row=profiles.historical_basis[seat.cityId],record=DataLoader.populationRecord(profiles,seat.name);assert.ok(record,`${seat.name}缺少人口来源`);assert.deepEqual(row.slice(0,3),[record.commandery,record.year,record.population]);assert.ok(reference.sources[record.source]?.url)}
 assert.deepEqual(Object.entries(reference.records).filter(([,row])=>row[1]===null).map(([name])=>name),["辽东属国"],"只有明确缺载项允许人口为空");
 for(const [name,population] of Object.entries({京兆尹:285574,左冯翊:145195,右扶风:93091,魏郡:695606,代郡:126188,辽西郡:81714,东莱郡:484393,郁林郡:71162,酒泉郡:76726}))assert.equal(reference.records[name][1],population,name);
@@ -35,4 +35,4 @@ for(const city of rawCities.filter(city=>city.id.startsWith("commandery_city_")&
   const basis=profiles.historical_basis[city.id][0],record=reference.records[basis];if(!record)continue;
   const expected=Math.max(model.minimum,Math.round(record[1]*model.registered_retention*model.urban_share/estimate.cityNodes/model.rounding)*model.rounding);assert.equal(city.population,expected,city.id);
 }
-console.log(`人口基准通过：${Object.keys(reference.records).length}郡国覆盖 / ${Object.keys(profiles.historical_basis).length}据点 / 原文与校勘与前期基准分离 / 缺载不伪造 / 253县守恒 / 三剧本载入 / 离线县人口 / 旧战局保留 / 自定义郡隔离`);
+console.log(`人口基准通过：${Object.keys(reference.records).length}郡国覆盖 / ${Object.keys(profiles.historical_basis).length}据点 / 原文与校勘与前期基准分离 / 缺载不伪造 / 268县守恒 / 三剧本载入 / 离线县人口 / 旧战局保留 / 自定义郡隔离`);

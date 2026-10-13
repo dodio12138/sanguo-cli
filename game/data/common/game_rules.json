@@ -987,26 +987,30 @@
     ],
     "yangping": [
       "hanzhong",
-      "chengdu"
+      "chengdu",
+      "jiameng"
     ],
     "zitong": [
       "commandery_city_057",
       "hanzhong",
       "langzhong",
       "chengdu",
-      "jianmen"
+      "jianmen",
+      "jiangyou"
     ],
     "langzhong": [
       "jiangzhou",
       "hanzhong",
       "zitong",
       "chengdu",
-      "commandery_city_064"
+      "commandery_city_064",
+      "jiameng"
     ],
     "jianmen": [
       "zitong",
       "chengdu",
-      "commandery_city_057"
+      "commandery_city_057",
+      "jiameng"
     ],
     "chengdu": [
       "zitong",
@@ -1365,7 +1369,8 @@
     ],
     "commandery_city_057": [
       "jianmen",
-      "zitong"
+      "zitong",
+      "jiangyou"
     ],
     "commandery_city_059": [
       "chengdu",
@@ -1599,7 +1604,8 @@
       "commandery_city_009"
     ],
     "commandery_city_127": [
-      "commandery_city_069"
+      "commandery_city_069",
+      "jiangyou"
     ],
     "commandery_city_128": [
       "wan"
@@ -1609,6 +1615,16 @@
     ],
     "commandery_city_130": [
       "commandery_city_066"
+    ],
+    "jiameng": [
+      "yangping",
+      "jianmen",
+      "langzhong"
+    ],
+    "jiangyou": [
+      "commandery_city_127",
+      "commandery_city_057",
+      "zitong"
     ]
   },
   "resolution_phases": [

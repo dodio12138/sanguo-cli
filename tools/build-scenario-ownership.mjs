@@ -11,6 +11,8 @@ const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),"utf8")
 // 《后汉书·郡国志》建置与汉末牧守传记的战略投影；后设郡沿母郡继承，非逐县实控考证。
 // 190 年据《三国志》卷一、七、四十九及《后汉书》卷五十补齐，取舍见 SCENARIO_NOTES.md。
 const COMMANDERY_OWNERS={
+  // 定稿郡界外的废并郡国：沿用据点现有归属。
+  "张掖郡":["handan_shang","ma_teng","zhang_meng"],"酒泉郡":["handan_shang","ma_teng","zhang_meng"],"敦煌郡":["handan_shang","ma_teng","zhang_meng"],"张掖居延属国":["handan_shang","ma_teng","zhang_meng"],"上郡":["yuan","neutral","cao"],"西河郡":["yuan","neutral","cao"],"云中郡":["yuan","neutral","cao"],"定襄郡":["yuan","neutral","cao"],"朔方郡":["yuan","neutral","cao"],
   "河南尹":["cao","dong","cao"],"恒农郡":["cao","dong","cao"],"京兆尹":["cao","dong","cao"],
   "左冯翊":["cao","dong","cao"],"右扶风":["ma_teng","dong","ma_chao"],"汉兴郡":["cao","dong","cao"],
   "河东郡":["cao","dong","cao"],"河内郡":["cao","wang_kuang","cao"],
@@ -68,6 +70,7 @@ const COMMANDERY_OWNERS={
 // 个别据点在所属郡之外单独归属：渡津、关隘、郡治兼战略节点、史籍错配的县治与塞外据点。
 const CITY_OWNERS={
   "200_guandu":{
+    "jiameng":"liu_zhang","jiangyou":"liu_zhang",
     "qiao":"cao","xiaopei":"liu","xinye":"liu_biao","wan":"cao","wuguan":"cao",
     "commandery_city_011":"liu","commandery_city_105":"neutral","commandery_city_100":"zhang_jin","cangwu":"zhang_jin",
     "baima":"cao","yanjin":"cao","puyang":"cao","xuchang":"cao","guandu":"cao","hulao":"cao","hangu":"cao",
@@ -78,6 +81,7 @@ const CITY_OWNERS={
     "commandery_city_084":"yuan","commandery_city_085":"yuan","commandery_city_087":"yuan"
   },
   "190_coalition":{
+    "jiameng":"liu_yan","jiangyou":"liu_yan",
     "qiao":"cao","xiaopei":"tao_qian","xinye":"liu_biao","wan":"yuan_shu","wuguan":"dong","guandu":"kong_zhou",
     "commandery_city_011":"kong_zhou","commandery_city_104":"neutral","commandery_city_105":"neutral","commandery_city_100":"neutral","cangwu":"neutral",
     "xiapi":"tao_qian","pengcheng":"tao_qian","langya":"tao_qian","guangling":"zhang_chao","runan":"yuan_shu",
@@ -89,6 +93,7 @@ const CITY_OWNERS={
     "commandery_city_084":"neutral","commandery_city_085":"neutral","commandery_city_087":"neutral"
   },
   "208_red_cliffs":{
+    "jiameng":"liu_zhang","jiangyou":"liu_zhang",
     "qiao":"cao","xiaopei":"cao","xinye":"cao","wan":"cao","wuguan":"cao",
     "commandery_city_011":"cao","commandery_city_105":"neutral","commandery_city_100":"wu_ju","cangwu":"wu_ju",
     "xiakou":"liu","yiling":"cao","chaisang":"sun","pukou":"sun","shouchun":"cao","hefei":"cao",

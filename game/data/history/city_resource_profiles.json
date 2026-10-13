@@ -1111,6 +1111,18 @@
       140,
       570967,
       "xuzhou"
+    ],
+    "jiameng": [
+      "梓潼郡",
+      140,
+      509438,
+      "yizhou"
+    ],
+    "jiangyou": [
+      "汶山郡",
+      140,
+      1350476,
+      "yizhou"
     ]
   },
   "storage_by_level": {
@@ -2441,8 +2453,8 @@
     },
     "commandery_city_044": {
       "baseYear": 200,
-      "population": 10000,
-      "cityNodes": 1,
+      "population": 5000,
+      "cityNodes": 2,
       "method": "commandery_urban_share"
     },
     "commandery_city_045": {
@@ -2862,55 +2874,55 @@
     "commandery_city_074": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_075": {
       "baseYear": 200,
       "population": 3000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_076": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_078": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_081": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_082": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_084": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_085": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     },
     "commandery_city_087": {
       "baseYear": 200,
       "population": 1000,
-      "cityNodes": 9,
+      "cityNodes": 1,
       "method": "existing_game_estimate"
     }
   }

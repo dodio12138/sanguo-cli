@@ -13,7 +13,7 @@ const additions=["lelang","ji","shangdang","henei","linzi","langya","pengcheng",
 const archive=read("game/data/map/layouts/pixel-60-v1.json");
 const map=read("game/data/map/central_plains.json");
 const strategic=cities.filter(city=>!city.id.startsWith("commandery_city_"));
-if(cities.length!==archive.cities.length+26||strategic.length!==76||cities.length-strategic.length!==108)throw new Error(`地图未保留76个战略据点与108个郡治，实际 ${cities.length}/${strategic.length}`);
+if(cities.length!==archive.cities.length+28||strategic.length!==78||cities.length-strategic.length!==108)throw new Error(`地图未保留78个战略据点与108个郡治，实际 ${cities.length}/${strategic.length}`);
 if(administrative.commandery_seats_140.length!==119||administrative.commandery_seats_140.some(seat=>!ids.has(seat.cityId)))throw new Error("119个郡国治所未全部接入城市模型");
 for(const id of additions)if(!ids.has(id))throw new Error(`缺少新增据点 ${id}`);
 const coordinates=new Set;for(const city of cities){const key=`${city.x}:${city.y}`;if(coordinates.has(key))throw new Error(`据点坐标重叠 ${key}`);coordinates.add(key)}
