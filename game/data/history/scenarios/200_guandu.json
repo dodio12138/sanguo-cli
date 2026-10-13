@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "id": "200_guandu",
-  "name": "官渡风云",
+  "name": "官渡",
   "start_date": "200-01-01",
   "default_player_force": "cao",
   "player_force": "cao",

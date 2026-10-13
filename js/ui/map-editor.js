@@ -15,7 +15,7 @@ window.MapEditor = class MapEditor {
     this.provinces=structuredClone(this.defaults.provinces);
     this.commanderies=structuredClone(this.defaults.commanderies);
     this.waterways=MapEditor.editableWaterways(MapGrid.waterways(this.map));
-    if(!Array.isArray(this.map.waterways))this.waterways=this.waterways.map(river=>({...river,points:river.points.filter(([x,y])=>this.inBounds(x,y))})).filter(river=>river.points.length>1);
+    if(!Array.isArray(this.map.waterways))this.waterways=this.waterways.map(river=>({...river,points:river.points.filter(point=>this.riverPointInBounds(river,point))})).filter(river=>river.points.length>1);
     this.landmarks=MapGrid.landmarks(this.map);
     this.cities=structuredClone(source.cities||[]);this.graph=structuredClone(source.rules?.city_graph||{});this.customRoutes=MapEditor.editableRoads(source.map?.roads||[]);
     this.undoStack=[];this.redoStack=[];
@@ -29,6 +29,8 @@ window.MapEditor = class MapEditor {
   reset(){return this.load(this.source)}
   index(x,y){return y*this.width+x}
   inBounds(x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<this.width&&y<this.height}
+  cornerInBounds(x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<=this.width&&y<=this.height}
+  riverPointInBounds(river,point){return Array.isArray(point)&&point.length===2&&(MapGrid.isCornerRiver(river)?this.cornerInBounds(...point):this.inBounds(...point))}
   static gridLine(x,y,tx,ty){return MapGrid.gridLine(x,y,tx,ty)}
   layer(kind){return kind==="terrain"?this.terrain:kind==="province"?this.provinces:kind==="commandery"?this.commanderies:null}
   at(kind,x,y){const values=this.layer(kind);return values&&this.inBounds(x,y)?values[this.index(x,y)]:null}
@@ -214,12 +216,12 @@ window.MapEditor = class MapEditor {
     }
     throw new Error("调整会经过海面或使道路折返，请换一个节点位置");
   }
-  saveWaterway(id,name,points){
-    const label=MapEditor.regionName(name);
-    if(!Array.isArray(points)||points.length<2||points.some(point=>!Array.isArray(point)||point.length!==2||!this.inBounds(...point)))throw new Error("河流需至少两个地图内的整数坐标点");
+  saveWaterway(id,name,points,anchor){
+    const label=MapEditor.regionName(name),previousRiver=this.waterways.find(river=>river.id===id),mode=anchor??previousRiver?.anchor,shape={anchor:mode};
+    if(!Array.isArray(points)||points.length<2||points.some(point=>!this.riverPointInBounds(shape,point)))throw new Error("河流需至少两个地图内的整数坐标点");
     if(points.some((point,i)=>i&&point[0]===points[i-1][0]&&point[1]===points[i-1][1]))throw new Error("相邻河流节点不能重叠");
     let riverId=id;if(!riverId){let suffix=1;while(this.waterways.some(river=>river.id===`custom-waterway:${suffix}`))suffix++;riverId=`custom-waterway:${suffix}`}
-    const index=this.waterways.findIndex(river=>river.id===riverId),previous=this.waterways[index],river={...previous,id:riverId,name:label,points:structuredClone(points)};
+    const index=this.waterways.findIndex(river=>river.id===riverId),previous=this.waterways[index],river={...previous,id:riverId,name:label,...(mode?{anchor:mode}:{}),points:structuredClone(points)};
     if(JSON.stringify(previous)===JSON.stringify(river))return previous;this.checkpoint();if(index>=0)this.waterways[index]=river;else this.waterways.push(river);return river;
   }
   removeWaterway(id){if(!this.waterways.some(river=>river.id===id))return false;this.checkpoint();this.waterways=this.waterways.filter(river=>river.id!==id);return true}
@@ -260,7 +262,7 @@ window.MapEditor = class MapEditor {
     for(const river of this.waterways){
       if(!river||!river.id||riverIds.has(river.id))result.errors.push("河流 ID 缺失或重复");riverIds.add(river?.id);
       if(!river?.name)result.errors.push("河流缺少名称");
-      if(!Array.isArray(river?.points)||river.points.length<2||river.points.some(point=>!Array.isArray(point)||point.length!==2||!this.inBounds(...point)))result.errors.push(`河流 ${river?.name||"?"} 的节点无效或越界`);
+      if(!Array.isArray(river?.points)||river.points.length<2||river.points.some(point=>!this.riverPointInBounds(river,point)))result.errors.push(`河流 ${river?.name||"?"} 的节点无效或越界`);
     }
     result.ok=result.errors.length===0;return result;
   }
@@ -367,7 +369,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     editor.importPatch(record.patch);pathDraft=null;riverDraft=null;selectedRoadId=record.selectedRoadId||"";selectedRiverId=record.selectedRiverId||"";
     const draft=record.pathDraft,from=draft&&editor.roadNode(draft.from),to=draft&&editor.roadNode(draft.to);
     if(from&&to&&Array.isArray(draft.points)&&draft.points.length&&draft.points.every(point=>Array.isArray(point)&&editor.inBounds(...point))&&draft.points[0][0]===from.x&&draft.points[0][1]===from.y){pathDraft=structuredClone(draft);roadPick.from=draft.from;roadPick.to=draft.to}
-    if(!pathDraft&&record.riverDraft&&Array.isArray(record.riverDraft.points)&&record.riverDraft.points.every(point=>Array.isArray(point)&&editor.inBounds(...point)))riverDraft=structuredClone(record.riverDraft);
+    if(!pathDraft&&record.riverDraft&&Array.isArray(record.riverDraft.points)&&record.riverDraft.points.every(point=>editor.riverPointInBounds(record.riverDraft,point)))riverDraft=structuredClone(record.riverDraft);
     if(riverDraft)$("mapEditorRiverName").value=riverDraft.name;
     pendingRecovery=null;$("mapEditorDraftNotice").hidden=true;refresh();if(pathDraft)setTool("road");else if(riverDraft)setTool("river");
     if(editor.city(record.selectedCity)){$("mapEditorCity").value=record.selectedCity;syncSelect($("mapEditorCity"));syncCityForm()}
@@ -485,11 +487,11 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     if(elementVisible("waterways"))drawWaterways();
     if(elementVisible("roads"))drawRoads();
     if(tool()==="road"&&pathDraft?.points?.length>1)drawRoadDraft();
-    if(tool()==="river"&&riverDraft?.points?.length>1)drawLine(riverDraft.points,"#9ce7ee",2.5,[5,4]);
+    if(tool()==="river"&&riverDraft?.points?.length>1)drawRiver(riverDraft,"#9ce7ee",2.5,[5,4]);
     if(elementVisible("counties"))drawCounties();
     if(elementVisible("landmarks"))drawLandmarks();
     if(elementVisible("cities"))drawCities();
-    if(adjustingLine){const points=selectedLine(adjustingLine)?.points||[];ctx.save();ctx.fillStyle="#0a100b";ctx.strokeStyle="#f5df94";ctx.lineWidth=1;points.forEach(([x,y],index)=>{if(adjustingLine==="road"&&(index===0||index===points.length-1))return;ctx.fillRect((x+.5)*cell-2,(y+.5)*cell-2,4,4);ctx.strokeRect((x+.5)*cell-2,(y+.5)*cell-2,4,4)});ctx.restore()}
+    if(adjustingLine){const line=selectedLine(adjustingLine),points=line?.points||[],offset=adjustingLine==="river"&&MapGrid.isCornerRiver(line)?0:.5;ctx.save();ctx.fillStyle="#0a100b";ctx.strokeStyle="#f5df94";ctx.lineWidth=1;points.forEach(([x,y],index)=>{if(adjustingLine==="road"&&(index===0||index===points.length-1))return;ctx.fillRect((x+offset)*cell-2,(y+offset)*cell-2,4,4);ctx.strokeRect((x+offset)*cell-2,(y+offset)*cell-2,4,4)});ctx.restore()}
     drawHover();updateReadout();updateStatus(persist);
   }
   function drawGrid(){
@@ -503,9 +505,10 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     for(const river of editor.waterways){
       const points=river?.points;
       if(!Array.isArray(points)||points.length<2)continue;
-      drawLine(points,tool()==="river"&&river.id===selectedRiverId?"#9ce7ee":"#4f9bbd",tool()==="river"&&river.id===selectedRiverId?3:1.6);
+      drawRiver(river,tool()==="river"&&river.id===selectedRiverId?"#9ce7ee":"#4f9bbd",tool()==="river"&&river.id===selectedRiverId?3:1.6);
     }
   }
+  function drawRiver(river,color,width,dashes=[]){const offset=MapGrid.isCornerRiver(river)?0:.5;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin="round";ctx.setLineDash(dashes);ctx.beginPath();MapGrid.riverCorners(river).forEach(([x,y],index)=>index?ctx.lineTo((x+offset)*cell,(y+offset)*cell):ctx.moveTo((x+offset)*cell,(y+offset)*cell));ctx.stroke();ctx.restore()}
   function drawLine(points,color,width,dashes=[]){ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin="round";ctx.setLineDash(dashes);ctx.beginPath();points.forEach(([x,y],index)=>index?ctx.lineTo((x+.5)*cell,(y+.5)*cell):ctx.moveTo((x+.5)*cell,(y+.5)*cell));ctx.stroke();ctx.restore()}
   function drawRoads(){
     for(const route of editor.roadNetwork())drawLine(route.points,tool()==="road"&&route.id===selectedRoadId?"#fff0ab":route.kind==="main"?"#e7c463":"#927c48",tool()==="road"&&route.id===selectedRoadId?3:route.kind==="main"?2:1);
@@ -529,7 +532,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     for(const mark of editor.landmarks){
       if(!editor.inBounds(mark.x,mark.y))continue;
       const x=(mark.x+.5)*cell,y=(mark.y+.5)*cell;
-      ctx.fillStyle=mark.type==="lake"?"#78b4c6":"#b7ac8b";ctx.beginPath();ctx.arc(x,y,1.9,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle=mark.type==="lake"?"#78b4c6":mark.type==="battle"?"#c9714f":"#b7ac8b";ctx.beginPath();ctx.arc(x,y,1.9,0,Math.PI*2);ctx.fill();
       ctx.fillStyle="#c9c19c";ctx.fillText(mark.name,x,y-4);
     }
     ctx.restore();
@@ -635,10 +638,10 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   }
   function lineAt(type,x,y){
     const lines=type==="road"?editor.customRoutes:editor.waterways;let nearest=null,distance=.7;
-    for(const line of lines)for(let i=1;i<line.points.length;i++){
-      const [ax,ay]=line.points[i-1],[bx,by]=line.points[i],dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy||1))),d=Math.hypot(x-ax-t*dx,y-ay-t*dy);
+    for(const line of lines){const offset=type==="river"&&!MapGrid.isCornerRiver(line)?.5:0,points=type==="river"?MapGrid.riverCorners(line).map(([px,py])=>[px+offset,py+offset]):line.points;for(let i=1;i<points.length;i++){
+      const [ax,ay]=points[i-1],[bx,by]=points[i],dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy||1))),d=Math.hypot(x-ax-t*dx,y-ay-t*dy);
       if(d<distance){distance=d;nearest=line}
-    }
+    }}
     return nearest;
   }
   function beginLineAdjustment(event,x,y){
@@ -649,7 +652,7 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
     selectedRiverPoint=activeTool==="river"?index:-1;editor.beginEdit();gesture={pointerId:event.pointerId,kind:"vertex",lineType:activeTool,id:line.id,index,original:structuredClone(line.points)};canvas.setPointerCapture?.(event.pointerId);syncLineSelects();requestDraw();return true;
   }
   function moveLineVertex(x,y){
-    const edit=gesture;if(!edit||edit.kind!=="vertex"||!editor.inBounds(x,y))return;
+    const edit=gesture,river=edit?.lineType==="river"?editor.waterways.find(item=>item.id===edit.id):null;if(!edit||edit.kind!=="vertex"||!(river?editor.riverPointInBounds(river,[x,y]):editor.inBounds(x,y)))return;
     try{
       if(edit.lineType==="road")editor.reshapeRoadPoint(edit.id,edit.index,x,y,edit.original);
       else{const river=editor.waterways.find(item=>item.id===edit.id),points=structuredClone(edit.original);points[edit.index]=[x,y];editor.saveWaterway(edit.id,river.name,points)}
@@ -665,13 +668,13 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   function startRiverDraft(){
     if(pathDraft)return output("请先保存或取消道路草稿。");if(cityFormDirty)return output("请先保存或还原据点表单。");
     if(riverDraft?.points.length&&!(armedAction?.key==="river-restart"&&armedAction.until>Date.now())){armedAction={key:"river-restart",until:Date.now()+5000};return output("当前河流尚未保存，再次点击绘制按钮可重画。")}
-    armedAction=null;adjustingLine=null;const river=selectedLine("river");riverDraft={id:river?.id||null,name:$("mapEditorRiverName").value||river?.name||"新河流",points:[],redo:[]};drawCanvas();output("点击落点或按住拖动描线，至少两个节点后完成保存。");
+    armedAction=null;adjustingLine=null;const river=selectedLine("river");riverDraft={id:river?.id||null,name:$("mapEditorRiverName").value||river?.name||"新河流",anchor:"corner",points:[],redo:[]};drawCanvas();output("点击落点或按住拖动描线，至少两个节点后完成保存。");
   }
   function appendRiverPoint(x,y){
-    if(!riverDraft||!editor.inBounds(x,y))return;const last=riverDraft.points.at(-1);if(last&&last[0]===x&&last[1]===y)return;
+    if(!riverDraft||!editor.riverPointInBounds(riverDraft,[x,y]))return;const last=riverDraft.points.at(-1);if(last&&last[0]===x&&last[1]===y)return;
     riverDraft.points.push([x,y]);riverDraft.redo=[];requestDraw();
   }
-  function finishRiverDraft(){if(!riverDraft)return;try{const river=editor.saveWaterway(riverDraft.id,$("mapEditorRiverName").value,riverDraft.points);selectedRiverId=river.id;riverDraft=null;refresh();output("河流路径已保存。")}catch(error){output(`河流未保存：${error.message}`)}}
+  function finishRiverDraft(){if(!riverDraft)return;try{const river=editor.saveWaterway(riverDraft.id,$("mapEditorRiverName").value,riverDraft.points,riverDraft.anchor);selectedRiverId=river.id;riverDraft=null;refresh();output("河流路径已保存。")}catch(error){output(`河流未保存：${error.message}`)}}
   function refresh(){
     reference?.syncGrid();
     syncValueOptions();syncCitySelects();if(!cityFormDirty)syncCityForm();syncLineSelects();syncRoadInfo();syncTool();
@@ -740,6 +743,8 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
   $("mapEditorZoomFit").onclick=()=>changeZoom(1,null,true);
   const mapPointAt=event=>{const rect=canvas.getBoundingClientRect(),scaleX=canvas.width/(rect.width||canvas.width),scaleY=canvas.height/(rect.height||canvas.height);return {x:(event.clientX-rect.left)*scaleX/cell,y:(event.clientY-rect.top)*scaleY/cell}};
   const cellAt=event=>{const point=mapPointAt(event);return {x:Math.floor(point.x),y:Math.floor(point.y)}};
+  // 角点河流取最近的格子角点；旧格心河流仍按格子取点。
+  const riverPointAt=(event,river)=>{const point=mapPointAt(event);return MapGrid.isCornerRiver(river)?{x:Math.round(point.x),y:Math.round(point.y)}:{x:Math.floor(point.x),y:Math.floor(point.y)}};
   const viewport=canvas?.closest?.(".map-editor-viewport");
   viewport?.addEventListener?.("scroll",requestReferenceDraw,{passive:true});
   const syncPanCursor=()=>{const button=$("mapEditorPanToggle"),enabled=panMode||spacePan;if(button){button.classList.toggle("active",panMode);button.setAttribute("aria-pressed",String(panMode))}if(canvas)canvas.style.cursor=panState?"grabbing":enabled?"grab":reference?.adjusting||movingCity||adjustingLine?"move":activeTool==="city"||(["road","river"].includes(activeTool)&&!pathDraft&&!riverDraft)?"pointer":"crosshair"};
@@ -759,6 +764,11 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
       if(reference?.adjusting&&reference.beginDrag(mapPointAt(event))){gesture={pointerId:event.pointerId,kind:"reference"};canvas.setPointerCapture?.(event.pointerId);return}
       const {x,y}=cellAt(event);setHover(x,y);if(!editor.inBounds(x,y))return;
       if(activeTool==="layer"&&kind()==="province"){const name=editor.commanderyAt(x,y);if(name){$("mapEditorAssignmentCommandery").value=name;syncProvinceAssignment();output(`已选中「${name}」 · ${editor.commanderyProvince(name)||"未分配州"}`)}return}
+      if(activeTool==="river"&&!erase){
+        if(adjustingLine==="river"){const point=riverPointAt(event,selectedLine("river"));if(beginLineAdjustment(event,point.x,point.y))return}
+        if(riverDraft){const point=riverPointAt(event,riverDraft);gesture={pointerId:event.pointerId,kind:"river",last:point};canvas.setPointerCapture?.(event.pointerId);appendRiverPoint(point.x,point.y);return}
+        const point=mapPointAt(event),river=lineAt("river",point.x,point.y);if(river)selectLine("river",river.id);else output("点击河流可选择；新建请按「绘制／重画」。");return;
+      }
       if(adjustingLine&&beginLineAdjustment(event,x,y))return;
       if(erase){pickingCommandery=false;editor.beginEdit();gesture={pointerId:event.pointerId,kind:"cede",visited:new Set(),last:{x,y}};canvas.setPointerCapture?.(event.pointerId);syncTool();cedeCell(x,y);return}
       if(activeTool==="layer"&&kind()==="commandery"&&(pickingCommandery||(!event.altKey&&!event.shiftKey&&!$("mapEditorRegionFill")?.checked&&((elementVisible("counties")&&editor.countyAt(x,y))||(elementVisible("cities")&&editor.cityAt(x,y)))))){pickCommandery(x,y);return}
@@ -776,8 +786,8 @@ MapEditor.install = function install({$,state,mapView,toast,downloadJson,getData
       if(!editor.inBounds(x,y)){gesture.last=null;return}
       if(gesture.kind==="paint"||gesture.kind==="cede"){for(const [px,py] of gesture.last?MapEditor.gridLine(gesture.last.x,gesture.last.y,x,y):[[x,y]])applyTool(px,py)}
       else if(gesture.kind==="road"&&pathDraft){const last=pathDraft.points.at(-1);for(const [px,py] of MapEditor.gridLine(last[0],last[1],x,y).slice(1))if(!appendRoadPoint(px,py))break}
-      else if(gesture.kind==="river")appendRiverPoint(x,y);
-      else if(gesture.kind==="vertex")moveLineVertex(x,y);
+      else if(gesture.kind==="river"){const point=riverPointAt(event,riverDraft);appendRiverPoint(point.x,point.y)}
+      else if(gesture.kind==="vertex"){const point=gesture.lineType==="river"?riverPointAt(event,editor.waterways.find(item=>item.id===gesture.id)):{x,y};moveLineVertex(point.x,point.y)}
       gesture.last={x,y};
     });
     for(const type of ["pointerup","pointercancel","lostpointercapture"])canvas.addEventListener(type,endGesture);

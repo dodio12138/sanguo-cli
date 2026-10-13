@@ -67,3 +67,11 @@ const imported=new MapEditor(fixture());imported.importPatch(rivers.exportPatch(
 imported.importPatch({map:{provinces:MapGrid.encode(Array(64).fill("新州")),commanderies:MapGrid.encode(Array(64).fill("新郡"))}});
 assert.ok(imported.cities.every(city=>city.province==="新州"&&city.commandery==="新郡"),"导入边界后城市也应自动归属");
 console.log("州郡及线要素通过：独立图层 / 坐标自动归属 / 同步撤销 / 城市与县治道路 / 节点调整 / 单条与批量删除 / 河流编辑 / 无损导出 / 非法导入拦截");
+const corners=new MapEditor(fixture()),legacy=corners.waterways[0];
+const drawn=corners.saveWaterway(null,"角点河",[[0,0],[8,0],[8,8]],"corner");
+assert.equal(drawn.anchor,"corner","新画河流沿格线保存");assert.ok(corners.validate().ok,"角点可落在网格右下边界");
+assert.throws(()=>corners.saveWaterway(null,"越界河",[[0,0],[9,0]],"corner"),/整数坐标/,"角点仍不能越出网格");
+const renamed=corners.saveWaterway(legacy.id,"旧河改名",legacy.points);assert.equal(renamed.anchor,undefined,"旧格心河流改名不改变坐标含义");
+assert.throws(()=>corners.saveWaterway(legacy.id,"旧河",[[0,3],[8,3]]),/整数坐标/,"旧格心河流仍按格子范围校验");
+assert.deepEqual(corners.exportMap().waterways.find(river=>river.name==="角点河").anchor,"corner","导出保留沿格线标记");
+console.log("角点河流编辑通过：新河默认沿格线 / 边界角点可用 / 旧河坐标含义不变 / 导出保留标记");

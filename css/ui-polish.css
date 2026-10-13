@@ -367,3 +367,58 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 #startNewView.scenario-pending>section{max-width:560px}
 #startNewView.scenario-pending .start-choice.active{border-color:var(--amber);background:#232c17}
 @media(max-width:700px){#startNewView.scenario-pending>section{max-width:none}}
+/* 剧本与势力同屏：左列剧本，右侧势力小地图与势力名录 */
+.start-terminal.campaign-wide{width:min(1240px,96vw);height:min(780px,94vh)}
+.campaign-select{display:grid;grid-template-columns:minmax(200px,236px) minmax(0,1fr);flex:1;min-width:0;min-height:0}
+.campaign-select[hidden]{display:none}
+#startScenarioStep{border-right:1px solid var(--line-dim);background:#0a0f0b;padding:16px 14px}
+#startScenarioStep .campaign-heading{flex-direction:column;align-items:flex-start;gap:5px;margin-bottom:12px}
+/* 剧本卡片：字体与卡面参照 Descent-Chart-Generator，竖排题名、书法水印、底部年号条 */
+@font-face{font-family:"Start WenYue";src:url("../assets/fonts/start-wenyue.woff2?v=20261013-02") format("woff2");font-display:swap}
+@font-face{font-family:"Start Daofeng";src:url("../assets/fonts/start-daofeng.woff2?v=20261013-02") format("woff2");font-display:swap}
+#startScenarioStep .start-choices{grid-template-columns:1fr;grid-auto-rows:104px;gap:8px;padding:2px 4px 4px 2px}
+#startScenarioStep .scenario-card{position:relative;overflow:hidden;min-height:0;padding:0;border:1px solid var(--line-dim);border-radius:3px;background:#131b12;color:var(--text);font-family:"Start WenYue",serif;box-shadow:0 3px 10px #0000004d;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
+#startScenarioStep .scenario-card::before{content:attr(data-seal);position:absolute;top:-.1em;right:-.1em;color:#c6a15b1f;font:96px/1 "Start Daofeng",serif;pointer-events:none}
+#startScenarioStep .scenario-card b{position:absolute;top:9px;left:10px;margin:0;color:#d9d0a3;font:24px/1.05 "Start WenYue",serif;letter-spacing:.06em;writing-mode:vertical-rl;text-orientation:upright;white-space:nowrap}
+#startScenarioStep .scenario-card small{position:static;margin:0;color:var(--text)}
+#startScenarioStep .scenario-card-brief{position:absolute;right:10px;bottom:28px;left:46px;color:#a9a888;font:10px/1.6 "Start WenYue",serif;text-align:right;text-wrap:pretty}
+#startScenarioStep .scenario-card-date{position:absolute;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;height:21px;border-top:1px solid #30392c;background:#1b2317;color:#a9a888;font:11px "Start WenYue",serif;letter-spacing:.04em}
+#startScenarioStep .scenario-card:hover{border-color:var(--line);background:#182217;transform:translateY(-1px);box-shadow:0 6px 16px #00000066}
+#startScenarioStep .scenario-card.active{border-color:var(--amber);background:#1d2616;box-shadow:inset 0 0 0 1px #000,0 6px 16px #00000066}
+#startScenarioStep .scenario-card.active::before{color:#c6a15b38}
+#startScenarioStep .scenario-card.active b{color:#f1dc93}
+#startScenarioStep .scenario-card.active .scenario-card-brief{color:#cfc79c}
+#startScenarioStep .scenario-card.active .scenario-card-date{border-top-color:#8e966f;background:#4b4f2b;color:#f1e6bb}
+#startScenarioStep .scenario-card:focus-visible{outline:2px dashed var(--amber);outline-offset:2px}
+#startForceStep{padding:16px 18px}
+.campaign-select .campaign-force-layout{grid-template-columns:minmax(0,1fr) 260px;grid-template-rows:minmax(0,1fr) auto;grid-template-areas:"map list" "map brief";gap:12px}
+.campaign-minimap{grid-area:map;position:relative;min-width:0;min-height:0;overflow:hidden;border:1px solid var(--line);outline:1px solid #000;outline-offset:-2px;background:#070b08}
+.campaign-minimap canvas{position:absolute;inset:0;display:block;width:100%;height:100%;image-rendering:pixelated}
+.campaign-minimap-tip{position:absolute;left:0;top:0;z-index:2;pointer-events:none;padding:4px 7px;border:1px solid var(--amber);background:#0b100c;color:var(--text);font:10px var(--mono);white-space:nowrap;box-shadow:2px 2px 0 #000}
+.campaign-minimap-tip[hidden]{display:none}
+.campaign-select .campaign-force-layout .force-choices{grid-area:list;display:flex;flex-direction:column;gap:4px;padding:2px 4px 8px 2px}
+.campaign-select .campaign-force-layout .force-choices>.start-choice{flex:0 0 auto}
+.campaign-select .campaign-force-layout .start-choice{display:flex;align-items:baseline;justify-content:space-between;gap:8px;min-height:0;padding:7px 9px}
+.campaign-select .campaign-force-layout .start-choice b{flex:0 0 auto;font-size:12px}
+.campaign-select .campaign-force-layout .start-choice small{min-width:0;margin-top:0;overflow:hidden;font-size:9px;text-align:right;text-overflow:ellipsis;white-space:nowrap}
+.campaign-select .campaign-force-layout .start-choice.active{background:#1d2616;box-shadow:inset 0 0 0 1px #000}
+.campaign-select .campaign-brief{grid-area:brief;max-height:210px;padding:10px 12px;border-top-width:1px;border-left:2px solid var(--amber)}
+.campaign-select .campaign-brief h3{margin:0 0 6px;font-size:14px}
+.campaign-select .campaign-brief h4{margin:8px 0 3px}
+.campaign-select .campaign-brief p{font-size:10px;line-height:1.75}
+@media(max-width:700px){
+  .campaign-select{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);overflow:auto}
+  #startScenarioStep{border-right:0;border-bottom:1px solid var(--line-dim);padding:10px}
+  #startScenarioStep .campaign-heading{flex-direction:row;align-items:baseline;margin-bottom:8px}
+  #startScenarioStep .start-choices{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
+  #startScenarioStep .start-choices{grid-auto-rows:100px}
+  .campaign-select>.campaign-pane{flex:0 0 auto}
+  #startScenarioStep .start-choices{overflow:visible}
+  #startForceStep{padding:10px;overflow:visible}
+  .campaign-select .campaign-force-layout{flex:0 0 auto}
+  .campaign-select .campaign-force-layout .force-choices{min-height:auto}
+  .campaign-select .campaign-force-layout{grid-template-columns:1fr;grid-template-rows:220px auto auto;grid-template-areas:"map" "list" "brief"}
+  .campaign-select .campaign-force-layout .force-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}
+  .campaign-select .campaign-brief{max-height:none}
+}
+@media(max-width:420px){#startScenarioStep .start-choices{grid-template-columns:1fr}.campaign-select .campaign-force-layout{grid-template-rows:180px auto auto}}

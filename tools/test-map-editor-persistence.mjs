@@ -16,7 +16,7 @@ editor.updateCity(city.id,{name:"校验城",...destination});
 editor.setTerrain(0,0,"forest");editor.setCommandery(0,0,"校验郡");editor.assignCommanderyProvince("校验郡","校验州");
 const removable=editor.cities.find(item=>item.id!==city.id&&!state.data.officers.some(officer=>officer.city===item.id)&&!state.data.armies.some(army=>army.city===item.id));
 editor.removeCity(removable.id);
-const river=editor.waterways[0],riverPoints=structuredClone(river.points);riverPoints[1][1]+=1;editor.saveWaterway(river.id,"存档测试河",riverPoints);
+const river=editor.waterways[0],riverPoints=[[0,1],[1,0],[0,-1],[-1,0]].map(([dx,dy])=>{const next=structuredClone(river.points);next[1]=[next[1][0]+dx,next[1][1]+dy];return next}).find(next=>editor.riverPointInBounds(river,next[1])&&!next.some((point,index)=>index&&point[0]===next[index-1][0]&&point[1]===next[index-1][1]));editor.saveWaterway(river.id,"存档测试河",riverPoints);
 assert.equal(editor.validate().ok,true,"用于存档测试的编辑应通过校验");
 editor.applyTo(state.data);state.select("city",state.data.cities.find(item=>item.id===city.id));state.save("manual","1");
 const restored=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});restored.load("1");

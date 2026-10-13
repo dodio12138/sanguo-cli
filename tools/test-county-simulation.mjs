@@ -7,7 +7,7 @@ await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.
 await import("../js/core/game-state.js");
 
 const profiles=JSON.parse(fs.readFileSync(new URL("../game/data/history/city_resource_profiles.json",import.meta.url),"utf8")),state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});
-if(state.data.counties.length!==253)throw new Error(`县域数量异常：${state.data.counties.length}`);
+if(state.data.counties.length!==268)throw new Error(`县域数量异常：${state.data.counties.length}`);
 for(const commandery of Object.keys(state.data.administrativeDivisions.commandery_counties)){const expected=Object.values(profiles.historical_basis).find(row=>row[0]===commandery)?.[2],actual=state.data.counties.filter(county=>county.commandery===commandery).reduce((sum,county)=>sum+county.historicalPopulation,0);if(actual!==expected)throw new Error(`${commandery}人口分配不守恒：${actual}/${expected}`)}
 for(const county of state.data.counties)if(!county.jurisdictionCityId||!county.force||county.population<=0||!["commandery","major","county"].includes(county.rank)||![county.agriculture,county.commerce,county.order].every(Number.isFinite))throw new Error(`${county.name}未进入县域模拟`);
 
