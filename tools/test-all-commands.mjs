@@ -57,6 +57,7 @@ function payloadFor(command,ctx){
   if(command.id==="form_army"){city(ownCity.id);officer(ownOfficers[0].id);payload.amount=3000;payload.options={name:"QA新军",units:{infantry:2000,cavalry:500,archers:500}}}
   if(command.id==="reorganize_army"){army(ownArmy.id);payload.options={name:ownArmy.name,units:structuredClone(ownArmy.units),formation:"balanced",tactic:"balanced"}}
   if(["redeploy","assemble","move","forced_march","retreat"].includes(command.id)){army(ownArmy.id);city(ownCity2.id)}
+  if(command.id==="siege_action"){city(enemyCity.id);payload.options.action="parley"}
   if(command.id==="raid"){army(ownArmy.id);city(enemyCity.id)}
   if(["scout_city","investigate_route","investigate_terrain","incite","establish_inside_contact","sabotage","spread_rumor","set_military_goal"].includes(command.id))city(enemyCity.id);
   if(command.id==="scout_army")army(enemyArmy.id);
@@ -96,4 +97,4 @@ if(results.length+failures.length!==catalog.length)throw new Error("命令覆盖
 if(failures.length){console.error(JSON.stringify({covered:catalog.length,failures},null,2));process.exit(1)}
 const executed=results.filter(result=>result.status==="executed").length,rejected=results.length-executed;
 if(process.argv.includes("--verbose"))for(const result of results)console.log(`${result.status==="executed"?"PASS":"RULE"} ${result.id}｜${result.event}`);
-console.log(`105 条命令规则覆盖通过：${executed} 条成功执行 / ${rejected} 条明确前置条件拒绝 / 0 条遗漏路由`);
+console.log(`${executed+rejected} 条命令规则覆盖通过：${executed} 条成功执行 / ${rejected} 条明确前置条件拒绝 / 0 条遗漏路由`);
