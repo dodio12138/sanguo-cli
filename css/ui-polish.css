@@ -442,3 +442,14 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .battle-log.victory{border-left-color:#8fae5b;}
 .battle-log.defeat{border-left-color:#b65c46;}
 [data-open-siege]{margin-left:6px;padding:0 6px;font-size:9px;}
+
+/* 内政档案按郡折叠 */
+.commandery-groups{display:grid;gap:4px;margin:6px 0;}
+.commandery-group{border:1px solid #2c3428;background:#0f150f;}
+.commandery-group>summary{display:flex;gap:10px;align-items:center;padding:5px 8px;cursor:pointer;font-size:10px;color:var(--muted);list-style:none;}
+.commandery-group>summary b{color:#ddd5aa;min-width:64px;}
+.commandery-group>summary span{flex:1;}
+.commandery-group>summary button,[data-delegate-toggle]{border:1px solid var(--line);background:#1a2418;color:var(--green);padding:2px 8px;font-size:9px;cursor:pointer;}
+.commandery-group>summary em{font-style:normal;color:#8a7d5b;font-size:9px;}
+.commandery-group[open]>summary{border-bottom:1px dotted #343c2e;}
+.commandery-group .ledger-table{margin:0;}
