@@ -13,7 +13,7 @@ for(const county of state.data.counties)if(!county.jurisdictionCityId||!county.f
 
 const city=state.data.cities.find(item=>item.force==="cao"&&state.engine.countiesForCity(item.id).length),counties=state.engine.countiesForCity(city.id),populationBefore=counties.reduce((sum,county)=>sum+county.population,0),goldBefore=state.resources.gold,foodBefore=state.resources.food,events=[];
 state.engine.resolveEconomies(state,events);if(state.resources.gold!==goldBefore||state.resources.food!==foodBefore||city.fiscal.accrued.land<=0||city.fiscal.cropAccrued<=0)throw new Error("县域税粮应累积应收和田间收成，不能立即生成中央库存");
-city.localGold=50000;city.localFood=50000;city.administration.recruitmentTarget=city.garrison+1000;state.engine.resolveAdministration(state,events);const populationAfter=state.engine.countyPopulation(city.id);if(populationAfter>=populationBefore||city.garrison<=0)throw new Error("募兵没有消耗辖县编户");
+city.localGold=50000;city.localFood=50000;city.administration.manualRecruitment=true;city.administration.recruitmentTarget=city.garrison+1000;state.engine.resolveAdministration(state,events);const populationAfter=state.engine.countyPopulation(city.id);if(populationAfter>=populationBefore||city.garrison<=0)throw new Error("募兵没有消耗辖县编户");
 
 const save=state.serialize(),saved=save.world.counties.find(county=>county.id===counties[0].id);if(save.version!==17||saved.population!==counties[0].population)throw new Error("v17 存档没有持久化县域变化");
 const restored=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});restored.applySave(restored.migrateSave(save));if(restored.data.counties.find(county=>county.id===saved.id).population!==saved.population)throw new Error("县域人口恢复失败");

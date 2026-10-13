@@ -14,7 +14,7 @@ const official=officers.find(o=>o.name==="荀彧")||officers[0],second=officers.
 const appointed=state.engine.assignCityAdministration(city.id,{governor:official.id,agriculture:official.id,commerce:official.id,order:official.id,recruitment:official.id,commanderyGovernor:official.id});
 if(!appointed.ok||state.engine.officerDutyCount(official.id)<5||state.engine.dutyEfficiency(official.id)>=1)throw new Error("兼任职务或效率递减未生效");
 
-city.administration.boosts.agriculture=state.turn+5;const agricultureBefore=city.agriculture,garrisonBefore=city.garrison;city.administration.recruitmentTarget=city.garrison+600;for(let i=0;i<5;i++)state.engine.resolveAdministration(state,[]);
+city.administration.boosts.agriculture=state.turn+5;const agricultureBefore=city.agriculture,garrisonBefore=city.garrison;city.administration.manualRecruitment=true;city.administration.recruitmentTarget=city.garrison+600;for(let i=0;i<5;i++)state.engine.resolveAdministration(state,[]);
 if(city.agriculture<=agricultureBefore||city.garrison<=garrisonBefore)throw new Error("持续农业发展或自动征募未生效");
 
 const commander=state.data.officers.find(o=>o.name===army.commander),military=state.engine.assignArmyOffices(army.id,{commander:commander?.id,deputy:second?.id||null,staff:null,target:army.soldiers+500});
