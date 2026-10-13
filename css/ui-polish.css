@@ -494,3 +494,6 @@ dialog#mapEditorDialog>.map-editor-content{display:grid;grid-template-columns:mi
 .planner-legs{width:100%;margin-top:6px;border-collapse:collapse;font-size:8px;color:var(--text)}
 .planner-legs th,.planner-legs td{border-bottom:1px dotted var(--line-dim);padding:3px 4px;text-align:left}.planner-legs th{color:var(--muted);font-weight:normal}
 .planner-legs td:nth-child(3),.planner-legs td:nth-child(4),.planner-legs th:nth-child(3),.planner-legs th:nth-child(4){text-align:right}
+/* 战报档案：每场战事可打开战况窗口；野战窗口的历次交战 */
+.battle-open{display:flex;justify-content:flex-end;margin:4px 0}
+.battle-history{border:1px dotted var(--line-dim);padding:4px 6px;margin:4px 0}.battle-history summary{cursor:pointer;color:var(--amber)}

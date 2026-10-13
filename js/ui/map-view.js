@@ -179,17 +179,21 @@ window.MapView = class MapView {
     if(rank!=="county"){const inner=size*(rank==="province"?.55:.42);c.fillStyle=color;c.fillRect(x-inner,y-inner,inner*2,inner*2)}
   }
   drawCityNodes(c,m){
-    const cities=this.state.data.cities,divisions=this.state.data.administrativeDivisions,font=getComputedStyle(document.body).fontFamily;
+    const cities=this.state.data.cities,divisions=this.state.data.administrativeDivisions,font=getComputedStyle(document.body).fontFamily,labels=[];
     for(const city of cities){if(!this.inView(city,m))continue;
       const kind=MapGrid.nodeKind(city),rank=MapGrid.nodeRank(city,divisions),importance=this.nodeImportance(city),selected=this.state.selected.value===city;
       if(!selected&&!this.nodeVisible(importance,m)||this.legendHidden(MapGrid.NODE_KIND_NAMES[kind]))continue;
       const x=m.startX+(city.x+.5)*m.cell,y=m.startY+(city.y+.5)*m.cell,force=this.state.data.forces.find(f=>f.id===city.force),size=Math.max(2.5,Math.min({province:6.5,commandery:5,county:4}[rank]||4.5,m.cell*({province:.38,commandery:.33,county:.27}[rank]||.32)));
       this.drawNodeMarker(c,kind,rank,x,y,size,force?.color||"#777568");
-      const nearby=cities.some(other=>other!==city&&Math.abs(other.x-city.x)<=2&&Math.abs(other.y-city.y)<=1),below=nearby&&(city.x+city.y)%2===0,showLabel=selected||this.nodeLabelVisible(importance,m);
-      if(showLabel){const major=importance>=2;c.fillStyle=rank==="province"?"#f6e7a8":major?"#eee4b8":"#d9d2ad";c.font=`${major?"bold ":""}${Math.max(8,Math.min(rank==="province"?12:11,m.cell*.42))}px ${font}`;c.textAlign="center";c.fillText(city.name,x,y+(below?size+(rank==="province"?13:10):-size-(rank==="province"?6:3)))}
+      if(selected||this.nodeLabelVisible(importance,m)){const major=importance>=2;labels.push({city,x,y,size,rank,selected,priority:(selected?100:0)+importance*10+(city.force===this.state.playerForceId?1:0),color:rank==="province"?"#f6e7a8":major?"#eee4b8":"#d9d2ad",font:`${major?"bold ":""}${Math.max(8,Math.min(rank==="province"?12:11,m.cell*.42))}px ${font}`})}
       if(selected){c.strokeStyle="#f0ce78";c.lineWidth=2;c.strokeRect(x-size-5,y-size-5,size*2+10,size*2+10)}
     }
+    this.placeLabels(c,labels);
   }
+  // 标签避让：按选中、州治、郡治、关渡、县邑与己方优先依次落位，逐一尝试上、下、右、左四个位置，与已放标签重叠则跳过，选中据点总会显示。
+  placeLabels(c,labels){const placed=[],overlap=box=>placed.some(other=>box.x1<other.x2&&box.x2>other.x1&&box.y1<other.y2&&box.y2>other.y1);c.textBaseline="alphabetic";
+    for(const label of labels.sort((a,b)=>b.priority-a.priority)){c.font=label.font;const width=c.measureText(label.city.name).width,height=parseFloat(label.font.match(/(\d+(?:\.\d+)?)px/)?.[1]||10),gap=label.rank==="province"?5:3,{x,y,size}=label,spots=[[x,y-size-gap,"center"],[x,y+size+gap+height,"center"],[x+size+gap+width/2,y+height*.35,"center"],[x-size-gap-width/2,y+height*.35,"center"]];
+      let chosen=null;for(const [tx,ty] of spots){const box={x1:tx-width/2-1,x2:tx+width/2+1,y1:ty-height,y2:ty+2};if(!overlap(box)){chosen=[tx,ty,box];break}}if(!chosen&&label.selected){const [tx,ty]=spots[0];chosen=[tx,ty,{x1:tx-width/2,x2:tx+width/2,y1:ty-height,y2:ty+2}]}if(!chosen)continue;placed.push(chosen[2]);c.fillStyle=label.color;c.textAlign="center";c.fillText(label.city.name,chosen[0],chosen[1])}}
   drawLandmarks(c,m){if(m.cell<9||this.state.layer==="commandery"&&this.scale<1.25)return;const battlesHidden=this.legendHidden("战场");c.font=`${Math.max(7,Math.min(9,m.cell*.34))}px ${getComputedStyle(document.body).fontFamily}`;c.textAlign="center";for(const site of this.landmarks){if(!this.inView(site,m)||site.type==="battle"&&battlesHidden)continue;const x=m.startX+(site.x+.5)*m.cell,y=m.startY+(site.y+.5)*m.cell;c.lineWidth=1;if(site.type==="mountain"){c.fillStyle="rgba(56,48,37,.72)";c.strokeStyle="#9e8b67";c.beginPath();c.moveTo(x-5,y+3);c.lineTo(x,y-5);c.lineTo(x+5,y+3);c.closePath();c.fill();c.stroke()}else if(site.type==="lake"){c.fillStyle="rgba(75,126,139,.62)";c.strokeStyle="#90bdc7";c.beginPath();c.ellipse(x,y,5,3,0,0,Math.PI*2);c.fill();c.stroke()}else if(site.type==="pass"){c.fillStyle="#201a12";c.fillRect(x-4,y-3,8,6);c.strokeStyle="#d69b52";c.strokeRect(x-4,y-3,8,6)}else if(site.type==="ford"){c.strokeStyle="#87bed1";c.beginPath();c.moveTo(x-4,y-3);c.lineTo(x+4,y+3);c.moveTo(x-4,y+3);c.lineTo(x+4,y-3);c.stroke()}else if(site.type==="battle"){c.strokeStyle="#0b0e0b";c.lineWidth=3.4;c.beginPath();c.arc(x,y,4,0,Math.PI*2);c.stroke();c.strokeStyle="#d98b6a";c.lineWidth=1.6;c.stroke()}else{c.fillStyle="#090b09";c.fillRect(x-2.5,y-2.5,5,5);c.strokeStyle="#ddd28a";c.strokeRect(x-3,y-3,6,6)}c.fillStyle=site.type==="lake"?"#94c4cb":site.type==="mountain"?"#b4a17a":site.type==="ford"?"#a7d5df":site.type==="pass"?"#e0ae68":site.type==="battle"?"#d99a7c":"#c8c49a";c.fillText(site.name,x,y-7)}}
   drawIntel(c,m){
     c.save();c.textAlign="center";c.font=`${Math.max(7,Math.min(10,m.cell*.32))}px serif`;
