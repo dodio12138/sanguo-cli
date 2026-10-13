@@ -66,7 +66,11 @@ window.MapView = class MapView {
   provinceLabel(cell){return cell.province||(cell.terrain==="ocean"?"海域":"未划定")}
   onMove(e){const r=this.canvas.getBoundingClientRect();if(this.drag){if(!(e.buttons&1)){this.cancelDrag();return}if(e.pointerId!==this.drag.pointerId)return;const dx=e.clientX-this.drag.x,dy=e.clientY-this.drag.y;if(Math.abs(dx)+Math.abs(dy)>3)this.drag.moved=true;if(this.drag.moved){this.offset.x=this.drag.ox+dx;this.offset.y=this.drag.oy+dy}this.tooltip(true);this.scheduleDraw();return}if(e.buttons)return;this.hover=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(this.hover){document.getElementById("cursorInfo").textContent=`坐标 ${String(this.hover.x).padStart(2,"0")},${String(this.hover.y).padStart(2,"0")} · ${this.provinceLabel(this.hover)}${this.hover.commandery?` · ${this.hover.commandery}`:""}${this.hover.county?` · ${this.hover.county.name}县治`:""} · ${this.terrainDef(this.hover.terrain).name}`;this.tooltip(false,e.clientX-r.left,e.clientY-r.top)}else this.tooltip(true);this.scheduleDraw();}
   cellAt(px,py){const m=this.metrics(),x=Math.floor((px-m.startX)/m.cell),y=Math.floor((py-m.startY)/m.cell);return this.cell(x,y)}
-  pick(e){const r=this.canvas.getBoundingClientRect(),cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
+  // 军团情报：己方全知；他方取军团情报与所在据点情报的较高者，未探明（0）不显示。
+  armyIntelLevel(army){if(this.state.observerMode||army.force===this.state.playerForceId)return 3;const city=this.state.data.cities.find(item=>item.id===army.city);return Math.max(this.state.intelligence?.armies?.[army.id]||0,this.intelLevel(city))}
+  armyScreenPoint(army,m){const position=this.armyPosition(army);if(!position)return null;return {x:m.startX+(position.x+(position.moving?.5:.78))*m.cell,y:m.startY+(position.y+(position.moving?.5:.7))*m.cell}}
+  armyAt(px,py){const m=this.metrics();let best=null,bestDistance=10;for(const army of this.state.data.armies||[]){if(this.armyIntelLevel(army)<1)continue;const point=this.armyScreenPoint(army,m);if(!point)continue;const distance=Math.hypot(point.x-px,point.y-py);if(distance<bestDistance){bestDistance=distance;best=army}}return best}
+  pick(e){const r=this.canvas.getBoundingClientRect(),army=this.onArmyPick?this.armyAt(e.clientX-r.left,e.clientY-r.top):null;if(army){this.onArmyPick(army);return}const cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
   setZoom(value){this.scale=Math.max(.65,Math.min(3.4,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
   center(){this.offset={x:0,y:0};this.setZoom(1);}
   setPlannedRoute(cityIds=[]){this.plannedRoute=cityIds;this.draw()}
@@ -85,7 +89,7 @@ window.MapView = class MapView {
   static intelBands=[["守军薄弱",2000,0],["守军一般",6000,.34],["守军雄厚",12000,.67],["守军重兵",Infinity,1]];
   get intelBands(){return MapView.intelBands}
   intelBand(garrison){const value=Math.max(0,garrison||0),band=this.intelBands.find(item=>value<item[1])||this.intelBands.at(-1);return {label:band[0],limit:band[1],heat:band[2]}}
-  intelLevel(city){if(!city)return 0;if(city.force===this.state.playerForceId)return 3;return this.state.intelligence?.cities?.[city.id]||0}
+  intelLevel(city){if(!city)return 0;if(this.state.observerMode||city.force===this.state.playerForceId)return 3;return this.state.intelligence?.cities?.[city.id]||0}
   intelColor(heat,level,fade=1){const alpha=Math.max(.25,Math.min(1,fade)),lightness=Math.round((11+heat*24)*alpha+3);return `hsl(${Math.round(118-118*heat)}, ${level>=2?58:26}%, ${lightness}%)`}
   static intelEstimate(value,level){const count=Math.max(0,value||0);if(level<=0)return null;if(level<2)return count>=10000?`约${Math.max(1,Math.round(count/10000))}万`:`约${Math.max(1,Math.round(count/5000)*5)}千`;if(count>=10000)return `约${(count/10000).toFixed(1)}万`;return `约${Math.max(1,Math.round(count/1000))}千`}
   intelStrength(value,level){return MapView.intelEstimate(value,level)}
@@ -211,7 +215,8 @@ window.MapView = class MapView {
       const owner=this.politicalOwner(cell),controlled=cell.province!=="域外"&&(owner.administrative||owner.distance<this.territoryRadius),force=city?this.state.data.forces.find(item=>item.id===city.force):controlled?owner.force:null;
       return [city?.name,`所属势力：${force?.name||"无主"}`,`州郡：${cell.province||city?.province||county?.province||"州属未详"} · ${commandery||"郡属未详"}`].filter(Boolean).join("\n");
     }
-    const siege=city?.siegeTurns?`｜围城 ${city.siegeTurns*(Number.isInteger(this.state.date?.day)?10:1)}日｜城防 ${Math.max(0,100-(city.defenseDamage||0))}%`:"",battle=city?.lastBattleTurn&&this.state.turn-city.lastBattleTurn<=1?`｜${city.lastBattle}`:"",occupation=city?.occupiedUntil&&city.occupiedUntil>this.state.turn?`｜占领管制 ${city.occupiedUntil-this.state.turn}日`:"",countyInfo=county?`｜编户 ${(county.population||0).toLocaleString()}｜农${county.agriculture} 商${county.commerce} 治${county.order}`:"";
+    // 迷雾：县域户口与农商治、围城与交战动态按所属据点情报显示；己方全知，未探明者不显示。
+    const seat=county?this.state.data.cities.find(item=>item.id===county.jurisdictionCityId)||city:city,level=seat?this.intelLevel(seat):0,known=level>=1,siege=known&&city?.siegeTurns?`｜围城 ${city.siegeTurns*(Number.isInteger(this.state.date?.day)?10:1)}日${level>=2?`｜城防 ${Math.max(0,100-(city.defenseDamage||0))}%`:""}`:"",battle=known&&city?.lastBattleTurn&&this.state.turn-city.lastBattleTurn<=1?`｜${city.lastBattle}`:"",occupation=known&&city?.occupiedUntil&&city.occupiedUntil>this.state.turn?`｜占领管制 ${city.occupiedUntil-this.state.turn}日`:"",countyInfo=!county?"":level>=3?`｜编户 ${(county.population||0).toLocaleString()}｜农${county.agriculture} 商${county.commerce} 治${county.order}`:level>=2?`｜编户 ${MapView.intelEstimate(county.population||0,level)}`:"";
     return city?`${city.name}｜${cell.province||city.province} · ${commandery||"郡属未详"}${countyInfo}${siege}${battle}${occupation}`:`${this.provinceLabel(cell)}${commandery?` · ${commandery}`:""}${county?` · ${county.name}`:""}${countyInfo}｜${this.terrainDef(cell.terrain).name}`;
   }
   tooltip(hide,x=0,y=0){
