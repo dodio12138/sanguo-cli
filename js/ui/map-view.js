@@ -88,7 +88,32 @@ window.MapView = class MapView {
     this.invalidateColors();
   }
   invalidateColors(){this.cellColors=null;this.colorCacheLayer=null;this.colorCacheRevision=-1;this.colorRevision=(this.colorRevision||0)+1}
-  ensureColors(){if(this.cellColors&&this.colorCacheLayer===this.state.layer&&this.colorCacheRevision===this.colorRevision)return;this.cellColors=this.cells.map(cell=>this.color(cell));this.colorCacheLayer=this.state.layer;this.colorCacheRevision=this.colorRevision}
+  ensureColors(){const stamp=MapView.DYNAMIC_LAYERS.has(this.state.layer)?`${this.state.turn}|${this.perspectiveForce()}|${[...(this.hiddenLegendItems||[])].join(",")}`:"";if(this.cellColors&&this.colorCacheLayer===this.state.layer&&this.colorCacheRevision===this.colorRevision&&this.colorCacheStamp===stamp)return;this.cellColors=this.cells.map(cell=>this.color(cell));this.colorCacheLayer=this.state.layer;this.colorCacheRevision=this.colorRevision;this.colorCacheStamp=stamp}
+  // 关系、粮食、武将三个分析图层：按郡与势力汇总（每日更新），他方数值受情报约束。
+  static DYNAMIC_LAYERS=new Set(["relation","food","officers"]);
+  static RELATION_BANDS={我方:"#c9a95a",盟友:"#4f9a6c",互不侵犯:"#5f8f92",友善:"#7f9358",中立:"#5c5f55",敌视:"#a06a42",交战:"#a8433a",无主:"#3b3d36"};
+  static FOOD_BANDS=[["充裕",180,"#4f8a4a"],["尚足",90,"#8a9a48"],["偏紧",30,"#b08a3c"],["告急",0,"#a8433a"]];
+  static OFFICER_BANDS=[["众将",6,"#5a7fb0"],["中等",3,"#6f8f9a"],["寡少",1,"#8a8460"],["空缺",0,"#5c4a40"]];
+  perspectiveForce(){if(!this.state.observerMode)return this.state.playerForceId;const value=this.state.selected?.value;return value?.force||this.state.playerForceId}
+  relationBand(forceId){const viewer=this.perspectiveForce(),engine=this.state.engine;if(!forceId||forceId==="neutral")return "无主";if(forceId===viewer)return "我方";if(!engine)return "中立";this.relationCache=this.relationCache?.stamp===`${this.state.turn}|${viewer}`?this.relationCache:{stamp:`${this.state.turn}|${viewer}`,bands:new Map()};const cached=this.relationCache.bands.get(forceId);if(cached)return cached;
+    let band;if(engine.worldWar(this.state,viewer,forceId))band="交战";else{const d=this.state.diplomacy||{},key=engine.pairKey(viewer,forceId),types=viewer===this.state.playerForceId?(d.treaties||[]).filter(item=>item.forceId===forceId).map(item=>item.type):(d.worldTreaties||[]).filter(item=>item.key===key&&(!item.expiresTurn||item.expiresTurn>=this.state.turn)).map(item=>item.type),vassal=d.worldVassals?.[forceId]===viewer||d.worldVassals?.[viewer]===forceId;if(vassal||types.some(type=>["alliance","coalition","marriage"].includes(type)))band="盟友";else if(types.some(type=>["non_aggression","truce","war_support"].includes(type)))band="互不侵犯";else{const value=engine.worldRelation(this.state,viewer,forceId);band=value>=30?"友善":value<=-30?"敌视":"中立"}}
+    this.relationCache.bands.set(forceId,band);return band}
+  layerGroups(){const stamp=`${this.state.turn}|${this.perspectiveForce()}`;if(this.layerGroupCache?.stamp===stamp)return this.layerGroupCache.groups;const rules=this.state.data.rules?.balance?.food||{},garrisonRation=rules.garrison_ration??.05,armyRation=rules.army_ration??.066,groups=new Map();
+    for(const city of this.state.data.cities){const key=`${city.commandery}|${city.force}`,group=groups.get(key)||{key,force:city.force,commandery:city.commandery,cities:[],food:0,need:0,officers:[],level:0};groups.set(key,group);group.cities.push(city);group.food+=city.localFood||0;group.need+=(city.garrison||0)*garrisonRation;group.level=Math.max(group.level,this.intelLevel(city))}
+    for(const army of this.state.data.armies||[]){if(army.route?.length||army.siegeTarget)continue;const city=this.state.data.cities.find(item=>item.id===army.city);const group=city&&groups.get(`${city.commandery}|${army.force}`);if(group)group.need+=(army.soldiers||0)*armyRation}
+    for(const officer of this.state.data.officers||[]){if(officer.status!=="serving")continue;const city=this.state.data.cities.find(item=>item.id===officer.city);const group=city&&groups.get(`${city.commandery}|${officer.force}`);if(group)group.officers.push(officer)}
+    for(const group of groups.values())group.days=group.need>0?group.food/group.need:Infinity;this.layerGroupCache={stamp,groups};return groups}
+  layerGroupAt(cell){const owner=this.politicalOwner(cell),force=owner.force?.id;if(!force||force==="neutral")return null;return this.layerGroups().get(`${cell.commandery}|${force}`)||this.layerGroups().get(`${owner.city?.commandery}|${force}`)||null}
+  foodBand(group){if(!group)return null;if(group.level<2)return "不详";return MapView.FOOD_BANDS.find(([,days])=>group.days>=days)?.[0]||"告急"}
+  officerBand(group){if(!group)return null;if(group.level<2)return "不详";return MapView.OFFICER_BANDS.find(([,count])=>group.officers.length>=count)?.[0]||"空缺"}
+  analysisColor(cell){const owner=this.politicalOwner(cell),controlled=owner.administrative||owner.distance<this.territoryRadius;if(!controlled)return "#3b3d36";
+    if(this.state.layer==="relation"){const band=this.relationBand(owner.force?.id);return this.legendHidden(band)?"#30372f":MapView.RELATION_BANDS[band]}
+    const group=this.layerGroupAt(cell);if(!group)return "#3b3d36";const band=this.state.layer==="food"?this.foodBand(group):this.officerBand(group);if(this.legendHidden(band))return "#30372f";if(band==="不详")return "#1b201a";return (this.state.layer==="food"?MapView.FOOD_BANDS:MapView.OFFICER_BANDS).find(([name])=>name===band)?.[2]||"#3b3d36"}
+  analysisTooltip(cell,city,commandery){if(cell.terrain==="ocean")return "海域";const owner=this.politicalOwner(cell),force=owner.force,name=city?.name||commandery||"";if(!force||force.id==="neutral")return `${name}｜无主`;
+    if(this.state.layer==="relation")return `${name}｜${force.name}｜${this.relationBand(force.id)}${force.id!==this.perspectiveForce()&&this.state.engine?`（关系值 ${this.state.engine.worldRelation(this.state,this.perspectiveForce(),force.id)}）`:""}`;
+    const group=this.layerGroupAt(cell);if(!group)return `${name}｜${force.name}`;const head=`${group.commandery}·${force.name}（${group.cities.length} 处据点）`;if(group.level<2)return `${head}｜情报不足，${this.state.layer==="food"?"仓储":"驻将"}不详`;
+    if(this.state.layer==="food"){const exact=group.level>=3,stock=exact?`${Math.round(group.food).toLocaleString()} 石`:`约 ${MapView.intelEstimate(group.food,group.level)} 石`,days=Number.isFinite(group.days)?`${Math.round(group.days)} 日`:"无驻军";return `${head}｜仓储 ${stock}｜日耗 ${Math.round(group.need).toLocaleString()} 石｜可支 ${days}（${this.foodBand(group)}）`}
+    const list=[...group.officers].sort((a,b)=>(b.command+b.war+b.intelligence+b.politics)-(a.command+a.war+a.intelligence+a.politics)),shown=group.level>=3?list.slice(0,6).map(officer=>`${officer.name}(统${officer.command}武${officer.war}智${officer.intelligence}政${officer.politics})`):list.slice(0,4).map(officer=>officer.name);return `${head}｜驻将 ${list.length} 人${shown.length?`：${shown.join("、")}${list.length>shown.length?" 等":""}`:""}`}
   static intelBands=[["守军薄弱",2000,0],["守军一般",6000,.34],["守军雄厚",12000,.67],["守军重兵",Infinity,1]];
   get intelBands(){return MapView.intelBands}
   intelBand(garrison){const value=Math.max(0,garrison||0),band=this.intelBands.find(item=>value<item[1])||this.intelBands.at(-1);return {label:band[0],limit:band[1],heat:band[2]}}
@@ -103,6 +128,7 @@ window.MapView = class MapView {
     if(this.state.layer==="province"){if(this.legendHidden("州域"))return"#3b4034";return this.provinceColors?.get(cell.province)||"#3b4034"}
     if(this.state.layer==="commandery"){if(this.legendHidden("郡域"))return"#3b4034";const name=cell.commandery||"史籍未详",hue=[...name].reduce((sum,char)=>sum+char.charCodeAt(0),0)%360;return `hsl(${hue}, 30%, ${28+(hue%3)*3}%)`}
     if(this.state.layer==="supply"){const band=cell.supply>=6?"充足":cell.supply>=3?"一般":"匮乏";return this.legendHidden(band)?"#30372f":`hsl(${cell.supply*10}, 42%, ${20+cell.supply*3}%)`}
+    if(MapView.DYNAMIC_LAYERS.has(this.state.layer))return this.analysisColor(cell);
     if(this.state.layer==="intel"){const owner=this.politicalOwner(cell),level=this.intelLevel(owner.city);if(!level)return this.legendHidden("未查明")?"#0c100c":"#111711";const band=this.intelBand(owner.city.garrison);if(this.legendHidden(band.label))return "#111711";return this.intelColor(band.heat,level,1-owner.distance/(this.territoryRadius+2))}
     const owner=this.politicalOwner(cell);return (owner.administrative||owner.distance<this.territoryRadius)&&!this.legendHidden(owner.force?.name)?owner.force.color:"#4c4e45";
   }
@@ -227,6 +253,7 @@ window.MapView = class MapView {
   drawLabels(c,m){c.textAlign="center";for(const label of this.seaLabels){if(!this.inView(label,m))continue;c.fillStyle="rgba(130,169,173,.47)";c.font=`${Math.min(12,m.cell*.55)}px serif`;c.fillText(label.name,m.startX+(label.x+.5)*m.cell,m.startY+(label.y+.5)*m.cell)}if(this.state.layer!=="political")for(const label of this.landLabels){if(!this.inView(label,m))continue;c.fillStyle="rgba(216,204,164,.31)";c.font=`${Math.min(10,m.cell*.42)}px serif`;c.fillText(label.name,m.startX+(label.x+.5)*m.cell,m.startY+(label.y+.5)*m.cell)}}
   tooltipText(cell){
     const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y),county=cell.county||(city&&(this.state.data.counties||[]).find(item=>item.cityId===city.id)),commandery=cell.commandery||city?.commandery||county?.commandery;
+    if(MapView.DYNAMIC_LAYERS.has(this.state.layer))return this.analysisTooltip(cell,city,commandery);
     if(this.state.layer==="political"){
       if(cell.terrain==="ocean")return "海域";
       const owner=this.politicalOwner(cell),controlled=cell.province!=="域外"&&(owner.administrative||owner.distance<this.territoryRadius),force=city?this.state.data.forces.find(item=>item.id===city.force):controlled?owner.force:null;
