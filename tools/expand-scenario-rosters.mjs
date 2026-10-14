@@ -15,7 +15,7 @@ function spliceValue(text,key,value){const [start,end]=valueSpan(text,key),origi
 const write=(path,value)=>{const url=new URL(path,import.meta.url);if(!value.patch){fs.writeFileSync(url,`${JSON.stringify(value,null,2)}\n`);return}let text=fs.readFileSync(url,"utf8");text=spliceValue(text,"extra_officers",value.patch.extra_officers);text=spliceValue(text,"officer_assignments",value.patch.officer_assignments);if(line(JSON.parse(text))!==line(value))throw new Error(`${path} 排版写回与数据不一致`);fs.writeFileSync(url,text)};
 const apt=code=>Object.fromEntries(["spear","halberd","crossbow","cavalry","siege","navy"].map((key,index)=>[key,code[index]||"C"]));
 
-// 参考库与已有名册均未收录的史传人物。能力为游戏估值（statsBasis: game-estimate），生卒不详者取史事上下限估计。
+// 参考库与已有名册均未收录的人物（正史与演义合收）。能力为游戏估值（statsBasis: game-estimate），生卒不详者取史事上下限估计。
 // [id, 姓名, 生, 卒, 籍贯/出仕地城池id, 统, 武, 智, 政, 魅, 适性(枪戟弩骑兵水)]
 const NEW_PEOPLE=[
   ["history_sun_ben","孙贲",160,210,"yuzhang",64,62,55,58,62,"BCCBCB"],
@@ -59,7 +59,16 @@ const NEW_PEOPLE=[
   ["history_du_xi","杜袭",170,235,"commandery_city_008",44,30,72,78,64,"CCCCCC"],
   ["history_zhao_yan","赵俨",171,245,"commandery_city_008",60,40,72,80,66,"CCCCCC"],
   ["history_he_qia","和洽",167,235,"xiangyang",26,16,70,76,64,"CCCCCC"],
-  ["history_zhang_xiu_hanzhong","张修",150,191,"hanzhong",52,48,58,50,64,"CCCCCC"]
+  ["history_zhang_xiu_hanzhong","张修",150,191,"hanzhong",52,48,58,50,64,"CCCCCC"],
+  // 演义人物
+  ["history_kong_xiu","孔秀",165,200,"luoyang",52,60,30,28,36,"BCCBCC"],
+  ["history_han_fu_luoyang","韩福",160,200,"luoyang",55,58,40,42,40,"CCBCCC"],
+  ["history_meng_tan","孟坦",165,200,"luoyang",50,62,28,24,32,"BCCCCC"],
+  ["history_qin_qi","秦琪",170,200,"baima",54,64,30,24,34,"BCCBCB"],
+  ["history_wang_zhi","王植",160,200,"commandery_city_008",50,46,52,48,40,"CCBCCC"],
+  ["history_cai_yang","蔡阳",150,200,"xuchang",62,70,32,28,38,"BCCBCC"],
+  ["history_yang_ling","杨龄",170,208,"changsha",52,64,30,26,38,"BCCCCC"],
+  ["history_chunyu_dao","淳于导",170,208,"xiangyang",56,66,30,22,34,"BCCBCC"]
 ].map(([id,name,birthYear,deathYear,home,command,war,intelligence,politics,charm,code])=>({id,name,birthYear,deathYear,debutYear:Math.max(184,birthYear+18),home,command,war,intelligence,politics,charm,aptitude:apt(code),statsBasis:"game-estimate"}));
 
 // 每行「势力@城: 人物…」，城可写名称或id；人物后缀 =忠诚（默认80）、!改属（覆盖已有指派）、~卒年（无=null，卒年校正）。
@@ -87,6 +96,16 @@ han_sui@金城: 阎行 成公英
 gongsun_du@襄平: 柳毅 阳仪
 shi_xie@交趾: 士壹=100 士䵋=100 士武=100
 zhou_xin@宛陵: 周昂=95
+dong@洛阳: 貂蝉=30
+han_fu@邺: 潘凤
+kong_rong@北海: 武安国
+wang_kuang@河内: 方悦 张杨=60 穆顺
+yuan_shu@宛: 俞涉
+liu_yu@蓟: 邹靖
+zhang_miao@陈留: 典韦
+yuan@南皮: 刘氏=100
+cao@谯: 卞氏=100
+sun_jian@长沙: 吴国太=100
 `,
   "194_puyang":`
 cao@鄄城: 韩浩 史涣 王忠
@@ -101,6 +120,10 @@ wang_lang@kuaiji: 许靖=70
 shi_xie@交趾: 士壹=100 士䵋=100 士武=100 程秉
 gongsun_du@襄平: 柳毅 阳仪
 li_jue@长安: 杨定 杨彪=40 金旋
+lu_bu@濮阳: 貂蝉=100
+li_jue@弘农: 邹氏=100
+liu_biao@零陵: 邢道荣
+ma_teng@天水: 马云禄=100
 `,
   "200_guandu":`
 cao@许昌: 韩浩 史涣 任峻 王忠 朱灵 袁涣 王朗 孔融=50 杜畿 国渊 刘岱 卫觊 杜袭 鲜于辅 田豫 孙观 吴敦 尹礼
@@ -135,6 +158,18 @@ shi_xie@交趾: 士壹=100 程秉 许靖=70
 shi_xie@合浦: 士䵋=100
 shi_xie@番禺: 士武=100
 wei_duan@天水: 韦康=100 杨阜 姜叙 赵昂
+cao@许昌: 孔秀 蔡阳 夏侯恩 夏侯德 卞氏=100
+cao@洛阳: 韩福 孟坦
+cao@虎牢关: 卞喜 王植 胡班
+cao@白马津: 秦琪
+yuan@邺: 刘氏=100 甄氏=90 沮鹄
+liu_biao@长沙: 韩玄
+liu_biao@桂阳: 赵范 陈应 鲍隆 樊氏
+liu_biao@武陵: 金旋 巩志
+liu_biao@零陵: 刘度 邢道荣
+sun@建业: 吴国太=100 大乔=100 小乔=100
+wei_duan@天水: 王异
+ma_teng@槐里: 马云禄=100
 `,
   "208_red_cliffs":`
 cao@襄阳: 曹纯 曹休 曹真 夏侯尚 刘晔 韩浩 张郃 蒋干 徐庶=60 杨修 王粲 蒯越 韩嵩 傅巽 和洽 娄圭 蔡瑁~ 张允=70
@@ -164,6 +199,17 @@ wei_kang@天水: 姜叙 赵昂
 gongsun_kang@襄平: 公孙恭=100 柳毅 阳仪
 shi_xie@交趾: 士壹=100 程秉 许靖=70
 shi_xie@合浦: 士䵋=100
+cao@襄阳: 夏侯恩 夏侯德 蔡氏=70 蔡和 蔡中 王威 淳于导
+cao@邺: 卞氏=100 甄氏=100 蔡琰 张春华
+liu@夏口: 周仓=100 糜氏=100 黄月英=100
+sun@建业: 吴国太=100 孙尚香=100 大乔=100 徐氏
+sun@柴桑: 小乔=100 太史慈
+liu_du@零陵: 刘贤=100 邢道荣
+zhao_fan@桂阳: 陈应 鲍隆 樊氏
+jin_xuan@武陵: 巩志
+han_xuan@长沙: 杨龄
+wei_kang@天水: 王异
+ma_chao@槐里: 马云禄=100
 `,
   "211_tongguan":`
 cao@邺: 徐庶=60 蒯越 桓阶 袁涣 和洽 卫觊 杜袭 赵俨
@@ -172,6 +218,16 @@ liu@公安: 冯习 傅彤 刘琰
 cao@天水: 姜叙 赵昂
 gongsun_kang@襄平: 柳毅 阳仪
 shi_xie@交趾: 士壹=100 士䵋=100
+cao@汝南: 李通
+cao@许昌: 金祎=50
+cao@邺: 娄圭 刘勋 蔡琰 张春华
+cao@弘农: 韩德
+cao@天水: 王异
+liu@公安: 孙尚香=60 黄月英=100
+liu@江陵: 周仓=100 胡班
+liu@桂阳: 赵范 樊氏
+sun@建业: 吴国太=100 大乔=100~ 小乔=100~ 徐氏
+ma_chao@潼关: 马云禄=100
 `,
   "219_xiangyang":`
 cao@邺: 阎圃 徐庶=60 陈矫 和洽 卫觊 杜袭 阎行 成公英
@@ -184,6 +240,15 @@ liu@成都: 张裔 张肃
 sun@吴: 朱治 是仪
 gongsun_kang@襄平: 阳仪
 shi_xie@交趾: 士壹=100 士䵋=100
+cao@邺: 张鲁=70 蔡琰 张春华 辛宪英
+cao@长安: 韩德
+cao@天水: 王异
+cao@寿春: 蒋干
+liu@成都: 黄月英=100 马云禄=100 张苞=100 孙乾
+liu@宜城: 周仓=100 胡班 关索=100 鲍三娘
+sun@建业: 孙尚香=90 大乔=100~ 小乔=100~ 徐氏
+sun@濡须口: 凌统
+sun@夏口: 苏飞
 `
 };
 

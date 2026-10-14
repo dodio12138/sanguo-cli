@@ -70,7 +70,9 @@ for(const [id,expected] of Object.entries({"200_guandu":{jiaozhi:"shi_xie",panyu
   assert.deepEqual(data.map,original.map,`${id} 补全不改定稿几何`);
 }
 const redCliffs=await loader.loadScenario("208_red_cliffs",{useSavedMap:false});
-for(const name of ["太史慈","凌操","巩志"])assert(!redCliffs.officers.some(officer=>officer.name===name&&officer.status==="serving"),`208 年不应继续任用 ${name}`);
+// 人物按演义与正史合收：已故者（凌操 203 年战死）不任用；太史慈依演义至合肥之战仍在，巩志为演义武陵将。
+assert(!redCliffs.officers.some(officer=>officer.name==="凌操"&&officer.status==="serving"),"208 年不应继续任用 凌操");
+for(const [name,force] of [["太史慈","sun"],["巩志","jin_xuan"]])assert.equal(redCliffs.officers.find(officer=>officer.name===name)?.force,force,`208 年 ${name} 应在 ${force}`);
 assert.equal(redCliffs.armies.find(army=>army.force==="han_xuan").commander,"黄忠");
 assert.equal(redCliffs.officers.find(officer=>officer.name==="马腾"&&officer.status==="serving")?.force,"cao","208 年马腾已经入朝，不与马超同时建立西北阵营");
 console.log("官渡、赤壁地方势力补全通过：15 / 16 个可选势力 / 各仅 1 个待考节点 / 西北与交州分期归属 / 赤壁名册时点校订");

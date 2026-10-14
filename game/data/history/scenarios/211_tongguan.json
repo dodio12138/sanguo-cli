@@ -1077,6 +1077,103 @@
         "force": "shi_xie",
         "city": "jiaozhi",
         "loyalty": 100
+      },
+      "李通": {
+        "force": "cao",
+        "city": "runan",
+        "loyalty": 80
+      },
+      "金祎": {
+        "force": "cao",
+        "city": "xuchang",
+        "loyalty": 50
+      },
+      "娄圭": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "刘勋": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "蔡琰": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "张春华": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "韩德": {
+        "force": "cao",
+        "city": "hongnong",
+        "loyalty": 80
+      },
+      "王异": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "孙尚香": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 60
+      },
+      "黄月英": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 100
+      },
+      "周仓": {
+        "force": "liu",
+        "city": "jiangling",
+        "loyalty": 100
+      },
+      "胡班": {
+        "force": "liu",
+        "city": "jiangling",
+        "loyalty": 80
+      },
+      "赵范": {
+        "force": "liu",
+        "city": "guiyang",
+        "loyalty": 80
+      },
+      "樊氏": {
+        "force": "liu",
+        "city": "guiyang",
+        "loyalty": 80
+      },
+      "吴国太": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100
+      },
+      "大乔": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100,
+        "deathYear": null
+      },
+      "小乔": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100,
+        "deathYear": null
+      },
+      "徐氏": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 80
+      },
+      "马云禄": {
+        "force": "ma_chao",
+        "city": "tongguan",
+        "loyalty": 100
       }
     },
     "treaties": [{"a": "cao", "b": "ma_chao", "type": "war"}, {"a": "cao", "b": "han_sui", "type": "war"}, {"a": "ma_chao", "b": "han_sui", "type": "alliance"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "war"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}, {"a": "shi_xie", "b": "sun", "type": "non_aggression"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],
