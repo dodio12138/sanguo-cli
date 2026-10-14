@@ -531,6 +531,27 @@
           "navy": "C"
         },
         "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_yang_ding",
+        "name": "杨定",
+        "birthYear": 148,
+        "deathYear": 197,
+        "debutYear": 184,
+        "command": 64,
+        "war": 66,
+        "intelligence": 40,
+        "politics": 30,
+        "charm": 44,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "B",
+          "crossbow": "C",
+          "cavalry": "B",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
       }
     ],
     "officer_assignments": {
@@ -1187,7 +1208,7 @@
       "樊稠": {
         "force": "li_jue",
         "city": "changan",
-      "deathYear": 195
+        "deathYear": 195
       },
       "贾诩": {
         "force": "li_jue",
@@ -1398,6 +1419,146 @@
         "force": "handan_shang",
         "city": "xiliang",
         "loyalty": 100
+      },
+      "韩浩": {
+        "force": "cao",
+        "city": "xian_extra_04",
+        "loyalty": 80
+      },
+      "史涣": {
+        "force": "cao",
+        "city": "xian_extra_04",
+        "loyalty": 80
+      },
+      "王忠": {
+        "force": "cao",
+        "city": "xian_extra_04",
+        "loyalty": 80
+      },
+      "董昭": {
+        "force": "zhang_yang",
+        "city": "henei",
+        "loyalty": 70
+      },
+      "袁涣": {
+        "force": "liu",
+        "city": "xiaopei",
+        "loyalty": 80
+      },
+      "刘琰": {
+        "force": "liu",
+        "city": "xiaopei",
+        "loyalty": 80
+      },
+      "陈武": {
+        "force": "yuan_shu",
+        "city": "shouchun",
+        "loyalty": 80
+      },
+      "孙贲": {
+        "force": "yuan_shu",
+        "city": "shouchun",
+        "loyalty": 90
+      },
+      "孙河": {
+        "force": "yuan_shu",
+        "city": "shouchun",
+        "loyalty": 90
+      },
+      "笮融": {
+        "force": "liu_yao",
+        "city": "jianye",
+        "loyalty": 55
+      },
+      "赵韪": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "吴兰": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "雷铜": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张肃": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张裔": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "甘宁": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "韩玄": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "麴义": {
+        "force": "yuan",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "许靖": {
+        "force": "wang_lang",
+        "city": "kuaiji",
+        "loyalty": 70
+      },
+      "士壹": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士䵋": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士武": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "程秉": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 80
+      },
+      "柳毅": {
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "阳仪": {
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "杨定": {
+        "force": "li_jue",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "杨彪": {
+        "force": "li_jue",
+        "city": "changan",
+        "loyalty": 40
+      },
+      "金旋": {
+        "force": "li_jue",
+        "city": "changan",
+        "loyalty": 80
       }
     },
     "treaties": [{"a": "cao", "b": "lu_bu", "type": "war"}, {"a": "cao", "b": "tao_qian", "type": "war"}, {"a": "tao_qian", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "gongsun", "type": "war"}, {"a": "yuan", "b": "cao", "type": "alliance"}, {"a": "gongsun", "b": "tao_qian", "type": "alliance"}, {"a": "gongsun", "b": "yuan_shu", "type": "alliance"}, {"a": "yuan_shu", "b": "liu_yao", "type": "war"}, {"a": "yuan_shu", "b": "liu_biao", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}, {"a": "li_jue", "b": "ma_teng", "type": "war"}, {"a": "lu_bu", "b": "zhang_yang", "type": "non_aggression"}, {"a": "yuan", "b": "kong_rong", "type": "war"}],

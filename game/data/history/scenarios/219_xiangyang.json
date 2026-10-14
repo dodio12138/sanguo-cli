@@ -751,7 +751,7 @@
       "公孙康": {
         "force": "gongsun_kang",
         "city": "xiangping",
-      "deathYear": null,
+        "deathYear": null,
         "loyalty": 100
       },
       "公孙恭": {
@@ -761,6 +761,121 @@
       "卑衍": {
         "force": "gongsun_kang",
         "city": "lelang"
+      },
+      "阎圃": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "徐庶": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 60
+      },
+      "陈矫": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "和洽": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "卫觊": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "杜袭": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "阎行": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "成公英": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "杨秋": {
+        "force": "cao",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "侯选": {
+        "force": "cao",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "赵俨": {
+        "force": "cao",
+        "city": "runan",
+        "loyalty": 80
+      },
+      "姜叙": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "赵昂": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "严颜": {
+        "force": "liu",
+        "city": "jiangzhou",
+        "loyalty": 80
+      },
+      "刘璋": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 60
+      },
+      "刘琰": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 80
+      },
+      "张裔": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张肃": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "朱治": {
+        "force": "sun",
+        "city": "wu",
+        "loyalty": 80
+      },
+      "是仪": {
+        "force": "sun",
+        "city": "wu",
+        "loyalty": 80
+      },
+      "阳仪": {
+        "force": "gongsun_kang",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "士壹": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士䵋": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
       }
     },
     "treaties": [{"a": "cao", "b": "liu", "type": "war"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "non_aggression"}, {"a": "shi_xie", "b": "sun", "type": "alliance"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],
