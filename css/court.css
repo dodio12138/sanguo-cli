@@ -93,3 +93,15 @@
 .bureau-col .data-row b small{font-weight:400}
 .bureau-note{margin:2px 0 0;color:#76806a;font-size:8px;line-height:1.5}
 @media (max-width:760px){.court-stance{grid-template-columns:1fr}.court-hero{grid-template-columns:48px 1fr}.court-gauges{grid-column:1/-1}}
+
+/* 诏令页：下诏表单、待奉诏令与表章 */
+.court-edict-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.court-edict-form label{display:grid;gap:3px;color:var(--muted);font-size:9px}
+.court-edict-form select,.court-edict-form input{border:1px solid var(--line-dim);padding:4px 5px;background:#0b100c;color:#e8e1b8;font-size:10px}
+.court-edict-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;color:#cfc89c}
+.court-issue,.court-pending button{border:1px solid #786638;padding:4px 12px;background:#1d1c12;color:#ecd99a;font-size:10px;cursor:pointer}
+.court-issue:disabled{opacity:.45;cursor:not-allowed}
+.court-pending{display:flex;align-items:center;gap:6px;border:1px solid var(--line-dim);padding:6px;background:#0d130e;margin-bottom:4px}
+.court-pending>span{flex:1;display:grid;gap:2px;color:#cfc89c}
+.court-pending small{color:var(--muted)}
+.court-pending button.danger{border-color:#7a3a30;color:#e09080}
