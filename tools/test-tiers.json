@@ -11,6 +11,7 @@
     "test-siege-sortie.mjs",
     "test-court-edicts.mjs",
     "test-field-logistics.mjs",
-    "test-court-crisis.mjs"
+    "test-court-crisis.mjs",
+    "test-court-history.mjs"
   ]
 }
