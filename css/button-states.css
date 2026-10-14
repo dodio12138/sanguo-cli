@@ -42,6 +42,9 @@ button:disabled{
   --button-hover-outline:#465634;
 }
 
+/* 任务栏托盘（历法日期、府库、消息）每日刷新，不做颜色渐变，避免刷新时闪动。 */
+.os-calendar-tray,.os-resource-tray,.message-tray{transition:none}
+
 @media (prefers-reduced-motion:reduce){
   button{transition:none}
   button:not(:disabled):active{translate:none}
