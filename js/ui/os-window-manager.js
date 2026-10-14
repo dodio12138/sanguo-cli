@@ -231,9 +231,10 @@
   }
 
   let taskStrip,calendarTray,resourceTray;
-  function syncCalendarTray(){if(!calendarTray)return;const match=$("dateLabel")?.textContent.match(/(\d+)日/);calendarTray.textContent=match?.[1]||"1"}
+  // 托盘只在值变化时改写：反复改写同值会重绘，浅色日期方块上尤其显眼。
+  function syncCalendarTray(){if(!calendarTray)return;const match=$("dateLabel")?.textContent.match(/(\d+)日/),day=match?.[1];if(day&&calendarTray.textContent!==day)calendarTray.textContent=day}
   function syncTaskButton(button,{closed,minimized,active}){
-    button.hidden=closed;button.classList.toggle("is-minimized",minimized);button.classList.toggle("is-active",active&&!minimized&&!closed);
+    if(button.hidden!==closed)button.hidden=closed;button.classList.toggle("is-minimized",minimized);button.classList.toggle("is-active",active&&!minimized&&!closed);
     button.setAttribute("aria-pressed",String(active&&!minimized&&!closed));
   }
   function updateTasks(){
@@ -247,13 +248,13 @@
       syncTaskButton(button,{closed:!dialog||!dialog.open&&!minimized,minimized,active:!!dialog?.classList.contains("is-active")});
     });
     const calendar=document.querySelector('[data-window-id="calendarWindow"]'),resource=document.querySelector('[data-window-id="resourcePanel"]');
-    if(calendarTray)calendarTray.hidden=!calendar?.classList.contains("is-minimized")||calendar.classList.contains("is-closed");
+    if(calendarTray){const hide=!calendar?.classList.contains("is-minimized")||calendar.classList.contains("is-closed");if(calendarTray.hidden!==hide)calendarTray.hidden=hide};
     if(resourceTray)resourceTray.hidden=!resource||resource.classList.contains("is-closed");
   }
   function createTaskStrip(windows){
     const dock=document.querySelector(".main-nav");if(!dock)return;taskStrip=document.createElement("span");taskStrip.className="os-task-strip";
     for(const window of windows){const button=document.createElement("button");button.type="button";button.className="os-task-button";button.dataset.taskWindow=window.dataset.windowId;button.textContent=titleOf(window);button.onclick=()=>window.classList.contains("is-minimized")||window.classList.contains("is-closed")?openWindow(window):window.classList.contains("is-active")?toggleMinimize(window):focusWindow(window);taskStrip.append(button)}
-    const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),calendarWindow=windows.find(window=>window.dataset.windowId==="calendarWindow"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="切换府库窗口";const syncTray=()=>{tray.innerHTML=`钱 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　帛 <b>${$("silkValue")?.textContent||"—"}</b>`};resourceTray=tray;syncTray();for(const id of ["goldValue","foodValue","silkValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>{if(!resourceWindow)return;resourceWindow.classList.contains("is-minimized")||resourceWindow.classList.contains("is-closed")?openWindow(resourceWindow):toggleMinimize(resourceWindow)};
+    const resourceWindow=windows.find(window=>window.dataset.windowId==="resourcePanel"),calendarWindow=windows.find(window=>window.dataset.windowId==="calendarWindow"),tray=document.createElement("button");tray.type="button";tray.className="os-resource-tray";tray.title="切换府库窗口";const syncTray=()=>{const html=`钱 <b>${$("goldValue")?.textContent||"—"}</b>　粮 <b>${$("foodValue")?.textContent||"—"}</b>　帛 <b>${$("silkValue")?.textContent||"—"}</b>`;if(tray.innerHTML!==html)tray.innerHTML=html};resourceTray=tray;syncTray();for(const id of ["goldValue","foodValue","silkValue"]){const target=$(id);if(target)new MutationObserver(syncTray).observe(target,{childList:true,characterData:true,subtree:true})}tray.onclick=()=>{if(!resourceWindow)return;resourceWindow.classList.contains("is-minimized")||resourceWindow.classList.contains("is-closed")?openWindow(resourceWindow):toggleMinimize(resourceWindow)};
     calendarTray=document.createElement("button");calendarTray.type="button";calendarTray.className="os-calendar-tray";calendarTray.title="打开历法";calendarTray.hidden=true;calendarTray.onclick=()=>calendarWindow&&openWindow(calendarWindow);syncCalendarTray();
     const clock=document.createElement("time");clock.className="os-clock";const tick=()=>{const now=new Date();clock.textContent=now.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})};tick();setInterval(tick,30000);dock.append(taskStrip,clock);updateTasks();
     dock.insertBefore(calendarTray,clock);dock.insertBefore(tray,clock);const playback=$("observerControls");if(playback)dock.insertBefore(playback,clock);const messages=$("messageCenterButton");if(messages){messages.classList.add("os-message-tray");dock.insertBefore(messages,playback&&playback.parentNode===dock?playback:clock)}updateTasks();
