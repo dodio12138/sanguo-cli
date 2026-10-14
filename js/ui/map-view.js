@@ -71,7 +71,8 @@ window.MapView = class MapView {
   armyScreenPoint(army,m){const position=this.armyPosition(army);if(!position)return null;return {x:m.startX+(position.x+(position.moving?.5:.78))*m.cell,y:m.startY+(position.y+(position.moving?.5:.7))*m.cell}}
   armyAt(px,py){const m=this.metrics();let best=null,bestDistance=10;for(const army of this.state.data.armies||[]){if(this.armyIntelLevel(army)<1)continue;const point=this.armyScreenPoint(army,m);if(!point)continue;const distance=Math.hypot(point.x-px,point.y-py);if(distance<bestDistance){bestDistance=distance;best=army}}return best}
   pick(e){const r=this.canvas.getBoundingClientRect(),marker=this.onBattlePick?this.battleMarkerAt(e.clientX-r.left,e.clientY-r.top):null;if(marker){this.onBattlePick(marker);return}const army=this.onArmyPick?this.armyAt(e.clientX-r.left,e.clientY-r.top):null;if(army){this.onArmyPick(army);return}const cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
-  setZoom(value){this.scale=Math.max(.65,Math.min(MapView.MAX_ZOOM,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
+  // 缩放以当前画面中心为锚：偏移量随缩放比例同步伸缩，画面中心对准的格子不动。
+  setZoom(value){const before=this.scale||1;this.scale=Math.max(.65,Math.min(MapView.MAX_ZOOM,Math.round(value*20)/20));const ratio=this.scale/before;this.offset={x:(this.offset?.x||0)*ratio,y:(this.offset?.y||0)*ratio};document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
   center(){this.offset={x:0,y:0};this.setZoom(1);}
   // 定位据点：放大到可辨认的比例，并把该据点移到视野中央。
   focusOn(city){if(!city)return;this.setZoom(Math.max(this.scale||1,1.8));const {width,height}=this.state.data.map,cell=this.metrics().cell;this.offset={x:width*cell/2-(city.x+.5)*cell,y:height*cell/2-(city.y+.5)*cell};this.draw()}
