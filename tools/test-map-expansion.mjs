@@ -37,7 +37,7 @@ const view=[fs.readFileSync(new URL("../js/ui/map-view.js",import.meta.url),"utf
 for(const feature of ["太行山","泰山","洞庭湖","鄱阳湖","辽水","珠江"])if(!view.includes(feature))throw new Error(`地图缺少地貌标注 ${feature}`);
 if(!view.includes('if(x>=24&&y>=18&&y<=27)return"扬州"')||!view.includes('if(y<=13&&x>=24)return"青州"'))throw new Error("扬州、青州区位边界未校正");
 if(!view.includes('this.state.layer==="commandery"')||!view.includes("drawCommanderyLabels")||!view.includes("drawCounties"))throw new Error("郡域地图没有绘制郡界、郡名与县治");
-for(const feature of ["visibleBounds","inView","showAllNames","this.scale>=2.2","Math.min(3.4"])if(!view.includes(feature))throw new Error(`地图缺少分级渲染或视口裁剪：${feature}`);
+for(const feature of ["visibleBounds","inView","showAllNames","this.scale>=2.2","Math.min(MapView.MAX_ZOOM","static MAX_ZOOM=8"])if(!view.includes(feature))throw new Error(`地图缺少分级渲染或视口裁剪：${feature}`);
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");if(!html.includes('data-layer="commandery"')||!html.includes('data-layer="supply">补给</button>'))throw new Error("郡域或补给地图入口没有配置");
 
 console.log(`地图扩展通过：${cities.length} 据点 / ${administrative.commandery_seats_140.length} 郡域 / ${seats.length} 县治 / 坐标唯一且归属邻近 / 双向路网 / 旧存档补图 / 山水与郡县标注`);
