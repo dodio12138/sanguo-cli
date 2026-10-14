@@ -108,3 +108,24 @@
 .court-edict:not(:disabled){cursor:pointer}
 .court-edict:not(:disabled):hover{border-color:#786638}
 .court-edict.danger:not(:disabled){border-color:#6a3a30}
+
+/* 幕府：本势力官制图与方面指挥 */
+.force-command-dialog{width:min(1180px,calc(100vw - 24px));max-width:none}
+.cmd-chart{max-height:min(46vh,460px)}
+.cmd-node{cursor:pointer;font:inherit;text-align:center}
+.cmd-node span{display:block;font-size:9px;color:var(--muted)}
+.cmd-node.is-selected{border-color:#e0bd55;box-shadow:0 0 0 1px #e0bd55}
+.cmd-badge{font-style:normal;margin-left:4px;padding:0 4px;border:1px solid #7a3a30;color:#e09080;font-size:9px}
+.cmd-node .bad,.court-log .bad{color:#e09080;font-style:normal}
+.cmd-layout{display:grid;grid-template-columns:minmax(160px,220px) 1fr;gap:10px;align-items:start}
+.cmd-list{display:grid;gap:3px}
+.cmd-list button{text-align:left;border:1px solid var(--line-dim);background:#0b100c;color:#cfc89c;padding:4px 6px;font-size:10px;cursor:pointer}
+.cmd-list button.active{border-color:#786638;color:#ecd99a;background:#1d1c12}
+.cmd-areas{display:flex;flex-wrap:wrap;gap:4px 10px;border:1px solid var(--line-dim);padding:4px 8px;font-size:10px;grid-column:1/-1}
+.cmd-areas label{display:flex;gap:3px;align-items:center}
+.cmd-head p{margin:2px 0;font-size:10px;color:var(--muted)}
+.force-command-content .court-block button:not(.court-issue):not(.cmd-node){border:1px solid var(--line-dim);padding:2px 8px;background:#0b100c;color:#cfc89c;font-size:10px;cursor:pointer}
+.force-command-content .court-block button.danger{border-color:#7a3a30;color:#e09080}
+.force-command-content button.link{border:0;background:none;color:#ecd99a;padding:0;font:inherit;cursor:pointer}
+@media (max-width:720px){.cmd-layout{grid-template-columns:1fr}}
+.cmd-node b{color:#ecd99a}.cmd-node small{color:#cfc89c}
