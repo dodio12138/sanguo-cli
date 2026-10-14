@@ -21,7 +21,9 @@ const named=(game,name)=>game.data.officers.find(o=>o.name===name);
   const seat=id=>e.clanDistribution(game,id).filter(row=>row.seat).map(row=>row.name);assert(seat("zhong").includes("长社"),"钟氏祖居长社县");assert(seat("yuan_rn").includes("平舆"),"汝阳不在图上，寄于平舆");assert(seat("xi_xy").length,"襄阳习氏有祖居（同处至多四家时不再被挤掉）");
   for(const clan of game.data.clans)assert(e.clanDistribution(game,clan.id).some(row=>row.seat),`${clan.id} 有祖居`);
   // 地产只在祖居、近县与支脉，不再铺满全郡
-  const xun=e.clanDistribution(game,"xun");assert(xun.length<=6,"荀氏地产集中在颍阴及近县");assert(xun.every(row=>row.commandery==="颍川郡"));
+  const xun=e.clanDistribution(game,"xun");assert(xun.length<=4,"荀氏地产集中在颍阴及近县");const yingyin=xun.find(row=>row.seat);assert(yingyin.placeIds.length===2&&yingyin.urban>0&&yingyin.rural>0,"颍阴城邑与乡里合为一行");
+  const pingyu=e.clanDistribution(game,"yuan_rn").filter(row=>row.name==="平舆");assert.equal(pingyu.length,1,"平舆据点与归汝南管辖的平舆乡里合为一行");assert(pingyu[0].cityIds.length===2);
+  for(const clan of game.data.clans){const names=e.clanDistribution(game,clan.id).map(row=>`${row.commandery}${row.name}`);assert.equal(new Set(names).size,names.length,`${clan.id} 分布无重复行`)}assert(xun.every(row=>row.commandery==="颍川郡"));
   console.log("全称与祖居通过");}
 
 // 2. 支脉：诸葛氏在襄阳与江东、袁氏在邺与寿春、士氏兄弟各郡

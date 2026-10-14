@@ -56,8 +56,8 @@ window.ClanUI=class ClanUI{
   // 分布表：按州、郡分组；每处列份额、实控势力、依附户、祖居 / 支脉 / 县令标记，可点开所属城池
   static distribution(state,dist){const e=ClanUI.esc,n=ClanUI.num,groups=new Map;for(const row of dist){const key=`${row.province||"化外"}|${row.commandery||""}`;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row)}
     return `<div class="clan-places">${[...groups.entries()].map(([key,rows])=>{const [province,commandery]=key.split("|");return `<div class="clan-group"><h4>${e(province)} · ${e(commandery)}</h4>${rows.map(row=>`<div class="clan-place">
-      <span class="clan-place-name"><button type="button" class="clan-city" data-city-open="${e(row.cityId)}" title="查看所属据点">${e(row.name)}${row.county?"县":"城"}</button>${row.seat?'<i class="clan-badge seat">祖居</i>':""}${row.branch?'<i class="clan-badge branch">支脉</i>':""}${row.magistrate?'<i class="clan-badge">出县令</i>':""}</span>
-      <span class="clan-share"><i style="width:${Math.round(row.share*100/.7)}%"></i></span><small>${Math.round(row.share*100)}% · 依附 ${n(row.dependents)}</small>${ClanUI.forceTag(state,row.forceId)}</div>`).join("")}</div>`}).join("")||'<p class="empty">已无地产</p>'}</div>`}
+      <span class="clan-place-name"><button type="button" class="clan-city" data-city-open="${e(row.cityId)}" title="查看所属据点">${e(row.name)}${row.county&&!/县$/.test(row.name)?"县":""}</button>${row.seat?'<i class="clan-badge seat">祖居</i>':""}${row.branch?'<i class="clan-badge branch">支脉</i>':""}${row.magistrate?'<i class="clan-badge">出县令</i>':""}</span>
+      <span class="clan-share"><i style="width:${Math.round(row.share*100/.7)}%"></i></span><small title="依附户：城邑 ${n(row.urban)} · 乡里 ${n(row.rural)}">${Math.round(row.share*100)}% · 依附 ${n(row.dependents)}${row.urban&&row.rural?`（城 ${n(row.urban)} · 乡 ${n(row.rural)}）`:""}</small><span>${(row.forceIds||[row.forceId]).map(id=>ClanUI.forceTag(state,id)).join("")}</span></div>`).join("")}</div>`}).join("")||'<p class="empty">已无地产</p>'}</div>`}
 
   // 分布图：陆地底色、各处地产按实控势力着色，圆的大小表示份额，祖居加金框
   static landCache=new WeakMap();
