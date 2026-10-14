@@ -4,7 +4,7 @@ window.SANGUO_DATA = (() => {
     hills:{name:"丘陵",color:"#6c664a",move:2},mountain:{name:"山地",color:"#4d5044",move:3},
     river:{name:"河流（线状）",color:"#4e9dc2",move:2},marsh:{name:"泽地",color:"#526359",move:3},
     desert:{name:"荒漠",color:"#927f55",move:2},grassland:{name:"草原",color:"#71805a",move:1},
-    plateau:{name:"高原",color:"#706b52",move:2},basin:{name:"盆地",color:"#586f48",move:1},
+    plateau:{name:"高原",color:"#706b52",move:2},basin:{name:"盆地",color:"#586f48",move:1},highland:{name:"高平地",color:"#857c56",move:1},
     ocean:{name:"海洋",color:"#263f49",move:99}
   };
   const forces = [

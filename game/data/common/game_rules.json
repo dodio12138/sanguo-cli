@@ -795,7 +795,7 @@
       "crossing_days": 1,
       "capacity": 0.5,
       "frontage": 2,
-      "terrain_cost": {"plains": 1, "grassland": 1, "basin": 1, "river": 1.3, "desert": 1.3, "plateau": 1.4, "forest": 1.5, "hills": 1.6, "marsh": 2.2, "mountain": 2.8}
+      "terrain_cost": {"plains": 1, "grassland": 1, "basin": 1, "highland": 1.1, "river": 1.3, "desert": 1.3, "plateau": 1.4, "forest": 1.5, "hills": 1.6, "marsh": 2.2, "mountain": 2.8}
     }
   },
   "succession": {

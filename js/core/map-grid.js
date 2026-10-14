@@ -2,7 +2,7 @@ window.MapGrid = class MapGrid {
   static SCHEMA=1;
   static DEFAULT_WIDTH=60;
   static DEFAULT_HEIGHT=60;
-  static TERRAIN_ORDER=["plains","grassland","hills","mountain","plateau","basin","desert","forest","marsh","ocean"];
+  static TERRAIN_ORDER=["plains","grassland","hills","mountain","plateau","highland","basin","desert","forest","marsh","ocean"];
   static LAND_SPANS=[[0,31],[0,34],[0,34],[0,33],[0,32],[0,31],[0,29],[0,28],[0,28],[0,28],[0,29],[0,30],[0,30],[0,29],[0,29],[0,29],[0,30],[0,30],[0,30],[0,30],[0,31],[0,31],[0,31],[0,32],[0,33],[0,32],[0,30],[0,28],[0,25],[0,24],[0,23],[0,22]];
   static SEA_EDGE=[31,34,34,33,32,31,29,28,28,28,29,30,30,29,29,29,30,30,30,30,31,31,31,32,33,32,30,28,25,24,23,22];
   static DEFAULT_WATERWAYS=[
@@ -224,7 +224,7 @@ window.MapGrid = class MapGrid {
     if(!inside(from)||!inside(to))return [];
     const layers=MapGrid.layers(map),length=width*height,start=from.y*width+from.x,goal=to.y*width+to.x;
     if(start===goal)return [[from.x,from.y]];
-    const terrainCost={plains:1,grassland:1.08,basin:1.12,hills:1.55,forest:1.8,plateau:2.25,desert:2.7,marsh:3.1,mountain:4.2,ocean:Infinity},riverCells=new Uint8Array(length),waterways=MapGrid.waterways(map).filter(river=>!MapGrid.isCornerRiver(river)),crossings=MapGrid.riverCrossings(map);
+    const terrainCost={plains:1,grassland:1.08,basin:1.12,highland:1.18,hills:1.55,forest:1.8,plateau:2.25,desert:2.7,marsh:3.1,mountain:4.2,ocean:Infinity},riverCells=new Uint8Array(length),waterways=MapGrid.waterways(map).filter(river=>!MapGrid.isCornerRiver(river)),crossings=MapGrid.riverCrossings(map);
     for(const river of waterways)for(let i=1;i<(river.points||[]).length;i++){
       let [x,y]=river.points[i-1], [tx,ty]=river.points[i];
       while(x!==tx||y!==ty){const index=y*width+x;if(index>=0&&index<length)riverCells[index]=1;if(x!==tx)x+=Math.sign(tx-x);else y+=Math.sign(ty-y)}

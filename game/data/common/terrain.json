@@ -11,6 +11,7 @@
     "grassland": { "name": "草原", "color": "#71805a", "move_cost": 1, "defence": 0, "supply": 0.65 },
     "plateau": { "name": "高原", "color": "#706b52", "move_cost": 2, "defence": 0.20, "supply": 0.35 },
     "basin": { "name": "盆地", "color": "#586f48", "move_cost": 1, "defence": 0.05, "supply": 0.90 },
+    "highland": { "name": "高平地", "color": "#857c56", "move_cost": 1, "defence": 0.05, "supply": 0.55 },
     "ocean": { "name": "海洋", "color": "#263f49", "move_cost": 99, "defence": 0, "supply": 0 }
   }
 }
