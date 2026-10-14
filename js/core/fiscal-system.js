@@ -162,7 +162,8 @@ window.FiscalSystem=class FiscalSystem {
   static foodRules(state){return {army_ration:.066,garrison_ration:.05,crop_scale:1,stock_scale:4,...(state?.data?.rules?.balance?.food||{})}}
   static garrisonDailyFood(state,soldiers){return Math.max(0,soldiers||0)*this.foodRules(state).garrison_ration}
   static armyDailyNeed(state,army){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.foodRules(state).army_ration*(GameClock.isDaily(state)?1:10)))}
-  static armyFoodTarget(state,army){return this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?60:6)}
+  // 随军满仓按携粮天数（玩家可调，默认为该军轻松携带的天数）；超出会压低组织度，见 engine/logistics.js。
+  static armyFoodTarget(state,army){const days=state.engine?.armyCarryDays?state.engine.armyCarryDays(army):60;return Math.ceil(this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?days:days/10))}
   static localFoodReserve(state,city,g){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve)}
   static supplyCity(state,army){
     const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
@@ -205,7 +206,9 @@ window.FiscalSystem=class FiscalSystem {
     if(fromCity>0)city.localFood-=fromCity;
     const fromStores=Math.min(need-fromCity,army.stores.food);army.stores.food-=fromStores;
     const fromRegion=city&&need-fromCity-fromStores>0?this.drawRegionalFood(state,city,need-fromCity-fromStores,army.force):0;
-    if(!city&&army.stores.food<need*this.haulRules(state).field_resupply_days/(GameClock.isDaily(state)?1:10)){const anchor=this.fieldAnchor(state,army);if(anchor){const wanted=this.armyFoodTarget(state,army)-army.stores.food,own=Math.min(wanted,Math.max(0,(anchor.localFood||0)-Math.ceil(this.garrisonDailyFood(state,anchor.garrison)*30)));anchor.localFood-=own;army.stores.food+=own+(own<wanted?this.drawRegionalFood(state,anchor,wanted-own,army.force):0);army.stores.lastResupply={turn:state.turn,cityId:anchor.id}}}
+    // 在外军团：大军由补给来源派运粮队实运，轻装在敌境就食（engine/logistics.js）；无引擎时退回旧的就近续运。
+    if(!city&&state.engine?.fieldResupply)state.engine.fieldResupply(state,army,events);
+    else if(!city&&army.stores.food<need*this.haulRules(state).field_resupply_days/(GameClock.isDaily(state)?1:10)){const anchor=this.fieldAnchor(state,army);if(anchor){const wanted=this.armyFoodTarget(state,army)-army.stores.food,own=Math.min(wanted,Math.max(0,(anchor.localFood||0)-Math.ceil(this.garrisonDailyFood(state,anchor.garrison)*30)));anchor.localFood-=own;army.stores.food+=own+(own<wanted?this.drawRegionalFood(state,anchor,wanted-own,army.force):0);army.stores.lastResupply={turn:state.turn,cityId:anchor.id}}}
     const taken=fromCity+fromStores+fromRegion,short=need-taken;
     army.stores.lastConsumption={turn:state.turn,need,taken,fromCity:fromCity+fromRegion,fromRegion,fromStores,short,cityId:city?.id||null,source:short>0?"缺粮":fromCity>=need?"城市粮仓":fromRegion?"郡府调拨":fromStores>=need-fromCity?"随军军仓":"兼取"};
     if(short>0){army.supply=Math.max(0,(army.supply??100)-8);army.morale=Math.max(0,(army.morale??70)-4);if(army.force===state.playerForceId)events.push({phase:"后勤",text:`${army.name}军仓缺粮 ${short}石，补给与士气下降`})}

@@ -520,3 +520,10 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .breakout-officers{display:flex;flex-wrap:wrap;gap:4px 10px;border:1px solid var(--line-dim);padding:6px}
 .breakout-officers label{display:flex;align-items:center;gap:4px;font-size:9px}
 .breakout-officers small{color:var(--muted)}
+
+/* 军团粮道：携粮滑杆与告警 */
+.supply-carry{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:4px 0;color:var(--muted);font-size:10px}
+.supply-carry input{width:100%;accent-color:#c6a15b}
+.supply-carry b{color:#ecd99a}
+.supply-panel b.warn{color:#e09080}
+.supply-panel select,.supply-panel button{border:1px solid var(--line-dim);padding:2px 6px;background:#0b100c;color:#cfc89c;font-size:9px}

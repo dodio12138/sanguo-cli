@@ -9,6 +9,7 @@
     "test-han-court.mjs",
     "test-field-battle.mjs",
     "test-siege-sortie.mjs",
-    "test-court-edicts.mjs"
+    "test-court-edicts.mjs",
+    "test-field-logistics.mjs"
   ]
 }
