@@ -33,10 +33,11 @@ Object.assign(window.RuleEngine.prototype,{
     value-=court.defiance[forceId]||0;if(court.controller&&this.worldWar(state,forceId,court.controller))value=Math.min(value,rules.war_cap);return this.courtClamp(value)},
   courtLegitimacy(state,forceId){const court=state.court,factor=this.courtRules().self_styled_factor;let total=0;for(const item of court.offices)if(item.forceId===forceId)total+=(this.courtOffice(item.office)?.legitimacy||0)*(item.self?factor:1);for(const item of court.titles)if(item.forceId===forceId)total+=(this.courtTitle(item.title)?.legitimacy||0)*(item.self?factor:1);total+=court.merit?.[forceId]||0;return Math.round(total)},
 
-  // 名录维护：人物去世、下野或改投他方时，官职出缺；爵位世袭，由同势力继位君主承袭，否则除国。
-  syncCourtHoldings(state,events=[]){const court=state.court,byId=new Map(this.data.officers.map(officer=>[officer.id,officer]));
-    court.offices=court.offices.filter(item=>{const officer=byId.get(item.officerId);if(officer?.status==="serving"){item.forceId=officer.force;return true}if(officer)events.push({phase:"汉庭",text:`${officer.name}所任${item.variant||this.courtOffice(item.office)?.name||item.office}出缺`});return false});
-    court.titles=court.titles.filter(item=>{const officer=byId.get(item.officerId);if(officer?.status==="serving"){item.forceId=officer.force;return true}const title=this.courtTitle(item.title),force=this.data.forces.find(f=>f.id===item.forceId),heir=title?.hereditary&&force?.ruler&&this.data.officers.find(o=>o.name===force.ruler&&o.force===item.forceId&&o.status==="serving");if(heir&&heir.id!==item.officerId){events.push({phase:"汉庭",text:`${heir.name}袭${item.fief||""}${title.name}`});item.officerId=heir.id;return true}return false})},
+  // 名录维护（每日）：人物去世、被俘、下野或改投他方时官职出缺（负伤者仍在任）；爵位被俘者暂存，
+  // 身死则世袭爵位只由原为君主者传给继位君主（臣下的爵位不传君主），否则除国。
+  syncCourtHoldings(state,events=[]){const court=state.court,byId=new Map(this.data.officers.map(officer=>[officer.id,officer])),inOffice=officer=>["serving","injured"].includes(officer?.status);
+    court.offices=court.offices.filter(item=>{const officer=byId.get(item.officerId);if(inOffice(officer)){item.forceId=officer.force;return true}if(officer)events.push({phase:"汉庭",text:`${officer.name}所任${item.variant||this.courtOffice(item.office)?.name||item.office}出缺`});return false});
+    court.titles=court.titles.filter(item=>{const officer=byId.get(item.officerId);if(inOffice(officer)){item.forceId=officer.force;return true}if(officer?.status==="prisoner")return true;const title=this.courtTitle(item.title),force=this.data.forces.find(f=>f.id===item.forceId),wasRuler=officer&&force&&(force.formerRuler===officer.name||force.ruler===officer.name),heir=title?.hereditary&&wasRuler&&force.ruler&&this.data.officers.find(o=>o.name===force.ruler&&o.force===item.forceId&&o.status==="serving");if(heir&&heir.id!==item.officerId){events.push({phase:"汉庭",text:`${heir.name}袭${item.fief||""}${title.name}`});item.officerId=heir.id;return true}if(officer)events.push({phase:"汉庭",text:`${officer.name}${item.fief||""}${title?.name||""}除国`});return false})},
 
   // 每月重算：维护名录 → 控制力 → 天子威望回归 → 各势力服从（平滑）与名分。挟天子者势力覆灭则天子流离。
   recomputeCourt(state,{immediate=false}={}){const court=state.court;if(!court)return;const rules=this.courtRules();
@@ -45,7 +46,7 @@ Object.assign(window.RuleEngine.prototype,{
     if(!immediate)court.authority=this.courtClamp(court.authority+Math.sign((court.baseline??50)-court.authority)*Math.min(rules.authority_drift,Math.abs((court.baseline??50)-court.authority)));
     for(const [forceId,stance] of Object.entries(court.stances)){if(!this.data.forces.some(force=>force.id===forceId))continue;const target=this.courtObedienceTarget(state,forceId);stance.obedience=immediate?target:this.courtClamp(stance.obedience+(target-stance.obedience)*rules.smoothing);stance.legitimacy=this.courtLegitimacy(state,forceId)}
     for(const forceId of Object.keys(court.defiance)){court.defiance[forceId]=Math.max(0,court.defiance[forceId]-rules.defiance_decay);if(!court.defiance[forceId])delete court.defiance[forceId]}},
-  resolveCourt(state,events){if(!state.court||!GameClock.isMonthEnd(state))return;this.syncCourtHoldings(state,events);this.recomputeCourt(state)},
+  resolveCourt(state,events){if(!state.court)return;this.syncCourtHoldings(state,events);if(GameClock.isMonthEnd(state))this.recomputeCourt(state)},
 
   // 实控区分档与名义区归属，供舆图与汉庭窗口使用。
   courtBand(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";if(court.usurpers.includes(forceId)||this.isCourtRebel?.(state,forceId))return "逆贼";if(forceId===court.controller)return "直辖";const obedience=court.stances[forceId]?.obedience??0,rules=this.courtRules();return obedience>=rules.obey_threshold?"奉诏":obedience>=rules.waver_threshold?"观望":"不奉诏"},
