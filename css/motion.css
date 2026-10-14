@@ -35,7 +35,8 @@ dialog[open] .turn-briefing-body>:nth-child(3){animation-delay:.06s}
 dialog[open] .turn-briefing-body>:nth-child(4){animation-delay:.09s}
 dialog[open] .turn-briefing-body>:nth-child(n+5){animation-delay:.12s}
 
-/* 消息托盘：出现紧急军情时角标闪三下 */
-.message-tray.has-urgent b{animation:ui-badge .6s steps(2,end) 3}
+/* 任务栏（开始按钮、窗口按钮、历法日期、府库、消息、时钟）一律不做动效与渐变：托盘每日刷新，任何动效都会显成闪动。 */
+.main-nav,.main-nav *,.main-nav *::before,.main-nav *::after{animation:none!important;transition:none!important}
+.main-nav button:not(:disabled):active{translate:none}
 
 html.ui-motion-off *,html.ui-motion-off *::before,html.ui-motion-off *::after,html.ui-motion-off dialog::backdrop{animation:none!important;transition:none!important}
