@@ -5,6 +5,7 @@
     "test-route-choice.mjs",
     "test-save-size.mjs",
     "test-scenario-map-store.mjs",
-    "test-scenario-rosters.mjs"
+    "test-scenario-rosters.mjs",
+    "test-han-court.mjs"
   ]
 }

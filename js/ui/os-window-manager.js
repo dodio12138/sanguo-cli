@@ -146,7 +146,7 @@
 
   const primaryDesktopApps=["mapWindow","factionPanel","commandsRailPanel"];
   const ledgerApps={military:["军政","military-affairs"],domestic:["内治","domestic-affairs"],diplomacy:["外交","diplomacy"],intelligence:["情报","intelligence"],officers:["人物","officers"],policy:["政策","policy"]};
-  const archiveApps={battleReportButton:["战报","battle-report"],reportButton:["日报","daily-report"],openChronicleButton:["史官档案","chronicle-archive"]};
+  const archiveApps={battleReportButton:["战报","battle-report"],reportButton:["日报","daily-report"],openChronicleButton:["史官档案","chronicle-archive"],courtButton:["汉庭","han-court"],courtChartButton:["官制图","court-chart"]};
   const advisorApp={id:"app-aiSettingsButton",name:"军师",asset:"ai-advisor"};
   const desktopApps=[...definitions].sort((a,b)=>{const rank=item=>{const index=primaryDesktopApps.indexOf(item.id);return index<0?primaryDesktopApps.length:index};return rank(a)-rank(b)}).map(({id,title,asset})=>({id,name:title,asset})).concat(Object.entries(ledgerApps).map(([kind,[name,asset]])=>({id:`ledger-${kind}`,name,asset})),Object.entries(archiveApps).map(([buttonId,[name,asset]])=>({id:`app-${buttonId}`,name,asset})),advisorApp);
   const defaultIconPositions=Object.fromEntries(desktopApps.map((app,row)=>[app.id,{column:0,row}]));
@@ -260,7 +260,7 @@
   }
 
   function bindDialogs(){
-    const managedIds=new Set(["helpDialog","detailDialog","armyDetailDialog","officerDetailDialog","resourceDetailDialog","reportDialog","chronicleDialog","battleReportDialog","ledgerDialog","commandDialog","plannerDialog","modToolsDialog","mapEditorDialog","aiDialog","saveManagerDialog","gameSettingsDialog","messageCenterDialog"]),tasks=new Map;
+    const managedIds=new Set(["helpDialog","detailDialog","armyDetailDialog","officerDetailDialog","resourceDetailDialog","reportDialog","chronicleDialog","battleReportDialog","ledgerDialog","commandDialog","plannerDialog","modToolsDialog","mapEditorDialog","aiDialog","saveManagerDialog","gameSettingsDialog","messageCenterDialog","courtDialog","courtChartDialog"]),tasks=new Map;
     // 标题取标题栏的文字节点与标题 span，跳过窗口按钮和工具区，免得任务栏显示「_□×」。
     const titleText=handle=>[...(handle?.childNodes||[])].map(node=>node.nodeType===3?node.textContent:node.matches?.("span:not(.os-dialog-buttons):not(.dialog-tools)")?node.textContent:"").join("").trim();
     const syncTask=dialog=>{const button=tasks.get(dialog);if(!button)return;const title=titleText(dialog.querySelector(":scope > .dialog-title"));if(title)button.textContent=title;updateTasks()};

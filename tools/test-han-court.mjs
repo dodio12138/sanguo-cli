@@ -50,4 +50,18 @@ for(const [id,[controller,capital]] of Object.entries(expected)){
   for(const city of game.data.cities)if(city.force==="cao")city.force="neutral";e.recomputeCourt(game);assert.equal(game.court.controller,null);assert.equal(game.court.emperor.status,"wandering");
   console.log("官渡要点通过：袁绍大将军冀州牧 / 宜城亭侯 / 名分排序 / 逆贼分档 / 出缺 / 袭爵 / 天子流离");
 }
+// P1：汉庭窗口四页与官制图（纯字符串渲染）、两张舆图与城市官署三栏的接线
+await import(pathToFileURL(path.join(root,"js/ui/court-ui.js")));
+{const data=await loader.loadScenario("200_guandu"),game=new GameState(structuredClone(data),{playerForceId:"liu"});
+  const overview=CourtUI.render(game,"overview");assert.match(overview,/献帝 刘协/);assert.match(overview,/挟天子者/);assert.match(overview,/不奉挟天子者的诏令|观望|奉诏/);assert(!/马腾/.test(overview.split("在朝重臣")[1]?.split("朝局动向")[0]||""),"在朝重臣只列挟天子者朝中之人");
+  assert.match(CourtUI.render(game,"offices"),/大将军[\s\S]*袁绍/);assert.match(CourtUI.render(game,"offices"),/世家/);
+  const lords=CourtUI.render(game,"lords");assert.match(lords,/<td>.*曹操.*直辖/s);assert((lords.match(/<tr/g)||[]).length>8);
+  assert.match(CourtUI.render(game,"edicts"),/上表朝贡/);
+  const chart=CourtUI.chart(game,new Set(["冀州"]));assert.match(chart,/chart-node is-root/);assert.match(chart,/中央/);assert.match(chart,/地方/);assert.match(chart,/data-chart-province="冀州"/);assert.match(chart,/县令长 · 世家选拔/,"展开州后列诸郡与县（世家）");
+  const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");
+  for(const id of ["courtDialog","courtChartDialog","courtButton","courtChartButton"])assert(html.includes(`id="${id}"`),id);assert.match(html,/data-layer="courtNominal"/);assert.match(html,/data-layer="courtActual"/);
+  assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
+  assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);
+  console.log("汉庭 P1 通过：窗口四页 / 官制图中央地方与州郡县 / 名义实控图层 / 城市官署三栏");
+}
 console.log("汉庭 P0 通过");
