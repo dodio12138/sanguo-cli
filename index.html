@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=df25456342">
   <link rel="stylesheet" href="css/button-states.css?v=1b257558cf">
+  <link rel="stylesheet" href="css/court.css?v=cfa9227637">
   <link rel="stylesheet" href="css/motion.css?v=8b6c8b7279">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
@@ -56,7 +57,7 @@
     </header>
 
     <nav class="main-nav panel-line" aria-label="主菜单">
-      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button><button id="messageCenterButton" class="message-tray" type="button" data-tip="查看紧急与重要消息汇总">消息<b id="messageUnreadCount" hidden>0</b></button>
+      <button id="mapHomeButton" class="active">战略舆图</button><button data-ledger="military">军政</button><button data-ledger="domestic">内治</button><button data-ledger="diplomacy">外交</button><button data-ledger="intelligence">情报</button><button data-ledger="officers">人物</button><button data-ledger="policy">政策</button><button id="courtButton" type="button" data-tip="汉庭：天子、朝局、官爵与诸侯向背">汉庭</button><button id="courtChartButton" type="button" data-tip="汉庭官制图：中央与地方官僚架构">官制</button><button id="battleReportButton">战报</button><button id="reportButton">日报</button><button id="messageCenterButton" class="message-tray" type="button" data-tip="查看紧急与重要消息汇总">消息<b id="messageUnreadCount" hidden>0</b></button>
       <div id="observerControls" class="observer-controls" hidden><button id="observerToggle" type="button" aria-label="继续模拟"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L17 8L9 13Z"/></svg></button><button id="simulationSpeedButton" type="button" class="simulation-speed-button" aria-label="切换模拟速度"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M9 3L15 8L9 13Z"/></svg></button><select id="observerSpeed" aria-label="模拟速度" data-terminal-select="true" hidden><option value="3000" selected>3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></div>
       <div class="nav-end save-tools"><button id="saveButton" data-tip="更新当前档案或另存为新档案">存档</button><button id="loadButton" data-tip="选择已保存的战局">读档</button><button id="gameSettingsButton" data-tip="调整游戏与自动保存设置">设置</button><button id="exitGameButton" data-tip="保存进度并返回主菜单">退出</button><button id="helpButton">帮助</button></div>
     </nav>
@@ -103,7 +104,7 @@
             <button data-layer="political">势力</button>
             <button data-layer="province">州域</button>
             <button data-layer="commandery">郡域</button>
-            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button>
+            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button><button data-layer="courtNominal" data-tip="汉庭名义控制区：奉汉、自立、化外；金边为朝廷所授州牧刺史之州">名义</button><button data-layer="courtActual" data-tip="汉庭实际控制区：按对挟天子者的服从分档">实控</button>
           </div>
           <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
         </div>
@@ -197,6 +198,14 @@
     <div id="battleReportHistory" class="dialog-content report-history"></div>
   </dialog>
 
+  <dialog id="courtDialog" class="wide-dialog court-dialog">
+    <div class="dialog-title"><span>汉庭</span><button data-close="courtDialog">×</button></div>
+    <div id="courtContent" class="dialog-content court-content"></div>
+  </dialog>
+  <dialog id="courtChartDialog" class="wide-dialog court-chart-dialog">
+    <div class="dialog-title"><span>汉庭官制图</span><button data-close="courtChartDialog">×</button></div>
+    <div id="courtChartContent" class="dialog-content court-chart-content"></div>
+  </dialog>
   <dialog id="ledgerDialog" class="wide-dialog">
     <div class="dialog-title"><span id="ledgerTitle">军政档案</span><button data-close="ledgerDialog">×</button></div>
     <div id="ledgerContent" class="dialog-content ledger-content"></div>
@@ -392,40 +401,42 @@
 
   <script src="js/data/command-catalog.js?v=acf2a0c6d1"></script>
   <script src="js/data/game-data.js?v=35f9cdf9c1"></script>
-  <script src="js/data/offline-data.generated.js?v=82a125faea"></script>
-  <script src="js/core/data-loader.js?v=35ae1ee497"></script>
+  <script src="js/data/offline-data.generated.js?v=59b2e3b6bb"></script>
+  <script src="js/core/data-loader.js?v=6cdce0108a"></script>
   <script src="js/core/game-clock.js?v=f26b12b5b8"></script>
   <script src="js/core/simulation-clock.js?v=e1c04e8ed0"></script>
   <script src="js/core/fiscal-system.js?v=5631947bf8"></script>
-  <script src="js/core/rule-engine.js?v=2ee533f706"></script>
+  <script src="js/core/rule-engine.js?v=46081d8abd"></script>
   <script src="js/core/engine/movement.js?v=a979496a3c"></script>
   <script src="js/core/engine/siege.js?v=e4899f2920"></script>
   <script src="js/core/engine/diplomacy.js?v=4b3e8ca120"></script>
   <script src="js/core/engine/events.js?v=8104cb9e2a"></script>
   <script src="js/core/engine/ai.js?v=6e61ce3140"></script>
   <script src="js/core/engine/administration.js?v=1153842be6"></script>
+  <script src="js/core/engine/court.js?v=2b83d2f123"></script>
   <script src="js/core/ai-bridge.js?v=b0c1f4b2aa"></script>
   <script src="js/core/mcp-adapter.js?v=2755278e35"></script>
   <script src="js/core/ai-controller.js?v=d99b172770"></script>
   <script src="js/core/save-library.js?v=8cf1ae0e94"></script>
-  <script src="js/core/game-state.js?v=715359face"></script>
+  <script src="js/core/game-state.js?v=200598af28"></script>
   <script src="js/core/map-grid.js?v=c7d347eb25"></script>
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=1029743e0e"></script>
   <script src="js/core/scenario-officer-store.js?v=00a1f6ae1a"></script>
-  <script src="js/ui/map-view.js?v=3d7ec1e9f8"></script>
+  <script src="js/ui/map-view.js?v=481552080a"></script>
   <script src="js/ui/map-editor-reference.js?v=1abff8a11b"></script>
   <script src="js/ui/map-editor.js?v=8e6f205fec"></script>
   <script src="js/ui/officer-editor.js?v=5a89959de4"></script>
   <script src="js/ui/terminal-select.js?v=ddfadac352"></script>
   <script src="js/ui/fiscal-ui.js?v=e21781cfc0"></script>
+  <script src="js/ui/court-ui.js?v=61e69ab2ed"></script>
   <script src="js/ui/command-planner.js?v=bb058b37b0"></script>
   <script src="js/ui/button-feedback.js?v=4866e2dd45"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
   <script src="js/ui/simulation-speed-control.js?v=286b6b6e76"></script>
   <script src="js/ui/message-center.js?v=a56caaf5e6"></script>
-  <script src="js/ui/app.js?v=05ff40be22"></script>
+  <script src="js/ui/app.js?v=81a54fa1fb"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
-  <script src="js/ui/os-window-manager.js?v=950121cc09"></script>
+  <script src="js/ui/os-window-manager.js?v=00aa036546"></script>
 </body>
 </html>

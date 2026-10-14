@@ -1,0 +1,92 @@
+/* 汉庭窗口、官制图与城市页官署三栏。配色沿用终端主题：底 #101710 / 线 #536044 / 金 #c6a15b / 汉赤 #9a3d33。 */
+.court-dialog{width:min(820px,calc(100vw - 24px));max-width:none}
+.court-chart-dialog{width:min(1180px,calc(100vw - 24px));max-width:none}
+.court-content{display:grid;gap:10px;font-size:10px}
+.court-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-dim);padding-bottom:6px}
+.court-tabs button{border:1px solid var(--line-dim);padding:5px 12px;background:#0b100c;color:var(--muted);font-size:10px;cursor:pointer}
+.court-tabs button.active{border-color:var(--amber);background:#202719;color:#ecd99a}
+.court-tabs .court-chart-link{margin-left:auto;border-color:#786638;color:#dcc575}
+.court-page{display:grid;gap:10px}
+.court-hero{display:grid;grid-template-columns:64px 1fr minmax(180px,240px);gap:12px;align-items:center;border:1px solid #6b4a35;padding:10px;background:linear-gradient(90deg,#2a1512,#121a12 60%)}
+.court-hero h2{margin:2px 0;font:700 18px/1.2 serif;color:#f0dca0}
+.court-hero p{margin:2px 0;color:#b7b28e}
+.court-hero small{color:#c79a6a}
+.court-seal{display:grid;place-items:center;width:58px;height:58px;border:2px solid #e0bd55;background:#7a1f19;color:#f6e2a0;font:700 30px/1 serif;box-shadow:3px 3px 0 #050705}
+.court-gauges,.court-stance{display:grid;gap:6px}
+.court-stance{grid-template-columns:repeat(4,minmax(0,1fr))}
+.court-meter{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px;border:1px solid var(--line-dim);padding:5px 7px;background:#0b100c}
+.court-meter span{color:var(--muted)}
+.court-meter i{height:6px;background:#1a2418;border:1px solid #30392c}
+.court-meter i b{display:block;height:100%;background:var(--green)}
+.court-meter.gold i b{background:#c6a15b}
+.court-meter.red i b{background:#9a3d33}
+.court-meter strong{color:#ecd99a;font-size:11px}
+.court-meter:not(:has(i)){grid-template-columns:auto 1fr}
+.court-meter:not(:has(i)) strong{text-align:right}
+.court-identity{margin:0;border-left:3px solid #9a3d33;padding:6px 9px;background:#170f0d;color:#e3cf98}
+.court-block h3{margin:0 0 6px;color:#d8c27c;font-size:11px}
+.court-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}
+.court-office{display:grid;gap:4px;align-content:start;border:1px solid var(--line-dim);padding:6px;background:#0d130e}
+.court-office>small{color:#a9a07a}
+.court-office em{color:#c79a6a;font-style:normal;font-size:9px}
+.court-variant{display:grid;gap:2px}
+.court-holder{display:grid;grid-template-columns:20px 1fr;align-items:center;column-gap:6px;border-left:3px solid var(--force,#59614d);padding:2px 4px;background:#111811}
+.court-holder i{grid-row:span 2;display:grid;place-items:center;width:20px;height:20px;background:var(--force,#59614d);color:#0b0f0c;font:700 11px/1 serif;font-style:normal}
+.court-holder b{color:#e8e1b8;font-weight:600}
+.court-holder small{color:var(--muted);font-size:8px}
+.court-holder.is-self{border-left-style:dashed;opacity:.86}
+.court-vacant{color:#6d7060;font-style:italic}
+.court-note{margin:0;color:#858b76;font-size:9px;line-height:1.6}
+.court-log{margin:0;padding:0;list-style:none;display:grid;gap:3px}
+.court-log small{margin-right:6px;color:var(--muted)}
+.court-table{width:100%;border-collapse:collapse}
+.court-table th,.court-table td{border-bottom:1px solid #222b20;padding:5px 6px;text-align:left}
+.court-table th{color:var(--muted);font-weight:400}
+.court-table td i{display:inline-block;width:8px;height:8px;margin-right:6px;vertical-align:middle}
+.court-table tr.is-own td{background:#1a2214}
+.court-band{padding:1px 5px;border:1px solid currentColor;font-weight:400}
+.band-直辖{color:#e0bd55}.band-奉诏{color:#d0705f}.band-观望{color:#c09a5a}.band-不奉诏{color:#8fa0b6}.band-逆贼{color:#b58ad0}
+.court-edict{display:grid;gap:3px;border:1px solid var(--line-dim);padding:8px;background:#0d130e;color:#cfc89c;text-align:left}
+.court-edict small{color:var(--muted)}
+
+/* 官制图：仿家族树的上下连线，可拖动平移 */
+.court-chart-content{overflow:auto;max-height:min(72vh,720px);cursor:grab;background:radial-gradient(circle at 50% 0,#1a1510,#0a0e0b 70%)}
+.court-chart-content.is-panning{cursor:grabbing;user-select:none}
+.court-chart-tree{display:inline-block;min-width:100%;padding:16px 24px 24px}
+.court-chart-tree ul{position:relative;display:flex;justify-content:center;margin:0;padding:18px 0 0;list-style:none}
+.court-chart-tree li{position:relative;display:flex;flex-direction:column;align-items:center;padding:18px 5px 0}
+.court-chart-tree li::before,.court-chart-tree li::after{content:"";position:absolute;top:0;right:50%;width:50%;height:18px;border-top:1px solid #6e6a4c}
+.court-chart-tree li::after{right:auto;left:50%;border-left:1px solid #6e6a4c}
+.court-chart-tree li:only-child::before,.court-chart-tree li:only-child::after{display:none}
+.court-chart-tree li:only-child{padding-top:0}
+.court-chart-tree li:first-child::before,.court-chart-tree li:last-child::after{border:0}
+.court-chart-tree li:last-child::before{border-right:1px solid #6e6a4c}
+.court-chart-tree ul ul::before{content:"";position:absolute;top:0;left:50%;height:18px;border-left:1px solid #6e6a4c}
+.court-chart-tree>ul{padding-top:0}
+.court-chart-tree>ul>li{padding-top:0}
+.court-chart-tree>ul>li::before,.court-chart-tree>ul>li::after{display:none}
+.chart-node{display:grid;gap:3px;min-width:118px;max-width:150px;border:1px solid #4e5640;padding:5px 6px;background:#101710;box-shadow:2px 2px 0 #050705;font-size:9px;text-align:left}
+.chart-node>small{color:#a9a07a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart-node em{color:#c79a6a;font-style:normal;font-size:8px}
+.chart-node.is-root{min-width:170px;max-width:200px;border-color:#e0bd55;background:#2a1512}
+.chart-node.is-branch{min-width:96px;border-color:#786638;background:#1d1c12;text-align:center}
+.chart-node.is-branch b{color:#ecd99a;font-size:10px}
+.chart-node.is-province{border-color:#6b5a35}
+.chart-node.is-small{min-width:104px;padding:3px 5px}
+.chart-node.is-reserved{border-style:dashed;opacity:.75}
+.chart-toggle{margin-top:2px;border:1px solid #4e5640;padding:2px 4px;background:#0b100c;color:#cfc89c;font-size:8px;cursor:pointer}
+/* 竖排子树（九卿、将军、诸郡）：不再横向铺开 */
+.court-chart-tree ul.chart-vertical{flex-direction:column;align-items:flex-start;gap:4px;margin-left:50%;padding:10px 0 0 10px;border-left:1px solid #6e6a4c}
+.court-chart-tree ul.chart-vertical::before{display:none}
+.court-chart-tree ul.chart-vertical>li{padding:0}
+.court-chart-tree ul.chart-vertical>li::before{display:block;top:12px;right:auto;left:-10px;width:10px;height:0;border:0;border-top:1px solid #6e6a4c}
+.court-chart-tree ul.chart-vertical>li::after{display:none}
+
+/* 城市页官署三栏：州治 / 郡治 / 县治 */
+.bureau-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.bureau-col{display:grid;gap:4px;align-content:start;min-width:0;border:1px solid var(--line-dim);padding:7px;background:#0c120d}
+.bureau-col h4{margin:0 0 3px;padding-bottom:4px;border-bottom:1px solid #2a3326;color:#d8c27c;font-size:10px}
+.bureau-col .office-slot-grid{grid-template-columns:1fr}
+.bureau-col .data-row b small{font-weight:400}
+.bureau-note{margin:2px 0 0;color:#76806a;font-size:8px;line-height:1.5}
+@media (max-width:760px){.bureau-columns,.court-stance{grid-template-columns:1fr}.court-hero{grid-template-columns:48px 1fr}.court-gauges{grid-column:1/-1}}
