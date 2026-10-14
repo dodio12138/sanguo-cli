@@ -13,6 +13,7 @@
     "test-field-logistics.mjs",
     "test-court-crisis.mjs",
     "test-court-history.mjs",
-    "test-population.mjs"
+    "test-population.mjs",
+    "test-force-command.mjs"
   ]
 }
