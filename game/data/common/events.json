@@ -898,7 +898,7 @@
           "li_jue"
         ]
       },
-      "text": "李傕、郭汜相攻于长安，天子乘乱东归，关中大乱。",
+      "text": "李傕、郭汜相攻于长安，天子乘乱东归，流离于河东、洛阳之间，关中大乱。",
       "world": [
         {
           "type": "army",
@@ -914,6 +914,11 @@
           "order": -8,
           "agriculture": -3,
           "note": "三辅残破，司隶民心大乱"
+        },
+        {
+          "type": "court",
+          "op": "release",
+          "city": "luoyang"
         }
       ]
     },
@@ -1910,6 +1915,349 @@
           ],
           "order": -8,
           "note": "邺都人心浮动"
+        }
+      ]
+    },
+    {
+      "id": "dong_moves_capital",
+      "name": "迁都长安",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "190_coalition"
+        ],
+        "once": true,
+        "date_from": "190-02",
+        "date_to": "190-08",
+        "cities_owned": {
+          "luoyang": "dong",
+          "changan": "dong"
+        },
+        "court_controller": "dong"
+      },
+      "text": "董卓惧关东联军，挟天子西迁长安，焚洛阳宫室，驱民数百万西行。",
+      "world": [
+        {
+          "type": "court",
+          "op": "capital",
+          "city": "changan",
+          "control": 10
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "河南尹"
+          ],
+          "order": -15,
+          "agriculture": -5,
+          "food_ratio": 0.7,
+          "note": "洛阳焚毁，河南尹户口流散"
+        }
+      ]
+    },
+    {
+      "id": "cao_receives_emperor",
+      "name": "迎天子都许",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao"
+        ],
+        "date_from": "196-07",
+        "date_to": "197-06",
+        "court_controller": null,
+        "forces_alive": [
+          "cao"
+        ]
+      },
+      "text": "天子东归洛阳，宫室残破。曹操用荀彧之谋奉迎天子，迁都于许。",
+      "world": [
+        {
+          "type": "court",
+          "op": "receive",
+          "force": "cao",
+          "city": "xuchang",
+          "control": 45
+        }
+      ]
+    },
+    {
+      "id": "yuan_shu_emperor",
+      "name": "袁术称帝",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "194_puyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "yuan_shu"
+        ],
+        "date_from": "197-01",
+        "date_to": "197-08",
+        "forces_alive": [
+          "yuan_shu"
+        ],
+        "court_dynasty": false
+      },
+      "text": "袁术得传国玺，自以为应谶，僭号于寿春，置公卿、祠南北郊，天下离心。",
+      "world": [
+        {
+          "type": "court",
+          "op": "proclaim",
+          "force": "yuan_shu",
+          "rank": "emperor"
+        }
+      ]
+    },
+    {
+      "id": "girdle_edict",
+      "name": "衣带诏事泄",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu"
+        ],
+        "once": true,
+        "date_from": "200-01",
+        "date_to": "200-03",
+        "forces_alive": [
+          "cao",
+          "liu"
+        ],
+        "court_controller": "cao"
+      },
+      "text": "车骑将军董承称受天子衣带中密诏，与种辑、王子服等谋诛曹操，事泄，皆夷三族。",
+      "world": [
+        {
+          "type": "court",
+          "op": "control",
+          "delta": 5,
+          "authority": -3
+        },
+        {
+          "type": "relation",
+          "a": "cao",
+          "b": "liu",
+          "delta": -20
+        }
+      ]
+    },
+    {
+      "id": "cao_duke_of_wei",
+      "name": "魏公加九锡",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu",
+          "208_red_cliffs",
+          "211_tongguan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao"
+        ],
+        "date_from": "213-05",
+        "date_to": "214-12",
+        "court_controller": "cao",
+        "court_dynasty": false,
+        "court_promotion": [
+          "cao",
+          1
+        ]
+      },
+      "text": "汉帝策命曹操为魏公，加九锡，以冀州十郡为魏国，置丞相以下群卿百僚。",
+      "world": [
+        {
+          "type": "court",
+          "op": "promote",
+          "force": "cao",
+          "to": "gong"
+        }
+      ]
+    },
+    {
+      "id": "cao_king_of_wei",
+      "name": "进爵魏王",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "200_guandu",
+          "208_red_cliffs",
+          "211_tongguan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao"
+        ],
+        "date_from": "216-05",
+        "date_to": "217-12",
+        "court_controller": "cao",
+        "court_dynasty": false,
+        "court_promotion": [
+          "cao",
+          2
+        ]
+      },
+      "text": "汉帝进魏公曹操爵为魏王，设天子旌旗，出入称警跸。",
+      "world": [
+        {
+          "type": "court",
+          "op": "promote",
+          "force": "cao",
+          "to": "wang"
+        }
+      ]
+    },
+    {
+      "id": "liu_king_of_hanzhong",
+      "name": "汉中王",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "211_tongguan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu"
+        ],
+        "date_from": "219-07",
+        "date_to": "220-06",
+        "cities_owned": {
+          "commandery_city_055": "liu"
+        },
+        "court_dynasty": false
+      },
+      "text": "刘备既得汉中，群下上表汉帝，推刘备为汉中王，还治成都。",
+      "world": [
+        {
+          "type": "court",
+          "op": "proclaim",
+          "force": "liu",
+          "rank": "king",
+          "fief": "汉中"
+        }
+      ]
+    },
+    {
+      "id": "cao_pi_abdication",
+      "name": "曹丕受禅",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs",
+          "211_tongguan",
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao"
+        ],
+        "date_from": "220-10",
+        "date_to": "221-06",
+        "court_controller": "cao",
+        "court_dynasty": false,
+        "court_promotion": [
+          "cao",
+          3
+        ],
+        "officers_serving": {
+          "曹丕": "cao"
+        }
+      },
+      "text": "汉帝以众望在魏，禅位于魏王曹丕，汉祚告终，献帝降封山阳公。",
+      "world": [
+        {
+          "type": "court",
+          "op": "promote",
+          "force": "cao",
+          "to": "abdication"
+        }
+      ]
+    },
+    {
+      "id": "liu_bei_emperor",
+      "name": "刘备称帝",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs",
+          "211_tongguan",
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu"
+        ],
+        "date_from": "221-04",
+        "date_to": "221-12",
+        "forces_alive": [
+          "liu"
+        ],
+        "court_dynasty": true
+      },
+      "text": "传闻献帝遇害，刘备发丧制服，即皇帝位于成都武担之南，以绍汉统。",
+      "world": [
+        {
+          "type": "court",
+          "op": "proclaim",
+          "force": "liu",
+          "rank": "emperor"
+        }
+      ]
+    },
+    {
+      "id": "sun_quan_king_of_wu",
+      "name": "孙权受封吴王",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "208_red_cliffs",
+          "211_tongguan",
+          "219_xiangyang"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "sun"
+        ],
+        "date_from": "221-08",
+        "date_to": "222-06",
+        "forces_alive": [
+          "sun"
+        ],
+        "court_dynasty": true,
+        "officers_serving": {
+          "孙权": "sun"
+        }
+      },
+      "text": "孙权遣使称藩于魏，魏帝曹丕册封孙权为吴王，加九锡。",
+      "world": [
+        {
+          "type": "court",
+          "op": "grant_title",
+          "name": "孙权",
+          "title": "wang",
+          "fief": "吴"
+        },
+        {
+          "type": "relation",
+          "a": "cao",
+          "b": "sun",
+          "delta": 20
         }
       ]
     }
