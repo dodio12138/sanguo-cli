@@ -1559,6 +1559,26 @@
         "force": "li_jue",
         "city": "changan",
         "loyalty": 80
+      },
+      "貂蝉": {
+        "force": "lu_bu",
+        "city": "puyang",
+        "loyalty": 100
+      },
+      "邹氏": {
+        "force": "li_jue",
+        "city": "hongnong",
+        "loyalty": 100
+      },
+      "邢道荣": {
+        "force": "liu_biao",
+        "city": "lingling",
+        "loyalty": 80
+      },
+      "马云禄": {
+        "force": "ma_teng",
+        "city": "tianshui",
+        "loyalty": 100
       }
     },
     "treaties": [{"a": "cao", "b": "lu_bu", "type": "war"}, {"a": "cao", "b": "tao_qian", "type": "war"}, {"a": "tao_qian", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "gongsun", "type": "war"}, {"a": "yuan", "b": "cao", "type": "alliance"}, {"a": "gongsun", "b": "tao_qian", "type": "alliance"}, {"a": "gongsun", "b": "yuan_shu", "type": "alliance"}, {"a": "yuan_shu", "b": "liu_yao", "type": "war"}, {"a": "yuan_shu", "b": "liu_biao", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}, {"a": "li_jue", "b": "ma_teng", "type": "war"}, {"a": "lu_bu", "b": "zhang_yang", "type": "non_aggression"}, {"a": "yuan", "b": "kong_rong", "type": "war"}],

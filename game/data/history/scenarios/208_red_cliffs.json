@@ -1056,6 +1056,151 @@
         "force": "shi_xie",
         "city": "commandery_city_102",
         "loyalty": 100
+      },
+      "夏侯恩": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "夏侯德": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "蔡氏": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 70
+      },
+      "蔡和": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "蔡中": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "王威": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "淳于导": {
+        "force": "cao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "卞氏": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 100
+      },
+      "甄氏": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 100
+      },
+      "蔡琰": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "张春华": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "周仓": {
+        "force": "liu",
+        "city": "xiakou",
+        "loyalty": 100
+      },
+      "糜氏": {
+        "force": "liu",
+        "city": "xiakou",
+        "loyalty": 100
+      },
+      "黄月英": {
+        "force": "liu",
+        "city": "xiakou",
+        "loyalty": 100
+      },
+      "吴国太": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100
+      },
+      "孙尚香": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100
+      },
+      "大乔": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100
+      },
+      "徐氏": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 80
+      },
+      "小乔": {
+        "force": "sun",
+        "city": "chaisang",
+        "loyalty": 100
+      },
+      "太史慈": {
+        "force": "sun",
+        "city": "chaisang",
+        "loyalty": 80
+      },
+      "刘贤": {
+        "force": "liu_du",
+        "city": "lingling",
+        "loyalty": 100
+      },
+      "邢道荣": {
+        "force": "liu_du",
+        "city": "lingling",
+        "loyalty": 80
+      },
+      "陈应": {
+        "force": "zhao_fan",
+        "city": "guiyang",
+        "loyalty": 80
+      },
+      "鲍隆": {
+        "force": "zhao_fan",
+        "city": "guiyang",
+        "loyalty": 80
+      },
+      "樊氏": {
+        "force": "zhao_fan",
+        "city": "guiyang",
+        "loyalty": 80
+      },
+      "巩志": {
+        "force": "jin_xuan",
+        "city": "wuling",
+        "loyalty": 80
+      },
+      "杨龄": {
+        "force": "han_xuan",
+        "city": "changsha",
+        "loyalty": 80
+      },
+      "王异": {
+        "force": "wei_kang",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "马云禄": {
+        "force": "ma_chao",
+        "city": "commandery_city_007",
+        "loyalty": 100
       }
     },
     "treaties": [{"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "liu", "type": "war"}, {"a": "cao", "b": "sun", "type": "war"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}],

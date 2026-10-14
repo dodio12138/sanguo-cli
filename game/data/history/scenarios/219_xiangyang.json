@@ -876,6 +876,113 @@
         "force": "shi_xie",
         "city": "jiaozhi",
         "loyalty": 100
+      },
+      "张鲁": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 70
+      },
+      "蔡琰": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "张春华": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "辛宪英": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "韩德": {
+        "force": "cao",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "王异": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "蒋干": {
+        "force": "cao",
+        "city": "shouchun",
+        "loyalty": 80
+      },
+      "黄月英": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 100
+      },
+      "马云禄": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 100
+      },
+      "张苞": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 100
+      },
+      "孙乾": {
+        "force": "liu",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "周仓": {
+        "force": "liu",
+        "city": "xian_09_04",
+        "loyalty": 100
+      },
+      "胡班": {
+        "force": "liu",
+        "city": "xian_09_04",
+        "loyalty": 80
+      },
+      "关索": {
+        "force": "liu",
+        "city": "xian_09_04",
+        "loyalty": 100
+      },
+      "鲍三娘": {
+        "force": "liu",
+        "city": "xian_09_04",
+        "loyalty": 80
+      },
+      "孙尚香": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 90
+      },
+      "大乔": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100,
+        "deathYear": null
+      },
+      "小乔": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 100,
+        "deathYear": null
+      },
+      "徐氏": {
+        "force": "sun",
+        "city": "jianye",
+        "loyalty": 80
+      },
+      "凌统": {
+        "force": "sun",
+        "city": "pukou",
+        "loyalty": 80
+      },
+      "苏飞": {
+        "force": "sun",
+        "city": "xiakou",
+        "loyalty": 80
       }
     },
     "treaties": [{"a": "cao", "b": "liu", "type": "war"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "non_aggression"}, {"a": "shi_xie", "b": "sun", "type": "alliance"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],

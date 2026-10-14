@@ -248,7 +248,19 @@
       "士壹":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
       "士䵋":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
       "士武":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
-      "周昂":{"force":"zhou_xin","city":"commandery_city_050","loyalty":95}
+      "周昂":{"force":"zhou_xin","city":"commandery_city_050","loyalty":95},
+      "貂蝉":{"force":"dong","city":"luoyang","loyalty":30},
+      "潘凤":{"force":"han_fu","city":"ye","loyalty":80},
+      "武安国":{"force":"kong_rong","city":"beihai","loyalty":80},
+      "方悦":{"force":"wang_kuang","city":"henei","loyalty":80},
+      "张杨":{"force":"wang_kuang","city":"henei","loyalty":60},
+      "穆顺":{"force":"wang_kuang","city":"henei","loyalty":80},
+      "俞涉":{"force":"yuan_shu","city":"wan","loyalty":80},
+      "邹靖":{"force":"liu_yu","city":"ji","loyalty":80},
+      "典韦":{"force":"zhang_miao","city":"chenliu","loyalty":80},
+      "刘氏":{"force":"yuan","city":"nanpi","loyalty":100},
+      "卞氏":{"force":"cao","city":"qiao","loyalty":100},
+      "吴国太":{"force":"sun_jian","city":"changsha","loyalty":100}
     },
     "armies":[
       {"id":"dong_liangzhou","name":"凉州军","force":"dong","city":"luoyang","commander":"董卓","soldiers":26000,"units":{"infantry":13000,"cavalry":10000,"archers":3000},"morale":82,"training":76,"supply":90,"stance":"驻扎"},
