@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "汉庭：官职（职事，有名额可罢免）与爵位（身份，世袭不占名额）分两套。parent 用于官僚架构图；scope 为 central（中央）、province（州，按州一席）、commandery（郡，按郡一席）。legitimacy 为名分点数，自领者折半。剧本初值见 scenarios，人物按姓名匹配。",
+  "note": "汉庭：官职（职事，有名额可罢免）与爵位（身份，世袭不占名额）分两套。parent 用于官僚架构图；scope 为 central（中央）、province（州，按州一席）、commandery（郡，按郡一席）。legitimacy 为名分点数，自领者折半。剧本初值见 scenarios，人物按姓名匹配。 地方官依史实补全：挟天子者所署为朝廷所授；其余诸侯自署或表授未获朝廷承认者记为自领（名分折半）。郡长官称谓按郡名：郡称太守，王国称相，京畿称尹，属国称都尉。",
   "offices": [
     {"id": "xiangguo", "name": "相国", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 40, "duty": "总揽朝政，位在三公之上"},
     {"id": "chengxiang", "name": "丞相", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 40, "duty": "建安十三年复置，罢三公，总领百官"},
@@ -75,9 +75,12 @@
       "han_loyalty": {"dong": 15, "cao": 70, "yuan": 55, "sun_jian": 75, "gongsun": 50, "liu_biao": 75, "yuan_shu": 30, "han_fu": 65, "liu_yu": 95, "tao_qian": 60, "kong_rong": 90, "liu_yan": 45, "liu_dai": 70, "ma_teng": 40, "han_sui": 20, "gongsun_du": 25, "wang_kuang": 70, "kong_zhou": 75, "zhang_miao": 70, "qiao_mao": 80, "yuan_yi": 70, "bao_xin": 75, "zhang_chao": 75, "chen_wen": 65, "zhou_xin": 70, "liu_chong": 90, "shi_xie": 60, "jiao_he": 70},
       "offices": [
         ["xiangguo", "董卓"], ["situ", "杨彪"], ["taipu", "王允"], ["zuojiangjun", "皇甫嵩"], ["zhonglangjiang", "蔡邕", null, "左中郎将"],
-        ["dasima", "刘虞"], ["zhoumu", "刘虞", "幽州"], ["zhoumu", "韩馥", "冀州"], ["zhoumu", "刘焉", "益州"], ["cishi", "刘表", "荆州"], ["cishi", "陶谦", "徐州"], ["cishi", "刘岱", "兖州"], ["cishi", "孔伷", "豫州"], ["cishi", "陈温", "扬州"], ["cishi", "焦和", "青州"],
-        ["houjiangjun", "袁术"], ["taishou", "袁绍", "渤海郡"], ["cheqi", "袁绍", null, null, true], ["zahao", "曹操", null, "奋武将军", true], ["taishou", "孙坚", "长沙郡"], ["zahao", "孙坚", null, "破虏将军", true],
-        ["taishou", "孔融", "北海国"], ["taishou", "王匡", "河内郡"], ["taishou", "张邈", "陈留郡"], ["taishou", "桥瑁", "东郡"], ["taishou", "袁遗", "山阳国"], ["taishou", "鲍信", "济北国"], ["taishou", "张超", "广陵郡"], ["taishou", "周昕", "丹阳郡"], ["taishou", "公孙度", "辽东郡"], ["taishou", "士燮", "交趾郡"], ["zhonglangjiang", "公孙瓒"]
+        ["dasima", "刘虞"], ["zhoumu", "刘虞", "幽州"], ["zhoumu", "韩馥", "冀州"], ["zhoumu", "刘焉", "益州"], ["cishi", "刘表", "荆州"],
+        ["cishi", "陶谦", "徐州"], ["cishi", "刘岱", "兖州"], ["cishi", "孔伷", "豫州"], ["cishi", "陈温", "扬州"], ["cishi", "焦和", "青州"],
+        ["houjiangjun", "袁术"], ["taishou", "袁绍", "渤海郡"], ["cheqi", "袁绍", null, null, true], ["zahao", "曹操", null, "奋武将军", true], ["taishou", "孙坚", "长沙郡"],
+        ["zahao", "孙坚", null, "破虏将军", true], ["taishou", "孔融", "北海国"], ["taishou", "王匡", "河内郡"], ["taishou", "张邈", "陈留郡"], ["taishou", "桥瑁", "东郡"],
+        ["taishou", "袁遗", "山阳国"], ["taishou", "鲍信", "济北国"], ["taishou", "张超", "广陵郡"], ["taishou", "周昕", "丹阳郡"], ["taishou", "公孙度", "辽东郡"],
+        ["taishou", "士燮", "交趾郡"], ["zhonglangjiang", "公孙瓒"]
       ],
       "titles": [["xianhou", "董卓", "郿"], ["wang", "刘宠", "陈"]]
     },
@@ -87,10 +90,14 @@
       "capital": "changan", "controller": "li_jue", "authority": 40, "control": 60,
       "han_loyalty": {"li_jue": 10, "cao": 60, "lu_bu": 35, "tao_qian": 60, "liu": 90, "yuan": 50, "gongsun": 45, "yuan_shu": 25, "liu_biao": 70, "liu_zhang": 55, "zhang_lu": 30, "kong_rong": 90, "ma_teng": 50, "han_sui": 30, "gongsun_du": 20, "liu_yao": 85, "wang_lang": 80, "zhang_yang": 75, "zhang_yan": 20, "liu_chong": 90, "shi_xie": 60, "handan_shang": 60},
       "offices": [
-        ["cheqi", "李傕"], ["sili", "李傕"], ["houjiangjun", "郭汜"], ["youjiangjun", "樊稠"], ["zhenjiangjun", "张济", null, "镇东将军"], ["taiwei", "杨彪"], ["taichang", "皇甫嵩"],
-        ["zhoumu", "陶谦", "徐州"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"], ["qianjiangjun", "公孙瓒"], ["zuojiangjun", "袁术"], ["zhengjiangjun", "马腾", null, "征西将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"],
-        ["zhoumu", "刘璋", "益州"], ["cishi", "刘繇", "扬州"], ["taishou", "王朗", "会稽郡"], ["taishou", "张杨", "河内郡"], ["zahao", "张杨", null, "安国将军"], ["zahao", "吕布", null, "奋威将军"], ["taishou", "孔融", "北海国"], ["taishou", "士燮", "交趾郡"], ["cishi", "邯郸商", "凉州"],
-        ["zhoumu", "袁绍", "冀州", null, true], ["zhoumu", "曹操", "兖州", null, true], ["cishi", "刘备", "豫州", null, true], ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "张邈", "陈留郡"]
+        ["cheqi", "李傕"], ["sili", "李傕"], ["houjiangjun", "郭汜"], ["youjiangjun", "樊稠"], ["zhenjiangjun", "张济", null, "镇东将军"],
+        ["taiwei", "杨彪"], ["taichang", "皇甫嵩"], ["zhoumu", "陶谦", "徐州"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"],
+        ["qianjiangjun", "公孙瓒"], ["zuojiangjun", "袁术"], ["zhengjiangjun", "马腾", null, "征西将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["zhoumu", "刘璋", "益州"],
+        ["cishi", "刘繇", "扬州"], ["taishou", "王朗", "会稽郡"], ["taishou", "张杨", "河内郡"], ["zahao", "张杨", null, "安国将军"], ["zahao", "吕布", null, "奋威将军"],
+        ["taishou", "孔融", "北海国"], ["taishou", "士燮", "交趾郡"], ["cishi", "邯郸商", "凉州"], ["zhoumu", "袁绍", "冀州", null, true], ["zhoumu", "曹操", "兖州", null, true],
+        ["cishi", "刘备", "豫州", null, true], ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "张邈", "陈留郡"], ["cishi", "田楷", "青州", null, true], ["cishi", "单经", "兖州", null, true],
+        ["taishou", "黄祖", "江夏郡", null, true], ["taishou", "韩玄", "长沙郡", null, true], ["taishou", "庞羲", "巴西郡", null, true], ["taishou", "张肃", "广汉郡", null, true], ["taishou", "陈纪", "九江郡", null, true],
+        ["taishou", "朱皓", "豫章郡"], ["taishou", "许贡", "吴郡"], ["taishou", "骆俊", "陈郡"]
       ],
       "titles": [["xianhou", "李傕", "池阳"], ["xianhou", "郭汜", "美阳"], ["xianhou", "陶谦", "溧阳"], ["xianhou", "刘表", "成武"], ["xianhou", "公孙瓒", "易"], ["xianhou", "袁术", "阳翟"], ["xianhou", "吕布", "温"], ["wang", "刘宠", "陈"]]
     },
@@ -100,10 +107,17 @@
       "capital": "xuchang", "controller": "cao", "authority": 55, "control": 70,
       "han_loyalty": {"cao": 55, "yuan": 40, "liu": 90, "liu_biao": 65, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "ma_teng": 50, "han_sui": 35, "gongsun_du": 20, "shi_xie": 60, "zhang_jin": 60, "handan_shang": 65, "zhang_meng": 50, "wei_duan": 75},
       "offices": [
-        ["sikong", "曹操"], ["cheqi", "曹操"], ["shangshuling", "荀彧"], ["shaofu", "孔融"], ["sili", "钟繇"], ["zahao", "张绣", null, "扬武将军"], ["zhonglangjiang", "张辽"],
-        ["dajiangjun", "袁绍"], ["zhoumu", "袁绍", "冀州"], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "豫州"], ["zahao", "孙策", null, "讨逆将军"], ["taishou", "孙策", "会稽郡"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"],
-        ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["qianjiangjun", "马腾"], ["zhenjiangjun", "韩遂", null, "镇西将军"],
-        ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "士燮", "交趾郡"], ["cishi", "张津", "交州"], ["zhoumu", "韦端", "凉州"], ["taishou", "张猛", "武威郡"]
+        ["sikong", "曹操"], ["cheqi", "曹操"], ["shangshuling", "荀彧"], ["shaofu", "孔融"], ["sili", "钟繇"],
+        ["zahao", "张绣", null, "扬武将军"], ["zhonglangjiang", "张辽"], ["dajiangjun", "袁绍"], ["zhoumu", "袁绍", "冀州"], ["zuojiangjun", "刘备"],
+        ["zhoumu", "刘备", "豫州"], ["zahao", "孙策", null, "讨逆将军"], ["taishou", "孙策", "会稽郡"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"],
+        ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["qianjiangjun", "马腾"],
+        ["zhenjiangjun", "韩遂", null, "镇西将军"], ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "士燮", "交趾郡"], ["cishi", "张津", "交州"], ["zhoumu", "韦端", "凉州"],
+        ["taishou", "张猛", "武威郡"], ["cishi", "刘馥", "扬州"], ["taishou", "夏侯惇", "河南尹"], ["taishou", "满宠", "汝南郡"], ["taishou", "刘延", "东郡"],
+        ["taishou", "魏种", "河内郡"], ["taishou", "王邑", "河东郡"], ["taishou", "吕虔", "泰山郡"], ["taishou", "程昱", "济阴国"], ["taishou", "糜芳", "彭城国"],
+        ["taishou", "陈登", "广陵郡"], ["cishi", "袁谭", "青州", null, true], ["cishi", "袁熙", "幽州", null, true], ["cishi", "高干", "并州", null, true], ["taishou", "关羽", "下邳国", null, true],
+        ["taishou", "黄祖", "江夏郡", null, true], ["taishou", "韩玄", "长沙郡", null, true], ["taishou", "孙贲", "豫章郡", null, true], ["taishou", "孙辅", "庐陵郡", null, true], ["taishou", "朱治", "吴郡", null, true],
+        ["taishou", "吴景", "丹阳郡", null, true], ["taishou", "李术", "庐江郡", null, true], ["taishou", "张肃", "广汉郡", null, true], ["taishou", "严颜", "巴郡", null, true], ["taishou", "士壹", "合浦郡", null, true],
+        ["taishou", "士䵋", "九真郡", null, true], ["taishou", "士武", "南海郡", null, true]
       ],
       "titles": [["xianhou", "曹操", "武平"], ["xianhou", "袁绍", "邺"], ["tinghou", "刘备", "宜城"], ["xianhou", "孙策", "吴"], ["xianhou", "刘表", "成武"], ["xianghou", "马腾", "槐里"], ["guanneihou", "张辽"]]
     },
@@ -113,10 +127,15 @@
       "capital": "xuchang", "controller": "cao", "authority": 50, "control": 80,
       "han_loyalty": {"cao": 45, "liu": 90, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "gongsun_kang": 25, "han_xuan": 60, "liu_du": 60, "zhao_fan": 55, "jin_xuan": 65, "ma_chao": 40, "han_sui": 35, "zhang_meng": 50, "wei_kang": 75, "shi_xie": 60, "wu_ju": 55},
       "offices": [
-        ["chengxiang", "曹操"], ["shangshuling", "荀彧"], ["sili", "钟繇"], ["weiwei", "马腾"], ["zahao", "夏侯惇", null, "伏波将军"], ["zahao", "张辽", null, "荡寇将军"], ["zahao", "于禁", null, "虎威将军"], ["zahao", "程昱", null, "奋武将军"],
-        ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "豫州"], ["cishi", "刘琦", "荆州", null, true], ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"],
+        ["chengxiang", "曹操"], ["shangshuling", "荀彧"], ["sili", "钟繇"], ["weiwei", "马腾"], ["zahao", "夏侯惇", null, "伏波将军"],
+        ["zahao", "张辽", null, "荡寇将军"], ["zahao", "于禁", null, "虎威将军"], ["zahao", "程昱", null, "奋武将军"], ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"],
+        ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "豫州"], ["cishi", "刘琦", "荆州", null, true], ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"],
         ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["zahao", "马超", null, "偏将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["taishou", "公孙康", "辽东郡"],
-        ["taishou", "韩玄", "长沙郡"], ["taishou", "赵范", "桂阳郡"], ["taishou", "金旋", "武陵郡"], ["taishou", "刘度", "零陵郡"], ["cishi", "韦康", "凉州"], ["taishou", "张猛", "武威郡"], ["taishou", "士燮", "交趾郡"]
+        ["taishou", "韩玄", "长沙郡"], ["taishou", "赵范", "桂阳郡"], ["taishou", "金旋", "武陵郡"], ["taishou", "刘度", "零陵郡"], ["cishi", "韦康", "凉州"],
+        ["taishou", "张猛", "武威郡"], ["taishou", "士燮", "交趾郡"], ["zhoumu", "曹操", "冀州"], ["cishi", "梁习", "并州"], ["cishi", "刘馥", "扬州"],
+        ["taishou", "杜畿", "河东郡"], ["taishou", "吕虔", "泰山郡"], ["taishou", "李通", "汝南郡"], ["taishou", "王修", "魏郡"], ["taishou", "臧霸", "琅邪国"],
+        ["taishou", "刘琦", "江夏郡", null, true], ["taishou", "孙瑜", "丹阳郡", null, true], ["taishou", "朱治", "吴郡", null, true], ["taishou", "张肃", "广汉郡", null, true], ["taishou", "士壹", "合浦郡", null, true],
+        ["taishou", "士䵋", "九真郡", null, true], ["taishou", "吴巨", "苍梧郡", null, true]
       ],
       "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
     },
@@ -127,8 +146,13 @@
       "han_loyalty": {"cao": 40, "liu": 90, "sun": 40, "liu_zhang": 55, "zhang_lu": 30, "ma_chao": 35, "han_sui": 30, "gongsun_kang": 25, "shi_xie": 55},
       "offices": [
         ["chengxiang", "曹操"], ["shangshuling", "荀彧"], ["sili", "钟繇"], ["weiwei", "马腾"], ["zhonglangjiang", "曹丕", null, "五官中郎将"],
-        ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"], ["cheqi", "孙权", null, null, true], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "荆州", null, true], ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"],
-        ["zahao", "马超", null, "偏将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"]
+        ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"], ["cheqi", "孙权", null, null, true], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "荆州", null, true],
+        ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"], ["zahao", "马超", null, "偏将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"],
+        ["taishou", "张鲁", "汉中郡"], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"], ["zhoumu", "曹操", "冀州"], ["cishi", "梁习", "并州"],
+        ["cishi", "温恢", "扬州"], ["cishi", "韦康", "凉州"], ["taishou", "杜畿", "河东郡"], ["taishou", "贾逵", "恒农郡"], ["taishou", "吕虔", "泰山郡"],
+        ["taishou", "满宠", "汝南郡"], ["taishou", "臧霸", "琅邪国"], ["taishou", "关羽", "襄阳郡", null, true], ["taishou", "廖立", "长沙郡", null, true], ["taishou", "赵云", "桂阳郡", null, true],
+        ["taishou", "张飞", "宜都郡", null, true], ["taishou", "程普", "江夏郡", null, true], ["taishou", "朱治", "吴郡", null, true], ["cishi", "步骘", "交州", null, true], ["taishou", "张肃", "广汉郡", null, true],
+        ["taishou", "董和", "益州郡", null, true], ["taishou", "严颜", "巴郡", null, true], ["taishou", "庞羲", "巴西郡", null, true], ["taishou", "士壹", "合浦郡", null, true], ["taishou", "士䵋", "九真郡", null, true]
       ],
       "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
     },
@@ -139,8 +163,13 @@
       "han_loyalty": {"cao": 20, "liu": 90, "sun": 35, "gongsun_kang": 25, "shi_xie": 55},
       "offices": [
         ["chengxiang", "曹操"], ["zhengjiangjun", "曹仁", null, "征南将军"], ["zhengjiangjun", "张辽", null, "征东将军"], ["zuojiangjun", "于禁"], ["zahao", "徐晃", null, "平寇将军"],
-        ["dasima", "刘备", null, null, true], ["qianjiangjun", "关羽", null, null, true], ["youjiangjun", "张飞", null, null, true], ["houjiangjun", "黄忠", null, null, true],
-        ["cheqi", "孙权", null, null, true], ["zhoumu", "孙权", "徐州", null, true], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"]
+        ["dasima", "刘备", null, null, true], ["qianjiangjun", "关羽", null, null, true], ["youjiangjun", "张飞", null, null, true], ["houjiangjun", "黄忠", null, null, true], ["cheqi", "孙权", null, null, true],
+        ["zhoumu", "孙权", "徐州", null, true], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"], ["cishi", "梁习", "并州"], ["cishi", "温恢", "扬州"],
+        ["cishi", "臧霸", "徐州"], ["taishou", "杜畿", "河东郡"], ["taishou", "贾逵", "恒农郡"], ["taishou", "吕虔", "泰山郡"], ["taishou", "牵招", "雁门郡"],
+        ["taishou", "吕常", "襄阳郡"], ["taishou", "杨阜", "武都郡"], ["zhoumu", "刘备", "益州", null, true], ["zhoumu", "刘备", "荆州", null, true], ["taishou", "魏延", "汉中郡", null, true],
+        ["taishou", "杨洪", "蜀郡", null, true], ["taishou", "糜芳", "南郡", null, true], ["taishou", "郝普", "零陵郡", null, true], ["taishou", "廖立", "巴郡", null, true], ["taishou", "李严", "犍为郡", null, true],
+        ["taishou", "陈震", "汶山郡", null, true], ["taishou", "张飞", "巴西郡", null, true], ["taishou", "孟达", "宜都郡", null, true], ["taishou", "申耽", "上庸郡", null, true], ["taishou", "申仪", "西城郡", null, true],
+        ["taishou", "吕岱", "庐陵郡", null, true], ["cishi", "步骘", "交州", null, true], ["taishou", "朱治", "吴郡", null, true], ["taishou", "士壹", "合浦郡", null, true], ["taishou", "士䵋", "九真郡", null, true]
       ],
       "titles": [["wang", "曹操", "魏"], ["wang", "刘备", "汉中", true], ["xianhou", "公孙康", "襄平"]]
     }

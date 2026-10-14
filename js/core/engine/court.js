@@ -48,10 +48,28 @@ Object.assign(window.RuleEngine.prototype,{
     for(const forceId of Object.keys(court.defiance)){court.defiance[forceId]=Math.max(0,court.defiance[forceId]-rules.defiance_decay);if(!court.defiance[forceId])delete court.defiance[forceId]}},
   resolveCourt(state,events){if(!state.court)return;this.syncCourtHoldings(state,events);if(GameClock.isMonthEnd(state))this.recomputeCourt(state)},
 
+  // 州郡名录：地图郡属州表，加上不在表中但有城池的边郡（按城池所在州归属），供官制图列全实际管辖。名录随地图固定，按城池数组缓存。
+  courtDivisions(){const cities=this.data.cities;if(this._courtDivisions?.cities===cities&&this._courtDivisions.size===cities.length)return this._courtDivisions.map;
+    const table=this.data.map?.commandery_provinces||{},map=new Map(),add=(province,commandery)=>{if(!province||!commandery)return;if(!map.has(province))map.set(province,[]);const list=map.get(province);if(!list.includes(commandery))list.push(commandery)};
+    for(const [commandery,province] of Object.entries(table))add(province,commandery);for(const city of cities)if(city.commandery&&!table[city.commandery]&&city.commandery!=="塞外区域")add(city.province,city.commandery);
+    this._courtDivisions={cities,size:cities.length,map};return map},
+  commanderyProvince(commandery){return this.data.map?.commandery_provinces?.[commandery]||this.data.cities.find(city=>city.commandery===commandery)?.province||""},
+  // 郡治：行政区划所记郡治城，其次郡内等级最高的城
+  commanderySeatCity(commandery){const seat=this.data.administrativeDivisions?.commandery_seats_140?.find(item=>(item.commandery||item.name)===commandery),cities=this.data.cities.filter(city=>city.commandery===commandery&&!city.countyNode),byId=seat?.cityId&&cities.find(city=>city.id===seat.cityId);return byId||cities.find(city=>city.name===seat?.seat)||[...cities].sort((a,b)=>(b.level||1)-(a.level||1)||(b.population||0)-(a.population||0))[0]||null},
+  // 一郡的实际管辖：据城最多的势力、各势力城数、郡治与其治事者
+  // 治事者：实控势力在本郡设有郡守职位（幕府）者取其人，否则取郡治长官
+  commanderyControl(commandery,state=null){const counts=new Map;let total=0;for(const city of this.data.cities){if(city.commandery!==commandery)continue;total++;if(city.force&&city.force!=="neutral")counts.set(city.force,(counts.get(city.force)||0)+1)}
+    const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]),seat=this.commanderySeatCity(commandery),forceId=seat?.force&&seat.force!=="neutral"?seat.force:ranked[0]?.[0]||null,post=state&&forceId&&Object.values(state.forceCommand?.[forceId]?.posts||{}).find(p=>p.kind==="jun"&&p.scope.commanderies?.[0]===commandery),prefect=post&&this.data.officers.find(o=>o.id===post.holderId&&o.force===forceId);return {forceId,forces:ranked,total,seat,governor:prefect?.name||this.cityGovernorName(seat)}},
+  // 城池长官：「—」「普通官员」等为佐吏代理，视作空缺
+  cityGovernorName(city){const name=city?.governor;return name&&!["—","普通官员","无"].includes(name)?name:null},
+  provinceControl(province){const counts=new Map;for(const commandery of this.courtDivisions().get(province)||[]){const forceId=this.commanderyControl(commandery).forceId;if(forceId)counts.set(forceId,(counts.get(forceId)||0)+1)}return [...counts.entries()].sort((a,b)=>b[1]-a[1])},
+  // 郡长官称谓：郡称太守，王国称相，京畿称尹，属国称都尉
+  courtSeatTitle(officeId,seat){const name=seat||"";if(officeId==="taishou")return /尹$/.test(name)?name:/属国$/.test(name)?`${name}都尉`:/国$/.test(name)?`${name}相`:`${name}太守`;if(officeId==="zhoumu")return `${name}牧`;if(officeId==="cishi")return `${name}刺史`;return `${name}${this.courtOffice(officeId)?.name||""}`},
+
   // 实控区分档与名义区归属，供舆图与汉庭窗口使用。
   courtBand(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";if(court.usurpers.includes(forceId)||this.isCourtRebel?.(state,forceId))return "逆贼";if(forceId===court.controller)return "直辖";const obedience=court.stances[forceId]?.obedience??0,rules=this.courtRules();return obedience>=rules.obey_threshold?"奉诏":obedience>=rules.waver_threshold?"观望":"不奉诏"},
   courtNominal(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";return court.usurpers.includes(forceId)?"自立":this.isCourtRebel?.(state,forceId)?"逆贼":"奉汉"},
   courtHoldings(state,forceId){const court=state.court;if(!court)return {offices:[],titles:[]};return {offices:court.offices.filter(item=>item.forceId===forceId),titles:court.titles.filter(item=>item.forceId===forceId)}},
   courtSeatHolder(state,scope,seat){const court=state.court;if(!court)return null;return court.offices.find(item=>item.seat===seat&&this.courtOffice(item.office)?.scope===scope&&!item.self)||court.offices.find(item=>item.seat===seat&&this.courtOffice(item.office)?.scope===scope)||null},
-  courtHoldingLabel(item){const office=item.office?this.courtOffice(item.office):null,title=item.title?this.courtTitle(item.title):null;if(office)return `${item.seat||""}${item.variant||office.name}${item.self?"（自领）":""}`;if(title)return `${item.fief?`${item.fief}${{wang:"王",gong:"公",xianhou:"侯"}[title.id]||title.name}`:title.name}${item.self?"（自称）":""}`;return ""}
+  courtHoldingLabel(item){const office=item.office?this.courtOffice(item.office):null,title=item.title?this.courtTitle(item.title):null;if(office)return `${item.variant?`${item.seat||""}${item.variant}`:this.courtSeatTitle(item.office,item.seat)}${item.self?"（自领）":""}`;if(title)return `${item.fief?`${item.fief}${{wang:"王",gong:"公",xianhou:"侯"}[title.id]||title.name}`:title.name}${item.self?"（自称）":""}`;return ""}
 });
