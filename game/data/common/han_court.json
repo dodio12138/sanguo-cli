@@ -69,6 +69,7 @@
   },
   "scenarios": {
     "190_coalition": {
+      "promotion_fief": {"dong": "郿"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "初平", "status": "controlled"},
       "capital": "luoyang", "controller": "dong", "authority": 50, "control": 70,
       "han_loyalty": {"dong": 15, "cao": 70, "yuan": 55, "sun_jian": 75, "gongsun": 50, "liu_biao": 75, "yuan_shu": 30, "han_fu": 65, "liu_yu": 95, "tao_qian": 60, "kong_rong": 90, "liu_yan": 45, "liu_dai": 70, "ma_teng": 40, "han_sui": 20, "gongsun_du": 25, "wang_kuang": 70, "kong_zhou": 75, "zhang_miao": 70, "qiao_mao": 80, "yuan_yi": 70, "bao_xin": 75, "zhang_chao": 75, "chen_wen": 65, "zhou_xin": 70, "liu_chong": 90, "shi_xie": 60, "jiao_he": 70},
@@ -81,6 +82,7 @@
       "titles": [["xianhou", "董卓", "郿"], ["wang", "刘宠", "陈"]]
     },
     "194_puyang": {
+      "promotion_fief": {"li_jue": "池阳"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "兴平", "status": "controlled"},
       "capital": "changan", "controller": "li_jue", "authority": 40, "control": 60,
       "han_loyalty": {"li_jue": 10, "cao": 60, "lu_bu": 35, "tao_qian": 60, "liu": 90, "yuan": 50, "gongsun": 45, "yuan_shu": 25, "liu_biao": 70, "liu_zhang": 55, "zhang_lu": 30, "kong_rong": 90, "ma_teng": 50, "han_sui": 30, "gongsun_du": 20, "liu_yao": 85, "wang_lang": 80, "zhang_yang": 75, "zhang_yan": 20, "liu_chong": 90, "shi_xie": 60, "handan_shang": 60},
@@ -93,6 +95,7 @@
       "titles": [["xianhou", "李傕", "池阳"], ["xianhou", "郭汜", "美阳"], ["xianhou", "陶谦", "溧阳"], ["xianhou", "刘表", "成武"], ["xianhou", "公孙瓒", "易"], ["xianhou", "袁术", "阳翟"], ["xianhou", "吕布", "温"], ["wang", "刘宠", "陈"]]
     },
     "200_guandu": {
+      "promotion_fief": {"cao": "魏"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
       "capital": "xuchang", "controller": "cao", "authority": 55, "control": 70,
       "han_loyalty": {"cao": 55, "yuan": 40, "liu": 90, "liu_biao": 65, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "ma_teng": 50, "han_sui": 35, "gongsun_du": 20, "shi_xie": 60, "zhang_jin": 60, "handan_shang": 65, "zhang_meng": 50, "wei_duan": 75},
@@ -105,6 +108,7 @@
       "titles": [["xianhou", "曹操", "武平"], ["xianhou", "袁绍", "邺"], ["tinghou", "刘备", "宜城"], ["xianhou", "孙策", "吴"], ["xianhou", "刘表", "成武"], ["xianghou", "马腾", "槐里"], ["guanneihou", "张辽"]]
     },
     "208_red_cliffs": {
+      "promotion_fief": {"cao": "魏"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
       "capital": "xuchang", "controller": "cao", "authority": 50, "control": 80,
       "han_loyalty": {"cao": 45, "liu": 90, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "gongsun_kang": 25, "han_xuan": 60, "liu_du": 60, "zhao_fan": 55, "jin_xuan": 65, "ma_chao": 40, "han_sui": 35, "zhang_meng": 50, "wei_kang": 75, "shi_xie": 60, "wu_ju": 55},
@@ -117,6 +121,7 @@
       "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
     },
     "211_tongguan": {
+      "promotion_fief": {"cao": "魏"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
       "capital": "xuchang", "controller": "cao", "authority": 45, "control": 85,
       "han_loyalty": {"cao": 40, "liu": 90, "sun": 40, "liu_zhang": 55, "zhang_lu": 30, "ma_chao": 35, "han_sui": 30, "gongsun_kang": 25, "shi_xie": 55},
@@ -128,6 +133,7 @@
       "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
     },
     "219_xiangyang": {
+      "promotion_fief": {"cao": "魏"},
       "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
       "capital": "xuchang", "controller": "cao", "authority": 35, "control": 90,
       "han_loyalty": {"cao": 20, "liu": 90, "sun": 35, "gongsun_kang": 25, "shi_xie": 55},

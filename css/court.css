@@ -105,3 +105,6 @@
 .court-pending>span{flex:1;display:grid;gap:2px;color:#cfc89c}
 .court-pending small{color:var(--muted)}
 .court-pending button.danger{border-color:#7a3a30;color:#e09080}
+.court-edict:not(:disabled){cursor:pointer}
+.court-edict:not(:disabled):hover{border-color:#786638}
+.court-edict.danger:not(:disabled){border-color:#6a3a30}
