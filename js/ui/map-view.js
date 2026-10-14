@@ -77,6 +77,10 @@ window.MapView = class MapView {
   // 定位据点：放大到可辨认的比例，并把该据点移到视野中央。
   focusOn(city){if(!city)return;this.setZoom(Math.max(this.scale||1,1.8));const {width,height}=this.state.data.map,cell=this.metrics().cell;this.offset={x:width*cell/2-(city.x+.5)*cell,y:height*cell/2-(city.y+.5)*cell};this.draw()}
   // 规划中的行军路线：规划时隐去该军团现行路线，只显示新方案；关闭规划即清除。
+  // 世家地产标注：focus={name,points:[{x,y,share,seat,color}]}，null 取消
+  setClanFocus(focus=null){this.clanFocus=focus?.points?.length?focus:null;this.draw()}
+  drawClanFocus(c,m){const focus=this.clanFocus;if(!focus)return;c.save();for(const p of focus.points){const x=m.startX+(p.x+.5)*m.cell,y=m.startY+(p.y+.5)*m.cell,r=Math.max(5,m.cell*(.45+Math.sqrt(p.share)*1.4));c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fillStyle=p.color||"#e0bd55";c.globalAlpha=.32;c.fill();c.globalAlpha=1;c.lineWidth=p.seat?3:1.5;c.strokeStyle=p.seat?"#f4d36b":"#e0bd55";c.stroke()}
+    c.font="bold 13px serif";c.textAlign="left";c.fillStyle="#f4d36b";c.strokeStyle="#050705";c.lineWidth=3;const label=`${focus.name} · 地产 ${focus.points.length} 处`;c.strokeText(label,12,22);c.fillText(label,12,22);c.restore()}
   setPlannedRoute(cityIds=[],armyId=null){this.plannedRoute=Array.isArray(cityIds)&&cityIds.length>1?[...cityIds]:[];this.plannedArmyId=this.plannedRoute.length||armyId?armyId:null;this.draw()}
   setLegendVisibility(key,visible){if(visible)this.hiddenLegendItems.delete(key);else this.hiddenLegendItems.add(key);this.invalidateColors();this.draw()}
   legendHidden(key){return this.hiddenLegendItems.has(key)}
@@ -183,7 +187,7 @@ window.MapView = class MapView {
     if(!this.size)return;const c=this.ctx,m=this.metrics(),{width,height}=this.state.data.map,bounds=this.visibleBounds(m),visibleCells=[];for(let y=bounds.minY;y<=bounds.maxY;y++)for(let x=bounds.minX;x<=bounds.maxX;x++)visibleCells.push(this.cells[y*width+x]);c.clearRect(0,0,this.size.w,this.size.h);c.fillStyle="#080d10";c.fillRect(0,0,this.size.w,this.size.h);
     this.ensureColors();c.save();c.beginPath();c.rect(0,0,this.size.w,this.size.h);c.clip();for(const cell of visibleCells){const x=m.startX+cell.x*m.cell,y=m.startY+cell.y*m.cell;c.fillStyle=this.cellColors[cell.y*width+cell.x];c.fillRect(x,y,m.cell+.25,m.cell+.25);if(!this.drag?.moved&&m.cell>=12)this.drawTerrainBlend(c,m,cell)}this.drawAdministrativeEdges(c,m,visibleCells);if(this.state.layer!=="province"&&this.state.layer!=="commandery")this.drawColorEdges(c,m,visibleCells);if(m.cell>=5)this.drawCoastEdges(c,m,visibleCells);
     if(!this.legendHidden("水道"))this.drawWaterways(c,m);if(!this.legendHidden("道路")){this.drawRoutes(c,m);this.drawPlannedRoute(c,m)}this.drawSupplyRoutes(c,m);if(m.cell>15)this.drawLabels(c,m);this.drawCounties(c,m);if(this.state.layer==="commandery"){this.drawCommanderySeats(c,m);this.drawCommanderyLabels(c,m)}this.drawLandmarks(c,m);this.drawPlayerTerritoryOutline(c,m,visibleCells);this.drawCourtOverlay(c,m,visibleCells);
-    this.drawCityNodes(c,m);
+    this.drawCityNodes(c,m);this.drawClanFocus(c,m);
     if(this.state.layer==="intel")this.drawIntel(c,m);
     this.drawSieges(c,m);this.drawBattles(c,m);this.drawArmyRoutes(c,m);this.drawSupplyLines(c,m);this.drawArmies(c,m);
     if(this.hover){const hx=m.startX+this.hover.x*m.cell,hy=m.startY+this.hover.y*m.cell;c.strokeStyle="#fff2a8";c.lineWidth=2;c.strokeRect(hx+1,hy+1,m.cell-2,m.cell-2)}
