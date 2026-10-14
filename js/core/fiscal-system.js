@@ -161,7 +161,7 @@ window.FiscalSystem=class FiscalSystem {
   static startingResources(data,force,prestige=200){const stock={army_ration:.066,stock_scale:4,...(data?.rules?.balance?.food||{})}.stock_scale;return {gold:Math.max(6000,(force?.cities||1)*3000),food:Math.round(Math.max(18000,(force?.soldiers||20000)*.45)*stock),silk:0,prestige}}
   static foodRules(state){return {army_ration:.066,garrison_ration:.05,crop_scale:1,stock_scale:4,...(state?.data?.rules?.balance?.food||{})}}
   static garrisonDailyFood(state,soldiers){return Math.max(0,soldiers||0)*this.foodRules(state).garrison_ration}
-  static armyDailyNeed(state,army){return Math.max(1,Math.ceil(army.soldiers*this.foodRules(state).army_ration*(GameClock.isDaily(state)?1:10)))}
+  static armyDailyNeed(state,army){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0))*this.foodRules(state).army_ration*(GameClock.isDaily(state)?1:10)))}
   static armyFoodTarget(state,army){return this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?60:6)}
   static localFoodReserve(state,city,g){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve)}
   static supplyCity(state,army){
