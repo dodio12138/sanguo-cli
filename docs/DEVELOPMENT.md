@@ -25,14 +25,14 @@
 |---|---|
 | `js/core/` | 领域层：`data-loader.js`（读数据、套剧本、任官与补录人物）、`game-state.js`（状态容器、存档）、`rule-engine.js`（规则引擎核心）、`fiscal-system.js`、`map-grid.js`、`game-clock.js`、AI 桥接与存档库 |
 | `js/core/engine/` | 规则引擎分模块，以 mixin 并入 `RuleEngine.prototype`：行军、攻城、外交、事件、AI、郡县官署、汉庭（含诏令、朝局剧变）、战斗、粮道、户口、世家、幕府。新增模块须同时登记 `RuleEngine.PARTS`、`index.html` 与 `tools/test-report-ui.mjs`、`tools/test-turn-briefing.mjs` 中的引擎文件表 |
-| `js/ui/` | 表现层：`app.js` 启动壳、`app/` 功能模块、舆图（`map-view.js`）、窗口管理（`os-window-manager.js`）、编辑器，以及只出标记的面板类（`CourtUI`、`CommandUI`、`FiscalUI`、`PopulationUI`、`CommandPlanner`） |
+| `js/ui/` | 表现层：`app.js` 启动壳、`app/` 功能模块、舆图（`map-view.js`）、窗口管理（`os-window-manager.js`）、编辑器，以及只出标记的面板类（`CourtUI`、`CommandUI`、`ClanUI`、`FiscalUI`、`PopulationUI`、`CommandPlanner`） |
 | `js/data/` | 浏览器离线镜像，`offline-data.generated.js` 由 `tools/build-offline-data.mjs` 生成，勿手改 |
 | `game/data/` | 正式数据源（规则、剧本、人物、地图、汉庭、世家、任官表） |
 | `tools/` | 构建、发布、校验脚本与 `test-*.mjs` 回归测试 |
 
 ### 界面模块（js/ui/app.js 与 js/ui/app/）
 
-`app.js` 原是 22 万字的单一闭包，2026-10-14 拆为启动壳和 14 个功能模块，行为不变。
+`app.js` 原是 22 万字的单一闭包，2026-10-14 拆为启动壳和 14 个功能模块，行为不变；此后新增的世家窗口为第 15 个。
 
 - **启动壳 `app.js`**（约 4.5 万字）：开局前的设置与存档读取、建 `GameState` 与 `MapView`、资源栏与选区等常驻渲染、命令提交、`advanceTurn` 主循环与模拟时钟、存档管理、全局按钮与快捷键。
 - **功能模块 `app/*.js`**：
@@ -53,6 +53,7 @@
 | `army-detail.js` | 军团档案 | `openArmyDetail`、`armyIntelLevel` |
 | `battle-detail.js` | 战况窗口：围城与野战 | `openBattleDetail`、`openSiegeDetail`、`siegeRows`、`meter` |
 | `officers.js` | 人物档案、人物检索、本剧本名册 | `openOfficerDetail`、`referenceStatus` |
+| `clan-window.js` | 世家窗口接线（标记由 `ClanUI` 出），以及族名 / 人名 / 城池链接的全局代理（`data-clan-open`、`data-officer-open`、`data-city-open`） | `openClan` |
 | `ai-panel.js` | AI 军师面板：连接、建议、审计、托管 | `renderControlMode` |
 
 - **写法**：
@@ -859,6 +860,13 @@ submit_orders()
 - [x] 新增模块注册表 `js/ui/app/registry.js`（`SanguoApp.define / mount / context`）：模块经 `app` 上下文取壳内依赖，导出挂回 `app`；导出重名、模块未载入时挂载即报错。
 - [x] 迁移用 AST 作用域分析逐个改写引用：壳内稳定的名字在模块顶部解构（源码文本基本不变），可变状态与跨模块调用改为 `app.名`；同一行的多条语句整行随迁，紧贴语句的整行注释一并带走。旬报、战报分页计数改归 `reports` 模块。`downloadJson` 因舆图编辑器在挂载前就要用而留在壳内。
 - [x] 测试：新增 `tools/app-source.mjs`，26 个源码静态检查测试改读合并文本；`test-window-navigation.mjs` 改为在 `vm` 中挂载真实模块（档案、规划、据点、军团、战况、人物、命令书）；`test-button-bindings.mjs` 递归扫描 `js/ui/`。
+
+### P79（世家细分到县与世家窗口）
+
+- [x] 世家按「郡望 + 祖居县 + 姓氏」称呼，祖居落到县；地产改为祖居县、本郡近县与史载支脉，族谱 `kin` 覆盖 60 余家。
+- [x] 新增联姻、劝输助饷、徙豪强三项交互与围城内应；世家窗口（名录、详情、族谱图、地产分布图、舆图标注）。
+- [x] 人名、族名、城池在各窗口可点击跳转（全局链接代理），人物档案列族亲（按本人视角称谓）。
+- [x] 详见 `docs/POP_CLAN_PLAN.md` 实施记录；`tools/test-clans.mjs` 把关。
 
 ## 7. 完成标准
 

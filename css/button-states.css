@@ -51,3 +51,6 @@ button:disabled{
 }
 html.ui-motion-off button:not(:disabled):active{translate:none}
 .pop-panel button:disabled{opacity:.45;cursor:not-allowed}
+/* 世家窗口：未开放的详情页签、不满足条件的交互 */
+.clan-content .court-tabs button:disabled{opacity:.45;cursor:default}
+.clan-act:disabled{opacity:.5;cursor:default}
