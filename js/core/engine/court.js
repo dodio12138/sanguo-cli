@@ -10,13 +10,13 @@ Object.assign(window.RuleEngine.prototype,{
   // 新开战局按剧本初值建立朝廷；人物按姓名匹配在任者，名录中找不到的人跳过并记入 court.skipped。
   initCourt(state){const config=this.courtData().scenarios?.[this.data.scenario?.id];if(!config){state.court=null;return null}
     const officerByName=new Map();for(const officer of this.data.officers)if(officer.status==="serving"&&!officerByName.has(officer.name))officerByName.set(officer.name,officer);
-    const court={version:1,emperor:{...config.emperor},capital:config.capital,controller:config.controller||null,authority:config.authority??50,control:config.control??50,baseline:config.authority??50,offices:[],titles:[],stances:{},skipped:[],usurpers:[],defiance:{}};
+    const court={version:1,emperor:{...config.emperor},capital:config.capital,controller:config.controller||null,authority:config.authority??50,control:config.control??50,baseline:config.authority??50,offices:[],titles:[],stances:{},skipped:[],usurpers:[],rebels:[],defiance:{}};
     for(const [office,name,seat=null,variant=null,self=false] of config.offices||[]){const officer=officerByName.get(name);if(!officer||!this.courtOffice(office)){court.skipped.push(`${name}·${variant||this.courtOffice(office)?.name||office}`);continue}court.offices.push({office,seat,variant,officerId:officer.id,forceId:officer.force,self:Boolean(self),grantedTurn:0,grantedBy:self?officer.force:"court"})}
     for(const [title,name,fief=null,self=false] of config.titles||[]){const officer=officerByName.get(name);if(!officer||!this.courtTitle(title)){court.skipped.push(`${name}·${this.courtTitle(title)?.name||title}`);continue}court.titles.push({title,fief,officerId:officer.id,forceId:officer.force,self:Boolean(self),grantedTurn:0,grantedBy:self?officer.force:"court"})}
     for(const force of this.data.forces){if(force.id==="neutral")continue;const loyalty=config.han_loyalty?.[force.id]??50;court.stances[force.id]={hanLoyalty:loyalty,obedience:force.id===court.controller?100:this.courtClamp(loyalty*court.authority/100),legitimacy:0}}
     state.court=court;this.recomputeCourt(state,{immediate:true});return court},
   // 旧存档没有朝廷数据时按剧本初值补建；已有则补齐新增势力。
-  ensureCourt(state){if(!state.court)return this.initCourt(state);const court=state.court;court.offices??=[];court.titles??=[];court.stances??={};court.usurpers??=[];court.defiance??={};for(const force of this.data.forces)if(force.id!=="neutral"&&!court.stances[force.id])court.stances[force.id]={hanLoyalty:50,obedience:this.courtClamp(50*court.authority/100),legitimacy:0};return court},
+  ensureCourt(state){if(!state.court)return this.initCourt(state);const court=state.court;court.offices??=[];court.titles??=[];court.stances??={};court.usurpers??=[];court.rebels??=[];court.defiance??={};for(const force of this.data.forces)if(force.id!=="neutral"&&!court.stances[force.id])court.stances[force.id]={hanLoyalty:50,obedience:this.courtClamp(50*court.authority/100),legitimacy:0};return court},
 
   forceStrength(forceId){let total=0;for(const army of this.data.armies)if(army.force===forceId)total+=army.soldiers||0;for(const city of this.data.cities)if(city.force===forceId)total+=city.garrison||0;return total},
   forceSeat(forceId){const force=this.data.forces.find(item=>item.id===forceId),ruler=force?.ruler&&this.data.officers.find(officer=>officer.name===force.ruler&&officer.force===forceId),city=ruler&&this.data.cities.find(item=>item.id===ruler.city&&item.force===forceId);return city||this.data.cities.find(item=>item.force===forceId)||null},
@@ -24,7 +24,7 @@ Object.assign(window.RuleEngine.prototype,{
 
   // 服从的目标值。底数看「挟天子者的名分」：挟天子者忠汉越低，诏书越像矫诏——忠汉高者越不肯奉，
   // 唯实力是从的势力则仍会屈从；再加与挟天子者的关系、实力比、离都城远近、所受朝廷官职，减去近期抗诏。与挟天子者交战者封顶。
-  courtObedienceTarget(state,forceId){const court=state.court,rules=this.courtRules(),stance=court.stances[forceId];if(!stance)return 0;if(court.usurpers.includes(forceId))return 0;if(forceId===court.controller)return 100;
+  courtObedienceTarget(state,forceId){const court=state.court,rules=this.courtRules(),stance=court.stances[forceId];if(!stance)return 0;if(court.usurpers.includes(forceId)||this.isCourtRebel?.(state,forceId))return 0;if(forceId===court.controller)return 100;
     const loyal=stance.hanLoyalty/100,legit=court.controller?Math.min(1,(court.stances[court.controller]?.hanLoyalty??50)*rules.legit_scale/100):1;
     let value=court.authority*(legit*loyal+(1-legit)*(1-loyal)*rules.pragmatic_weight);
     if(court.controller){value+=this.worldRelation(state,forceId,court.controller)*rules.relation_weight;const own=Math.max(1,this.forceStrength(forceId)),theirs=Math.max(1,this.forceStrength(court.controller));value+=Math.max(-rules.power_cap,Math.min(rules.power_cap,Math.log2(theirs/own)*rules.power_weight))}
@@ -48,8 +48,8 @@ Object.assign(window.RuleEngine.prototype,{
   resolveCourt(state,events){if(!state.court||!GameClock.isMonthEnd(state))return;this.syncCourtHoldings(state,events);this.recomputeCourt(state)},
 
   // 实控区分档与名义区归属，供舆图与汉庭窗口使用。
-  courtBand(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";if(court.usurpers.includes(forceId))return "逆贼";if(forceId===court.controller)return "直辖";const obedience=court.stances[forceId]?.obedience??0,rules=this.courtRules();return obedience>=rules.obey_threshold?"奉诏":obedience>=rules.waver_threshold?"观望":"不奉诏"},
-  courtNominal(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";return court.usurpers.includes(forceId)?"自立":"奉汉"},
+  courtBand(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";if(court.usurpers.includes(forceId)||this.isCourtRebel?.(state,forceId))return "逆贼";if(forceId===court.controller)return "直辖";const obedience=court.stances[forceId]?.obedience??0,rules=this.courtRules();return obedience>=rules.obey_threshold?"奉诏":obedience>=rules.waver_threshold?"观望":"不奉诏"},
+  courtNominal(state,forceId){const court=state.court;if(!court||!forceId||forceId==="neutral")return "化外";return court.usurpers.includes(forceId)?"自立":this.isCourtRebel?.(state,forceId)?"逆贼":"奉汉"},
   courtHoldings(state,forceId){const court=state.court;if(!court)return {offices:[],titles:[]};return {offices:court.offices.filter(item=>item.forceId===forceId),titles:court.titles.filter(item=>item.forceId===forceId)}},
   courtSeatHolder(state,scope,seat){const court=state.court;if(!court)return null;return court.offices.find(item=>item.seat===seat&&this.courtOffice(item.office)?.scope===scope&&!item.self)||court.offices.find(item=>item.seat===seat&&this.courtOffice(item.office)?.scope===scope)||null},
   courtHoldingLabel(item){const office=item.office?this.courtOffice(item.office):null,title=item.title?this.courtTitle(item.title):null;if(office)return `${item.seat||""}${item.variant||office.name}${item.self?"（自领）":""}`;if(title)return `${item.fief?`${item.fief}${{wang:"王",gong:"公",xianhou:"侯"}[title.id]||title.name}`:title.name}${item.self?"（自称）":""}`;return ""}

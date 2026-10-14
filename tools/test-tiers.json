@@ -10,6 +10,7 @@
     "test-field-battle.mjs",
     "test-siege-sortie.mjs",
     "test-court-edicts.mjs",
-    "test-field-logistics.mjs"
+    "test-field-logistics.mjs",
+    "test-court-crisis.mjs"
   ]
 }

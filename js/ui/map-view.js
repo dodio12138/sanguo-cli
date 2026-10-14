@@ -94,7 +94,7 @@ window.MapView = class MapView {
   static MAX_ZOOM=8;
   static DYNAMIC_LAYERS=new Set(["relation","food","officers","courtNominal","courtActual"]);
   // 汉庭两图：名义（是否奉汉）与实控（对挟天子者的服从分档），按郡与势力着色；独立县描边，名义图另为朝廷所授州牧刺史之州描金边。
-  static COURT_NOMINAL_BANDS={奉汉:"#9a3d33",自立:"#6a4a8a",化外:"#3b3d36"};
+  static COURT_NOMINAL_BANDS={奉汉:"#9a3d33",逆贼:"#4a2a5a",自立:"#6a4a8a",化外:"#3b3d36"};
   static COURT_ACTUAL_BANDS={直辖:"#c9a95a",奉诏:"#9a3d33",观望:"#8a6a3c",不奉诏:"#4d5a68",逆贼:"#5a2a6a",化外:"#3b3d36"};
   static COURT_LAYERS=new Set(["courtNominal","courtActual"]);
   courtBandOf(forceId){const engine=this.state.engine;if(!engine?.courtBand||!this.state.court)return "化外";return this.state.layer==="courtNominal"?engine.courtNominal(this.state,forceId):engine.courtBand(this.state,forceId)}
