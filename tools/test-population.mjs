@@ -22,7 +22,7 @@ const sumPops=(place,f)=>(place.pops||[]).filter(f).reduce((n,p)=>n+total(p),0);
 {const {game,e}=fresh(),base=structuredClone(scenario);const places=e.popPlaces();assert(places.every(p=>Array.isArray(p.pops)),"每处有 POP");
   const original=[...base.cities,...base.counties].reduce((n,p)=>n+(p.population||0),0);assert.equal(national(game),original,"开局真实人口不变");
   const raw=places.reduce((n,p)=>n+e.taxBase(game,p),0);assert(Math.abs(raw/original-1)<.03,`税基与原人口偏差 ${(raw/original-1)*100}%`);
-  assert(places.every(p=>p.pops.length<=8),"每处不超过软上限");assert(Object.keys(game.clans.byId).length>=20,"世家已落地");
+  assert(places.every(p=>p.pops.length<=10),"每处不超过软上限");assert(Object.keys(game.clans.byId).length>=20,"世家已落地");
   const xun=places.find(p=>p.name==="颍阴"&&p.pops.some(x=>x[P.CLS]===P.DEP&&x[P.CLAN]==="xun"));assert(xun,"荀氏在颍阴有依附户");
   assert(places.every(p=>p.pops.every(x=>x[P.HH]>0||total(x)===0)),"户数独立存在");console.log(`开局：${places.reduce((n,p)=>n+p.pops.length,0)} 个 POP / 税基系数 ${game.popScale}`)}
 
@@ -69,11 +69,14 @@ const sumPops=(place,f)=>(place.pops||[]).filter(f).reduce((n,p)=>n+total(p),0);
   const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(save));const back=restored.engine.popPlace(place.id);
   assert.deepEqual(back.pops,place.pops,"POP 往返");assert.equal(restored.popScale,game.popScale);assert.deepEqual(restored.clans.byId.xun.presence,game.clans.byId.xun.presence);assert.equal(back.registeredPopulation,place.registeredPopulation,"读档重算缓存")}
 
+// 9b. 旧档补建新增世家：已有世家状态不动；人物挂接出身
+{const {game,e}=fresh(),xun=structuredClone(game.clans.byId.xun);delete game.clans.byId.mi;game.clans.byId.xun.grievance.cao=33;e.ensurePopulation(game);assert(game.clans.byId.mi&&Object.keys(game.clans.byId.mi.presence).length,"补建东海糜氏");assert.equal(game.clans.byId.xun.grievance.cao,33,"已有世家不重置");
+  assert.equal(e.officerClan(game.data.officers.find(o=>o.name==="荀彧"))?.id,"xun");assert.equal(e.officerClan(game.data.officers.find(o=>o.name==="曹豹")),null,"曹豹不入谯县曹氏");assert((game.data.clans||[]).length>=70,"世家扩充")}
 // 10. 界面
 {const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),ui=fs.readFileSync(path.join(root,"js/ui/population-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");
   for(const token of ["PopulationUI.section(state,city)","PopulationUI.bind("])assert(app.includes(token),token);for(const token of ["data-inspect-registry","data-levy-mode","data-clan-action","实有人口","可征丁"])assert(ui.includes(token),token);for(const file of ["engine/population.js","engine/clans.js","ui/population-ui.js"])assert(html.includes(file),file)}
 
 // 11. 两年无头推演：无负数、无 NaN、不碎片化
-{const {game,e}=fresh();game.observerMode=true;for(let i=0;i<730;i++)game.endTurn();const places=e.popPlaces();for(const place of places){assert(place.pops.length<=8,`${place.name} POP 过多`);for(const p of place.pops)for(let i=3;i<=7;i++)assert(Number.isFinite(p[i])&&p[i]>=0,`${place.name} 数值非法`)}
+{const {game,e}=fresh();game.observerMode=true;for(let i=0;i<730;i++)game.endTurn();const places=e.popPlaces();for(const place of places){assert(place.pops.length<=10,`${place.name} POP 过多`);for(const p of place.pops)for(let i=3;i<=7;i++)assert(Number.isFinite(p[i])&&p[i]>=0,`${place.name} 数值非法`)}
   console.log(`两年推演：全国 ${national(game).toLocaleString()} 人 / ${places.reduce((n,p)=>n+p.pops.length,0)} 个 POP / 出生 ${game.popStats.births} 死亡 ${game.popStats.deaths} 征发 ${game.popStats.levied}`)}
 console.log("人口与世家通过：开局与税基持平 / 拆分合并 / 征兵守恒与户留劳力 / 户口分离 / 饥荒依附与流民 / 户籍清查 / 世家关系与操作 / 事件不凭空生人 / 县报与存档 / 界面 / 长推演");

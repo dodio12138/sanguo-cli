@@ -13,10 +13,13 @@ Object.assign(window.RuleEngine.prototype,{
     ai:{court_chance:.1,court_relation:40,court_reserve:4000,inspect_chance:.03},...(this.data.rules?.clans||{})}},
   clanDef(id){return (this.data.clans||[]).find(clan=>clan.id===id)||null},
   clanName(id){return this.clanDef(id)?.name||""},
+  // 人物所属世家：按 clans.json 的成员名单挂接（同名者以名单为准）。
+  officerClan(officer){this._clanMemberIndex??=new Map((this.data.clans||[]).flatMap(clan=>clan.members.map(name=>[name,clan])));return officer?this._clanMemberIndex.get(officer.name)||null:null},
 
   // 开局：按本郡与祖居给出各处地产份额；同一处多家合计不超过上限。
-  initClans(state){const rules=this.clanRules();state.clans={byId:{},inspections:{},levyGrievance:{}};const places=this.popPlaces();
-    for(const clan of this.data.clans||[]){const local=places.filter(place=>place.commandery===clan.commandery);if(!local.length)continue;const named=local.filter(place=>clan.seat&&[place.name,`${place.name}县`].includes(clan.seat)||place.name===`${clan.seat}县`),seats=named.length?named:[local.slice().sort((a,b)=>(b.population||0)-(a.population||0))[0]];
+  // 开局建世家状态；读旧档时只补建档中没有的世家（已有世家的份额、积怨不动）。
+  initClans(state){const rules=this.clanRules();state.clans??={byId:{},inspections:{},levyGrievance:{}};state.clans.byId??={};const places=this.popPlaces();
+    for(const clan of this.data.clans||[]){if(state.clans.byId[clan.id])continue;const local=places.filter(place=>place.commandery===clan.commandery);if(!local.length)continue;const named=local.filter(place=>clan.seat&&[place.name,`${place.name}县`].includes(clan.seat)||place.name===`${clan.seat}县`),seats=named.length?named:[local.slice().sort((a,b)=>(b.population||0)-(a.population||0))[0]];
       const presence={};for(const place of local)presence[place.id]=Math.round((seats.includes(place)?clan.land_share:clan.land_share*rules.other_place_share)*1000)/1000;
       state.clans.byId[clan.id]={presence,wealth:clan.wealth||0,favor:{},grievance:{},courted:{},seatIds:seats.map(place=>place.id)}}
     for(const place of places){const shares=this.clanSharesAt(state,place.id),sum=Object.values(shares).reduce((n,v)=>n+v,0);if(sum>rules.total_share_cap)for(const id of Object.keys(shares)){const presence=state.clans.byId[id].presence;presence[place.id]=Math.round(presence[place.id]*rules.total_share_cap/sum*1000)/1000}}this.clanChanged()},

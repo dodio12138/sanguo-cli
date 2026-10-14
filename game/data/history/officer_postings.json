@@ -1,0 +1,1481 @@
+{
+ "note": "剧本开局的太守、守将与随驻人物：每条 [据点 id, 太守或守将（可空）, 随驻人物, 依据]。只移动该剧本里在任且属同一势力的人物；人物不在名册或势力不符时跳过。未列入的人物若在一城扎堆，由载入器按就近原则派往本方未设太守的郡治（记为推定）。",
+ "family": [
+  "卞氏",
+  "甄氏",
+  "糜氏",
+  "蔡氏",
+  "刘氏",
+  "樊氏",
+  "邹氏",
+  "吴国太",
+  "大乔",
+  "小乔",
+  "徐氏",
+  "黄月英",
+  "张春华",
+  "蔡琰",
+  "貂蝉",
+  "孙尚香",
+  "马云禄",
+  "鲍三娘",
+  "王异",
+  "辛宪英",
+  "祝融"
+ ],
+ "caps": {
+  "capital": 16,
+  "other": 10
+ },
+ "scenarios": {
+  "190_coalition": [
+   {
+    "city": "luoyang",
+    "governor": "董卓",
+    "staff": [
+     "李儒",
+     "李肃",
+     "王允",
+     "杨彪",
+     "蔡邕",
+     "貂蝉",
+     "董旻",
+     "杨定"
+    ],
+    "basis": "董卓专政于洛阳，王允为司徒，蔡邕被征"
+   },
+   {
+    "city": "hongnong",
+    "governor": "牛辅",
+    "staff": [
+     "贾诩",
+     "李傕",
+     "郭汜",
+     "张济"
+    ],
+    "basis": "《李傕传》：卓使婿牛辅屯陕，傕、汜、济皆辅部曲；贾诩为辅讨虏校尉"
+   },
+   {
+    "city": "hulao",
+    "governor": "吕布",
+    "staff": [
+     "高顺",
+     "张辽",
+     "魏续",
+     "宋宪",
+     "侯成",
+     "郝萌",
+     "曹性",
+     "华雄"
+    ],
+    "basis": "演义：吕布守虎牢关，华雄先守汜水关"
+   },
+   {
+    "city": "mengjin",
+    "governor": "徐荣",
+    "staff": [
+     "胡轸"
+    ],
+    "basis": "徐荣败曹操于汴水；胡轸与吕布共击孙坚"
+   },
+   {
+    "city": "xian_23_03",
+    "governor": null,
+    "staff": [
+     "段煨"
+    ],
+    "basis": "段煨屯华阴"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": "皇甫嵩",
+    "staff": [],
+    "basis": "皇甫嵩以左将军屯扶风"
+   },
+   {
+    "city": "changan",
+    "governor": "樊稠",
+    "staff": [
+     "李蒙",
+     "王方"
+    ],
+    "basis": "李傕部将留关中"
+   },
+   {
+    "city": "commandery_city_093",
+    "governor": "刘备",
+    "staff": [
+     "关羽",
+     "张飞",
+     "简雍",
+     "田豫"
+    ],
+    "basis": "刘备依公孙瓒，以别部司马御胡；地图取右北平土垠"
+   },
+   {
+    "city": "commandery_city_048",
+    "governor": "桓阶",
+    "staff": [],
+    "basis": "桓阶长沙临湘人，孙坚举孝廉"
+   },
+   {
+    "city": "xinye",
+    "governor": "文聘",
+    "staff": [],
+    "basis": "文聘为刘表大将，备御北方"
+   },
+   {
+    "city": "commandery_city_092",
+    "governor": "鲜于辅",
+    "staff": [
+     "鲜于银"
+    ],
+    "basis": "鲜于辅、鲜于银为渔阳人，刘虞从事"
+   },
+   {
+    "city": "commandery_city_031",
+    "governor": "陶谦",
+    "staff": [
+     "王朗",
+     "赵昱",
+     "糜竺",
+     "张闿",
+     "笮融"
+    ],
+    "basis": "徐州刺史治郯；王朗为治中，糜竺为别驾"
+   },
+   {
+    "city": "xiapi",
+    "governor": "陈珪",
+    "staff": [
+     "陈登",
+     "孙乾",
+     "糜芳"
+    ],
+    "basis": "陈珪下邳淮浦人"
+   }
+  ],
+  "194_puyang": [
+   {
+    "city": "commandery_city_009",
+    "governor": "陈纪",
+    "staff": [],
+    "basis": "陈纪为袁术九江太守前事汝南"
+   },
+   {
+    "city": "commandery_city_049",
+    "governor": "孙策",
+    "staff": [
+     "程普",
+     "黄盖",
+     "韩当",
+     "朱治",
+     "吕范",
+     "孙河",
+     "蒋钦",
+     "周泰",
+     "陈武",
+     "吕蒙",
+     "鲁肃"
+    ],
+    "basis": "孙策依袁术，收孙坚旧部；鲁肃为东城人，地近阴陵"
+   },
+   {
+    "city": "hefei",
+    "governor": "吴景",
+    "staff": [
+     "孙贲",
+     "周瑜",
+     "刘勋"
+    ],
+    "basis": "吴景、孙贲为刘繇所逐，退屯历阳；地图取合肥"
+   },
+   {
+    "city": "commandery_city_119",
+    "governor": "陈兰",
+    "staff": [
+     "雷薄"
+    ],
+    "basis": "陈兰、雷薄后据灊山"
+   },
+   {
+    "city": "changsha",
+    "governor": "韩玄",
+    "staff": [],
+    "basis": "演义：长沙太守韩玄"
+   },
+   {
+    "city": "commandery_city_057",
+    "governor": "张肃",
+    "staff": [
+     "张任",
+     "刘璝"
+    ],
+    "basis": "张肃为广汉太守；张任、刘璝后守雒"
+   },
+   {
+    "city": "commandery_city_110",
+    "governor": "赵韪",
+    "staff": [],
+    "basis": "赵韪以征东中郎将屯朐忍，备刘表；地图取鱼复"
+   },
+   {
+    "city": "langzhong",
+    "governor": "庞羲",
+    "staff": [],
+    "basis": "庞羲为巴西太守"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": "樊稠",
+    "staff": [],
+    "basis": "樊稠与马腾、韩遂战于长平观"
+   },
+   {
+    "city": "xian_extra_12",
+    "governor": null,
+    "staff": [
+     "张英",
+     "樊能"
+    ],
+    "basis": "刘繇遣樊能、张英屯横江、当利，与牛渚相望"
+   },
+   {
+    "city": "commandery_city_020",
+    "governor": "袁谭",
+    "staff": [
+     "崔琰"
+    ],
+    "basis": "崔琰清河东武城人"
+   }
+  ],
+  "200_guandu": [
+   {
+    "city": "xuchang",
+    "governor": "荀彧",
+    "staff": [
+     "曹操",
+     "郭嘉",
+     "荀攸",
+     "刘晔",
+     "董昭",
+     "毛玠",
+     "陈群",
+     "杨修",
+     "孔融",
+     "王朗",
+     "袁涣",
+     "国渊",
+     "卞氏",
+     "杜袭",
+     "杜畿",
+     "任峻",
+     "司马朗"
+    ],
+    "basis": "荀彧守尚书令居中；曹操在官渡与许都之间"
+   },
+   {
+    "city": "guandu",
+    "governor": "曹洪",
+    "staff": [
+     "许褚",
+     "张辽",
+     "徐晃",
+     "曹纯",
+     "张绣",
+     "胡车儿",
+     "贾诩",
+     "韩浩",
+     "史涣",
+     "曹休"
+    ],
+    "basis": "曹洪守官渡大营；张绣、贾诩新降从征"
+   },
+   {
+    "city": "yanjin",
+    "governor": "于禁",
+    "staff": [
+     "乐进"
+    ],
+    "basis": "于禁守延津，乐进同击袁绍别营"
+   },
+   {
+    "city": "baima",
+    "governor": null,
+    "staff": [
+     "秦琪"
+    ],
+    "basis": "刘延为东郡太守守白马（名册无其人）；秦琪为演义黄河渡口守将"
+   },
+   {
+    "city": "chenliu",
+    "governor": "夏侯渊",
+    "staff": [],
+    "basis": "夏侯渊行督军校尉，曾领陈留、颍川太守"
+   },
+   {
+    "city": "luoyang",
+    "governor": "夏侯惇",
+    "staff": [
+     "韩福",
+     "孟坦"
+    ],
+    "basis": "夏侯惇为河南尹；演义洛阳太守韩福、牙将孟坦"
+   },
+   {
+    "city": "hulao",
+    "governor": null,
+    "staff": [
+     "卞喜",
+     "胡班",
+     "王植"
+    ],
+    "basis": "演义：汜水关卞喜、荥阳王植与从事胡班"
+   },
+   {
+    "city": "commandery_city_008",
+    "governor": null,
+    "staff": [
+     "孔秀"
+    ],
+    "basis": "演义：东岭关孔秀，地近许都"
+   },
+   {
+    "city": "commandery_city_030",
+    "governor": "程昱",
+    "staff": [
+     "李典"
+    ],
+    "basis": "程昱守鄄城，李典屯乘氏，皆属济阴"
+   },
+   {
+    "city": "changan",
+    "governor": "钟繇",
+    "staff": [
+     "卫觊"
+    ],
+    "basis": "钟繇以司隶校尉持节督关中；卫觊使益州道阻，留镇关中"
+   },
+   {
+    "city": "runan",
+    "governor": "满宠",
+    "staff": [
+     "李通",
+     "赵俨",
+     "曹仁"
+    ],
+    "basis": "满宠为汝南太守；李通、赵俨、曹仁抚汝南"
+   },
+   {
+    "city": "commandery_city_027",
+    "governor": "吕虔",
+    "staff": [
+     "臧霸",
+     "孙观",
+     "吴敦",
+     "尹礼"
+    ],
+    "basis": "吕虔为泰山太守；臧霸诸将据青徐，地图归刘备，暂屯泰山"
+   },
+   {
+    "city": "hefei",
+    "governor": "刘馥",
+    "staff": [],
+    "basis": "刘馥为扬州刺史，单马造合肥空城"
+   },
+   {
+    "city": "hongnong",
+    "governor": "段煨",
+    "staff": [],
+    "basis": "段煨屯华阴"
+   },
+   {
+    "city": "ye",
+    "governor": "审配",
+    "staff": [
+     "袁绍",
+     "袁尚",
+     "颜良",
+     "文丑",
+     "郭图",
+     "淳于琼",
+     "沮授",
+     "田丰",
+     "逢纪",
+     "许攸",
+     "荀谌",
+     "陈琳",
+     "高览",
+     "张郃",
+     "李孚",
+     "苏由",
+     "刘氏",
+     "甄氏"
+    ],
+    "basis": "审配总幕府守邺；袁绍主力临黄河"
+   },
+   {
+    "city": "linzi",
+    "governor": "袁谭",
+    "staff": [
+     "王修",
+     "辛评",
+     "辛毗"
+    ],
+    "basis": "袁谭为青州刺史；王修为别驾，辛评兄弟附谭"
+   },
+   {
+    "city": "jinyang",
+    "governor": "高干",
+    "staff": [
+     "郭援",
+     "高柔"
+    ],
+    "basis": "高干为并州刺史；郭援为其甥，高柔为其从弟"
+   },
+   {
+    "city": "commandery_city_020",
+    "governor": "崔琰",
+    "staff": [],
+    "basis": "崔琰清河东武城人，事袁绍为骑都尉"
+   },
+   {
+    "city": "commandery_city_021",
+    "governor": "沮鹄",
+    "staff": [],
+    "basis": "沮鹄为邯郸令"
+   },
+   {
+    "city": "beiping",
+    "governor": "焦触",
+    "staff": [
+     "张南"
+    ],
+    "basis": "焦触、张南为袁熙部将"
+   },
+   {
+    "city": "xiaopei",
+    "governor": "刘备",
+    "staff": [
+     "张飞",
+     "简雍",
+     "孙乾",
+     "赵云",
+     "陈到"
+    ],
+    "basis": "刘备屯小沛"
+   },
+   {
+    "city": "xiapi",
+    "governor": "关羽",
+    "staff": [
+     "糜氏",
+     "刘琰"
+    ],
+    "basis": "关羽守下邳，行太守事"
+   },
+   {
+    "city": "pengcheng",
+    "governor": "糜芳",
+    "staff": [
+     "糜竺"
+    ],
+    "basis": "曹操表糜芳为彭城相"
+   },
+   {
+    "city": "commandery_city_031",
+    "governor": "昌豨",
+    "staff": [],
+    "basis": "昌豨据东海"
+   },
+   {
+    "city": "wu",
+    "governor": "朱治",
+    "staff": [
+     "孙静",
+     "孙河"
+    ],
+    "basis": "朱治为吴郡太守"
+   },
+   {
+    "city": "commandery_city_050",
+    "governor": "吴景",
+    "staff": [
+     "孙瑜",
+     "周泰"
+    ],
+    "basis": "吴景为丹阳太守；周泰为春谷长"
+   },
+   {
+    "city": "yuzhang",
+    "governor": "孙贲",
+    "staff": [
+     "华歆",
+     "韩当"
+    ],
+    "basis": "孙贲为豫章太守；华歆前太守，归孙策；韩当为乐安长"
+   },
+   {
+    "city": "commandery_city_054",
+    "governor": "太史慈",
+    "staff": [],
+    "basis": "太史慈为建昌都尉，治海昏"
+   },
+   {
+    "city": "commandery_city_116",
+    "governor": "孙辅",
+    "staff": [],
+    "basis": "孙辅为庐陵太守"
+   },
+   {
+    "city": "commandery_city_118",
+    "governor": "吕范",
+    "staff": [],
+    "basis": "吕范领彭泽太守"
+   },
+   {
+    "city": "chaisang",
+    "governor": "周瑜",
+    "staff": [
+     "程普"
+    ],
+    "basis": "周瑜以中护军领江夏太守，屯巴丘"
+   },
+   {
+    "city": "jianan",
+    "governor": "贺齐",
+    "staff": [
+     "凌操"
+    ],
+    "basis": "贺齐为南部都尉"
+   },
+   {
+    "city": "kuaiji",
+    "governor": null,
+    "staff": [
+     "虞翻",
+     "董袭",
+     "蒋钦",
+     "顾雍"
+    ],
+    "basis": "会稽太守孙策自领"
+   },
+   {
+    "city": "lujiang",
+    "governor": null,
+    "staff": [
+     "陈武",
+     "黄盖",
+     "孙辅"
+    ],
+    "basis": "陈武庐江人"
+   },
+   {
+    "city": "xiakou",
+    "governor": "黄祖",
+    "staff": [
+     "苏飞",
+     "甘宁"
+    ],
+    "basis": "黄祖为江夏太守"
+   },
+   {
+    "city": "xinye",
+    "governor": "文聘",
+    "staff": [],
+    "basis": "文聘守北境"
+   },
+   {
+    "city": "changsha",
+    "governor": "韩玄",
+    "staff": [
+     "黄忠",
+     "刘磐"
+    ],
+    "basis": "演义：长沙太守韩玄；刘磐、黄忠守攸县"
+   },
+   {
+    "city": "jiangling",
+    "governor": null,
+    "staff": [
+     "向朗"
+    ],
+    "basis": "向朗为临沮长，属南郡"
+   },
+   {
+    "city": "yiling",
+    "governor": "李严",
+    "staff": [],
+    "basis": "李严为秭归长"
+   },
+   {
+    "city": "commandery_city_057",
+    "governor": "张肃",
+    "staff": [
+     "法正",
+     "孟达",
+     "刘璝"
+    ],
+    "basis": "张肃为广汉太守；法正为新都令，孟达同依刘璋"
+   },
+   {
+    "city": "jiangzhou",
+    "governor": "严颜",
+    "staff": [],
+    "basis": "严颜为巴郡太守"
+   },
+   {
+    "city": "zitong",
+    "governor": "张任",
+    "staff": [],
+    "basis": "张任为蜀郡从事，守梓潼"
+   },
+   {
+    "city": "jiameng",
+    "governor": "杨怀",
+    "staff": [
+     "高沛"
+    ],
+    "basis": "杨怀、高沛守白水关"
+   },
+   {
+    "city": "yangping",
+    "governor": "张卫",
+    "staff": [
+     "杨昂",
+     "杨任"
+    ],
+    "basis": "张卫、杨昂守阳平"
+   },
+   {
+    "city": "jincheng",
+    "governor": "成公英",
+    "staff": [
+     "阎行"
+    ],
+    "basis": "阎行、成公英为韩遂部"
+   },
+   {
+    "city": "longxi",
+    "governor": "姜叙",
+    "staff": [],
+    "basis": "姜叙为抚夷将军，屯历城"
+   },
+   {
+    "city": "commandery_city_068",
+    "governor": "赵昂",
+    "staff": [
+     "王异"
+    ],
+    "basis": "赵昂冀人，王异其妻"
+   },
+   {
+    "city": "commandery_city_102",
+    "governor": "士壹",
+    "staff": [],
+    "basis": "士壹为合浦太守"
+   },
+   {
+    "city": "commandery_city_104",
+    "governor": "士䵋",
+    "staff": [],
+    "basis": "士䵋为九真太守"
+   },
+   {
+    "city": "panyu",
+    "governor": "士武",
+    "staff": [],
+    "basis": "士武为南海太守"
+   }
+  ],
+  "208_red_cliffs": [
+   {
+    "city": "xiangyang",
+    "governor": "曹操",
+    "staff": [
+     "荀攸",
+     "贾诩",
+     "刘晔",
+     "蒋干",
+     "杨修",
+     "娄圭",
+     "和洽",
+     "王粲",
+     "蒯越",
+     "韩嵩",
+     "傅巽",
+     "徐庶",
+     "许褚",
+     "曹洪",
+     "张郃",
+     "夏侯渊",
+     "韩浩",
+     "夏侯尚"
+    ],
+    "basis": "曹操下荆州，驻襄阳"
+   },
+   {
+    "city": "jiangling",
+    "governor": "曹仁",
+    "staff": [
+     "牛金",
+     "徐晃",
+     "曹纯",
+     "曹休",
+     "曹真",
+     "蔡瑁",
+     "张允",
+     "蔡和",
+     "蔡中",
+     "文聘",
+     "夏侯恩",
+     "夏侯德",
+     "淳于导"
+    ],
+    "basis": "曹仁守江陵；虎豹骑追至长坂；演义蔡瑁、张允督水军"
+   },
+   {
+    "city": "xian_01_03",
+    "governor": null,
+    "staff": [
+     "张辽",
+     "于禁",
+     "赵俨"
+    ],
+    "basis": "张辽屯长社，于禁屯颍阴，赵俨护七军"
+   },
+   {
+    "city": "xinye",
+    "governor": "乐进",
+    "staff": [],
+    "basis": "乐进屯新野一带"
+   },
+   {
+    "city": "xian_extra_06",
+    "governor": null,
+    "staff": [
+     "满宠"
+    ],
+    "basis": "满宠以奋威将军屯当阳"
+   },
+   {
+    "city": "runan",
+    "governor": "李通",
+    "staff": [],
+    "basis": "李通为汝南太守"
+   },
+   {
+    "city": "ye",
+    "governor": "王修",
+    "staff": [
+     "曹丕",
+     "曹植",
+     "司马懿",
+     "崔琰",
+     "夏侯惇",
+     "国渊",
+     "陈琳",
+     "辛毗",
+     "卞氏",
+     "甄氏",
+     "蔡琰",
+     "张春华",
+     "马腾",
+     "马休",
+     "马铁"
+    ],
+    "basis": "王修为魏郡太守；马腾入为卫尉，家属徙邺"
+   },
+   {
+    "city": "xuchang",
+    "governor": "荀彧",
+    "staff": [
+     "王朗",
+     "华歆",
+     "桓阶",
+     "陈群",
+     "程昱",
+     "董昭",
+     "毛玠",
+     "卫觊",
+     "杜袭"
+    ],
+    "basis": "荀彧守尚书令"
+   },
+   {
+    "city": "changan",
+    "governor": "钟繇",
+    "staff": [
+     "张既"
+    ],
+    "basis": "钟繇镇关中"
+   },
+   {
+    "city": "commandery_city_003",
+    "governor": "杜畿",
+    "staff": [],
+    "basis": "杜畿为河东太守"
+   },
+   {
+    "city": "jinyang",
+    "governor": "梁习",
+    "staff": [],
+    "basis": "梁习为并州刺史"
+   },
+   {
+    "city": "commandery_city_027",
+    "governor": "吕虔",
+    "staff": [],
+    "basis": "吕虔为泰山太守"
+   },
+   {
+    "city": "hefei",
+    "governor": "刘馥",
+    "staff": [
+     "蒋济"
+    ],
+    "basis": "刘馥为扬州刺史，蒋济为别驾"
+   },
+   {
+    "city": "langya",
+    "governor": "臧霸",
+    "staff": [
+     "孙观"
+    ],
+    "basis": "臧霸为琅邪相"
+   },
+   {
+    "city": "xiakou",
+    "governor": "刘琦",
+    "staff": [
+     "刘备",
+     "诸葛亮",
+     "关羽",
+     "关平",
+     "张飞",
+     "赵云",
+     "简雍",
+     "孙乾",
+     "糜竺",
+     "糜芳",
+     "伊籍",
+     "刘封",
+     "糜氏",
+     "黄月英",
+     "陈到"
+    ],
+    "basis": "刘琦为江夏太守；刘备败于长坂，与关羽水军会于夏口"
+   },
+   {
+    "city": "commandery_city_044",
+    "governor": "霍峻",
+    "staff": [
+     "魏延",
+     "周仓",
+     "刘琰"
+    ],
+    "basis": "江夏西陵"
+   },
+   {
+    "city": "chaisang",
+    "governor": "周瑜",
+    "staff": [
+     "鲁肃",
+     "程普",
+     "黄盖",
+     "韩当",
+     "甘宁",
+     "周泰",
+     "蒋钦",
+     "吕蒙",
+     "凌统",
+     "徐盛",
+     "宋谦",
+     "潘璋",
+     "陈武",
+     "董袭",
+     "苏飞",
+     "小乔"
+    ],
+    "basis": "周瑜督军屯柴桑、拒曹于赤壁"
+   },
+   {
+    "city": "commandery_city_050",
+    "governor": "孙瑜",
+    "staff": [],
+    "basis": "孙瑜为丹阳太守"
+   },
+   {
+    "city": "commandery_city_054",
+    "governor": "太史慈",
+    "staff": [],
+    "basis": "太史慈为建昌都尉"
+   },
+   {
+    "city": "kuaiji",
+    "governor": "顾雍",
+    "staff": [
+     "虞翻",
+     "吕岱"
+    ],
+    "basis": "顾雍为会稽丞，行太守事"
+   },
+   {
+    "city": "jianan",
+    "governor": "贺齐",
+    "staff": [],
+    "basis": "贺齐为南部都尉，讨建安"
+   },
+   {
+    "city": "wu",
+    "governor": "朱治",
+    "staff": [
+     "陆逊",
+     "朱然",
+     "孙韶"
+    ],
+    "basis": "朱治为吴郡太守；陆逊屯海昌"
+   },
+   {
+    "city": "commandery_city_057",
+    "governor": "张肃",
+    "staff": [
+     "法正",
+     "孟达"
+    ],
+    "basis": "张肃为广汉太守；法正为新都令"
+   },
+   {
+    "city": "commandery_city_110",
+    "governor": "张裔",
+    "staff": [],
+    "basis": "张裔为鱼复长"
+   },
+   {
+    "city": "longxi",
+    "governor": "姜叙",
+    "staff": [],
+    "basis": "姜叙为抚夷将军，屯历城"
+   },
+   {
+    "city": "commandery_city_068",
+    "governor": "赵昂",
+    "staff": [
+     "王异"
+    ],
+    "basis": "赵昂冀人"
+   },
+   {
+    "city": "commandery_city_102",
+    "governor": "士壹",
+    "staff": [],
+    "basis": "士壹为合浦太守"
+   },
+   {
+    "city": "commandery_city_104",
+    "governor": "士䵋",
+    "staff": [],
+    "basis": "士䵋为九真太守"
+   }
+  ],
+  "211_tongguan": [
+   {
+    "city": "hongnong",
+    "governor": "贾逵",
+    "staff": [
+     "曹操",
+     "曹仁",
+     "许褚",
+     "徐晃",
+     "朱灵",
+     "曹洪",
+     "张郃",
+     "夏侯渊",
+     "典满",
+     "韩德",
+     "荀攸",
+     "贾诩",
+     "钟繇",
+     "张既",
+     "郭淮",
+     "曹休",
+     "曹真",
+     "娄圭",
+     "高柔",
+     "刘晔",
+     "杨修",
+     "韩浩",
+     "赵俨"
+    ],
+    "basis": "曹操西征，大军集于潼关之东；贾逵为弘农太守；演义娄子伯献沙土冻城"
+   },
+   {
+    "city": "ye",
+    "governor": "曹丕",
+    "staff": [
+     "程昱",
+     "国渊",
+     "司马懿",
+     "崔琰",
+     "毛玠",
+     "陈群",
+     "陈矫",
+     "桓阶",
+     "王朗",
+     "王修",
+     "曹植",
+     "曹彰",
+     "卞氏",
+     "甄氏",
+     "张春华",
+     "蔡琰",
+     "袁涣",
+     "和洽",
+     "田畴",
+     "刘勋",
+     "马腾",
+     "马休",
+     "马铁",
+     "夏侯尚"
+    ],
+    "basis": "曹丕为五官中郎将，留守邺；程昱参其军事，国渊为居府长史统留事"
+   },
+   {
+    "city": "xuchang",
+    "governor": "荀彧",
+    "staff": [
+     "华歆",
+     "金祎",
+     "蒯越",
+     "卫觊",
+     "徐庶",
+     "董昭"
+    ],
+    "basis": "荀彧守尚书令"
+   },
+   {
+    "city": "xiangyang",
+    "governor": "乐进",
+    "staff": [
+     "牛金"
+    ],
+    "basis": "乐进守襄阳"
+   },
+   {
+    "city": "commandery_city_027",
+    "governor": "吕虔",
+    "staff": [],
+    "basis": "吕虔为泰山太守"
+   },
+   {
+    "city": "jiangling",
+    "governor": "关羽",
+    "staff": [
+     "关平",
+     "周仓",
+     "胡班",
+     "赵累",
+     "潘濬",
+     "糜芳",
+     "杨仪",
+     "廖化"
+    ],
+    "basis": "关羽为襄阳太守、荡寇将军，驻江北"
+   },
+   {
+    "city": "xian_extra_08",
+    "governor": null,
+    "staff": [
+     "刘备",
+     "庞统",
+     "黄忠",
+     "魏延",
+     "霍峻",
+     "刘封",
+     "孙尚香",
+     "伊籍",
+     "简雍",
+     "孙乾",
+     "糜竺",
+     "马良",
+     "黄月英",
+     "刘琰",
+     "陈到",
+     "冯习",
+     "傅彤",
+     "傅士仁"
+    ],
+    "basis": "刘备领荆州牧，治公安；入蜀前夕"
+   },
+   {
+    "city": "changsha",
+    "governor": "廖立",
+    "staff": [
+     "诸葛亮",
+     "陈震"
+    ],
+    "basis": "廖立为长沙太守；诸葛亮督零陵、桂阳、长沙三郡"
+   },
+   {
+    "city": "guiyang",
+    "governor": "赵云",
+    "staff": [
+     "赵范",
+     "樊氏"
+    ],
+    "basis": "赵云为桂阳太守"
+   },
+   {
+    "city": "commandery_city_125",
+    "governor": "张飞",
+    "staff": [],
+    "basis": "张飞为宜都太守"
+   },
+   {
+    "city": "yiling",
+    "governor": "向朗",
+    "staff": [],
+    "basis": "向朗督秭归、夷道、巫、夷陵四县"
+   },
+   {
+    "city": "lingling",
+    "governor": null,
+    "staff": [
+     "蒋琬",
+     "马谡"
+    ],
+    "basis": "零陵郡"
+   },
+   {
+    "city": "xiakou",
+    "governor": "程普",
+    "staff": [
+     "孙皎",
+     "苏飞"
+    ],
+    "basis": "程普领江夏太守"
+   },
+   {
+    "city": "commandery_city_044",
+    "governor": "甘宁",
+    "staff": [],
+    "basis": "甘宁领西陵太守"
+   },
+   {
+    "city": "commandery_city_118",
+    "governor": "吕范",
+    "staff": [
+     "蒋钦"
+    ],
+    "basis": "吕范领彭泽太守"
+   },
+   {
+    "city": "pukou",
+    "governor": "董袭",
+    "staff": [
+     "陈武",
+     "周泰"
+    ],
+    "basis": "濡须"
+   },
+   {
+    "city": "cangwu",
+    "governor": "步骘",
+    "staff": [
+     "薛综"
+    ],
+    "basis": "步骘为交州刺史"
+   },
+   {
+    "city": "kuaiji",
+    "governor": "顾雍",
+    "staff": [
+     "朱桓",
+     "留赞"
+    ],
+    "basis": "顾雍为会稽丞；朱桓为余姚长"
+   },
+   {
+    "city": "wu",
+    "governor": "朱治",
+    "staff": [
+     "陆逊",
+     "陆绩",
+     "全琮",
+     "骆统",
+     "孙韶",
+     "吾粲",
+     "阚泽",
+     "吕岱",
+     "张温"
+    ],
+    "basis": "朱治为吴郡太守"
+   },
+   {
+    "city": "commandery_city_057",
+    "governor": "张肃",
+    "staff": [
+     "张任",
+     "刘璝",
+     "冷苞",
+     "邓贤"
+    ],
+    "basis": "张肃为广汉太守；演义张任、刘璝、冷苞、邓贤守雒"
+   },
+   {
+    "city": "zitong",
+    "governor": "吴懿",
+    "staff": [
+     "吴兰",
+     "雷铜"
+    ],
+    "basis": "吴懿等屯涪"
+   },
+   {
+    "city": "jianing",
+    "governor": "董和",
+    "staff": [
+     "李恢"
+    ],
+    "basis": "董和为益州太守"
+   },
+   {
+    "city": "commandery_city_110",
+    "governor": "张裔",
+    "staff": [],
+    "basis": "张裔为鱼复长"
+   },
+   {
+    "city": "xian_28_02",
+    "governor": null,
+    "staff": [
+     "邓芝"
+    ],
+    "basis": "邓芝为郫邸阁督"
+   },
+   {
+    "city": "commandery_city_068",
+    "governor": "赵昂",
+    "staff": [
+     "王异"
+    ],
+    "basis": "赵昂冀人"
+   },
+   {
+    "city": "longxi",
+    "governor": "姜叙",
+    "staff": [],
+    "basis": "姜叙屯历城"
+   }
+  ],
+  "219_xiangyang": [
+   {
+    "city": "changan",
+    "governor": "张既",
+    "staff": [
+     "曹操",
+     "许褚",
+     "曹洪",
+     "曹休",
+     "曹真",
+     "曹彰",
+     "夏侯霸",
+     "刘晔",
+     "杨修",
+     "朱灵",
+     "典满",
+     "韩德",
+     "侯选",
+     "成公英",
+     "杜袭",
+     "夏侯楙",
+     "董昭"
+    ],
+    "basis": "张既为雍州刺史；曹操自汉中还长安"
+   },
+   {
+    "city": "ye",
+    "governor": "曹丕",
+    "staff": [
+     "钟繇",
+     "王朗",
+     "华歆",
+     "贾诩",
+     "陈群",
+     "桓阶",
+     "高柔",
+     "司马懿",
+     "司马孚",
+     "程昱",
+     "徐庶",
+     "辛毗",
+     "卫觊",
+     "和洽",
+     "陈矫",
+     "王昶",
+     "夏侯尚",
+     "曹植",
+     "张鲁",
+     "阎圃",
+     "阎行",
+     "卞氏",
+     "甄氏",
+     "蔡琰",
+     "张春华",
+     "辛宪英"
+    ],
+    "basis": "曹丕为魏太子，居邺；钟繇为魏相国"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "蒋济"
+    ],
+    "basis": "曹操议迁都避关羽，蒋济谏止"
+   },
+   {
+    "city": "xian_extra_05",
+    "governor": null,
+    "staff": [
+     "曹仁",
+     "满宠",
+     "于禁",
+     "庞德",
+     "牛金"
+    ],
+    "basis": "曹仁守樊，满宠助守；于禁、庞德屯樊北"
+   },
+   {
+    "city": "wan",
+    "governor": "徐晃",
+    "staff": [
+     "赵俨"
+    ],
+    "basis": "徐晃救樊，屯宛；赵俨以议郎参军"
+   },
+   {
+    "city": "runan",
+    "governor": null,
+    "staff": [
+     "夏侯惇"
+    ],
+    "basis": "夏侯惇屯召陵"
+   },
+   {
+    "city": "anding",
+    "governor": "杨秋",
+    "staff": [],
+    "basis": "杨秋降后还安定"
+   },
+   {
+    "city": "commandery_city_111",
+    "governor": "张郃",
+    "staff": [
+     "郭淮",
+     "郝昭"
+    ],
+    "basis": "张郃屯陈仓"
+   },
+   {
+    "city": "hanzhong",
+    "governor": "魏延",
+    "staff": [
+     "刘备",
+     "法正",
+     "黄忠",
+     "赵云",
+     "黄权",
+     "王平",
+     "吴懿"
+    ],
+    "basis": "刘备进位汉中王，魏延为汉中太守"
+   },
+   {
+    "city": "chengdu",
+    "governor": null,
+    "staff": [
+     "诸葛亮",
+     "许靖",
+     "董和",
+     "刘巴",
+     "秦宓",
+     "尹默",
+     "董允",
+     "费祎",
+     "蒋琬",
+     "杨仪",
+     "马谡",
+     "伊籍",
+     "简雍",
+     "孙乾",
+     "糜竺",
+     "黄月英",
+     "关兴",
+     "张苞",
+     "马云禄",
+     "陈到",
+     "冯习",
+     "傅彤",
+     "吴班"
+    ],
+    "basis": "诸葛亮留守成都，足食足兵"
+   },
+   {
+    "city": "xian_09_04",
+    "governor": null,
+    "staff": [
+     "关羽",
+     "关平",
+     "关索",
+     "周仓",
+     "胡班",
+     "赵累",
+     "廖化",
+     "鲍三娘"
+    ],
+    "basis": "关羽围襄樊；关索、鲍三娘为演义人物"
+   },
+   {
+    "city": "jiangling",
+    "governor": "糜芳",
+    "staff": [
+     "潘濬",
+     "王甫",
+     "马良",
+     "费诗"
+    ],
+    "basis": "糜芳为南郡太守；费诗授关羽前将军印"
+   },
+   {
+    "city": "xian_extra_08",
+    "governor": "傅士仁",
+    "staff": [
+     "刘璋",
+     "刘琰"
+    ],
+    "basis": "傅士仁守公安；刘璋迁居公安"
+   },
+   {
+    "city": "commandery_city_121",
+    "governor": "陈震",
+    "staff": [],
+    "basis": "陈震为汶山太守"
+   },
+   {
+    "city": "jianing",
+    "governor": "李恢",
+    "staff": [
+     "张裔"
+    ],
+    "basis": "李恢为庲降都督；张裔为益州太守"
+   },
+   {
+    "city": "commandery_city_116",
+    "governor": "吕岱",
+    "staff": [],
+    "basis": "吕岱为庐陵太守"
+   }
+  ]
+ }
+}

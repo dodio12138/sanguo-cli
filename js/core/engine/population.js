@@ -15,7 +15,7 @@ Object.assign(window.RuleEngine.prototype,{
       fertility:.18,mortality:{children:.045,adult:.012,elderly:.07},famine_mortality:.08,war_mortality:.04,
       household_ratio:.72,marriage_rate:.08,dissolve_base:.003,dissolve_war:.02,dissolve_famine:.02,
       dependency:{base:.004,famine:.03,tax:.01,war:.01,max_share:.9},flight:{war:.03,famine:.03},
-      refugee:{migrate:.25,loss:.03,settle:.1,neighbors:8,levy:.5},min_pop:50,max_pops:8,
+      refugee:{migrate:.25,loss:.03,settle:.1,neighbors:8,levy:.5},min_pop:50,max_pops:10,
       levy_floor:{normal:.75,accelerated:.55,forced:.25},tax_weights:[1,.8,.3],female_labor:.6,
       registration:{drift:.03,free_base:.84,free_per_score:.0013,free_max:.98,dependent_base:.5},estimate:{base:.1,per_year:.05,max:.4}};
     const custom=this.data.rules?.population||{};return {...base,...custom,refugee:{...base.refugee,...custom.refugee},dependency:{...base.dependency,...custom.dependency},registration:{...base.registration,...custom.registration}}},
@@ -56,7 +56,7 @@ Object.assign(window.RuleEngine.prototype,{
     const raw=this.popPlaces().reduce((n,place)=>n+this.rawTaxBase(place),0),population=this.popPlaces().reduce((n,place)=>n+(place.population||0),0);state.popScale??=raw>0?Math.round(population/raw*1e4)/1e4:1;
     state.popStats??={births:0,deaths:0,lost:0,levied:0,returned:0}},
   // 读档：缺 POP 的处所按人口补生成；存档人口与 POP 合计不符（旧档或外部改动）时以存档人口为准，按原构成缩放。
-  ensurePopulation(state){for(const place of this.popPlaces())if(place.pops&&Number.isFinite(place.population))this.popRescale(place,place.population);if(!state.clans||this.popPlaces().some(place=>!place.pops))this.initPopulation(state);else{for(const place of this.popPlaces())this.popSync(place)}state.popStats??={births:0,deaths:0,lost:0,levied:0,returned:0}},
+  ensurePopulation(state){for(const place of this.popPlaces())if(place.pops&&Number.isFinite(place.population))this.popRescale(place,place.population);if(state.clans?.byId&&(this.data.clans||[]).some(clan=>!state.clans.byId[clan.id]))this.initClans(state);if(!state.clans||this.popPlaces().some(place=>!place.pops))this.initPopulation(state);else{for(const place of this.popPlaces())this.popSync(place)}state.popStats??={births:0,deaths:0,lost:0,levied:0,returned:0}},
   popSeed(state,place,rules,refugeeShare){const amount=Math.max(0,Math.round(place.population||0)),age=rules.age,mix=place.jurisdictionCityId||place.countyNode?rules.county_mix:rules.urban_mix;place.pops=[];if(!amount){this.popSync(place);return}
     const split=n=>{const ch=Math.round(n*age.children),am=Math.round(n*age.adult_male),af=Math.round(n*age.adult_female);return [ch,am,af,Math.max(0,n-ch-am-af)]};
     const trade=Math.round(amount*mix.trade),scholar=Math.round(amount*mix.scholar),refugees=Math.round(amount*refugeeShare),farmers=amount-trade-scholar-refugees;

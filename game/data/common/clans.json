@@ -1,5 +1,5 @@
 {
- "note": "世家：本郡、祖居（县名，空则取本郡最大据点）、地产份额（祖居处，本郡其余各处取其三成）、财富、才俊（出县令的能力基准）、成员（按名挂接现有人物）。曹豹为下邳人，不入谯县曹氏。",
+ "note": "世家：本郡、祖居（县名，空则取本郡最大据点）、地产份额（祖居处，本郡其余各处取其三成）、财富、才俊（出县令的能力基准）、成员（按名挂接现有人物，仅收名册中有其人者）、依据。史书人物为主，演义人物在依据中注明。",
  "clans": [
   {
    "id": "xun",
@@ -13,12 +13,9 @@
     "荀彧",
     "荀攸",
     "荀谌",
-    "荀衍",
-    "荀悦",
-    "荀顗",
-    "荀粲",
-    "荀恽"
-   ]
+    "荀顗"
+   ],
+   "basis": "荀淑之后，「八龙」；荀彧、荀攸叔侄为曹操谋主"
   },
   {
    "id": "chen_yc",
@@ -31,9 +28,9 @@
    "members": [
     "陈群",
     "陈纪",
-    "陈泰",
-    "陈谌"
-   ]
+    "陈泰"
+   ],
+   "basis": "陈寔之后，陈纪、陈群父子"
   },
   {
    "id": "zhong",
@@ -47,7 +44,38 @@
     "钟繇",
     "钟会",
     "钟毓"
-   ]
+   ],
+   "basis": "钟皓之后，钟繇镇关中"
+  },
+  {
+   "id": "guo_yc",
+   "name": "颍川郭氏",
+   "commandery": "颍川郡",
+   "seat": "阳翟",
+   "land_share": 0.12,
+   "wealth": 3000,
+   "talent": 75,
+   "members": [
+    "郭嘉",
+    "郭图"
+   ],
+   "basis": "阳翟郭氏世传法律；郭嘉事曹，郭图事袁"
+  },
+  {
+   "id": "xin",
+   "name": "颍川辛氏",
+   "commandery": "颍川郡",
+   "seat": "阳翟",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "辛评",
+    "辛毗",
+    "辛宪英",
+    "辛敞"
+   ],
+   "basis": "阳翟辛氏；辛评事袁谭，辛毗归曹"
   },
   {
    "id": "yuan_rn",
@@ -64,9 +92,35 @@
     "袁熙",
     "袁尚",
     "袁胤",
-    "袁遗",
-    "袁买"
-   ]
+    "袁遗"
+   ],
+   "basis": "四世三公；本籍汝阳，地图无此县，取汝南郡治"
+  },
+  {
+   "id": "xu_rn",
+   "name": "汝南许氏",
+   "commandery": "汝南郡",
+   "seat": "平舆",
+   "land_share": 0.12,
+   "wealth": 2500,
+   "talent": 70,
+   "members": [
+    "许靖"
+   ],
+   "basis": "平舆许氏，月旦评"
+  },
+  {
+   "id": "yuan_cj",
+   "name": "陈郡袁氏",
+   "commandery": "陈郡",
+   "seat": "",
+   "land_share": 0.12,
+   "wealth": 3000,
+   "talent": 72,
+   "members": [
+    "袁涣"
+   ],
+   "basis": "扶乐袁氏，袁涣事吕布后归曹"
   },
   {
    "id": "yang_hn",
@@ -79,7 +133,8 @@
    "members": [
     "杨彪",
     "杨修"
-   ]
+   ],
+   "basis": "四世太尉"
   },
   {
    "id": "sima",
@@ -97,7 +152,22 @@
     "司马昭",
     "司马望",
     "司马伷"
-   ]
+   ],
+   "basis": "司马防八子「八达」"
+  },
+  {
+   "id": "wei_hd",
+   "name": "河东卫氏",
+   "commandery": "河东郡",
+   "seat": "",
+   "land_share": 0.15,
+   "wealth": 4000,
+   "talent": 72,
+   "members": [
+    "卫觊",
+    "卫瓘"
+   ],
+   "basis": "安邑卫氏"
   },
   {
    "id": "zhuge",
@@ -115,8 +185,537 @@
     "诸葛恪",
     "诸葛乔",
     "诸葛瞻",
-    "诸葛玄"
-   ]
+    "诸葛尚"
+   ],
+   "basis": "本籍阳都，地图无此县，取诸县"
+  },
+  {
+   "id": "wang_dh",
+   "name": "东海王氏",
+   "commandery": "东海国",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "王朗",
+    "王肃"
+   ],
+   "basis": "郯县王氏，王朗、王肃父子"
+  },
+  {
+   "id": "mi",
+   "name": "东海糜氏",
+   "commandery": "东海国",
+   "seat": "",
+   "land_share": 0.25,
+   "wealth": 12000,
+   "talent": 60,
+   "members": [
+    "糜竺",
+    "糜芳",
+    "糜氏"
+   ],
+   "basis": "朐县糜氏，世代货殖，僮客万人"
+  },
+  {
+   "id": "chen_xp",
+   "name": "下邳陈氏",
+   "commandery": "下邳国",
+   "seat": "下邳",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 75,
+   "members": [
+    "陈珪",
+    "陈登",
+    "陈应"
+   ],
+   "basis": "淮浦陈氏，陈球之后"
+  },
+  {
+   "id": "lu_lh",
+   "name": "临淮鲁氏",
+   "commandery": "下邳国",
+   "seat": "",
+   "land_share": 0.12,
+   "wealth": 8000,
+   "talent": 72,
+   "members": [
+    "鲁肃"
+   ],
+   "basis": "东城鲁氏，家富于财；东城属临淮，地图归下邳国"
+  },
+  {
+   "id": "zhang_pc",
+   "name": "彭城张氏",
+   "commandery": "彭城国",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "张昭",
+    "张承",
+    "张休"
+   ],
+   "basis": "彭城张昭"
+  },
+  {
+   "id": "zhang_gl",
+   "name": "广陵张氏",
+   "commandery": "广陵郡",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 2000,
+   "talent": 70,
+   "members": [
+    "张纮"
+   ],
+   "basis": "广陵张纮"
+  },
+  {
+   "id": "kong",
+   "name": "鲁国孔氏",
+   "commandery": "鲁国",
+   "seat": "鲁县",
+   "land_share": 0.25,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "孔融"
+   ],
+   "basis": "孔子之后"
+  },
+  {
+   "id": "yang_ts",
+   "name": "泰山羊氏",
+   "commandery": "泰山郡",
+   "seat": "",
+   "land_share": 0.15,
+   "wealth": 3500,
+   "talent": 72,
+   "members": [
+    "羊祜"
+   ],
+   "basis": "南城羊氏，九世二千石"
+  },
+  {
+   "id": "cheng_dj",
+   "name": "东郡程氏",
+   "commandery": "东郡",
+   "seat": "东阿",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 68,
+   "members": [
+    "程昱",
+    "程武"
+   ],
+   "basis": "东阿程氏"
+  },
+  {
+   "id": "wang_ty",
+   "name": "太原王氏",
+   "commandery": "太原郡",
+   "seat": "祁县",
+   "land_share": 0.25,
+   "wealth": 5000,
+   "talent": 75,
+   "members": [
+    "王允",
+    "王凌",
+    "王昶",
+    "王浑"
+   ],
+   "basis": "祁县王氏"
+  },
+  {
+   "id": "guo_ty",
+   "name": "太原郭氏",
+   "commandery": "太原郡",
+   "seat": "阳曲",
+   "land_share": 0.12,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "郭淮"
+   ],
+   "basis": "阳曲郭氏"
+  },
+  {
+   "id": "cui",
+   "name": "清河崔氏",
+   "commandery": "甘陵郡",
+   "seat": "",
+   "land_share": 0.2,
+   "wealth": 4500,
+   "talent": 75,
+   "members": [
+    "崔琰",
+    "崔林"
+   ],
+   "basis": "东武城崔氏；清河国汉末改甘陵"
+  },
+  {
+   "id": "tian_jl",
+   "name": "钜鹿田氏",
+   "commandery": "巨鹿郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "田丰"
+   ],
+   "basis": "钜鹿田丰"
+  },
+  {
+   "id": "shen",
+   "name": "魏郡审氏",
+   "commandery": "魏郡",
+   "seat": "",
+   "land_share": 0.12,
+   "wealth": 3500,
+   "talent": 68,
+   "members": [
+    "审配"
+   ],
+   "basis": "阴安审氏，宗族强盛"
+  },
+  {
+   "id": "zhen",
+   "name": "中山甄氏",
+   "commandery": "中山国",
+   "seat": "",
+   "land_share": 0.2,
+   "wealth": 8000,
+   "talent": 60,
+   "members": [
+    "甄氏"
+   ],
+   "basis": "无极甄氏，世为二千石，家富"
+  },
+  {
+   "id": "hua_py",
+   "name": "平原华氏",
+   "commandery": "平原郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "华歆"
+   ],
+   "basis": "高唐华歆"
+  },
+  {
+   "id": "tian_bp",
+   "name": "右北平田氏",
+   "commandery": "右北平郡",
+   "seat": "",
+   "land_share": 0.12,
+   "wealth": 2000,
+   "talent": 70,
+   "members": [
+    "田畴"
+   ],
+   "basis": "无终田畴，宗族附从者五千余家"
+  },
+  {
+   "id": "lu_zj",
+   "name": "涿郡卢氏",
+   "commandery": "涿郡",
+   "seat": "涿县",
+   "land_share": 0.15,
+   "wealth": 2500,
+   "talent": 70,
+   "members": [
+    "卢植"
+   ],
+   "basis": "涿县卢植"
+  },
+  {
+   "id": "gongsun_lx",
+   "name": "辽西公孙氏",
+   "commandery": "辽西郡",
+   "seat": "",
+   "land_share": 0.2,
+   "wealth": 3000,
+   "talent": 62,
+   "members": [
+    "公孙瓒",
+    "公孙越",
+    "公孙范",
+    "公孙续"
+   ],
+   "basis": "令支公孙氏"
+  },
+  {
+   "id": "gongsun_ld",
+   "name": "辽东公孙氏",
+   "commandery": "辽东郡",
+   "seat": "",
+   "land_share": 0.3,
+   "wealth": 5000,
+   "talent": 62,
+   "members": [
+    "公孙度",
+    "公孙康",
+    "公孙恭",
+    "公孙渊"
+   ],
+   "basis": "襄平公孙氏，割据辽东三世"
+  },
+  {
+   "id": "cao",
+   "name": "谯县曹氏",
+   "commandery": "谯郡",
+   "seat": "谯县",
+   "land_share": 0.3,
+   "wealth": 5000,
+   "talent": 70,
+   "members": [
+    "曹操",
+    "曹仁",
+    "曹洪",
+    "曹纯",
+    "曹休",
+    "曹真",
+    "曹丕",
+    "曹植",
+    "曹彰",
+    "曹昂",
+    "曹爽",
+    "曹叡",
+    "曹熊",
+    "曹冲",
+    "曹宇",
+    "曹训",
+    "曹羲"
+   ],
+   "basis": "谯县曹氏；曹豹为下邳人，不入此族"
+  },
+  {
+   "id": "xiahou",
+   "name": "谯县夏侯氏",
+   "commandery": "谯郡",
+   "seat": "谯县",
+   "land_share": 0.2,
+   "wealth": 3500,
+   "talent": 70,
+   "members": [
+    "夏侯惇",
+    "夏侯渊",
+    "夏侯尚",
+    "夏侯霸",
+    "夏侯楙",
+    "夏侯玄",
+    "夏侯和",
+    "夏侯威",
+    "夏侯惠",
+    "夏侯德",
+    "夏侯恩"
+   ],
+   "basis": "谯县夏侯氏，与曹氏世为婚姻；夏侯恩、夏侯德为演义人物"
+  },
+  {
+   "id": "ding_pg",
+   "name": "沛国丁氏",
+   "commandery": "沛郡",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 2000,
+   "talent": 68,
+   "members": [
+    "丁仪"
+   ],
+   "basis": "丁仪兄弟附曹植"
+  },
+  {
+   "id": "liu_sy",
+   "name": "山阳刘氏",
+   "commandery": "山阳国",
+   "seat": "",
+   "land_share": 0.15,
+   "wealth": 3500,
+   "talent": 68,
+   "members": [
+    "刘表",
+    "刘琦",
+    "刘琮",
+    "刘磐"
+   ],
+   "basis": "高平刘氏，汉室宗亲"
+  },
+  {
+   "id": "liu_jx",
+   "name": "江夏刘氏",
+   "commandery": "江夏郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 3000,
+   "talent": 62,
+   "members": [
+    "刘焉",
+    "刘璋",
+    "刘循"
+   ],
+   "basis": "竟陵刘氏，汉室宗亲，父子据益州"
+  },
+  {
+   "id": "liu_dl",
+   "name": "东莱刘氏",
+   "commandery": "东莱郡",
+   "seat": "",
+   "land_share": 0.12,
+   "wealth": 2500,
+   "talent": 65,
+   "members": [
+    "刘繇",
+    "刘岱"
+   ],
+   "basis": "牟平刘氏，汉室宗亲"
+  },
+  {
+   "id": "dong_lx",
+   "name": "陇西董氏",
+   "commandery": "陇西郡",
+   "seat": "",
+   "land_share": 0.15,
+   "wealth": 3000,
+   "talent": 55,
+   "members": [
+    "董卓",
+    "董旻"
+   ],
+   "basis": "临洮董氏"
+  },
+  {
+   "id": "jia_ww",
+   "name": "武威贾氏",
+   "commandery": "武威郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2000,
+   "talent": 75,
+   "members": [
+    "贾诩"
+   ],
+   "basis": "姑臧贾氏"
+  },
+  {
+   "id": "zhang_ww",
+   "name": "武威张氏",
+   "commandery": "武威郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2000,
+   "talent": 60,
+   "members": [
+    "张济",
+    "张绣"
+   ],
+   "basis": "祖厉张氏"
+  },
+  {
+   "id": "huangfu",
+   "name": "安定皇甫氏",
+   "commandery": "安定郡",
+   "seat": "",
+   "land_share": 0.15,
+   "wealth": 3500,
+   "talent": 72,
+   "members": [
+    "皇甫嵩"
+   ],
+   "basis": "朝那皇甫氏，皇甫规之后"
+  },
+  {
+   "id": "jiang_ts",
+   "name": "天水姜氏",
+   "commandery": "汉阳郡",
+   "seat": "冀县",
+   "land_share": 0.15,
+   "wealth": 2500,
+   "talent": 72,
+   "members": [
+    "姜维",
+    "姜叙"
+   ],
+   "basis": "冀县姜氏；汉阳郡即天水"
+  },
+  {
+   "id": "yang_ts2",
+   "name": "天水杨氏",
+   "commandery": "汉阳郡",
+   "seat": "冀县",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 70,
+   "members": [
+    "杨阜"
+   ],
+   "basis": "冀县杨阜"
+  },
+  {
+   "id": "du_jz",
+   "name": "京兆杜氏",
+   "commandery": "京兆尹",
+   "seat": "杜陵",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 70,
+   "members": [
+    "杜畿",
+    "杜预"
+   ],
+   "basis": "杜陵杜氏"
+  },
+  {
+   "id": "wei_jz",
+   "name": "京兆韦氏",
+   "commandery": "京兆尹",
+   "seat": "杜陵",
+   "land_share": 0.12,
+   "wealth": 3000,
+   "talent": 68,
+   "members": [
+    "韦端",
+    "韦康"
+   ],
+   "basis": "杜陵韦氏，父子相继为凉州牧、刺史"
+  },
+  {
+   "id": "ma_ff",
+   "name": "扶风马氏",
+   "commandery": "右扶风",
+   "seat": "槐里",
+   "land_share": 0.3,
+   "wealth": 3000,
+   "talent": 60,
+   "members": [
+    "马腾",
+    "马超",
+    "马休",
+    "马铁",
+    "马岱",
+    "马云禄"
+   ],
+   "basis": "茂陵马氏，马援之后；马云禄为演义人物"
+  },
+  {
+   "id": "fa",
+   "name": "扶风法氏",
+   "commandery": "右扶风",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 72,
+   "members": [
+    "法正"
+   ],
+   "basis": "郿县法氏"
   },
   {
    "id": "gu",
@@ -128,11 +727,9 @@
    "talent": 75,
    "members": [
     "顾雍",
-    "顾邵",
-    "顾谭",
-    "顾承",
-    "顾徽"
-   ]
+    "顾谭"
+   ],
+   "basis": "吴四姓"
   },
   {
    "id": "lu",
@@ -146,10 +743,9 @@
     "陆逊",
     "陆绩",
     "陆抗",
-    "陆凯",
-    "陆瑁",
-    "陆景"
-   ]
+    "陆凯"
+   ],
+   "basis": "吴四姓"
   },
   {
    "id": "zhu",
@@ -163,7 +759,35 @@
     "朱桓",
     "朱据",
     "朱异"
-   ]
+   ],
+   "basis": "吴四姓"
+  },
+  {
+   "id": "zhang_wu",
+   "name": "吴郡张氏",
+   "commandery": "吴郡",
+   "seat": "吴县",
+   "land_share": 0.08,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "张温"
+   ],
+   "basis": "吴四姓"
+  },
+  {
+   "id": "quan",
+   "name": "吴郡全氏",
+   "commandery": "吴郡",
+   "seat": "余杭",
+   "land_share": 0.1,
+   "wealth": 4000,
+   "talent": 65,
+   "members": [
+    "全琮",
+    "全怿"
+   ],
+   "basis": "钱唐全氏；钱唐地图无此县，取余杭"
   },
   {
    "id": "sun",
@@ -192,8 +816,25 @@
     "孙亮",
     "孙休",
     "孙峻",
-    "孙綝"
-   ]
+    "孙綝",
+    "孙河",
+    "孙朗"
+   ],
+   "basis": "富春孙氏；孙韶、孙桓本姓俞，赐姓孙"
+  },
+  {
+   "id": "zhu_dy",
+   "name": "丹阳朱氏",
+   "commandery": "丹阳郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
+   "talent": 68,
+   "members": [
+    "朱治",
+    "朱然"
+   ],
+   "basis": "故鄣朱氏；朱然本姓施，过继朱治"
   },
   {
    "id": "yu",
@@ -205,9 +846,9 @@
    "talent": 70,
    "members": [
     "虞翻",
-    "虞汜",
-    "虞忠"
-   ]
+    "虞汜"
+   ],
+   "basis": "会稽四姓"
   },
   {
    "id": "he_kj",
@@ -218,10 +859,9 @@
    "wealth": 3000,
    "talent": 65,
    "members": [
-    "贺齐",
-    "贺达",
-    "贺邵"
-   ]
+    "贺齐"
+   ],
+   "basis": "会稽四姓"
   },
   {
    "id": "zhou_lj",
@@ -232,10 +872,9 @@
    "wealth": 4000,
    "talent": 75,
    "members": [
-    "周瑜",
-    "周循",
-    "周胤"
-   ]
+    "周瑜"
+   ],
+   "basis": "舒县周氏，世为二千石"
   },
   {
    "id": "cai",
@@ -249,8 +888,9 @@
     "蔡瑁",
     "蔡中",
     "蔡和",
-    "蔡勋"
-   ]
+    "蔡氏"
+   ],
+   "basis": "襄阳蔡氏，与刘表联姻；蔡中、蔡和为演义人物"
   },
   {
    "id": "kuai",
@@ -262,9 +902,9 @@
    "talent": 75,
    "members": [
     "蒯良",
-    "蒯越",
-    "蒯祺"
-   ]
+    "蒯越"
+   ],
+   "basis": "中庐蒯氏"
   },
   {
    "id": "pang",
@@ -275,12 +915,22 @@
    "wealth": 2000,
    "talent": 80,
    "members": [
-    "庞统",
-    "庞林",
-    "庞德公",
-    "庞山民",
-    "庞宏"
-   ]
+    "庞统"
+   ],
+   "basis": "襄阳庞氏"
+  },
+  {
+   "id": "huang_my",
+   "name": "沔阳黄氏",
+   "commandery": "南郡",
+   "seat": "襄阳",
+   "land_share": 0.08,
+   "wealth": 2000,
+   "talent": 72,
+   "members": [
+    "黄月英"
+   ],
+   "basis": "黄承彦之女适诸葛亮；地图无沔阳，取襄阳"
   },
   {
    "id": "ma_yc",
@@ -293,68 +943,115 @@
    "members": [
     "马良",
     "马谡"
-   ]
+   ],
+   "basis": "马氏五常"
   },
   {
-   "id": "wang_ty",
-   "name": "太原王氏",
-   "commandery": "太原郡",
-   "seat": "祁县",
-   "land_share": 0.25,
-   "wealth": 5000,
-   "talent": 75,
-   "members": [
-    "王允",
-    "王凌",
-    "王昶",
-    "王浑",
-    "王广"
-   ]
-  },
-  {
-   "id": "cui",
-   "name": "清河崔氏",
-   "commandery": "甘陵郡",
-   "seat": "",
-   "land_share": 0.2,
-   "wealth": 4500,
-   "talent": 75,
-   "members": [
-    "崔琰",
-    "崔林",
-    "崔州平"
-   ]
-  },
-  {
-   "id": "du_jz",
-   "name": "京兆杜氏",
-   "commandery": "京兆尹",
-   "seat": "杜陵",
-   "land_share": 0.2,
-   "wealth": 4000,
+   "id": "xiang_yc",
+   "name": "宜城向氏",
+   "commandery": "南郡",
+   "seat": "宜城",
+   "land_share": 0.08,
+   "wealth": 2000,
    "talent": 70,
    "members": [
-    "杜畿",
-    "杜恕",
-    "杜预"
-   ]
+    "向朗",
+    "向宠"
+   ],
+   "basis": "宜城向氏"
   },
   {
-   "id": "ma_ff",
-   "name": "扶风马氏",
-   "commandery": "右扶风",
-   "seat": "槐里",
-   "land_share": 0.3,
+   "id": "deng_nyy",
+   "name": "南阳邓氏",
+   "commandery": "南阳郡",
+   "seat": "新野",
+   "land_share": 0.12,
    "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "邓芝"
+   ],
+   "basis": "新野邓氏，邓禹之后"
+  },
+  {
+   "id": "jiang_ll",
+   "name": "零陵蒋氏",
+   "commandery": "零陵郡",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 72,
+   "members": [
+    "蒋琬"
+   ],
+   "basis": "湘乡蒋琬"
+  },
+  {
+   "id": "liu_ll",
+   "name": "零陵刘氏",
+   "commandery": "零陵郡",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 72,
+   "members": [
+    "刘巴"
+   ],
+   "basis": "烝阳刘氏"
+  },
+  {
+   "id": "huang_bx",
+   "name": "巴西黄氏",
+   "commandery": "巴西郡",
+   "seat": "阆中",
+   "land_share": 0.12,
+   "wealth": 2500,
+   "talent": 70,
+   "members": [
+    "黄权",
+    "黄崇"
+   ],
+   "basis": "阆中黄权"
+  },
+  {
+   "id": "qiao_bx",
+   "name": "巴西谯氏",
+   "commandery": "巴西郡",
+   "seat": "",
+   "land_share": 0.08,
+   "wealth": 1500,
+   "talent": 72,
+   "members": [
+    "谯周"
+   ],
+   "basis": "西充谯周"
+  },
+  {
+   "id": "gan_bj",
+   "name": "巴郡甘氏",
+   "commandery": "巴郡",
+   "seat": "",
+   "land_share": 0.1,
+   "wealth": 2500,
    "talent": 60,
    "members": [
-    "马腾",
-    "马超",
-    "马休",
-    "马铁",
-    "马岱",
-    "马云騄"
-   ]
+    "甘宁"
+   ],
+   "basis": "临江甘宁，游侠豪强"
+  },
+  {
+   "id": "zhang_sj",
+   "name": "蜀郡张氏",
+   "commandery": "蜀郡",
+   "seat": "成都",
+   "land_share": 0.1,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "张松",
+    "张肃"
+   ],
+   "basis": "成都张氏"
   },
   {
    "id": "yong",
@@ -366,7 +1063,23 @@
    "talent": 55,
    "members": [
     "雍闿"
-   ]
+   ],
+   "basis": "南中大姓"
+  },
+  {
+   "id": "meng_nz",
+   "name": "南中孟氏",
+   "commandery": "益州郡",
+   "seat": "味县",
+   "land_share": 0.2,
+   "wealth": 2000,
+   "talent": 50,
+   "members": [
+    "孟获",
+    "孟优",
+    "祝融"
+   ],
+   "basis": "南中大姓；祝融为演义人物"
   },
   {
    "id": "shi",
@@ -379,106 +1092,10 @@
    "members": [
     "士燮",
     "士壹",
-    "士徽",
     "士䵋",
-    "士武",
-    "士匡"
-   ]
-  },
-  {
-   "id": "chen_xp",
-   "name": "下邳陈氏",
-   "commandery": "下邳国",
-   "seat": "下邳",
-   "land_share": 0.2,
-   "wealth": 4000,
-   "talent": 75,
-   "members": [
-    "陈珪",
-    "陈登",
-    "陈应"
-   ]
-  },
-  {
-   "id": "kong",
-   "name": "鲁国孔氏",
-   "commandery": "鲁国",
-   "seat": "鲁县",
-   "land_share": 0.25,
-   "wealth": 3000,
-   "talent": 70,
-   "members": [
-    "孔融"
-   ]
-  },
-  {
-   "id": "cao",
-   "name": "谯县曹氏",
-   "commandery": "谯郡",
-   "seat": "谯县",
-   "land_share": 0.3,
-   "wealth": 5000,
-   "talent": 70,
-   "members": [
-    "曹操",
-    "曹仁",
-    "曹洪",
-    "曹纯",
-    "曹休",
-    "曹真",
-    "曹丕",
-    "曹植",
-    "曹彰",
-    "曹昂",
-    "曹安民",
-    "曹爽",
-    "曹叡",
-    "曹熊",
-    "曹冲",
-    "曹宇",
-    "曹训",
-    "曹羲",
-    "曹彪",
-    "曹据"
-   ]
-  },
-  {
-   "id": "xiahou",
-   "name": "谯县夏侯氏",
-   "commandery": "谯郡",
-   "seat": "谯县",
-   "land_share": 0.2,
-   "wealth": 3500,
-   "talent": 70,
-   "members": [
-    "夏侯惇",
-    "夏侯渊",
-    "夏侯尚",
-    "夏侯霸",
-    "夏侯楙",
-    "夏侯玄",
-    "夏侯和",
-    "夏侯威",
-    "夏侯惠",
-    "夏侯德",
-    "夏侯恩",
-    "夏侯兰",
-    "夏侯杰",
-    "夏侯充"
-   ]
-  },
-  {
-   "id": "lu_zj",
-   "name": "涿郡卢氏",
-   "commandery": "涿郡",
-   "seat": "涿县",
-   "land_share": 0.15,
-   "wealth": 2500,
-   "talent": 70,
-   "members": [
-    "卢植",
-    "卢毓"
-   ]
+    "士武"
+   ],
+   "basis": "世居交州，兄弟并为列郡"
   }
  ]
 }

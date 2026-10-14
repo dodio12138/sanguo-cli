@@ -47,14 +47,18 @@ assert.equal(coalition.cities.filter(city=>city.force==="neutral"&&!city.countyN
 for(const county of coalition.cities.filter(city=>city.countyNode)){const seat=coalition.cities.find(city=>city.commanderySeatNode&&city.commandery===county.commandery);if(seat)assert.equal(county.force,seat.force,`190 年县邑${county.name}应随${county.commandery}治所归属`)}
 for(const [name,assignment] of Object.entries(coalition.scenario.patch.officer_assignments)){
   const officers=coalition.officers.filter(officer=>officer.name===name&&officer.status==="serving");
-  assert.equal(officers.length,1,`${name} 必须真正载入且不能重复`);assert.equal(officers[0].force,assignment.force);assert.equal(officers[0].city,assignment.city);
+  assert.equal(officers.length,1,`${name} 必须真正载入且不能重复`);assert.equal(officers[0].force,assignment.force);
+  // 开局任官（officer_postings.json）可改派驻地：列入任官表者须在所派之城，其余须留在原驻地或被分流到本势力据点
+  const post=(coalition.officerPostings?.scenarios?.["190_coalition"]||[]).find(item=>item.governor===name||item.staff?.includes(name));if(post)assert.equal(officers[0].city,post.city,`${name} 应按任官表驻${post.city}`);else assert(officers[0].city===assignment.city||coalition.cities.find(city=>city.id===officers[0].city)?.force===assignment.force,`${name} 驻地应属本势力`);
 }
 for(const county of coalition.counties){const city=coalition.cities.find(city=>city.id===county.jurisdictionCityId);if(city)assert.equal(county.force,city.force,`${county.name} 应继承辖城归属`)}
 for(const id of coalition.scenario.playable_forces){
   assert(coalition.officers.some(officer=>officer.force===id&&officer.status==="serving"),`${id} 必须有可用主将`);
   assert(coalition.cities.some(city=>city.force===id&&(city.type||"city")==="city"),`${id} 必须有可控制城市`);
 }
-for(const [id,name] of Object.entries(coalition.scenario.patch.governors))assert.equal(coalition.cities.find(city=>city.id===id)?.governor,name,`${id} 郡治官员不能被初始化清掉`);
+// 剧本郡治官员不能被初始化清掉；开局任官表另行指派或调走者以任官表为准
+const coalitionPosts=coalition.officerPostings?.scenarios?.["190_coalition"]||[];
+for(const [id,name] of Object.entries(coalition.scenario.patch.governors)){const posted=coalitionPosts.find(item=>item.city===id&&item.governor),movedAway=coalitionPosts.some(item=>item.city!==id&&(item.governor===name||item.staff?.includes(name)));if(posted)assert.equal(coalition.cities.find(city=>city.id===id)?.governor,posted.governor,`${id} 按任官表`);else if(!movedAway)assert.equal(coalition.cities.find(city=>city.id===id)?.governor,name,`${id} 郡治官员不能被初始化清掉`)}
 assert.deepEqual(coalition.map,original.map,"剧本归属补全不允许修改海陆、州郡、道路与河流");
 assert.deepEqual(coalition.cities.map(({id,name,x,y})=>({id,name,x,y})),original.cities.map(({id,name,x,y})=>({id,name,x,y})),"城池坐标与名称保持不变");
 const fixture=structuredClone(coalition.scenario);fixture.patch.extra_officers.push(structuredClone(fixture.patch.extra_officers.find(officer=>officer?.name==="士燮")),{id:"duplicate_wang_kuang",name:"王匡"});
