@@ -44,8 +44,11 @@ for(const [id,[controller,capital]] of Object.entries(expected)){
   // 出缺：任官者去世，月末出缺
   // 君主去世（继承先于每月名录维护）：官职出缺，世袭爵位由继位君主承袭
   const yuanShao=game.data.officers.find(o=>o.name==="袁绍"),title=game.court.titles.find(t=>t.forceId==="yuan"),heir=game.data.officers.find(o=>o.force==="yuan"&&o.status==="serving"&&o.name!=="袁绍");assert(title,"袁绍有爵");
-  yuanShao.status="dead";game.data.forces.find(f=>f.id==="yuan").ruler=heir.name;const events=[];e.syncCourtHoldings(game,events);
+  yuanShao.status="dead";Object.assign(game.data.forces.find(f=>f.id==="yuan"),{ruler:heir.name,formerRuler:"袁绍"});const events=[];e.syncCourtHoldings(game,events);
   assert(!game.court.offices.some(item=>item.officerId===yuanShao.id),"去世者官职出缺");assert(events.some(ev=>ev.text.includes("出缺")));assert.equal(title.officerId,heir.id,"县侯由继位者承袭");assert(events.some(ev=>ev.text.includes("袭")));
+  // 臣下身死：爵位不传君主而除国；负伤者仍在任；被俘者爵位暂存
+  const vassal=game.court.titles.find(t=>t.forceId!=="yuan"&&game.data.officers.find(o=>o.id===t.officerId)?.name!==game.data.forces.find(f=>f.id===t.forceId)?.name);if(vassal){const holder=game.data.officers.find(o=>o.id===vassal.officerId);holder.status="dead";e.syncCourtHoldings(game,[]);assert(!game.court.titles.includes(vassal),`${holder.name}之爵不传其主`)}
+  const office=game.court.offices.find(item=>item.forceId==="cao"),official=game.data.officers.find(o=>o.id===office.officerId);official.status="injured";e.syncCourtHoldings(game,[]);assert(game.court.offices.includes(office),"负伤者不失官");official.status="serving";
   // 挟天子者覆灭：天子流离
   for(const city of game.data.cities)if(city.force==="cao")city.force="neutral";e.recomputeCourt(game);assert.equal(game.court.controller,null);assert.equal(game.court.emperor.status,"wandering");
   console.log("官渡要点通过：袁绍大将军冀州牧 / 宜城亭侯 / 名分排序 / 逆贼分档 / 出缺 / 袭爵 / 天子流离");
