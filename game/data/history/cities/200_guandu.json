@@ -3462,7 +3462,7 @@
       "type": "city",
       "x": 25,
       "y": 47,
-      "force": "cao",
+      "force": "ma_teng",
       "province": "司隶",
       "population": 10500,
       "garrison": 0,

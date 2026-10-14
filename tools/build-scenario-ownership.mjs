@@ -7,6 +7,7 @@ const write=process.argv.includes("--write");
 const scenarioId=process.argv.find(arg=>arg.startsWith("--scenario="))?.slice("--scenario=".length);
 const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),"utf8"));
 
+// 汉兴郡分自右扶风，各剧本随右扶风归属。
 // 郡国 → [200 官渡, 190 反董卓联合, 208 赤壁, 194 濮阳, 211 潼关, 219 襄阳] 归属；郡国名取自 cities/200_guandu.json 的 commandery 字段。
 // 《后汉书·郡国志》建置与汉末牧守传记的战略投影；后设郡沿母郡继承，非逐县实控考证。
 // 190 年据《三国志》卷一、七、四十九及《后汉书》卷五十补齐；194/211/219 年取舍同见 SCENARIO_NOTES.md。
@@ -14,7 +15,7 @@ const COMMANDERY_OWNERS={
   // 定稿郡界外的废并郡国：沿用据点现有归属。
   "张掖郡":["handan_shang","ma_teng","zhang_meng","handan_shang","han_sui","cao"],"酒泉郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao"],"敦煌郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao"],"张掖居延属国":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao"],"上郡":["yuan","neutral","cao","neutral","cao","cao"],"西河郡":["yuan","neutral","cao","neutral","cao","cao"],"云中郡":["yuan","neutral","cao","neutral","cao","cao"],"定襄郡":["yuan","neutral","cao","neutral","cao","cao"],"朔方郡":["yuan","neutral","cao","neutral","cao","cao"],
   "河南尹":["cao","dong","cao","neutral","cao","cao"],"恒农郡":["cao","dong","cao","li_jue","cao","cao"],"京兆尹":["cao","dong","cao","li_jue","ma_chao","cao"],
-  "左冯翊":["cao","dong","cao","li_jue","ma_chao","cao"],"右扶风":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao"],"汉兴郡":["cao","dong","cao","li_jue","ma_chao","cao"],
+  "左冯翊":["cao","dong","cao","li_jue","ma_chao","cao"],"右扶风":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao"],"汉兴郡":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao"],
   "河东郡":["cao","dong","cao","li_jue","cao","cao"],"河内郡":["cao","wang_kuang","cao","zhang_yang","cao","cao"],
   "颍川郡":["cao","kong_zhou","cao","neutral","cao","cao"],"汝南郡":["cao","yuan_shu","cao","yuan_shu","cao","cao"],"梁国":["cao","kong_zhou","cao","neutral","cao","cao"],
   "陈郡":["cao","liu_chong","cao","liu_chong","cao","cao"],"鲁国":["cao","kong_zhou","cao","neutral","cao","cao"],"谯郡":["cao","cao","cao","cao","cao","cao"],

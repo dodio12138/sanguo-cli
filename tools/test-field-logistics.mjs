@@ -43,6 +43,9 @@ const days=(game,e,n,events=[])=>{for(let i=0;i<n;i++){game.turn++;e.advanceConv
 // 8. 存档往返与界面接线
 {const {game,e,army}=setup();FiscalSystem.consumeArmy(game,army,[]);army.carryDays=20;army.escortLevel="heavy";const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(save));const back=restored.data.armies.find(a=>a.id==="F");assert.deepEqual(back.convoy,army.convoy);assert.equal(back.carryDays,20);assert.equal(back.escortLevel,"heavy");
   const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");for(const token of ["data-carry-days","data-escort-level","data-army-raid","data-build-depot"])assert(app.includes(token),token);assert.match(view,/drawSupplyLines\(c,m\)/)}
+// 军团解散或覆没：在途粮队与护送折返来源城
+{const {game,e,army}=setup();game.playerForceId="cao";FiscalSystem.consumeArmy(game,army,[]);days(game,e,1);const source=game.data.cities.find(c=>c.id===army.convoy.sourceId),food=source.localFood,garrison=source.garrison,escort=army.convoy.escort;game.data.armies=game.data.armies.filter(a=>a!==army);const events=days(game,e,1);
+  assert(source.localFood>food,"粮折返来源城");assert.equal(source.garrison,garrison+escort,"护送归还守军");assert(events.some(ev=>/折返/.test(ev.text)));assert(!Object.keys(game.convoyLedger).length,"台账清空")}
 // 9. 长推演：AI 对局不崩，粮队与军仓数值合法
 {const game=new GameState(structuredClone(scenario),{playerForceId:"cao"});game.observerMode=true;for(let i=0;i<120;i++)game.endTurn();let convoys=0;for(const army of game.data.armies){assert(army.stores.food>=0);if(army.convoy){convoys++;assert(army.convoy.food>=0&&army.convoy.path.length>=1)}}console.log(`百二十日推演：在途粮队 ${convoys}`)}
 console.log("W4、W5 野战补给通过：携粮与组织度 / 运粮实走与途损 / 改道追送 / 轻装就食 / 截粮与护送 / 前进粮仓 / AI 袭扰 / 存档与界面");
