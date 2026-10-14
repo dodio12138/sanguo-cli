@@ -54,7 +54,7 @@ window.MapView = class MapView {
     listen(canvas,"pointerleave",()=>{this.hover=null;this.tooltip(true);this.scheduleDraw()});
     listen(window,"blur",()=>this.cancelDrag());
     listen(document,"visibilitychange",()=>{if(document.hidden)this.cancelDrag()});
-    listen(canvas,"wheel",e=>{e.preventDefault();this.cancelDrag();this.setZoom(this.scale+(e.deltaY<0?.15:-.15))},{passive:false});
+    listen(canvas,"wheel",e=>{e.preventDefault();this.cancelDrag();this.setZoom(this.scale*(e.deltaY<0?1.15:1/1.15))},{passive:false});
     this.disposeInput=()=>{this.cancelDrag();listeners.forEach(remove=>remove())};
   }
   cancelDrag(){const id=this.drag?.pointerId;this.drag=null;this.hover=null;this.tooltip(true);if(id!==undefined&&this.canvas.hasPointerCapture(id))this.canvas.releasePointerCapture(id);this.scheduleDraw()}
@@ -71,7 +71,7 @@ window.MapView = class MapView {
   armyScreenPoint(army,m){const position=this.armyPosition(army);if(!position)return null;return {x:m.startX+(position.x+(position.moving?.5:.78))*m.cell,y:m.startY+(position.y+(position.moving?.5:.7))*m.cell}}
   armyAt(px,py){const m=this.metrics();let best=null,bestDistance=10;for(const army of this.state.data.armies||[]){if(this.armyIntelLevel(army)<1)continue;const point=this.armyScreenPoint(army,m);if(!point)continue;const distance=Math.hypot(point.x-px,point.y-py);if(distance<bestDistance){bestDistance=distance;best=army}}return best}
   pick(e){const r=this.canvas.getBoundingClientRect(),marker=this.onBattlePick?this.battleMarkerAt(e.clientX-r.left,e.clientY-r.top):null;if(marker){this.onBattlePick(marker);return}const army=this.onArmyPick?this.armyAt(e.clientX-r.left,e.clientY-r.top):null;if(army){this.onArmyPick(army);return}const cell=this.cellAt(e.clientX-r.left,e.clientY-r.top);if(!cell)return;const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y);this.state.select(city?"city":"cell",city||cell);this.draw();}
-  setZoom(value){this.scale=Math.max(.65,Math.min(3.4,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
+  setZoom(value){this.scale=Math.max(.65,Math.min(MapView.MAX_ZOOM,Math.round(value*20)/20));document.getElementById("zoomLabel").textContent=`${Math.round(this.scale*100)}%`;this.draw();}
   center(){this.offset={x:0,y:0};this.setZoom(1);}
   // 定位据点：放大到可辨认的比例，并把该据点移到视野中央。
   focusOn(city){if(!city)return;this.setZoom(Math.max(this.scale||1,1.8));const {width,height}=this.state.data.map,cell=this.metrics().cell;this.offset={x:width*cell/2-(city.x+.5)*cell,y:height*cell/2-(city.y+.5)*cell};this.draw()}
@@ -90,6 +90,7 @@ window.MapView = class MapView {
   invalidateColors(){this.cellColors=null;this.colorCacheLayer=null;this.colorCacheRevision=-1;this.colorRevision=(this.colorRevision||0)+1}
   ensureColors(){const stamp=MapView.DYNAMIC_LAYERS.has(this.state.layer)?`${this.state.turn}|${this.perspectiveForce()}|${[...(this.hiddenLegendItems||[])].join(",")}`:"";if(this.cellColors&&this.colorCacheLayer===this.state.layer&&this.colorCacheRevision===this.colorRevision&&this.colorCacheStamp===stamp)return;this.cellColors=this.cells.map(cell=>this.color(cell));this.colorCacheLayer=this.state.layer;this.colorCacheRevision=this.colorRevision;this.colorCacheStamp=stamp}
   // 关系、粮食、武将三个分析图层：按郡与势力汇总（每日更新），他方数值受情报约束。
+  static MAX_ZOOM=8;
   static DYNAMIC_LAYERS=new Set(["relation","food","officers"]);
   static RELATION_BANDS={我方:"#c9a95a",盟友:"#4f9a6c",互不侵犯:"#5f8f92",友善:"#7f9358",中立:"#5c5f55",敌视:"#a06a42",交战:"#a8433a",无主:"#3b3d36"};
   static FOOD_BANDS=[["充裕",180,"#4f8a4a"],["尚足",90,"#8a9a48"],["偏紧",30,"#b08a3c"],["告急",0,"#a8433a"]];
@@ -183,15 +184,14 @@ window.MapView = class MapView {
     return roads;
   }
   drawPlannedRoute(c,m){if(!this.plannedRoute||this.plannedRoute.length<2)return;this.drawMarchPath(c,m,this.legSegments(this.plannedRoute),"#ff5a3c",true)}
-  // 陆路按路网类型分级绘制：驿道宽亮，一般道路居中，山道细虚，栈道点线，渡口以蓝色虚线标示。
+  // 陆路按路网类型分级绘制：驿道宽亮，一般道路居中，山道细虚，栈道点线；渡口段按一般道路实线绘制，只在渡口处标记。
   routeKind(route){const network=this.state.data.routeNetwork;if(!network)return route.kind==="main"?"road":"county";if(!this.routeKindIndex||this.routeKindIndexSource!==network){this.routeKindIndexSource=network;this.routeKindIndex=new Map(network.routes.filter(item=>network.kinds[item.kind]?.mode==="land").map(item=>[[item.a,item.b].sort().join(":"),item.kind]))}return this.routeKindIndex.get([route.from,route.to].sort().join(":"))||(route.kind==="main"?"road":"county")}
   drawRoutes(c,m){const bounds=this.visibleBounds(m,2),visible=this.routes.filter(route=>{const points=route.points;if(!points?.length)return false;const xs=points.map(point=>point[0]),ys=points.map(point=>point[1]);return Math.max(...xs)>=bounds.minX&&Math.min(...xs)<=bounds.maxX&&Math.max(...ys)>=bounds.minY&&Math.min(...ys)<=bounds.maxY}),supply=this.state.layer==="supply",groups=new Map();for(const route of visible){const kind=this.routeKind(route);if(!groups.has(kind))groups.set(kind,[]);groups.get(kind).push(route)}
     const draw=(routes,width,color,dash=[])=>{if(!routes?.length)return;c.setLineDash(dash);c.beginPath();for(const route of routes)this.traceRoad(c,m,route.points,false);c.strokeStyle=color;c.lineWidth=width;c.stroke()};
     draw(groups.get("county"),Math.max(1,m.cell*.05),supply?"rgba(134,116,62,.22)":"#6f6140");
     draw(groups.get("plank"),Math.max(1.2,m.cell*.07),supply?"rgba(170,92,70,.4)":"#a8573f",[Math.max(1.5,m.cell*.08),Math.max(2,m.cell*.12)]);
     draw(groups.get("mountain"),Math.max(1.1,m.cell*.07),supply?"rgba(134,116,62,.35)":"#8a7448",[Math.max(3,m.cell*.25),Math.max(2,m.cell*.14)]);
-    draw(groups.get("ford"),Math.max(1.2,m.cell*.08),supply?"rgba(110,150,170,.4)":"#6e9cb0",[Math.max(3,m.cell*.22),Math.max(2,m.cell*.12)]);
-    draw(groups.get("road"),Math.max(1.3,m.cell*.085),supply?"rgba(134,116,62,.32)":"#7d6a3f");
+    draw([...groups.get("road")||[],...groups.get("ford")||[]],Math.max(1.3,m.cell*.085),supply?"rgba(134,116,62,.32)":"#7d6a3f");
     draw(groups.get("post"),Math.max(2.2,m.cell*.15),supply?"rgba(134,116,62,.38)":"#47381e");draw(groups.get("post"),Math.max(1.1,m.cell*.065),supply?"rgba(217,194,111,.35)":"#c9a95a");c.setLineDash([])}
   drawSupplyRoutes(c,m){if(this.state.layer!=="supply")return;for(const key of this.state.infrastructure.supplyRoutes||[]){const status=this.state.engine.assessSupplyRoute(this.state,key);if(this.legendHidden(status.active?"路线畅通":"路线中断"))continue;if(status.path.length<2)continue;c.save();c.strokeStyle=status.active?"#93c86d":"#bd6658";c.lineWidth=Math.max(2,m.cell*.2);c.setLineDash(status.active?[]:[m.cell*.25,m.cell*.18]);c.shadowColor=status.active?"#93c86d":"#bd6658";c.shadowBlur=5;this.traceCityRoute(c,m,status.path);c.stroke();c.restore()}}
   drawWaterways(c,m){c.lineCap="round";c.lineJoin="round";for(const river of this.waterways){const corner=MapGrid.isCornerRiver(river),points=corner?MapGrid.riverCorners(river):river.points,offset=corner?0:.5;if(!points?.length)continue;c.beginPath();points.forEach(([x,y],index)=>c[index?"lineTo":"moveTo"](m.startX+(x+offset)*m.cell,m.startY+(y+offset)*m.cell));c.strokeStyle="#10222c";c.lineWidth=Math.max(3,m.cell*.24);c.stroke();c.strokeStyle="#55a7cb";c.lineWidth=Math.max(1.4,m.cell*.12);c.stroke();if(m.cell>18){const [x,y]=points[Math.floor(points.length/2)];c.fillStyle="#a8d2df";c.font=`${Math.min(9,m.cell*.35)}px serif`;c.fillText(river.name,m.startX+(x+.5)*m.cell,m.startY+(y+.25)*m.cell)}}c.lineCap="butt"}
