@@ -931,7 +931,7 @@
       "张卫": {
         "force": "zhang_lu",
         "city": "yangping",
-      "deathYear": null
+        "deathYear": null
       },
       "杨任": {
         "force": "zhang_lu",
@@ -961,12 +961,122 @@
       "公孙康": {
         "force": "gongsun_kang",
         "city": "xiangping",
-      "deathYear": null,
+        "deathYear": null,
         "loyalty": 100
       },
       "公孙恭": {
         "force": "gongsun_kang",
         "city": "lelang"
+      },
+      "徐庶": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 60
+      },
+      "蒯越": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "桓阶": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "袁涣": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "和洽": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "卫觊": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "杜袭": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "赵俨": {
+        "force": "cao",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "邓芝": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "费诗": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "秦宓": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张肃": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张裔": {
+        "force": "liu_zhang",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "冯习": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 80
+      },
+      "傅彤": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 80
+      },
+      "刘琰": {
+        "force": "liu",
+        "city": "xian_extra_08",
+        "loyalty": 80
+      },
+      "姜叙": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "赵昂": {
+        "force": "cao",
+        "city": "tianshui",
+        "loyalty": 80
+      },
+      "柳毅": {
+        "force": "gongsun_kang",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "阳仪": {
+        "force": "gongsun_kang",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "士壹": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士䵋": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
       }
     },
     "treaties": [{"a": "cao", "b": "ma_chao", "type": "war"}, {"a": "cao", "b": "han_sui", "type": "war"}, {"a": "ma_chao", "b": "han_sui", "type": "alliance"}, {"a": "sun", "b": "liu", "type": "alliance"}, {"a": "cao", "b": "sun", "type": "war"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}, {"a": "shi_xie", "b": "sun", "type": "non_aggression"}, {"a": "gongsun_kang", "b": "cao", "type": "non_aggression"}],

@@ -24,7 +24,7 @@ for(const band of Object.values({a:view.relationBand("cao"),b:view.relationBand(
 // 粮食与武将：按郡与势力汇总；己方给实数，他方未详查时为“不详”。
 const xiaopei=cityOf("xiaopei"),own=view.layerGroupAt(cellOf(xiaopei));
 assert.equal(own.force,"liu");assert(own.food>0&&own.need>0&&Number.isFinite(own.days));assert(MapView.FOOD_BANDS.some(([name])=>name===view.foodBand(own)));
-assert(own.officers.some(officer=>officer.name==="刘备"),"小沛驻将含刘备");assert.equal(own.officers.length,6,"沛郡：小沛五将加相县陈到");assert.equal(view.officerBand(own),"众将");
+assert(own.officers.some(officer=>officer.name==="刘备"),"小沛驻将含刘备");assert.equal(own.officers.length,state.data.officers.filter(officer=>officer.status==="serving"&&officer.force==="liu"&&["xiaopei","commandery_city_011"].includes(officer.city)).length,"沛郡：小沛与相县驻将合计");assert(own.officers.length>=6);assert.equal(view.officerBand(own),"众将");
 const tip=view.analysisTooltip.call(Object.assign(view,{}),cellOf(xiaopei),xiaopei,xiaopei.commandery);
 state.layer="officers";assert.match(view.tooltipText(cellOf(xiaopei)),/驻将 \d+ 人：.*刘备/);state.layer="food";assert.match(view.tooltipText(cellOf(xiaopei)),/仓储 [\d,]+ 石｜日耗 [\d,]+ 石｜可支/);
 const enemy=state.data.cities.find(city=>city.force==="yuan"),enemyGroup=view.layerGroupAt(cellOf(enemy));assert.equal(view.foodBand(enemyGroup),"不详","未探明他方仓储不详");assert.equal(view.officerBand(enemyGroup),"不详");
