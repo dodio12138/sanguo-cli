@@ -7,11 +7,12 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=a3ce7e78d8">
   <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
-  <link rel="stylesheet" href="css/ui-polish.css?v=f62fcfb163">
+  <link rel="stylesheet" href="css/ui-polish.css?v=449e65025c">
   <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=df25456342">
-  <link rel="stylesheet" href="css/button-states.css?v=5847234371">
+  <link rel="stylesheet" href="css/button-states.css?v=1b257558cf">
+  <link rel="stylesheet" href="css/motion.css?v=8b6c8b7279">
   <script>try{if(sessionStorage.getItem("sanguo.active-session.v1"))document.documentElement.classList.add("resume-pending")}catch{}</script>
   <style id="bootGuard">.app-shell{visibility:hidden}.game-started .app-shell{visibility:visible}.start-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#080b08;color:#d5d0a6}.start-screen.hidden,html.resume-pending .start-screen{display:none}</style>
 </head>
@@ -144,7 +145,7 @@
   </dialog>
   <dialog id="gameSettingsDialog" class="settings-dialog">
     <div class="dialog-title">游戏设置 <button data-close="gameSettingsDialog">×</button></div>
-    <div class="dialog-content settings-grid"><label>模拟速度<select id="gameObserverSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="gameConfirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check"><input id="gamePauseOnUrgent" type="checkbox">自动模拟遇紧急军情时暂停并弹出汇总</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
+    <div class="dialog-content settings-grid"><label>模拟速度<select id="gameObserverSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="gameConfirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check"><input id="gamePauseOnUrgent" type="checkbox">自动模拟遇紧急军情时暂停并弹出汇总</label><label class="setting-check"><input id="gameUiMotion" type="checkbox">界面动效（窗口浮现、按钮反馈等）</label><label class="setting-check setting-feature"><input id="gameChronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="gameGlobalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label><button id="returnTitleButton">保存进度并返回主菜单</button></div>
   </dialog>
   <dialog id="confirmTurnDialog" class="confirm-turn-dialog">
     <div class="dialog-title"><span>结束当前日</span></div><div class="dialog-content"><p>提交本日队列中的命令，并结算所有势力的行动？</p><div id="turnForecast" class="turn-forecast"></div><div class="confirm-actions"><button id="confirmTurnNo">继续筹划</button><button id="confirmTurnYes">提交并进入下一日</button></div></div>
@@ -422,8 +423,8 @@
   <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
   <script src="js/ui/simulation-speed-control.js?v=286b6b6e76"></script>
   <script src="js/ui/message-center.js?v=a56caaf5e6"></script>
-  <script src="js/ui/app.js?v=8027fec86a"></script>
+  <script src="js/ui/app.js?v=05ff40be22"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
-  <script src="js/ui/os-window-manager.js?v=cbeec7c1f4"></script>
+  <script src="js/ui/os-window-manager.js?v=950121cc09"></script>
 </body>
 </html>

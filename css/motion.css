@@ -1,0 +1,43 @@
+/*
+ * 界面动效：只用 opacity / transform / 颜色，单次、短时（≤ .35s），不做常驻循环，不碰舆图画布。
+ * 关闭途径：系统「减少动态效果」，或设置里取消「界面动效」（html.ui-motion-off）。
+ */
+:root{
+  --motion-fast:.12s;
+  --motion-base:.16s;
+  --motion-ease:cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes ui-pop{from{opacity:0;transform:translateY(6px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes ui-fade{from{opacity:0}to{opacity:1}}
+@keyframes ui-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes ui-seal{0%{opacity:0;transform:scale(1.5) rotate(-6deg)}60%{opacity:1;transform:scale(.94) rotate(1deg)}100%{opacity:1;transform:none}}
+@keyframes ui-badge{50%{opacity:.35}}
+
+/* 窗口与对话框：打开、从任务栏还原时轻微浮现 */
+dialog.os-dialog-window[open]{animation:ui-pop var(--motion-base) var(--motion-ease)}
+dialog.os-dialog-window::backdrop{animation:ui-fade var(--motion-base) ease-out}
+.game-started .os-window:not(.is-minimized):not(.is-closed){animation:ui-pop var(--motion-base) var(--motion-ease)}
+dialog.os-dialog-dragging,.os-window.is-maximized{animation:none}
+
+/* 开始菜单、任务栏按钮 */
+.os-start-menu:not([hidden]){transform-origin:left bottom;animation:ui-rise var(--motion-fast) var(--motion-ease)}
+.os-task-button:not([hidden]){animation:ui-fade var(--motion-base) ease-out}
+
+/* 按钮的颜色渐变与按下下沉在 button-states.css（按钮交互状态的唯一入口） */
+
+/* 舆图图层与图例切换 */
+.map-legend-item{transition:opacity var(--motion-fast) ease}
+
+/* 事件：印章落印；简报：分段依次浮现 */
+dialog[open] .event-seal{animation:ui-seal .32s var(--motion-ease) both}
+dialog[open] .turn-briefing-body>*{animation:ui-rise var(--motion-base) var(--motion-ease) both}
+dialog[open] .turn-briefing-body>:nth-child(2){animation-delay:.03s}
+dialog[open] .turn-briefing-body>:nth-child(3){animation-delay:.06s}
+dialog[open] .turn-briefing-body>:nth-child(4){animation-delay:.09s}
+dialog[open] .turn-briefing-body>:nth-child(n+5){animation-delay:.12s}
+
+/* 消息托盘：出现紧急军情时角标闪三下 */
+.message-tray.has-urgent b{animation:ui-badge .6s steps(2,end) 3}
+
+html.ui-motion-off *,html.ui-motion-off *::before,html.ui-motion-off *::after,html.ui-motion-off dialog::backdrop{animation:none!important;transition:none!important}
