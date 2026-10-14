@@ -61,7 +61,7 @@ await import(pathToFileURL(path.join(root,"js/ui/court-ui.js")));
   const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");
   for(const id of ["courtDialog","courtChartDialog","courtButton","courtChartButton"])assert(html.includes(`id="${id}"`),id);assert.match(html,/data-layer="courtNominal"/);assert.match(html,/data-layer="courtActual"/);
   assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
-  assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);
+  assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);assert.match(app,/data-bureau-tab="\$\{id\}"/,"官署三页切换");assert.match(app,/data-bureau-panel="county"/);
   console.log("汉庭 P1 通过：窗口四页 / 官制图中央地方与州郡县 / 名义实控图层 / 城市官署三栏");
 }
 console.log("汉庭 P0 通过");

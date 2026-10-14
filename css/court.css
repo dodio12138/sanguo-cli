@@ -2,9 +2,10 @@
 .court-dialog{width:min(820px,calc(100vw - 24px));max-width:none}
 .court-chart-dialog{width:min(1180px,calc(100vw - 24px));max-width:none}
 .court-content{display:grid;gap:10px;font-size:10px}
-.court-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-dim);padding-bottom:6px}
-.court-tabs button{border:1px solid var(--line-dim);padding:5px 12px;background:#0b100c;color:var(--muted);font-size:10px;cursor:pointer}
-.court-tabs button.active{border-color:var(--amber);background:#202719;color:#ecd99a}
+/* 窗口内标签页（汉庭窗口、城市官署共用）：统一的终端页签 */
+.ui-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-dim);padding-bottom:6px}
+.ui-tabs button{border:1px solid var(--line-dim);padding:5px 12px;background:#0b100c;color:var(--muted);font-size:10px;cursor:pointer}
+.ui-tabs button.active{border-color:var(--amber);background:#202719;color:#ecd99a}
 .court-tabs .court-chart-link{margin-left:auto;border-color:#786638;color:#dcc575}
 .court-page{display:grid;gap:10px}
 .court-hero{display:grid;grid-template-columns:64px 1fr minmax(180px,240px);gap:12px;align-items:center;border:1px solid #6b4a35;padding:10px;background:linear-gradient(90deg,#2a1512,#121a12 60%)}
@@ -82,11 +83,13 @@
 .court-chart-tree ul.chart-vertical>li::before{display:block;top:12px;right:auto;left:-10px;width:10px;height:0;border:0;border-top:1px solid #6e6a4c}
 .court-chart-tree ul.chart-vertical>li::after{display:none}
 
-/* 城市页官署三栏：州治 / 郡治 / 县治 */
-.bureau-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+/* 城市页官署：州治 / 郡治 / 县治 三页切换 */
+.bureau-tabs{margin-bottom:6px}
+.bureau-panels{display:grid}
+.bureau-col[hidden]{display:none}
 .bureau-col{display:grid;gap:4px;align-content:start;min-width:0;border:1px solid var(--line-dim);padding:7px;background:#0c120d}
 .bureau-col h4{margin:0 0 3px;padding-bottom:4px;border-bottom:1px solid #2a3326;color:#d8c27c;font-size:10px}
-.bureau-col .office-slot-grid{grid-template-columns:1fr}
+.bureau-col .office-slot-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
 .bureau-col .data-row b small{font-weight:400}
 .bureau-note{margin:2px 0 0;color:#76806a;font-size:8px;line-height:1.5}
-@media (max-width:760px){.bureau-columns,.court-stance{grid-template-columns:1fr}.court-hero{grid-template-columns:48px 1fr}.court-gauges{grid-column:1/-1}}
+@media (max-width:760px){.court-stance{grid-template-columns:1fr}.court-hero{grid-template-columns:48px 1fr}.court-gauges{grid-column:1/-1}}
