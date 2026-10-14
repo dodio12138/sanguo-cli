@@ -31,7 +31,7 @@ Object.assign(window.RuleEngine.prototype,{
     const seat=this.forceSeat(forceId),capital=this.courtCapitalCity(state);if(seat&&capital){const distance=Math.hypot(seat.x-capital.x,seat.y-capital.y),t=Math.max(0,Math.min(1,(distance-rules.distance_near)/Math.max(1,rules.distance_far-rules.distance_near)));value+=rules.distance_bonus*(1-2*t)}
     const granted=court.offices.filter(item=>item.forceId===forceId&&!item.self).length;value+=Math.min(rules.office_bonus_cap,granted*rules.office_bonus_each);
     value-=court.defiance[forceId]||0;if(court.controller&&this.worldWar(state,forceId,court.controller))value=Math.min(value,rules.war_cap);return this.courtClamp(value)},
-  courtLegitimacy(state,forceId){const court=state.court,factor=this.courtRules().self_styled_factor;let total=0;for(const item of court.offices)if(item.forceId===forceId)total+=(this.courtOffice(item.office)?.legitimacy||0)*(item.self?factor:1);for(const item of court.titles)if(item.forceId===forceId)total+=(this.courtTitle(item.title)?.legitimacy||0)*(item.self?factor:1);return Math.round(total)},
+  courtLegitimacy(state,forceId){const court=state.court,factor=this.courtRules().self_styled_factor;let total=0;for(const item of court.offices)if(item.forceId===forceId)total+=(this.courtOffice(item.office)?.legitimacy||0)*(item.self?factor:1);for(const item of court.titles)if(item.forceId===forceId)total+=(this.courtTitle(item.title)?.legitimacy||0)*(item.self?factor:1);total+=court.merit?.[forceId]||0;return Math.round(total)},
 
   // 名录维护：人物去世、下野或改投他方时，官职出缺；爵位世袭，由同势力继位君主承袭，否则除国。
   syncCourtHoldings(state,events=[]){const court=state.court,byId=new Map(this.data.officers.map(officer=>[officer.id,officer]));
