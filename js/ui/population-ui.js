@@ -1,0 +1,32 @@
+// 城页「户口与世家」：县报口径——登记口、登记户、可征丁为准，实有人口与流民只给估计；
+// 在地世家的份额、关系、依附户与县令；户籍清查、征发档位、结好、征辟、抑制豪强。企划见 docs/POP_CLAN_PLAN.md。
+window.PopulationUI=class PopulationUI{
+  static esc(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[char])}
+  static num(value){return Math.round(value||0).toLocaleString()}
+  static places(state,city){return [city,...state.engine.countiesForCity(city.id)].filter(place=>place.pops)}
+  static LEVY=[["normal","常征","户留七成五劳力"],["accelerated","急征","户留五成五劳力"],["forced","强征","户留两成五劳力，世家关系逐月受损"]];
+  static summary(state,city){const engine=state.engine,places=PopulationUI.places(state,city),reports=places.map(place=>engine.popReport(state,place)),sum=key=>reports.reduce((n,r)=>n+(r[key]||0),0);
+    const error=reports.length?Math.max(...reports.map(r=>r.error)):0,rows=new Map();for(const place of places)for(const row of engine.popComposition(place)){const into=rows.get(row.label)||{label:row.label,registered:0,households:0};into.registered+=row.registered;into.households+=row.households;rows.set(row.label,into)}
+    return {places,registered:sum("registered"),households:sum("registeredHouseholds"),estimate:sum("estimate"),refugees:sum("refugees"),recruitable:sum("recruitable"),error,rows:[...rows.values()],compliance:engine.clanCompliance(state,city,city.force)}}
+  static clanRows(state,city){const engine=state.engine,places=PopulationUI.places(state,city),out=new Map(),P=state.engine.constructor.POP;
+    for(const place of places){for(const [clanId,share] of Object.entries(engine.clanSharesAt(state,place.id))){const row=out.get(clanId)||{clanId,share:0,dependents:0};row.share=Math.max(row.share,share);row.dependents+=(place.pops||[]).filter(p=>p[P.CLS]===P.DEP&&p[P.CLAN]===clanId).reduce((n,p)=>n+Math.round(P.total(p)*p[P.RR]),0);out.set(clanId,row)}}
+    return [...out.values()].sort((a,b)=>b.share-a.share)}
+  static section(state,city){const engine=state.engine;if(!state.clans||!PopulationUI.places(state,city).length)return "";const e=PopulationUI.esc,n=PopulationUI.num,own=city.force===state.playerForceId,s=PopulationUI.summary(state,city),force=state.data.forces.find(f=>f.id===city.force);
+    const pct=Math.round(s.error*100),inspected=state.clans.inspections?.[city.id],sinceText=inspected==null?"开局以来未清查":`上次清查距今 ${Math.max(0,state.turn-inspected)} 日`;
+    const kpi=`<div class="pop-kpis"><article><small>登记口</small><b>${n(s.registered)}</b><span>县报</span></article><article><small>登记户</small><b>${n(s.households)}</b><span>户均 ${(s.registered/Math.max(1,s.households)).toFixed(1)} 口</span></article><article><small>实有人口</small><b>约 ${n(s.estimate)}</b><span>误差约 ±${pct}% · ${e(sinceText)}</span></article><article><small>流民</small><b>约 ${n(s.refugees)}</b><span>不入编户</span></article><article><small>可征丁</small><b>${n(s.recruitable)}</b><span>${e(PopulationUI.LEVY.find(([id])=>id===(force?.levyMode||"normal"))?.[1]||"常征")} · 配合 ${Math.round(s.compliance*100)}%</span></article></div>`;
+    const rows=s.rows.filter(row=>row.registered>0).map(row=>`<tr><td>${e(row.label)}</td><td>${n(row.registered)}</td><td>${n(row.households)}</td></tr>`).join("");
+    const seen=new Set(),magistrates=s.places.map(place=>[place,engine.countyMagistrate(state,place)]).filter(([place,m])=>m&&!seen.has(place.name)&&seen.add(place.name));
+    const clans=PopulationUI.clanRows(state,city).map(row=>{const def=engine.clanDef(row.clanId),relation=engine.clanRelation(state,row.clanId,city.force),members=engine.clanMembers(row.clanId).filter(o=>o.force===city.force&&o.status==="serving").map(o=>o.name),free=own?engine.summonableMembers(state,row.clanId):[];
+      return `<div class="clan-row"><div class="clan-head"><b>${e(def?.name||row.clanId)}</b><small>地产约 ${Math.round(row.share*100)}% · 依附户（登记）${n(row.dependents)} · 关系 <i class="${relation>=60?"good":relation<40?"bad":""}">${relation}</i></small>${members.length?`<small>在本方任职：${e(members.join("、"))}</small>`:""}</div>${own?`<div class="clan-actions"><button type="button" data-clan-action="court" data-clan="${e(row.clanId)}">结好 · 金 ${engine.clanRules().court.gold}</button><button type="button" data-clan-action="summon" data-clan="${e(row.clanId)}" ${free.length&&relation>=engine.clanRules().summon.min_relation?"":"disabled"}>征辟${free.length?`（${e(free[0].name)}）`:""}</button><button type="button" class="danger" data-clan-action="suppress" data-clan="${e(row.clanId)}">抑制豪强</button></div>`:""}</div>`}).join("");
+    const levy=own?`<label class="pop-levy">征发档位<select data-levy-mode>${PopulationUI.LEVY.map(([id,name,tip])=>`<option value="${id}" ${(force?.levyMode||"normal")===id?"selected":""}>${name}（${tip}）</option>`).join("")}</select></label>`:"";
+    const inspect=own?`<button type="button" data-inspect-registry>户籍清查 · 金 ${n(engine.inspectionCost(state,city))}</button>`:"";
+    return `<section class="biography pop-panel"><h3>户口与世家</h3>${kpi}<table class="pop-table"><thead><tr><th>户籍</th><th>登记口</th><th>登记户</th></tr></thead><tbody>${rows}</tbody></table>
+      ${magistrates.length?`<p class="court-note">县令：${magistrates.map(([place,m])=>`${e(place.name)}由${e(m.name)}出任（能力 ${m.ability}）`).join("；")}。世家把持的县，编户登记看县令能力，玩家不能直接任免。</p>`:""}
+      ${clans?`<h4>在地世家</h4>${clans}`:`<p class="court-note">此地没有大族，县务由郡守兼领。</p>`}
+      ${own?`<div class="pop-actions">${inspect}${levy}</div><p class="court-note">户籍清查：编户登记率回升，一成五依附户括出改为编户，在地世家记怨；同处一年一次。征发档位作用于本方全境。</p>`:""}</section>`}
+  static bind(root,state,city,{reopen,toast,log,refresh}){const engine=state.engine,done=result=>{toast(result.ok?result.text:result.error);if(result.ok){log?.(result.text);refresh?.();reopen()}};
+    root.querySelector("[data-inspect-registry]")?.addEventListener("click",()=>done(engine.inspectRegistry(state,city.id)));
+    root.querySelector("[data-levy-mode]")?.addEventListener("change",event=>{engine.setLevyMode(state,state.playerForceId,event.target.value);reopen()});
+    root.querySelectorAll("[data-clan-action]").forEach(button=>button.onclick=()=>{const id=button.dataset.clan,action=button.dataset.clanAction;if(action==="suppress"&&!confirm(`抑制${engine.clanName(id)}：没入半数家财，境内地产减半；该族积怨极深，本族任职者忠诚下降。确定？`))return;
+      done(action==="court"?engine.courtClan(state,id):action==="summon"?engine.summonClanMember(state,id):engine.suppressClan(state,id))})}
+};

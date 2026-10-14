@@ -1,0 +1,484 @@
+{
+ "note": "世家：本郡、祖居（县名，空则取本郡最大据点）、地产份额（祖居处，本郡其余各处取其三成）、财富、才俊（出县令的能力基准）、成员（按名挂接现有人物）。曹豹为下邳人，不入谯县曹氏。",
+ "clans": [
+  {
+   "id": "xun",
+   "name": "颍川荀氏",
+   "commandery": "颍川郡",
+   "seat": "颍阴",
+   "land_share": 0.3,
+   "wealth": 6000,
+   "talent": 80,
+   "members": [
+    "荀彧",
+    "荀攸",
+    "荀谌",
+    "荀衍",
+    "荀悦",
+    "荀顗",
+    "荀粲",
+    "荀恽"
+   ]
+  },
+  {
+   "id": "chen_yc",
+   "name": "颍川陈氏",
+   "commandery": "颍川郡",
+   "seat": "许县",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 75,
+   "members": [
+    "陈群",
+    "陈纪",
+    "陈泰",
+    "陈谌"
+   ]
+  },
+  {
+   "id": "zhong",
+   "name": "颍川钟氏",
+   "commandery": "颍川郡",
+   "seat": "长社",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 75,
+   "members": [
+    "钟繇",
+    "钟会",
+    "钟毓"
+   ]
+  },
+  {
+   "id": "yuan_rn",
+   "name": "汝南袁氏",
+   "commandery": "汝南郡",
+   "seat": "平舆",
+   "land_share": 0.3,
+   "wealth": 9000,
+   "talent": 70,
+   "members": [
+    "袁绍",
+    "袁术",
+    "袁谭",
+    "袁熙",
+    "袁尚",
+    "袁胤",
+    "袁遗",
+    "袁买"
+   ]
+  },
+  {
+   "id": "yang_hn",
+   "name": "弘农杨氏",
+   "commandery": "恒农郡",
+   "seat": "华阴",
+   "land_share": 0.25,
+   "wealth": 6000,
+   "talent": 75,
+   "members": [
+    "杨彪",
+    "杨修"
+   ]
+  },
+  {
+   "id": "sima",
+   "name": "河内司马氏",
+   "commandery": "河内郡",
+   "seat": "温县",
+   "land_share": 0.25,
+   "wealth": 5000,
+   "talent": 80,
+   "members": [
+    "司马懿",
+    "司马朗",
+    "司马孚",
+    "司马师",
+    "司马昭",
+    "司马望",
+    "司马伷"
+   ]
+  },
+  {
+   "id": "zhuge",
+   "name": "琅邪诸葛氏",
+   "commandery": "琅邪国",
+   "seat": "诸县",
+   "land_share": 0.15,
+   "wealth": 2500,
+   "talent": 80,
+   "members": [
+    "诸葛亮",
+    "诸葛瑾",
+    "诸葛均",
+    "诸葛诞",
+    "诸葛恪",
+    "诸葛乔",
+    "诸葛瞻",
+    "诸葛玄"
+   ]
+  },
+  {
+   "id": "gu",
+   "name": "吴郡顾氏",
+   "commandery": "吴郡",
+   "seat": "吴县",
+   "land_share": 0.18,
+   "wealth": 4500,
+   "talent": 75,
+   "members": [
+    "顾雍",
+    "顾邵",
+    "顾谭",
+    "顾承",
+    "顾徽"
+   ]
+  },
+  {
+   "id": "lu",
+   "name": "吴郡陆氏",
+   "commandery": "吴郡",
+   "seat": "吴县",
+   "land_share": 0.18,
+   "wealth": 4500,
+   "talent": 80,
+   "members": [
+    "陆逊",
+    "陆绩",
+    "陆抗",
+    "陆凯",
+    "陆瑁",
+    "陆景"
+   ]
+  },
+  {
+   "id": "zhu",
+   "name": "吴郡朱氏",
+   "commandery": "吴郡",
+   "seat": "吴县",
+   "land_share": 0.1,
+   "wealth": 3000,
+   "talent": 65,
+   "members": [
+    "朱桓",
+    "朱据",
+    "朱异"
+   ]
+  },
+  {
+   "id": "sun",
+   "name": "富春孙氏",
+   "commandery": "吴郡",
+   "seat": "富春",
+   "land_share": 0.2,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "孙坚",
+    "孙策",
+    "孙权",
+    "孙翊",
+    "孙匡",
+    "孙静",
+    "孙贲",
+    "孙辅",
+    "孙瑜",
+    "孙皎",
+    "孙韶",
+    "孙桓",
+    "孙尚香",
+    "孙登",
+    "孙和",
+    "孙亮",
+    "孙休",
+    "孙峻",
+    "孙綝"
+   ]
+  },
+  {
+   "id": "yu",
+   "name": "会稽虞氏",
+   "commandery": "会稽郡",
+   "seat": "余姚",
+   "land_share": 0.2,
+   "wealth": 3500,
+   "talent": 70,
+   "members": [
+    "虞翻",
+    "虞汜",
+    "虞忠"
+   ]
+  },
+  {
+   "id": "he_kj",
+   "name": "会稽贺氏",
+   "commandery": "会稽郡",
+   "seat": "山阴",
+   "land_share": 0.15,
+   "wealth": 3000,
+   "talent": 65,
+   "members": [
+    "贺齐",
+    "贺达",
+    "贺邵"
+   ]
+  },
+  {
+   "id": "zhou_lj",
+   "name": "庐江周氏",
+   "commandery": "庐江郡",
+   "seat": "舒县",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 75,
+   "members": [
+    "周瑜",
+    "周循",
+    "周胤"
+   ]
+  },
+  {
+   "id": "cai",
+   "name": "襄阳蔡氏",
+   "commandery": "南郡",
+   "seat": "襄阳",
+   "land_share": 0.25,
+   "wealth": 7000,
+   "talent": 65,
+   "members": [
+    "蔡瑁",
+    "蔡中",
+    "蔡和",
+    "蔡勋"
+   ]
+  },
+  {
+   "id": "kuai",
+   "name": "襄阳蒯氏",
+   "commandery": "南郡",
+   "seat": "襄阳",
+   "land_share": 0.12,
+   "wealth": 3500,
+   "talent": 75,
+   "members": [
+    "蒯良",
+    "蒯越",
+    "蒯祺"
+   ]
+  },
+  {
+   "id": "pang",
+   "name": "襄阳庞氏",
+   "commandery": "南郡",
+   "seat": "襄阳",
+   "land_share": 0.1,
+   "wealth": 2000,
+   "talent": 80,
+   "members": [
+    "庞统",
+    "庞林",
+    "庞德公",
+    "庞山民",
+    "庞宏"
+   ]
+  },
+  {
+   "id": "ma_yc",
+   "name": "宜城马氏",
+   "commandery": "南郡",
+   "seat": "宜城",
+   "land_share": 0.15,
+   "wealth": 2500,
+   "talent": 70,
+   "members": [
+    "马良",
+    "马谡"
+   ]
+  },
+  {
+   "id": "wang_ty",
+   "name": "太原王氏",
+   "commandery": "太原郡",
+   "seat": "祁县",
+   "land_share": 0.25,
+   "wealth": 5000,
+   "talent": 75,
+   "members": [
+    "王允",
+    "王凌",
+    "王昶",
+    "王浑",
+    "王广"
+   ]
+  },
+  {
+   "id": "cui",
+   "name": "清河崔氏",
+   "commandery": "甘陵郡",
+   "seat": "",
+   "land_share": 0.2,
+   "wealth": 4500,
+   "talent": 75,
+   "members": [
+    "崔琰",
+    "崔林",
+    "崔州平"
+   ]
+  },
+  {
+   "id": "du_jz",
+   "name": "京兆杜氏",
+   "commandery": "京兆尹",
+   "seat": "杜陵",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 70,
+   "members": [
+    "杜畿",
+    "杜恕",
+    "杜预"
+   ]
+  },
+  {
+   "id": "ma_ff",
+   "name": "扶风马氏",
+   "commandery": "右扶风",
+   "seat": "槐里",
+   "land_share": 0.3,
+   "wealth": 3000,
+   "talent": 60,
+   "members": [
+    "马腾",
+    "马超",
+    "马休",
+    "马铁",
+    "马岱",
+    "马云騄"
+   ]
+  },
+  {
+   "id": "yong",
+   "name": "南中雍氏",
+   "commandery": "益州郡",
+   "seat": "滇池",
+   "land_share": 0.3,
+   "wealth": 2500,
+   "talent": 55,
+   "members": [
+    "雍闿"
+   ]
+  },
+  {
+   "id": "shi",
+   "name": "交趾士氏",
+   "commandery": "交趾郡",
+   "seat": "龙编",
+   "land_share": 0.35,
+   "wealth": 6000,
+   "talent": 65,
+   "members": [
+    "士燮",
+    "士壹",
+    "士徽",
+    "士䵋",
+    "士武",
+    "士匡"
+   ]
+  },
+  {
+   "id": "chen_xp",
+   "name": "下邳陈氏",
+   "commandery": "下邳国",
+   "seat": "下邳",
+   "land_share": 0.2,
+   "wealth": 4000,
+   "talent": 75,
+   "members": [
+    "陈珪",
+    "陈登",
+    "陈应"
+   ]
+  },
+  {
+   "id": "kong",
+   "name": "鲁国孔氏",
+   "commandery": "鲁国",
+   "seat": "鲁县",
+   "land_share": 0.25,
+   "wealth": 3000,
+   "talent": 70,
+   "members": [
+    "孔融"
+   ]
+  },
+  {
+   "id": "cao",
+   "name": "谯县曹氏",
+   "commandery": "谯郡",
+   "seat": "谯县",
+   "land_share": 0.3,
+   "wealth": 5000,
+   "talent": 70,
+   "members": [
+    "曹操",
+    "曹仁",
+    "曹洪",
+    "曹纯",
+    "曹休",
+    "曹真",
+    "曹丕",
+    "曹植",
+    "曹彰",
+    "曹昂",
+    "曹安民",
+    "曹爽",
+    "曹叡",
+    "曹熊",
+    "曹冲",
+    "曹宇",
+    "曹训",
+    "曹羲",
+    "曹彪",
+    "曹据"
+   ]
+  },
+  {
+   "id": "xiahou",
+   "name": "谯县夏侯氏",
+   "commandery": "谯郡",
+   "seat": "谯县",
+   "land_share": 0.2,
+   "wealth": 3500,
+   "talent": 70,
+   "members": [
+    "夏侯惇",
+    "夏侯渊",
+    "夏侯尚",
+    "夏侯霸",
+    "夏侯楙",
+    "夏侯玄",
+    "夏侯和",
+    "夏侯威",
+    "夏侯惠",
+    "夏侯德",
+    "夏侯恩",
+    "夏侯兰",
+    "夏侯杰",
+    "夏侯充"
+   ]
+  },
+  {
+   "id": "lu_zj",
+   "name": "涿郡卢氏",
+   "commandery": "涿郡",
+   "seat": "涿县",
+   "land_share": 0.15,
+   "wealth": 2500,
+   "talent": 70,
+   "members": [
+    "卢植",
+    "卢毓"
+   ]
+  }
+ ]
+}
