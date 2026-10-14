@@ -24,7 +24,7 @@ const fight=(attackerSoldiers,defenderSoldiers,attackerExtra={},defenderExtra={}
 
 // 1. 势均：打多个回合，以溃散或后撤收场；伤亡三分、守恒
 {const {attacker,defender,main}=fight(10000,10000);assert(main.rounds.length>=2,`势均之战应多回合，实为 ${main.rounds.length}`);assert(main.rounds.some(r=>/溃散|后撤/.test(r.note))||main.result==="stalemate");
-  for(const [side,army] of [["attacker",attacker],["defender",defender]]){const c=main.casualties[side],lost=10000-army.soldiers;assert.equal(c.killed+c.wounded+c.scattered,lost,`${side} 伤亡三分守恒`);assert(c.wounded>0&&c.killed>0);assert.equal(army.wounded,c.wounded,"伤员入营");assert(lost<10000*.6,"不会打到全军覆没")}
+  for(const [side,army] of [["attacker",attacker],["defender",defender]]){const c=main.casualties[side],lost=10000-army.soldiers;assert.equal(c.killed+c.wounded+c.scattered+c.captured,lost,`${side} 伤亡（含追击被俘）守恒`);assert(c.wounded>0&&c.killed>0);assert.equal(army.wounded,c.wounded,"伤员入营");assert(lost<10000*.6,"不会打到全军覆没")}
   assert(main.rounds[0].attackerMorale>main.rounds.at(-1).attackerMorale,"士气逐回合下跌");assert.match(main.text,/合，/);console.log(`势均 10000:10000 → ${main.rounds.length} 合 ${main.result}｜${main.text.split("｜").slice(-2).join("｜")}`)}
 // 2. 三倍兵力：攻方胜，守方溃退；守方损失远大于攻方
 {const {won,main,defender,attacker}=fight(24000,8000);assert(won,"三倍兵力应胜");assert(main.casualties.defender.killed+main.casualties.defender.scattered>main.casualties.attacker.killed+main.casualties.attacker.scattered);assert.equal(defender.stance,"败退");assert(attacker.veterans>0,"胜方产生老兵");console.log(`三倍 → ${main.rounds.length} 合，${main.text.split("｜").at(-2)}`)}
@@ -46,7 +46,26 @@ const fight=(attackerSoldiers,defenderSoldiers,attackerExtra={},defenderExtra={}
 // 7. 长推演：AI 对局不崩，兵员数值合法
 {const game=new GameState(structuredClone(scenario),{playerForceId:"cao"});game.observerMode=true;for(let i=0;i<90;i++)game.endTurn();for(const army of game.data.armies){assert(army.soldiers>=100&&army.wounded>=0&&army.veterans>=0&&army.veterans<=army.soldiers,`${army.name} 兵员数值越界`)}
   console.log(`九十日推演：${game.data.armies.length} 军团兵员合法，伤员 ${game.data.armies.reduce((n,a)=>n+a.wounded,0)}`)}
+// 9. W2 追击：骑兵多则俘获多；有序后撤者被俘少；俘虏随胜军押解
+{const horse=fight(15000,8000,{units:{infantry:5000,cavalry:10000,archers:0}},{retreatLine:0}),foot=fight(15000,8000,{},{retreatLine:0});
+  assert(horse.won&&foot.won);assert(horse.main.captured>foot.main.captured,`骑兵追击俘获更多：骑 ${horse.main.captured} / 步 ${foot.main.captured}`);assert.equal(horse.e.prisonerCount(horse.attacker.prisoners),horse.main.captured,"俘虏归胜军押解");assert(horse.main.rounds.at(-1).name==="追击");
+  const orderly=fight(15000,8000,{units:{infantry:5000,cavalry:10000,archers:0}},{retreatLine:60});assert(orderly.main.captured<horse.main.captured,"有序后撤被俘少");
+  assert(horse.e.pursuitStrength([horse.attacker])>foot.e.pursuitStrength([foot.attacker]));console.log(`追击：骑兵俘 ${horse.main.captured} / 步兵俘 ${foot.main.captured} / 有序后撤被俘 ${orderly.main.captured}`)}
+// 10. 包围歼灭：守方相邻无己方据点或均被敌军占住 → 被围歼，大部被俘
+{const {game,e,site,from,make}=fresh();game.data.armies=game.data.armies.filter(a=>a.city!==site.id);for(const id of game.data.rules.city_graph[site.id]){const c=game.data.cities.find(x=>x.id===id);if(c&&c.force==="cao")make(`B${id}`,"yuan",3000,{city:id})}
+  const defender=make("D","cao",6000,{retreatLine:0}),attacker=make("A","yuan",18000),events=[];assert.equal(e.retreatPath(game,site,defender),null,"四面受敌无退路");const won=e.resolveFieldBattle(attacker,[defender],from,site,"road",game,events),main=events.find(ev=>ev.phase==="野战"&&ev.rounds);
+  assert(won);assert(!game.data.armies.includes(defender),"被围歼");assert.match(main.text,/被围歼/);assert(main.captured>3000,`大部被俘：${main.captured}`);console.log(`围歼：俘 ${main.captured}｜${main.rounds.at(-1).note}`)}
+// 11. 战俘入营、收编、看守不足逃散、处置（释放加关系 / 换俘换回将领 / 坑杀失关系）、城池易主获释
+{const {game,e,make}=fresh();const home=game.data.cities.find(c=>c.force==="cao"&&c.garrison>3000),army=make("P","cao",5000,{city:home.id,prisoners:{yuan:2000,neutral:300}}),events=[];game.playerForceId="cao";e.resolvePrisoners(game,events);
+  assert.equal(e.prisonerCount(army.prisoners),0);assert.equal(home.prisoners.yuan,2000,"入城关押");assert(events.some(ev=>ev.phase==="战俘"));
+  const garrison=home.garrison;e.disposePrisoners(game,home.id,"levy");for(let i=0;i<5;i++)e.resolvePrisoners(game,[]);assert(home.garrison>garrison&&home.prisoners.yuan<2000,"收编逐日入守军");e.disposePrisoners(game,home.id,"levy");
+  const officer=game.data.officers.find(o=>o.force==="cao"&&o.status==="serving"&&o.name!=="曹操");Object.assign(officer,{status:"prisoner",capturedBy:"yuan",originalForce:"cao"});const relation=e.worldRelation(game,"cao","yuan");
+  const swap=e.disposePrisoners(game,home.id,"exchange","yuan");assert(swap.ok&&swap.text.includes(officer.name),"换俘换回将领");assert.equal(officer.status,"serving");assert(e.worldRelation(game,"cao","yuan")>=relation);
+  home.prisoners={liu:1000};const before=e.worldRelation(game,"cao","liu"),order=home.order;e.disposePrisoners(game,home.id,"execute","liu");assert(e.worldRelation(game,"cao","liu")<=before-25&&home.order<order,"坑杀失关系与民心");
+  home.prisoners={yuan:500,cao:0};home.prisonerHolder="cao";home.prisoners.yuan=500;home.force="yuan";home.prisoners.yuan=500;const g=home.garrison;e.resolvePrisoners(game,[]);assert(home.garrison===g+500&&!home.prisoners,"城池易主，被俘者获释归营");
+  const weak=game.data.cities.find(c=>c.force==="cao"&&c!==home);weak.garrison=100;weak.prisoners={yuan:3000};weak.prisonerHolder="cao";const ord=weak.order;e.resolvePrisoners(game,[]);assert(weak.prisoners.yuan<3000&&weak.order<ord,"看守不足则逃散、扰动治安");
+  const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(save));assert.deepEqual(restored.data.cities.find(c=>c.id===weak.id).prisoners,weak.prisoners,"战俘随存档往返")}
 // 8. 改编命令设撤退线；界面接线
 {const game=new GameState(structuredClone(scenario),{playerForceId:"cao"}),army=game.data.armies.find(a=>a.force==="cao"),events=[];game.engine.playerForceId="cao";game.engine.resolveOrder(game,{type:"reorganize_army",armyIds:[army.id],options:{units:{...army.units},retreatLine:45}},events);assert.equal(army.retreatLine,45,"改编可设撤退线");game.engine.resolveOrder(game,{type:"reorganize_army",armyIds:[army.id],options:{units:{...army.units},retreatLine:null}},events);assert.equal(army.retreatLine,undefined,"可恢复随战术");
-  const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");assert.match(app,/name="retreatLine"/);assert.match(app,/<h3>兵员与精锐<\/h3>/);assert.match(app,/function battleRoundsHtml\(event\)/);assert.equal((app.match(/\$\{battleRoundsHtml\((main|event|last)\)\}/g)||[]).length,3,"三处战报都用逐回合表");assert.match(fs.readFileSync(path.join(root,"index.html"),"utf8"),/engine\/battle\.js\?v=/)}
+  const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");assert.match(app,/name="retreatLine"/);assert.match(app,/<h3>兵员与精锐<\/h3>/);assert.match(app,/function battleRoundsHtml\(event\)/);assert.match(app,/战俘营 · /);assert.match(app,/data-prisoner-action="exchange"/);assert.equal((app.match(/\$\{battleRoundsHtml\((main|event|last)\)\}/g)||[]).length,3,"三处战报都用逐回合表");assert.match(fs.readFileSync(path.join(root,"index.html"),"utf8"),/engine\/battle\.js\?v=/)}
 console.log("W1 战斗核心通过：分回合至溃散 / 伤亡三分 / 撤退线 / 溃散线与老兵 / 伤员康复与归建 / 初始老兵与存档");

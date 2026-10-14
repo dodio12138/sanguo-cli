@@ -798,7 +798,31 @@
     "wound_recover_city": 0.03,
     "wound_recover_field": 0.005,
     "wound_death_field": 0.01,
-    "wound_death_starving": 0.05
+    "wound_death_starving": 0.05,
+    "pursuit_base": 0.15,
+    "pursuit_cavalry": 0.6,
+    "pursuit_cap": 0.6,
+    "pursuit_capture": 0.8,
+    "pursuit_loss": 0.18,
+    "orderly_pursuit_factor": 0.3,
+    "encircle_capture": 0.6,
+    "encircle_scatter_capture": 0.8,
+    "encircle_commander_capture": 0.6
+  },
+  "prisoners": {
+    "note": "俘虏随胜军押解（口粮按半数计、拖慢行军），到己方城后关押；收编逐日转为守军，看守不足则逃散并扰动治安",
+    "field_escape": 0.01,
+    "levy_rate": 0.04,
+    "guard_ratio": 1,
+    "unrest_escape": 0.02,
+    "unrest_order": 0.5,
+    "release_relation_per_1000": 3,
+    "release_relation_cap": 15,
+    "release_order": 3,
+    "execute_relation": -30,
+    "execute_relation_all": -5,
+    "execute_order": -15,
+    "exchange_per_officer": 1000
   },
   "movement": {
     "road_cost": 8,
