@@ -9,6 +9,7 @@ const keyframes=[...motion.matchAll(/@keyframes [\w-]+\{([^@]*?)\}\s*(?=@keyfram
 for(const property of keyframes.match(/[a-z-]+(?=:)/g)||[])assert(["opacity","transform"].includes(property),`动效关键帧只改 opacity/transform，发现 ${property}`);
 assert(!/infinite/.test(motion),"动效不做常驻循环");
 assert(!/canvas|#mapCanvas/.test(motion),"动效不碰舆图画布");
+assert(!/\.os-start-menu[^{]*\{[^}]*animation|\.os-task-button[^{]*\{[^}]*animation/.test(motion),"开始菜单与任务栏按钮不做入场动效（会闪）");
 assert.match(motion,/html\.ui-motion-off \*[^{]*\{animation:none!important;transition:none!important\}/,"设置可整体关闭动效");
 assert.match(buttons,/prefers-reduced-motion:reduce[\s\S]*translate:none/,"系统减少动态时按钮不下沉");
 assert.match(html,/id="gameUiMotion"/);assert.match(app,/uiMotion:true/);assert.match(app,/classList\.toggle\("ui-motion-off",userSettings\.uiMotion===false\)/);
