@@ -153,6 +153,15 @@
      "糜芳"
     ],
     "basis": "陈珪下邳淮浦人"
+   },
+   {
+    "city": "qiao",
+    "governor": null,
+    "staff": [
+     "曹嵩",
+     "曹德"
+    ],
+    "basis": "曹嵩、曹德居谯，后避难琅邪"
    }
   ],
   "194_puyang": [
@@ -247,6 +256,23 @@
      "崔琰"
     ],
     "basis": "崔琰清河东武城人"
+   },
+   {
+    "city": "jianye",
+    "governor": null,
+    "staff": [
+     "薛礼",
+     "于糜"
+    ],
+    "basis": "薛礼据秣陵，于糜为刘繇部将（演义）"
+   },
+   {
+    "city": "commandery_city_029",
+    "governor": null,
+    "staff": [
+     "毛晖"
+    ],
+    "basis": "毛晖叛曹应吕布"
    }
   ],
   "200_guandu": [
@@ -301,11 +327,11 @@
    },
    {
     "city": "baima",
-    "governor": null,
+    "governor": "刘延",
     "staff": [
      "秦琪"
     ],
-    "basis": "刘延为东郡太守守白马（名册无其人）；秦琪为演义黄河渡口守将"
+    "basis": "刘延为东郡太守守白马（名册无其人）；秦琪为演义黄河渡口守将；刘延为东郡太守守白马"
    },
    {
     "city": "chenliu",
@@ -410,9 +436,14 @@
      "李孚",
      "苏由",
      "刘氏",
-     "甄氏"
+     "甄氏",
+     "韩猛",
+     "蒋奇",
+     "马延",
+     "张顗",
+     "审荣"
     ],
-    "basis": "审配总幕府守邺；袁绍主力临黄河"
+    "basis": "审配总幕府守邺；袁绍主力临黄河；韩猛督运；蒋奇救乌巢（演义）；马延、张顗为袁氏部将；审荣为审配侄"
    },
    {
     "city": "linzi",
@@ -442,8 +473,10 @@
    {
     "city": "commandery_city_021",
     "governor": "沮鹄",
-    "staff": [],
-    "basis": "沮鹄为邯郸令"
+    "staff": [
+     "尹楷"
+    ],
+    "basis": "沮鹄为邯郸令；尹楷屯毛城，护上党粮道"
    },
    {
     "city": "beiping",
@@ -562,13 +595,13 @@
    },
    {
     "city": "lujiang",
-    "governor": null,
+    "governor": "李术",
     "staff": [
      "陈武",
      "黄盖",
      "孙辅"
     ],
-    "basis": "陈武庐江人"
+    "basis": "陈武庐江人；李术为孙策所署庐江太守"
    },
    {
     "city": "xiakou",
@@ -686,6 +719,33 @@
     "governor": "士武",
     "staff": [],
     "basis": "士武为南海太守"
+   },
+   {
+    "city": "henei",
+    "governor": "魏种",
+    "staff": [],
+    "basis": "魏种为河内太守"
+   },
+   {
+    "city": "commandery_city_003",
+    "governor": "王邑",
+    "staff": [
+     "卫固",
+     "范先"
+    ],
+    "basis": "王邑为河东太守，卫固、范先为郡掾"
+   },
+   {
+    "city": "pingyuan",
+    "governor": "高蕃",
+    "staff": [],
+    "basis": "高蕃为袁氏部将，屯河上"
+   },
+   {
+    "city": "commandery_city_017",
+    "governor": "甄俨",
+    "staff": [],
+    "basis": "甄俨为中山无极甄氏"
    }
   ],
   "208_red_cliffs": [
@@ -730,9 +790,10 @@
      "文聘",
      "夏侯恩",
      "夏侯德",
-     "淳于导"
+     "淳于导",
+     "蔡勋"
     ],
-    "basis": "曹仁守江陵；虎豹骑追至长坂；演义蔡瑁、张允督水军"
+    "basis": "曹仁守江陵；虎豹骑追至长坂；演义蔡瑁、张允督水军；蔡勋为蔡瑁宗族（演义）"
    },
    {
     "city": "xian_01_03",
@@ -1266,6 +1327,14 @@
     "governor": "姜叙",
     "staff": [],
     "basis": "姜叙屯历城"
+   },
+   {
+    "city": "changan",
+    "governor": null,
+    "staff": [
+     "刘雄鸣"
+    ],
+    "basis": "刘雄鸣据蓝田，从马超"
    }
   ],
   "219_xiangyang": [
@@ -1393,7 +1462,7 @@
    },
    {
     "city": "chengdu",
-    "governor": null,
+    "governor": "杨洪",
     "staff": [
      "诸葛亮",
      "许靖",
@@ -1419,7 +1488,7 @@
      "傅彤",
      "吴班"
     ],
-    "basis": "诸葛亮留守成都，足食足兵"
+    "basis": "诸葛亮留守成都，足食足兵；杨洪为蜀郡太守"
    },
    {
     "city": "xian_09_04",
@@ -1443,9 +1512,10 @@
      "潘濬",
      "王甫",
      "马良",
-     "费诗"
+     "费诗",
+     "庞林"
     ],
-    "basis": "糜芳为南郡太守；费诗授关羽前将军印"
+    "basis": "糜芳为南郡太守；费诗授关羽前将军印；庞林为荆州治中从事"
    },
    {
     "city": "xian_extra_08",
@@ -1475,6 +1545,30 @@
     "governor": "吕岱",
     "staff": [],
     "basis": "吕岱为庐陵太守"
+   },
+   {
+    "city": "lingling",
+    "governor": "郝普",
+    "staff": [
+     "习珍"
+    ],
+    "basis": "郝普为零陵太守，习珍为零陵北部都尉"
+   },
+   {
+    "city": "commandery_city_125",
+    "governor": null,
+    "staff": [
+     "詹晏"
+    ],
+    "basis": "詹晏为宜都郡将"
+   },
+   {
+    "city": "wuling",
+    "governor": null,
+    "staff": [
+     "樊伷"
+    ],
+    "basis": "樊伷为武陵从事"
    }
   ]
  }

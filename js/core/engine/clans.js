@@ -5,7 +5,7 @@
 const POP=()=>window.RuleEngine.POP;
 Object.assign(window.RuleEngine.prototype,{
   clanRules(){return this._clanRules??=this.buildClanRules()},
-  buildClanRules(){return {member_bonus:5,member_cap:25,tax_penalty:15,forced_levy_penalty:15,favor_decay:1,grievance_decay:1.5,compliance_scale:1.5,compliance_line:60,total_share_cap:.7,other_place_share:.3,
+  buildClanRules(){return {member_bonus:5,member_cap:25,tax_penalty:15,forced_levy_penalty:15,favor_decay:1,grievance_decay:1.5,compliance_scale:1.5,compliance_line:60,total_share_cap:.7,max_clans_per_place:4,other_place_share:.3,
     magistrate_share:.15,rent_per_thousand:1.5,
     inspection:{gold:300,per_10k:20,lift:.06,cap:.98,return_dependents:.15,grievance:60,cooldown_days:360,order_line:45,order:3},
     court:{gold:500,favor:8,cooldown_days:60},summon:{min_relation:55,favor:5},
@@ -22,6 +22,8 @@ Object.assign(window.RuleEngine.prototype,{
     for(const clan of this.data.clans||[]){if(state.clans.byId[clan.id])continue;const local=places.filter(place=>place.commandery===clan.commandery);if(!local.length)continue;const named=local.filter(place=>clan.seat&&[place.name,`${place.name}县`].includes(clan.seat)||place.name===`${clan.seat}县`),seats=named.length?named:[local.slice().sort((a,b)=>(b.population||0)-(a.population||0))[0]];
       const presence={};for(const place of local)presence[place.id]=Math.round((seats.includes(place)?clan.land_share:clan.land_share*rules.other_place_share)*1000)/1000;
       state.clans.byId[clan.id]={presence,wealth:clan.wealth||0,favor:{},grievance:{},courted:{},seatIds:seats.map(place=>place.id)}}
+    // 同一处至多四家有地产（份额最小者让出），合计不超过上限
+    for(const place of places){const ranked=Object.entries(this.clanSharesAt(state,place.id)).sort((a,b)=>b[1]-a[1]);for(const [id] of ranked.slice(rules.max_clans_per_place))delete state.clans.byId[id].presence[place.id]}this.clanChanged();
     for(const place of places){const shares=this.clanSharesAt(state,place.id),sum=Object.values(shares).reduce((n,v)=>n+v,0);if(sum>rules.total_share_cap)for(const id of Object.keys(shares)){const presence=state.clans.byId[id].presence;presence[place.id]=Math.round(presence[place.id]*rules.total_share_cap/sum*1000)/1000}}this.clanChanged()},
   // 地产份额按处所建索引；份额变动（开局、抑制豪强、读档）后调用 clanChanged 重建。
   clanSharesAt(state,placeId){if(this._clanShareState!==state.clans||!this._clanShareIndex){this._clanShareState=state.clans;this._clanShareIndex=new Map();for(const [id,clan] of Object.entries(state.clans?.byId||{}))for(const [place,share] of Object.entries(clan.presence))if(share>0){const row=this._clanShareIndex.get(place)||{};row[id]=share;this._clanShareIndex.set(place,row)}}return this._clanShareIndex.get(placeId)||{}},
