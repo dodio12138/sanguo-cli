@@ -25,7 +25,9 @@ window.TerminalSelect = (() => {
   const absorbTitle=element=>{if(!element?.hasAttribute?.("title"))return;const message=element.getAttribute("title");if(message&&!element.dataset.tip)element.dataset.tip=message;element.removeAttribute("title")};
   const scan=root=>{if(root.matches?.("select"))enhance(root);root.querySelectorAll?.("select").forEach(enhance);absorbTitle(root);root.querySelectorAll?.("[title]").forEach(absorbTitle)};
   const absorbAdded=node=>{if(node.nodeType!==1)return;scan(node);const host=node.parentNode;if(host&&controls.has(host))sync(controls.get(host))};
-  scan(document);new MutationObserver(records=>records.forEach(record=>{if(record.type==="attributes")absorbTitle(record.target);else record.addedNodes.forEach(absorbAdded)})).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["title"]});
+  scan(document);new MutationObserver(records=>{records.forEach(record=>{if(record.type==="attributes")absorbTitle(record.target);else record.addedNodes.forEach(absorbAdded)});
+    // 面板重绘换掉了正展开的下拉框：收起浮在外层的旧列表，免得留下点不动的残影。
+    if(openControl&&!openControl.root.isConnected)close(openControl)}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["title"]});
   document.addEventListener("pointerdown",event=>{if(openControl&&!openControl.root.contains(event.target)&&!openControl.list.contains(event.target))close(openControl)});
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&openControl)close(openControl)},true);
   return {enhance,scan,closeAll,refresh:select=>{const control=controls.get(select);if(control)sync(control)},placement};

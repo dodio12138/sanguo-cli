@@ -41,6 +41,8 @@ Object.assign(window.RuleEngine.prototype,{
     if(involved)events.push({phase:"后勤",armyId:army.id,siteId:node.id,lv:army.force===state.playerForceId?2:1,text:`${raider.name}于${node.name}截获${army.name}粮队：缴粮 ${captured} 石，余者焚毁，护送 ${convoy.escort} 人溃散`});return true},
   // 每日推进运粮队：逐段前行、途损；进入有敌军之处被截（守在路旁一段内的袭扰部队也会出击）；到达即交粮，护送回营。军团若已转移则改道追送。
   advanceConvoys(state,events){const r=this.fieldLogisticsRules(),days=GameClock.factor(state)*10;this.aiRaidPosture(state);
+    // 军团解散、覆没或并编后，在途粮队与护送折返来源城（来源城已易手则就地散失）。
+    const ledger=state.convoyLedger||{},alive=new Set(this.data.armies.map(a=>a.id));for(const [armyId,c] of Object.entries(ledger)){if(alive.has(armyId))continue;const back=this.data.cities.find(city=>city.id===c.sourceId&&city.force===c.force);if(back){back.localFood=(back.localFood||0)+Math.floor(c.food);back.garrison=(back.garrison||0)+c.escort;if(c.force===state.playerForceId)events.push({phase:"后勤",siteId:back.id,text:`${c.armyName}已不在，粮队折返${back.name}：交还粮 ${Math.floor(c.food)} 石、护送 ${c.escort} 人`})}}
     for(const army of this.data.armies){const convoy=army.convoy;if(!convoy)continue;convoy.food*=Math.max(0,1-r.convoy_loss_per_day*days);convoy.legLeft-=days;
       while(army.convoy&&convoy.legLeft<=0){if(convoy.index>=convoy.path.length-1)break;convoy.index++;const nodeId=convoy.path[convoy.index],node=this.data.cities.find(c=>c.id===nodeId),hostile=army2=>army2.force!==army.force&&army2.soldiers>=100&&this.worldWar(state,army2.force,army.force),present=this.data.armies.find(a=>a.city===nodeId&&!a.siegeTarget&&hostile(a)),lurking=this.data.armies.find(a=>a.raiding&&hostile(a)&&(this.data.rules.city_graph[a.city]||[]).includes(nodeId));
         if(node&&(present||lurking)&&this.interceptConvoy(state,army,present||lurking,node,!present||!!present.raiding,events))break;
@@ -48,7 +50,8 @@ Object.assign(window.RuleEngine.prototype,{
       if(!army.convoy||convoy.index<convoy.path.length-1)continue;
       const at=convoy.path[convoy.index];if(at!==army.city){const path=this.graphPath(at,army.city,r.convoy_max_hops);if(path&&path.length>1){convoy.path=[...convoy.path.slice(0,convoy.index),...path];convoy.legLeft=this.legDaysBetween(path[0],path[1]);continue}const back=this.data.cities.find(c=>c.id===convoy.sourceId);if(back){back.localFood=(back.localFood||0)+Math.floor(convoy.food);back.garrison=(back.garrison||0)+convoy.escort}army.convoy=null;army.supplyStatus="粮队追送不及，折返";continue}
       army.stores??={gold:0,food:0,silk:0};army.stores.food+=Math.floor(convoy.food);const source=this.data.cities.find(c=>c.id===convoy.sourceId);if(source&&source.force===army.force)source.garrison=(source.garrison||0)+convoy.escort;army.convoy=null;army.supplyStatus="粮道畅通";army.lastSupply={turn:state.turn,sourceId:convoy.sourceId,food:Math.floor(convoy.food)};
-      if(army.force===state.playerForceId)events.push({phase:"后勤",armyId:army.id,text:`粮队抵${army.name}营：交粮 ${Math.floor(convoy.food)} 石（${state.turn-convoy.departedTurn} 日）`})}},
+      if(army.force===state.playerForceId)events.push({phase:"后勤",armyId:army.id,text:`粮队抵${army.name}营：交粮 ${Math.floor(convoy.food)} 石（${state.turn-convoy.departedTurn} 日）`})}
+    state.convoyLedger=Object.fromEntries(this.data.armies.filter(a=>a.convoy).map(a=>[a.id,{sourceId:a.convoy.sourceId,force:a.force,food:a.convoy.food,escort:a.convoy.escort,armyName:a.name}]))},
   supplyCut(state,army){return Number.isFinite(army?.supplyCutTurn)&&state.turn-army.supplyCutTurn<=this.fieldLogisticsRules().cut_days},
 
   // 袭扰粮道：玩家指令设定；离开驻地即自动解除。AI 骑兵占优、闲置、且附近有敌方粮道的军团会自行袭扰。

@@ -1,7 +1,7 @@
 /* 汉庭窗口、官制图与城市页官署三栏。配色沿用终端主题：底 #101710 / 线 #536044 / 金 #c6a15b / 汉赤 #9a3d33。 */
 .court-dialog{width:min(820px,calc(100vw - 24px));max-width:none}
 .court-chart-dialog{width:min(1180px,calc(100vw - 24px));max-width:none}
-.court-content{display:grid;gap:10px;font-size:10px}
+.court-content{display:grid;gap:10px;font-size:10px;align-content:start}
 /* 窗口内标签页（汉庭窗口、城市官署共用）：统一的终端页签 */
 .ui-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-dim);padding-bottom:6px}
 .ui-tabs button{border:1px solid var(--line-dim);padding:5px 12px;background:#0b100c;color:var(--muted);font-size:10px;cursor:pointer}
