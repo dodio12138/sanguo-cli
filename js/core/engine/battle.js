@@ -5,7 +5,7 @@ Object.assign(window.RuleEngine.prototype,{
   veteranRatio(army){return Math.max(0,Math.min(1,(army?.veterans||0)/Math.max(1,army?.soldiers||0)))},
   veteranTier(army){const percent=this.veteranRatio(army)*100;let name="新募";for(const [floor,label] of this.battleRules().tiers)if(percent>=floor)name=label;return name},
   // 溃散线：统率高、老兵多则更能撑；撤退线：玩家可设，未设时按战术取默认（猛攻者不主动撤）。
-  routLine(army){const rules=this.battleRules(),commander=this.data.officers.find(o=>o.id===army.commanderOfficerId)||this.data.officers.find(o=>o.name===army.commander),command=commander?.command??50;return Math.round(Math.max(rules.rout_min,Math.min(rules.rout_max,rules.rout_line-(command-50)*rules.rout_command_scale-this.veteranRatio(army)*rules.rout_veteran_shift)))},
+  routLine(army){const rules=this.battleRules(),commander=this.data.officers.find(o=>o.id===army.commanderOfficerId)||this.data.officers.find(o=>o.name===army.commander),command=commander?.command??50;return Math.round(Math.max(rules.rout_min,Math.min(rules.rout_max,rules.rout_line-(command-50)*rules.rout_command_scale-this.veteranRatio(army)*rules.rout_veteran_shift+(this.organizationRoutShift?.(null,army)||0))))},
   retreatLine(army){const value=Number.isFinite(army?.retreatLine)?army.retreatLine:this.battleRules().retreat_line_by_tactic[army?.tactic||"balanced"]??30;return Math.max(0,Math.min(80,value))},
   // 新开战局的初始老兵按训练度估算；战中新建的军团为 0。
   initialVeterans(army){const rule=this.battleRules().veteran_initial;return Math.round((army.soldiers||0)*Math.max(0,Math.min(.9,((army.training??50)-rule.floor)*rule.scale/100)))},
