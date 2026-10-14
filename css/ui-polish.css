@@ -511,3 +511,9 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .message-tray b{margin-left:4px;padding:0 4px;background:var(--amber);color:#11170f;font-size:8px}.message-tray.has-urgent b{background:var(--red);color:#fff}
 .briefing-alerts{border:1px solid var(--amber)}
 .report-filter{float:right;display:inline-flex;align-items:center;gap:4px;color:var(--muted)}
+
+/* 战俘营：每行来源势力 + 处置按钮 */
+.prisoner-row b{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px}
+.prisoner-actions{display:inline-flex;gap:3px}
+.prisoner-panel button{border:1px solid var(--line-dim);padding:2px 6px;background:#0b100c;color:#cfc89c;font-size:9px;cursor:pointer}
+.prisoner-panel button.danger{border-color:#7a3a30;color:#e09080}

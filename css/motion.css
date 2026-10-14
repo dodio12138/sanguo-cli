@@ -20,9 +20,7 @@ dialog.os-dialog-window::backdrop{animation:ui-fade var(--motion-base) ease-out}
 .game-started .os-window:not(.is-minimized):not(.is-closed){animation:ui-pop var(--motion-base) var(--motion-ease)}
 dialog.os-dialog-dragging,.os-window.is-maximized{animation:none}
 
-/* 开始菜单、任务栏按钮 */
-.os-start-menu:not([hidden]){transform-origin:left bottom;animation:ui-rise var(--motion-fast) var(--motion-ease)}
-.os-task-button:not([hidden]){animation:ui-fade var(--motion-base) ease-out}
+/* 开始菜单与任务栏按钮不做入场动效：菜单从透明淡入像闪一下；任务栏按钮在最小化 / 还原时会先隐后显，淡入重播成闪烁。 */
 
 /* 按钮的颜色渐变与按下下沉在 button-states.css（按钮交互状态的唯一入口） */
 
