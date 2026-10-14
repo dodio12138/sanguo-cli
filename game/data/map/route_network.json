@@ -255,7 +255,7 @@
     {
       "a": "commandery_city_127",
       "b": "commandery_city_064",
-      "kind": "road",
+      "kind": "mountain",
       "name": "阴平道"
     },
     {
@@ -375,7 +375,7 @@
     {
       "a": "chengdu",
       "b": "commandery_city_065",
-      "kind": "road",
+      "kind": "mountain",
       "name": "青衣道"
     },
     {
@@ -789,7 +789,7 @@
     {
       "a": "commandery_city_090",
       "b": "commandery_city_091",
-      "kind": "road",
+      "kind": "mountain",
       "name": "上谷道"
     },
     {
@@ -1769,7 +1769,7 @@
     {
       "a": "yongan",
       "b": "badong",
-      "kind": "road",
+      "kind": "mountain",
       "name": "巴郡道"
     },
     {
@@ -1781,7 +1781,7 @@
     {
       "a": "fuling",
       "b": "jiangzhou",
-      "kind": "road",
+      "kind": "mountain",
       "name": "巴郡道"
     },
     {
@@ -2099,13 +2099,13 @@
     {
       "a": "commandery_city_077",
       "b": "xian_13_02",
-      "kind": "mountain",
+      "kind": "road",
       "name": "武威郡县道"
     },
     {
       "a": "commandery_city_077",
       "b": "xian_13_04",
-      "kind": "mountain",
+      "kind": "road",
       "name": "武威郡县道"
     },
     {
@@ -2423,7 +2423,7 @@
     {
       "a": "commandery_city_057",
       "b": "xian_27_03",
-      "kind": "mountain",
+      "kind": "road",
       "name": "广汉郡县道"
     },
     {
@@ -2705,7 +2705,7 @@
     {
       "a": "ji",
       "b": "xian_39_03",
-      "kind": "mountain",
+      "kind": "road",
       "name": "广阳郡县道"
     },
     {
