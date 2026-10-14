@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import {appSource} from "./app-source.mjs";
 globalThis.window=globalThis;await import("../js/ui/map-view.js");
 const city={id:"xu",name:"许昌",x:3,y:4,force:"cao",province:"豫州",commandery:"颍川郡"},county={name:"许县",cityId:"xu",population:12345,agriculture:50,commerce:60,order:70};
 const view=Object.create(MapView.prototype);Object.assign(view,{territoryRadius:8,state:{layer:"political",playerForceId:"cao",intelligence:{cities:{}},data:{cities:[city],counties:[county],forces:[{id:"cao",name:"曹操"}]}},politicalOwner:()=>({force:{name:"袁绍"},distance:0,administrative:true}),terrainDef:()=>({name:"平原"})});
@@ -21,6 +22,6 @@ console.log("舆图提示与布局通过：势力和州郡县 / 不暴露户数 
   armyView.pick({clientX:(3+.78)*10,clientY:(4+.7)*10});assert.deepEqual(picked,["a1"],"点击己方军团标记应打开详情");
   armyView.pick({clientX:(8+.78)*10,clientY:(2+.7)*10});assert.deepEqual(picked,["a1"],"未探明敌军不可点选");
   armyView.state.intelligence.armies.a2=1;armyView.pick({clientX:(8+.78)*10,clientY:(2+.7)*10});assert.deepEqual(picked,["a1","a2"],"探明后可点开敌军情报");
-  const source=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");assert.ok(source.includes("map.onArmyPick=army=>openArmyDetail(army)"),"地图点击军团须接入军团详情");assert.ok(/if\(intel<3\)\{if\(intel>=1\)openEnemyArmyDetail/.test(source),"情报不足时只显示敌军情报");
+  const source=appSource();assert.ok(source.includes("map.onArmyPick=army=>openArmyDetail(army)"),"地图点击军团须接入军团详情");assert.ok(/if\(intel<3\)\{if\(intel>=1\)openEnemyArmyDetail/.test(source),"情报不足时只显示敌军情报");
 }
 console.log("军团点选与迷雾通过：己方点开详情 / 未探明不可点 / 探明后显示有限情报");

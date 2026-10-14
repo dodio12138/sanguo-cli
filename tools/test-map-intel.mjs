@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;
 await import("../js/core/map-grid.js");
@@ -103,7 +104,7 @@ if(!(hoverCall>siegeCall))throw new Error("悬停光标框必须在情报与军�
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 if(!html.includes('<button data-layer="intel">情报</button>'))throw new Error("舆图图层按钮缺少情报入口");
 if(!html.includes("F1～F6"))throw new Error("帮助文本未更新为六个图层");
-const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
+const app=appSource();
 if(!app.includes('intel:{label:"情报"'))throw new Error("图层图例缺少情报说明");
 if(!/"terrain","political","province","commandery","supply","intel"/.test(app))throw new Error("快捷键未包含情报图层");
 if(!app.includes("openEnemyCityDetail"))throw new Error("敌城档案缺少情报遮蔽视图");

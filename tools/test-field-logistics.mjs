@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -42,7 +43,7 @@ const days=(game,e,n,events=[])=>{for(let i=0;i<n;i++){game.turn++;e.advanceConv
 {const {game,e,army}=setup();game.playerForceId="liu";game.diplomacy.wars.push("yuan");e.declareWorldWar(game,"cao","yuan",[],"测试");FiscalSystem.consumeArmy(game,army,[]);const node=army.convoy.path[1],ai={id:"Q",name:"袁骑",force:"yuan",city:(game.data.rules.city_graph[node]||[])[0],soldiers:4000,units:{infantry:500,cavalry:3500,archers:0},morale:70,stores:{food:0}};game.data.armies.push(ai);e.aiRaidPosture(game);assert(ai.raiding,"AI 骑兵自行袭扰")}
 // 8. 存档往返与界面接线
 {const {game,e,army}=setup();FiscalSystem.consumeArmy(game,army,[]);army.carryDays=20;army.escortLevel="heavy";const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(save));const back=restored.data.armies.find(a=>a.id==="F");assert.deepEqual(back.convoy,army.convoy);assert.equal(back.carryDays,20);assert.equal(back.escortLevel,"heavy");
-  const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");for(const token of ["data-carry-days","data-escort-level","data-army-raid","data-build-depot"])assert(app.includes(token),token);assert.match(view,/drawSupplyLines\(c,m\)/)}
+  const app=appSource(),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");for(const token of ["data-carry-days","data-escort-level","data-army-raid","data-build-depot"])assert(app.includes(token),token);assert.match(view,/drawSupplyLines\(c,m\)/)}
 // 军团解散或覆没：在途粮队与护送折返来源城
 {const {game,e,army}=setup();game.playerForceId="cao";FiscalSystem.consumeArmy(game,army,[]);days(game,e,1);const source=game.data.cities.find(c=>c.id===army.convoy.sourceId),food=source.localFood,garrison=source.garrison,escort=army.convoy.escort;game.data.armies=game.data.armies.filter(a=>a!==army);const events=days(game,e,1);
   assert(source.localFood>food,"粮折返来源城");assert.equal(source.garrison,garrison+escort,"护送归还守军");assert(events.some(ev=>/折返/.test(ev.text)));assert(!Object.keys(game.convoyLedger).length,"台账清空")}

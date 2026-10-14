@@ -50,14 +50,17 @@ let z=10;
 const elements=new Map();
 const $=id=>{if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id)};
 const document={querySelectorAll:()=>[...elements.values()].filter(element=>element.open)};
-const context=vm.createContext({$,state,document,MapGrid,getComputedStyle:element=>element.style,
-  forceBy:id=>state.data.forces.find(force=>force.id===id),esc:value=>String(value??""),
-  toast(){},submit:()=>true,FiscalUI,openResourceDetail(){},warPlanHtml:()=>"",aiBridge:{audit:[]},map:{setPlannedRoute(){}},
-  cityTargetCommandIds:new Set(state.data.commandCatalog.commands.map(command=>command.id)),loader:{}});
+// 界面模块：载入注册表与相关模块，以桩对象充当壳的 app 上下文；壳内的关窗与迷雾判定函数原样取自 app.js
+const loader={},context=vm.createContext({$,state,document,MapGrid,FiscalUI,getComputedStyle:element=>element.style,loader});context.window=context;
 vm.runInContext(fs.readFileSync(new URL("../js/ui/command-planner.js",import.meta.url),"utf8").replace("window.CommandPlanner","globalThis.CommandPlanner"),context);
 vm.runInContext(fs.readFileSync(new URL("../js/ui/population-ui.js",import.meta.url),"utf8").replace("window.PopulationUI","globalThis.PopulationUI"),context);
-vm.runInContext(source.slice(source.indexOf("  function closeTopDialog("),source.indexOf("  function renderAISuggestions(")),context);
-const {openLedger,openArmyDetail,openCityDetail,openOfficerDetail,openBuildingPlanner,openAdministrationPlanner,openArmyOfficePlanner,openReorganizePlanner,openTroopTransferPlanner,openCityCommands,closeTopDialog}=context;
+const shellFunction=name=>{const start=source.indexOf(`  function ${name}(`);assert(start>=0,name);const end=source.indexOf("\n  function ",start+1);return source.slice(start,end)};
+vm.runInContext(["closeTopDialog","cityIntel","fogNumber"].map(shellFunction).join("\n")+"\nglobalThis.shell={closeTopDialog,cityIntel,fogNumber};",context);
+context.map={setPlannedRoute(){},intelLevel:()=>3,armyIntelLevel:()=>3};
+for(const file of ["registry","command-book","resources","ledgers","planners","city-detail","army-detail","battle-detail","officers"])vm.runInContext(fs.readFileSync(new URL(`../js/ui/app/${file}.js`,import.meta.url),"utf8"),context);
+const app={$,state,map:context.map,loader,forceBy:id=>state.data.forces.find(force=>force.id===id),esc:value=>String(value??""),toast(){},submit:()=>true,renderOrders(){},renderSelection(){},aiBridge:{audit:[]},...context.shell};
+context.SanguoApp.mount(["commandBook","resources","ledgers","planners","cityDetail","armyDetail","battleDetail","officers"],app);
+const {openLedger,openArmyDetail,openCityDetail,openOfficerDetail,openBuildingPlanner,openAdministrationPlanner,openArmyOfficePlanner,openReorganizePlanner,openTroopTransferPlanner,openCityCommands,closeTopDialog}=app;
 const city=state.data.cities.find(city=>city.force==="cao"&&(city.type||"city")==="city");
 const army=state.data.armies.find(army=>army.force==="cao");
 const officer=state.data.officers.find(officer=>officer.force==="cao"&&officer.status==="serving");
@@ -82,7 +85,8 @@ assert.equal($("plannerDialog").open,false);assert.equal($("officerDetailDialog"
 
 for(const id of ["form_army","reorganize_army","return_garrison","construct_building","agriculture"]){
   const command=state.data.commandCatalog.commands.find(command=>command.id===id);
-  context.renderCommandBook(command.categoryId,city);$("commandDialog").showModal();
+  // 军团类命令不以城池为目标，按总命令书打开
+  app.renderCommandBook(command.categoryId,["reorganize_army","return_garrison"].includes(id)?null:city);$("commandDialog").showModal();
   const button=$("commandList").querySelectorAll("[data-command-id]").find(button=>button.dataset.commandId===id);
   assert(button,id);retained("commandDialog",()=>button.onclick());assert.equal($("plannerDialog").open,true,id);
   $("plannerDialog").close();
@@ -90,7 +94,7 @@ for(const id of ["form_army","reorganize_army","return_garrison","construct_buil
 
 // Async biographies cannot replace a newer selection or another entity window.
 delete state.data.officerBiographies;
-const pending=[];context.loader.loadOfficerBiographies=()=>new Promise(resolve=>pending.push(resolve));
+const pending=[];loader.loadOfficerBiographies=()=>new Promise(resolve=>pending.push(resolve));
 const second=state.data.officers.find(item=>item.id!==officer.id);
 const firstLoad=openOfficerDetail(officer),secondLoad=openOfficerDetail(second);
 pending[1]({biographies:{[second.id]:"新列传"}});await secondLoad;

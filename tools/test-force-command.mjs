@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -67,5 +68,5 @@ const tenDays=(game,n)=>{for(let i=0;i<n*10;i++)game.endTurn()};
   await import(pathToFileURL(path.join(root,"js/ui/command-ui.js")));CommandUI.expanded=new Set(["direct",...posts.map(p=>p.id)]);const html=CommandUI.chart(game);for(const token of ["data-cmd-expand","河东郡太守","东郡太守","直辖"])assert(html.includes(token),token);CommandUI.expanded=new Set()}
 
 // 7. 界面
-{const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),ui=fs.readFileSync(path.join(root,"js/ui/command-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");for(const token of ["forceCommandButton","forceCommandDialog","engine/command.js","ui/command-ui.js"])assert(html.includes(token),token);for(const token of ["CommandUI.render","CommandUI.act","setCentralOffice"])assert(app.includes(token),token);for(const token of ["data-post-select","data-cmd-action=\"create\"","data-cmd-action=\"directive\"","协同出击"])assert(ui.includes(token),token)}
+{const app=appSource(),ui=fs.readFileSync(path.join(root,"js/ui/command-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");for(const token of ["forceCommandButton","forceCommandDialog","engine/command.js","ui/command-ui.js"])assert(html.includes(token),token);for(const token of ["CommandUI.render","CommandUI.act","setCentralOffice"])assert(app.includes(token),token);for(const token of ["data-post-select","data-cmd-action=\"create\"","data-cmd-action=\"directive\"","协同出击"])assert(ui.includes(token),token)}
 console.log("幕府与方面指挥通过：层级任免 / 进取不占额度 / 粮草先行、方略、派遣 / 协同出击 / 月报与截留 / AI 中枢设方面 / 开局史实方面 / 存档与旧军团迁移 / 界面");

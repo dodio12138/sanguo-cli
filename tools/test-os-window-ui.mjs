@@ -1,6 +1,7 @@
 import fs from "node:fs";
+import {appSource as readAppSource} from "./app-source.mjs";
 
-const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=fs.readFileSync(new URL("js/ui/app.js",root),"utf8");
+const root=new URL("../",import.meta.url),html=fs.readFileSync(new URL("index.html",root),"utf8"),css=fs.readFileSync(new URL("css/os-desktop.css",root),"utf8"),source=fs.readFileSync(new URL("js/ui/os-window-manager.js",root),"utf8"),appSource=readAppSource();
 const polishCss=fs.readFileSync(new URL("css/ui-polish.css",root),"utf8");
 const feedbackSource=fs.readFileSync(new URL("js/ui/button-feedback.js",root),"utf8");
 const buttonCss=fs.readFileSync(new URL("css/button-states.css",root),"utf8"),hierarchyCss=fs.readFileSync(new URL("css/hierarchy.css",root),"utf8"),styleCss=fs.readFileSync(new URL("css/style.css",root),"utf8");

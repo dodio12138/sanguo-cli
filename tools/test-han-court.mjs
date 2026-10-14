@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -63,7 +64,7 @@ await import(pathToFileURL(path.join(root,"js/ui/court-ui.js")));
   const lords=CourtUI.render(game,"lords");assert.match(lords,/<td>.*曹操.*直辖/s);assert((lords.match(/<tr/g)||[]).length>8);
   assert.match(CourtUI.render(game,"edicts"),/上表朝贡/);
   const chart=CourtUI.chart(game,new Set(["冀州"]));assert.match(chart,/chart-node is-root/);assert.match(chart,/中央/);assert.match(chart,/地方/);assert.match(chart,/data-chart-province="冀州"/);assert.match(chart,/县令长 · 世家选拔/,"展开州后列诸郡与县（世家）");
-  const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");
+  const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=appSource(),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");
   for(const id of ["courtDialog","courtChartDialog","courtButton","courtChartButton"])assert(html.includes(`id="${id}"`),id);assert.match(html,/data-layer="courtNominal"/);assert.match(html,/data-layer="courtActual"/);
   assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
   assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);assert.match(app,/data-bureau-tab="\$\{id\}"/,"官署三页切换");assert.match(app,/data-bureau-panel="county"/);

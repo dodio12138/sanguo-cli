@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -46,5 +47,5 @@ const serving=(game,city)=>game.data.officers.filter(o=>o.force==="cao"&&o.statu
 // 10. AI 都城粮尽：奉天子突围
 {const {game,e,city}=setup({garrison:6000,enemy:40000,player:"liu"});city.siegeMorale=20;game.random=()=>.01;const events=[];e.aiSiegeResponses(game,events);assert(events.some(ev=>/奉天子突围|突围/.test(ev.text)),"AI 奉天子突围")}
 // 11. 界面接线
-{const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");assert.match(app,/data-siege-action="field_battle"/);assert.match(app,/data-siege-action="breakout"/);assert.match(app,/function openBreakoutPlanner\(city,queue\)/);assert.match(app,/queue\("breakout"/)}
+{const app=appSource();assert.match(app,/data-siege-action="field_battle"/);assert.match(app,/data-siege-action="breakout"/);assert.match(app,/function openBreakoutPlanner\(city,queue\)/);assert.match(app,/queue\("breakout"/)}
 console.log("W3 攻城扩展通过：出城迎战 / 背城 / 突围成算与三档结局 / 天子随行或易手 / 都城陷落 / 玩家命令 / AI 应对");

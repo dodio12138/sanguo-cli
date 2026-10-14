@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import {appSource} from "./app-source.mjs";
 
 // 迷雾一致性：他方数值在“未探明、仅知大概、略知内情”三级下不得给出精确值。检查各面板的取值都经过情报判定。
-const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
+const app=appSource();
 const between=(start,end)=>{const i=app.indexOf(start);assert(i>=0,`缺少 ${start}`);const j=app.indexOf(end,i+start.length);return app.slice(i,j<0?undefined:j)};
 assert(/function fogNumber\(value,level,suffix=""\)\{[^}]*level>=3\?[^:]*:level>=1\?[^:]*MapView\.intelEstimate[^:]*:"不详"\}/.test(app),"统一的迷雾数值函数：实数、概数、不详三级");
 

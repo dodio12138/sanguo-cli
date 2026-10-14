@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -43,7 +44,7 @@ const fresh=(player="cao")=>{const game=new GameState(structuredClone(scenario),
 // 8. 界面：挟天子者有讨逆、联军、迁都、晋位；他方有奉迎、衣带诏、称王、称帝
 {const {game}=fresh();CourtUI.draft={kind:"coalition"};const html=CourtUI.render(game,"edicts");assert.match(html,/data-crisis-issue/);assert.match(html,/集结地/);CourtUI.draft={kind:"promote"};assert.match(CourtUI.render(game,"edicts"),/下一步：自为丞相|下一步：受封/);
   const other=fresh("liu");CourtUI.draft={kind:"grant_office"};const page=CourtUI.render(other.game,"edicts");for(const kind of ["receive","conspiracy","proclaim_king","proclaim_emperor"])assert(page.includes(`data-crisis="${kind}"`),kind);
-  const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");assert(app.includes("[data-crisis-issue]")&&app.includes("state.engine.courtCrisisAction("))}
+  const app=appSource();assert(app.includes("[data-crisis-issue]")&&app.includes("state.engine.courtCrisisAction("))}
 // 9. 长局：六剧本各推演两年，朝局操作不崩，天子归属与名分合法
 for(const id of ["190_coalition","194_puyang","200_guandu","208_red_cliffs","211_tongguan","219_xiangyang"]){const data=await loader.loadScenario(id),game=new GameState(structuredClone(data),{playerForceId:data.scenario.default_player_force});game.observerMode=true;const texts=[];const log=game.engine.courtLog;game.engine.courtLog=function(ev,text,extra){texts.push(text);return log.call(this,ev,text,extra)};
   for(let i=0;i<730;i++)game.endTurn();const court=game.court;assert(!court.controller||game.data.cities.some(c=>c.force===court.controller),`${id} 挟天子者仍有据点`);for(const stance of Object.values(court.stances))assert(stance.obedience>=0&&stance.obedience<=100&&stance.hanLoyalty>=0);

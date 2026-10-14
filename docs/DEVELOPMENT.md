@@ -17,6 +17,65 @@
 
 以后若系统复杂度明显上升，可迁移到 TypeScript；数据目录与领域模型无需随 UI 框架重写。
 
+## 2.1 代码结构
+
+脚本全部是浏览器全局脚本（无打包），按 `index.html` 中的顺序载入；Node 测试用 `import` 或 `vm` 载入同一批文件。
+
+| 目录 | 内容 |
+|---|---|
+| `js/core/` | 领域层：`data-loader.js`（读数据、套剧本、任官与补录人物）、`game-state.js`（状态容器、存档）、`rule-engine.js`（规则引擎核心）、`fiscal-system.js`、`map-grid.js`、`game-clock.js`、AI 桥接与存档库 |
+| `js/core/engine/` | 规则引擎分模块，以 mixin 并入 `RuleEngine.prototype`：行军、攻城、外交、事件、AI、郡县官署、汉庭（含诏令、朝局剧变）、战斗、粮道、户口、世家、幕府。新增模块须同时登记 `RuleEngine.PARTS`、`index.html` 与 `tools/test-report-ui.mjs`、`tools/test-turn-briefing.mjs` 中的引擎文件表 |
+| `js/ui/` | 表现层：`app.js` 启动壳、`app/` 功能模块、舆图（`map-view.js`）、窗口管理（`os-window-manager.js`）、编辑器，以及只出标记的面板类（`CourtUI`、`CommandUI`、`FiscalUI`、`PopulationUI`、`CommandPlanner`） |
+| `js/data/` | 浏览器离线镜像，`offline-data.generated.js` 由 `tools/build-offline-data.mjs` 生成，勿手改 |
+| `game/data/` | 正式数据源（规则、剧本、人物、地图、汉庭、世家、任官表） |
+| `tools/` | 构建、发布、校验脚本与 `test-*.mjs` 回归测试 |
+
+### 界面模块（js/ui/app.js 与 js/ui/app/）
+
+`app.js` 原是 22 万字的单一闭包，2026-10-14 拆为启动壳和 14 个功能模块，行为不变。
+
+- **启动壳 `app.js`**（约 4.5 万字）：开局前的设置与存档读取、建 `GameState` 与 `MapView`、资源栏与选区等常驻渲染、命令提交、`advanceTurn` 主循环与模拟时钟、存档管理、全局按钮与快捷键。
+- **功能模块 `app/*.js`**：
+
+| 文件 | 内容 | 主要导出 |
+|---|---|---|
+| `registry.js` | 模块注册表 `SanguoApp`（`define` / `mount` / `context`） | — |
+| `start-screen.js` | 开局画面：剧本、势力、开局设置三步，读档、设置、开局小地图 | `chooseCampaign` |
+| `command-book.js` | 命令书、命令模板、城池命令 | `renderCommandBook`、`openCityCommands`、`prefill` |
+| `resources.js` | 资源栏、收支明细、本旬预估、府库窗口、阶段目标 | `renderResources`、`openResourceDetail`、`renderObjective`、`resourceDeltaMarkup` |
+| `reports.js` | 旬报、战报、史官编年、消息中心、日度简报、事件分级 | `renderReports`、`renderBattleReports`、`buildTurnBriefing`、`showTurnBriefing`、`renderMessageTray` |
+| `court-windows.js` | 汉庭窗口与汉庭官制图的接线（标记由 `CourtUI` 出） | — |
+| `force-command-window.js` | 幕府窗口的接线（标记由 `CommandUI` 出） | — |
+| `ledgers.js` | 档案窗口：军政、内治、外交关系网、情报、战争与防御计划、人物、国策 | `openLedger`、`toggleDelegation` |
+| `mod-tools.js` | 诊断报告、模组开关、剧本 JSON、存档导入导出 | —（只做接线） |
+| `planners.js` | 规划窗口：建筑、编军、官署、职司、突围、整编、增援、行军 | `openMarchPlanner` 等 `open*Planner` |
+| `city-detail.js` | 据点档案（他方按情报、己方含官署三栏、户口、粮道、战俘） | `openCityDetail` |
+| `army-detail.js` | 军团档案 | `openArmyDetail`、`armyIntelLevel` |
+| `battle-detail.js` | 战况窗口：围城与野战 | `openBattleDetail`、`openSiegeDetail`、`siegeRows`、`meter` |
+| `officers.js` | 人物档案、人物检索、本剧本名册 | `openOfficerDetail`、`referenceStatus` |
+| `ai-panel.js` | AI 军师面板：连接、建议、审计、托管 | `renderControlMode` |
+
+- **写法**：
+
+```js
+// js/ui/app/example.js
+SanguoApp.define("example",app=>{
+  const {$,state,map,esc,toast}=app;          // 壳内稳定的函数与常量：顶部解构
+  let page=0;                                  // 本模块私有状态
+  function openExample(){ /* … */ app.openCityDetail(city); }   // 其他模块的导出、可变状态：用 app.名
+  $("exampleButton").onclick=()=>openExample();                // 挂载时即执行的接线
+  return {openExample};                        // 导出挂回 app，壳与其他模块可用
+});
+```
+
+- **上下文 `app`**：壳在开头用 `SanguoApp.context({...})` 建立，含壳内函数（`esc`、`toast`、`submit`、`log`、`cityIntel`、`fogNumber`…）与可变状态的 getter/setter（`data`、`userSettings`、`pendingTurnBriefing`、`editorSource`…）。壳在两处挂载：开局画面模块在 `chooseCampaign()` 之前挂载，其余模块在 `state`、`map`、`forceBy` 建好之后挂载，挂载前 `Object.assign(app,{state,map,…})` 补入稳定常量；挂载后壳用 `const {…}=app` 取回自己要调用的导出。
+- **约定**：
+  - 新面板写成新模块，不再往壳里堆；模块内只解构「挂载时已存在且不再赋值」的名字，可变状态与跨模块函数一律 `app.名`，否则会拿到旧值或撞上暂时性死区。
+  - 模块私有的可变状态放在模块内；壳要读写的状态留在壳，并在 `context` 里给 getter/setter。
+  - 导出名在 `app` 上全局唯一，重名在挂载时报错。
+  - 新文件要加进 `index.html`（`registry.js` 之后、`app.js` 之前），然后运行 `node tools/sync-asset-versions.mjs` 更新缓存版本。
+- **测试**：做源码静态检查的测试用 `tools/app-source.mjs` 的 `appSource()` 取壳与全部模块的合并文本，不必关心代码在哪个文件。需要实际运行面板的测试（如 `test-window-navigation.mjs`）在 `vm` 中载入 `registry.js` 与相关模块，用桩对象充当 `app` 后 `SanguoApp.mount`。
+
 ## 3. 回合模型
 
 ```text
@@ -793,6 +852,13 @@ submit_orders()
 - [x] 全部 75 座据点、253 处县治、河流、地标和地图标注迁移到新网格；海格上的县治自动挪到最近陆格，并保持对应郡治与城市坐标一致。三套剧本统一引用 `china_pixel_60x60`。
 - [x] 地图编辑器的“恢复默认”读取地图原始分层；旧存档版本迁移所选格坐标，城池和县治位置由新地图基准数据恢复。
 - [x] `tools/import-pixel-map.mjs` 可从源 BMP 重建网格和坐标；县治网格生成器改为使用同一张位图陆海掩码。
+
+### P78（app.js 拆分为启动壳与界面模块）
+
+- [x] `js/ui/app.js` 由 22 万字的单一闭包拆为约 4.5 万字的启动壳和 `js/ui/app/` 下 14 个功能模块（开局画面、命令书、府库、旬报战报、汉庭窗口、幕府窗口、档案、模组工具、规划窗口、据点档案、军团档案、战况、人物、AI 军师），逻辑原样迁移，说明见「2.1 代码结构 · 界面模块」。
+- [x] 新增模块注册表 `js/ui/app/registry.js`（`SanguoApp.define / mount / context`）：模块经 `app` 上下文取壳内依赖，导出挂回 `app`；导出重名、模块未载入时挂载即报错。
+- [x] 迁移用 AST 作用域分析逐个改写引用：壳内稳定的名字在模块顶部解构（源码文本基本不变），可变状态与跨模块调用改为 `app.名`；同一行的多条语句整行随迁，紧贴语句的整行注释一并带走。旬报、战报分页计数改归 `reports` 模块。`downloadJson` 因舆图编辑器在挂载前就要用而留在壳内。
+- [x] 测试：新增 `tools/app-source.mjs`，26 个源码静态检查测试改读合并文本；`test-window-navigation.mjs` 改为在 `vm` 中挂载真实模块（档案、规划、据点、军团、战况、人物、命令书）；`test-button-bindings.mjs` 递归扫描 `js/ui/`。
 
 ## 7. 完成标准
 

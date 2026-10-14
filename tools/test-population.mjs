@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -73,7 +74,7 @@ const sumPops=(place,f)=>(place.pops||[]).filter(f).reduce((n,p)=>n+total(p),0);
 {const {game,e}=fresh(),xun=structuredClone(game.clans.byId.xun);delete game.clans.byId.mi;game.clans.byId.xun.grievance.cao=33;e.ensurePopulation(game);assert(game.clans.byId.mi&&Object.keys(game.clans.byId.mi.presence).length,"补建东海糜氏");assert.equal(game.clans.byId.xun.grievance.cao,33,"已有世家不重置");
   assert.equal(e.officerClan(game.data.officers.find(o=>o.name==="荀彧"))?.id,"xun");assert.equal(e.officerClan(game.data.officers.find(o=>o.name==="曹豹")),null,"曹豹不入谯县曹氏");assert((game.data.clans||[]).length>=70,"世家扩充")}
 // 10. 界面
-{const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),ui=fs.readFileSync(path.join(root,"js/ui/population-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");
+{const app=appSource(),ui=fs.readFileSync(path.join(root,"js/ui/population-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");
   for(const token of ["PopulationUI.section(state,city)","PopulationUI.bind("])assert(app.includes(token),token);for(const token of ["data-inspect-registry","data-levy-mode","data-clan-action","实有人口","可征丁"])assert(ui.includes(token),token);for(const file of ["engine/population.js","engine/clans.js","ui/population-ui.js"])assert(html.includes(file),file)}
 
 // 11. 两年无头推演：无负数、无 NaN、不碎片化

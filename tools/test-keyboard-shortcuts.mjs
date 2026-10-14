@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {appSource} from "./app-source.mjs";
 globalThis.window=globalThis;
 await import('../js/ui/keyboard-shortcuts.js');
 let blocked=false,city=true,menu=false;
@@ -23,7 +24,7 @@ press('s',{ctrlKey:true});assert.equal(calls.at(-1)[0],'save');
 count=calls.length;press('s',{ctrlKey:true,shiftKey:true});press(' ',{defaultPrevented:true});assert.equal(calls.length,count);
 menu=true;press('Escape');press(' ');assert.equal(calls.length,count,'菜单/下拉框自行处理按键');menu=false;
 press('Escape');assert.equal(calls.at(-1)[0],'close');
-const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8'),html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const app=appSource(),html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
 assert(app.includes('GameShortcuts.createHandler'));assert(app.includes('toggle:()=>simulation.toggle()'));
 assert(html.includes('空格：暂停／继续'));assert(html.indexOf('keyboard-shortcuts.js')<html.indexOf('js/ui/app.js'));
 console.log('快捷键通过：空格暂停/继续、长按防重、输入与事件保护、窗口/菜单冲突、图层与命令、变速、保存');

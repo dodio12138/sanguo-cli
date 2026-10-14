@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;
 await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
@@ -57,7 +58,7 @@ const conflictData={cities:[{id:"camp",force:"cao"}],officers:[{id:"alpha",name:
 const conflictEngine=new RuleEngine(conflictData);conflictEngine.syncAllArmyOfficerLocations();
 if(conflictData.armies[1].commander!=="乙将"||conflictData.officers[1].armyId!=="second"||conflictData.armies[0].deputyOfficerIds.length)throw new Error("副将记录抢占了另一军团的主将");
 
-const appSource=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
-if(!appSource.includes("residentOfficers=officers.length")||!appSource.includes("驻城将领 <b>${residentOfficers}"))throw new Error("据点界面没有按本城名单显示驻城人数");
+const appText=appSource();
+if(!appText.includes("residentOfficers=officers.length")||!appText.includes("驻城将领 <b>${residentOfficers}"))throw new Error("据点界面没有按本城名单显示驻城人数");
 
 console.log("将领驻地通过：旧数据校正 / 主副将随军 / 驻城统计 / 调任与旅行拦截 / 异地换将拦截 / 解散清理");

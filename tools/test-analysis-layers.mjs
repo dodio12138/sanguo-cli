@@ -3,6 +3,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -33,6 +34,6 @@ state.intelligence.cities[enemy.id]=3;view.layerGroupCache=null;assert.notEqual(
 
 // 每日更新：缓存随日期刷新，粮仓见底则转为告急。
 for(const city of state.data.cities.filter(item=>item.force==="liu"&&item.commandery===xiaopei.commandery))city.localFood=0;state.turn++;assert.equal(view.foodBand(view.layerGroupAt(cellOf(xiaopei))),"告急");
-const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");
+const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=appSource();
 for(const [layer,label] of [["relation","关系"],["food","粮食"],["officers","武将"]]){assert(html.includes(`<button data-layer="${layer}">${label}</button>`),`缺少${label}图层按钮`);assert(app.includes(`${layer}:{label:"${label}"`),`缺少${label}图例`)}
 console.log("分析图层通过：关系（我方、盟友、交战、无主）/ 粮食按郡汇总可支日数 / 武将驻将数 / 他方未详查为不详 / 每日刷新");

@@ -1,8 +1,9 @@
 // 界面动效与窗口外观一致性的源码约束：动效只用轻量属性且可关闭；对话框标题与关闭钮统一。
 import fs from "node:fs";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 const read=path=>fs.readFileSync(new URL(`../${path}`,import.meta.url),"utf8");
-const html=read("index.html"),motion=read("css/motion.css"),buttons=read("css/button-states.css"),app=read("js/ui/app.js"),wm=read("js/ui/os-window-manager.js");
+const html=read("index.html"),motion=read("css/motion.css"),buttons=read("css/button-states.css"),app=appSource(),wm=read("js/ui/os-window-manager.js");
 
 assert.match(html,/css\/button-states\.css\?v=[0-9a-f]+">[\s\S]*?<link rel="stylesheet" href="css\/motion\.css\?v=[0-9a-f]+">/,"motion.css 在按钮状态之后载入");
 const keyframes=[...motion.matchAll(/@keyframes [\w-]+\{([^@]*?)\}\s*(?=@keyframes|\n)/g)].map(match=>match[1]).join(" ");

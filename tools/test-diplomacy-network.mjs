@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
+import {appSource} from "./app-source.mjs";
 
 const [app,css,html]=await Promise.all([
-  fs.readFile(new URL("../js/ui/app.js",import.meta.url),"utf8"),
+  Promise.resolve(appSource()),
   fs.readFile(new URL("../css/ui-polish.css",import.meta.url),"utf8"),
   fs.readFile(new URL("../index.html",import.meta.url),"utf8")
 ]);

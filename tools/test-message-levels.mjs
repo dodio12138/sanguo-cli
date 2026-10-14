@@ -3,6 +3,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -34,7 +35,7 @@ const added=MessageCenter.collect(state,report);assert.equal(added.length,2);ass
 for(let i=0;i<200;i++)MessageCenter.collect(state,{turn:6+i,date:"",events:[{phase:"天下大事",text:"测试",lv:2}]});assert.equal(MessageCenter.inbox(state).items.length,MessageCenter.INBOX_LIMIT,"收件箱有上限");
 
 // 日终流程：手动结束本日照常弹出简报；自动模拟只在紧急时暂停并弹出，可在设置中关闭。
-const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");
+const app=appSource(),html=fs.readFileSync(path.join(root,"index.html"),"utf8");
 assert(/MessageCenter\.annotate\(state\.reports\[0\],MessageCenter\.context\(state,messageBefore/.test(app)&&/else if\(urgent\.length&&userSettings\.pauseOnUrgent!==false\)\{simulation\.pause\(\);showTurnBriefing\(\)/.test(app),"紧急军情暂停模拟并弹出汇总");
 assert(html.includes('id="messageCenterButton"')&&html.includes('id="messageCenterDialog"')&&html.includes('id="gamePauseOnUrgent"')&&html.includes('id="turnBriefingAlerts"'),"消息入口、汇总窗口、设置与简报要报");
 assert(/data-report-level/.test(app)&&/data-battle-own/.test(app),"日报按等级筛选、战报可只看我方");

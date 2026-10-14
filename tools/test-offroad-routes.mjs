@@ -3,6 +3,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -39,7 +40,7 @@ const forceId=data.scenario.player_force||"cao",army=data.armies.find(item=>item
 const own=state.data.cities.filter(city=>city.force===forceId),home=state.data.armies.find(item=>item.id===army.id),goal=own.find(city=>city.id!==home.city&&state.engine.path(home.city,city.id,forceId)?.length>3),via=own.find(city=>![home.city,goal.id].includes(city.id)&&!state.engine.path(home.city,goal.id,forceId).includes(city.id)&&state.engine.plannedRoute(home.city,goal.id,forceId,{waypoints:[city.id]}));
 const events=[];state.engine.resolveOrder?.(state,{type:"move",armyIds:[home.id],cityIds:[goal.id],options:{routeMode:"custom",waypoints:[via.id]}},events);
 assert([home.city,...home.route].includes(via.id),`军团应经停 ${via.name}：${events.map(e=>e.text).join("；")}`);
-const view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8"),app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");
+const view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8"),app=appSource();
 assert(/leg\?\.kind==="offroad"&&leg\.points/.test(view),"野径行军沿地形折线绘制");
 assert(/name="routeMode"/.test(app)&&/自定义停留节点/.test(app)&&/plannedRoute\(/.test(app),"行军对话框提供路线方案与自定义停留节点");
 console.log(`野外行军与自定义路线通过：${links/2} 条野径 / 野径较官路慢 / 只走官路不经野径 / 停留点依次经过并由命令执行`);

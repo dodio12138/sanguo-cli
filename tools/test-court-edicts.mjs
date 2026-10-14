@@ -4,6 +4,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
+import {appSource} from "./app-source.mjs";
 
 globalThis.window=globalThis;globalThis.location={protocol:"http:"};
 const root=path.resolve(new URL("..",import.meta.url).pathname);
@@ -50,5 +51,5 @@ const ruler=(game,force)=>game.engine.forceRulerOfficer(force);
 {const {game,e,court}=fresh();e.issueEdict(game,"cao","appease",{forceId:"ma_teng"});const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(save));assert.deepEqual(restored.court.edicts,court.edicts);
   CourtUI.draft={kind:"grant_office",force:"liu_biao",officer:ruler(game,"liu_biao").id,office:"zahao"};const html=CourtUI.render(game,"edicts");assert.match(html,/data-edict-issue(?! disabled)/);assert.match(html,/奉诏可能约 \d+%/);
   CourtUI.draft={kind:"appoint",office:"taishou"};assert.match(CourtUI.render(game,"edicts"),/data-edict-field="seat"/);
-  const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8");for(const token of ["[data-edict-issue]","[data-edict-answer]","[data-petition]","[data-tribute]","state.engine.issueEdict("])assert(app.includes(token),token)}
+  const app=appSource();for(const token of ["[data-edict-issue]","[data-edict-answer]","[data-petition]","[data-tribute]","state.engine.issueEdict("])assert(app.includes(token),token)}
 console.log("汉庭 P2 通过：安抚免战 / 强诸侯抗诏 / 册封与员额 / 任免与罢免 / 玩家奉诏抗诏 / 上表请封 / AI 诏令 / 存档与界面");

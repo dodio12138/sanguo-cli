@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
+import {appSource} from "./app-source.mjs";
 globalThis.window=globalThis;
 await import("../js/ui/map-editor-reference.js");
 const {MapEditorReference:Reference}=globalThis,grid={width:60,height:60};
-const html=await readFile(new URL("../index.html",import.meta.url),"utf8"),app=await readFile(new URL("../js/ui/app.js",import.meta.url),"utf8");
+const html=await readFile(new URL("../index.html",import.meta.url),"utf8"),app=await appSource();
 const css=await readFile(new URL("../css/ui-polish.css",import.meta.url),"utf8");assert.match(css,/#mapEditorReferenceCanvas\[hidden\]\s*\{display:none\}/,"隐藏底图不能被公共画布 display:block 覆盖");
 assert.match(html,/<button id="openMapEditor" disabled/,"编辑器入口初始必须禁用，不能让点击发生在安装前");
 assert(app.includes('$("openMapEditor").disabled=loading||!mapEditor'),"剧本加载期间入口不能打开旧数据");

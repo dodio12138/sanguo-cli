@@ -219,6 +219,7 @@
 > - 第 13 项：`tools/run-tests.mjs`，并行执行；快测 76 项约 26 秒，全部约 80 秒。
 > - 第 14 项：`tools/sync-asset-versions.mjs`，由 `test-asset-versions` 检查。
 > - 第 15 项：`rule-engine.js` 由 170 KB 拆为核心 90 KB 加 `js/core/engine/` 六个领域文件。`app.js` 暂不拆：13 个测试直接核对其源码，拆分要同步改写这些测试，留待下次界面改版。
+> - 第 15 项（续，2026-10-14）：`app.js` 由约 225 KB 拆为约 47 KB 的启动壳加 `js/ui/app/` 下 14 个功能模块（注册表 `SanguoApp`）；直接核对源码的 26 个测试改读 `tools/app-source.mjs` 的合并文本。结构见 `docs/DEVELOPMENT.md`「2.1 代码结构」。
 
 12. **部署脚本化**：把建 gh-pages 工作树、构建、提交、合并、轮询写成 `tools/deploy-pages.mjs`，并在 Pages 构建卡住超过 10 分钟时自动重新请求构建（本轮曾卡住约两小时）。
 13. **测试分层**：全套 76 个测试需数分钟；拆分快测与长测。
