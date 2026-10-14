@@ -1,5 +1,5 @@
 {
- "note": "剧本开局的太守、守将与随驻人物：每条 [据点 id, 太守或守将（可空）, 随驻人物, 依据]。只移动该剧本里在任且属同一势力的人物；人物不在名册或势力不符时跳过。未列入的人物若在一城扎堆，由载入器按就近原则派往本方未设太守的郡治（记为推定）。",
+ "note": "剧本开局的太守、守将与随驻人物：每条 [据点 id, 太守或守将（可空）, 随驻人物, 依据]。只移动该剧本里在任且属同一势力的人物；人物不在名册或势力不符时跳过。未列入的人物若在一城扎堆，由载入器按就近原则派往本方未设太守的郡治（记为推定）。 commands：开局方面大员与中枢属官（幕府），按势力列 central（advisor 军师、chief 长史、marshal 司马）与 posts（kind 都督 dudu／州牧刺史 zhou／郡守 jun，辖 provinces 或 commanderies，parent 按上级人名引用须先列）；人物不在任、辖区含主公驻地或本方在辖区内无城者跳过。",
  "family": [
   "卞氏",
   "甄氏",
@@ -1571,5 +1571,984 @@
     "basis": "樊伷为武陵从事"
    }
   ]
+ },
+ "commands": {
+  "190_coalition": {
+   "dong": {
+    "central": {
+     "advisor": "李儒"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "牛辅",
+      "commanderies": [
+       "恒农郡",
+       "河东郡"
+      ],
+      "title": "陕都督",
+      "basis": "《李傕传》：卓使婿牛辅屯陕，李傕、郭汜、张济皆其部曲"
+     }
+    ]
+   },
+   "liu_biao": {
+    "central": {
+     "advisor": "蒯越",
+     "chief": "蒯良"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "黄祖",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "basis": "黄祖为刘表江夏太守，镇夏口"
+     }
+    ]
+   },
+   "liu_yan": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "张鲁",
+      "commanderies": [
+       "汉中郡"
+      ],
+      "title": "督义司马（汉中）",
+      "basis": "刘焉以张鲁为督义司马，住汉中，断绝谷阁"
+     }
+    ]
+   }
+  },
+  "194_puyang": {
+   "gongsun": {
+    "posts": [
+     {
+      "kind": "zhou",
+      "holder": "田楷",
+      "provinces": [
+       "青州"
+      ],
+      "basis": "公孙瓒以田楷为青州刺史，与袁绍争青州"
+     }
+    ]
+   },
+   "liu_biao": {
+    "central": {
+     "advisor": "蒯越",
+     "chief": "蒯良"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "黄祖",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "basis": "黄祖为江夏太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "韩玄",
+      "commanderies": [
+       "长沙郡"
+      ],
+      "basis": "演义：长沙太守韩玄"
+     }
+    ]
+   },
+   "liu_zhang": {
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "赵韪",
+      "commanderies": [
+       "固陵郡"
+      ],
+      "title": "征东中郎将（朐忍）",
+      "basis": "赵韪以征东中郎将屯朐忍，备刘表"
+     },
+     {
+      "kind": "jun",
+      "holder": "庞羲",
+      "commanderies": [
+       "巴西郡"
+      ],
+      "basis": "庞羲为巴西太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "张肃",
+      "commanderies": [
+       "广汉郡"
+      ],
+      "basis": "张肃为广汉太守"
+     }
+    ]
+   },
+   "li_jue": {
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "张济",
+      "commanderies": [
+       "恒农郡"
+      ],
+      "title": "弘农都督",
+      "basis": "张济以镇东将军屯弘农"
+     }
+    ]
+   },
+   "liu_yao": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "朱皓",
+      "commanderies": [
+       "豫章郡"
+      ],
+      "basis": "朝廷以朱皓为豫章太守，刘繇助之逐诸葛玄"
+     }
+    ]
+   },
+   "tao_qian": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "臧霸",
+      "commanderies": [
+       "琅邪国"
+      ],
+      "basis": "臧霸以骑都尉屯开阳，统琅邪诸将"
+     }
+    ]
+   },
+   "lu_bu": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "张邈",
+      "commanderies": [
+       "陈留郡"
+      ],
+      "basis": "张邈为陈留太守，迎吕布入兖州"
+     }
+    ]
+   }
+  },
+  "200_guandu": {
+   "cao": {
+    "central": {
+     "advisor": "荀攸",
+     "chief": "荀彧"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "钟繇",
+      "commanderies": [
+       "京兆尹",
+       "左冯翊",
+       "恒农郡",
+       "河东郡"
+      ],
+      "title": "关中都督",
+      "basis": "钟繇以司隶校尉持节督关中诸军，委以后事"
+     },
+     {
+      "kind": "jun",
+      "holder": "王邑",
+      "commanderies": [
+       "河东郡"
+      ],
+      "parent": "钟繇",
+      "basis": "王邑为河东太守，隶钟繇"
+     },
+     {
+      "kind": "dudu",
+      "holder": "程昱",
+      "provinces": [
+       "兖州"
+      ],
+      "title": "兖州都督",
+      "basis": "程昱为东中郎将，领济阴太守，都督兖州事"
+     },
+     {
+      "kind": "jun",
+      "holder": "刘延",
+      "commanderies": [
+       "东郡"
+      ],
+      "parent": "程昱",
+      "basis": "刘延为东郡太守，守白马"
+     },
+     {
+      "kind": "jun",
+      "holder": "夏侯惇",
+      "commanderies": [
+       "河南尹"
+      ],
+      "basis": "夏侯惇为河南尹"
+     },
+     {
+      "kind": "jun",
+      "holder": "满宠",
+      "commanderies": [
+       "汝南郡"
+      ],
+      "basis": "满宠为汝南太守，抚定诸壁"
+     },
+     {
+      "kind": "jun",
+      "holder": "魏种",
+      "commanderies": [
+       "河内郡"
+      ],
+      "basis": "魏种为河内太守，属以河北事"
+     },
+     {
+      "kind": "zhou",
+      "holder": "刘馥",
+      "provinces": [
+       "扬州"
+      ],
+      "basis": "刘馥为扬州刺史，单马造合肥空城"
+     }
+    ]
+   },
+   "yuan": {
+    "central": {
+     "advisor": "沮授",
+     "chief": "审配"
+    },
+    "posts": [
+     {
+      "kind": "zhou",
+      "holder": "袁谭",
+      "provinces": [
+       "青州"
+      ],
+      "basis": "袁绍以长子袁谭为青州刺史"
+     },
+     {
+      "kind": "zhou",
+      "holder": "袁熙",
+      "provinces": [
+       "幽州"
+      ],
+      "basis": "袁熙为幽州刺史"
+     },
+     {
+      "kind": "zhou",
+      "holder": "高干",
+      "provinces": [
+       "并州"
+      ],
+      "basis": "高干为并州刺史"
+     }
+    ]
+   },
+   "sun": {
+    "central": {
+     "chief": "张昭"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "孙贲",
+      "commanderies": [
+       "豫章郡"
+      ],
+      "basis": "孙贲为豫章太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "孙辅",
+      "commanderies": [
+       "庐陵郡"
+      ],
+      "basis": "孙辅为庐陵太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "李术",
+      "commanderies": [
+       "庐江郡"
+      ],
+      "basis": "李术为孙策所署庐江太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "朱治",
+      "commanderies": [
+       "吴郡"
+      ],
+      "basis": "朱治为吴郡太守"
+     }
+    ]
+   },
+   "liu_biao": {
+    "central": {
+     "advisor": "蒯越",
+     "chief": "蒯良"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "黄祖",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "basis": "黄祖为江夏太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "韩玄",
+      "commanderies": [
+       "长沙郡"
+      ],
+      "basis": "演义：长沙太守韩玄"
+     }
+    ]
+   },
+   "liu_zhang": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "严颜",
+      "commanderies": [
+       "巴郡"
+      ],
+      "basis": "演义：巴郡太守严颜"
+     },
+     {
+      "kind": "jun",
+      "holder": "张肃",
+      "commanderies": [
+       "广汉郡"
+      ],
+      "basis": "张肃为广汉太守"
+     }
+    ]
+   },
+   "shi_xie": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "士壹",
+      "commanderies": [
+       "合浦郡"
+      ],
+      "basis": "士壹为合浦太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "士䵋",
+      "commanderies": [
+       "九真郡"
+      ],
+      "basis": "士䵋为九真太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "士武",
+      "commanderies": [
+       "南海郡"
+      ],
+      "basis": "士武为南海太守"
+     }
+    ]
+   }
+  },
+  "208_red_cliffs": {
+   "cao": {
+    "central": {
+     "advisor": "荀攸",
+     "chief": "荀彧"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "钟繇",
+      "commanderies": [
+       "京兆尹",
+       "左冯翊",
+       "恒农郡",
+       "河东郡"
+      ],
+      "title": "关中都督",
+      "basis": "钟繇以司隶校尉镇关中"
+     },
+     {
+      "kind": "jun",
+      "holder": "杜畿",
+      "commanderies": [
+       "河东郡"
+      ],
+      "parent": "钟繇",
+      "basis": "杜畿为河东太守，隶钟繇"
+     },
+     {
+      "kind": "dudu",
+      "holder": "曹仁",
+      "commanderies": [
+       "南郡",
+       "宜都郡"
+      ],
+      "title": "江陵都督",
+      "basis": "曹仁行征南将军，守江陵"
+     },
+     {
+      "kind": "zhou",
+      "holder": "梁习",
+      "provinces": [
+       "并州"
+      ],
+      "basis": "梁习为并州刺史"
+     },
+     {
+      "kind": "zhou",
+      "holder": "刘馥",
+      "provinces": [
+       "扬州"
+      ],
+      "basis": "刘馥为扬州刺史"
+     },
+     {
+      "kind": "jun",
+      "holder": "臧霸",
+      "commanderies": [
+       "琅邪国"
+      ],
+      "basis": "臧霸为琅邪相，委以青、徐"
+     },
+     {
+      "kind": "jun",
+      "holder": "吕虔",
+      "commanderies": [
+       "泰山郡"
+      ],
+      "basis": "吕虔为泰山太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "李通",
+      "commanderies": [
+       "汝南郡"
+      ],
+      "basis": "李通为汝南太守"
+     }
+    ]
+   },
+   "sun": {
+    "central": {
+     "chief": "张昭"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "周瑜",
+      "commanderies": [
+       "豫章郡",
+       "庐陵郡",
+       "鄱阳郡"
+      ],
+      "title": "左都督",
+      "basis": "周瑜督军屯柴桑，拒曹于赤壁"
+     },
+     {
+      "kind": "jun",
+      "holder": "朱治",
+      "commanderies": [
+       "吴郡"
+      ],
+      "basis": "朱治为吴郡太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "顾雍",
+      "commanderies": [
+       "会稽郡"
+      ],
+      "title": "会稽丞（行太守事）",
+      "basis": "顾雍为会稽丞，行太守事"
+     }
+    ]
+   },
+   "liu_zhang": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "张肃",
+      "commanderies": [
+       "广汉郡"
+      ],
+      "basis": "张肃为广汉太守"
+     }
+    ]
+   },
+   "shi_xie": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "士壹",
+      "commanderies": [
+       "合浦郡"
+      ],
+      "basis": "士壹为合浦太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "士䵋",
+      "commanderies": [
+       "九真郡"
+      ],
+      "basis": "士䵋为九真太守"
+     }
+    ]
+   }
+  },
+  "211_tongguan": {
+   "cao": {
+    "central": {
+     "advisor": "荀攸",
+     "chief": "荀彧"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "杜畿",
+      "commanderies": [
+       "河东郡"
+      ],
+      "basis": "杜畿为河东太守"
+     },
+     {
+      "kind": "zhou",
+      "holder": "梁习",
+      "provinces": [
+       "并州"
+      ],
+      "basis": "梁习为并州刺史"
+     },
+     {
+      "kind": "zhou",
+      "holder": "温恢",
+      "provinces": [
+       "扬州"
+      ],
+      "basis": "温恢为扬州刺史，张辽、乐进、李典屯合肥"
+     },
+     {
+      "kind": "jun",
+      "holder": "臧霸",
+      "commanderies": [
+       "琅邪国"
+      ],
+      "basis": "臧霸为琅邪相"
+     },
+     {
+      "kind": "jun",
+      "holder": "吕虔",
+      "commanderies": [
+       "泰山郡"
+      ],
+      "basis": "吕虔为泰山太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "满宠",
+      "commanderies": [
+       "汝南郡"
+      ],
+      "basis": "满宠为汝南太守"
+     }
+    ]
+   },
+   "liu": {
+    "central": {
+     "advisor": "庞统"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "诸葛亮",
+      "commanderies": [
+       "零陵郡",
+       "桂阳郡",
+       "长沙郡"
+      ],
+      "title": "督三郡",
+      "basis": "诸葛亮以军师中郎将督零陵、桂阳、长沙三郡，调其赋税"
+     },
+     {
+      "kind": "jun",
+      "holder": "廖立",
+      "commanderies": [
+       "长沙郡"
+      ],
+      "parent": "诸葛亮",
+      "basis": "廖立为长沙太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "赵云",
+      "commanderies": [
+       "桂阳郡"
+      ],
+      "parent": "诸葛亮",
+      "basis": "赵云为桂阳太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "张飞",
+      "commanderies": [
+       "宜都郡"
+      ],
+      "basis": "张飞为宜都太守"
+     }
+    ]
+   },
+   "sun": {
+    "central": {
+     "chief": "张昭"
+    },
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "程普",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "basis": "程普领江夏太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "朱治",
+      "commanderies": [
+       "吴郡"
+      ],
+      "basis": "朱治为吴郡太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "顾雍",
+      "commanderies": [
+       "会稽郡"
+      ],
+      "title": "会稽丞（行太守事）",
+      "basis": "顾雍为会稽丞，行太守事"
+     }
+    ]
+   },
+   "liu_zhang": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "严颜",
+      "commanderies": [
+       "巴郡"
+      ],
+      "basis": "演义：巴郡太守严颜"
+     },
+     {
+      "kind": "jun",
+      "holder": "庞羲",
+      "commanderies": [
+       "巴西郡"
+      ],
+      "basis": "庞羲为巴西太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "张肃",
+      "commanderies": [
+       "广汉郡"
+      ],
+      "basis": "张肃为广汉太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "董和",
+      "commanderies": [
+       "益州郡"
+      ],
+      "basis": "董和为益州太守"
+     }
+    ]
+   },
+   "shi_xie": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "士壹",
+      "commanderies": [
+       "合浦郡"
+      ],
+      "basis": "士壹为合浦太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "士䵋",
+      "commanderies": [
+       "九真郡"
+      ],
+      "basis": "士䵋为九真太守"
+     }
+    ]
+   }
+  },
+  "219_xiangyang": {
+   "cao": {
+    "central": {
+     "advisor": "贾诩",
+     "chief": "钟繇"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "曹仁",
+      "provinces": [
+       "荆州"
+      ],
+      "title": "荆州都督",
+      "basis": "曹仁以征南将军屯樊，督荆州诸军"
+     },
+     {
+      "kind": "jun",
+      "holder": "吕常",
+      "commanderies": [
+       "襄阳郡"
+      ],
+      "parent": "曹仁",
+      "basis": "吕常为襄阳太守，隶曹仁"
+     },
+     {
+      "kind": "dudu",
+      "holder": "夏侯惇",
+      "provinces": [
+       "扬州"
+      ],
+      "title": "扬州都督",
+      "basis": "夏侯惇督二十六军，留居巢备吴"
+     },
+     {
+      "kind": "zhou",
+      "holder": "梁习",
+      "provinces": [
+       "并州"
+      ],
+      "basis": "梁习为并州刺史"
+     },
+     {
+      "kind": "zhou",
+      "holder": "臧霸",
+      "provinces": [
+       "徐州"
+      ],
+      "basis": "臧霸为徐州刺史"
+     },
+     {
+      "kind": "dudu",
+      "holder": "张郃",
+      "commanderies": [
+       "汉兴郡",
+       "右扶风"
+      ],
+      "title": "陈仓都督",
+      "basis": "夏侯渊死后张郃督汉中余众，退屯陈仓"
+     },
+     {
+      "kind": "jun",
+      "holder": "杜畿",
+      "commanderies": [
+       "河东郡"
+      ],
+      "basis": "杜畿为河东太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "吕虔",
+      "commanderies": [
+       "泰山郡"
+      ],
+      "basis": "吕虔为泰山太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "牵招",
+      "commanderies": [
+       "雁门郡"
+      ],
+      "basis": "牵招为雁门太守，雁门属并州",
+      "parent": "梁习"
+     },
+     {
+      "kind": "jun",
+      "holder": "杨阜",
+      "commanderies": [
+       "武都郡"
+      ],
+      "basis": "杨阜为武都太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "贾逵",
+      "commanderies": [
+       "恒农郡"
+      ],
+      "basis": "贾逵为弘农太守"
+     }
+    ]
+   },
+   "liu": {
+    "central": {
+     "advisor": "法正",
+     "chief": "诸葛亮"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "关羽",
+      "provinces": [
+       "荆州"
+      ],
+      "title": "董督荆州事",
+      "basis": "关羽以前将军董督荆州事"
+     },
+     {
+      "kind": "jun",
+      "holder": "糜芳",
+      "commanderies": [
+       "南郡"
+      ],
+      "parent": "关羽",
+      "basis": "糜芳为南郡太守，隶关羽"
+     },
+     {
+      "kind": "jun",
+      "holder": "郝普",
+      "commanderies": [
+       "零陵郡"
+      ],
+      "parent": "关羽",
+      "basis": "郝普为零陵太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "张飞",
+      "commanderies": [
+       "巴西郡"
+      ],
+      "basis": "张飞为巴西太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "廖立",
+      "commanderies": [
+       "巴郡"
+      ],
+      "basis": "廖立为巴郡太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "李严",
+      "commanderies": [
+       "犍为郡"
+      ],
+      "basis": "李严为犍为太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "陈震",
+      "commanderies": [
+       "汶山郡"
+      ],
+      "basis": "陈震为汶山太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "李恢",
+      "commanderies": [
+       "益州郡"
+      ],
+      "title": "庲降都督",
+      "basis": "李恢为庲降都督，治南中"
+     }
+    ]
+   },
+   "sun": {
+    "central": {
+     "chief": "张昭"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "吕蒙",
+      "commanderies": [
+       "长沙郡",
+       "桂阳郡"
+      ],
+      "title": "陆口都督",
+      "basis": "吕蒙代鲁肃屯陆口，图荆州"
+     },
+     {
+      "kind": "dudu",
+      "holder": "周泰",
+      "commanderies": [
+       "庐江郡"
+      ],
+      "title": "濡须督",
+      "basis": "周泰为濡须督"
+     },
+     {
+      "kind": "jun",
+      "holder": "孙皎",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "title": "夏口督",
+      "basis": "孙皎督夏口"
+     },
+     {
+      "kind": "jun",
+      "holder": "吕岱",
+      "commanderies": [
+       "庐陵郡"
+      ],
+      "basis": "吕岱为庐陵太守"
+     },
+     {
+      "kind": "zhou",
+      "holder": "步骘",
+      "provinces": [
+       "交州"
+      ],
+      "basis": "步骘为交州刺史"
+     }
+    ]
+   },
+   "shi_xie": {
+    "posts": [
+     {
+      "kind": "jun",
+      "holder": "士壹",
+      "commanderies": [
+       "合浦郡"
+      ],
+      "basis": "士壹为合浦太守"
+     },
+     {
+      "kind": "jun",
+      "holder": "士䵋",
+      "commanderies": [
+       "九真郡"
+      ],
+      "basis": "士䵋为九真太守"
+     }
+    ]
+   }
+  }
  }
 }

@@ -129,3 +129,9 @@
 .force-command-content button.link{border:0;background:none;color:#ecd99a;padding:0;font:inherit;cursor:pointer}
 @media (max-width:720px){.cmd-layout{grid-template-columns:1fr}}
 .cmd-node b{color:#ecd99a}.cmd-node small{color:#cfc89c}
+.court-actual{display:flex;flex-wrap:wrap;gap:2px 3px;align-items:center;color:var(--muted);font-size:8px;line-height:1.3}
+.court-force-tag{font-style:normal;padding:0 3px;border-left:3px solid var(--force,#59614d);background:#0b100c;color:#d8d0a6;white-space:nowrap}
+.cmd-juns{display:grid;gap:2px;margin-top:2px;padding-top:3px;border-top:1px dashed #3a4232;text-align:left}
+.cmd-juns div{display:flex;justify-content:space-between;gap:6px;font-size:8px;color:var(--muted);white-space:nowrap}
+.cmd-juns b{color:#cfc89c;font-weight:500}
+.cmd-toggle{justify-self:center;margin-top:2px;border:1px solid var(--line-dim);background:#0b100c;color:#a9a07a;font-size:8px;padding:0 6px;cursor:pointer}

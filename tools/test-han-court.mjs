@@ -23,10 +23,12 @@ for(const [id,[controller,capital]] of Object.entries(expected)){
   assert.deepEqual(court.skipped,[],`${id} 名录人物均在任：${court.skipped.join("、")}`);
   for(const force of game.data.forces.filter(f=>f.id!=="neutral")){const stance=court.stances[force.id];assert(stance,`${id} ${force.id} 有立场`);for(const key of ["hanLoyalty","obedience"])assert(stance[key]>=0&&stance[key]<=100,`${id} ${force.id} ${key} 越界`)}
   assert.equal(court.stances[controller].obedience,100,"挟天子者服从恒为 100");assert.equal(game.engine.courtBand(game,controller),"直辖");
-  for(const item of court.offices){const office=game.engine.courtOffice(item.office);assert(office,`未知官职 ${item.office}`);if(office.scope==="province")assert(Object.values(game.data.map.commandery_provinces).includes(item.seat),`${id} 州名 ${item.seat}`);if(office.scope==="commandery")assert(game.data.map.commandery_provinces[item.seat],`${id} 郡名 ${item.seat}`)}
+  for(const item of court.offices){const office=game.engine.courtOffice(item.office);assert(office,`未知官职 ${item.office}`);const divisions=game.engine.courtDivisions();if(office.scope==="province")assert(divisions.has(item.seat),`${id} 州名 ${item.seat}`);if(office.scope==="commandery")assert([...divisions.values()].some(list=>list.includes(item.seat)),`${id} 郡名 ${item.seat}`)}
   // 每月重算：推进到月末，数值仍在界内，服从向目标靠拢
-  const before=structuredClone(court.stances);for(let i=0;i<40&&game.date.month===Number(data.scenario.start_date.split("-")[1]);i++)game.endTurn();
-  for(const [forceId,stance] of Object.entries(game.court.stances)){assert(stance.obedience>=0&&stance.obedience<=100);assert.equal(stance.hanLoyalty,before[forceId].hanLoyalty,"忠汉不因月度重算改变")}
+  const before=structuredClone(court.stances);before.__promotion={...(game.engine.courtPromotionStep?(court.promotion||{}):{})};for(const id of Object.keys(court.stances))if(before.__promotion[id]==null&&game.engine.courtPromotionStep)before.__promotion[id]=game.engine.courtPromotionStep(game,id);for(let i=0;i<40&&game.date.month===Number(data.scenario.start_date.split("-")[1]);i++)game.endTurn();
+  const promoted=new Set(Object.keys(game.court.promotion||{}).filter(id=>game.court.promotion[id]>(before.__promotion?.[id]??-1)));
+  // 挟天子者 AI 按月有概率晋位（耗忠汉），晋位者不计
+  for(const [forceId,stance] of Object.entries(game.court.stances)){assert(stance.obedience>=0&&stance.obedience<=100);if(!promoted.has(forceId))assert.equal(stance.hanLoyalty,before[forceId].hanLoyalty,"忠汉不因月度重算改变")}
   // 存档往返
   const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(data));restored.applySave(restored.migrateSave(save));assert.deepEqual(restored.court,game.court,`${id} 朝廷随存档往返`);
   // 旧档无朝廷：按剧本初值补建
@@ -65,6 +67,13 @@ await import(pathToFileURL(path.join(root,"js/ui/court-ui.js")));
   for(const id of ["courtDialog","courtChartDialog","courtButton","courtChartButton"])assert(html.includes(`id="${id}"`),id);assert.match(html,/data-layer="courtNominal"/);assert.match(html,/data-layer="courtActual"/);
   assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
   assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);assert.match(app,/data-bureau-tab="\$\{id\}"/,"官署三页切换");assert.match(app,/data-bureau-panel="county"/);
-  console.log("汉庭 P1 通过：窗口四页 / 官制图中央地方与州郡县 / 名义实控图层 / 城市官署三栏");
+  // 地方官制补全：边郡列入州下、郡长官称谓、朝廷所授与实际管辖并列
+  const e=game.engine,divisions=e.courtDivisions();assert(divisions.get("幽州").includes("乐浪郡")&&divisions.get("凉州").includes("敦煌郡"),"边郡按城池归州");
+  assert.equal(e.courtSeatTitle("taishou","北海国"),"北海国相");assert.equal(e.courtSeatTitle("taishou","河南尹"),"河南尹");assert.equal(e.courtSeatTitle("taishou","张掖属国"),"张掖属国都尉");assert.equal(e.courtSeatTitle("taishou","东郡"),"东郡太守");
+  const dong=game.court.offices.find(item=>item.office==="taishou"&&item.seat==="东郡");assert.equal(game.data.officers.find(o=>o.id===dong?.officerId)?.name,"刘延","东郡太守刘延");assert(!dong.self,"挟天子者所署为朝廷所授");
+  assert(game.court.offices.find(item=>item.office==="cishi"&&item.seat==="青州"&&item.self),"袁谭青州刺史为自领");
+  const ctl=e.commanderyControl("东郡");assert.equal(ctl.forceId,"cao");assert(ctl.total>=1);assert.equal(e.provinceControl("冀州")[0][0],"yuan","冀州实控袁绍");
+  const local=CourtUI.chart(game,new Set(["兖州","幽州"]));for(const token of ["东郡太守","实控","court-force-tag","乐浪郡太守"])assert(local.includes(token),token);
+  console.log("汉庭 P1 通过：窗口四页 / 官制图中央地方与州郡县 / 名义实控图层 / 城市官署三栏 / 地方官补全与实际管辖");
 }
 console.log("汉庭 P0 通过");

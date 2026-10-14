@@ -11,7 +11,8 @@ for(const file of ["js/core/data-loader.js","js/core/game-clock.js","js/core/fis
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class CustomEvent extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 const sandbox={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,"js/data/offline-data.generated.js"),"utf8"),sandbox);
 const loader=new DataLoader(sandbox.window.SANGUO_DATA);await loader.load();const scenario=await loader.loadScenario("200_guandu");
-const fresh=(force="cao")=>{const game=new GameState(structuredClone(scenario),{playerForceId:force});return {game,e:game.engine}};
+// 默认清掉开局史实方面，便于逐项测任免；seed 为真时保留
+const fresh=(force="cao",{seed=false}={})=>{const game=new GameState(structuredClone(scenario),{playerForceId:force});if(!seed){game.forceCommand={};for(const army of game.data.armies)delete army.postId}return {game,e:game.engine}};
 const named=(game,name)=>game.data.officers.find(o=>o.name===name);
 const tenDays=(game,n)=>{for(let i=0;i<n*10;i++)game.endTurn()};
 
@@ -49,8 +50,22 @@ const tenDays=(game,n)=>{for(let i=0;i<n*10;i++)game.endTurn()};
 // 6. AI：中枢按州设方面，指定主攻方向；存档往返；旧军团迁移
 {const {game,e}=fresh();game.observerMode=true;tenDays(game,4);const yuan=e.commandPosts(game,"yuan");assert(yuan.length>=2,"袁绍设州方面");assert(yuan.some(p=>p.policy.type==="advance"),"有主攻方向");assert(yuan.every(p=>e.postHolder(p)?.force==="yuan"));
   const save=JSON.parse(JSON.stringify(game.serialize())),back=new GameState(structuredClone(scenario));back.applySave(back.migrateSave(save));assert.deepEqual(Object.keys(back.forceCommand.yuan.posts),Object.keys(game.forceCommand.yuan.posts),"存档往返");
-  const old=new GameState(structuredClone(scenario),{playerForceId:"cao"}),army=old.data.armies.find(a=>a.force==="cao");old.corps=[{id:"c1",name:"第1军团",leaderId:named(old,"曹仁").id,armyIds:[army.id],cityIds:[army.city]}];old.engine.ensureForceCommand(old);const migrated=old.engine.commandPosts(old,"cao");assert.equal(migrated.length,1,"旧军团并入都督府");assert.equal(army.postId,migrated[0].id);assert.equal(old.corps.length,0)}
+  const old=new GameState(structuredClone(scenario),{playerForceId:"cao"}),army=old.data.armies.find(a=>a.force==="cao");old.forceCommand={};old.corps=[{id:"c1",name:"第1军团",leaderId:named(old,"曹仁").id,armyIds:[army.id],cityIds:[army.city]}];old.engine.ensureForceCommand(old);const migrated=old.engine.commandPosts(old,"cao");assert.equal(migrated.length,1,"旧军团并入都督府");assert.equal(army.postId,migrated[0].id);assert.equal(old.corps.length,0)}
+
+// 6b. 开局史实方面：按剧本预置（钟繇督关中、王邑隶之）；玩家军团仍归直辖；AI 方面保留并被州职位收为下级；官制图列实际管辖
+{const {game,e}=fresh("cao",{seed:true}),posts=e.commandPosts(game,"cao"),post=name=>posts.find(p=>e.postHolder(p)?.name===name);assert.deepEqual(game.forceCommandSkipped,[],"开局方面无跳过项");
+  assert(post("钟繇")&&post("钟繇").kind==="dudu"&&post("钟繇").title==="关中都督");assert.equal(post("王邑").parentId,post("钟繇").id,"河东太守隶关中都督");assert.equal(post("刘延").parentId,post("程昱").id);assert.equal(post("夏侯惇").title,"河南尹");assert(post("钟繇").basis);
+  assert(!game.data.armies.some(a=>a.force==="cao"&&a.postId),"玩家开局军团不划归方面");assert.equal(post("钟繇").autoArmies,false);
+  assert.equal(named(game,"荀攸").id,e.commandOf(game,"cao").central.advisor);
+  const yuan=e.commandPosts(game,"yuan").map(p=>`${p.title}:${e.postHolder(p)?.name}`);for(const t of ["青州刺史:袁谭","幽州刺史:袁熙","并州刺史:高干"])assert(yuan.includes(t),t);
+  const sun=e.commandPosts(game,"sun");assert(sun.length&&!sun.some(p=>e.postCities(p,"sun").some(c=>c.id===e.forceRulerOfficer("sun")?.city)),"辖区不含主公驻地");
+  // AI 复审：保留史实方面（刘表的黄祖）；曹操为 AI 时钟繇、满宠仍在任
+  e.runCentralAI(game,[]);assert(e.commandPosts(game,"liu_biao").some(p=>e.postHolder(p)?.name==="黄祖"),"复审保留黄祖");
+  const {game:g2,e:e2}=fresh("liu_biao",{seed:true});e2.runCentralAI(g2,[]);const ps=e2.commandPosts(g2,"cao");for(const name of ["钟繇","满宠","程昱"])assert(ps.some(p=>e2.postHolder(p)?.name===name),`${name}仍在任`);
+  for(const p of ps)if(p.parentId)assert(e2.commandOf(g2,"cao").posts[p.parentId],"上级存在");
+  // 官制图：展开后列出辖郡长官与直辖州郡
+  await import(pathToFileURL(path.join(root,"js/ui/command-ui.js")));CommandUI.expanded=new Set(["direct",...posts.map(p=>p.id)]);const html=CommandUI.chart(game);for(const token of ["data-cmd-expand","河东郡太守","东郡太守","直辖"])assert(html.includes(token),token);CommandUI.expanded=new Set()}
 
 // 7. 界面
 {const app=fs.readFileSync(path.join(root,"js/ui/app.js"),"utf8"),ui=fs.readFileSync(path.join(root,"js/ui/command-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");for(const token of ["forceCommandButton","forceCommandDialog","engine/command.js","ui/command-ui.js"])assert(html.includes(token),token);for(const token of ["CommandUI.render","CommandUI.act","setCentralOffice"])assert(app.includes(token),token);for(const token of ["data-post-select","data-cmd-action=\"create\"","data-cmd-action=\"directive\"","协同出击"])assert(ui.includes(token),token)}
-console.log("幕府与方面指挥通过：层级任免 / 进取不占额度 / 粮草先行、方略、派遣 / 协同出击 / 月报与截留 / AI 中枢设方面 / 存档与旧军团迁移 / 界面");
+console.log("幕府与方面指挥通过：层级任免 / 进取不占额度 / 粮草先行、方略、派遣 / 协同出击 / 月报与截留 / AI 中枢设方面 / 开局史实方面 / 存档与旧军团迁移 / 界面");
