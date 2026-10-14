@@ -55,6 +55,7 @@ const context=vm.createContext({$,state,document,MapGrid,getComputedStyle:elemen
   toast(){},submit:()=>true,FiscalUI,openResourceDetail(){},warPlanHtml:()=>"",aiBridge:{audit:[]},map:{setPlannedRoute(){}},
   cityTargetCommandIds:new Set(state.data.commandCatalog.commands.map(command=>command.id)),loader:{}});
 vm.runInContext(fs.readFileSync(new URL("../js/ui/command-planner.js",import.meta.url),"utf8").replace("window.CommandPlanner","globalThis.CommandPlanner"),context);
+vm.runInContext(fs.readFileSync(new URL("../js/ui/population-ui.js",import.meta.url),"utf8").replace("window.PopulationUI","globalThis.PopulationUI"),context);
 vm.runInContext(source.slice(source.indexOf("  function closeTopDialog("),source.indexOf("  function renderAISuggestions(")),context);
 const {openLedger,openArmyDetail,openCityDetail,openOfficerDetail,openBuildingPlanner,openAdministrationPlanner,openArmyOfficePlanner,openReorganizePlanner,openTroopTransferPlanner,openCityCommands,closeTopDialog}=context;
 const city=state.data.cities.find(city=>city.force==="cao"&&(city.type||"city")==="city");

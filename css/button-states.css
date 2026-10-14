@@ -50,3 +50,4 @@ button:disabled{
   button:not(:disabled):active{translate:none}
 }
 html.ui-motion-off button:not(:disabled):active{translate:none}
+.pop-panel button:disabled{opacity:.45;cursor:not-allowed}

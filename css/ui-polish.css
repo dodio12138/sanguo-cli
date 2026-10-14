@@ -527,3 +527,25 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .supply-carry b{color:#ecd99a}
 .supply-panel b.warn{color:#e09080}
 .supply-panel select,.supply-panel button{border:1px solid var(--line-dim);padding:2px 6px;background:#0b100c;color:#cfc89c;font-size:9px}
+
+/* 户口与世家 */
+.pop-panel .pop-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin:6px 0}
+.pop-panel .pop-kpis article{border:1px solid var(--line-dim);padding:5px 7px;display:grid;gap:2px}
+.pop-panel .pop-kpis small,.pop-panel .pop-kpis span{color:var(--muted);font-size:10px}
+.pop-panel .pop-kpis b{font-size:13px}
+.pop-panel .pop-table{width:100%;border-collapse:collapse;font-size:11px;margin:4px 0 8px}
+.pop-panel .pop-table th,.pop-panel .pop-table td{border-bottom:1px solid var(--line-dim);padding:3px 6px;text-align:right}
+.pop-panel .pop-table th:first-child,.pop-panel .pop-table td:first-child{text-align:left}
+.pop-panel h4{margin:8px 0 4px;font-size:11px;color:var(--muted)}
+.pop-panel .clan-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;border:1px solid var(--line-dim);padding:6px 8px;margin-bottom:5px}
+.pop-panel .clan-head{display:grid;gap:2px}
+.pop-panel .clan-head small{color:var(--muted);font-size:10px}
+.pop-panel .clan-head i{font-style:normal}
+.pop-panel .clan-head i.good{color:#9fc27a}
+.pop-panel .clan-head i.bad{color:#d4735f}
+.pop-panel .clan-actions,.pop-panel .pop-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pop-panel .pop-actions{margin-top:8px}
+.pop-panel .pop-levy{display:flex;gap:6px;align-items:center;font-size:11px}
+.pop-panel button{border:1px solid var(--line-dim);padding:3px 8px;background:#0b100c;color:#cfc89c;font-size:10px;cursor:pointer}
+.pop-panel button.danger{border-color:#7a3a30;color:#e09080}
+.pop-panel [data-inspect-registry]{border-color:#786638;background:#1d1c12;color:#ecd99a}

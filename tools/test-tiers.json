@@ -12,6 +12,7 @@
     "test-court-edicts.mjs",
     "test-field-logistics.mjs",
     "test-court-crisis.mjs",
-    "test-court-history.mjs"
+    "test-court-history.mjs",
+    "test-population.mjs"
   ]
 }

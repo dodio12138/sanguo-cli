@@ -9,7 +9,8 @@ const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});st
 const size=()=>JSON.stringify(state.serialize()).length;let half=0;
 for(let day=1;day<=360;day++){state.endTurn();if(day===180)half=size()}
 const full=size(),ledger=state.policies.fiscalAccounts;
-assert.ok(full<1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1MB`);
+// 人口 POP（约 2,600 组）入档后约增 100KB，上限由 1MB 放宽到 1.2MB（docs/POP_CLAN_PLAN.md 第 1 节第 9 条）
+assert.ok(full<1.2*1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1.2MB`);
 assert.ok(full-half<half*.4,`下半年存档增长 ${((full-half)/1024)|0}KB，增长过快`);
 assert.ok(ledger.shipments.length<200,`在途与近期转运 ${ledger.shipments.length} 条，应有上限`);
 assert.ok(Object.keys(ledger.archive||{}).length,"已结束转运应并入汇总");
