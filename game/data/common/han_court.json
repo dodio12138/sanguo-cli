@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "note": "汉庭：官职（职事，有名额可罢免）与爵位（身份，世袭不占名额）分两套。parent 用于官僚架构图；scope 为 central（中央）、province（州，按州一席）、commandery（郡，按郡一席）。legitimacy 为名分点数，自领者折半。剧本初值见 scenarios，人物按姓名匹配。",
+  "offices": [
+    {"id": "xiangguo", "name": "相国", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 40, "duty": "总揽朝政，位在三公之上"},
+    {"id": "chengxiang", "name": "丞相", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 40, "duty": "建安十三年复置，罢三公，总领百官"},
+    {"id": "dasima", "name": "大司马", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 32, "duty": "加官，掌武事"},
+    {"id": "dajiangjun", "name": "大将军", "branch": "military", "parent": "emperor", "rank": "万石", "grade": 1, "quota": 1, "legitimacy": 34, "duty": "统兵征伐，位比三公"},
+    {"id": "taiwei", "name": "太尉", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 28, "duty": "三公之一，掌四方兵事功课"},
+    {"id": "situ", "name": "司徒", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 28, "duty": "三公之一，掌民事教化"},
+    {"id": "sikong", "name": "司空", "branch": "central", "parent": "emperor", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 28, "duty": "三公之一，掌水土营建"},
+    {"id": "shangshuling", "name": "尚书令", "branch": "central", "parent": "emperor", "rank": "千石", "grade": 3, "quota": 1, "legitimacy": 16, "duty": "尚书台之长，出纳王命，实掌机要"},
+    {"id": "sili", "name": "司隶校尉", "branch": "central", "parent": "emperor", "rank": "比二千石", "grade": 3, "quota": 1, "legitimacy": 16, "duty": "督察京畿七郡与百官"},
+    {"id": "taichang", "name": "太常", "branch": "central", "parent": "taiwei", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌礼仪祭祀"},
+    {"id": "guanglu", "name": "光禄勋", "branch": "central", "parent": "taiwei", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌宫殿门户宿卫"},
+    {"id": "weiwei", "name": "卫尉", "branch": "central", "parent": "taiwei", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌宫门卫士"},
+    {"id": "taipu", "name": "太仆", "branch": "central", "parent": "situ", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌舆马"},
+    {"id": "tingwei", "name": "廷尉", "branch": "central", "parent": "situ", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌刑狱"},
+    {"id": "dahonglu", "name": "大鸿胪", "branch": "central", "parent": "situ", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌诸侯与四夷朝贡"},
+    {"id": "zongzheng", "name": "宗正", "branch": "central", "parent": "sikong", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌宗室属籍"},
+    {"id": "dasinong", "name": "大司农", "branch": "central", "parent": "sikong", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌钱谷租税"},
+    {"id": "shaofu", "name": "少府", "branch": "central", "parent": "sikong", "rank": "中二千石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "九卿，掌宫廷用度"},
+    {"id": "piaoqi", "name": "骠骑将军", "branch": "military", "parent": "dajiangjun", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 26, "duty": "重号将军，位次大将军"},
+    {"id": "cheqi", "name": "车骑将军", "branch": "military", "parent": "dajiangjun", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 24, "duty": "重号将军"},
+    {"id": "weijiangjun", "name": "卫将军", "branch": "military", "parent": "dajiangjun", "rank": "万石", "grade": 2, "quota": 1, "legitimacy": 22, "duty": "重号将军，掌宿卫"},
+    {"id": "qianjiangjun", "name": "前将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 3, "quota": 1, "legitimacy": 18, "duty": "四方将军之一"},
+    {"id": "houjiangjun", "name": "后将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 3, "quota": 1, "legitimacy": 18, "duty": "四方将军之一"},
+    {"id": "zuojiangjun", "name": "左将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 3, "quota": 1, "legitimacy": 18, "duty": "四方将军之一"},
+    {"id": "youjiangjun", "name": "右将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 3, "quota": 1, "legitimacy": 18, "duty": "四方将军之一"},
+    {"id": "zhengjiangjun", "name": "四征将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 4, "quota": 4, "variants": ["征东将军", "征西将军", "征南将军", "征北将军"], "legitimacy": 14, "duty": "专征一方"},
+    {"id": "zhenjiangjun", "name": "四镇将军", "branch": "military", "parent": "dajiangjun", "rank": "二千石", "grade": 4, "quota": 4, "variants": ["镇东将军", "镇西将军", "镇南将军", "镇北将军"], "legitimacy": 13, "duty": "镇守一方"},
+    {"id": "zahao", "name": "杂号将军", "branch": "military", "parent": "dajiangjun", "rank": "比二千石", "grade": 5, "quota": 16, "variants": ["讨逆将军", "讨虏将军", "破虏将军", "奋武将军", "奋威将军", "扬武将军", "振威将军", "安国将军", "伏波将军", "荡寇将军", "虎威将军", "偏将军"], "legitimacy": 8, "duty": "因事而设的将军号"},
+    {"id": "zhonglangjiang", "name": "中郎将", "branch": "military", "parent": "dajiangjun", "rank": "比二千石", "grade": 6, "quota": 12, "variants": ["五官中郎将", "左中郎将", "右中郎将", "绥南中郎将", "镇民中郎将"], "legitimacy": 6, "duty": "领兵宿卫或出镇边地"},
+    {"id": "xiaowei", "name": "校尉", "branch": "military", "parent": "dajiangjun", "rank": "比二千石", "grade": 7, "quota": 20, "legitimacy": 4, "duty": "统领一营"},
+    {"id": "zhoumu", "name": "州牧", "branch": "local", "parent": "emperor", "scope": "province", "rank": "二千石", "grade": 3, "quota": 1, "legitimacy": 20, "duty": "总领一州军政，与刺史同席，二者择一"},
+    {"id": "cishi", "name": "刺史", "branch": "local", "parent": "emperor", "scope": "province", "rank": "六百石", "grade": 4, "quota": 1, "legitimacy": 12, "duty": "监察一州诸郡，与州牧同席"},
+    {"id": "taishou", "name": "太守", "branch": "local", "parent": "zhoumu", "scope": "commandery", "rank": "二千石", "grade": 5, "quota": 1, "legitimacy": 6, "duty": "治一郡；王国称国相。朝廷任免止于此级"},
+    {"id": "xianling", "name": "县令长", "branch": "local", "parent": "taishou", "scope": "county", "rank": "千石至三百石", "grade": 7, "quota": 0, "legitimacy": 0, "appointable": false, "duty": "由当地世家选拔或把持（世家系统预留），朝廷不直接任免"}
+  ],
+  "titles": [
+    {"id": "wang", "name": "王", "grade": 1, "legitimacy": 40, "hereditary": true, "note": "诸侯王；异姓称王须付忠汉代价"},
+    {"id": "gong", "name": "公", "grade": 2, "legitimacy": 30, "hereditary": true, "note": "如魏公，九锡线的一环"},
+    {"id": "xianhou", "name": "县侯", "grade": 3, "legitimacy": 12, "hereditary": true, "note": "以县为食邑"},
+    {"id": "xianghou", "name": "乡侯", "grade": 4, "legitimacy": 8, "hereditary": true, "note": "以乡为食邑"},
+    {"id": "tinghou", "name": "亭侯", "grade": 5, "legitimacy": 5, "hereditary": true, "note": "以亭为食邑"},
+    {"id": "guanneihou", "name": "关内侯", "grade": 6, "legitimacy": 2, "hereditary": false, "note": "有爵无国，赏功之用"}
+  ],
+  "rules": {
+    "obey_threshold": 70,
+    "waver_threshold": 40,
+    "smoothing": 0.5,
+    "relation_weight": 0.2,
+    "power_weight": 6,
+    "power_cap": 15,
+    "legit_scale": 1.5,
+    "pragmatic_weight": 0.6,
+    "war_cap": 20,
+    "distance_near": 10,
+    "distance_far": 40,
+    "distance_bonus": 10,
+    "office_bonus_each": 5,
+    "office_bonus_cap": 15,
+    "defiance_decay": 5,
+    "self_styled_factor": 0.5,
+    "control_capital_garrison": 5000,
+    "control_gain": 1,
+    "control_loss_no_capital": 6,
+    "authority_drift": 0.3
+  },
+  "scenarios": {
+    "190_coalition": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "初平", "status": "controlled"},
+      "capital": "luoyang", "controller": "dong", "authority": 50, "control": 70,
+      "han_loyalty": {"dong": 15, "cao": 70, "yuan": 55, "sun_jian": 75, "gongsun": 50, "liu_biao": 75, "yuan_shu": 30, "han_fu": 65, "liu_yu": 95, "tao_qian": 60, "kong_rong": 90, "liu_yan": 45, "liu_dai": 70, "ma_teng": 40, "han_sui": 20, "gongsun_du": 25, "wang_kuang": 70, "kong_zhou": 75, "zhang_miao": 70, "qiao_mao": 80, "yuan_yi": 70, "bao_xin": 75, "zhang_chao": 75, "chen_wen": 65, "zhou_xin": 70, "liu_chong": 90, "shi_xie": 60, "jiao_he": 70},
+      "offices": [
+        ["xiangguo", "董卓"], ["situ", "杨彪"], ["taipu", "王允"], ["zuojiangjun", "皇甫嵩"], ["zhonglangjiang", "蔡邕", null, "左中郎将"],
+        ["dasima", "刘虞"], ["zhoumu", "刘虞", "幽州"], ["zhoumu", "韩馥", "冀州"], ["zhoumu", "刘焉", "益州"], ["cishi", "刘表", "荆州"], ["cishi", "陶谦", "徐州"], ["cishi", "刘岱", "兖州"], ["cishi", "孔伷", "豫州"], ["cishi", "陈温", "扬州"], ["cishi", "焦和", "青州"],
+        ["houjiangjun", "袁术"], ["taishou", "袁绍", "渤海郡"], ["cheqi", "袁绍", null, null, true], ["zahao", "曹操", null, "奋武将军", true], ["taishou", "孙坚", "长沙郡"], ["zahao", "孙坚", null, "破虏将军", true],
+        ["taishou", "孔融", "北海国"], ["taishou", "王匡", "河内郡"], ["taishou", "张邈", "陈留郡"], ["taishou", "桥瑁", "东郡"], ["taishou", "袁遗", "山阳国"], ["taishou", "鲍信", "济北国"], ["taishou", "张超", "广陵郡"], ["taishou", "周昕", "丹阳郡"], ["taishou", "公孙度", "辽东郡"], ["taishou", "士燮", "交趾郡"], ["zhonglangjiang", "公孙瓒"]
+      ],
+      "titles": [["xianhou", "董卓", "郿"], ["wang", "刘宠", "陈"]]
+    },
+    "194_puyang": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "兴平", "status": "controlled"},
+      "capital": "changan", "controller": "li_jue", "authority": 40, "control": 60,
+      "han_loyalty": {"li_jue": 10, "cao": 60, "lu_bu": 35, "tao_qian": 60, "liu": 90, "yuan": 50, "gongsun": 45, "yuan_shu": 25, "liu_biao": 70, "liu_zhang": 55, "zhang_lu": 30, "kong_rong": 90, "ma_teng": 50, "han_sui": 30, "gongsun_du": 20, "liu_yao": 85, "wang_lang": 80, "zhang_yang": 75, "zhang_yan": 20, "liu_chong": 90, "shi_xie": 60, "handan_shang": 60},
+      "offices": [
+        ["cheqi", "李傕"], ["sili", "李傕"], ["houjiangjun", "郭汜"], ["youjiangjun", "樊稠"], ["zhenjiangjun", "张济", null, "镇东将军"], ["taiwei", "杨彪"], ["taichang", "皇甫嵩"],
+        ["zhoumu", "陶谦", "徐州"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"], ["qianjiangjun", "公孙瓒"], ["zuojiangjun", "袁术"], ["zhengjiangjun", "马腾", null, "征西将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"],
+        ["zhoumu", "刘璋", "益州"], ["cishi", "刘繇", "扬州"], ["taishou", "王朗", "会稽郡"], ["taishou", "张杨", "河内郡"], ["zahao", "张杨", null, "安国将军"], ["zahao", "吕布", null, "奋威将军"], ["taishou", "孔融", "北海国"], ["taishou", "士燮", "交趾郡"], ["cishi", "邯郸商", "凉州"],
+        ["zhoumu", "袁绍", "冀州", null, true], ["zhoumu", "曹操", "兖州", null, true], ["cishi", "刘备", "豫州", null, true], ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "张邈", "陈留郡"]
+      ],
+      "titles": [["xianhou", "李傕", "池阳"], ["xianhou", "郭汜", "美阳"], ["xianhou", "陶谦", "溧阳"], ["xianhou", "刘表", "成武"], ["xianhou", "公孙瓒", "易"], ["xianhou", "袁术", "阳翟"], ["xianhou", "吕布", "温"], ["wang", "刘宠", "陈"]]
+    },
+    "200_guandu": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
+      "capital": "xuchang", "controller": "cao", "authority": 55, "control": 70,
+      "han_loyalty": {"cao": 55, "yuan": 40, "liu": 90, "liu_biao": 65, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "ma_teng": 50, "han_sui": 35, "gongsun_du": 20, "shi_xie": 60, "zhang_jin": 60, "handan_shang": 65, "zhang_meng": 50, "wei_duan": 75},
+      "offices": [
+        ["sikong", "曹操"], ["cheqi", "曹操"], ["shangshuling", "荀彧"], ["shaofu", "孔融"], ["sili", "钟繇"], ["zahao", "张绣", null, "扬武将军"], ["zhonglangjiang", "张辽"],
+        ["dajiangjun", "袁绍"], ["zhoumu", "袁绍", "冀州"], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "豫州"], ["zahao", "孙策", null, "讨逆将军"], ["taishou", "孙策", "会稽郡"], ["zhenjiangjun", "刘表", null, "镇南将军"], ["zhoumu", "刘表", "荆州"],
+        ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["qianjiangjun", "马腾"], ["zhenjiangjun", "韩遂", null, "镇西将军"],
+        ["taishou", "公孙度", "辽东郡", null, true], ["taishou", "士燮", "交趾郡"], ["cishi", "张津", "交州"], ["zhoumu", "韦端", "凉州"], ["taishou", "张猛", "武威郡"]
+      ],
+      "titles": [["xianhou", "曹操", "武平"], ["xianhou", "袁绍", "邺"], ["tinghou", "刘备", "宜城"], ["xianhou", "孙策", "吴"], ["xianhou", "刘表", "成武"], ["xianghou", "马腾", "槐里"], ["guanneihou", "张辽"]]
+    },
+    "208_red_cliffs": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
+      "capital": "xuchang", "controller": "cao", "authority": 50, "control": 80,
+      "han_loyalty": {"cao": 45, "liu": 90, "sun": 45, "liu_zhang": 55, "zhang_lu": 30, "gongsun_kang": 25, "han_xuan": 60, "liu_du": 60, "zhao_fan": 55, "jin_xuan": 65, "ma_chao": 40, "han_sui": 35, "zhang_meng": 50, "wei_kang": 75, "shi_xie": 60, "wu_ju": 55},
+      "offices": [
+        ["chengxiang", "曹操"], ["shangshuling", "荀彧"], ["sili", "钟繇"], ["weiwei", "马腾"], ["zahao", "夏侯惇", null, "伏波将军"], ["zahao", "张辽", null, "荡寇将军"], ["zahao", "于禁", null, "虎威将军"], ["zahao", "程昱", null, "奋武将军"],
+        ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "豫州"], ["cishi", "刘琦", "荆州", null, true], ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"],
+        ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["zahao", "马超", null, "偏将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["taishou", "公孙康", "辽东郡"],
+        ["taishou", "韩玄", "长沙郡"], ["taishou", "赵范", "桂阳郡"], ["taishou", "金旋", "武陵郡"], ["taishou", "刘度", "零陵郡"], ["cishi", "韦康", "凉州"], ["taishou", "张猛", "武威郡"], ["taishou", "士燮", "交趾郡"]
+      ],
+      "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
+    },
+    "211_tongguan": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
+      "capital": "xuchang", "controller": "cao", "authority": 45, "control": 85,
+      "han_loyalty": {"cao": 40, "liu": 90, "sun": 40, "liu_zhang": 55, "zhang_lu": 30, "ma_chao": 35, "han_sui": 30, "gongsun_kang": 25, "shi_xie": 55},
+      "offices": [
+        ["chengxiang", "曹操"], ["shangshuling", "荀彧"], ["sili", "钟繇"], ["weiwei", "马腾"], ["zhonglangjiang", "曹丕", null, "五官中郎将"],
+        ["zahao", "孙权", null, "讨虏将军"], ["taishou", "孙权", "会稽郡"], ["cheqi", "孙权", null, null, true], ["zuojiangjun", "刘备"], ["zhoumu", "刘备", "荆州", null, true], ["zhoumu", "刘璋", "益州"], ["zahao", "刘璋", null, "振威将军"],
+        ["zahao", "马超", null, "偏将军"], ["zhenjiangjun", "韩遂", null, "镇西将军"], ["zhonglangjiang", "张鲁", null, "镇民中郎将"], ["taishou", "张鲁", "汉中郡"], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"]
+      ],
+      "titles": [["xianhou", "曹操", "武平"], ["tinghou", "刘备", "宜城"], ["tinghou", "马超", "都"], ["xianhou", "公孙康", "襄平"]]
+    },
+    "219_xiangyang": {
+      "emperor": {"name": "刘协", "temple": "献帝", "era": "建安", "status": "controlled"},
+      "capital": "xuchang", "controller": "cao", "authority": 35, "control": 90,
+      "han_loyalty": {"cao": 20, "liu": 90, "sun": 35, "gongsun_kang": 25, "shi_xie": 55},
+      "offices": [
+        ["chengxiang", "曹操"], ["zhengjiangjun", "曹仁", null, "征南将军"], ["zhengjiangjun", "张辽", null, "征东将军"], ["zuojiangjun", "于禁"], ["zahao", "徐晃", null, "平寇将军"],
+        ["dasima", "刘备", null, null, true], ["qianjiangjun", "关羽", null, null, true], ["youjiangjun", "张飞", null, null, true], ["houjiangjun", "黄忠", null, null, true],
+        ["cheqi", "孙权", null, null, true], ["zhoumu", "孙权", "徐州", null, true], ["taishou", "公孙康", "辽东郡"], ["taishou", "士燮", "交趾郡"]
+      ],
+      "titles": [["wang", "曹操", "魏"], ["wang", "刘备", "汉中", true], ["xianhou", "公孙康", "襄平"]]
+    }
+  }
+}
