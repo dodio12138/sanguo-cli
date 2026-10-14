@@ -775,6 +775,31 @@
       "order": 1
     }
   },
+  "battle": {
+    "note": "野战分回合交战，打到一方士气跌破溃散线（或到撤退线有序后撤）为止；损失拆为阵亡、伤员、溃散；老兵只能打出来",
+    "max_rounds": 8,
+    "round_loss": 0.06,
+    "round_loss_cap": 0.35,
+    "morale_per_loss": 100,
+    "pressure_morale": 2.5,
+    "rout_line": 25,
+    "rout_command_scale": 0.12,
+    "rout_veteran_shift": 10,
+    "retreat_line_by_tactic": {"aggressive": 0, "balanced": 30, "cautious": 40},
+    "split": {"killed": 0.3, "wounded": 0.45, "scattered": 0.25},
+    "rout_loss": 0.1,
+    "withdraw_loss": 0.03,
+    "straggler_return": 0.4,
+    "straggler_daily": 0.25,
+    "veteran_power": 0.3,
+    "veteran_gain": 1.6,
+    "veteran_gain_cap": 0.3,
+    "veteran_initial": {"floor": 40, "scale": 1},
+    "wound_recover_city": 0.03,
+    "wound_recover_field": 0.005,
+    "wound_death_field": 0.01,
+    "wound_death_starving": 0.05
+  },
   "movement": {
     "road_cost": 8,
     "river_crossing_cost": 5,
