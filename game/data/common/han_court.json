@@ -485,6 +485,17 @@
       "legitimacy": 8,
       "duty": "掌宫外警戒、巡察京师",
       "expansionBatch": "rosters-20261015"
+    },
+    {
+      "id": "taifu",
+      "name": "太傅",
+      "branch": "central",
+      "parent": "emperor",
+      "rank": "万石",
+      "grade": 1,
+      "quota": 1,
+      "legitimacy": 30,
+      "duty": "辅导天子，魏晋多用于顾命辅政；不等于军队统帅。"
     }
   ],
   "titles": [
@@ -4135,6 +4146,472 @@
         "batch": "rosters-20261015",
         "offices": [],
         "deferred": []
+      }
+    },
+    "249_gaopingling": {
+      "dynasty": "魏",
+      "emperor": {
+        "name": "曹芳",
+        "temple": "魏帝",
+        "era": "正始",
+        "status": "reigning"
+      },
+      "capital": "luoyang",
+      "controller": "cao",
+      "authority": 50,
+      "control": 90,
+      "usurpers": [
+        "liu",
+        "sun"
+      ],
+      "han_loyalty": {
+        "cao": 100,
+        "liu": 10,
+        "sun": 10
+      },
+      "offices": [
+        [
+          "dajiangjun",
+          "曹爽",
+          null,
+          null,
+          false
+        ],
+        [
+          "taifu",
+          "司马懿",
+          null,
+          null,
+          false
+        ],
+        [
+          "taiwei",
+          "蒋济",
+          null,
+          null,
+          false
+        ],
+        [
+          "shangshuling",
+          "司马孚",
+          null,
+          null,
+          false
+        ],
+        [
+          "sili",
+          "毕轨",
+          null,
+          null,
+          false
+        ],
+        [
+          "shangshu",
+          "何晏",
+          null,
+          null,
+          false
+        ],
+        [
+          "shangshu",
+          "邓飏",
+          null,
+          null,
+          false
+        ],
+        [
+          "shangshu",
+          "丁谧",
+          null,
+          null,
+          false
+        ],
+        [
+          "cheqi",
+          "王凌",
+          null,
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "陈泰",
+          "并州",
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "郭淮",
+          "雍州",
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "令狐愚",
+          "兖州",
+          null,
+          false
+        ],
+        [
+          "dajiangjun",
+          "费祎",
+          null,
+          null,
+          true
+        ],
+        [
+          "weijiangjun",
+          "姜维",
+          null,
+          null,
+          true
+        ]
+      ],
+      "titles": [],
+      "ruler_styles": {
+        "cao": "魏帝 · 曹芳",
+        "liu": "汉帝 · 刘禅（自立）",
+        "sun": "吴帝 · 孙权（自立）"
+      }
+    },
+    "253_hefei": {
+      "dynasty": "魏",
+      "emperor": {
+        "name": "曹芳",
+        "temple": "魏帝",
+        "era": "嘉平",
+        "status": "reigning"
+      },
+      "capital": "luoyang",
+      "controller": "cao",
+      "authority": 50,
+      "control": 90,
+      "usurpers": [
+        "liu",
+        "sun"
+      ],
+      "han_loyalty": {
+        "cao": 100,
+        "liu": 10,
+        "sun": 10
+      },
+      "offices": [
+        [
+          "dajiangjun",
+          "司马师",
+          null,
+          null,
+          false
+        ],
+        [
+          "taiwei",
+          "司马孚",
+          null,
+          null,
+          false
+        ],
+        [
+          "zhengjiangjun",
+          "郭淮",
+          null,
+          "征西将军",
+          false
+        ],
+        [
+          "cishi",
+          "陈泰",
+          "雍州",
+          null,
+          false
+        ],
+        [
+          "zhengjiangjun",
+          "毌丘俭",
+          null,
+          "征东将军",
+          false
+        ],
+        [
+          "weijiangjun",
+          "姜维",
+          null,
+          null,
+          true
+        ],
+        [
+          "taifu",
+          "诸葛恪",
+          null,
+          null,
+          true
+        ],
+        [
+          "dajiangjun",
+          "诸葛恪",
+          null,
+          null,
+          true
+        ]
+      ],
+      "titles": [],
+      "ruler_styles": {
+        "cao": "魏帝 · 曹芳",
+        "liu": "汉帝 · 刘禅（自立）",
+        "sun": "吴帝 · 孙亮（自立）"
+      }
+    },
+    "263_jiange": {
+      "dynasty": "魏",
+      "emperor": {
+        "name": "曹奂",
+        "temple": "魏帝",
+        "era": "景元",
+        "status": "reigning"
+      },
+      "capital": "luoyang",
+      "controller": "cao",
+      "authority": 50,
+      "control": 90,
+      "usurpers": [
+        "liu",
+        "sun"
+      ],
+      "han_loyalty": {
+        "cao": 100,
+        "liu": 10,
+        "sun": 10,
+        "lv_xing": 10
+      },
+      "offices": [
+        [
+          "dajiangjun",
+          "司马昭",
+          null,
+          null,
+          false
+        ],
+        [
+          "taifu",
+          "司马孚",
+          null,
+          null,
+          false
+        ],
+        [
+          "zhengjiangjun",
+          "邓艾",
+          null,
+          "征西将军",
+          false
+        ],
+        [
+          "zhenjiangjun",
+          "钟会",
+          null,
+          "镇西将军",
+          false
+        ],
+        [
+          "tingwei",
+          "卫瓘",
+          null,
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "诸葛绪",
+          "雍州",
+          null,
+          false
+        ],
+        [
+          "dajiangjun",
+          "姜维",
+          null,
+          null,
+          true
+        ],
+        [
+          "weijiangjun",
+          "诸葛瞻",
+          null,
+          null,
+          true
+        ],
+        [
+          "chengxiang",
+          "濮阳兴",
+          null,
+          null,
+          true
+        ],
+        [
+          "dajiangjun",
+          "丁奉",
+          null,
+          null,
+          true
+        ]
+      ],
+      "titles": [],
+      "ruler_styles": {
+        "cao": "魏帝 · 曹奂",
+        "liu": "汉帝 · 刘禅（自立）",
+        "sun": "吴帝 · 孙休（自立）",
+        "lv_xing": "地方军首领"
+      }
+    },
+    "279_jianye": {
+      "dynasty": "晋",
+      "emperor": {
+        "name": "司马炎",
+        "temple": "武帝",
+        "era": "咸宁",
+        "status": "reigning"
+      },
+      "capital": "luoyang",
+      "controller": "cao",
+      "authority": 75,
+      "control": 90,
+      "usurpers": [
+        "sun"
+      ],
+      "han_loyalty": {
+        "cao": 100,
+        "sun": 10,
+        "guo_ma": 10,
+        "tufa_shujineng": 10
+      },
+      "offices": [
+        [
+          "taiwei",
+          "贾充",
+          null,
+          null,
+          false
+        ],
+        [
+          "situ",
+          "李胤",
+          null,
+          null,
+          false
+        ],
+        [
+          "sikong",
+          "司马攸",
+          null,
+          null,
+          false
+        ],
+        [
+          "shangshuling",
+          "卫瓘",
+          null,
+          null,
+          false
+        ],
+        [
+          "shizhong",
+          "张华",
+          null,
+          null,
+          false
+        ],
+        [
+          "zahao",
+          "王浑",
+          null,
+          "安东将军",
+          false
+        ],
+        [
+          "zhengjiangjun",
+          "司马骏",
+          null,
+          "征西将军",
+          false
+        ],
+        [
+          "zhenjiangjun",
+          "杜预",
+          null,
+          "镇南将军",
+          false
+        ],
+        [
+          "cishi",
+          "王戎",
+          "豫州",
+          null,
+          false
+        ],
+        [
+          "zahao",
+          "王濬",
+          null,
+          "龙骧将军",
+          false
+        ],
+        [
+          "taishou",
+          "马隆",
+          "武威郡",
+          null,
+          false
+        ],
+        [
+          "chengxiang",
+          "张悌",
+          null,
+          null,
+          true
+        ],
+        [
+          "situ",
+          "何植",
+          null,
+          null,
+          true
+        ],
+        [
+          "guanglu",
+          "薛莹",
+          null,
+          null,
+          true
+        ],
+        [
+          "zhoumu",
+          "陶璜",
+          "交州",
+          null,
+          true
+        ],
+        [
+          "taishou",
+          "沈莹",
+          "丹阳郡",
+          null,
+          true
+        ],
+        [
+          "taishou",
+          "王毅",
+          "苍梧郡",
+          null,
+          true
+        ]
+      ],
+      "titles": [],
+      "ruler_styles": {
+        "cao": "晋帝 · 司马炎",
+        "sun": "吴帝 · 孙皓（自立）",
+        "guo_ma": "地方军首领",
+        "tufa_shujineng": "地方军首领"
       }
     }
   }

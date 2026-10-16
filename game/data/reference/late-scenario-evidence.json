@@ -1,0 +1,3970 @@
+{
+  "batch": "late-scenarios-20261016",
+  "note": "史书人物与任职按所引传记核对；驻地非本传明确时为游戏近似。first/last为本批采用事迹区间，不等于生卒年。既有人物能力沿用游戏参考，不称史实数值。",
+  "sources": {
+    "s4": [
+      "《三国志》卷4·三少帝纪",
+      "https://zh.wikisource.org/wiki/三國志/卷04"
+    ],
+    "s9": [
+      "《三国志》卷9·曹爽、夏侯玄等传",
+      "https://zh.wikisource.org/wiki/三國志/卷09"
+    ],
+    "s22": [
+      "《三国志》卷22·陈群陈泰等传",
+      "https://zh.wikisource.org/wiki/三國志/卷22"
+    ],
+    "s24": [
+      "《三国志》卷24·高柔等传",
+      "https://zh.wikisource.org/wiki/三國志/卷24"
+    ],
+    "s26": [
+      "《三国志》卷26·郭淮等传",
+      "https://zh.wikisource.org/wiki/三國志/卷26"
+    ],
+    "s27": [
+      "《三国志》卷27·王昶胡质等传",
+      "https://zh.wikisource.org/wiki/三國志/卷27"
+    ],
+    "s28": [
+      "《三国志》卷28·王凌毌丘俭诸葛诞邓艾钟会传",
+      "https://zh.wikisource.org/wiki/三國志/卷28"
+    ],
+    "s33": [
+      "《三国志》卷33·后主传",
+      "https://zh.wikisource.org/wiki/三國志/卷33"
+    ],
+    "s34": [
+      "《三国志》卷34·二主妃子传",
+      "https://zh.wikisource.org/wiki/三國志/卷34"
+    ],
+    "s39": [
+      "《三国志》卷39·董允陈祗等传",
+      "https://zh.wikisource.org/wiki/三國志/卷39"
+    ],
+    "s42": [
+      "《三国志》卷42·谯周郤正等传",
+      "https://zh.wikisource.org/wiki/三國志/卷42"
+    ],
+    "s43": [
+      "《三国志》卷43·霍弋等传",
+      "https://zh.wikisource.org/wiki/三國志/卷43"
+    ],
+    "s44": [
+      "《三国志》卷44·费祎姜维传",
+      "https://zh.wikisource.org/wiki/三國志/卷44"
+    ],
+    "s45": [
+      "《三国志》卷45·邓芝张翼等传",
+      "https://zh.wikisource.org/wiki/三國志/卷45"
+    ],
+    "s48": [
+      "《三国志》卷48·三嗣主传（含裴注）",
+      "https://zh.wikisource.org/wiki/三國志/卷48"
+    ],
+    "s50": [
+      "《三国志》卷50·妃嫔传",
+      "https://zh.wikisource.org/wiki/三國志/卷50"
+    ],
+    "s56": [
+      "《三国志》卷56·朱然朱绩等传",
+      "https://zh.wikisource.org/wiki/三國志/卷56"
+    ],
+    "s58": [
+      "《三国志》卷58·陆逊陆抗传",
+      "https://zh.wikisource.org/wiki/三國志/卷58"
+    ],
+    "s60": [
+      "《三国志》卷60·全琮等传",
+      "https://zh.wikisource.org/wiki/三國志/卷60"
+    ],
+    "s61": [
+      "《三国志》卷61·陆凯等传",
+      "https://zh.wikisource.org/wiki/三國志/卷61"
+    ],
+    "s64": [
+      "《三国志》卷64·诸葛恪滕胤孙峻孙綝传",
+      "https://zh.wikisource.org/wiki/三國志/卷64"
+    ],
+    "s65": [
+      "《三国志》卷65·薛莹华核等传",
+      "https://zh.wikisource.org/wiki/三國志/卷65"
+    ],
+    "j1": [
+      "《晋书》卷1·宣帝纪",
+      "https://zh.wikisource.org/wiki/晉書/卷001"
+    ],
+    "j2": [
+      "《晋书》卷2·景帝文帝纪",
+      "https://zh.wikisource.org/wiki/晉書/卷002"
+    ],
+    "j3": [
+      "《晋书》卷3·武帝纪",
+      "https://zh.wikisource.org/wiki/晉書/卷003"
+    ],
+    "j31": [
+      "《晋书》卷31·后妃传",
+      "https://zh.wikisource.org/wiki/晉書/卷031"
+    ],
+    "j33": [
+      "《晋书》卷33·何曾石苞等传",
+      "https://zh.wikisource.org/wiki/晉書/卷033"
+    ],
+    "j34": [
+      "《晋书》卷34·羊祜杜预传",
+      "https://zh.wikisource.org/wiki/晉書/卷034"
+    ],
+    "j35": [
+      "《晋书》卷35·裴秀王沈等传",
+      "https://zh.wikisource.org/wiki/晉書/卷035"
+    ],
+    "j36": [
+      "《晋书》卷36·卫瓘张华等传",
+      "https://zh.wikisource.org/wiki/晉書/卷036"
+    ],
+    "j37": [
+      "《晋书》卷37·安平献王孚传",
+      "https://zh.wikisource.org/wiki/晉書/卷037"
+    ],
+    "j38": [
+      "《晋书》卷38·宣五王等传",
+      "https://zh.wikisource.org/wiki/晉書/卷038"
+    ],
+    "j39": [
+      "《晋书》卷39·荀勖等传",
+      "https://zh.wikisource.org/wiki/晉書/卷039"
+    ],
+    "j42": [
+      "《晋书》卷42·王濬王浑唐彬传",
+      "https://zh.wikisource.org/wiki/晉書/卷042"
+    ],
+    "j43": [
+      "《晋书》卷43·山涛王戎等传",
+      "https://zh.wikisource.org/wiki/晉書/卷043"
+    ],
+    "j44": [
+      "《晋书》卷44·郑袤李胤等传",
+      "https://zh.wikisource.org/wiki/晉書/卷044"
+    ],
+    "j45": [
+      "《晋书》卷45·刘毅和峤等传",
+      "https://zh.wikisource.org/wiki/晉書/卷045"
+    ],
+    "j46": [
+      "《晋书》卷46·刘颂等传",
+      "https://zh.wikisource.org/wiki/晉書/卷046"
+    ],
+    "j50": [
+      "《晋书》卷50·庾峻任恺等传",
+      "https://zh.wikisource.org/wiki/晉書/卷050"
+    ],
+    "j51": [
+      "《晋书》卷51·皇甫谧束皙等传",
+      "https://zh.wikisource.org/wiki/晉書/卷051"
+    ],
+    "j57": [
+      "《晋书》卷57·罗宪滕修马隆陶璜吾彦等传",
+      "https://zh.wikisource.org/wiki/晉書/卷057"
+    ],
+    "j101": [
+      "《晋书》卷101·刘元海载记",
+      "https://zh.wikisource.org/wiki/晉書/卷101"
+    ],
+    "j40": [
+      "《晋书》卷40·杨骏等传",
+      "https://zh.wikisource.org/wiki/晉書/卷040"
+    ],
+    "j49": [
+      "《晋书》卷49·阮籍嵇康向秀等传",
+      "https://zh.wikisource.org/wiki/晉書/卷049"
+    ],
+    "j52": [
+      "《晋书》卷52·郤诜等传",
+      "https://zh.wikisource.org/wiki/晉書/卷052"
+    ],
+    "j59": [
+      "《晋书》卷59·汝南王等传",
+      "https://zh.wikisource.org/wiki/晉書/卷059"
+    ],
+    "j88": [
+      "《晋书》卷88·孝友传（李密）",
+      "https://zh.wikisource.org/wiki/晉書/卷088"
+    ],
+    "j58": [
+      "《晋书》卷58·周处等传",
+      "https://zh.wikisource.org/wiki/晉書/卷058"
+    ],
+    "s52": [
+      "《三国志》卷52·顾雍等传",
+      "https://zh.wikisource.org/wiki/三國志/卷52"
+    ],
+    "s35": [
+      "《三国志》卷35·诸葛亮传",
+      "https://zh.wikisource.org/wiki/三國志/卷35"
+    ]
+  },
+  "people": [
+    {
+      "name": "陆喜",
+      "first": 279,
+      "last": 280,
+      "source": "s61",
+      "basis": "陆胤子，吴吏部尚书，吴亡后徙洛阳；卒年未确不补造。"
+    },
+    {
+      "name": "顾荣",
+      "first": 279,
+      "last": 280,
+      "source": "s52",
+      "basis": "顾雍孙，仕吴黄门侍郎、太子辅义都尉；吴亡后入晋。",
+      "deathYear": 312
+    },
+    {
+      "name": "周处",
+      "first": 279,
+      "last": 280,
+      "source": "j58",
+      "basis": "周鲂子，仕吴东观左丞、无难督，吴亡后入晋。",
+      "deathYear": 297
+    },
+    {
+      "name": "王济",
+      "first": 263,
+      "last": 280,
+      "source": "j42",
+      "basis": "王浑子，晋侍中，尚常山公主；与汉末同名者区分，不附会精确卒年。"
+    },
+    {
+      "name": "孙鲁育",
+      "first": 249,
+      "last": 255,
+      "source": "s50",
+      "basis": "孙权女、朱据妻；孙峻时遇害，不配置军职。",
+      "deathYear": 255
+    },
+    {
+      "name": "陶璜",
+      "first": 263,
+      "last": 280,
+      "source": "j57",
+      "basis": "吴将，讨交趾、后领交州；晋平吴后仍镇交州。"
+    },
+    {
+      "name": "马隆",
+      "first": 249,
+      "last": 290,
+      "source": "j57",
+      "basis": "收葬令狐愚，后以三千五百募士平凉州；269年前官职未确者只列在野。"
+    },
+    {
+      "name": "秃发树机能",
+      "first": 270,
+      "last": 279,
+      "source": "j3",
+      "basis": "咸宁间据凉州抗晋，279年为马隆讨平。",
+      "deathYear": 279
+    },
+    {
+      "name": "刘渊",
+      "first": 264,
+      "last": 280,
+      "source": "j101",
+      "basis": "刘豹之子，魏末入洛阳为任子，晋代领北部；不提前建立汉赵；仅载嘉平年间出生，不定具体生年。",
+      "deathYear": 310
+    },
+    {
+      "name": "山涛",
+      "first": 244,
+      "last": 280,
+      "source": "j43",
+      "basis": "魏末晋初选举重臣，晋武帝时掌吏部。",
+      "birthYear": 205,
+      "deathYear": 283
+    },
+    {
+      "name": "向秀",
+      "first": 249,
+      "last": 272,
+      "source": "j49",
+      "basis": "竹林人物，晋初散骑侍郎；本批先作为可访问的在野文士；生卒年存在推定，不录精确值。"
+    },
+    {
+      "name": "裴楷",
+      "first": 260,
+      "last": 280,
+      "source": "j35",
+      "basis": "魏末晋初中书与侍中，裴秀族弟。",
+      "birthYear": 237,
+      "deathYear": 291
+    },
+    {
+      "name": "卫恒",
+      "first": 263,
+      "last": 280,
+      "source": "j36",
+      "basis": "卫瓘子，晋初尚书郎、秘书丞等；未详某年任次者寄洛阳。",
+      "birthYear": 252,
+      "deathYear": 291
+    },
+    {
+      "name": "李胤",
+      "first": 249,
+      "last": 282,
+      "source": "j44",
+      "basis": "魏末晋初历郡州，晋武帝时官至司徒。",
+      "deathYear": 282
+    },
+    {
+      "name": "任恺",
+      "first": 249,
+      "last": 280,
+      "source": "j50",
+      "basis": "魏末为侍中，晋初掌机密与选举。",
+      "birthYear": 223,
+      "deathYear": 284
+    },
+    {
+      "name": "和峤",
+      "first": 263,
+      "last": 280,
+      "source": "j45",
+      "basis": "魏末晋初历官，晋为中书令。"
+    },
+    {
+      "name": "刘毅",
+      "first": 249,
+      "last": 280,
+      "source": "j45",
+      "basis": "魏末晋初官员，武帝时司隶校尉，论九品中正。",
+      "birthYear": 216,
+      "deathYear": 285
+    },
+    {
+      "name": "刘颂",
+      "first": 263,
+      "last": 280,
+      "source": "j46",
+      "basis": "晋官，灭吴时为平南军司，后论法制。"
+    },
+    {
+      "name": "杨珧",
+      "first": 263,
+      "last": 280,
+      "source": "j40",
+      "basis": "杨氏中枢官员，支持马隆军功封赏。",
+      "deathYear": 291
+    },
+    {
+      "name": "杨骏",
+      "first": 263,
+      "last": 280,
+      "source": "j40",
+      "basis": "弘农杨氏，晋武帝后期车骑将军，杨芷父。",
+      "deathYear": 291
+    },
+    {
+      "name": "荀恺",
+      "first": 263,
+      "last": 280,
+      "source": "j39",
+      "basis": "伐蜀时平蜀护军，围汉城；荀勖从子。"
+    },
+    {
+      "name": "郤诜",
+      "first": 269,
+      "last": 280,
+      "source": "j52",
+      "basis": "泰始间举贤良，晋初尚书郎等。"
+    },
+    {
+      "name": "李密",
+      "first": 263,
+      "last": 280,
+      "source": "j88",
+      "basis": "蜀汉郎官，晋初征太子洗马，上陈情表，后出仕。",
+      "birthYear": 224,
+      "deathYear": 287
+    },
+    {
+      "name": "陈勰",
+      "first": 263,
+      "last": 280,
+      "source": "j42",
+      "basis": "晋伐吴时王浑参军；灭吴前置扬州军府随驻。"
+    },
+    {
+      "name": "张乔",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "晋成阳都尉，吴张悌渡江来攻时闭栅受降而后出击。"
+    },
+    {
+      "name": "徐胤",
+      "first": 263,
+      "last": 272,
+      "source": "s58",
+      "basis": "晋巴东监军，272年率水军救西陵；279年任职不详不强配。"
+    },
+    {
+      "name": "刘俊",
+      "first": 263,
+      "last": 268,
+      "source": "s48",
+      "basis": "吴交州刺史，进攻交趾，268年败死。",
+      "deathYear": 268
+    },
+    {
+      "name": "修则",
+      "first": 263,
+      "last": 268,
+      "source": "s48",
+      "basis": "吴将，参与攻交趾，268年败死。",
+      "deathYear": 268
+    },
+    {
+      "name": "吕兴",
+      "first": 263,
+      "last": 264,
+      "source": "s48",
+      "basis": "交趾郡吏，263年起兵杀孙谞，求附魏，后被部下杀。",
+      "deathYear": 264
+    },
+    {
+      "name": "孙谞",
+      "first": 260,
+      "last": 263,
+      "source": "s48",
+      "basis": "吴交趾太守，263年为吕兴等所杀。",
+      "deathYear": 263
+    },
+    {
+      "name": "孙谅",
+      "first": 263,
+      "last": 271,
+      "source": "s48",
+      "basis": "吴合浦太守，交趾战事所见。"
+    },
+    {
+      "name": "杨稷",
+      "first": 264,
+      "last": 271,
+      "source": "j57",
+      "basis": "晋交趾太守，271年为陶璜军所俘。"
+    },
+    {
+      "name": "毛炅",
+      "first": 264,
+      "last": 271,
+      "source": "j57",
+      "basis": "晋交趾军将，拒吴，城陷后遇害。",
+      "deathYear": 271
+    },
+    {
+      "name": "董元",
+      "first": 264,
+      "last": 271,
+      "source": "j57",
+      "basis": "晋交趾将领，交州战事所见。"
+    },
+    {
+      "name": "孟干",
+      "first": 264,
+      "last": 271,
+      "source": "j57",
+      "basis": "晋交趾军将，城陷后奔还。"
+    },
+    {
+      "name": "爨谷",
+      "first": 264,
+      "last": 268,
+      "source": "j57",
+      "basis": "晋交趾太守，交州军政交替所见。"
+    },
+    {
+      "name": "霍汜",
+      "first": 263,
+      "last": 271,
+      "source": "s43",
+      "basis": "霍弋子，南中霍氏后辈；具体驻县按家系近似。"
+    },
+    {
+      "name": "刘隐",
+      "first": 249,
+      "last": 263,
+      "source": "s44",
+      "basis": "蜀牙门将，263年守黄金围，不因汉中主力退却而自动降。"
+    },
+    {
+      "name": "句安",
+      "first": 249,
+      "last": 264,
+      "source": "s44",
+      "basis": "249年随蜀军攻麴山后降魏；263年列魏军。"
+    },
+    {
+      "name": "蒋显",
+      "first": 263,
+      "last": 264,
+      "source": "s44",
+      "basis": "姜维部将，成都降后奉命敕姜维降。"
+    },
+    {
+      "name": "罗袭",
+      "first": 270,
+      "last": 280,
+      "source": "j57",
+      "basis": "罗宪子，统父部曲，历陵江将军、广汉太守。"
+    },
+    {
+      "name": "罗蒙",
+      "first": 230,
+      "last": 249,
+      "source": "j57",
+      "basis": "罗宪父，蜀广汉太守；249年前后仅存家谱，不附会任官。"
+    },
+    {
+      "name": "诸葛京",
+      "first": 263,
+      "last": 280,
+      "source": "s35",
+      "basis": "诸葛瞻子，蜀亡后徙河东，晋时出仕。"
+    },
+    {
+      "name": "杨伟",
+      "first": 239,
+      "last": 249,
+      "source": "s9",
+      "basis": "曹爽参军，谏止骆谷用兵。"
+    },
+    {
+      "name": "孙谦",
+      "first": 249,
+      "last": 249,
+      "source": "s9",
+      "basis": "曹爽军将，高平陵事变阻止向司马懿放弩。"
+    },
+    {
+      "name": "张当",
+      "first": 239,
+      "last": 249,
+      "source": "s9",
+      "basis": "魏黄门，与曹爽交通，249年被收诛。",
+      "deathYear": 249
+    },
+    {
+      "name": "曹彦",
+      "first": 239,
+      "last": 249,
+      "source": "s9",
+      "basis": "曹真子，散骑常侍，249年同曹爽遇害。",
+      "deathYear": 249
+    },
+    {
+      "name": "曹则",
+      "first": 239,
+      "last": 249,
+      "source": "s9",
+      "basis": "曹真子，列侯，曹爽宗族。",
+      "deathYear": 249
+    },
+    {
+      "name": "曹皑",
+      "first": 239,
+      "last": 249,
+      "source": "s9",
+      "basis": "曹真子，列侯，曹爽宗族。",
+      "deathYear": 249
+    },
+    {
+      "name": "胡冲",
+      "first": 263,
+      "last": 280,
+      "source": "s48",
+      "basis": "胡综子，吴中书令，劝孙皓降晋。"
+    },
+    {
+      "name": "虞授",
+      "first": 270,
+      "last": 279,
+      "source": "s48",
+      "basis": "吴广州督，279年为郭马等所杀。",
+      "deathYear": 279
+    },
+    {
+      "name": "闾丰",
+      "first": 279,
+      "last": 280,
+      "source": "j57",
+      "basis": "吴末广州刺史，晋平吴后与滕修送印绶。"
+    },
+    {
+      "name": "王毅",
+      "first": 279,
+      "last": 280,
+      "source": "j57",
+      "basis": "吴苍梧太守，晋平吴后送印绶。"
+    },
+    {
+      "name": "熊睦",
+      "first": 264,
+      "last": 279,
+      "source": "j57",
+      "basis": "吴广州刺史，滕修代其职；本批只作为早先人物来源。"
+    },
+    {
+      "name": "修允",
+      "first": 264,
+      "last": 279,
+      "source": "s48",
+      "basis": "吴部曲督，所部北徙引发郭马等不安；279年已病卒。",
+      "deathYear": 279
+    },
+    {
+      "name": "何典",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "郭马部将，率兵攻苍梧。"
+    },
+    {
+      "name": "王族",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "郭马部将，攻始兴。"
+    },
+    {
+      "name": "吴述",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "郭马同党，吴末广州叛乱所见。"
+    },
+    {
+      "name": "殷兴",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "郭马同党，吴末广州叛乱所见。"
+    },
+    {
+      "name": "留宪",
+      "first": 279,
+      "last": 280,
+      "source": "j42",
+      "basis": "吴西陵督，晋军东下时战死。",
+      "deathYear": 280
+    },
+    {
+      "name": "成据",
+      "first": 279,
+      "last": 280,
+      "source": "j42",
+      "basis": "吴征南将军，与留宪守西陵，晋军东下时战死。",
+      "deathYear": 280
+    },
+    {
+      "name": "张象",
+      "first": 279,
+      "last": 280,
+      "source": "j42",
+      "basis": "吴游击将军，率舟军拒王濬，后降晋。"
+    },
+    {
+      "name": "薛胜",
+      "first": 279,
+      "last": 280,
+      "source": "s48",
+      "basis": "晋将，灭吴时与蒋班乘吴军阵乱进击。"
+    },
+    {
+      "name": "滕牧",
+      "first": 264,
+      "last": 280,
+      "source": "s50",
+      "basis": "滕皇后父，任卫将军；后徙苍梧，卒年不详。"
+    },
+    {
+      "name": "滕氏（孙皓后）",
+      "first": 264,
+      "last": 280,
+      "source": "s50",
+      "basis": "孙皓滕皇后，本传称滕夫人；不配军职。"
+    },
+    {
+      "name": "杨艳",
+      "first": 258,
+      "last": 274,
+      "source": "j31",
+      "basis": "晋武元皇后，杨文宗女，274年卒。",
+      "birthYear": 238,
+      "deathYear": 274
+    },
+    {
+      "name": "杨芷",
+      "first": 276,
+      "last": 280,
+      "source": "j31",
+      "basis": "杨骏女，晋武悼皇后；不倒置为249年在任人物。",
+      "birthYear": 259,
+      "deathYear": 292
+    },
+    {
+      "name": "羊徽瑜",
+      "first": 249,
+      "last": 278,
+      "source": "j31",
+      "basis": "羊祜姊、司马师妻，晋景献皇后。",
+      "birthYear": 214,
+      "deathYear": 278
+    },
+    {
+      "name": "王元姬",
+      "first": 249,
+      "last": 268,
+      "source": "j31",
+      "basis": "王肃女、司马昭妻，晋文明皇后。",
+      "birthYear": 217,
+      "deathYear": 268
+    },
+    {
+      "name": "全氏（孙亮后）",
+      "first": 252,
+      "last": 260,
+      "source": "s50",
+      "basis": "吴孙亮全皇后，本传称全夫人；不配军职。"
+    },
+    {
+      "name": "张咸",
+      "first": 272,
+      "last": 272,
+      "source": "s58",
+      "basis": "陆抗部将，西陵之战守围；任年不延伸到279。"
+    },
+    {
+      "name": "孙遵",
+      "first": 272,
+      "last": 272,
+      "source": "s58",
+      "basis": "吴公安督，西陵之战御羊祜。"
+    },
+    {
+      "name": "留虑",
+      "first": 272,
+      "last": 272,
+      "source": "s58",
+      "basis": "吴水军督，西陵之战拒徐胤。"
+    },
+    {
+      "name": "丁固",
+      "first": 263,
+      "last": 273,
+      "source": "s48",
+      "basis": "吴左御史大夫、司徒，与陆凯同辅政。",
+      "birthYear": 198,
+      "deathYear": 273
+    },
+    {
+      "name": "司马骏",
+      "first": 265,
+      "last": 280,
+      "source": "j38",
+      "basis": "扶风王，都督雍凉军事，镇关中。",
+      "birthYear": 232,
+      "deathYear": 286
+    },
+    {
+      "name": "司马亮",
+      "first": 265,
+      "last": 280,
+      "source": "j59",
+      "basis": "汝南王，晋宗室，历都督与中央官。",
+      "birthYear": 227,
+      "deathYear": 291
+    },
+    {
+      "name": "司马伦",
+      "first": 265,
+      "last": 280,
+      "source": "j59",
+      "basis": "琅邪王、后赵王，晋宗室，任职时点不详者只列家属。",
+      "deathYear": 301
+    },
+    {
+      "name": "朱损",
+      "first": 253,
+      "last": 257,
+      "source": "s64",
+      "basis": "吴将，孙峻诸葛恪之际参与军务；在本批253年列中军随驻。"
+    },
+    {
+      "name": "周浚",
+      "first": 279,
+      "last": 280,
+      "source": "j42",
+      "basis": "晋扬州刺史，灭吴时与王浑合军。",
+      "deathYear": 289
+    },
+    {
+      "name": "孙拯",
+      "first": 279,
+      "last": 280,
+      "source": "s58",
+      "basis": "陆氏属吏，陆云友，吴末可访问文士，仕晋记录不倒置为吴军将领。",
+      "deathYear": 303
+    }
+  ],
+  "scenarios": {
+    "249_gaopingling": {
+      "startDate": "249-01-01",
+      "assignments": [
+        {
+          "name": "曹芳",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹爽",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹羲",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹训",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹彦",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹则",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "曹皑",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何晏",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓飏",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁谧",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "毕轨",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "桓范",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杨伟",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙谦",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张当",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "s9",
+          "basis": "曹芳在位、曹爽辅政；取高平陵政变前，不提前诛爽党。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马懿",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马师",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马昭",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马孚",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋济",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "高柔",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙礼",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王观",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "卢毓",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘放",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙资",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王肃",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王祥",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "傅嘏",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "许允",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟毓",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟会",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王沈",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何曾",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j1",
+          "basis": "魏末中枢及司马氏府属；人物在世归属据史，未确官署者在京随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "夏侯玄",
+          "force": "cao",
+          "city": "changan",
+          "source": "s9",
+          "basis": "夏侯玄都督雍凉、镇关中，杜预尚曹氏公主；随驻者为区域近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杜预",
+          "force": "cao",
+          "city": "changan",
+          "source": "s9",
+          "basis": "夏侯玄都督雍凉、镇关中，杜预尚曹氏公主；随驻者为区域近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郭配",
+          "force": "cao",
+          "city": "changan",
+          "source": "s9",
+          "basis": "夏侯玄都督雍凉、镇关中，杜预尚曹氏公主；随驻者为区域近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "夏侯和",
+          "force": "cao",
+          "city": "changan",
+          "source": "s9",
+          "basis": "夏侯玄都督雍凉、镇关中，杜预尚曹氏公主；随驻者为区域近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郭淮",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s26",
+          "basis": "郭淮经营雍州陇右；邓艾南安任次在249年前后，开局按陇右分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓艾",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s26",
+          "basis": "郭淮经营雍州陇右；邓艾南安任次在249年前后，开局按陇右分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "戴陵",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s26",
+          "basis": "郭淮经营雍州陇右；邓艾南安任次在249年前后，开局按陇右分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "夏侯霸",
+          "force": "cao",
+          "city": "longxi",
+          "source": "s9",
+          "basis": "夏侯霸在高平陵政变前仍属魏，不提前降蜀；军属具体营地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "徐质",
+          "force": "cao",
+          "city": "longxi",
+          "source": "s9",
+          "basis": "夏侯霸在高平陵政变前仍属魏，不提前降蜀；军属具体营地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈泰",
+          "force": "cao",
+          "city": "jinyang",
+          "source": "s22",
+          "basis": "陈泰为并州刺史，嘉平初转雍州；开局尚在并州。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘靖",
+          "force": "cao",
+          "city": "jinyang",
+          "source": "s22",
+          "basis": "陈泰为并州刺史，嘉平初转雍州；开局尚在并州。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王凌",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "王凌镇淮南，令狐愚兖州、文钦庐江；分县近似随后在专条覆盖。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "令狐愚",
+          "force": "cao",
+          "city": "puyang",
+          "source": "s28",
+          "basis": "令狐愚为兖州刺史，平阿无独立节点，寄于兖州濮阳。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "文钦",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "文钦为魏庐江太守，现图舒县属吴，寄淮南寿春；文鸯文虎为后辈随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "唐咨",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "王凌镇淮南，令狐愚兖州、文钦庐江；分县近似随后在专条覆盖。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吴纲",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "王凌镇淮南，令狐愚兖州、文钦庐江；分县近似随后在专条覆盖。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王昶",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军据宛与襄阳；各年任次不明者只配置随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王基",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军据宛与襄阳；各年任次不明者只配置随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "州泰",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军据宛与襄阳；各年任次不明者只配置随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡遵",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "s28",
+          "basis": "曹魏将领按荆州军区分驻，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡奋",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "s28",
+          "basis": "曹魏将领按荆州军区分驻，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡质",
+          "force": "cao",
+          "city": "pengcheng",
+          "source": "s27",
+          "basis": "胡质都督青徐诸军事，249年卒但年初仍在世。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王颀",
+          "force": "cao",
+          "city": "ji",
+          "source": "s28",
+          "basis": "王颀曾任玄菟太守；按北方任职经历分驻，不授当年未确官号。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "石苞",
+          "force": "cao",
+          "city": "runan",
+          "source": "j33",
+          "basis": "魏末淮南军政经历，按区域分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘禅",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈祗",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "黄皓",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "董厥",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "樊建",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "谯周",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郤正",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "来敏",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杜琼",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张绍",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "宗预",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛瞻",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘永",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "蜀汉中枢；董允实际246已卒，由时序检查剔除，不复活旧臣。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张翼",
+          "force": "liu",
+          "city": "langzhong",
+          "source": "s45",
+          "basis": "蜀将分驻巴西作为北境后方，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "费祎",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "姜维",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张嶷",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "廖化",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡济",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "赵广",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "傅佥",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋舒",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "句安",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "费祎与姜维分统蜀汉军务；北境军将按军区近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘隐",
+          "force": "liu",
+          "city": "yangping",
+          "source": "s44",
+          "basis": "刘隐为蜀牙门将，后守黄金围，军中驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓芝",
+          "force": "liu",
+          "city": "jiangzhou",
+          "source": "s45",
+          "basis": "邓芝督江州。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "阎宇",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "邓芝督江州、阎宇与罗宪后镇巴东；249年按东线分驻，不倒授后职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "罗宪",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "邓芝督江州、阎宇与罗宪后镇巴东；249年按东线分驻，不倒授后职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "霍弋",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋经营南中；孟获、爨习归属与最后在世年缺载，未确者不延寿补官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "爨习",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋经营南中；孟获、爨习归属与最后在世年缺载，未确者不延寿补官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙权",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛恪",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙峻",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "滕胤",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛融",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "潘濬",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙弘",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙和",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙霸",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙休",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "韦昭",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张布",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁固",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孟宗",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙权末年及二宫问题；在世校验排除已卒旧臣，宗室不充当未载军职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱然",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s56",
+          "basis": "朱然督江陵，249年卒；朱绩、陆抗承吴西线军务。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱绩",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s56",
+          "basis": "朱然督江陵，249年卒；朱绩、陆抗承吴西线军务。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆抗",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s56",
+          "basis": "朱然督江陵，249年卒；朱绩、陆抗承吴西线军务。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "步协",
+          "force": "sun",
+          "city": "yiling",
+          "source": "s58",
+          "basis": "步氏西陵部曲，驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆凯",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴西线军政人物，武昌节点使用现有鄂县，不新增地图城市。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吕岱",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴西线军政人物，武昌节点使用现有鄂县，不新增地图城市。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱异",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "吴淮南前沿诸将按濡须区域近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁奉",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "吴淮南前沿诸将按濡须区域近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁封",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "吴淮南前沿诸将按濡须区域近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吕据",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s64",
+          "basis": "吴军江防诸将，驻县近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留赞",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s64",
+          "basis": "吴军江防诸将，驻县近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留平",
+          "force": "sun",
+          "city": "changsha",
+          "source": "s48",
+          "basis": "吴荆南军将分驻，具体县治为游戏近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆胤",
+          "force": "sun",
+          "city": "panyu",
+          "source": "s61",
+          "basis": "陆胤交州任职在赤乌末，按岭南分驻；不倒授后来官阶。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        }
+      ],
+      "rosterCount": 255
+    },
+    "253_hefei": {
+      "startDate": "253-03-01",
+      "assignments": [
+        {
+          "name": "曹芳",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马师",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马昭",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马孚",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "高柔",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "卢毓",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王观",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王肃",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王祥",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何曾",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "傅嘏",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟毓",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟会",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀顗",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀勖",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王沈",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "许允",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张缉",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "夏侯玄",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "贾充",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "裴秀",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "司马师辅政，曹芳尚在位；夏侯玄、李丰、张缉尚未遭254年之祸。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郭淮",
+          "force": "cao",
+          "city": "changan",
+          "source": "s22",
+          "basis": "郭淮督西方、陈泰治雍州，陇右军将按军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈泰",
+          "force": "cao",
+          "city": "changan",
+          "source": "s22",
+          "basis": "郭淮督西方、陈泰治雍州，陇右军将按军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡遵",
+          "force": "cao",
+          "city": "changan",
+          "source": "s22",
+          "basis": "郭淮督西方、陈泰治雍州，陇右军将按军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "徐质",
+          "force": "cao",
+          "city": "changan",
+          "source": "s22",
+          "basis": "郭淮督西方、陈泰治雍州，陇右军将按军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杜预",
+          "force": "cao",
+          "city": "changan",
+          "source": "s22",
+          "basis": "郭淮督西方、陈泰治雍州，陇右军将按军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓艾",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "邓艾参与陇右防务，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "毌丘俭",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "毌丘俭、文钦镇淮南，尚未起255年之兵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "文钦",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "毌丘俭、文钦镇淮南，尚未起255年之兵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "文鸯",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "毌丘俭、文钦镇淮南，尚未起255年之兵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吴纲",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "s28",
+          "basis": "毌丘俭、文钦镇淮南，尚未起255年之兵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张特",
+          "force": "cao",
+          "city": "hefei",
+          "source": "s48",
+          "basis": "张特守合肥新城，前沿军将按合肥军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "乐綝",
+          "force": "cao",
+          "city": "hefei",
+          "source": "s48",
+          "basis": "张特守合肥新城，前沿军将按合肥军区分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王昶",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军，按襄宛区域分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王基",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军，按襄宛区域分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "州泰",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军，按襄宛区域分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "石苞",
+          "force": "cao",
+          "city": "wan",
+          "source": "s27",
+          "basis": "魏荆州诸军，按襄宛区域分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡奋",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "s28",
+          "basis": "魏军荆州前沿分驻，具体营地推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡烈",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "s28",
+          "basis": "魏军荆州前沿分驻，具体营地推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛诞",
+          "force": "cao",
+          "city": "runan",
+          "source": "s28",
+          "basis": "诸葛诞东兴败后都督豫州，寄于汝南。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘靖",
+          "force": "cao",
+          "city": "ji",
+          "source": "s27",
+          "basis": "刘靖督河北与幽州，王颀按北方经历分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王颀",
+          "force": "cao",
+          "city": "ji",
+          "source": "s27",
+          "basis": "刘靖督河北与幽州，王颀按北方经历分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘禅",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈祗",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "黄皓",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "董厥",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "樊建",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "谯周",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郤正",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "来敏",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张绍",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛瞻",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘璿",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘谌",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘永",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s39",
+          "basis": "后主中枢；费祎于253年正月遇刺，开局另标死亡。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "姜维",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张翼",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "廖化",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡济",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张嶷",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "夏侯霸",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "傅佥",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "赵广",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋舒",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "姜维统北境军务，夏侯霸已归蜀，军中人员分驻汉中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘隐",
+          "force": "liu",
+          "city": "yangping",
+          "source": "s44",
+          "basis": "黄金围守将后见于263年，本期按汉中军中随驻推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "宗预",
+          "force": "liu",
+          "city": "langzhong",
+          "source": "s45",
+          "basis": "宗预蜀汉将领，按巴西军区分驻，具体任年未详。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "阎宇",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "巴东军区，具体任职年不详处只配置随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "罗宪",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "巴东军区，具体任职年不详处只配置随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "霍弋",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋、李氏后辈于南中任事，具体驻县近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "李遗",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋、李氏后辈于南中任事，具体驻县近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙亮",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛恪",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙峻",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "滕胤",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张布",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孟宗",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁固",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "韦昭",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "华核",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "薛莹",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱损",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙仪",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s64",
+          "basis": "东兴战后诸葛恪辅政，尚未发生合肥失败及孙峻杀恪；未确任次者为京府随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱绩",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s56",
+          "basis": "朱绩督江陵，陆抗任西线军职，驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆抗",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s56",
+          "basis": "朱绩督江陵，陆抗任西线军职，驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "步协",
+          "force": "sun",
+          "city": "yiling",
+          "source": "s58",
+          "basis": "步氏西陵部曲，步阐尚未于272年降晋。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "步阐",
+          "force": "sun",
+          "city": "yiling",
+          "source": "s58",
+          "basis": "步氏西陵部曲，步阐尚未于272年降晋。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆凯",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴武昌军区，按西线驻地分配。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吕岱",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴武昌军区，按西线驻地分配。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁奉",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "东兴胜后淮南前沿，尚未将诸葛恪全军锁定在新城围城状态。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁封",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "东兴胜后淮南前沿，尚未将诸葛恪全军锁定在新城围城状态。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱异",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s56",
+          "basis": "东兴胜后淮南前沿，尚未将诸葛恪全军锁定在新城围城状态。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吕据",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s64",
+          "basis": "吴水军及江防诸将，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留赞",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s64",
+          "basis": "吴水军及江防诸将，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留平",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s64",
+          "basis": "吴水军及江防诸将，具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙休",
+          "force": "sun",
+          "city": "wu",
+          "source": "s48",
+          "basis": "吴宗室分居，孙休封琅邪王、孙和徙新都等具体驻地缺节点，本批寄吴郡并标近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙和",
+          "force": "sun",
+          "city": "wu",
+          "source": "s48",
+          "basis": "吴宗室分居，孙休封琅邪王、孙和徙新都等具体驻地缺节点，本批寄吴郡并标近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆胤",
+          "force": "sun",
+          "city": "panyu",
+          "source": "s61",
+          "basis": "交州军政人物，不沿用228年的戴良、陈时。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        }
+      ],
+      "rosterCount": 227
+    },
+    "263_jiange": {
+      "startDate": "263-07-01",
+      "assignments": [
+        {
+          "name": "曹奂",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马昭",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马炎",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马攸",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马孚",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "贾充",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀顗",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀勖",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王沈",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何曾",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "裴秀",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟毓",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王祥",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "山涛",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "任恺",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "裴楷",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "李胤",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j2",
+          "basis": "魏元帝曹奂在位，司马昭掌政；尚未发生265年晋受禅。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "钟会",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "卫瓘",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杜预",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡烈",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "许仪",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀恺",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "师纂",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡奋",
+          "force": "cao",
+          "city": "changan",
+          "source": "s28",
+          "basis": "伐蜀军集结于关中；取夏季出师前，不提前把钟会放进剑阁。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓艾",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "邓艾督陇右，后参与伐蜀。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "牵弘",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "邓艾督陇右，后参与伐蜀。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杨欣",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "邓艾督陇右，后参与伐蜀。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "邓忠",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "邓艾督陇右，后参与伐蜀。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛绪",
+          "force": "cao",
+          "city": "longxi",
+          "source": "s28",
+          "basis": "诸葛绪部在西北，后阻姜维退路；具体集结点近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "田续",
+          "force": "cao",
+          "city": "longxi",
+          "source": "s28",
+          "basis": "诸葛绪部在西北，后阻姜维退路；具体集结点近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "石苞",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j33",
+          "basis": "魏晋交替前淮南诸军，王浑尚不倒授279年都督职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈骞",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j33",
+          "basis": "魏晋交替前淮南诸军，王浑尚不倒授279年都督职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王浑",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j33",
+          "basis": "魏晋交替前淮南诸军，王浑尚不倒授279年都督职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马伷",
+          "force": "cao",
+          "city": "hefei",
+          "source": "j38",
+          "basis": "司马伷南方军职，具体军营近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王戎",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "j34",
+          "basis": "二人魏末已仕，羊祜尚非269年后的荆州都督；按南方军政经历随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "羊祜",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "j34",
+          "basis": "二人魏末已仕，羊祜尚非269年后的荆州都督；按南方军政经历随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王颀",
+          "force": "cao",
+          "city": "tianshui",
+          "source": "s28",
+          "basis": "王颀为天水太守，伐蜀时渡鸭绿江的244年事迹不混入本年。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘禅",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛瞻",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "董厥",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s44",
+          "basis": "开局尚未出师援姜维，留成都待调；不预演后来的剑阁会师。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "樊建",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "黄皓",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "谯周",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郤正",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张绍",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘璿",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘谌",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "李密",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈寿",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s33",
+          "basis": "蜀汉末年中枢，黄皓用事；未发生成都投降和绵竹战死。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "姜维",
+          "force": "liu",
+          "city": "commandery_city_069",
+          "source": "s44",
+          "basis": "姜维屯沓中；现图无沓中独立节点，寄武都下辨并注明近似；廖化张翼尚待朝命。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "廖化",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s44",
+          "basis": "开局尚未出师援姜维，留成都待调；不预演后来的剑阁会师。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张翼",
+          "force": "liu",
+          "city": "chengdu",
+          "source": "s44",
+          "basis": "开局尚未出师援姜维，留成都待调；不预演后来的剑阁会师。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡济",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "胡济汉寿、蒋斌汉城、傅佥蒋舒乐城；现图节点近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋斌",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "胡济汉寿、蒋斌汉城、傅佥蒋舒乐城；现图节点近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "傅佥",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "胡济汉寿、蒋斌汉城、傅佥蒋舒乐城；现图节点近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋舒",
+          "force": "liu",
+          "city": "hanzhong",
+          "source": "s44",
+          "basis": "胡济汉寿、蒋斌汉城、傅佥蒋舒乐城；现图节点近似分驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘隐",
+          "force": "liu",
+          "city": "yangping",
+          "source": "s44",
+          "basis": "刘隐守黄金围，寄于阳平关前沿。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "阎宇",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "阎宇都督巴东，罗宪为副，守永安；不提前归晋。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "罗宪",
+          "force": "liu",
+          "city": "yongan",
+          "source": "j57",
+          "basis": "阎宇都督巴东，罗宪为副，守永安；不提前归晋。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "霍弋",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋镇南中，蜀亡前仍属汉，未提前降魏。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "霍汜",
+          "force": "liu",
+          "city": "jianing",
+          "source": "s43",
+          "basis": "霍弋镇南中，蜀亡前仍属汉，未提前降魏。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "宗预",
+          "force": "liu",
+          "city": "langzhong",
+          "source": "s45",
+          "basis": "宗预为镇军大将军，按巴西分驻近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙休",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "濮阳兴",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张布",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "华核",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "薛莹",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "韦昭",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孟宗",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁固",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张悌",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何植",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "孙休在位，濮阳兴张布为中枢；孙皓尚未即位。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙皓",
+          "force": "sun",
+          "city": "wu",
+          "source": "s48",
+          "basis": "孙皓为乌程侯；孙和已死，由时序检查不作为在任人物。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆抗",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s58",
+          "basis": "陆抗督荆州诸军，朱绩守上游重镇；军区近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "朱绩",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s58",
+          "basis": "陆抗督荆州诸军，朱绩守上游重镇；军区近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "步协",
+          "force": "sun",
+          "city": "yiling",
+          "source": "s58",
+          "basis": "西陵步氏部曲，明确保留吴属。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "步阐",
+          "force": "sun",
+          "city": "yiling",
+          "source": "s58",
+          "basis": "西陵步氏部曲，明确保留吴属。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆凯",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴武昌军区。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留平",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s61",
+          "basis": "吴武昌军区。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁奉",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s48",
+          "basis": "吴北境诸军，准备接应蜀汉，尚未发生蜀亡后攻永安。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "丁封",
+          "force": "sun",
+          "city": "pukou",
+          "source": "s48",
+          "basis": "吴北境诸军，准备接应蜀汉，尚未发生蜀亡后攻永安。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛靓",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s48",
+          "basis": "吴军江防将领分驻；具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "沈莹",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s48",
+          "basis": "吴军江防将领分驻；具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙震",
+          "force": "sun",
+          "city": "chaisang",
+          "source": "s48",
+          "basis": "吴军江防将领分驻；具体驻县推定。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "滕修",
+          "force": "sun",
+          "city": "panyu",
+          "source": "j57",
+          "basis": "吴南方将领，尚未倒置为279年的平郭马军。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙谅",
+          "force": "sun",
+          "city": "commandery_city_102",
+          "source": "j57",
+          "basis": "吴岭南军将集中合浦区域；讨交趾军职在后，开局仅近似随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陶璜",
+          "force": "sun",
+          "city": "commandery_city_102",
+          "source": "j57",
+          "basis": "吴岭南军将集中合浦区域；讨交趾军职在后，开局仅近似随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘俊",
+          "force": "sun",
+          "city": "commandery_city_102",
+          "source": "j57",
+          "basis": "吴岭南军将集中合浦区域；讨交趾军职在后，开局仅近似随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "修则",
+          "force": "sun",
+          "city": "commandery_city_102",
+          "source": "j57",
+          "basis": "吴岭南军将集中合浦区域；讨交趾军职在后，开局仅近似随驻。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吕兴",
+          "force": "lv_xing",
+          "city": "jiaozhi",
+          "source": "s48",
+          "basis": "吕兴已杀孙谞，求附魏；正式魏晋郡守接收在后，作为交趾地方势力。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        }
+      ],
+      "rosterCount": 183
+    },
+    "279_jianye": {
+      "startDate": "279-11-01",
+      "assignments": [
+        {
+          "name": "司马炎",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马攸",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "贾充",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀顗",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "荀勖",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "卫瓘",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张华",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "山涛",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "任恺",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "裴楷",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "李胤",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杨珧",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杨骏",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杨济",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘毅",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "和峤",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "刘颂",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j3",
+          "basis": "晋武帝朝中枢；已卒何曾、司马孚等由时序校验剔除。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王浑",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马骏",
+          "force": "cao",
+          "city": "changan",
+          "source": "j38",
+          "basis": "扶风王司马骏督雍凉，镇关中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "周浚",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈勰",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张乔",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "蒋班",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "薛胜",
+          "force": "cao",
+          "city": "shouchun",
+          "source": "j42",
+          "basis": "王浑都督扬州，伐吴军府；部将具体营地按淮南近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈骞",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j33",
+          "basis": "陈骞晚年还京，不给前线军团。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "司马伷",
+          "force": "cao",
+          "city": "xiapi",
+          "source": "j38",
+          "basis": "司马伷都督徐州，伐吴时出涂中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "杜预",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "j34",
+          "basis": "羊祜278年卒后，杜预都督荆州；周旨随军，胡奋参与南征。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡奋",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "j34",
+          "basis": "羊祜278年卒后，杜预都督荆州；周旨随军，胡奋参与南征。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "周旨",
+          "force": "cao",
+          "city": "xiangyang",
+          "source": "j34",
+          "basis": "羊祜278年卒后，杜预都督荆州；周旨随军，胡奋参与南征。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王戎",
+          "force": "cao",
+          "city": "wan",
+          "source": "j43",
+          "basis": "王戎为豫州刺史、建威将军，伐吴攻武昌方向，寄宛为集结点近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王濬",
+          "force": "cao",
+          "city": "chengdu",
+          "source": "j42",
+          "basis": "王濬在益州造舟，晋军出师前仍在蜀中。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "唐彬",
+          "force": "cao",
+          "city": "yongan",
+          "source": "j42",
+          "basis": "唐彬为巴东监军；罗袭统父部曲，具体任次与驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "罗袭",
+          "force": "cao",
+          "city": "yongan",
+          "source": "j42",
+          "basis": "唐彬为巴东监军；罗袭统父部曲，具体任次与驻地近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "文立",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "李密",
+          "force": "cao",
+          "city": "chengdu",
+          "source": "j88",
+          "basis": "李密晋初任官后蜀地经历，本期开局回乡为近似，不授未确官职。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陈寿",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "卫恒",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙楷",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙秀",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "文鸯",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王济",
+          "force": "cao",
+          "city": "luoyang",
+          "source": "j36",
+          "basis": "文立为散骑常侍，陈寿等入晋从事史职；卫恒为后辈文官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "马隆",
+          "force": "cao",
+          "city": "jincheng",
+          "source": "j57",
+          "basis": "马隆选募三千五百人西行，尚未平武威；本期开局置金城为进军起点近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙皓",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张悌",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何植",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "薛莹",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "胡冲",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "岑昏",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙震",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "诸葛靓",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陶濬",
+          "force": "sun",
+          "city": "xian_10_04",
+          "source": "s48",
+          "basis": "陶濬驻武昌，280年还建业；开局在上游而非提前回都。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "张象",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "周处",
+          "force": "sun",
+          "city": "jianye",
+          "source": "s48",
+          "basis": "吴末中枢与建业守军，不提前按280年战败处理。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "伍延",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s48",
+          "basis": "伍延督江陵；孙歆镇乐乡，今图无乐乡独立节点，暂寄江陵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙歆",
+          "force": "sun",
+          "city": "jiangling",
+          "source": "s48",
+          "basis": "伍延督江陵；孙歆镇乐乡，今图无乐乡独立节点，暂寄江陵。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "留宪",
+          "force": "sun",
+          "city": "yiling",
+          "source": "j42",
+          "basis": "吴西陵守将，陆抗已卒，不复用旧督。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "成据",
+          "force": "sun",
+          "city": "yiling",
+          "source": "j42",
+          "basis": "吴西陵守将，陆抗已卒，不复用旧督。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆晏",
+          "force": "sun",
+          "city": "commandery_city_125",
+          "source": "s58",
+          "basis": "陆抗诸子分领部曲；陆晏夷道、陆景乐乡的节点为现图近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆景",
+          "force": "sun",
+          "city": "commandery_city_125",
+          "source": "s58",
+          "basis": "陆抗诸子分领部曲；陆晏夷道、陆景乐乡的节点为现图近似。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吾彦",
+          "force": "sun",
+          "city": "yiling",
+          "source": "j57",
+          "basis": "吾彦守建平，阻晋水军；现图未独立划建平郡，寄于夷陵峡口，不附会为南郡太守。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "沈莹",
+          "force": "sun",
+          "city": "commandery_city_050",
+          "source": "s48",
+          "basis": "沈莹为丹阳太守，生成时按丹阳郡治匹配。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆机",
+          "force": "sun",
+          "city": "wu",
+          "source": "s58",
+          "basis": "吴地宗室与陆氏后辈；陆机陆云不配280年以后才有的晋官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆云",
+          "force": "sun",
+          "city": "wu",
+          "source": "s58",
+          "basis": "吴地宗室与陆氏后辈；陆机陆云不配280年以后才有的晋官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "孙拯",
+          "force": "sun",
+          "city": "wu",
+          "source": "s58",
+          "basis": "吴地宗室与陆氏后辈；陆机陆云不配280年以后才有的晋官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陆喜",
+          "force": "sun",
+          "city": "wu",
+          "source": "s58",
+          "basis": "吴地宗室与陆氏后辈；陆机陆云不配280年以后才有的晋官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "顾荣",
+          "force": "sun",
+          "city": "wu",
+          "source": "s58",
+          "basis": "吴地宗室与陆氏后辈；陆机陆云不配280年以后才有的晋官。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "滕修",
+          "force": "sun",
+          "city": "changsha",
+          "source": "j57",
+          "basis": "滕修讨郭马，岭南军区前沿集结点近似；不把番禺视为吴军安全驻地。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王毅",
+          "force": "sun",
+          "city": "cangwu",
+          "source": "j57",
+          "basis": "苍梧太守王毅，后同滕修送印绶。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "闾丰",
+          "force": "sun",
+          "city": "commandery_city_102",
+          "source": "j57",
+          "basis": "广州刺史闾丰与滕修同属吴；因广州首府叛，暂寄合浦待恢复。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "陶璜",
+          "force": "sun",
+          "city": "jiaozhi",
+          "source": "j57",
+          "basis": "陶璜已于271年收复交趾，279年镇交州。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "郭马",
+          "force": "guo_ma",
+          "city": "panyu",
+          "source": "s48",
+          "basis": "郭马据广州，遣兵攻苍梧、始兴；未攻下地区不自动划入。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "何典",
+          "force": "guo_ma",
+          "city": "panyu",
+          "source": "s48",
+          "basis": "郭马据广州，遣兵攻苍梧、始兴；未攻下地区不自动划入。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "王族",
+          "force": "guo_ma",
+          "city": "panyu",
+          "source": "s48",
+          "basis": "郭马据广州，遣兵攻苍梧、始兴；未攻下地区不自动划入。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "吴述",
+          "force": "guo_ma",
+          "city": "panyu",
+          "source": "s48",
+          "basis": "郭马据广州，遣兵攻苍梧、始兴；未攻下地区不自动划入。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "殷兴",
+          "force": "guo_ma",
+          "city": "panyu",
+          "source": "s48",
+          "basis": "郭马据广州，遣兵攻苍梧、始兴；未攻下地区不自动划入。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        },
+        {
+          "name": "秃发树机能",
+          "force": "tufa_shujineng",
+          "city": "xiliang",
+          "source": "j3",
+          "basis": "凉州兵乱，279年马隆西征前的地方控制以武威核心近似表示。",
+          "locationBasis": "传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面"
+        }
+      ],
+      "rosterCount": 99
+    }
+  },
+  "excludedAssignments": [
+    {
+      "scenario": "249_gaopingling",
+      "name": "文鸯",
+      "reason": "未出生或尚幼，列未登场，不配置现职"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "文虎",
+      "reason": "未出生或尚幼，列未登场，不配置现职"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "董允",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "尹默",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "孟获",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "是仪",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "胡综",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "孙亮",
+      "reason": "未出生或尚幼，列未登场，不配置现职"
+    },
+    {
+      "scenario": "249_gaopingling",
+      "name": "薛综",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "李丰",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "文虎",
+      "reason": "未出生或尚幼，列未登场，不配置现职"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "杜琼",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "尹默",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "孙弘",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "253_hefei",
+      "name": "孙皓",
+      "reason": "未出生或尚幼，列未登场，不配置现职"
+    },
+    {
+      "scenario": "263_jiange",
+      "name": "王基",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "263_jiange",
+      "name": "州泰",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "263_jiange",
+      "name": "孙和",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "279_jianye",
+      "name": "司马孚",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    },
+    {
+      "scenario": "279_jianye",
+      "name": "何曾",
+      "reason": "早于开局的参考卒年／采用区间，不配置为在任"
+    }
+  ]
+}

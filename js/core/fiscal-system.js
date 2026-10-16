@@ -69,12 +69,12 @@ window.FiscalSystem=class FiscalSystem {
       const next=cargo.route[Math.min(cargo.nextIndex+1,cargo.route.length-1)],destination=state.data.cities.find(city=>city.id===cargo.targetCityId),source=state.data.cities.find(city=>city.id===cargo.sourceCityId);
       if(destination?.force!==cargo.forceId){cargo.status="没收";cargo.completedTurn=state.turn;if(destination){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[cargo.resource];destination[key]=(destination[key]||0)+cargo.delivered}if(cargo.laborId)this.dismissLabor(state,cargo.sourceCityId,events,cargo.laborId);events.push({phase:"财政",text:`${cargo.purpose}运输目的地失守，${cargo.delivered}${this.units[cargo.resource]}被当地势力没收`});continue}
       const current=cargo.route[cargo.nextIndex],edgeOpen=next===current||(state.data.rules.city_graph[current]||[]).includes(next);
-      if(!edgeOpen||!next||state.data.cities.find(city=>city.id===next)?.force!==cargo.forceId||state.engine.isCityBesieged(next)||state.data.armies.some(army=>army.city===next&&army.force!==cargo.forceId&&!army.siegeTarget)||!source){cargo.status="受阻";cargo.arriveTurn+=1;continue}
+      if(!edgeOpen||!next||state.data.cities.find(city=>city.id===next)?.force!==cargo.forceId||state.engine.isCityBesieged(next)||state.data.armies.some(army=>!army.fieldPosition&&army.city===next&&army.force!==cargo.forceId&&!army.siegeTarget)||!source){cargo.status="受阻";cargo.arriveTurn+=1;continue}
       cargo.status="在途";cargo.segmentRemainingDays??=1;cargo.segmentRemainingDays-=1;if(cargo.segmentRemainingDays>0)continue;cargo.nextIndex=Math.min(cargo.nextIndex+1,cargo.route.length-1);cargo.segmentRemainingDays=cargo.legDays?.[cargo.nextIndex]??cargo.edgeDays??1;
       if(cargo.nextIndex<cargo.route.length-1)continue;
       let pool;
       if(cargo.targetKind==="central")pool=state.data.forces.find(force=>force.id===cargo.forceId)?.resources;
-      else if(cargo.targetKind==="army")pool=state.data.armies.find(army=>army.id===cargo.armyId&&army.force===cargo.forceId&&army.city===cargo.targetCityId)?.stores;
+      else if(cargo.targetKind==="army")pool=state.data.armies.find(army=>!army.fieldPosition&&army.id===cargo.armyId&&army.force===cargo.forceId&&army.city===cargo.targetCityId)?.stores;
       if(cargo.targetKind==="local"||cargo.targetKind==="army"&&!pool){const key={gold:"localGold",food:"localFood",silk:"localSilk"}[cargo.resource],accepted=cargo.resource==="food"?Math.min(cargo.delivered,Math.max(0,(destination.storage||20000)-(destination[key]||0))):cargo.delivered;destination[key]=(destination[key]||0)+accepted;cargo.storageLoss=cargo.delivered-accepted;if(cargo.storageLoss)events.push({phase:"后勤",siteId:destination.id,text:`${destination.name}仓储不足，${cargo.storageLoss}石粮食无法入仓并损失`})}else if(pool)pool[cargo.resource]=(pool[cargo.resource]||0)+cargo.delivered;
       cargo.status="完成";cargo.completedTurn=state.turn;
       if(cargo.laborId)this.dismissLabor(state,cargo.sourceCityId,events,cargo.laborId);
@@ -202,13 +202,13 @@ window.FiscalSystem=class FiscalSystem {
   static armyDailyNeed(state,army){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.foodRules(state).army_ration*(GameClock.isDaily(state)?1:10)))}
   // 随军满仓按携粮天数（玩家可调，默认为该军轻松携带的天数）；超出会压低组织度，见 engine/logistics.js。
   static armyFoodTarget(state,army){const days=state.engine?.armyCarryDays?state.engine.armyCarryDays(army):60;return Math.ceil(this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?days:days/10))}
-  static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
+  static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>!army.fieldPosition&&army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
   static supplyCity(state,army){
-    const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
+    if(army.fieldPosition)return null;const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
     return city&&!state.engine.isCityBesieged(city)?city:null;
   }
   static stationedCity(state,army){
-    if(army.route?.length||army.siegeTarget)return null;
+    if(army.fieldPosition||army.route?.length||army.siegeTarget)return null;
     // 被围的城内仍能就仓；围困只阻断外调，不使城内现存粮消失。
     return state.data.cities.find(city=>city.id===army.city&&city.force===army.force)||null;
   }

@@ -7,5 +7,9 @@
   {"id":"211_tongguan","name":"潼关","date":"建安十六年 / 211年秋","description":"关西诸将据潼关拒曹；刘备将入益州，孙权移治秣陵。","enabled":true,"definition":"211_tongguan.json"},
   {"id":"219_xiangyang","name":"襄阳","date":"建安二十四年 / 219年秋","description":"关羽北围襄樊，孙权谋取荆州；刘备新得汉中。","enabled":true,"definition":"219_xiangyang.json"},
   {"id":"222_yiling","name":"夷陵","date":"章武二年 / 222年春","description":"刘备倾国东征，连营至夷陵界；陆逊坚守猇亭，曹丕坐观其变。","enabled":true,"definition":"222_yiling.json"},
-  {"id":"228_tianshui","name":"天水","date":"建兴六年 / 228年春","description":"诸葛亮首出祁山，陇右三郡人心浮动；孟达据上庸叛魏，司马懿倍道来攻。","enabled":true,"definition":"228_tianshui.json"}
+  {"id":"228_tianshui","name":"天水","date":"建兴六年 / 228年春","description":"诸葛亮首出祁山，陇右三郡人心浮动；孟达据上庸叛魏，司马懿倍道来攻。","enabled":true,"definition":"228_tianshui.json"},
+  {"id":"249_gaopingling","name":"高平陵","date":"正始十年 / 249年初","description":"高平陵政变前，曹爽掌禁军、司马懿隐忍待机；费祎制衡姜维，孙权暮年二宫相争。","enabled":true,"definition":"249_gaopingling.json"},
+  {"id":"253_hefei","name":"合肥新城","date":"建兴二年 / 253年春","description":"东兴大捷之后，诸葛恪准备围合肥新城；费祎遇害，姜维将出陇右，司马师掌魏政。","enabled":true,"definition":"253_hefei.json"},
+  {"id":"263_jiange","name":"剑阁","date":"景元四年 / 263年夏","description":"魏军将伐蜀，姜维屯沓中；钟会邓艾分道集结，孙休待援，交趾吕兴新叛。","enabled":true,"definition":"263_jiange.json"},
+  {"id":"279_jianye","name":"建业","date":"天纪三年／咸宁五年 / 279年冬","description":"晋军六路伐吴前夕；孙皓守江东，郭马乱广州，马隆将平凉州，王濬战舰待发。","enabled":true,"definition":"279_jianye.json"}
 ]}
