@@ -4,6 +4,13 @@ Object.assign(window.RuleEngine.prototype,{
   courtData(){return this.data.hanCourt||{offices:[],titles:[],rules:{},scenarios:{}}},
   courtRules(){return {obey_threshold:70,waver_threshold:40,smoothing:.5,relation_weight:.2,power_weight:6,power_cap:15,legit_scale:1.5,pragmatic_weight:.6,war_cap:20,distance_near:10,distance_far:40,distance_bonus:10,office_bonus_each:5,office_bonus_cap:15,defiance_decay:5,self_styled_factor:.5,control_capital_garrison:5000,control_gain:1,control_loss_no_capital:6,authority_drift:.3,...(this.courtData().rules||{})}},
   courtOffice(id){return this.courtData().offices.find(office=>office.id===id)||null},
+  // 校尉补号据《后汉书》卷117及《三国志》卷55，中郎将补号据后者；已有将军号沿用官制名录。
+  courtOfficeVariants(id){const office=this.courtOffice(id);return [...new Set([...(office?.variants||[]),...({xiaowei:["屯骑校尉","越骑校尉","步兵校尉","长水校尉","射声校尉","城门校尉","先登校尉"],zhonglangjiang:["荡寇中郎将","武锋中郎将","讨越中郎将"]}[id]||[])])]},
+  courtCustomVariant(id){return {zahao:"将军",xiaowei:"校尉",zhonglangjiang:"中郎将"}[id]||null},
+  validateCourtVariant(state,office,raw){if(raw==null||raw==="")return {ok:true,variant:null};if(typeof raw!=="string")return {ok:false,error:"官号格式无效"};const variant=raw.trim(),known=this.courtOfficeVariants(office.id),suffix=this.courtCustomVariant(office.id);
+    if(!known.includes(variant)&&(!suffix||!new RegExp(`^[\\u3400-\\u9fff]{1,8}${suffix}$`).test(variant)))return {ok:false,error:suffix?`自定义官号须为一至八个汉字加「${suffix}」`:"请选择该官职的历史称号"};
+    if(variant===office.name||this.courtData().offices.some(o=>o.id!==office.id&&(o.name===variant||this.courtOfficeVariants(o.id).includes(variant))))return {ok:false,error:"该称号属于其他官职，请选择对应官职"};
+    if(state.court.offices.some(i=>!i.self&&(i.variant||this.courtOffice(i.office)?.name)===variant))return {ok:false,error:`${variant}已有在任者`};return {ok:true,variant}},
   courtTitle(id){return this.courtData().titles.find(title=>title.id===id)||null},
   courtClamp(value){return Math.max(0,Math.min(100,Math.round(value*10)/10))},
 
@@ -59,7 +66,7 @@ Object.assign(window.RuleEngine.prototype,{
   // 一郡的实际管辖：据城最多的势力、各势力城数、郡治与其治事者
   // 治事者：实控势力在本郡设有郡守职位（幕府）者取其人，否则取郡治长官
   commanderyControl(commandery,state=null){const counts=new Map;let total=0;for(const city of this.data.cities){if(city.commandery!==commandery)continue;total++;if(city.force&&city.force!=="neutral")counts.set(city.force,(counts.get(city.force)||0)+1)}
-    const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]),seat=this.commanderySeatCity(commandery),forceId=seat?.force&&seat.force!=="neutral"?seat.force:ranked[0]?.[0]||null,post=state&&forceId&&Object.values(state.forceCommand?.[forceId]?.posts||{}).find(p=>p.kind==="jun"&&p.scope.commanderies?.[0]===commandery),prefect=post&&this.data.officers.find(o=>o.id===post.holderId&&o.force===forceId);return {forceId,forces:ranked,total,seat,governor:prefect?.name||this.cityGovernorName(seat)}},
+    const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]),seat=this.commanderySeatCity(commandery),forceId=seat?.force&&seat.force!=="neutral"?seat.force:ranked[0]?.[0]||null,post=state&&forceId&&Object.values(state.forceCommand?.[forceId]?.posts||{}).find(p=>this.isCivilPrefectPost(p)&&p.scope.commanderies?.[0]===commandery),prefect=post&&this.data.officers.find(o=>o.id===post.holderId&&o.force===forceId);return {forceId,forces:ranked,total,seat,governor:(seat&&this.actualCommanderyGovernor?.(seat)?.name)||prefect?.name||this.cityGovernorName(seat)}},
   // 城池长官：「—」「普通官员」等为佐吏代理，视作空缺
   cityGovernorName(city){const name=city?.governor;return name&&!["—","普通官员","无"].includes(name)?name:null},
   provinceControl(province){const counts=new Map;for(const commandery of this.courtDivisions().get(province)||[]){const forceId=this.commanderyControl(commandery).forceId;if(forceId)counts.set(forceId,(counts.get(forceId)||0)+1)}return [...counts.entries()].sort((a,b)=>b[1]-a[1])},

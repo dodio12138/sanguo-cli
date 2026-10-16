@@ -53,7 +53,7 @@ CLI 窗口 → AI 网关 → MCP / 游戏工具
 
 ## MCP JSON-RPC
 
-页面暴露 `window.jiuzhouMCP.request(message)`，支持：
+页面暴露 `window.sanguoMCP.request(message)`，支持：
 
 - `initialize`
 - `ping`
@@ -64,11 +64,11 @@ CLI 窗口 → AI 网关 → MCP / 游戏工具
 
 ## 浏览器适配器
 
-页面暴露 `window.jiuzhouAI`，纯手动模式不需要调用它。外部本地服务可连接一个实现 `generate(context)` 的适配器：
+页面暴露 `window.sanguoAI`，纯手动模式不需要调用它。外部本地服务可连接一个实现 `generate(context)` 的适配器：
 
 ```js
-await jiuzhouAI.connect(new HttpAIProvider("http://127.0.0.1:8787"));
-await jiuzhouAI.plan();
+await sanguoAI.connect(new HttpAIProvider("http://127.0.0.1:8787"));
+await sanguoAI.plan();
 ```
 
 辅助模式只保存建议，不自动写入；托管模式会把返回的 `commands` 逐条交给 `submit_command`。城市、人物和军团查询均受玩家情报等级过滤。
@@ -92,3 +92,7 @@ node server/ai-gateway.mjs
 启动器窗口保持开启即可同时维持两个服务；结束窗口会停止本次由启动器创建的服务。网页 AI 设置可以修改并保存网关地址。`.env` 的常用项为 `AI_PROVIDER`（`deepseek` / `openai`）、`AI_API_KEY`、`AI_MODEL`、`AI_BASE_URL`；shell 中同名环境变量优先于 `.env`。切换到 OpenAI 时，将 `AI_PROVIDER=openai` 并设置相应模型和密钥。兼容旧配置 `OPENAI_API_KEY` / `OPENAI_MODEL`。
 
 网关通过标准工具调用提交 `submit_command`，返回内容仍会进入游戏已有的权限校验和旬命令队列，不会让模型直接修改游戏状态。DeepSeek 网关关闭思考模式并将单次规划输出限制为 900 tokens；史官采用独立 `/chronicle` 端点，每次只发送筛选、裁切后的当月重要事件，输出限制为 180 tokens。DeepSeek 的 API Key、模型和兼容端点配置详见[官方 API 文档](https://api-docs.deepseek.com/)。
+
+兼容说明：旧入口 `window.jiuzhouAI`、`window.jiuzhouMCP` 作为新入口的别名保留，既有本地接入无需迁移即可继续使用。新代码使用 `sanguoAI`、`sanguoMCP`。
+
+环境配置的新名称为 `SANGUO_AI_HOST`、`SANGUO_AI_PORT`、`SANGUO_ORIGIN`；启动器支持 `SANGUO_GAME_PORT`、`SANGUO_SAVE_FILE`。原 `JIUZHOU_` 配置仍作为后备读取，新旧并存时优先新配置。网关健康标识为 `sanguo-ai-gateway`，启动器也识别仍在运行的旧标识网关。

@@ -66,7 +66,7 @@ await import(pathToFileURL(path.join(root,"js/ui/court-ui.js")));
   const chart=CourtUI.chart(game,new Set(["冀州"]));assert.match(chart,/chart-node is-root/);assert.match(chart,/中央/);assert.match(chart,/地方/);assert.match(chart,/data-chart-province="冀州"/);assert.match(chart,/县令长 · 世家选拔/,"展开州后列诸郡与县（世家）");
   const html=fs.readFileSync(path.join(root,"index.html"),"utf8"),app=appSource(),view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8");
   for(const id of ["courtDialog","courtChartDialog","courtButton","courtChartButton"])assert(html.includes(`id="${id}"`),id);assert.match(html,/data-layer="courtNominal"/);assert.match(html,/data-layer="courtActual"/);
-  assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
+  assert.match(view,/DYNAMIC_LAYERS=new Set\(\[[^\]]*"courtNominal","courtActual"(?:,"[^"]+")*\]\)/);assert.match(view,/drawCourtOverlay\(c,m,visibleCells\)/);
   assert.match(app,/州治 · \$\{esc\(city\.province/);assert.match(app,/郡治 · \$\{esc\(city\.commandery/);assert.match(app,/<h4>县治<\/h4>/);assert.match(app,/data-bureau-tab="\$\{id\}"/,"官署三页切换");assert.match(app,/data-bureau-panel="county"/);
   // 地方官制补全：边郡列入州下、郡长官称谓、朝廷所授与实际管辖并列
   const e=game.engine,divisions=e.courtDivisions();assert(divisions.get("幽州").includes("乐浪郡")&&divisions.get("凉州").includes("敦煌郡"),"边郡按城池归州");

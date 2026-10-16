@@ -19,13 +19,13 @@ function loadEnvFile(file=path.join(projectRoot,".env")){
 }
 loadEnvFile();
 
-const host=process.env.JIUZHOU_AI_HOST||"127.0.0.1";
-const port=Number(process.env.JIUZHOU_AI_PORT||8787);
+const host=process.env.SANGUO_AI_HOST||process.env.JIUZHOU_AI_HOST||"127.0.0.1";
+const port=Number(process.env.SANGUO_AI_PORT||process.env.JIUZHOU_AI_PORT||8787);
 const provider=(process.env.AI_PROVIDER||(process.env.OPENAI_API_KEY?"openai":"deepseek")).toLowerCase();
 const apiKey=process.env.AI_API_KEY||process.env.OPENAI_API_KEY||"";
 const model=process.env.AI_MODEL||(provider==="deepseek"?"deepseek-flash":process.env.OPENAI_MODEL||"gpt-5");
 const baseUrl=(process.env.AI_BASE_URL||(provider==="deepseek"?"https://api.deepseek.com":"https://api.openai.com/v1")).replace(/\/+$/ ,"");
-const allowedOrigin=process.env.JIUZHOU_ORIGIN||"http://127.0.0.1:8080";
+const allowedOrigin=process.env.SANGUO_ORIGIN||process.env.JIUZHOU_ORIGIN||"http://127.0.0.1:8080";
 const maxBody=1_500_000;
 const json=(response,status,value,extra={})=>{response.writeHead(status,{"content-type":"application/json; charset=utf-8","access-control-allow-origin":allowedOrigin,"access-control-allow-methods":"GET,POST,OPTIONS","access-control-allow-headers":"content-type",...extra});response.end(JSON.stringify(value))};
 const corsOrigin=request=>{const origin=request.headers.origin;if(!origin)return allowedOrigin;if(origin===allowedOrigin)return origin;try{const url=new URL(origin);if(url.protocol==="http:"&&["127.0.0.1","localhost"].includes(url.hostname))return origin}catch{}return allowedOrigin};
@@ -70,7 +70,7 @@ async function writeChronicle(month,{global=false}={}){
 
 const server=http.createServer(async(request,response)=>{
   if(request.method==="OPTIONS"){reply(request,response,204,{});return}
-  if(request.method==="GET"&&request.url==="/health"){reply(request,response,200,{ok:true,service:"jiuzhou-ai-gateway",provider,model,configured:Boolean(apiKey)});return}
+  if(request.method==="GET"&&request.url==="/health"){reply(request,response,200,{ok:true,service:"sanguo-ai-gateway",provider,model,configured:Boolean(apiKey)});return}
   if(request.method==="POST"&&request.url==="/plan"){try{const body=await readBody(request);if(body.type!=="plan_turn"||!body.context)throw Object.assign(new Error("缺少 plan_turn context"),{status:400});reply(request,response,200,await requestUpstream(body.context))}catch(error){reply(request,response,error.status||500,{ok:false,error:error.message,requestId:error.requestId||null});}return}
   if(request.method==="POST"&&request.url==="/chronicle"){try{const body=await readBody(request);if(body.type==="chronicle_month"&&body.month)reply(request,response,200,await writeChronicle(body.month,{global:body.month.scope==="global"}));else if(body.type==="chronicle_world"&&body.world)reply(request,response,200,await writeChronicle(body.world,{global:true}));else throw Object.assign(new Error("缺少有效史官数据"),{status:400})}catch(error){reply(request,response,error.status||500,{ok:false,error:error.message,requestId:error.requestId||null});}return}
   reply(request,response,404,{ok:false,error:"not_found"});

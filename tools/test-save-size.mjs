@@ -19,6 +19,11 @@ assert.ok(ledger.shipments.every(cargo=>cargo.status!=="在途"||cargo.amount>=F
 // 紧凑存档读回：静态字段由基础数据补回，动态字段保持。
 const saved=state.serialize();assert.equal(saved.world.cities.find(city=>city.id==="xian_01_03").historical,undefined,"存档不重复保存史籍字段");
 const restored=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});restored.applySave(restored.migrateSave(structuredClone(saved)));
+for(const officer of state.data.officers.filter(o=>o.expansionRound)){
+  const compact=saved.world.officers.find(o=>o.id===officer.id),back=restored.data.officers.find(o=>o.id===officer.id);
+  for(const key of ["basis","evidenceRef","homeCity","availableUntilYear","expansionRound","stationBasis","stationSource","stationSourceUrl"]){assert.equal(compact[key],undefined,`${officer.name} 不重复保存静态资料 ${key}`);assert.deepEqual(back[key],officer[key],`${officer.name} 读回资料 ${key}`)}
+  for(const key of ["loyalty","city","force","status","merit","stamina","experience","officeRank","office"])assert.deepEqual(back[key],officer[key],`${officer.name} 动态状态 ${key}`);
+}
 for(const city of state.data.cities){const back=restored.data.cities.find(item=>item.id===city.id);assert.ok(back,`读档缺少据点 ${city.name}`);for(const key of ["name","x","y","commandery","force","garrison","population"])assert.deepEqual(back[key],city[key],`${city.name}.${key} 读档不一致`);assert.ok(back.historical,`${city.name} 史籍字段未补回`)}
 for(const officer of state.data.officers.slice(0,50)){const back=restored.data.officers.find(item=>item.id===officer.id);assert.deepEqual(back.aptitude,officer.aptitude);assert.equal(back.force,officer.force);assert.equal(back.status,officer.status)}
 // v17 及更早存档的存粮按口粮标定同比放大 4 倍。

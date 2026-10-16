@@ -50,8 +50,8 @@ const tenDays=(game,n)=>{for(let i=0;i<n*10;i++)game.endTurn()};
 
 // 6. AI：中枢按州设方面，指定主攻方向；存档往返；旧军团迁移
 {const {game,e}=fresh();game.observerMode=true;tenDays(game,4);const yuan=e.commandPosts(game,"yuan");assert(yuan.length>=2,"袁绍设州方面");assert(yuan.some(p=>p.policy.type==="advance"),"有主攻方向");assert(yuan.every(p=>e.postHolder(p)?.force==="yuan"));
-  const save=JSON.parse(JSON.stringify(game.serialize())),back=new GameState(structuredClone(scenario));back.applySave(back.migrateSave(save));assert.deepEqual(Object.keys(back.forceCommand.yuan.posts),Object.keys(game.forceCommand.yuan.posts),"存档往返");
-  const old=new GameState(structuredClone(scenario),{playerForceId:"cao"}),army=old.data.armies.find(a=>a.force==="cao");old.forceCommand={};old.corps=[{id:"c1",name:"第1军团",leaderId:named(old,"曹仁").id,armyIds:[army.id],cityIds:[army.city]}];old.engine.ensureForceCommand(old);const migrated=old.engine.commandPosts(old,"cao");assert.equal(migrated.length,1,"旧军团并入都督府");assert.equal(army.postId,migrated[0].id);assert.equal(old.corps.length,0)}
+  const save=JSON.parse(JSON.stringify(game.serialize())),back=new GameState(structuredClone(scenario));back.applySave(back.migrateSave(save));for(const [id,post] of Object.entries(game.forceCommand.yuan.posts))assert.deepEqual(back.forceCommand.yuan.posts[id],post,"既有方面存档往返");for(const post of Object.values(back.forceCommand.yuan.posts))if(!game.forceCommand.yuan.posts[post.id])assert(back.engine.isCivilPrefectPost(post),"仅补齐缺失的实际郡守方面");const ids=Object.keys(back.forceCommand.yuan.posts);back.engine.synchronizePrefectPosts(back);assert.deepEqual(Object.keys(back.forceCommand.yuan.posts),ids,"补齐幂等");
+  const old=new GameState(structuredClone(scenario),{playerForceId:"cao"}),army=old.data.armies.find(a=>a.force==="cao");old.forceCommand={};old.corps=[{id:"c1",name:"第1军团",leaderId:named(old,"曹仁").id,armyIds:[army.id],cityIds:[army.city]}];old.engine.ensureForceCommand(old);const migrated=old.engine.commandPosts(old,"cao").filter(p=>p.kind==="dudu");assert.equal(migrated.length,1,"旧军团并入都督府");assert.equal(army.postId,migrated[0].id);assert.equal(old.corps.length,0)}
 
 // 6b. 开局史实方面：按剧本预置（钟繇督关中、王邑隶之）；玩家军团仍归直辖；AI 方面保留并被州职位收为下级；官制图列实际管辖
 {const {game,e}=fresh("cao",{seed:true}),posts=e.commandPosts(game,"cao"),post=name=>posts.find(p=>e.postHolder(p)?.name===name);assert.deepEqual(game.forceCommandSkipped,[],"开局方面无跳过项");
@@ -59,13 +59,13 @@ const tenDays=(game,n)=>{for(let i=0;i<n*10;i++)game.endTurn()};
   assert(!game.data.armies.some(a=>a.force==="cao"&&a.postId),"玩家开局军团不划归方面");assert.equal(post("钟繇").autoArmies,false);
   assert.equal(named(game,"荀攸").id,e.commandOf(game,"cao").central.advisor);
   const yuan=e.commandPosts(game,"yuan").map(p=>`${p.title}:${e.postHolder(p)?.name}`);for(const t of ["青州刺史:袁谭","幽州刺史:袁熙","并州刺史:高干"])assert(yuan.includes(t),t);
-  const sun=e.commandPosts(game,"sun");assert(sun.length&&!sun.some(p=>e.postCities(p,"sun").some(c=>c.id===e.forceRulerOfficer("sun")?.city)),"辖区不含主公驻地");
+  const sun=e.commandPosts(game,"sun");assert(sun.length&&!sun.some(p=>p.kind!=="jun"&&e.postCities(p,"sun").some(c=>c.id===e.forceRulerOfficer("sun")?.city)),"辖区不含主公驻地");
   // AI 复审：保留史实方面（刘表的黄祖）；曹操为 AI 时钟繇、满宠仍在任
   e.runCentralAI(game,[]);assert(e.commandPosts(game,"liu_biao").some(p=>e.postHolder(p)?.name==="黄祖"),"复审保留黄祖");
   const {game:g2,e:e2}=fresh("liu_biao",{seed:true});e2.runCentralAI(g2,[]);const ps=e2.commandPosts(g2,"cao");for(const name of ["钟繇","满宠","程昱"])assert(ps.some(p=>e2.postHolder(p)?.name===name),`${name}仍在任`);
   for(const p of ps)if(p.parentId)assert(e2.commandOf(g2,"cao").posts[p.parentId],"上级存在");
-  // 官制图：展开后列出辖郡长官与直辖州郡
-  await import(pathToFileURL(path.join(root,"js/ui/command-ui.js")));CommandUI.expanded=new Set(["direct",...posts.map(p=>p.id)]);const html=CommandUI.chart(game);for(const token of ["data-cmd-expand","河东郡太守","东郡太守","直辖"])assert(html.includes(token),token);CommandUI.expanded=new Set()}
+  // 官制图只列官职架构；方面页提供辖郡及直辖管理
+  await import(pathToFileURL(path.join(root,"js/ui/command-ui.js")));CommandUI.expanded=new Set(["direct",...posts.map(p=>p.id)]);const html=CommandUI.chart(game);for(const token of ["data-post-select","河东郡太守","东郡太守","主公"])assert(html.includes(token),token);assert(CommandUI.posts(game).includes("data-cmd-expand"));CommandUI.expanded=new Set()}
 
 // 7. 界面
 {const app=appSource(),ui=fs.readFileSync(path.join(root,"js/ui/command-ui.js"),"utf8"),html=fs.readFileSync(path.join(root,"index.html"),"utf8");for(const token of ["forceCommandButton","forceCommandDialog","engine/command.js","ui/command-ui.js"])assert(html.includes(token),token);for(const token of ["CommandUI.render","CommandUI.act","setCentralOffice"])assert(app.includes(token),token);for(const token of ["data-post-select","data-cmd-action=\"create\"","data-cmd-action=\"directive\"","协同出击"])assert(ui.includes(token),token)}

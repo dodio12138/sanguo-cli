@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+globalThis.window=globalThis;await import('../js/ui/map-view.js');
+const state=new EventTarget();Object.assign(state,{layer:'political',data:{forces:[{id:'cao',name:'曹操',color:'#abc'},{id:'yuan',name:'袁绍',color:'#def'}]}});
+const map=Object.create(MapView.prototype);Object.assign(map,{state,hiddenLegendItems:new Set(),invalidateColors(){},draw(){}});
+let writes=0,html='';const root={get innerHTML(){return html},set innerHTML(v){writes++;html=v},querySelectorAll:()=>[]};
+const source=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8'),context=vm.createContext({state,map,$:()=>root,document:{querySelectorAll:()=>[]},esc:v=>String(v),layerMeta:{terrain:{items:[['平原','#123']]}}});
+vm.runInContext(source.match(/  const mapLegendItems=.*\n/)[0]+source.match(/  let lastLegendMarkup=.*\n/)[0]+source.match(/  function renderLayer\(\).*\n/)[0]+source.match(/state.addEventListener\("turn",renderLayer\);/)[0],context);
+context.renderLayer();assert.match(html,/>曹操</);assert.match(html,/data-legend-key="force:cao"/);context.renderLayer();assert.equal(writes,1,'未变化时不替换按钮，保留焦点');
+map.setLegendVisibility('force:cao',false);state.data.forces[0].name='曹丕';state.data.forces[0].color='#987';state.dispatchEvent(new Event('turn'));assert.match(html,/>曹丕</);assert(!html.includes('曹操'));assert.match(html,/background:#987/);assert.match(html,/is-hidden" data-legend-key="force:cao" aria-pressed="false"/);assert(map.legendHidden('force:cao'),'继承后保留势力隐藏状态');
+map.setLegendVisibility('force:cao',true);context.renderLayer();assert.match(html,/data-legend-key="force:cao" aria-pressed="true"/);assert(!map.legendHidden('force:cao'));
+state.layer='terrain';context.renderLayer();assert.match(html,/>平原</);state.layer='political';state.data.forces=structuredClone([{id:'cao',name:'曹叡',color:'#654'}]);context.renderLayer();assert.match(html,/>曹叡</);assert(!html.includes('曹丕'));assert(!html.includes('袁绍'),'换档后从当前势力表生成图例');
+console.log('势力图例通过：当前名称／颜色 / 日刷新 / 继承隐藏状态 / 恢复显示 / 切层与换档 / 无变化不替换按钮');

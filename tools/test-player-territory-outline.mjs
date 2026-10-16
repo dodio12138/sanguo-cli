@@ -50,7 +50,7 @@ assert.equal(hollow.cells[2*width+1].terrain,"ocean");
 assert.equal(segments(run(hollow))[0],boundaryCount(hollow.cells),"海面不应算作我方疆域");
 
 assert.equal(run(makeView({observerMode:true})).length,0,"观察模式不应绘制我方疆界");
-assert.equal(run(makeView({hidden:["曹操"]})).length,0,"图例隐藏本势力后不应绘制描边");
+assert.equal(run(makeView({hidden:["force:cao"]})).length,0,"图例隐藏本势力后不应绘制描边");
 assert.equal(run(makeView({playerForceId:"wu"})).length,0,"没有对应势力时不应绘制描边");
 assert.ok(segments(run(makeView({layer:"terrain"})))[0]>0,"非势力图层也应标示我方疆界");
 

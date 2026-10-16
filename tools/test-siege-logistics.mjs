@@ -26,7 +26,7 @@ if(cities[0].localFood!==beforeCore||cities[2].localFood!==beforeIsland||!transf
 
 engine.playerForceId="cao";const economyEvents=[];engine.resolveEconomies(state,economyEvents);
 if(cities[2].localFood!==beforeIsland)throw new Error("围城期间仍产生地方粮");
-const beforeDefenderMorale=defender.morale;engine.recoverIdleArmies();engine.consumeLocalSupplies(state,[]);if(defender.morale!==beforeDefenderMorale||cities[2].localFood!==beforeIsland)throw new Error("围城守军仍在休整或被重复扣粮");
+const beforeDefenderMorale=defender.morale;engine.recoverIdleArmies();if(defender.morale!==beforeDefenderMorale)throw new Error("围城守军不应获得闲置休整");engine.consumeLocalSupplies(state,[]);const consumed=defender.stores.lastConsumption;if(consumed.need!==FiscalSystem.armyDailyNeed(state,defender)||consumed.fromCity!==beforeIsland||cities[2].localFood!==0||consumed.fromRegion!==0||consumed.short!==consumed.need-beforeIsland)throw new Error("围城守军未通过统一入口耗粮，或越过包围调粮");
 
 cities[2].buildings=["农庄","市集","兵营","驿站"];engine.playerForceId="yuan";state.playerForceId="yuan";state.resources=data.forces[1].resources;const beforeBuildings={food:state.resources.food,gold:state.resources.gold,garrison:cities[2].garrison};engine.applyStrategicSystems(state,[]);
 if(state.resources.food!==beforeBuildings.food||state.resources.gold!==beforeBuildings.gold||cities[2].garrison!==beforeBuildings.garrison)throw new Error("围城设施仍在产粮、产金或补充守军");

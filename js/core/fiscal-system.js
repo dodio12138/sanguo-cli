@@ -9,6 +9,8 @@ window.FiscalSystem=class FiscalSystem {
   static commands=[
     ["set_collection_policy","征收制度","finance","财政","分别设置田租、商业税、粮食和布帛的税率与征收周期"],
     ["set_capital","设置首都","finance","财政","将己方城市设为中央府库所在地，新上缴按通往首都的道路计算"],
+    ["build_supply_depot","修建前进粮仓","logistics","后勤","在己方县城扩建前进粮仓，耗金800、约20日完工；可将其指定为自动供粮的收粮仓"],
+    ["set_supply_route","自动供粮线路","logistics","后勤","指定后方县仓或中央府库，按前线仓的囤粮目标自动沿安全道路转运；每五日检查，已在途粮食计入目标"],
     ["dispatch_resources","府库调运","logistics","后勤","从中央或地方库拨送钱粮布帛，经道路运输后进入地方库或军队仓储"],
     ["dismiss_labor","遣散徭役","logistics","后勤","遣散指定城市的徭役，返还原县人口并停止其生产占用"],
     ["relieve_fire","扑救火灾","construction","建设","征发徭役清理火灾损伤，工程完成后自动遣散民夫"]
@@ -18,7 +20,7 @@ window.FiscalSystem=class FiscalSystem {
     const data=state.data;
     state.policies.fiscalAccounts??={version:1,forces:{},shipments:[],laborGroups:[],projects:[],sequence:0};
     const ledger=state.policies.fiscalAccounts;
-    ledger.forces??={};ledger.shipments??=[];ledger.laborGroups??=[];ledger.projects??=[];ledger.sequence??=0;
+    ledger.supplyRoutes??=[];ledger.forces??={};ledger.shipments??=[];ledger.laborGroups??=[];ledger.projects??=[];ledger.sequence??=0;
     state.resources.silk??=0;
     for(const army of data.armies){army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0}
     // 一回合内只做一次完整初始化（据点逾三百，逐次遍历开销大）；势力账户与各城财政字段在此补齐。
@@ -83,6 +85,42 @@ window.FiscalSystem=class FiscalSystem {
     for(const cargo of [...ledger.shipments].reverse()){if(!finished(cargo))continue;const count=recent.get(cargo.forceId)||0,fresh=state.turn-(cargo.completedTurn||cargo.departedTurn)<keepTurns;if(fresh&&count<30){recent.set(cargo.forceId,count+1);continue}cargo.archived=true;const bucket=((ledger.archive[cargo.forceId]??={})[cargo.resource]??={shipments:0,amount:0,delivered:0,loss:0,confiscated:0});bucket.shipments++;bucket.amount+=cargo.amount||0;bucket.delivered+=cargo.status==="完成"?cargo.delivered||0:0;bucket.loss+=cargo.transportLoss||0;if(cargo.status==="没收")bucket.confiscated+=cargo.delivered||0}
     ledger.shipments=ledger.shipments.filter(cargo=>!cargo.archived);
   }
+  // 指定仓使用现有县城库存；扩建仓容仍走原有前进粮仓工程，不额外生成粮食。
+  static supplyRoutes(state,forceId=state.playerForceId){return (state.policies?.fiscalAccounts?.supplyRoutes||[]).filter(line=>line.forceId===forceId)}
+  static managedDepot(state,city){return this.supplyRoutes(state,city.force).some(line=>line.enabled&&line.targetCityId===city.id)}
+  static supplyReserve(state,city,reserveFood=0){return Math.ceil(Math.max(reserveFood,this.localFoodReserve(state,city,this.governance(state,city),false),this.garrisonDailyFood(state,city.garrison)*30))}
+  static supplyLineStatus(state,line){
+    const source=state.data.cities.find(c=>c.id===line.sourceCityId),target=state.data.cities.find(c=>c.id===line.targetCityId),central=line.sourceKind==="central",account=state.policies?.fiscalAccounts?.forces?.[line.forceId];
+    const incoming=(state.policies?.fiscalAccounts?.shipments||[]).filter(c=>c.forceId===line.forceId&&c.resource==="food"&&c.targetCityId===line.targetCityId&&c.targetKind==="local"&&["在途","受阻"].includes(c.status)).reduce((n,c)=>n+c.delivered,0),goal=Math.min(line.targetFood,target?.storage||20000),stock=Math.max(0,target?.localFood||0),need=Math.max(0,goal-stock-incoming);
+    let status=!line.enabled?"已停用":source?.force!==line.forceId||target?.force!==line.forceId?"仓址失守":central&&account?.capitalId!==source?.id?"府库已迁移":state.engine.isCityBesieged(source)||state.engine.isCityBesieged(target)?"仓址被围":need<=0?"目标已满足":null;
+    const pool=central?(line.forceId===state.playerForceId?state.resources:state.data.forces.find(f=>f.id===line.forceId)?.resources):source,reserve=source?(central?line.reserveFood:this.supplyReserve(state,source,line.reserveFood)):0,spare=Math.max(0,(pool?.[central?"food":"localFood"]||0)-reserve);
+    if(!status&&spare<=0)status="后方余粮不足";
+    return {source,target,central,pool,reserve,spare,incoming,goal,stock,need,status:status||"按期供粮"};
+  }
+  static configureSupplyRoute(state,order){
+    const options=order.options||{},forceId=state.playerForceId,sourceKind=options.source==="central"?"central":"local",sourceCityId=sourceKind==="central"?this.account(state).capitalId:order.cityIds?.[0],targetCityId=order.cityIds?.[1],source=state.data.cities.find(c=>c.id===sourceCityId),target=state.data.cities.find(c=>c.id===targetCityId),ledger=this.initialize(state);
+    const byId=ledger.supplyRoutes.find(line=>line.id===options.supplyLineId&&line.forceId===forceId);if(byId&&options.enabled==="no"){byId.enabled=false;byId.status="已停用";return {ok:true,line:byId}}
+    if(source?.force!==forceId||target?.force!==forceId||sourceCityId===targetCityId)return {ok:false,error:"须指定两座不同的己方县城粮仓"};
+    const targetFood=Number(options.targetFood),reserveFood=Number(options.reserveFood),batchFood=Number(options.batchFood),enabled=options.enabled!=="no";
+    if(![targetFood,reserveFood,batchFood].every(Number.isSafeInteger)||targetFood<1||targetFood>100000000||reserveFood<0||reserveFood>100000000||batchFood<1||batchFood>100000000)return {ok:false,error:"囤粮目标、每批数量须为正整数，后方留粮须为非负整数"};
+    const duplicate=ledger.supplyRoutes.find(line=>line.forceId===forceId&&line.sourceKind===sourceKind&&line.sourceCityId===sourceCityId&&line.targetCityId===targetCityId),existing=byId||duplicate;if(byId&&duplicate&&byId!==duplicate)return {ok:false,error:"该供粮线路已存在，请调整已有线路"};
+    // 连锁仓可以逐级转运，禁止形成相互倒粮的环。
+    const outgoing=new Map();for(const line of ledger.supplyRoutes){if(line===existing||!line.enabled||line.forceId!==forceId)continue;const nodes=outgoing.get(line.sourceCityId)||[];nodes.push(line.targetCityId);outgoing.set(line.sourceCityId,nodes)}
+    const seen=new Set(),queue=[targetCityId];while(enabled&&queue.length){const id=queue.pop();if(id===sourceCityId)return {ok:false,error:"供粮线路不能形成循环，请先停用反向线路"};if(seen.has(id))continue;seen.add(id);queue.push(...outgoing.get(id)||[])}
+    const line=existing||{id:`supply-${++ledger.sequence}`,forceId,sourceKind,sourceCityId,targetCityId};Object.assign(line,{sourceKind,sourceCityId,targetCityId,targetFood,reserveFood,batchFood,enabled,lastReviewTurn:null});if(!existing)ledger.supplyRoutes.push(line);
+    return {ok:true,line};
+  }
+  static advanceSupplyRoutes(state,events){
+    const lines=state.policies?.fiscalAccounts?.supplyRoutes;if(!lines?.length)return;
+    const interval=GameClock.isDaily(state)?5:1;
+    for(const line of lines){if(!line.enabled||line.lastReviewTurn!=null&&state.turn-line.lastReviewTurn<interval)continue;line.lastReviewTurn=state.turn;
+      const row=this.supplyLineStatus(state,line);line.status=row.status;if(row.status!=="按期供粮")continue;
+      const amount=Math.floor(Math.min(row.need,row.spare,line.batchFood));if(amount<=0)continue;
+      const cargo=this.enqueue(state,{forceId:line.forceId,sourceCityId:line.sourceCityId,targetCityId:line.targetCityId,resource:"food",amount,targetKind:"local",purpose:"自动供粮"});if(!cargo){line.status="道路受阻";continue}
+      row.pool[row.central?"food":"localFood"]-=amount;cargo.supplyLineId=line.id;line.lastShipmentTurn=state.turn;
+      if(line.forceId===state.playerForceId)events.push({phase:"后勤",siteId:row.target.id,text:`${row.source.name}${row.central?"中央府库":"县仓"}自动运粮 ${amount} 石至${row.target.name}前线仓，现粮 ${Math.floor(row.stock)}、在途 ${row.incoming+cargo.delivered} 石`});
+    }
+  }
   static collect(state,city,type,events,manual=false){
     const fiscal=city.fiscal,account=this.account(state,city.force),engine=state.engine,month=this.monthIndex(state.date),last=fiscal.lastCollected[type];
     if(engine.isCityBesieged(city))return {ok:false,error:"围城期间无法征收"};
@@ -137,6 +175,7 @@ window.FiscalSystem=class FiscalSystem {
       }
       if(force.id===state.playerForceId){const entry={turn:state.turn,income:Math.floor(income),harvest,upkeep,netFood:force.resources.food-before.food,gold:force.resources.gold,food:force.resources.food,silk:force.resources.silk,centralGold:force.resources.gold-before.gold,centralFood:force.resources.food-before.food,centralSilk:force.resources.silk-before.silk,grainPrice:state.engine.grainPrice(state),countyIncome:0,countyHarvest:0};state.policies.economyHistory??=[];state.policies.economyHistory.push(entry);state.policies.economyHistory=state.policies.economyHistory.slice(-36)}
     }
+    this.advanceSupplyRoutes(state,events);
   }
   static incomeSources(state,forceId=state.playerForceId){
     const cities=state.data.cities.filter(city=>city.force===forceId),rows=[];
@@ -163,14 +202,15 @@ window.FiscalSystem=class FiscalSystem {
   static armyDailyNeed(state,army){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.foodRules(state).army_ration*(GameClock.isDaily(state)?1:10)))}
   // 随军满仓按携粮天数（玩家可调，默认为该军轻松携带的天数）；超出会压低组织度，见 engine/logistics.js。
   static armyFoodTarget(state,army){const days=state.engine?.armyCarryDays?state.engine.armyCarryDays(army):60;return Math.ceil(this.armyDailyNeed(state,army)*(GameClock.isDaily(state)?days:days/10))}
-  static localFoodReserve(state,city,g){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve)}
+  static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
   static supplyCity(state,army){
     const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
     return city&&!state.engine.isCityBesieged(city)?city:null;
   }
   static stationedCity(state,army){
     if(army.route?.length||army.siegeTarget)return null;
-    return this.supplyCity(state,army);
+    // 被围的城内仍能就仓；围困只阻断外调，不使城内现存粮消失。
+    return state.data.cities.find(city=>city.id===army.city&&city.force===army.force)||null;
   }
   static hasLedger(state){return Boolean(state?.data?.cities&&state.policies)}
   static stockArmy(state,army){
@@ -188,10 +228,10 @@ window.FiscalSystem=class FiscalSystem {
   static GRAIN_DISPATCH={nearby:"就近调运",central:"中央统筹",local:"郡县自给"};
   static grainDispatch(state,forceId){const mode=forceId===state.playerForceId?state.policies?.grainDispatch:null;return this.GRAIN_DISPATCH[mode]?mode:"nearby"}
   static haulRules(state){return {haul_cells:30,haul_loss_per_cell:.008,haul_max_loss:.3,haul_reserve_days:60,field_resupply_days:20,...(state?.data?.rules?.balance?.food||{})}}
-  static drawRegionalFood(state,city,amount,forceId=city.force){let remaining=Math.max(0,Math.ceil(amount));const local=new Set([city.id]);for(const source of state.engine.reinforcementSources?.(city,forceId)||[]){local.add(source.city.id);if(!remaining)break;const other=source.city;if(other.id===city.id)continue;const spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*30)),taken=Math.min(remaining,spare);if(taken){other.localFood-=taken;remaining-=taken}}
-    const haul=()=>{if(!remaining)return;const cfg=this.haulRules(state),near=state.data.cities.filter(other=>other.force===forceId&&!local.has(other.id)&&!state.engine.isCityBesieged(other)).map(other=>({other,distance:Math.hypot(other.x-city.x,other.y-city.y)})).filter(item=>item.distance<=cfg.haul_cells).sort((a,b)=>a.distance-b.distance);
+  static drawRegionalFood(state,city,amount,forceId=city.force){if(this.managedDepot(state,city))return 0;let remaining=Math.max(0,Math.ceil(amount));const local=new Set([city.id]);for(const source of state.engine.reinforcementSources?.(city,forceId)||[]){local.add(source.city.id);if(!remaining)break;const other=source.city;if(other.id===city.id||this.managedDepot(state,other))continue;const spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*30)),taken=Math.min(remaining,spare);if(taken){other.localFood-=taken;remaining-=taken}}
+    const haul=()=>{if(!remaining)return;const cfg=this.haulRules(state),near=state.data.cities.filter(other=>other.force===forceId&&!local.has(other.id)&&!this.managedDepot(state,other)&&!state.engine.isCityBesieged(other)).map(other=>({other,distance:Math.hypot(other.x-city.x,other.y-city.y)})).filter(item=>item.distance<=cfg.haul_cells).sort((a,b)=>a.distance-b.distance);
       for(const {other,distance} of near){if(!remaining)break;const keep=1-Math.min(cfg.haul_max_loss,distance*cfg.haul_loss_per_cell),spare=Math.max(0,(other.localFood||0)-Math.ceil(this.garrisonDailyFood(state,other.garrison)*cfg.haul_reserve_days)),shipped=Math.min(spare,Math.ceil(remaining/keep));if(shipped<=0)continue;other.localFood-=shipped;remaining=Math.max(0,remaining-Math.floor(shipped*keep))}};
-    const central=()=>{const force=state.data.forces.find(item=>item.id===forceId),pool=force?.id===state.playerForceId?state.resources:force?.resources;if(remaining&&pool){const cost=Math.ceil(remaining/.9),paid=Math.min(cost,Math.max(0,Math.floor(pool.food||0)));pool.food-=paid;remaining-=Math.min(remaining,Math.floor(paid*.9))}};
+    const central=()=>{const force=state.data.forces.find(item=>item.id===forceId),pool=force?.id===state.playerForceId?state.resources:force?.resources;if(remaining&&pool){const cost=Math.ceil(remaining/.9),reserve=Math.max(0,...this.supplyRoutes(state,forceId).filter(line=>line.enabled&&line.sourceKind==="central").map(line=>line.reserveFood)),paid=Math.min(cost,Math.max(0,Math.floor((pool.food||0)-reserve)));pool.food-=paid;remaining-=Math.min(remaining,Math.floor(paid*.9))}};
     const mode=this.grainDispatch(state,forceId);if(mode==="central"){central();haul()}else if(mode==="local")central();else{haul();central()}
     return Math.max(0,Math.ceil(amount)-remaining)}
   // 行军与围城中的军团：随军军仓不足二十日时，由距其最近的己方城池沿补给线续运。
@@ -204,7 +244,7 @@ window.FiscalSystem=class FiscalSystem {
     const fromCity=city?Math.min(need,Math.max(0,city.localFood||0)):0;
     if(fromCity>0)city.localFood-=fromCity;
     const fromStores=Math.min(need-fromCity,army.stores.food);army.stores.food-=fromStores;
-    const fromRegion=city&&need-fromCity-fromStores>0?this.drawRegionalFood(state,city,need-fromCity-fromStores,army.force):0;
+    const fromRegion=city&&!state.engine.isCityBesieged(city)&&need-fromCity-fromStores>0?this.drawRegionalFood(state,city,need-fromCity-fromStores,army.force):0;
     // 在外军团：大军由补给来源派运粮队实运，轻装在敌境就食（engine/logistics.js）；无引擎时退回旧的就近续运。
     if(!city&&state.engine?.fieldResupply)state.engine.fieldResupply(state,army,events);
     else if(!city&&army.stores.food<need*this.haulRules(state).field_resupply_days/(GameClock.isDaily(state)?1:10)){const anchor=this.fieldAnchor(state,army);if(anchor){const wanted=this.armyFoodTarget(state,army)-army.stores.food,own=Math.min(wanted,Math.max(0,(anchor.localFood||0)-Math.ceil(this.garrisonDailyFood(state,anchor.garrison)*30)));anchor.localFood-=own;army.stores.food+=own+(own<wanted?this.drawRegionalFood(state,anchor,wanted-own,army.force):0);army.stores.lastResupply={turn:state.turn,cityId:anchor.id}}}
@@ -249,8 +289,10 @@ window.FiscalSystem=class FiscalSystem {
     if(project.type==="build_road"){const graph=state.data.rules.city_graph,target=project.targetCityId;graph[city.id]??=[];graph[target]??=[];if(!graph[city.id].includes(target))graph[city.id].push(target);if(!graph[target].includes(city.id))graph[target].push(city.id);(state.data.builtRoads??=[]).push([city.id,target])}
   }
   static handleOrder(state,order,events){
-    if(!["set_collection_policy","set_capital","dispatch_resources","dismiss_labor","relieve_fire","collect_tax","set_tax_rate","reward_officer","requisition_labor","transfer_gold","transfer_food","transport","construct_building","repair","build_road","build_warehouse","fortify","waterworks"].includes(order.type))return false;
+    if(!["build_supply_depot","set_supply_route","set_collection_policy","set_capital","dispatch_resources","dismiss_labor","relieve_fire","collect_tax","set_tax_rate","reward_officer","requisition_labor","transfer_gold","transfer_food","transport","construct_building","repair","build_road","build_warehouse","fortify","waterworks"].includes(order.type))return false;
     this.initialize(state);const engine=state.engine,city=state.data.cities.find(city=>city.id===order.cityIds?.[0]),own=city?.force===state.playerForceId,options=order.options||{},account=this.account(state),fail=message=>{events.push({phase:"财政",text:message});return true};
+    if(order.type==="build_supply_depot"){if(!own||engine.isCityBesieged(city))return fail("修建粮仓需要未被围困的己方县城");const result=engine.buildDepot(state,city?.id);return fail(result.ok?result.text:`修建粮仓失败：${result.error}`)}
+    if(order.type==="set_supply_route"){const result=this.configureSupplyRoute(state,order);return fail(result.ok?`自动供粮线路${result.line.enabled?"已启用":"已停用"}，每五日检查前线仓缺口；已启运粮队继续运输`:`供粮设置失败：${result.error}`)}
     if(order.type==="set_collection_policy"){
       const rates=["landRate","commercialRate","silkRate"],periods=["land","commercial","food","silk"];
       if(rates.some(key=>!Number.isFinite(Number(options[key]))||Number(options[key])<0||Number(options[key])>40)||periods.some(key=>![1,3,6,12].includes(Number(options[`${key}Period`]))))return fail("征收制度失败：税率须为0—40%，周期为1、3、6或12个月");

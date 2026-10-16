@@ -19,6 +19,7 @@ const payload={
   routeNetwork:read("game/data/map/route_network.json"),
   hanCourt:read("game/data/common/han_court.json"),
   clans:read("game/data/common/clans.json").clans,
+  genealogies:read("game/data/common/genealogies.json").families,
   officerPostings:read("game/data/history/officer_postings.json"),
   officerSupplement:read("game/data/history/officers_supplement.json"),
   forces:read(scenario.data_files.forces).forces,cities:read(scenario.data_files.cities).cities,
@@ -27,6 +28,7 @@ const payload={
 };
 payload.counties=structuredClone(payload.administrativeDivisions.county_seats||[]);
 const loader=new window.DataLoader(payload);loader.applyCityResources(payload,scenario.id);loader.assignCommanderySeatOwners(payload);loader.applyCountyResources(payload,scenario.id);loader.mergeOfficerSupplement(payload);
+loader.applyFamilyCatalog(payload);
 const output=`// 由 tools/build-offline-data.mjs 自动生成；不要手工编辑。\nwindow.SANGUO_DATA=Object.assign(window.SANGUO_DATA||{},${JSON.stringify(payload)});\n`;
 fs.writeFileSync("js/data/offline-data.generated.js",output);
 console.log(`离线镜像已生成：${payload.officers.length} 人物 / ${payload.cities.length} 据点 / ${payload.commandCatalog.commands.length} 命令`);

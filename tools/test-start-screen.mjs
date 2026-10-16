@@ -52,3 +52,6 @@ if(!source.includes('scenarios.find(s=>s.id===app.data.scenario.id)'))throw new 
 if(!source.includes('activeSessionKey="sanguo.active-session.v1"')||!source.includes("queueMicrotask(()=>resumeSlot(refreshSlot))")||!source.includes("clearActive();location.reload()"))throw new Error("缺少刷新自动恢复与显式返回主菜单逻辑");
 if(!html.includes('document.documentElement.classList.add("resume-pending")')||!html.includes("html.resume-pending .start-screen")||!source.includes('finishResume=()=>document.documentElement.classList.remove("resume-pending")'))throw new Error("刷新恢复期间仍可能闪现主菜单");
 console.log("开局界面结构通过：剧本势力同屏与小地图 / 独立势力介绍 / 上一步 / 阻止跳步开局 / 设置与多槽存档 / 刷新恢复战局");
+
+// 官爵来自当前剧本，不把官渡官职带到其他年代；爵位与自领标记保留。
+globalThis.window=globalThis;await import("../js/ui/court-ui.js");const fixture={scenario:{id:"one"},hanCourt:{offices:[{id:"sikong",name:"司空",grade:1},{id:"taishou",name:"太守",grade:4}],titles:[{id:"xianhou",name:"县侯",grade:3}],scenarios:{one:{offices:[["sikong","曹操"]],titles:[["xianhou","曹操","武平"]]},two:{offices:[["taishou","曹操","东郡",null,true]],titles:[]}}}};if(CourtUI.scenarioForceHonors(fixture,{name:"曹操"})!=="司空 · 武平侯")throw new Error("开局官爵读取错误");fixture.scenario.id="two";if(CourtUI.scenarioForceHonors(fixture,{name:"曹操"})!=="东郡太守（自领）")throw new Error("切换剧本后官爵未改变");if(CourtUI.scenarioForceHonors(fixture,{name:"观察者",observer:true}))throw new Error("观察者不应显示官爵");

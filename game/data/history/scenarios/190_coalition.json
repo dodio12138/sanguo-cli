@@ -1,44 +1,732 @@
 {
-  "schema_version":2,"id":"190_coalition","name":"洛阳","start_date":"190-01-01","map":"china_pixel_60x60","default_player_force":"cao","playable_forces":["dong","cao","yuan","sun_jian","gongsun","liu_biao","yuan_shu","han_fu","liu_yu","tao_qian","kong_rong","liu_yan","liu_dai","ma_teng","han_sui","gongsun_du","wang_kuang","kong_zhou","zhang_miao","qiao_mao","yuan_yi","bao_xin","zhang_chao","chen_wen","zhou_xin","liu_chong","shi_xie","jiao_he"],
-  "description":"初平元年关东诸侯讨董；城市、关隘与渡津按扩展战略地图布置。",
-  "historical_brief":"董卓控制洛阳朝廷与凉州、并州精兵；关东诸侯以讨董为名会盟，但粮运、号令与彼此猜忌将决定联军能否持续。",
-  "force_briefs":{"dong":"掌握朝廷与洛阳，西凉、并州军是主要依仗；关东联军名义一致，实际各有盘算。","cao":"从陈留起兵，与张邈协同讨董；义军根基尚浅，须争取盟友与落脚点。","yuan":"四世三公、声望最盛，被推为盟主；需要把盟约变成真正的协同进军。","sun_jian":"以长沙太守身份北上从征，军纪与战力出众；眼下远离江东本土。","gongsun":"据幽州边郡，白马义从善战；刘虞主张怀柔，幽州内部并非铁板一块。","liu_biao":"受命镇抚荆州，坐拥江汉要冲；观察中原局势并处理地方豪强。","yuan_shu":"袁氏另一支，驻于南阳方向，兵势不弱却与袁绍存在宗族及权力竞争。","han_fu":"冀州牧，治所在邺；州郡富庶但个人威望不足，正受袁绍觊觎。","liu_yu":"幽州牧，主张安抚边民与乌桓；与公孙瓒的强硬路线相左。","tao_qian":"据徐州，须兼顾州内防务与北方战局。","kong_rong":"守北海一郡，文名高而兵力有限，周边强邻环伺。","liu_yan":"益州牧，倚仗蜀道和富庶盆地自成一方；汉中交通与地方豪强仍待经营。","liu_dai":"兖州刺史，与东郡、陈留等太守共同讨董；州内各郡仍有自己的部众。","ma_teng":"西凉军阀，骑兵见长；需应对关中动荡并争取向东发展的机会。","han_sui":"盘踞金城、安定一带，西北部众与马腾时盟时争。","gongsun_du":"辽东太守，在远东边地经营独立基业，暂不受关东主战场直接牵制。","wang_kuang":"河内太守，扼守黄河北岸，与关东诸军共同讨董。","kong_zhou":"豫州刺史，驻颍川参加讨董联盟。","zhang_miao":"陈留太守，与曹操交好，共举义兵讨董。","qiao_mao":"东郡太守，参加关东会盟，与刘岱各有部众。","yuan_yi":"山阳太守，以州郡兵参加关东讨董联盟。","bao_xin":"招募乡里义兵参加讨董，主张与曹操相互支援。","zhang_chao":"广陵太守，听从功曹臧洪建议，与兄张邈共举义兵。","chen_wen":"扬州刺史，掌理州部，在江淮维持地方秩序。","zhou_xin":"丹阳太守，曾援助曹操在扬州募集兵员。","liu_chong":"陈王，与国相骆俊保境安民，境内百姓依附。","shi_xie":"交趾太守，保境安民，接纳避乱士人。","jiao_he":"青州刺史，出兵参与讨董，同时面临州内黄巾扰乱。"},
-  "objectives":{"dong":"守住洛阳朝廷与关中退路，分化讨董联盟","cao":"经营谯县义军据点，与陈留盟友协同讨董","yuan":"维系盟主威信，组织诸侯推进洛阳","sun_jian":"完成先锋作战并保存长沙北伐军","gongsun":"巩固幽州边防并处理与刘虞的路线分歧","liu_biao":"控制荆襄通道、维持州内稳定","yuan_shu":"守住南阳据点，压过袁氏宗族对手","han_fu":"保全冀州并抵御袁绍的政治与军事压力","liu_yu":"稳住幽州民政与边境，避免与公孙瓒内耗","tao_qian":"守住徐州门户，避免成为中原战场的牺牲品","kong_rong":"守护北海郡并借声望寻求盟援","liu_yan":"维系益州统一并控制入蜀要道","liu_dai":"守住兖州门户，避免被更强诸侯吞并","ma_teng":"维持凉州军力并开辟关中影响力","han_sui":"巩固金城—安定走廊并处理与马腾关系","gongsun_du":"确保辽东独立与北方边境安全","wang_kuang":"守住河内与黄河渡津，协助联军进军","kong_zhou":"稳定颍川与豫州州部，保障联军粮道","zhang_miao":"保全陈留，与曹操协同讨董","qiao_mao":"守住东郡渡津，维系诸侯盟约","yuan_yi":"守护山阳，兼顾会盟与郡内民生","bao_xin":"保全济北义兵，协助曹操勤王","zhang_chao":"稳住广陵，支援陈留同盟","chen_wen":"稳定江淮与江东，防止州郡失控","zhou_xin":"守住丹阳与江南通道，审慎援助关东诸军","liu_chong":"保全陈国，抵御外敌并接济流民","shi_xie":"守住交趾，维持民生与交通","jiao_he":"稳住青州州部，兼顾黄巾与关东战局"},
+  "schema_version": 2,
+  "id": "190_coalition",
+  "name": "洛阳",
+  "start_date": "190-01-01",
+  "map": "china_pixel_60x60",
+  "default_player_force": "cao",
+  "playable_forces": [
+    "dong",
+    "cao",
+    "yuan",
+    "sun_jian",
+    "gongsun",
+    "liu_biao",
+    "yuan_shu",
+    "han_fu",
+    "liu_yu",
+    "tao_qian",
+    "kong_rong",
+    "liu_yan",
+    "liu_dai",
+    "ma_teng",
+    "han_sui",
+    "gongsun_du",
+    "wang_kuang",
+    "kong_zhou",
+    "zhang_miao",
+    "qiao_mao",
+    "yuan_yi",
+    "bao_xin",
+    "zhang_chao",
+    "chen_wen",
+    "zhou_xin",
+    "liu_chong",
+    "shi_xie",
+    "jiao_he"
+  ],
+  "description": "初平元年关东诸侯讨董；城市、关隘与渡津按扩展战略地图布置。",
+  "historical_brief": "董卓控制洛阳朝廷与凉州、并州精兵；关东诸侯以讨董为名会盟，但粮运、号令与彼此猜忌将决定联军能否持续。",
+  "force_briefs": {
+    "dong": "掌握朝廷与洛阳，西凉、并州军是主要依仗；关东联军名义一致，实际各有盘算。",
+    "cao": "从陈留起兵，与张邈协同讨董；义军根基尚浅，须争取盟友与落脚点。",
+    "yuan": "四世三公、声望最盛，被推为盟主；需要把盟约变成真正的协同进军。",
+    "sun_jian": "以长沙太守身份北上从征，军纪与战力出众；眼下远离江东本土。",
+    "gongsun": "据幽州边郡，白马义从善战；刘虞主张怀柔，幽州内部并非铁板一块。",
+    "liu_biao": "受命镇抚荆州，坐拥江汉要冲；观察中原局势并处理地方豪强。",
+    "yuan_shu": "袁氏另一支，驻于南阳方向，兵势不弱却与袁绍存在宗族及权力竞争。",
+    "han_fu": "冀州牧，治所在邺；州郡富庶但个人威望不足，正受袁绍觊觎。",
+    "liu_yu": "幽州牧，主张安抚边民与乌桓；与公孙瓒的强硬路线相左。",
+    "tao_qian": "据徐州，须兼顾州内防务与北方战局。",
+    "kong_rong": "守北海一郡，文名高而兵力有限，周边强邻环伺。",
+    "liu_yan": "益州牧，倚仗蜀道和富庶盆地自成一方；汉中交通与地方豪强仍待经营。",
+    "liu_dai": "兖州刺史，与东郡、陈留等太守共同讨董；州内各郡仍有自己的部众。",
+    "ma_teng": "西凉军阀，骑兵见长；需应对关中动荡并争取向东发展的机会。",
+    "han_sui": "盘踞金城、安定一带，西北部众与马腾时盟时争。",
+    "gongsun_du": "辽东太守，在远东边地经营独立基业，暂不受关东主战场直接牵制。",
+    "wang_kuang": "河内太守，扼守黄河北岸，与关东诸军共同讨董。",
+    "kong_zhou": "豫州刺史，驻颍川参加讨董联盟。",
+    "zhang_miao": "陈留太守，与曹操交好，共举义兵讨董。",
+    "qiao_mao": "东郡太守，参加关东会盟，与刘岱各有部众。",
+    "yuan_yi": "山阳太守，以州郡兵参加关东讨董联盟。",
+    "bao_xin": "招募乡里义兵参加讨董，主张与曹操相互支援。",
+    "zhang_chao": "广陵太守，听从功曹臧洪建议，与兄张邈共举义兵。",
+    "chen_wen": "扬州刺史，掌理州部，在江淮维持地方秩序。",
+    "zhou_xin": "丹阳太守，曾援助曹操在扬州募集兵员。",
+    "liu_chong": "陈王，与国相骆俊保境安民，境内百姓依附。",
+    "shi_xie": "交趾太守，保境安民，接纳避乱士人。",
+    "jiao_he": "青州刺史，出兵参与讨董，同时面临州内黄巾扰乱。"
+  },
+  "objectives": {
+    "dong": "守住洛阳朝廷与关中退路，分化讨董联盟",
+    "cao": "经营谯县义军据点，与陈留盟友协同讨董",
+    "yuan": "维系盟主威信，组织诸侯推进洛阳",
+    "sun_jian": "完成先锋作战并保存长沙北伐军",
+    "gongsun": "巩固幽州边防并处理与刘虞的路线分歧",
+    "liu_biao": "控制荆襄通道、维持州内稳定",
+    "yuan_shu": "守住南阳据点，压过袁氏宗族对手",
+    "han_fu": "保全冀州并抵御袁绍的政治与军事压力",
+    "liu_yu": "稳住幽州民政与边境，避免与公孙瓒内耗",
+    "tao_qian": "守住徐州门户，避免成为中原战场的牺牲品",
+    "kong_rong": "守护北海郡并借声望寻求盟援",
+    "liu_yan": "维系益州统一并控制入蜀要道",
+    "liu_dai": "守住兖州门户，避免被更强诸侯吞并",
+    "ma_teng": "维持凉州军力并开辟关中影响力",
+    "han_sui": "巩固金城—安定走廊并处理与马腾关系",
+    "gongsun_du": "确保辽东独立与北方边境安全",
+    "wang_kuang": "守住河内与黄河渡津，协助联军进军",
+    "kong_zhou": "稳定颍川与豫州州部，保障联军粮道",
+    "zhang_miao": "保全陈留，与曹操协同讨董",
+    "qiao_mao": "守住东郡渡津，维系诸侯盟约",
+    "yuan_yi": "守护山阳，兼顾会盟与郡内民生",
+    "bao_xin": "保全济北义兵，协助曹操勤王",
+    "zhang_chao": "稳住广陵，支援陈留同盟",
+    "chen_wen": "稳定江淮与江东，防止州郡失控",
+    "zhou_xin": "守住丹阳与江南通道，审慎援助关东诸军",
+    "liu_chong": "保全陈国，抵御外敌并接济流民",
+    "shi_xie": "守住交趾，维持民生与交通",
+    "jiao_he": "稳住青州州部，兼顾黄巾与关东战局"
+  },
   "patch": {
-    "forces":[
-      {"id":"dong","name":"董卓","color":"#8b4038","soldiers":85000,"cities":21},
-      {"id":"cao","name":"曹操","color":"#b89044","soldiers":18000,"cities":2},
-      {"id":"yuan","name":"袁绍","color":"#776aa0","soldiers":30000,"cities":5},
-      {"id":"sun_jian","name":"孙坚","color":"#a35448","soldiers":22000,"cities":8},
-      {"id":"gongsun","name":"公孙瓒","color":"#7b8eaa","soldiers":22000,"cities":5},
-      {"id":"liu_biao","name":"刘表","color":"#55806a","soldiers":40000,"cities":37},
-      {"id":"yuan_shu","name":"袁术","color":"#9c725f","soldiers":32000,"cities":15},
-      {"id":"han_fu","name":"韩馥","color":"#977d9d","soldiers":30000,"cities":14},
-      {"id":"liu_yu","name":"刘虞","color":"#719080","soldiers":18000,"cities":13},
-      {"id":"tao_qian","name":"陶谦","color":"#8e8a64","soldiers":18000,"cities":20},
-      {"id":"kong_rong","name":"孔融","color":"#8289a2","soldiers":10000,"cities":6},
-      {"id":"liu_yan","name":"刘焉","color":"#758660","soldiers":48000,"cities":42},
-      {"id":"liu_dai","name":"刘岱","color":"#807554","soldiers":20000,"cities":4},
-      {"id":"ma_teng","name":"马腾","color":"#a66c43","soldiers":18000,"cities":24},
-      {"id":"han_sui","name":"韩遂","color":"#8e6d59","soldiers":16000,"cities":13},
-      {"id":"gongsun_du","name":"公孙度","color":"#647d83","soldiers":10000,"cities":12},
-      {"id":"wang_kuang","name":"王匡","color":"#8a7053","soldiers":6000,"cities":6},
-      {"id":"kong_zhou","name":"孔伷","color":"#96806b","soldiers":6000,"cities":10},
-      {"id":"zhang_miao","name":"张邈","color":"#a58c58","soldiers":7000,"cities":6},
-      {"id":"qiao_mao","name":"桥瑁","color":"#698d90","soldiers":5000,"cities":5},
-      {"id":"yuan_yi","name":"袁遗","color":"#8b7290","soldiers":4000,"cities":1},
-      {"id":"bao_xin","name":"鲍信","color":"#9d8258","soldiers":5000,"cities":1},
-      {"id":"zhang_chao","name":"张超","color":"#8f7260","soldiers":5000,"cities":5},
-      {"id":"chen_wen","name":"陈温","color":"#639582","soldiers":6000,"cities":33},
-      {"id":"zhou_xin","name":"周昕","color":"#9c7b67","soldiers":4000,"cities":6},
-      {"id":"liu_chong","name":"刘宠","color":"#9a8561","soldiers":5000,"cities":1},
-      {"id":"shi_xie","name":"士燮","color":"#759585","soldiers":4000,"cities":6},
-      {"id":"jiao_he","name":"焦和","color":"#78946a","soldiers":5000,"cities":14},
-      {"id":"neutral","name":"地方官府","color":"#777568","soldiers":0,"cities":31}
+    "forces": [
+      {
+        "id": "dong",
+        "name": "董卓",
+        "color": "#8b4038",
+        "soldiers": 85000,
+        "cities": 21
+      },
+      {
+        "id": "cao",
+        "name": "曹操",
+        "color": "#b89044",
+        "soldiers": 18000,
+        "cities": 2
+      },
+      {
+        "id": "yuan",
+        "name": "袁绍",
+        "color": "#776aa0",
+        "soldiers": 30000,
+        "cities": 5
+      },
+      {
+        "id": "sun_jian",
+        "name": "孙坚",
+        "color": "#a35448",
+        "soldiers": 22000,
+        "cities": 8
+      },
+      {
+        "id": "gongsun",
+        "name": "公孙瓒",
+        "color": "#7b8eaa",
+        "soldiers": 22000,
+        "cities": 5
+      },
+      {
+        "id": "liu_biao",
+        "name": "刘表",
+        "color": "#55806a",
+        "soldiers": 40000,
+        "cities": 37
+      },
+      {
+        "id": "yuan_shu",
+        "name": "袁术",
+        "color": "#9c725f",
+        "soldiers": 32000,
+        "cities": 15
+      },
+      {
+        "id": "han_fu",
+        "name": "韩馥",
+        "color": "#977d9d",
+        "soldiers": 30000,
+        "cities": 14
+      },
+      {
+        "id": "liu_yu",
+        "name": "刘虞",
+        "color": "#719080",
+        "soldiers": 18000,
+        "cities": 13
+      },
+      {
+        "id": "tao_qian",
+        "name": "陶谦",
+        "color": "#8e8a64",
+        "soldiers": 18000,
+        "cities": 20
+      },
+      {
+        "id": "kong_rong",
+        "name": "孔融",
+        "color": "#8289a2",
+        "soldiers": 10000,
+        "cities": 6
+      },
+      {
+        "id": "liu_yan",
+        "name": "刘焉",
+        "color": "#758660",
+        "soldiers": 48000,
+        "cities": 42
+      },
+      {
+        "id": "liu_dai",
+        "name": "刘岱",
+        "color": "#807554",
+        "soldiers": 20000,
+        "cities": 4
+      },
+      {
+        "id": "ma_teng",
+        "name": "马腾",
+        "color": "#a66c43",
+        "soldiers": 18000,
+        "cities": 24
+      },
+      {
+        "id": "han_sui",
+        "name": "韩遂",
+        "color": "#8e6d59",
+        "soldiers": 16000,
+        "cities": 13
+      },
+      {
+        "id": "gongsun_du",
+        "name": "公孙度",
+        "color": "#647d83",
+        "soldiers": 10000,
+        "cities": 12
+      },
+      {
+        "id": "wang_kuang",
+        "name": "王匡",
+        "color": "#8a7053",
+        "soldiers": 6000,
+        "cities": 6
+      },
+      {
+        "id": "kong_zhou",
+        "name": "孔伷",
+        "color": "#96806b",
+        "soldiers": 6000,
+        "cities": 10
+      },
+      {
+        "id": "zhang_miao",
+        "name": "张邈",
+        "color": "#a58c58",
+        "soldiers": 7000,
+        "cities": 6
+      },
+      {
+        "id": "qiao_mao",
+        "name": "桥瑁",
+        "color": "#698d90",
+        "soldiers": 5000,
+        "cities": 5
+      },
+      {
+        "id": "yuan_yi",
+        "name": "袁遗",
+        "color": "#8b7290",
+        "soldiers": 4000,
+        "cities": 1
+      },
+      {
+        "id": "bao_xin",
+        "name": "鲍信",
+        "color": "#9d8258",
+        "soldiers": 5000,
+        "cities": 1
+      },
+      {
+        "id": "zhang_chao",
+        "name": "张超",
+        "color": "#8f7260",
+        "soldiers": 5000,
+        "cities": 5
+      },
+      {
+        "id": "chen_wen",
+        "name": "陈温",
+        "color": "#639582",
+        "soldiers": 6000,
+        "cities": 33
+      },
+      {
+        "id": "zhou_xin",
+        "name": "周昕",
+        "color": "#9c7b67",
+        "soldiers": 4000,
+        "cities": 6
+      },
+      {
+        "id": "liu_chong",
+        "name": "刘宠",
+        "color": "#9a8561",
+        "soldiers": 5000,
+        "cities": 1
+      },
+      {
+        "id": "shi_xie",
+        "name": "士燮",
+        "color": "#759585",
+        "soldiers": 4000,
+        "cities": 6
+      },
+      {
+        "id": "jiao_he",
+        "name": "焦和",
+        "color": "#78946a",
+        "soldiers": 5000,
+        "cities": 14
+      },
+      {
+        "id": "neutral",
+        "name": "地方官府",
+        "color": "#777568",
+        "soldiers": 0,
+        "cities": 31
+      }
     ],
-    "city_forces":{"anding":"han_sui","badong":"liu_yan","baima":"qiao_mao","beihai":"kong_rong","beiping":"gongsun","cangwu":"neutral","chaisang":"chen_wen","changan":"dong","changsha":"sun_jian","chengdu":"liu_yan","chenliu":"zhang_miao","commandery_city_002":"wang_kuang","commandery_city_003":"dong","commandery_city_006":"dong","commandery_city_007":"dong","commandery_city_008":"kong_zhou","commandery_city_009":"yuan_shu","commandery_city_010":"kong_zhou","commandery_city_011":"kong_zhou","commandery_city_012":"liu_chong","commandery_city_013":"kong_zhou","commandery_city_015":"han_fu","commandery_city_016":"han_fu","commandery_city_017":"han_fu","commandery_city_018":"han_fu","commandery_city_019":"han_fu","commandery_city_020":"han_fu","commandery_city_021":"han_fu","commandery_city_025":"liu_dai","commandery_city_026":"liu_dai","commandery_city_027":"liu_dai","commandery_city_028":"bao_xin","commandery_city_029":"yuan_yi","commandery_city_030":"liu_dai","commandery_city_031":"tao_qian","commandery_city_032":"tao_qian","commandery_city_036":"jiao_he","commandery_city_038":"jiao_he","commandery_city_039":"kong_rong","commandery_city_040":"jiao_he","commandery_city_044":"liu_biao","commandery_city_045":"liu_biao","commandery_city_046":"liu_biao","commandery_city_047":"liu_biao","commandery_city_048":"sun_jian","commandery_city_049":"chen_wen","commandery_city_050":"zhou_xin","commandery_city_051":"chen_wen","commandery_city_052":"chen_wen","commandery_city_054":"chen_wen","commandery_city_055":"liu_yan","commandery_city_057":"liu_yan","commandery_city_059":"liu_yan","commandery_city_060":"liu_yan","commandery_city_061":"liu_yan","commandery_city_062":"liu_yan","commandery_city_063":"liu_yan","commandery_city_064":"liu_yan","commandery_city_065":"liu_yan","commandery_city_066":"liu_yan","commandery_city_067":"ma_teng","commandery_city_068":"ma_teng","commandery_city_069":"neutral","commandery_city_070":"han_sui","commandery_city_071":"han_sui","commandery_city_072":"han_sui","commandery_city_074":"ma_teng","commandery_city_075":"ma_teng","commandery_city_076":"ma_teng","commandery_city_077":"ma_teng","commandery_city_078":"ma_teng","commandery_city_079":"neutral","commandery_city_081":"neutral","commandery_city_082":"neutral","commandery_city_083":"neutral","commandery_city_084":"neutral","commandery_city_085":"neutral","commandery_city_086":"neutral","commandery_city_087":"neutral","commandery_city_088":"liu_yu","commandery_city_090":"liu_yu","commandery_city_091":"liu_yu","commandery_city_092":"liu_yu","commandery_city_093":"gongsun","commandery_city_094":"liu_yu","commandery_city_096":"liu_yu","commandery_city_097":"gongsun_du","commandery_city_098":"gongsun_du","commandery_city_100":"neutral","commandery_city_101":"neutral","commandery_city_102":"neutral","commandery_city_103":"shi_xie","commandery_city_104":"neutral","commandery_city_105":"neutral","commandery_city_106":"han_fu","commandery_city_107":"liu_yan","commandery_city_108":"tao_qian","commandery_city_109":"liu_biao","commandery_city_110":"liu_yan","commandery_city_111":"dong","commandery_city_112":"liu_yan","commandery_city_113":"jiao_he","commandery_city_114":"neutral","commandery_city_115":"tao_qian","commandery_city_116":"chen_wen","commandery_city_117":"yuan_shu","commandery_city_118":"chen_wen","commandery_city_119":"yuan_shu","commandery_city_120":"cao","commandery_city_121":"liu_yan","commandery_city_122":"liu_yan","commandery_city_123":"ma_teng","commandery_city_124":"han_sui","commandery_city_125":"liu_biao","commandery_city_126":"yuan_shu","commandery_city_127":"liu_yan","commandery_city_128":"liu_biao","commandery_city_129":"han_fu","commandery_city_130":"liu_yan","custom_1":"tao_qian","daixian":"liu_yu","fuling":"liu_yan","guandu":"kong_zhou","guangling":"zhang_chao","guiyang":"liu_biao","hangu":"dong","hanzhong":"liu_yan","hefei":"chen_wen","henei":"wang_kuang","hongnong":"dong","hulao":"dong","ji":"liu_yu","jiameng":"liu_yan","jianan":"chen_wen","jiangling":"liu_biao","jiangyou":"liu_yan","jiangzhou":"liu_yan","jianing":"liu_yan","jianmen":"liu_yan","jianye":"zhou_xin","jiaozhi":"shi_xie","jincheng":"han_sui","jinyang":"neutral","kuaiji":"chen_wen","langya":"tao_qian","langzhong":"liu_yan","lelang":"gongsun_du","lingling":"liu_biao","linzi":"jiao_he","longxi":"ma_teng","lujiang":"chen_wen","luoyang":"dong","mengjin":"dong","nanpi":"yuan","panyu":"neutral","pengcheng":"tao_qian","pingyuan":"jiao_he","pukou":"chen_wen","puyang":"qiao_mao","qiao":"cao","runan":"yuan_shu","shangdang":"neutral","shangyong":"liu_yan","shouchun":"chen_wen","tianshui":"ma_teng","tongguan":"dong","wan":"yuan_shu","wu":"chen_wen","wuguan":"dong","wuling":"liu_biao","xiakou":"liu_biao","xian_01_03":"kong_zhou","xian_01_04":"kong_zhou","xian_01_05":"kong_zhou","xian_02_02":"zhang_miao","xian_02_03":"zhang_miao","xian_02_04":"zhang_miao","xian_02_05":"zhang_miao","xian_03_02":"dong","xian_03_03":"dong","xian_03_04":"dong","xian_03_05":"dong","xian_04_02":"han_fu","xian_04_03":"han_fu","xian_04_04":"han_fu","xian_04_05":"han_fu","xian_05_02":"gongsun","xian_05_03":"gongsun","xian_05_04":"gongsun","xian_06_03":"qiao_mao","xian_06_04":"qiao_mao","xian_06_05":"qiao_mao","xian_07_02":"tao_qian","xian_07_03":"tao_qian","xian_07_04":"tao_qian","xian_08_03":"yuan_shu","xian_08_04":"yuan_shu","xian_08_05":"yuan_shu","xian_08_06":"yuan_shu","xian_09_04":"liu_biao","xian_09_05":"liu_biao","xian_10_03":"liu_biao","xian_10_04":"liu_biao","xian_10_05":"liu_biao","xian_11_03":"zhou_xin","xian_11_04":"zhou_xin","xian_11_05":"zhou_xin","xian_12_03":"chen_wen","xian_12_05":"chen_wen","xian_13_02":"ma_teng","xian_13_03":"ma_teng","xian_13_04":"ma_teng","xian_13_05":"ma_teng","xian_14_03":"han_sui","xian_14_04":"han_sui","xian_14_05":"han_sui","xian_15_03":"liu_yu","xian_15_04":"liu_yu","xian_16_02":"gongsun_du","xian_16_03":"gongsun_du","xian_16_04":"gongsun_du","xian_16_05":"gongsun_du","xian_17_02":"neutral","xian_17_03":"neutral","xian_17_04":"neutral","xian_17_05":"neutral","xian_18_02":"yuan","xian_18_03":"yuan","xian_18_04":"yuan","xian_18_05":"yuan","xian_19_02":"jiao_he","xian_19_03":"jiao_he","xian_19_04":"jiao_he","xian_19_05":"jiao_he","xian_20_02":"kong_rong","xian_20_03":"kong_rong","xian_20_04":"kong_rong","xian_20_05":"kong_rong","xian_21_02":"han_sui","xian_21_03":"han_sui","xian_21_04":"han_sui","xian_21_05":"han_sui","xian_22_02":"ma_teng","xian_22_03":"ma_teng","xian_22_04":"ma_teng","xian_22_05":"ma_teng","xian_23_02":"dong","xian_23_03":"dong","xian_23_04":"dong","xian_23_05":"dong","xian_24_02":"dong","xian_24_03":"dong","xian_24_04":"dong","xian_24_05":"dong","xian_25_04":"kong_zhou","xian_25_05":"kong_zhou","xian_26_03":"liu_yan","xian_26_04":"liu_yan","xian_26_05":"liu_yan","xian_27_03":"liu_yan","xian_27_04":"liu_yan","xian_27_05":"liu_yan","xian_28_02":"liu_yan","xian_28_03":"liu_yan","xian_28_04":"liu_yan","xian_28_05":"liu_yan","xian_29_04":"liu_yan","xian_30_03":"liu_yan","xian_30_04":"liu_yan","xian_30_05":"liu_yan","xian_31_02":"liu_biao","xian_31_03":"liu_biao","xian_31_04":"liu_biao","xian_31_05":"liu_biao","xian_32_02":"sun_jian","xian_32_03":"sun_jian","xian_32_04":"sun_jian","xian_32_05":"sun_jian","xian_33_03":"liu_biao","xian_33_04":"liu_biao","xian_33_05":"liu_biao","xian_34_02":"liu_biao","xian_34_03":"liu_biao","xian_34_04":"liu_biao","xian_34_05":"liu_biao","xian_35_03":"chen_wen","xian_35_04":"chen_wen","xian_35_05":"chen_wen","xian_36_03":"chen_wen","xian_36_04":"chen_wen","xian_36_05":"chen_wen","xian_37_02":"chen_wen","xian_37_03":"chen_wen","xian_37_04":"chen_wen","xian_37_05":"chen_wen","xian_38_02":"gongsun_du","xian_38_03":"gongsun_du","xian_38_04":"gongsun_du","xian_38_05":"gongsun_du","xian_39_02":"liu_yu","xian_39_03":"liu_yu","xian_39_04":"liu_yu","xian_40_01":"neutral","xian_40_03":"neutral","xian_40_04":"neutral","xian_40_05":"neutral","xian_41_02":"wang_kuang","xian_41_03":"wang_kuang","xian_41_04":"wang_kuang","xian_41_05":"wang_kuang","xian_42_02":"jiao_he","xian_42_03":"jiao_he","xian_42_04":"jiao_he","xian_42_05":"jiao_he","xian_43_02":"tao_qian","xian_43_03":"tao_qian","xian_43_04":"tao_qian","xian_43_05":"tao_qian","xian_44_02":"tao_qian","xian_44_03":"tao_qian","xian_44_04":"tao_qian","xian_44_05":"tao_qian","xian_45_02":"yuan_shu","xian_45_03":"yuan_shu","xian_45_04":"yuan_shu","xian_45_05":"yuan_shu","xian_46_02":"zhang_chao","xian_46_03":"zhang_chao","xian_46_04":"zhang_chao","xian_46_05":"zhang_chao","xian_47_02":"ma_teng","xian_47_03":"ma_teng","xian_47_04":"ma_teng","xian_47_05":"ma_teng","xian_48_02":"chen_wen","xian_48_03":"chen_wen","xian_48_04":"chen_wen","xian_48_06":"chen_wen","xian_49_02":"shi_xie","xian_49_03":"shi_xie","xian_49_04":"shi_xie","xian_49_05":"shi_xie","xian_50_02":"liu_biao","xian_50_03":"liu_biao","xian_50_04":"liu_biao","xian_50_05":"liu_biao","xian_51_02":"neutral","xian_51_03":"neutral","xian_51_04":"neutral","xian_51_05":"neutral","xian_extra_01":"zhang_miao","xian_extra_02":"dong","xian_extra_03":"dong","xian_extra_04":"qiao_mao","xian_extra_05":"yuan_shu","xian_extra_06":"liu_biao","xian_extra_07":"liu_biao","xian_extra_08":"liu_biao","xian_extra_09":"chen_wen","xian_extra_10":"chen_wen","xian_extra_11":"chen_wen","xian_extra_12":"zhou_xin","xian_extra_13":"ma_teng","xian_extra_14":"sun_jian","xian_extra_15":"sun_jian","xiangping":"gongsun_du","xiangyang":"liu_biao","xiaopei":"tao_qian","xiapi":"tao_qian","xiliang":"ma_teng","xinye":"liu_biao","xuchang":"kong_zhou","yangping":"liu_yan","yanjin":"qiao_mao","ye":"han_fu","yiling":"liu_biao","yongan":"liu_yan","yunnan":"liu_yan","yuzhang":"chen_wen","zitong":"liu_yan"},
-    "governors":{"luoyang":"董卓","mengjin":"吕布","chenliu":"张邈","ye":"韩馥","nanpi":"袁绍","beiping":"公孙瓒","daixian":"田畴","ji":"刘虞","puyang":"桥瑁","changsha":"孙坚","wan":"袁术","runan":"杨弘","hefei":"—","xiapi":"陶谦","langya":"臧霸","pengcheng":"曹豹","guangling":"张超","beihai":"孔融","linzi":"焦和","chengdu":"刘焉","hanzhong":"张鲁","langzhong":"黄权","badong":"庞羲","fuling":"吴懿","xiliang":"马腾","longxi":"马岱","jincheng":"韩遂","xiangping":"公孙度","lelang":"公孙康","xiangyang":"刘表","henei":"王匡","commandery_city_008":"孔伷","commandery_city_029":"袁遗","commandery_city_028":"鲍信","shouchun":"陈温","commandery_city_050":"周昕","commandery_city_012":"刘宠","jiaozhi":"士燮","qiao":"曹操"},
-    "extra_officers":[
+    "city_forces": {
+      "anding": "han_sui",
+      "badong": "liu_yan",
+      "baima": "qiao_mao",
+      "beihai": "kong_rong",
+      "beiping": "gongsun",
+      "cangwu": "neutral",
+      "chaisang": "chen_wen",
+      "changan": "dong",
+      "changsha": "sun_jian",
+      "chengdu": "liu_yan",
+      "chenliu": "zhang_miao",
+      "commandery_city_002": "wang_kuang",
+      "commandery_city_003": "dong",
+      "commandery_city_006": "dong",
+      "commandery_city_007": "dong",
+      "commandery_city_008": "kong_zhou",
+      "commandery_city_009": "yuan_shu",
+      "commandery_city_010": "kong_zhou",
+      "commandery_city_011": "kong_zhou",
+      "commandery_city_012": "liu_chong",
+      "commandery_city_013": "kong_zhou",
+      "commandery_city_015": "han_fu",
+      "commandery_city_016": "han_fu",
+      "commandery_city_017": "han_fu",
+      "commandery_city_018": "han_fu",
+      "commandery_city_019": "han_fu",
+      "commandery_city_020": "han_fu",
+      "commandery_city_021": "han_fu",
+      "commandery_city_025": "liu_dai",
+      "commandery_city_026": "liu_dai",
+      "commandery_city_027": "liu_dai",
+      "commandery_city_028": "bao_xin",
+      "commandery_city_029": "yuan_yi",
+      "commandery_city_030": "liu_dai",
+      "commandery_city_031": "tao_qian",
+      "commandery_city_032": "tao_qian",
+      "commandery_city_036": "jiao_he",
+      "commandery_city_038": "jiao_he",
+      "commandery_city_039": "kong_rong",
+      "commandery_city_040": "jiao_he",
+      "commandery_city_044": "liu_biao",
+      "commandery_city_045": "liu_biao",
+      "commandery_city_046": "liu_biao",
+      "commandery_city_047": "liu_biao",
+      "commandery_city_048": "sun_jian",
+      "commandery_city_049": "chen_wen",
+      "commandery_city_050": "zhou_xin",
+      "commandery_city_051": "chen_wen",
+      "commandery_city_052": "chen_wen",
+      "commandery_city_054": "chen_wen",
+      "commandery_city_055": "liu_yan",
+      "commandery_city_057": "liu_yan",
+      "commandery_city_059": "liu_yan",
+      "commandery_city_060": "liu_yan",
+      "commandery_city_061": "liu_yan",
+      "commandery_city_062": "liu_yan",
+      "commandery_city_063": "liu_yan",
+      "commandery_city_064": "liu_yan",
+      "commandery_city_065": "liu_yan",
+      "commandery_city_066": "liu_yan",
+      "commandery_city_067": "ma_teng",
+      "commandery_city_068": "ma_teng",
+      "commandery_city_069": "neutral",
+      "commandery_city_070": "han_sui",
+      "commandery_city_071": "han_sui",
+      "commandery_city_072": "han_sui",
+      "commandery_city_074": "ma_teng",
+      "commandery_city_075": "ma_teng",
+      "commandery_city_076": "ma_teng",
+      "commandery_city_077": "ma_teng",
+      "commandery_city_078": "ma_teng",
+      "commandery_city_079": "neutral",
+      "commandery_city_081": "neutral",
+      "commandery_city_082": "neutral",
+      "commandery_city_083": "neutral",
+      "commandery_city_084": "neutral",
+      "commandery_city_085": "neutral",
+      "commandery_city_086": "neutral",
+      "commandery_city_087": "neutral",
+      "commandery_city_088": "liu_yu",
+      "commandery_city_090": "liu_yu",
+      "commandery_city_091": "liu_yu",
+      "commandery_city_092": "liu_yu",
+      "commandery_city_093": "gongsun",
+      "commandery_city_094": "liu_yu",
+      "commandery_city_096": "liu_yu",
+      "commandery_city_097": "gongsun_du",
+      "commandery_city_098": "gongsun_du",
+      "commandery_city_100": "neutral",
+      "commandery_city_101": "neutral",
+      "commandery_city_102": "neutral",
+      "commandery_city_103": "shi_xie",
+      "commandery_city_104": "neutral",
+      "commandery_city_105": "neutral",
+      "commandery_city_106": "han_fu",
+      "commandery_city_107": "liu_yan",
+      "commandery_city_108": "tao_qian",
+      "commandery_city_109": "liu_biao",
+      "commandery_city_110": "liu_yan",
+      "commandery_city_111": "dong",
+      "commandery_city_112": "liu_yan",
+      "commandery_city_113": "jiao_he",
+      "commandery_city_114": "neutral",
+      "commandery_city_115": "tao_qian",
+      "commandery_city_116": "chen_wen",
+      "commandery_city_117": "yuan_shu",
+      "commandery_city_118": "chen_wen",
+      "commandery_city_119": "yuan_shu",
+      "commandery_city_120": "cao",
+      "commandery_city_121": "liu_yan",
+      "commandery_city_122": "liu_yan",
+      "commandery_city_123": "ma_teng",
+      "commandery_city_124": "han_sui",
+      "commandery_city_125": "liu_biao",
+      "commandery_city_126": "yuan_shu",
+      "commandery_city_127": "liu_yan",
+      "commandery_city_128": "liu_biao",
+      "commandery_city_129": "han_fu",
+      "commandery_city_130": "liu_yan",
+      "custom_1": "tao_qian",
+      "daixian": "liu_yu",
+      "fuling": "liu_yan",
+      "guandu": "kong_zhou",
+      "guangling": "zhang_chao",
+      "guiyang": "liu_biao",
+      "hangu": "dong",
+      "hanzhong": "liu_yan",
+      "hefei": "chen_wen",
+      "henei": "wang_kuang",
+      "hongnong": "dong",
+      "hulao": "dong",
+      "ji": "liu_yu",
+      "jiameng": "liu_yan",
+      "jianan": "chen_wen",
+      "jiangling": "liu_biao",
+      "jiangyou": "liu_yan",
+      "jiangzhou": "liu_yan",
+      "jianing": "liu_yan",
+      "jianmen": "liu_yan",
+      "jianye": "zhou_xin",
+      "jiaozhi": "shi_xie",
+      "jincheng": "han_sui",
+      "jinyang": "neutral",
+      "kuaiji": "chen_wen",
+      "langya": "tao_qian",
+      "langzhong": "liu_yan",
+      "lelang": "gongsun_du",
+      "lingling": "liu_biao",
+      "linzi": "jiao_he",
+      "longxi": "ma_teng",
+      "lujiang": "chen_wen",
+      "luoyang": "dong",
+      "mengjin": "dong",
+      "nanpi": "yuan",
+      "panyu": "neutral",
+      "pengcheng": "tao_qian",
+      "pingyuan": "jiao_he",
+      "pukou": "chen_wen",
+      "puyang": "qiao_mao",
+      "qiao": "cao",
+      "runan": "yuan_shu",
+      "shangdang": "neutral",
+      "shangyong": "liu_yan",
+      "shouchun": "chen_wen",
+      "tianshui": "ma_teng",
+      "tongguan": "dong",
+      "wan": "yuan_shu",
+      "wu": "chen_wen",
+      "wuguan": "dong",
+      "wuling": "liu_biao",
+      "xiakou": "liu_biao",
+      "xian_01_03": "kong_zhou",
+      "xian_01_04": "kong_zhou",
+      "xian_01_05": "kong_zhou",
+      "xian_02_02": "zhang_miao",
+      "xian_02_03": "zhang_miao",
+      "xian_02_04": "zhang_miao",
+      "xian_02_05": "zhang_miao",
+      "xian_03_02": "dong",
+      "xian_03_03": "dong",
+      "xian_03_04": "dong",
+      "xian_03_05": "dong",
+      "xian_04_02": "han_fu",
+      "xian_04_03": "han_fu",
+      "xian_04_04": "han_fu",
+      "xian_04_05": "han_fu",
+      "xian_05_02": "gongsun",
+      "xian_05_03": "gongsun",
+      "xian_05_04": "gongsun",
+      "xian_06_03": "qiao_mao",
+      "xian_06_04": "qiao_mao",
+      "xian_06_05": "qiao_mao",
+      "xian_07_02": "tao_qian",
+      "xian_07_03": "tao_qian",
+      "xian_07_04": "tao_qian",
+      "xian_08_03": "yuan_shu",
+      "xian_08_04": "yuan_shu",
+      "xian_08_05": "yuan_shu",
+      "xian_08_06": "yuan_shu",
+      "xian_09_04": "liu_biao",
+      "xian_09_05": "liu_biao",
+      "xian_10_03": "liu_biao",
+      "xian_10_04": "liu_biao",
+      "xian_10_05": "liu_biao",
+      "xian_11_03": "zhou_xin",
+      "xian_11_04": "zhou_xin",
+      "xian_11_05": "zhou_xin",
+      "xian_12_03": "chen_wen",
+      "xian_12_05": "chen_wen",
+      "xian_13_02": "ma_teng",
+      "xian_13_03": "ma_teng",
+      "xian_13_04": "ma_teng",
+      "xian_13_05": "ma_teng",
+      "xian_14_03": "han_sui",
+      "xian_14_04": "han_sui",
+      "xian_14_05": "han_sui",
+      "xian_15_03": "liu_yu",
+      "xian_15_04": "liu_yu",
+      "xian_16_02": "gongsun_du",
+      "xian_16_03": "gongsun_du",
+      "xian_16_04": "gongsun_du",
+      "xian_16_05": "gongsun_du",
+      "xian_17_02": "neutral",
+      "xian_17_03": "neutral",
+      "xian_17_04": "neutral",
+      "xian_17_05": "neutral",
+      "xian_18_02": "yuan",
+      "xian_18_03": "yuan",
+      "xian_18_04": "yuan",
+      "xian_18_05": "yuan",
+      "xian_19_02": "jiao_he",
+      "xian_19_03": "jiao_he",
+      "xian_19_04": "jiao_he",
+      "xian_19_05": "jiao_he",
+      "xian_20_02": "kong_rong",
+      "xian_20_03": "kong_rong",
+      "xian_20_04": "kong_rong",
+      "xian_20_05": "kong_rong",
+      "xian_21_02": "han_sui",
+      "xian_21_03": "han_sui",
+      "xian_21_04": "han_sui",
+      "xian_21_05": "han_sui",
+      "xian_22_02": "ma_teng",
+      "xian_22_03": "ma_teng",
+      "xian_22_04": "ma_teng",
+      "xian_22_05": "ma_teng",
+      "xian_23_02": "dong",
+      "xian_23_03": "dong",
+      "xian_23_04": "dong",
+      "xian_23_05": "dong",
+      "xian_24_02": "dong",
+      "xian_24_03": "dong",
+      "xian_24_04": "dong",
+      "xian_24_05": "dong",
+      "xian_25_04": "kong_zhou",
+      "xian_25_05": "kong_zhou",
+      "xian_26_03": "liu_yan",
+      "xian_26_04": "liu_yan",
+      "xian_26_05": "liu_yan",
+      "xian_27_03": "liu_yan",
+      "xian_27_04": "liu_yan",
+      "xian_27_05": "liu_yan",
+      "xian_28_02": "liu_yan",
+      "xian_28_03": "liu_yan",
+      "xian_28_04": "liu_yan",
+      "xian_28_05": "liu_yan",
+      "xian_29_04": "liu_yan",
+      "xian_30_03": "liu_yan",
+      "xian_30_04": "liu_yan",
+      "xian_30_05": "liu_yan",
+      "xian_31_02": "liu_biao",
+      "xian_31_03": "liu_biao",
+      "xian_31_04": "liu_biao",
+      "xian_31_05": "liu_biao",
+      "xian_32_02": "sun_jian",
+      "xian_32_03": "sun_jian",
+      "xian_32_04": "sun_jian",
+      "xian_32_05": "sun_jian",
+      "xian_33_03": "liu_biao",
+      "xian_33_04": "liu_biao",
+      "xian_33_05": "liu_biao",
+      "xian_34_02": "liu_biao",
+      "xian_34_03": "liu_biao",
+      "xian_34_04": "liu_biao",
+      "xian_34_05": "liu_biao",
+      "xian_35_03": "chen_wen",
+      "xian_35_04": "chen_wen",
+      "xian_35_05": "chen_wen",
+      "xian_36_03": "chen_wen",
+      "xian_36_04": "chen_wen",
+      "xian_36_05": "chen_wen",
+      "xian_37_02": "chen_wen",
+      "xian_37_03": "chen_wen",
+      "xian_37_04": "chen_wen",
+      "xian_37_05": "chen_wen",
+      "xian_38_02": "gongsun_du",
+      "xian_38_03": "gongsun_du",
+      "xian_38_04": "gongsun_du",
+      "xian_38_05": "gongsun_du",
+      "xian_39_02": "liu_yu",
+      "xian_39_03": "liu_yu",
+      "xian_39_04": "liu_yu",
+      "xian_40_01": "neutral",
+      "xian_40_03": "neutral",
+      "xian_40_04": "neutral",
+      "xian_40_05": "neutral",
+      "xian_41_02": "wang_kuang",
+      "xian_41_03": "wang_kuang",
+      "xian_41_04": "wang_kuang",
+      "xian_41_05": "wang_kuang",
+      "xian_42_02": "jiao_he",
+      "xian_42_03": "jiao_he",
+      "xian_42_04": "jiao_he",
+      "xian_42_05": "jiao_he",
+      "xian_43_02": "tao_qian",
+      "xian_43_03": "tao_qian",
+      "xian_43_04": "tao_qian",
+      "xian_43_05": "tao_qian",
+      "xian_44_02": "tao_qian",
+      "xian_44_03": "tao_qian",
+      "xian_44_04": "tao_qian",
+      "xian_44_05": "tao_qian",
+      "xian_45_02": "yuan_shu",
+      "xian_45_03": "yuan_shu",
+      "xian_45_04": "yuan_shu",
+      "xian_45_05": "yuan_shu",
+      "xian_46_02": "zhang_chao",
+      "xian_46_03": "zhang_chao",
+      "xian_46_04": "zhang_chao",
+      "xian_46_05": "zhang_chao",
+      "xian_47_02": "ma_teng",
+      "xian_47_03": "ma_teng",
+      "xian_47_04": "ma_teng",
+      "xian_47_05": "ma_teng",
+      "xian_48_02": "chen_wen",
+      "xian_48_03": "chen_wen",
+      "xian_48_04": "chen_wen",
+      "xian_48_06": "chen_wen",
+      "xian_49_02": "shi_xie",
+      "xian_49_03": "shi_xie",
+      "xian_49_04": "shi_xie",
+      "xian_49_05": "shi_xie",
+      "xian_50_02": "liu_biao",
+      "xian_50_03": "liu_biao",
+      "xian_50_04": "liu_biao",
+      "xian_50_05": "liu_biao",
+      "xian_51_02": "neutral",
+      "xian_51_03": "neutral",
+      "xian_51_04": "neutral",
+      "xian_51_05": "neutral",
+      "xian_extra_01": "zhang_miao",
+      "xian_extra_02": "dong",
+      "xian_extra_03": "dong",
+      "xian_extra_04": "qiao_mao",
+      "xian_extra_05": "yuan_shu",
+      "xian_extra_06": "liu_biao",
+      "xian_extra_07": "liu_biao",
+      "xian_extra_08": "liu_biao",
+      "xian_extra_09": "chen_wen",
+      "xian_extra_10": "chen_wen",
+      "xian_extra_11": "chen_wen",
+      "xian_extra_12": "zhou_xin",
+      "xian_extra_13": "ma_teng",
+      "xian_extra_14": "sun_jian",
+      "xian_extra_15": "sun_jian",
+      "xiangping": "gongsun_du",
+      "xiangyang": "liu_biao",
+      "xiaopei": "tao_qian",
+      "xiapi": "tao_qian",
+      "xiliang": "ma_teng",
+      "xinye": "liu_biao",
+      "xuchang": "kong_zhou",
+      "yangping": "liu_yan",
+      "yanjin": "qiao_mao",
+      "ye": "han_fu",
+      "yiling": "liu_biao",
+      "yongan": "liu_yan",
+      "yunnan": "liu_yan",
+      "yuzhang": "chen_wen",
+      "zitong": "liu_yan"
+    },
+    "governors": {
+      "luoyang": "董卓",
+      "mengjin": "吕布",
+      "chenliu": "张邈",
+      "ye": "韩馥",
+      "nanpi": "袁绍",
+      "beiping": "公孙瓒",
+      "daixian": "田畴",
+      "ji": "刘虞",
+      "puyang": "桥瑁",
+      "changsha": "孙坚",
+      "wan": "袁术",
+      "runan": "杨弘",
+      "hefei": "—",
+      "xiapi": "陶谦",
+      "langya": "臧霸",
+      "pengcheng": "曹豹",
+      "guangling": "张超",
+      "beihai": "孔融",
+      "linzi": "焦和",
+      "chengdu": "刘焉",
+      "hanzhong": "张鲁",
+      "langzhong": "黄权",
+      "badong": "庞羲",
+      "fuling": "吴懿",
+      "xiliang": "马腾",
+      "longxi": "马岱",
+      "jincheng": "韩遂",
+      "xiangping": "公孙度",
+      "lelang": "公孙康",
+      "xiangyang": "刘表",
+      "henei": "王匡",
+      "commandery_city_008": "孔伷",
+      "commandery_city_029": "袁遗",
+      "commandery_city_028": "鲍信",
+      "shouchun": "陈温",
+      "commandery_city_050": "周昕",
+      "commandery_city_012": "刘宠",
+      "jiaozhi": "士燮",
+      "qiao": "曹操"
+    },
+    "extra_officers": [
       "董卓",
       "吕布",
       "李儒",
@@ -56,238 +744,2044 @@
       "韩遂",
       "公孙度",
       "刘备",
-      {"id":"scenario_190_local_1","name":"张超","command":62,"war":46,"intelligence":69,"politics":71,"charm":78,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_2","name":"陈温","command":48,"war":28,"intelligence":67,"politics":75,"charm":72,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_3","name":"刘宠","command":72,"war":84,"intelligence":63,"politics":72,"charm":83,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_4","name":"士燮","command":42,"war":30,"intelligence":78,"politics":87,"charm":88,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_5","name":"焦和","command":36,"war":23,"intelligence":38,"politics":48,"charm":53,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_6","name":"臧洪","command":76,"war":62,"intelligence":77,"politics":73,"charm":85,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_7","name":"骆俊","command":48,"war":28,"intelligence":74,"politics":85,"charm":80,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"scenario_190_local_8","name":"卫兹","command":42,"war":27,"intelligence":63,"politics":70,"charm":72,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_yang_ding","name":"杨定","birthYear":148,"deathYear":197,"debutYear":184,"command":64,"war":66,"intelligence":40,"politics":30,"charm":44,"aptitude":{"spear":"C","halberd":"B","crossbow":"C","cavalry":"B","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_cai_yong","name":"蔡邕","birthYear":133,"deathYear":192,"debutYear":184,"command":10,"war":6,"intelligence":82,"politics":72,"charm":86,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_li_meng","name":"李蒙","birthYear":150,"deathYear":192,"debutYear":184,"command":58,"war":64,"intelligence":30,"politics":24,"charm":34,"aptitude":{"spear":"C","halberd":"B","crossbow":"C","cavalry":"B","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_wang_fang","name":"王方","birthYear":152,"deathYear":192,"debutYear":184,"command":56,"war":63,"intelligence":28,"politics":22,"charm":30,"aptitude":{"spear":"C","halberd":"B","crossbow":"C","cavalry":"B","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_zao_zhi","name":"枣祗","birthYear":155,"deathYear":198,"debutYear":184,"command":46,"war":32,"intelligence":74,"politics":84,"charm":68,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_geng_wu","name":"耿武","birthYear":150,"deathYear":191,"debutYear":184,"command":46,"war":50,"intelligence":56,"politics":60,"charm":62,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_min_chun","name":"闵纯","birthYear":152,"deathYear":191,"debutYear":184,"command":40,"war":34,"intelligence":64,"politics":66,"charm":60,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_zhao_yu","name":"赵昱","birthYear":152,"deathYear":194,"debutYear":184,"command":40,"war":26,"intelligence":72,"politics":76,"charm":80,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_jia_long","name":"贾龙","birthYear":150,"deathYear":191,"debutYear":184,"command":60,"war":58,"intelligence":50,"politics":52,"charm":56,"aptitude":{"spear":"B","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"},
-      {"id":"history_zhang_xiu_hanzhong","name":"张修","birthYear":150,"deathYear":191,"debutYear":184,"command":52,"war":48,"intelligence":58,"politics":50,"charm":64,"aptitude":{"spear":"C","halberd":"C","crossbow":"C","cavalry":"C","siege":"C","navy":"C"},"statsBasis":"game-estimate"}
+      {
+        "id": "scenario_190_local_1",
+        "name": "张超",
+        "command": 62,
+        "war": 46,
+        "intelligence": 69,
+        "politics": 71,
+        "charm": 78,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_2",
+        "name": "陈温",
+        "command": 48,
+        "war": 28,
+        "intelligence": 67,
+        "politics": 75,
+        "charm": 72,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_3",
+        "name": "刘宠",
+        "command": 72,
+        "war": 84,
+        "intelligence": 63,
+        "politics": 72,
+        "charm": 83,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_4",
+        "name": "士燮",
+        "command": 42,
+        "war": 30,
+        "intelligence": 78,
+        "politics": 87,
+        "charm": 88,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_5",
+        "name": "焦和",
+        "command": 36,
+        "war": 23,
+        "intelligence": 38,
+        "politics": 48,
+        "charm": 53,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_6",
+        "name": "臧洪",
+        "command": 76,
+        "war": 62,
+        "intelligence": 77,
+        "politics": 73,
+        "charm": 85,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_7",
+        "name": "骆俊",
+        "command": 48,
+        "war": 28,
+        "intelligence": 74,
+        "politics": 85,
+        "charm": 80,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "scenario_190_local_8",
+        "name": "卫兹",
+        "command": 42,
+        "war": 27,
+        "intelligence": 63,
+        "politics": 70,
+        "charm": 72,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_yang_ding",
+        "name": "杨定",
+        "birthYear": 148,
+        "deathYear": 197,
+        "debutYear": 184,
+        "command": 64,
+        "war": 66,
+        "intelligence": 40,
+        "politics": 30,
+        "charm": 44,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "B",
+          "crossbow": "C",
+          "cavalry": "B",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_cai_yong",
+        "name": "蔡邕",
+        "birthYear": 133,
+        "deathYear": 192,
+        "debutYear": 184,
+        "command": 10,
+        "war": 6,
+        "intelligence": 82,
+        "politics": 72,
+        "charm": 86,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_li_meng",
+        "name": "李蒙",
+        "birthYear": 150,
+        "deathYear": 192,
+        "debutYear": 184,
+        "command": 58,
+        "war": 64,
+        "intelligence": 30,
+        "politics": 24,
+        "charm": 34,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "B",
+          "crossbow": "C",
+          "cavalry": "B",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_wang_fang",
+        "name": "王方",
+        "birthYear": 152,
+        "deathYear": 192,
+        "debutYear": 184,
+        "command": 56,
+        "war": 63,
+        "intelligence": 28,
+        "politics": 22,
+        "charm": 30,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "B",
+          "crossbow": "C",
+          "cavalry": "B",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_zao_zhi",
+        "name": "枣祗",
+        "birthYear": 155,
+        "deathYear": 198,
+        "debutYear": 184,
+        "command": 46,
+        "war": 32,
+        "intelligence": 74,
+        "politics": 84,
+        "charm": 68,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_geng_wu",
+        "name": "耿武",
+        "birthYear": 150,
+        "deathYear": 191,
+        "debutYear": 184,
+        "command": 46,
+        "war": 50,
+        "intelligence": 56,
+        "politics": 60,
+        "charm": 62,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_min_chun",
+        "name": "闵纯",
+        "birthYear": 152,
+        "deathYear": 191,
+        "debutYear": 184,
+        "command": 40,
+        "war": 34,
+        "intelligence": 64,
+        "politics": 66,
+        "charm": 60,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_zhao_yu",
+        "name": "赵昱",
+        "birthYear": 152,
+        "deathYear": 194,
+        "debutYear": 184,
+        "command": 40,
+        "war": 26,
+        "intelligence": 72,
+        "politics": 76,
+        "charm": 80,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_jia_long",
+        "name": "贾龙",
+        "birthYear": 150,
+        "deathYear": 191,
+        "debutYear": 184,
+        "command": 60,
+        "war": 58,
+        "intelligence": 50,
+        "politics": 52,
+        "charm": 56,
+        "aptitude": {
+          "spear": "B",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      },
+      {
+        "id": "history_zhang_xiu_hanzhong",
+        "name": "张修",
+        "birthYear": 150,
+        "deathYear": 191,
+        "debutYear": 184,
+        "command": 52,
+        "war": 48,
+        "intelligence": 58,
+        "politics": 50,
+        "charm": 64,
+        "aptitude": {
+          "spear": "C",
+          "halberd": "C",
+          "crossbow": "C",
+          "cavalry": "C",
+          "siege": "C",
+          "navy": "C"
+        },
+        "statsBasis": "game-estimate"
+      }
     ],
-    "officer_assignments":{
-      "董卓":{"force":"dong","city":"luoyang","loyalty":100},
-      "吕布":{"force":"dong","city":"mengjin"},
-      "李儒":{"force":"dong","city":"luoyang"},
-      "华雄":{"force":"dong","city":"mengjin"},
-      "曹操":{"force":"cao","city":"qiao","loyalty":100},
-      "夏侯惇":{"force":"cao","city":"qiao"},
-      "夏侯渊":{"force":"cao","city":"qiao"},
-      "曹仁":{"force":"cao","city":"qiao"},
-      "曹洪":{"force":"cao","city":"qiao"},
-      "袁绍":{"force":"yuan","city":"nanpi","loyalty":100},
-      "颜良":{"force":"yuan","city":"nanpi"},
-      "文丑":{"force":"yuan","city":"nanpi"},
-      "田丰":{"force":"han_fu","city":"ye","loyalty":80},
-      "沮授":{"force":"han_fu","city":"ye","loyalty":80},
-      "审配":{"force":"han_fu","city":"ye","loyalty":80},
-      "孙坚":{"force":"sun_jian","city":"changsha","loyalty":100},
-      "程普":{"force":"sun_jian","city":"changsha"},
-      "黄盖":{"force":"sun_jian","city":"changsha"},
-      "韩当":{"force":"sun_jian","city":"changsha"},
-      "公孙瓒":{"force":"gongsun","city":"beiping","loyalty":100},
-      "赵云":{"force":"gongsun","city":"beiping"},
-      "刘表":{"force":"liu_biao","city":"xiangyang","loyalty":100},
-      "蔡瑁":{"force":"liu_biao","city":"xiangyang"},
-      "蒯越":{"force":"liu_biao","city":"xiangyang"},
-      "蒯良":{"force":"liu_biao","city":"xiangyang"},
-      "文聘":{"force":"liu_biao","city":"xiangyang"},
-      "黄祖":{"force":"liu_biao","city":"xiakou"},
-      "刘虞":{"force":"liu_yu","city":"ji","loyalty":100},
-      "田畴":{"force":"liu_yu","city":"daixian"},
-      "韩馥":{"force":"han_fu","city":"ye","loyalty":100},
-      "袁术":{"force":"yuan_shu","city":"wan","loyalty":100},
-      "纪灵":{"force":"yuan_shu","city":"wan"},
-      "杨弘":{"force":"yuan_shu","city":"runan"},
-      "阎象":{"force":"yuan_shu","city":"wan"},
-      "陶谦":{"force":"tao_qian","city":"xiapi","loyalty":100},
-      "陈登":{"force":"tao_qian","city":"xiapi"},
-      "臧霸":{"force":"tao_qian","city":"langya"},
-      "曹豹":{"force":"tao_qian","city":"pengcheng"},
-      "孔融":{"force":"kong_rong","city":"beihai","loyalty":100},
-      "王修":{"force":"kong_rong","city":"beihai"},
-      "刘焉":{"force":"liu_yan","city":"chengdu","loyalty":100},
-      "张鲁":{"force":"liu_yan","city":"hanzhong"},
-      "张任":{"force":"liu_yan","city":"chengdu"},
-      "严颜":{"force":"liu_yan","city":"jiangzhou"},
-      "黄权":{"force":"liu_yan","city":"langzhong"},
-      "庞羲":{"force":"liu_yan","city":"badong"},
-      "吴懿":{"force":"liu_yan","city":"fuling"},
-      "杨任":{"force":"liu_yan","city":"hanzhong"},
-      "阎圃":{"force":"liu_yan","city":"hanzhong"},
-      "刘岱":{"force":"liu_dai","city":"commandery_city_030","loyalty":100},
-      "马腾":{"force":"ma_teng","city":"xiliang","loyalty":100},
-      "马超":{"force":"ma_teng","city":"xiliang"},
-      "马岱":{"force":"ma_teng","city":"longxi"},
-      "庞德":{"force":"ma_teng","city":"xiliang"},
-      "韩遂":{"force":"han_sui","city":"jincheng","loyalty":100},
-      "公孙度":{"force":"gongsun_du","city":"xiangping","loyalty":100},
-      "公孙康":{"force":"gongsun_du","city":"lelang"},
-      "刘备":{"force":"gongsun","city":"beiping"},
-      "王匡":{"force":"wang_kuang","city":"henei","loyalty":100},
-      "孔伷":{"force":"kong_zhou","city":"commandery_city_008","loyalty":100},
-      "张邈":{"force":"zhang_miao","city":"chenliu","loyalty":100},
-      "桥瑁":{"force":"qiao_mao","city":"puyang","loyalty":100},
-      "袁遗":{"force":"yuan_yi","city":"commandery_city_029","loyalty":100},
-      "鲍信":{"force":"bao_xin","city":"commandery_city_028","loyalty":100},
-      "张超":{"force":"zhang_chao","city":"guangling","loyalty":100},
-      "陈温":{"force":"chen_wen","city":"shouchun","loyalty":100},
-      "周昕":{"force":"zhou_xin","city":"commandery_city_050","loyalty":100},
-      "刘宠":{"force":"liu_chong","city":"commandery_city_012","loyalty":100},
-      "士燮":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
-      "焦和":{"force":"jiao_he","city":"linzi","loyalty":100},
-      "臧洪":{"force":"zhang_chao","city":"guangling"},
-      "骆俊":{"force":"liu_chong","city":"commandery_city_012"},
-      "卫兹":{"force":"zhang_miao","city":"chenliu"},
-      "李傕":{"force":"dong","city":"luoyang","loyalty":80},
-      "郭汜":{"force":"dong","city":"luoyang","loyalty":80},
-      "牛辅":{"force":"dong","city":"luoyang","loyalty":80},
-      "董旻":{"force":"dong","city":"luoyang","loyalty":80},
-      "李肃":{"force":"dong","city":"luoyang","loyalty":80},
-      "贾诩":{"force":"dong","city":"luoyang","loyalty":80},
-      "段煨":{"force":"dong","city":"luoyang","loyalty":80},
-      "胡轸":{"force":"dong","city":"luoyang","loyalty":80},
-      "杨定":{"force":"dong","city":"luoyang","loyalty":80},
-      "蔡邕":{"force":"dong","city":"luoyang","loyalty":60},
-      "杨彪":{"force":"dong","city":"luoyang","loyalty":35},
-      "王允":{"force":"dong","city":"luoyang","loyalty":40},
-      "徐荣":{"force":"dong","city":"mengjin","loyalty":80},
-      "张辽":{"force":"dong","city":"mengjin","loyalty":80},
-      "高顺":{"force":"dong","city":"mengjin","loyalty":80},
-      "郝萌":{"force":"dong","city":"mengjin","loyalty":80},
-      "曹性":{"force":"dong","city":"mengjin","loyalty":80},
-      "宋宪":{"force":"dong","city":"mengjin","loyalty":80},
-      "魏续":{"force":"dong","city":"mengjin","loyalty":80},
-      "侯成":{"force":"dong","city":"mengjin","loyalty":80},
-      "张济":{"force":"dong","city":"changan","loyalty":80},
-      "樊稠":{"force":"dong","city":"changan","loyalty":80},
-      "李蒙":{"force":"dong","city":"changan","loyalty":80},
-      "王方":{"force":"dong","city":"changan","loyalty":80},
-      "皇甫嵩":{"force":"dong","city":"commandery_city_007","loyalty":45},
-      "曹纯":{"force":"cao","city":"qiao","loyalty":80},
-      "乐进":{"force":"cao","city":"qiao","loyalty":80},
-      "任峻":{"force":"cao","city":"qiao","loyalty":80},
-      "枣祗":{"force":"cao","city":"qiao","loyalty":80},
-      "史涣":{"force":"cao","city":"qiao","loyalty":80},
-      "张郃":{"force":"han_fu","city":"ye","loyalty":80},
-      "麴义":{"force":"han_fu","city":"ye","loyalty":80},
-      "耿武":{"force":"han_fu","city":"ye","loyalty":95},
-      "闵纯":{"force":"han_fu","city":"ye","loyalty":95},
-      "赵浮":{"force":"han_fu","city":"ye","loyalty":80},
-      "程奂":{"force":"han_fu","city":"ye","loyalty":80},
-      "逢纪":{"force":"yuan","city":"nanpi","loyalty":80},
-      "许攸":{"force":"yuan","city":"nanpi","loyalty":80},
-      "淳于琼":{"force":"yuan","city":"nanpi","loyalty":80},
-      "郭图":{"force":"yuan","city":"nanpi","loyalty":80},
-      "辛评":{"force":"yuan","city":"nanpi","loyalty":80},
-      "高干":{"force":"yuan","city":"nanpi","loyalty":95},
-      "荀谌":{"force":"yuan","city":"nanpi","loyalty":80},
-      "朱治":{"force":"sun_jian","city":"changsha","loyalty":80},
-      "祖茂":{"force":"sun_jian","city":"changsha","loyalty":80},
-      "吴景":{"force":"sun_jian","city":"changsha","loyalty":95},
-      "孙贲":{"force":"sun_jian","city":"changsha","loyalty":95},
-      "桓阶":{"force":"sun_jian","city":"changsha","loyalty":80},
-      "关羽":{"force":"gongsun","city":"beiping","loyalty":95},
-      "张飞":{"force":"gongsun","city":"beiping","loyalty":95},
-      "简雍":{"force":"gongsun","city":"beiping","loyalty":80},
-      "田豫":{"force":"gongsun","city":"beiping","loyalty":80},
-      "关靖":{"force":"gongsun","city":"beiping","loyalty":80},
-      "严纲":{"force":"gongsun","city":"beiping","loyalty":80},
-      "单经":{"force":"gongsun","city":"beiping","loyalty":80},
-      "公孙越":{"force":"gongsun","city":"beiping","loyalty":100},
-      "公孙范":{"force":"gongsun","city":"beiping","loyalty":95},
-      "田楷":{"force":"gongsun","city":"commandery_city_093","loyalty":80},
-      "邹丹":{"force":"gongsun","city":"commandery_city_093","loyalty":80},
-      "王门":{"force":"gongsun","city":"commandery_city_093","loyalty":80},
-      "鲜于辅":{"force":"liu_yu","city":"ji","loyalty":80},
-      "鲜于银":{"force":"liu_yu","city":"ji","loyalty":80},
-      "齐周":{"force":"liu_yu","city":"ji","loyalty":80},
-      "魏攸":{"force":"liu_yu","city":"ji","loyalty":80},
-      "刘和":{"force":"liu_yu","city":"ji","loyalty":100},
-      "韩浩":{"force":"wang_kuang","city":"henei","loyalty":80},
-      "糜竺":{"force":"tao_qian","city":"commandery_city_031","loyalty":80},
-      "王朗":{"force":"tao_qian","city":"commandery_city_031","loyalty":80},
-      "赵昱":{"force":"tao_qian","city":"commandery_city_031","loyalty":80},
-      "张闿":{"force":"tao_qian","city":"commandery_city_031","loyalty":80},
-      "笮融":{"force":"tao_qian","city":"commandery_city_031","loyalty":60},
-      "陈珪":{"force":"tao_qian","city":"xiapi","loyalty":80},
-      "糜芳":{"force":"tao_qian","city":"xiapi","loyalty":80},
-      "孙乾":{"force":"tao_qian","city":"xiapi","loyalty":80},
-      "是仪":{"force":"kong_rong","city":"beihai","loyalty":80},
-      "国渊":{"force":"kong_rong","city":"beihai","loyalty":80},
-      "张勋":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "桥蕤":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "袁胤":{"force":"yuan_shu","city":"wan","loyalty":95},
-      "韩胤":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "雷薄":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "陈兰":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "李丰":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "乐就":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "伊籍":{"force":"liu_biao","city":"xiangyang","loyalty":80},
-      "韩嵩":{"force":"liu_biao","city":"xiangyang","loyalty":80},
-      "张允":{"force":"liu_biao","city":"xiangyang","loyalty":80},
-      "王威":{"force":"liu_biao","city":"xiangyang","loyalty":80},
-      "赵韪":{"force":"liu_yan","city":"chengdu","loyalty":80},
-      "贾龙":{"force":"liu_yan","city":"chengdu","loyalty":60},
-      "董和":{"force":"liu_yan","city":"chengdu","loyalty":80},
-      "张修":{"force":"liu_yan","city":"chengdu","loyalty":80},
-      "阎行":{"force":"han_sui","city":"jincheng","loyalty":80},
-      "成公英":{"force":"han_sui","city":"jincheng","loyalty":80},
-      "柳毅":{"force":"gongsun_du","city":"xiangping","loyalty":80},
-      "阳仪":{"force":"gongsun_du","city":"xiangping","loyalty":80},
-      "士壹":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
-      "士䵋":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
-      "士武":{"force":"shi_xie","city":"jiaozhi","loyalty":100},
-      "周昂":{"force":"zhou_xin","city":"commandery_city_050","loyalty":95},
-      "貂蝉":{"force":"dong","city":"luoyang","loyalty":30},
-      "潘凤":{"force":"han_fu","city":"ye","loyalty":80},
-      "武安国":{"force":"kong_rong","city":"beihai","loyalty":80},
-      "方悦":{"force":"wang_kuang","city":"henei","loyalty":80},
-      "张杨":{"force":"wang_kuang","city":"henei","loyalty":60},
-      "穆顺":{"force":"wang_kuang","city":"henei","loyalty":80},
-      "俞涉":{"force":"yuan_shu","city":"wan","loyalty":80},
-      "邹靖":{"force":"liu_yu","city":"ji","loyalty":80},
-      "典韦":{"force":"zhang_miao","city":"chenliu","loyalty":80},
-      "刘氏":{"force":"yuan","city":"nanpi","loyalty":100},
-      "卞氏":{"force":"cao","city":"qiao","loyalty":100},
-      "吴国太":{"force":"sun_jian","city":"changsha","loyalty":100}
+    "officer_assignments": {
+      "董卓": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 100
+      },
+      "吕布": {
+        "force": "dong",
+        "city": "mengjin"
+      },
+      "李儒": {
+        "force": "dong",
+        "city": "luoyang"
+      },
+      "华雄": {
+        "force": "dong",
+        "city": "mengjin"
+      },
+      "曹操": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 100
+      },
+      "夏侯惇": {
+        "force": "cao",
+        "city": "qiao"
+      },
+      "夏侯渊": {
+        "force": "cao",
+        "city": "qiao"
+      },
+      "曹仁": {
+        "force": "cao",
+        "city": "qiao"
+      },
+      "曹洪": {
+        "force": "cao",
+        "city": "qiao"
+      },
+      "袁绍": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 100
+      },
+      "颜良": {
+        "force": "yuan",
+        "city": "nanpi"
+      },
+      "文丑": {
+        "force": "yuan",
+        "city": "nanpi"
+      },
+      "田丰": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "沮授": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "审配": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "孙坚": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 100
+      },
+      "程普": {
+        "force": "sun_jian",
+        "city": "changsha"
+      },
+      "黄盖": {
+        "force": "sun_jian",
+        "city": "changsha"
+      },
+      "韩当": {
+        "force": "sun_jian",
+        "city": "changsha"
+      },
+      "公孙瓒": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 100
+      },
+      "赵云": {
+        "force": "gongsun",
+        "city": "beiping"
+      },
+      "刘表": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 100
+      },
+      "蔡瑁": {
+        "force": "liu_biao",
+        "city": "xiangyang"
+      },
+      "蒯越": {
+        "force": "liu_biao",
+        "city": "xiangyang"
+      },
+      "蒯良": {
+        "force": "liu_biao",
+        "city": "xiangyang"
+      },
+      "文聘": {
+        "force": "liu_biao",
+        "city": "xiangyang"
+      },
+      "黄祖": {
+        "force": "liu_biao",
+        "city": "xiakou"
+      },
+      "刘虞": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 100
+      },
+      "田畴": {
+        "force": "liu_yu",
+        "city": "daixian"
+      },
+      "韩馥": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 100
+      },
+      "袁术": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 100
+      },
+      "纪灵": {
+        "force": "yuan_shu",
+        "city": "wan"
+      },
+      "杨弘": {
+        "force": "yuan_shu",
+        "city": "runan"
+      },
+      "阎象": {
+        "force": "yuan_shu",
+        "city": "wan"
+      },
+      "陶谦": {
+        "force": "tao_qian",
+        "city": "xiapi",
+        "loyalty": 100
+      },
+      "陈登": {
+        "force": "tao_qian",
+        "city": "xiapi"
+      },
+      "臧霸": {
+        "force": "tao_qian",
+        "city": "langya"
+      },
+      "曹豹": {
+        "force": "tao_qian",
+        "city": "pengcheng"
+      },
+      "孔融": {
+        "force": "kong_rong",
+        "city": "beihai",
+        "loyalty": 100
+      },
+      "王修": {
+        "force": "kong_rong",
+        "city": "beihai"
+      },
+      "刘焉": {
+        "force": "liu_yan",
+        "city": "chengdu",
+        "loyalty": 100
+      },
+      "张鲁": {
+        "force": "liu_yan",
+        "city": "hanzhong"
+      },
+      "张任": {
+        "force": "liu_yan",
+        "city": "chengdu"
+      },
+      "严颜": {
+        "force": "liu_yan",
+        "city": "jiangzhou"
+      },
+      "黄权": {
+        "force": "liu_yan",
+        "city": "langzhong"
+      },
+      "庞羲": {
+        "force": "liu_yan",
+        "city": "badong"
+      },
+      "吴懿": {
+        "force": "liu_yan",
+        "city": "fuling"
+      },
+      "杨任": {
+        "force": "liu_yan",
+        "city": "hanzhong"
+      },
+      "阎圃": {
+        "force": "liu_yan",
+        "city": "hanzhong"
+      },
+      "刘岱": {
+        "force": "liu_dai",
+        "city": "commandery_city_030",
+        "loyalty": 100
+      },
+      "马腾": {
+        "force": "ma_teng",
+        "city": "xiliang",
+        "loyalty": 100
+      },
+      "马超": {
+        "force": "ma_teng",
+        "city": "xiliang"
+      },
+      "马岱": {
+        "force": "ma_teng",
+        "city": "longxi"
+      },
+      "庞德": {
+        "force": "ma_teng",
+        "city": "xiliang"
+      },
+      "韩遂": {
+        "force": "han_sui",
+        "city": "jincheng",
+        "loyalty": 100
+      },
+      "公孙度": {
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "loyalty": 100
+      },
+      "公孙康": {
+        "force": "gongsun_du",
+        "city": "lelang"
+      },
+      "刘备": {
+        "force": "gongsun",
+        "city": "beiping"
+      },
+      "王匡": {
+        "force": "wang_kuang",
+        "city": "henei",
+        "loyalty": 100
+      },
+      "孔伷": {
+        "force": "kong_zhou",
+        "city": "commandery_city_008",
+        "loyalty": 100
+      },
+      "张邈": {
+        "force": "zhang_miao",
+        "city": "chenliu",
+        "loyalty": 100
+      },
+      "桥瑁": {
+        "force": "qiao_mao",
+        "city": "puyang",
+        "loyalty": 100
+      },
+      "袁遗": {
+        "force": "yuan_yi",
+        "city": "commandery_city_029",
+        "loyalty": 100
+      },
+      "鲍信": {
+        "force": "bao_xin",
+        "city": "commandery_city_028",
+        "loyalty": 100
+      },
+      "张超": {
+        "force": "zhang_chao",
+        "city": "guangling",
+        "loyalty": 100
+      },
+      "陈温": {
+        "force": "chen_wen",
+        "city": "shouchun",
+        "loyalty": 100
+      },
+      "周昕": {
+        "force": "zhou_xin",
+        "city": "commandery_city_050",
+        "loyalty": 100
+      },
+      "刘宠": {
+        "force": "liu_chong",
+        "city": "commandery_city_012",
+        "loyalty": 100
+      },
+      "士燮": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "焦和": {
+        "force": "jiao_he",
+        "city": "linzi",
+        "loyalty": 100
+      },
+      "臧洪": {
+        "force": "zhang_chao",
+        "city": "guangling"
+      },
+      "骆俊": {
+        "force": "liu_chong",
+        "city": "commandery_city_012"
+      },
+      "卫兹": {
+        "force": "zhang_miao",
+        "city": "chenliu"
+      },
+      "李傕": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "郭汜": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "牛辅": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "董旻": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "李肃": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "贾诩": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "段煨": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "胡轸": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "杨定": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 80
+      },
+      "蔡邕": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 60
+      },
+      "杨彪": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 35
+      },
+      "王允": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 40
+      },
+      "徐荣": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "张辽": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "高顺": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "郝萌": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "曹性": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "宋宪": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "魏续": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "侯成": {
+        "force": "dong",
+        "city": "mengjin",
+        "loyalty": 80
+      },
+      "张济": {
+        "force": "dong",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "樊稠": {
+        "force": "dong",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "李蒙": {
+        "force": "dong",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "王方": {
+        "force": "dong",
+        "city": "changan",
+        "loyalty": 80
+      },
+      "皇甫嵩": {
+        "force": "dong",
+        "city": "commandery_city_007",
+        "loyalty": 45
+      },
+      "曹纯": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 80
+      },
+      "乐进": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 80
+      },
+      "任峻": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 80
+      },
+      "枣祗": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 80
+      },
+      "史涣": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 80
+      },
+      "张郃": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "麴义": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "耿武": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 95
+      },
+      "闵纯": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 95
+      },
+      "赵浮": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "程奂": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "逢纪": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "许攸": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "淳于琼": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "郭图": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "辛评": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "高干": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 95
+      },
+      "荀谌": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 80
+      },
+      "朱治": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 80
+      },
+      "祖茂": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 80
+      },
+      "吴景": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 95
+      },
+      "孙贲": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 95
+      },
+      "桓阶": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 80
+      },
+      "关羽": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 95
+      },
+      "张飞": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 95
+      },
+      "简雍": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 80
+      },
+      "田豫": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 80
+      },
+      "关靖": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 80
+      },
+      "严纲": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 80
+      },
+      "单经": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 80
+      },
+      "公孙越": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 100
+      },
+      "公孙范": {
+        "force": "gongsun",
+        "city": "beiping",
+        "loyalty": 95
+      },
+      "田楷": {
+        "force": "gongsun",
+        "city": "commandery_city_093",
+        "loyalty": 80
+      },
+      "邹丹": {
+        "force": "gongsun",
+        "city": "commandery_city_093",
+        "loyalty": 80
+      },
+      "王门": {
+        "force": "gongsun",
+        "city": "commandery_city_093",
+        "loyalty": 80
+      },
+      "鲜于辅": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 80
+      },
+      "鲜于银": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 80
+      },
+      "齐周": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 80
+      },
+      "魏攸": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 80
+      },
+      "刘和": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 100
+      },
+      "韩浩": {
+        "force": "wang_kuang",
+        "city": "henei",
+        "loyalty": 80
+      },
+      "糜竺": {
+        "force": "tao_qian",
+        "city": "commandery_city_031",
+        "loyalty": 80
+      },
+      "王朗": {
+        "force": "tao_qian",
+        "city": "commandery_city_031",
+        "loyalty": 80
+      },
+      "赵昱": {
+        "force": "tao_qian",
+        "city": "commandery_city_031",
+        "loyalty": 80
+      },
+      "张闿": {
+        "force": "tao_qian",
+        "city": "commandery_city_031",
+        "loyalty": 80
+      },
+      "笮融": {
+        "force": "tao_qian",
+        "city": "commandery_city_031",
+        "loyalty": 60
+      },
+      "陈珪": {
+        "force": "tao_qian",
+        "city": "xiapi",
+        "loyalty": 80
+      },
+      "糜芳": {
+        "force": "tao_qian",
+        "city": "xiapi",
+        "loyalty": 80
+      },
+      "孙乾": {
+        "force": "tao_qian",
+        "city": "xiapi",
+        "loyalty": 80
+      },
+      "是仪": {
+        "force": "kong_rong",
+        "city": "beihai",
+        "loyalty": 80
+      },
+      "国渊": {
+        "force": "kong_rong",
+        "city": "beihai",
+        "loyalty": 80
+      },
+      "张勋": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "桥蕤": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "袁胤": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 95
+      },
+      "韩胤": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "雷薄": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "陈兰": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "李丰": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "乐就": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "伊籍": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "韩嵩": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "张允": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "王威": {
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "loyalty": 80
+      },
+      "赵韪": {
+        "force": "liu_yan",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "贾龙": {
+        "force": "liu_yan",
+        "city": "chengdu",
+        "loyalty": 60
+      },
+      "董和": {
+        "force": "liu_yan",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "张修": {
+        "force": "liu_yan",
+        "city": "chengdu",
+        "loyalty": 80
+      },
+      "阎行": {
+        "force": "han_sui",
+        "city": "jincheng",
+        "loyalty": 80
+      },
+      "成公英": {
+        "force": "han_sui",
+        "city": "jincheng",
+        "loyalty": 80
+      },
+      "柳毅": {
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "阳仪": {
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "loyalty": 80
+      },
+      "士壹": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士䵋": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "士武": {
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "loyalty": 100
+      },
+      "周昂": {
+        "force": "zhou_xin",
+        "city": "commandery_city_050",
+        "loyalty": 95
+      },
+      "貂蝉": {
+        "force": "dong",
+        "city": "luoyang",
+        "loyalty": 30
+      },
+      "潘凤": {
+        "force": "han_fu",
+        "city": "ye",
+        "loyalty": 80
+      },
+      "武安国": {
+        "force": "kong_rong",
+        "city": "beihai",
+        "loyalty": 80
+      },
+      "方悦": {
+        "force": "wang_kuang",
+        "city": "henei",
+        "loyalty": 80
+      },
+      "张杨": {
+        "force": "wang_kuang",
+        "city": "henei",
+        "loyalty": 60
+      },
+      "穆顺": {
+        "force": "wang_kuang",
+        "city": "henei",
+        "loyalty": 80
+      },
+      "俞涉": {
+        "force": "yuan_shu",
+        "city": "wan",
+        "loyalty": 80
+      },
+      "邹靖": {
+        "force": "liu_yu",
+        "city": "ji",
+        "loyalty": 80
+      },
+      "典韦": {
+        "force": "zhang_miao",
+        "city": "chenliu",
+        "loyalty": 80
+      },
+      "刘氏": {
+        "force": "yuan",
+        "city": "nanpi",
+        "loyalty": 100
+      },
+      "卞氏": {
+        "force": "cao",
+        "city": "qiao",
+        "loyalty": 100
+      },
+      "吴国太": {
+        "force": "sun_jian",
+        "city": "changsha",
+        "loyalty": 100
+      }
     },
-    "armies":[
-      {"id":"dong_liangzhou","name":"凉州军","force":"dong","city":"luoyang","commander":"董卓","soldiers":26000,"units":{"infantry":13000,"cavalry":10000,"archers":3000},"morale":82,"training":76,"supply":90,"stance":"驻扎"},
-      {"id":"dong_lubu","name":"并州军","force":"dong","city":"mengjin","commander":"吕布","soldiers":18000,"units":{"infantry":7000,"cavalry":10000,"archers":1000},"morale":88,"training":86,"supply":88,"stance":"驻扎"},
-      {"id":"cao_volunteers","name":"奋武军","force":"cao","city":"qiao","commander":"曹操","soldiers":9000,"units":{"infantry":5500,"cavalry":2500,"archers":1000},"morale":88,"training":68,"supply":82,"stance":"驻扎"},
-      {"id":"yuan_coalition","name":"盟主军","force":"yuan","city":"nanpi","commander":"袁绍","soldiers":16000,"units":{"infantry":10000,"cavalry":4000,"archers":2000},"morale":80,"training":70,"supply":86,"stance":"驻扎"},
-      {"id":"sun_vanguard","name":"长沙义军","force":"sun_jian","city":"changsha","commander":"孙坚","soldiers":13000,"units":{"infantry":8000,"cavalry":2500,"archers":2500},"morale":92,"training":82,"supply":86,"stance":"驻扎"},
-      {"id":"gongsun_whitehorse","name":"白马义从","force":"gongsun","city":"beiping","commander":"公孙瓒","soldiers":12000,"units":{"infantry":4000,"cavalry":7000,"archers":1000},"morale":86,"training":84,"supply":88,"stance":"驻扎"},
-      {"id":"liu_biao_jingzhou_190","name":"荆州军","force":"liu_biao","city":"xiangyang","commander":"刘表","soldiers":14000,"units":{"infantry":9000,"cavalry":1500,"archers":3500},"morale":78,"training":72,"supply":90,"stance":"驻扎"},
-      {"id":"yuan_shu_190","name":"南阳军","force":"yuan_shu","city":"wan","commander":"袁术","soldiers":10000,"units":{"infantry":6500,"cavalry":2000,"archers":1500},"morale":76,"training":68,"supply":84,"stance":"驻扎"},
-      {"id":"liu_yan_190","name":"益州军","force":"liu_yan","city":"chengdu","commander":"张任","soldiers":9000,"units":{"infantry":7000,"cavalry":500,"archers":1500},"morale":76,"training":66,"supply":88,"stance":"驻扎"},
-      {"id":"zhang_lu_190","name":"汉中军","force":"liu_yan","city":"hanzhong","commander":"杨任","soldiers":5000,"units":{"infantry":3500,"cavalry":300,"archers":1200},"morale":74,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"ma_teng_190","name":"西凉铁骑","force":"ma_teng","city":"xiliang","commander":"马腾","soldiers":9000,"units":{"infantry":2200,"cavalry":6000,"archers":800},"morale":84,"training":78,"supply":86,"stance":"驻扎"},
-      {"id":"han_sui_190","name":"金城军","force":"han_sui","city":"jincheng","commander":"韩遂","soldiers":7000,"units":{"infantry":3800,"cavalry":2500,"archers":700},"morale":78,"training":70,"supply":84,"stance":"驻扎"},
-      {"id":"gongsun_du_190","name":"辽东军","force":"gongsun_du","city":"xiangping","commander":"公孙度","soldiers":5000,"units":{"infantry":3400,"cavalry":1100,"archers":500},"morale":74,"training":64,"supply":88,"stance":"驻扎"},
-      {"id":"wang_kuang_190","name":"王匡部","force":"wang_kuang","city":"henei","commander":"王匡","soldiers":6000,"units":{"infantry":4200,"cavalry":600,"archers":1200},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"kong_zhou_190","name":"孔伷部","force":"kong_zhou","city":"commandery_city_008","commander":"孔伷","soldiers":6000,"units":{"infantry":4200,"cavalry":600,"archers":1200},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"zhang_miao_190","name":"张邈部","force":"zhang_miao","city":"chenliu","commander":"张邈","soldiers":7000,"units":{"infantry":4900,"cavalry":700,"archers":1400},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"qiao_mao_190","name":"桥瑁部","force":"qiao_mao","city":"puyang","commander":"桥瑁","soldiers":5000,"units":{"infantry":3500,"cavalry":500,"archers":1000},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"yuan_yi_190","name":"袁遗部","force":"yuan_yi","city":"commandery_city_029","commander":"袁遗","soldiers":4000,"units":{"infantry":2800,"cavalry":400,"archers":800},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"bao_xin_190","name":"鲍信部","force":"bao_xin","city":"commandery_city_028","commander":"鲍信","soldiers":5000,"units":{"infantry":3500,"cavalry":500,"archers":1000},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"zhang_chao_190","name":"张超部","force":"zhang_chao","city":"guangling","commander":"张超","soldiers":5000,"units":{"infantry":3500,"cavalry":500,"archers":1000},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"chen_wen_190","name":"陈温部","force":"chen_wen","city":"shouchun","commander":"陈温","soldiers":6000,"units":{"infantry":4200,"cavalry":600,"archers":1200},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"zhou_xin_190","name":"周昕部","force":"zhou_xin","city":"commandery_city_050","commander":"周昕","soldiers":4000,"units":{"infantry":2800,"cavalry":400,"archers":800},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"liu_chong_190","name":"刘宠部","force":"liu_chong","city":"commandery_city_012","commander":"刘宠","soldiers":5000,"units":{"infantry":3500,"cavalry":500,"archers":1000},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"shi_xie_190","name":"士燮部","force":"shi_xie","city":"jiaozhi","commander":"士燮","soldiers":4000,"units":{"infantry":2800,"cavalry":400,"archers":800},"morale":72,"training":62,"supply":82,"stance":"驻扎"},
-      {"id":"jiao_he_190","name":"焦和部","force":"jiao_he","city":"linzi","commander":"焦和","soldiers":5000,"units":{"infantry":3500,"cavalry":500,"archers":1000},"morale":72,"training":62,"supply":82,"stance":"驻扎"}
+    "armies": [
+      {
+        "id": "dong_liangzhou",
+        "name": "凉州军",
+        "force": "dong",
+        "city": "luoyang",
+        "commander": "董卓",
+        "soldiers": 21000,
+        "units": {
+          "infantry": 10500,
+          "cavalry": 8077,
+          "archers": 2423
+        },
+        "morale": 82,
+        "training": 76,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_605",
+          "koei11_606"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 26000,
+          "originalUnits": {
+            "infantry": 13000,
+            "cavalry": 10000,
+            "archers": 3000
+          }
+        }
+      },
+      {
+        "id": "dong_lubu",
+        "name": "并州军",
+        "force": "dong",
+        "city": "mengjin",
+        "commander": "吕布",
+        "soldiers": 18000,
+        "units": {
+          "infantry": 7000,
+          "cavalry": 10000,
+          "archers": 1000
+        },
+        "morale": 88,
+        "training": 86,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_280",
+          "koei11_206"
+        ],
+        "formation": "wedge",
+        "tactic": "aggressive"
+      },
+      {
+        "id": "cao_volunteers",
+        "name": "奋武军",
+        "force": "cao",
+        "city": "qiao",
+        "commander": "曹操",
+        "soldiers": 9000,
+        "units": {
+          "infantry": 5500,
+          "cavalry": 2500,
+          "archers": 1000
+        },
+        "morale": 88,
+        "training": 68,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_86",
+          "koei11_79"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "yuan_coalition",
+        "name": "盟主军",
+        "force": "yuan",
+        "city": "nanpi",
+        "commander": "袁绍",
+        "soldiers": 12000,
+        "units": {
+          "infantry": 7500,
+          "cavalry": 3000,
+          "archers": 1500
+        },
+        "morale": 80,
+        "training": 70,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_124",
+          "koei11_546"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 16000,
+          "originalUnits": {
+            "infantry": 10000,
+            "cavalry": 4000,
+            "archers": 2000
+          }
+        }
+      },
+      {
+        "id": "sun_vanguard",
+        "name": "长沙义军",
+        "force": "sun_jian",
+        "city": "changsha",
+        "commander": "孙坚",
+        "soldiers": 9800,
+        "units": {
+          "infantry": 6031,
+          "cavalry": 1884,
+          "archers": 1885
+        },
+        "morale": 92,
+        "training": 82,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_467",
+          "koei11_164"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 13000,
+          "originalUnits": {
+            "infantry": 8000,
+            "cavalry": 2500,
+            "archers": 2500
+          }
+        }
+      },
+      {
+        "id": "gongsun_whitehorse",
+        "name": "白马义从",
+        "force": "gongsun",
+        "city": "beiping",
+        "commander": "公孙瓒",
+        "soldiers": 9000,
+        "units": {
+          "infantry": 3000,
+          "cavalry": 5250,
+          "archers": 750
+        },
+        "morale": 86,
+        "training": 84,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_396",
+          "koei11_184"
+        ],
+        "formation": "wedge",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 12000,
+          "originalUnits": {
+            "infantry": 4000,
+            "cavalry": 7000,
+            "archers": 1000
+          }
+        }
+      },
+      {
+        "id": "liu_biao_jingzhou_190",
+        "name": "荆州军",
+        "force": "liu_biao",
+        "city": "xiangyang",
+        "commander": "刘表",
+        "soldiers": 10500,
+        "units": {
+          "infantry": 6750,
+          "cavalry": 1125,
+          "archers": 2625
+        },
+        "morale": 78,
+        "training": 72,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_220",
+          "koei11_55"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 14000,
+          "originalUnits": {
+            "infantry": 9000,
+            "cavalry": 1500,
+            "archers": 3500
+          }
+        }
+      },
+      {
+        "id": "yuan_shu_190",
+        "name": "南阳军",
+        "force": "yuan_shu",
+        "city": "wan",
+        "commander": "袁术",
+        "soldiers": 10000,
+        "units": {
+          "infantry": 6500,
+          "cavalry": 2000,
+          "archers": 1500
+        },
+        "morale": 76,
+        "training": 68,
+        "supply": 84,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_147",
+          "koei11_409"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "liu_yan_190",
+        "name": "益州军",
+        "force": "liu_yan",
+        "city": "chengdu",
+        "commander": "张任",
+        "soldiers": 5500,
+        "units": {
+          "infantry": 4278,
+          "cavalry": 305,
+          "archers": 917
+        },
+        "morale": 76,
+        "training": 66,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_zhao_wei",
+          "koei11_615"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 9000,
+          "originalUnits": {
+            "infantry": 7000,
+            "cavalry": 500,
+            "archers": 1500
+          }
+        }
+      },
+      {
+        "id": "zhang_lu_190",
+        "name": "汉中军",
+        "force": "liu_yan",
+        "city": "hanzhong",
+        "commander": "杨任",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 300,
+          "archers": 1200
+        },
+        "morale": 74,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_443",
+          "koei11_22"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
+      },
+      {
+        "id": "ma_teng_190",
+        "name": "西凉铁骑",
+        "force": "ma_teng",
+        "city": "xiliang",
+        "commander": "马腾",
+        "soldiers": 9000,
+        "units": {
+          "infantry": 2200,
+          "cavalry": 6000,
+          "archers": 800
+        },
+        "morale": 84,
+        "training": 78,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_559",
+          "koei11_516"
+        ],
+        "formation": "wedge",
+        "tactic": "aggressive"
+      },
+      {
+        "id": "han_sui_190",
+        "name": "金城军",
+        "force": "han_sui",
+        "city": "jincheng",
+        "commander": "韩遂",
+        "soldiers": 7000,
+        "units": {
+          "infantry": 3800,
+          "cavalry": 2500,
+          "archers": 700
+        },
+        "morale": 78,
+        "training": 70,
+        "supply": 84,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_315",
+          "koei11_15"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "gongsun_du_190",
+        "name": "辽东军",
+        "force": "gongsun_du",
+        "city": "xiangping",
+        "commander": "公孙度",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3400,
+          "cavalry": 1100,
+          "archers": 500
+        },
+        "morale": 74,
+        "training": 64,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_liu_yi_liaodong",
+          "history_yang_yi_liaodong"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "wang_kuang_190",
+        "name": "王匡部",
+        "force": "wang_kuang",
+        "city": "henei",
+        "commander": "王匡",
+        "soldiers": 6000,
+        "units": {
+          "infantry": 4200,
+          "cavalry": 600,
+          "archers": 1200
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_107",
+          "koei11_438"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "kong_zhou_190",
+        "name": "孔伷部",
+        "force": "kong_zhou",
+        "city": "commandery_city_008",
+        "commander": "孔伷",
+        "soldiers": 6000,
+        "units": {
+          "infantry": 4200,
+          "cavalry": 600,
+          "archers": 1200
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "zhang_miao_190",
+        "name": "张邈部",
+        "force": "zhang_miao",
+        "city": "chenliu",
+        "commander": "张邈",
+        "soldiers": 7000,
+        "units": {
+          "infantry": 4900,
+          "cavalry": 700,
+          "archers": 1400
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_472",
+          "scenario_190_local_8"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "qiao_mao_190",
+        "name": "桥瑁部",
+        "force": "qiao_mao",
+        "city": "puyang",
+        "commander": "桥瑁",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 500,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "yuan_yi_190",
+        "name": "袁遗部",
+        "force": "yuan_yi",
+        "city": "commandery_city_029",
+        "commander": "袁遗",
+        "soldiers": 4000,
+        "units": {
+          "infantry": 2800,
+          "cavalry": 400,
+          "archers": 800
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "bao_xin_190",
+        "name": "鲍信部",
+        "force": "bao_xin",
+        "city": "commandery_city_028",
+        "commander": "鲍信",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 500,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "supp_ext_540"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "zhang_chao_190",
+        "name": "张超部",
+        "force": "zhang_chao",
+        "city": "guangling",
+        "commander": "张超",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 500,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "scenario_190_local_6",
+          "supp_ext_104"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "chen_wen_190",
+        "name": "陈温部",
+        "force": "chen_wen",
+        "city": "shouchun",
+        "commander": "陈温",
+        "soldiers": 6000,
+        "units": {
+          "infantry": 4200,
+          "cavalry": 600,
+          "archers": 1200
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "zhou_xin_190",
+        "name": "周昕部",
+        "force": "zhou_xin",
+        "city": "commandery_city_050",
+        "commander": "周昕",
+        "soldiers": 4000,
+        "units": {
+          "infantry": 2800,
+          "cavalry": 400,
+          "archers": 800
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_240"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "liu_chong_190",
+        "name": "刘宠部",
+        "force": "liu_chong",
+        "city": "commandery_city_012",
+        "commander": "刘宠",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 500,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "scenario_190_local_7"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
+      },
+      {
+        "id": "shi_xie_190",
+        "name": "士燮部",
+        "force": "shi_xie",
+        "city": "jiaozhi",
+        "commander": "士燮",
+        "soldiers": 4000,
+        "units": {
+          "infantry": 2800,
+          "cavalry": 400,
+          "archers": 800
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_shi_yi_jiaozhi",
+          "history_shi_wu"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "jiao_he_190",
+        "name": "焦和部",
+        "force": "jiao_he",
+        "city": "linzi",
+        "commander": "焦和",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3500,
+          "cavalry": 500,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 62,
+        "supply": 82,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "balanced"
+      },
+      {
+        "id": "190_coalition_retinue_koei11_440",
+        "name": "张辽部",
+        "force": "dong",
+        "city": "hulao",
+        "commander": "张辽",
+        "commanderOfficerId": "koei11_440",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2500,
+          "cavalry": 1923,
+          "archers": 577
+        },
+        "morale": 82,
+        "training": 76,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "dong_liangzhou",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "190_coalition_retinue_koei11_256",
+        "name": "淳于琼部",
+        "force": "yuan",
+        "city": "nanpi",
+        "commander": "淳于琼",
+        "commanderOfficerId": "koei11_256",
+        "soldiers": 4000,
+        "units": {
+          "infantry": 2500,
+          "cavalry": 1000,
+          "archers": 500
+        },
+        "morale": 80,
+        "training": 70,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "yuan_coalition",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "190_coalition_retinue_koei11_117",
+        "name": "韩当部",
+        "force": "sun_jian",
+        "city": "changsha",
+        "commander": "韩当",
+        "commanderOfficerId": "koei11_117",
+        "soldiers": 3200,
+        "units": {
+          "infantry": 1969,
+          "cavalry": 616,
+          "archers": 615
+        },
+        "morale": 92,
+        "training": 82,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "sun_vanguard",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "190_coalition_retinue_koei11_99",
+        "name": "关羽部",
+        "force": "gongsun",
+        "city": "commandery_city_093",
+        "commander": "关羽",
+        "commanderOfficerId": "koei11_99",
+        "soldiers": 3000,
+        "units": {
+          "infantry": 1000,
+          "cavalry": 1750,
+          "archers": 250
+        },
+        "morale": 86,
+        "training": 84,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "wedge",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "gongsun_whitehorse",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "190_coalition_retinue_koei11_176",
+        "name": "黄祖部",
+        "force": "liu_biao",
+        "city": "xiakou",
+        "commander": "黄祖",
+        "commanderOfficerId": "koei11_176",
+        "soldiers": 3500,
+        "units": {
+          "infantry": 2250,
+          "cavalry": 375,
+          "archers": 875
+        },
+        "morale": 78,
+        "training": 72,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "liu_biao_jingzhou_190",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "190_coalition_retinue_koei11_163",
+        "name": "吴懿部",
+        "force": "liu_yan",
+        "city": "fuling",
+        "commander": "吴懿",
+        "commanderOfficerId": "koei11_163",
+        "soldiers": 3500,
+        "units": {
+          "infantry": 2722,
+          "cavalry": 195,
+          "archers": 583
+        },
+        "morale": 76,
+        "training": 66,
+        "supply": 88,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "liu_yan_190",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      }
     ]
   }
 }

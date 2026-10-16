@@ -8,8 +8,10 @@ await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.
 await import("../js/core/game-state.js");
 
 const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),city=state.data.cities.find(c=>c.id==="xuchang"),army=state.data.armies.find(a=>a.id==="cao_central"),officers=state.data.officers.filter(o=>o.force==="cao"&&o.city==="xuchang"&&o.status==="serving");
+if(state.engine.officialProfile(city,"commanderyGovernor").displayName==="普通官员")throw new Error("旧城市太守初值未迁入统一郡职");
 if(city.commandery!=="颍川郡"||!city.counties.includes("阳翟")||city.administration.recruitmentTarget<=city.garrison)throw new Error("郡县资料或城市治理初值未载入");
-if(state.engine.officialProfile(city,"agriculture").displayName!=="普通官员"||state.engine.officialProfile(city,"agriculture").raw!==45)throw new Error("空缺官槽没有普通官员兜底");
+const local=state.engine.officialProfile(city,"agriculture");if(!local.familyId||local.defaulted)throw new Error("在地世家没有接入空缺属官槽");
+const cache=state.engine._familyCountyOfficials;state.engine._familyCountyOfficials=new Map();if(state.engine.officialProfile(city,"agriculture").displayName!=="普通官员"||state.engine.officialProfile(city,"agriculture").raw!==45)throw new Error("无在地世家的空缺官槽没有普通官员兜底");state.engine._familyCountyOfficials=cache;
 
 const official=officers.find(o=>o.name==="荀彧")||officers[0],second=officers.find(o=>o.id!==official.id&&!state.engine.isOfficerAssigned(o));
 const appointed=state.engine.assignCityAdministration(city.id,{governor:official.id,agriculture:official.id,commerce:official.id,order:official.id,recruitment:official.id,commanderyGovernor:official.id});
@@ -26,3 +28,6 @@ const save=state.serialize(),migrated=state.migrateSave({...save,version:13});if
 const view=appSource();for(const text of ["郡县官署任命","普通官员 · 能力45","军职任命","自动补员目标","data-office-role","更换 / 任命","data-officer-appointment"])if(!view.includes(text))throw new Error(`治理 UI 缺少 ${text}`);
 
 console.log("郡县治理通过：郡守/太守/属官槽 / 普通官员 / 兼任衰减 / 持续发展 / 自动征募补员 / 军职槽 / v17 存档");
+
+// 郡守即太守：旧 governor 入口和郡级入口共用实际任职，不重复计为两份郡职。
+{const e=state.engine,head=e.officialProfile(city,"commanderyGovernor"),alias=e.officialProfile(city,"governor");if(head.id!==alias.id||head.name!=="太守")throw new Error("太守与郡守没有统一");const keys=[...e.officerDutyKeys(head.id)].filter(k=>k===`commandery:${city.force}:${city.commandery}`);if(keys.length!==1)throw new Error("同一太守重复计职");const holding=state.court.offices.filter(i=>i.office==="taishou"&&i.seat===city.commandery&&i.forceId===city.force);if(holding.length!==1||holding[0].officerId!==head.id)throw new Error("实际太守和汉庭任职未同步");}

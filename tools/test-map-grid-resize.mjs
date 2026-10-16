@@ -7,6 +7,8 @@ for(const file of ["core/map-grid","data/offline-data.generated","core/game-cloc
 const read=file=>JSON.parse(fs.readFileSync(new URL(`../${file}`,import.meta.url),"utf8")),archived=read("game/data/map/layouts/commandery-105-reference-v1.json"),base=structuredClone(SANGUO_DATA);
 const archivedGraph={};for(const road of archived.map.roads){(archivedGraph[road.from]??=[]).push(road.to);(archivedGraph[road.to]??=[]).push(road.from)}
 const old={...structuredClone(base),map:{...archived.map.grid,...archived.map},cities:structuredClone(archived.cities),counties:structuredClone(archived.counties),administrativeDivisions:structuredClone(archived.divisions),rules:{...structuredClone(base).rules,city_graph:archivedGraph}};
+// 归档时点尚无后增县邑，旧图夹具的名册只能引用归档已有据点。
+const archivedCityIds=new Set(old.cities.map(city=>city.id));old.officers=old.officers.filter(officer=>archivedCityIds.has(officer.city));assert(old.officers.length>100,"旧图保留实际人物名册");
 const editor=new MapEditor(old);editor.setTerrain(0,0,"forest");editor.setCommandery(0,0,"玩家手绘郡");const before=editor.snapshot(),baseline=JSON.stringify(old),history=editor.undoStack.length;
 assert.equal(editor.resize(100,100),true);assert.equal(editor.width,100);assert.equal(editor.height,100);assert.equal(editor.undoStack.length,history+1);assert.equal(editor.validate().ok,true);
 assert.equal(JSON.stringify(old),baseline,"转换预览不能改存档或原始数据");assert.equal(editor.terrainAt(0,0),"forest");assert.equal(editor.commanderyAt(0,0),"玩家手绘郡");assert.equal(editor.commanderyAt(1,1),"玩家手绘郡","手绘分层应按网格映射，不被史地生成器覆盖");

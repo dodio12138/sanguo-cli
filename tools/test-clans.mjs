@@ -19,7 +19,7 @@ const named=(game,name)=>game.data.officers.find(o=>o.name===name);
 {const {game,e}=fresh();for(const [id,name] of [["zhong","颍川长社钟氏"],["xun","颍川颍阴荀氏"],["yuan_rn","汝南汝阳袁氏"],["sima","河内温县司马氏"],["zhuge","琅邪阳都诸葛氏"],["sun","吴郡富春孙氏"],["cao","沛国谯县曹氏"],["yang_hn","弘农华阴杨氏"],["tian_jl","钜鹿田氏"],["shi","苍梧广信士氏"]])assert.equal(e.clanFullName(id),name,id);
   assert.equal(e.clanName("zhong"),"颍川长社钟氏","事件与界面统一用全称");
   const seat=id=>e.clanDistribution(game,id).filter(row=>row.seat).map(row=>row.name);assert(seat("zhong").includes("长社"),"钟氏祖居长社县");assert(seat("yuan_rn").includes("平舆"),"汝阳不在图上，寄于平舆");assert(seat("xi_xy").length,"襄阳习氏有祖居（同处至多四家时不再被挤掉）");
-  for(const clan of game.data.clans)assert(e.clanDistribution(game,clan.id).some(row=>row.seat),`${clan.id} 有祖居`);
+  for(const clan of game.data.clans){assert(game.clans.byId[clan.id]?.seatIds?.length,`${clan.id} 有祖居定位`);if(clan.landless){assert.equal(clan.land_share,0);assert(clan.landBasis,"无田产估值的谱系须注明依据");assert.deepEqual(e.clanDistribution(game,clan.id),[],"仅谱系家族不伪造地产")}else assert(e.clanDistribution(game,clan.id).some(row=>row.seat),`${clan.id} 有祖居地产`)}
   // 地产只在祖居、近县与支脉，不再铺满全郡
   const xun=e.clanDistribution(game,"xun");assert(xun.length<=4,"荀氏地产集中在颍阴及近县");const yingyin=xun.find(row=>row.seat);assert(yingyin.placeIds.length===2&&yingyin.urban>0&&yingyin.rural>0,"颍阴城邑与乡里合为一行");
   const pingyu=e.clanDistribution(game,"yuan_rn").filter(row=>row.name==="平舆");assert.equal(pingyu.length,1,"平舆据点与归汝南管辖的平舆乡里合为一行");assert(pingyu[0].cityIds.length===2);
