@@ -8,64 +8,64 @@ const scenarioId=process.argv.find(arg=>arg.startsWith("--scenario="))?.slice("-
 const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),"utf8"));
 
 // 汉兴郡分自右扶风，各剧本随右扶风归属。
-// 郡国 → [200 官渡, 190 反董卓联合, 208 赤壁, 194 濮阳, 211 潼关, 219 襄阳, 222 夷陵, 228 天水] 归属；郡国名取自 cities/200_guandu.json 的 commandery 字段。
+// 郡国 → [200 官渡, 190 反董卓联合, 208 赤壁, 194 濮阳, 211 潼关, 219 襄阳, 222 夷陵, 228 天水, 184 颍川] 归属；郡国名取自 cities/200_guandu.json 的 commandery 字段。
 // 《后汉书·郡国志》建置与汉末牧守传记的战略投影；后设郡沿母郡继承，非逐县实控考证。
 // 190 年据《三国志》卷一、七、四十九及《后汉书》卷五十补齐；194/211/219/222/228 年取舍同见 SCENARIO_NOTES.md。
 const COMMANDERY_OWNERS={
   // 定稿郡界外的废并郡国：沿用据点现有归属。
-  "张掖郡":["handan_shang","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao"],"酒泉郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao"],"敦煌郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao"],"张掖居延属国":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao"],"上郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"西河郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"云中郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"定襄郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"朔方郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],
-  "河南尹":["cao","dong","cao","neutral","cao","cao","cao","cao"],"恒农郡":["cao","dong","cao","li_jue","cao","cao","cao","cao"],"京兆尹":["cao","dong","cao","li_jue","ma_chao","cao","cao","cao"],
-  "左冯翊":["cao","dong","cao","li_jue","ma_chao","cao","cao","cao"],"右扶风":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao","cao","cao"],"汉兴郡":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao","cao","cao"],
-  "河东郡":["cao","dong","cao","li_jue","cao","cao","cao","cao"],"河内郡":["cao","wang_kuang","cao","zhang_yang","cao","cao","cao","cao"],
-  "颍川郡":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao"],"汝南郡":["cao","yuan_shu","cao","yuan_shu","cao","cao","cao","cao"],"梁国":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao"],
-  "陈郡":["cao","liu_chong","cao","liu_chong","cao","cao","cao","cao"],"鲁国":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao"],"谯郡":["cao","cao","cao","cao","cao","cao","cao","cao"],
-  "沛郡":["liu","kong_zhou","cao","liu","cao","cao","cao","cao"],"弋阳郡":["cao","yuan_shu","cao","yuan_shu","cao","cao","cao","cao"],"蕲新郡":["cao","yuan_shu","sun","yuan_shu","sun","sun","sun","sun"],
-  "陈留郡":["cao","zhang_miao","cao","lu_bu","cao","cao","cao","cao"],"东郡":["cao","qiao_mao","cao","lu_bu","cao","cao","cao","cao"],"济阴国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao"],
-  "山阳国":["cao","yuan_yi","cao","lu_bu","cao","cao","cao","cao"],"任城国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao"],"东平国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao"],
-  "济北国":["cao","bao_xin","cao","lu_bu","cao","cao","cao","cao"],"泰山郡":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao"],
-  "下邳国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],"彭城国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],"琅邪国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],
-  "东海国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],"东莞郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],"利城郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],
-  "城阳郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao"],"广陵郡":["liu","zhang_chao","cao","tao_qian","cao","cao","cao","cao"],
-  "魏郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"渤海郡":["yuan","yuan","cao","yuan","cao","cao","cao","cao"],"常山国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],
-  "中山国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"安平国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"河间国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],
-  "甘陵郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"赵郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"巨鹿郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],
-  "博陵国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],"章武郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao"],
-  "太原郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"上党郡":["yuan","neutral","cao","zhang_yang","cao","cao","cao","cao"],"雁门郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],
-  "新兴郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao"],"乐平郡":["yuan","neutral","cao","zhang_yan","cao","cao","cao","cao"],
-  "右北平郡":["yuan","gongsun","cao","gongsun","cao","cao","cao","cao"],"代郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],"广阳郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],
-  "涿郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],"上谷郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],"渔阳郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],
-  "辽东郡":["gongsun_du","gongsun_du","gongsun_kang","gongsun_du","gongsun_kang","gongsun_kang","gongsun_gong","gongsun_yuan"],"辽西郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao"],
-  "辽东属国":["gongsun_du","gongsun_du","gongsun_kang","gongsun_du","gongsun_kang","gongsun_kang","gongsun_gong","gongsun_yuan"],
-  "平原郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],"北海国":["yuan","kong_rong","cao","kong_rong","cao","cao","cao","cao"],"齐郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],
-  "济南国":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],"安乐国":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],"东莱郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],
-  "乐陵郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao"],
-  "武威郡":["zhang_meng","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao"],"汉阳郡":["wei_duan","ma_teng","wei_kang","ma_teng","cao","cao","cao","cao"],
-  "陇西郡":["wei_duan","ma_teng","wei_kang","ma_teng","cao","cao","cao","cao"],"西郡":["handan_shang","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao"],
-  "金城郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao"],"安定郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao"],
-  "北地郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao"],"西平郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao"],
-  "武都郡":["zhang_lu","neutral","zhang_lu","zhang_lu","zhang_lu","cao","cao","cao"],"汉中郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","liu","liu"],
-  "上庸郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","cao","liu"],"西城郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","cao","cao"],
-  "房陵郡":["liu_biao","liu_biao","zhang_lu","liu_biao","cao","liu","cao","cao"],
-  "梓潼郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"蜀郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "巴郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"巴西郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "巴东属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"广汉郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "广汉属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"蜀郡属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "犍为郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"犍为属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "越巂郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"益州郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "江阳郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"汶山郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "宕渠郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"阴平郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "朱提郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],"固陵郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu"],
-  "南阳郡":["cao","yuan_shu","cao","liu_biao","cao","cao","cao","cao"],"襄阳郡":["liu_biao","liu_biao","cao","liu_biao","cao","cao","cao","cao"],
-  "南郡":["liu_biao","liu_biao","cao","liu_biao","liu","liu","sun","sun"],"江夏郡":["liu_biao","liu_biao","liu","liu_biao","sun","sun","sun","sun"],
-  "章陵郡":["liu_biao","liu_biao","cao","liu_biao","cao","cao","cao","cao"],"南乡郡":["liu_biao","yuan_shu","cao","liu_biao","cao","cao","cao","cao"],
-  "宜都郡":["liu_biao","liu_biao","cao","liu_biao","liu","liu","sun","sun"],"武陵郡":["liu_biao","liu_biao","jin_xuan","liu_biao","liu","liu","sun","sun"],
-  "长沙郡":["liu_biao","sun_jian","han_xuan","liu_biao","liu","sun","sun","sun"],"零陵郡":["liu_biao","liu_biao","liu_du","liu_biao","liu","liu","sun","sun"],
-  "桂阳郡":["liu_biao","liu_biao","zhao_fan","liu_biao","liu","sun","sun","sun"],
-  "丹阳郡":["sun","zhou_xin","sun","liu_yao","sun","sun","sun","sun"],"吴郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun"],"会稽郡":["sun","chen_wen","sun","wang_lang","sun","sun","sun","sun"],
-  "豫章郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun"],"庐江郡":["sun","chen_wen","sun","neutral","cao","sun","sun","sun"],"庐陵郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun"],
-  "鄱阳郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun"],"九江郡":["cao","chen_wen","cao","yuan_shu","cao","cao","cao","cao"],
-  "交趾郡":["shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","sun"],"南海郡":["shi_xie","neutral","shi_xie","neutral","shi_xie","sun","sun","sun"],
-  "郁林郡":["zhang_jin","neutral","shi_xie","neutral","shi_xie","shi_xie","shi_xie","sun"],"合浦郡":["shi_xie","neutral","shi_xie","neutral","shi_xie","shi_xie","shi_xie","sun"]
+  "张掖郡":["handan_shang","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao","han"],"酒泉郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao","han"],"敦煌郡":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao","han"],"张掖居延属国":["handan_shang","ma_teng","zhang_meng","handan_shang","neutral","cao","cao","cao","han"],"上郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"西河郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"云中郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"定襄郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"朔方郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],
+  "河南尹":["cao","dong","cao","neutral","cao","cao","cao","cao","han"],"恒农郡":["cao","dong","cao","li_jue","cao","cao","cao","cao","han"],"京兆尹":["cao","dong","cao","li_jue","ma_chao","cao","cao","cao","han"],
+  "左冯翊":["cao","dong","cao","li_jue","ma_chao","cao","cao","cao","han"],"右扶风":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao","cao","cao","han"],"汉兴郡":["ma_teng","dong","ma_chao","li_jue","ma_chao","cao","cao","cao","han"],
+  "河东郡":["cao","dong","cao","li_jue","cao","cao","cao","cao","han"],"河内郡":["cao","wang_kuang","cao","zhang_yang","cao","cao","cao","cao","han"],
+  "颍川郡":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao","zhang_jiao"],"汝南郡":["cao","yuan_shu","cao","yuan_shu","cao","cao","cao","cao","zhang_jiao"],"梁国":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao","han"],
+  "陈郡":["cao","liu_chong","cao","liu_chong","cao","cao","cao","cao","han"],"鲁国":["cao","kong_zhou","cao","neutral","cao","cao","cao","cao","han"],"谯郡":["cao","cao","cao","cao","cao","cao","cao","cao","han"],
+  "沛郡":["liu","kong_zhou","cao","liu","cao","cao","cao","cao","han"],"弋阳郡":["cao","yuan_shu","cao","yuan_shu","cao","cao","cao","cao","han"],"蕲新郡":["cao","yuan_shu","sun","yuan_shu","sun","sun","sun","sun","han"],
+  "陈留郡":["cao","zhang_miao","cao","lu_bu","cao","cao","cao","cao","han"],"东郡":["cao","qiao_mao","cao","lu_bu","cao","cao","cao","cao","zhang_jiao"],"济阴国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao","han"],
+  "山阳国":["cao","yuan_yi","cao","lu_bu","cao","cao","cao","cao","han"],"任城国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao","han"],"东平国":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao","han"],
+  "济北国":["cao","bao_xin","cao","lu_bu","cao","cao","cao","cao","han"],"泰山郡":["cao","liu_dai","cao","lu_bu","cao","cao","cao","cao","han"],
+  "下邳国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],"彭城国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],"琅邪国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],
+  "东海国":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],"东莞郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],"利城郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],
+  "城阳郡":["liu","tao_qian","cao","tao_qian","cao","cao","cao","cao","han"],"广陵郡":["liu","zhang_chao","cao","tao_qian","cao","cao","cao","cao","han"],
+  "魏郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],"渤海郡":["yuan","yuan","cao","yuan","cao","cao","cao","cao","han"],"常山国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],
+  "中山国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],"安平国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","zhang_jiao"],"河间国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],
+  "甘陵郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","zhang_jiao"],"赵郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],"巨鹿郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","zhang_jiao"],
+  "博陵国":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],"章武郡":["yuan","han_fu","cao","yuan","cao","cao","cao","cao","han"],
+  "太原郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"上党郡":["yuan","neutral","cao","zhang_yang","cao","cao","cao","cao","han"],"雁门郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],
+  "新兴郡":["yuan","neutral","cao","neutral","cao","cao","cao","cao","han"],"乐平郡":["yuan","neutral","cao","zhang_yan","cao","cao","cao","cao","han"],
+  "右北平郡":["yuan","gongsun","cao","gongsun","cao","cao","cao","cao","han"],"代郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","han"],"广阳郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","zhang_jiao"],
+  "涿郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","han"],"上谷郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","han"],"渔阳郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","han"],
+  "辽东郡":["gongsun_du","gongsun_du","gongsun_kang","gongsun_du","gongsun_kang","gongsun_kang","gongsun_gong","gongsun_yuan","han"],"辽西郡":["yuan","liu_yu","cao","gongsun","cao","cao","cao","cao","han"],
+  "辽东属国":["gongsun_du","gongsun_du","gongsun_kang","gongsun_du","gongsun_kang","gongsun_kang","gongsun_gong","gongsun_yuan","han"],
+  "平原郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],"北海国":["yuan","kong_rong","cao","kong_rong","cao","cao","cao","cao","han"],"齐郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],
+  "济南国":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],"安乐国":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],"东莱郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],
+  "乐陵郡":["yuan","jiao_he","cao","gongsun","cao","cao","cao","cao","han"],
+  "武威郡":["zhang_meng","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao","han"],"汉阳郡":["wei_duan","ma_teng","wei_kang","ma_teng","cao","cao","cao","cao","han"],
+  "陇西郡":["wei_duan","ma_teng","wei_kang","ma_teng","cao","cao","cao","cao","han"],"西郡":["handan_shang","ma_teng","zhang_meng","handan_shang","han_sui","cao","cao","cao","han"],
+  "金城郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao","han"],"安定郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao","han"],
+  "北地郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao","han"],"西平郡":["han_sui","han_sui","han_sui","han_sui","han_sui","cao","cao","cao","han"],
+  "武都郡":["zhang_lu","neutral","zhang_lu","zhang_lu","zhang_lu","cao","cao","cao","han"],"汉中郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","liu","liu","han"],
+  "上庸郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","cao","liu","han"],"西城郡":["zhang_lu","liu_yan","zhang_lu","zhang_lu","zhang_lu","liu","cao","cao","han"],
+  "房陵郡":["liu_biao","liu_biao","zhang_lu","liu_biao","cao","liu","cao","cao","han"],
+  "梓潼郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"蜀郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "巴郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"巴西郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "巴东属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"广汉郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "广汉属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"蜀郡属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "犍为郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"犍为属国":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "越巂郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"益州郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "江阳郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"汶山郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "宕渠郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"阴平郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "朱提郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],"固陵郡":["liu_zhang","liu_yan","liu_zhang","liu_zhang","liu_zhang","liu","liu","liu","han"],
+  "南阳郡":["cao","yuan_shu","cao","liu_biao","cao","cao","cao","cao","han"],"襄阳郡":["liu_biao","liu_biao","cao","liu_biao","cao","cao","cao","cao","han"],
+  "南郡":["liu_biao","liu_biao","cao","liu_biao","liu","liu","sun","sun","han"],"江夏郡":["liu_biao","liu_biao","liu","liu_biao","sun","sun","sun","sun","han"],
+  "章陵郡":["liu_biao","liu_biao","cao","liu_biao","cao","cao","cao","cao","han"],"南乡郡":["liu_biao","yuan_shu","cao","liu_biao","cao","cao","cao","cao","han"],
+  "宜都郡":["liu_biao","liu_biao","cao","liu_biao","liu","liu","sun","sun","han"],"武陵郡":["liu_biao","liu_biao","jin_xuan","liu_biao","liu","liu","sun","sun","han"],
+  "长沙郡":["liu_biao","sun_jian","han_xuan","liu_biao","liu","sun","sun","sun","han"],"零陵郡":["liu_biao","liu_biao","liu_du","liu_biao","liu","liu","sun","sun","han"],
+  "桂阳郡":["liu_biao","liu_biao","zhao_fan","liu_biao","liu","sun","sun","sun","han"],
+  "丹阳郡":["sun","zhou_xin","sun","liu_yao","sun","sun","sun","sun","han"],"吴郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun","han"],"会稽郡":["sun","chen_wen","sun","wang_lang","sun","sun","sun","sun","han"],
+  "豫章郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun","han"],"庐江郡":["sun","chen_wen","sun","neutral","cao","sun","sun","sun","han"],"庐陵郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun","han"],
+  "鄱阳郡":["sun","chen_wen","sun","liu_yao","sun","sun","sun","sun","han"],"九江郡":["cao","chen_wen","cao","yuan_shu","cao","cao","cao","cao","han"],
+  "交趾郡":["shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","shi_xie","sun","han"],"南海郡":["shi_xie","neutral","shi_xie","neutral","shi_xie","sun","sun","sun","han"],
+  "郁林郡":["zhang_jin","neutral","shi_xie","neutral","shi_xie","shi_xie","shi_xie","sun","han"],"合浦郡":["shi_xie","neutral","shi_xie","neutral","shi_xie","shi_xie","shi_xie","sun","han"]
 };
 
 // 个别据点在所属郡之外单独归属：渡津、关隘、郡治兼战略节点、史籍错配的县治与塞外据点。
@@ -133,6 +133,11 @@ const CITY_OWNERS={
     "xiakou":"sun","xian_extra_14":"sun","xian_extra_15":"sun","pukou":"sun","hefei":"cao","shouchun":"cao",
     "commandery_city_105":"neutral","commandery_city_100":"sun","cangwu":"sun"
   },
+  // 中平元年三月：张角起于巨鹿，安平、甘陵二王为黄巾所虏，广阳黄巾杀幽州刺史郭勋；波才据颍川，彭脱据汝南，卜己据东郡，张曼成杀南阳太守褚贡、屯宛。
+  // 南阳仅宛及其北近县（西鄂、博望）属黄巾，新野以南仍为汉；其余郡国皆奉汉。
+  "184_yingchuan":{
+    "wan":"zhang_jiao","xian_08_05":"zhang_jiao","xian_08_06":"zhang_jiao","commandery_city_105":"neutral"
+  },
   // 孟达据上庸叛魏应蜀，司马懿倍道围之，房陵、西城仍为魏有；夷陵改名西陵，属吴；士燮卒后吕岱平交州；公孙渊夺叔父恭位。
   // 天水、南安、安定三郡响应诸葛亮由剧本事件触发，开局仍属魏。
   "228_tianshui":{
@@ -142,7 +147,7 @@ const CITY_OWNERS={
   }
 };
 
-const SCENARIOS=[{id:"200_guandu",index:0},{id:"190_coalition",index:1},{id:"208_red_cliffs",index:2},{id:"194_puyang",index:3},{id:"211_tongguan",index:4},{id:"219_xiangyang",index:5},{id:"222_yiling",index:6},{id:"228_tianshui",index:7}];
+const SCENARIOS=[{id:"200_guandu",index:0},{id:"190_coalition",index:1},{id:"208_red_cliffs",index:2},{id:"194_puyang",index:3},{id:"211_tongguan",index:4},{id:"219_xiangyang",index:5},{id:"222_yiling",index:6},{id:"228_tianshui",index:7},{id:"184_yingchuan",index:8}];
 if(scenarioId&&!SCENARIOS.some(scenario=>scenario.id===scenarioId))throw new Error(`未知剧本：${scenarioId}`);
 const citiesFile=read("game/data/history/cities/200_guandu.json");
 const defined=new Set(citiesFile.cities.map(city=>city.commandery));

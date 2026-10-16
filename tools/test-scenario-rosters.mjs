@@ -23,7 +23,8 @@ for(const entry of catalog.scenarios){
   // 已故人物不入名册，晚期剧本名册自然较短；在任者另按剧本断言。
   if(data.officers.length<400)throw new Error(`${entry.id} 人物名册未完整载入：${data.officers.length}`);
   const playable=data.scenario.playable_forces||[];
-  if(playable.length<3)throw new Error(`${entry.id} 可选势力不足`);
+  // 黄巾（184）只有汉廷与黄巾两阵营，全部可选即可。
+  if(playable.length<Math.min(3,data.forces.length-1))throw new Error(`${entry.id} 可选势力不足`);
   for(const id of playable)if(!data.scenario.force_briefs?.[id]||!data.scenario.objectives?.[id])throw new Error(`${entry.id} 的可选势力 ${id} 缺少背景或目标`);
   const state=new GameState(data,{playerForceId:data.scenario.default_player_force,difficulty:"normal"});
   for(let turn=0;turn<6;turn++)state.endTurn();

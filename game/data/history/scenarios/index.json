@@ -1,4 +1,5 @@
 {"schema_version":1,"scenarios":[
+  {"id":"184_yingchuan","name":"颍川","date":"中平元年 / 184年春","description":"黄巾三十六方同日俱起；皇甫嵩、朱儁出颍川，卢植北讨张角。","enabled":true,"definition":"184_yingchuan.json"},
   {"id":"190_coalition","name":"洛阳","date":"初平元年 / 190年","description":"关东诸侯起兵会盟，董卓据洛阳迎战。","enabled":true,"definition":"190_coalition.json"},
   {"id":"194_puyang","name":"濮阳","date":"兴平元年 / 194年夏","description":"吕布袭取兖州，曹操回师濮阳；陶谦病重，徐州将易其主。","enabled":true,"definition":"194_puyang.json"},
   {"id":"200_guandu","name":"官渡","date":"建安五年 / 200年","description":"曹袁决战前夜，中原群雄并立。","enabled":true,"definition":"200_guandu.json"},

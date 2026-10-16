@@ -1213,10 +1213,10 @@
         ],
         [
           "taishou",
-          "韩玄",
+          "张羡",
           "长沙郡",
           null,
-          true
+          false
         ],
         [
           "taishou",
@@ -4022,6 +4022,115 @@
         "cao": "魏明帝 · 太和",
         "liu": "汉帝 · 建兴（自立）"
       },
+      "rosterExpansion": {
+        "batch": "rosters-20261015",
+        "offices": [],
+        "deferred": []
+      }
+    },
+    "184_yingchuan": {
+      "dynasty": "汉",
+      "emperor": {
+        "name": "刘宏",
+        "temple": "灵帝",
+        "era": "光和",
+        "status": "reigning"
+      },
+      "capital": "luoyang",
+      "controller": "han",
+      "authority": 45,
+      "control": 90,
+      "usurpers": [
+        "zhang_jiao"
+      ],
+      "han_loyalty": {
+        "han": 100,
+        "zhang_jiao": 0
+      },
+      "ruler_styles": {
+        "han": "汉灵帝 · 光和",
+        "zhang_jiao": "天公将军（自立）"
+      },
+      "offices": [
+        [
+          "dajiangjun",
+          "何进",
+          null,
+          null,
+          false
+        ],
+        [
+          "situ",
+          "袁隗",
+          null,
+          null,
+          false
+        ],
+        [
+          "zhonglangjiang",
+          "皇甫嵩",
+          null,
+          "左中郎将",
+          false
+        ],
+        [
+          "zhonglangjiang",
+          "朱儁",
+          null,
+          "右中郎将",
+          false
+        ],
+        [
+          "zhonglangjiang",
+          "卢植",
+          null,
+          "北中郎将",
+          false
+        ],
+        [
+          "zhonglangjiang",
+          "宗员",
+          null,
+          "护乌桓中郎将",
+          false
+        ],
+        [
+          "taishou",
+          "何苗",
+          "河南尹",
+          null,
+          false
+        ],
+        [
+          "taishou",
+          "董卓",
+          "河东郡",
+          null,
+          false
+        ],
+        [
+          "taishou",
+          "赵谦",
+          "汝南郡",
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "王允",
+          "豫州",
+          null,
+          false
+        ],
+        [
+          "cishi",
+          "徐璆",
+          "荆州",
+          null,
+          false
+        ]
+      ],
+      "titles": [],
       "rosterExpansion": {
         "batch": "rosters-20261015",
         "offices": [],

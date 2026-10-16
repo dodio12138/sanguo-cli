@@ -2947,6 +2947,97 @@
           "order": 5
         }
       }
+    },
+    "184_yingchuan": {
+      "default": {
+        "population": 1.08,
+        "garrison": 0.82,
+        "agriculture": 2,
+        "commerce": 1,
+        "order": -2,
+        "food_stock": 0.62,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.12
+        },
+        "central": {
+          "population": 1.15
+        },
+        "xuzhou": {
+          "population": 1.18
+        },
+        "jingzhou": {
+          "population": 1.06
+        },
+        "jiangdong": {
+          "population": 0.9,
+          "agriculture": -2,
+          "commerce": -3
+        },
+        "huainan": {
+          "population": 1.05
+        },
+        "northwest": {
+          "population": 1.08
+        },
+        "yizhou": {
+          "population": 1.02
+        },
+        "liaodong": {
+          "population": 1.04
+        },
+        "jiaozhou": {
+          "population": 1
+        }
+      },
+      "cities": {
+        "luoyang": {
+          "population": 1.15,
+          "garrison": 1.3,
+          "order": 4
+        },
+        "changan": {
+          "population": 1.25,
+          "garrison": 1.25
+        },
+        "xuchang": {
+          "population": 0.92,
+          "garrison": 0.55,
+          "commerce": -6
+        },
+        "ye": {
+          "population": 1.1,
+          "garrison": 0.82
+        },
+        "jianye": {
+          "population": 0.78,
+          "commerce": -7
+        },
+        "wu": {
+          "population": 0.9
+        },
+        "wan": {
+          "order": -12,
+          "food_stock": 0.5
+        },
+        "commandery_city_015": {
+          "order": -10
+        },
+        "commandery_city_008": {
+          "order": -10
+        },
+        "commandery_city_009": {
+          "order": -10
+        },
+        "puyang": {
+          "order": -8
+        },
+        "ji": {
+          "order": -8
+        }
+      }
     }
   },
   "population_reference": {

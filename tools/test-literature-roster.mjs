@@ -39,8 +39,8 @@ for(const s of read("game/data/history/scenarios/index.json").scenarios){
  assert.equal(e.clanMembers("ma_baxi").filter(o=>o.name==="马忠").length,1);assert.equal(e.clanKinGraph("ma_baxi").nodes.find(n=>n.name==="马忠").officer.id,"koei11_515");
  assert(has("han_nanyang","韩肇","韩邦","父子"));assert(!has("han_nanyang","韩繇","韩邦","父子"));
  for(const c of literatureNewClans){assert(game.clans.byId[c.id]?.seatIds.length);if(c.landless)assert.deepEqual(e.clanDistribution(game,c.id),[])}
- const serving=data.officers.filter(o=>o.status==="serving");assert(serving.length>baseline[year]+30,`${s.id} 有实际出仕增量`);
- console.log(`${s.id}：在任 ${serving.length}（本轮 +${serving.length-baseline[year]}），新增在任覆盖 ${new Set(serving.filter(o=>o.expansionRound===round).map(o=>o.city)).size} 城镇`);
+ const serving=data.officers.filter(o=>o.status==="serving");if(year in baseline)assert(serving.length>baseline[year]+30,`${s.id} 有实际出仕增量`);// 184 无扩充前基线
+ console.log(`${s.id}：在任 ${serving.length}（本轮 +${year in baseline?serving.length-baseline[year]:"—"}），新增在任覆盖 ${new Set(serving.filter(o=>o.expansionRound===round).map(o=>o.city)).size} 城镇`);
  if(year===219)final={data,game};
 }
 const {data,game}=final,save=game.serialize(),newIds=new Set(newPeople.map(o=>o.id));save.world.officers=save.world.officers.filter(o=>!newIds.has(o.id));

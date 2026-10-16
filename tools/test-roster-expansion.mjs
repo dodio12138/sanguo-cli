@@ -27,7 +27,7 @@ for(const entry of read("game/data/history/scenarios/index.json").scenarios){
     if(row.free){assert.equal(o.force,"neutral");assert(["hidden","free"].includes(o.status))}else{assert.equal(o.status,"serving");assert.equal(o.force,row.force);assert.equal(cities.get(o.city).force,o.force)}
   }
   for(const o of data.officers.filter(o=>o.expansionBatch===batch))assert(cities.has(o.homeCity),`${entry.id} ${o.name} 在野有真实城镇，不能用编号随机落城`);
-  const serving=data.officers.filter(o=>o.status==="serving");assert(serving.length>=baseline[year]+40,`${entry.id} 在任人物有实质扩充`);
+  const serving=data.officers.filter(o=>o.status==="serving");if(year in baseline)assert(serving.length>=baseline[year]+40,`${entry.id} 在任人物有实质扩充`);// 184 黄巾为逐人手配的新剧本，无扩充前基线
   // 六剧本共同的在野学者，不因城镇属于某势力就自动成为其臣下。
   for(const name of ["郑玄","胡昭","王烈","刘熙","任安"]){const o=byName.get(name);if(o)assert.notEqual(o.status,"serving",`${entry.id} ${name} 保持在野/未登场`)}
   const game=new GameState(structuredClone(data),{playerForceId:data.scenario.default_player_force});

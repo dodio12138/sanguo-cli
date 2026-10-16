@@ -164,6 +164,66 @@
     "basis": "曹嵩、曹德居谯，后避难琅邪"
    },
    {
+    "city": "commandery_city_027",
+    "governor": "应劭",
+    "staff": [],
+    "basisType": "history",
+    "basis": "中平六年拜泰山太守，初平二年破黄巾于郡界。",
+    "source": "《后汉书》卷四十八·杨李翟应霍爰徐列传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷48",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "wu",
+    "governor": "盛宪",
+    "staff": [],
+    "basisType": "history",
+    "basis": "吴郡太守，孙策定吴后去官；初平中在任。",
+    "source": "《三国志》卷51（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷51",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_051",
+    "governor": "陆康",
+    "staff": [],
+    "basisType": "history",
+    "basis": "灵帝末为庐江太守，至兴平中为袁术所攻。",
+    "source": "《后汉书》卷三十一·郭杜孔张廉王苏羊贾陆列传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷31",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_055",
+    "governor": "苏固",
+    "staff": [],
+    "basisType": "history",
+    "basis": "汉中太守，刘焉遣张鲁、张修击之，初平二年遇害；190年在任。",
+    "source": "《三国志》卷8（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_047",
+    "governor": "曹寅",
+    "staff": [],
+    "basisType": "history",
+    "basis": "武陵太守，与荆州刺史王叡相恶，初平元年诈檄使孙坚杀叡。",
+    "source": "《三国志》卷46（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷46",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "changan",
+    "governor": "盖勋",
+    "staff": [],
+    "basisType": "history",
+    "basis": "中平末为京兆尹，初平元年董卓征为议郎前仍在任。",
+    "source": "《后汉书》卷五十八·虞傅盖臧列传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷58",
+    "expansionBatch": "governors-20261016"
+   },
+   {
     "city": "luoyang",
     "governor": null,
     "staff": [
@@ -313,20 +373,6 @@
     "free": false,
     "basisType": "estimate",
     "basis": "史书人物；关中侍中及皇甫氏活动地域。",
-    "source": "《三国志》卷6·董卓传",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
-    "city": "commandery_city_007",
-    "governor": null,
-    "staff": [
-     "盖勋"
-    ],
-    "force": "dong",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；三辅任职及扶风籍贯的配置近似。",
     "source": "《三国志》卷6·董卓传",
     "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
     "expansionBatch": "rosters-20261015"
@@ -1340,20 +1386,6 @@
     "expansionBatch": "rosters-20261015"
    },
    {
-    "city": "hanzhong",
-    "governor": null,
-    "staff": [
-     "苏固"
-    ],
-    "force": "liu_yan",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；汉中太守，为张鲁、张脩进军所杀；不将后来的张鲁统治倒推到190年。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
-    "source": "《三国志》卷8（含裴松之注）",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
     "city": "luoyang",
     "governor": null,
     "staff": [
@@ -2320,20 +2352,6 @@
     "expansionBatch": "rosters-20261015"
    },
    {
-    "city": "wu",
-    "governor": null,
-    "staff": [
-     "盛宪"
-    ],
-    "force": "neutral",
-    "free": true,
-    "basisType": "estimate",
-    "basis": "史书人物；会稽人，吴郡太守，后避孙策，孔融曾荐于曹操；被孙权所杀。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
-    "source": "《三国志》卷46（含裴松之注）",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷46",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
     "city": "xian_37_04",
     "governor": null,
     "staff": [
@@ -3107,9 +3125,11 @@
    },
    {
     "city": "changsha",
-    "governor": "韩玄",
-    "staff": [],
-    "basis": "演义：长沙太守韩玄"
+    "governor": null,
+    "staff": [
+     "韩玄"
+    ],
+    "basis": "演义：长沙太守韩玄；194年长沙太守为张羡（《桓阶传》），韩玄随驻"
    },
    {
     "city": "commandery_city_057",
@@ -3171,6 +3191,26 @@
      "毛晖"
     ],
     "basis": "毛晖叛曹应吕布"
+   },
+   {
+    "city": "commandery_city_048",
+    "governor": "张羡",
+    "staff": [],
+    "basisType": "history",
+    "basis": "长沙太守张羡，后率零陵、桂阳叛刘表（《刘表传》注、《桓阶传》）。",
+    "source": "《三国志》卷22（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷22",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_049",
+    "governor": "陈纪",
+    "staff": [],
+    "basisType": "history",
+    "basis": "袁术许孙策九江太守而改用丹阳陈纪（《孙策传》、《袁术传》）。",
+    "source": "《三国志》卷6（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
+    "expansionBatch": "governors-20261016"
    },
    {
     "city": "xian_06_04",
@@ -3730,20 +3770,6 @@
     "basis": "史书人物；江夏军旅配置；陈生采用演义。",
     "source": "《三国志》卷55·程黄韩蒋周陈董甘凌徐潘丁传",
     "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷55",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
-    "city": "commandery_city_048",
-    "governor": null,
-    "staff": [
-     "张羡"
-    ],
-    "force": "liu_biao",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；长沙太守前史配置推定。",
-    "source": "《三国志》卷32·先主传",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷32",
     "expansionBatch": "rosters-20261015"
    },
    {
@@ -6026,6 +6052,46 @@
     "basis": "甄俨为中山无极甄氏"
    },
    {
+    "city": "commandery_city_010",
+    "governor": "袁涣",
+    "staff": [],
+    "basisType": "history",
+    "basis": "吕布破后归曹，为沛南部都尉，迁梁相。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_128",
+    "governor": "蒯越",
+    "staff": [],
+    "basisType": "history",
+    "basis": "刘表以蒯越为章陵太守（《刘表传》注引《傅子》）。",
+    "source": "《三国志》卷6（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "langzhong",
+    "governor": "庞羲",
+    "staff": [],
+    "basisType": "history",
+    "basis": "刘璋以庞羲为巴西太守，领兵御张鲁。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "chengdu",
+    "governor": "王商",
+    "staff": [],
+    "basisType": "history",
+    "basis": "刘璋以王商为蜀郡太守（《许靖传》注引《益州耆旧传》）。",
+    "source": "《三国志》卷38·许麋孙简伊秦传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷38",
+    "expansionBatch": "governors-20261016"
+   },
+   {
     "city": "xian_extra_02",
     "governor": null,
     "staff": [
@@ -6793,20 +6859,6 @@
     "basis": "史书人物；蜀郡宾客分驻，未预授后期官职。",
     "source": "《三国志》卷42·杜周杜许孟来尹李谯郤传",
     "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷42",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
-    "city": "commandery_city_057",
-    "governor": null,
-    "staff": [
-     "王商"
-    ],
-    "force": "liu_zhang",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；益州文职分驻广汉，具体县为推定。",
-    "source": "《三国志》卷38·许麋孙简伊秦传",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷38",
     "expansionBatch": "rosters-20261015"
    },
    {
@@ -9579,6 +9631,36 @@
     "basis": "士䵋为九真太守"
    },
    {
+    "city": "commandery_city_090",
+    "governor": "裴潜",
+    "staff": [],
+    "basisType": "history",
+    "basis": "建安中为代郡太守，单车之官，乌丸三单于皆服。",
+    "source": "《三国志》卷23（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "changan",
+    "governor": "张既",
+    "staff": [],
+    "basisType": "history",
+    "basis": "建安中为京兆尹，招怀流民，兴复县邑。",
+    "source": "《三国志》卷15（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷15",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "langzhong",
+    "governor": "庞羲",
+    "staff": [],
+    "basisType": "history",
+    "basis": "巴西太守庞羲，刘璋之姻亲。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "governors-20261016"
+   },
+   {
     "city": "xian_extra_02",
     "governor": null,
     "staff": [
@@ -12024,20 +12106,6 @@
     "free": false,
     "basisType": "estimate",
     "basis": "史书人物；河内温人，避难上党耕读，后为高干所用，归曹历县郡。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
-    "source": "《三国志》卷23（含裴松之注）",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
-    "city": "wan",
-    "governor": null,
-    "staff": [
-     "裴潜"
-    ],
-    "force": "cao",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；河东闻喜人，避荆州再到长沙，曹操定荆州后为丞相参军，历代郡等职。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
     "source": "《三国志》卷23（含裴松之注）",
     "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
     "expansionBatch": "rosters-20261015"
@@ -14565,6 +14633,36 @@
      "刘雄鸣"
     ],
     "basis": "刘雄鸣据蓝田，从马超"
+   },
+   {
+    "city": "commandery_city_045",
+    "governor": "郝普",
+    "staff": [],
+    "basisType": "history",
+    "basis": "刘备取荆南后以郝普为零陵太守，建安二十年为吕蒙所诱降。",
+    "source": "《三国志》卷54·周瑜鲁肃吕蒙传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷54",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_051",
+    "governor": "朱光",
+    "staff": [],
+    "basisType": "history",
+    "basis": "曹操所署庐江太守，屯皖，建安十九年为吕蒙所擒。",
+    "source": "《三国志》卷54·周瑜鲁肃吕蒙传",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷54",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "langzhong",
+    "governor": "庞羲",
+    "staff": [],
+    "basisType": "history",
+    "basis": "巴西太守庞羲。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "governors-20261016"
    },
    {
     "city": "xuchang",
@@ -19057,6 +19155,46 @@
     "basis": "樊伷为武陵从事"
    },
    {
+    "city": "wan",
+    "governor": "东里衮",
+    "staff": [],
+    "basisType": "history",
+    "basis": "南阳太守；建安二十三年冬宛守将侯音反，执衮，功曹宗子卿说音释之，次年曹仁平宛（《武帝纪》注引《曹瞒传》）。",
+    "source": "《三国志》卷1（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷01",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_054",
+    "governor": "孙邻",
+    "staff": [],
+    "basisType": "history",
+    "basis": "孙贲卒，子邻嗣，年九岁代领豫章，后进封都亭侯。",
+    "source": "《三国志》卷51（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷51",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_052",
+    "governor": "淳于式",
+    "staff": [],
+    "basisType": "history",
+    "basis": "会稽太守淳于式，曾表陆逊枉取民人（《陆逊传》）。",
+    "source": "《三国志》卷58（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "governors-20261016"
+   },
+   {
+    "city": "commandery_city_050",
+    "governor": "吕范",
+    "staff": [],
+    "basisType": "history",
+    "basis": "吕范领丹阳太守（史载治建业，郡治节点为宛陵）。",
+    "source": "《三国志》卷56（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+    "expansionBatch": "governors-20261016"
+   },
+   {
     "city": "ye",
     "governor": null,
     "staff": [
@@ -22711,20 +22849,6 @@
     "expansionBatch": "rosters-20261015"
    },
    {
-    "city": "yuzhang",
-    "governor": null,
-    "staff": [
-     "孙邻"
-    ],
-    "force": "sun",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；孙贲之子，九岁继豫章太守是特殊史例，游戏不提前激活幼年任官。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
-    "source": "《三国志》卷51（含裴松之注）",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷51",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
     "city": "xian_37_05",
     "governor": null,
     "staff": [
@@ -23252,20 +23376,6 @@
     "free": false,
     "basisType": "estimate",
     "basis": "史书人物；会稽人，字休德，建武将军，重人物公论，为骆秀申理；前期军职为近似。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
-    "source": "《三国志》卷58（含裴松之注）",
-    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
-    "expansionBatch": "rosters-20261015"
-   },
-   {
-    "city": "kuaiji",
-    "governor": null,
-    "staff": [
-     "淳于式"
-    ],
-    "force": "sun",
-    "free": false,
-    "basisType": "estimate",
-    "basis": "史书人物；会稽太守，曾指控陆逊擅取民人，陆逊仍称其佳吏；前期任年近似。；人物所属取史载履历，具体起任年和县级随驻采用游戏近似。",
     "source": "《三国志》卷58（含裴松之注）",
     "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
     "expansionBatch": "rosters-20261015"
@@ -34869,6 +34979,1426 @@
     "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷090",
     "expansionBatch": "rosters-20261015"
    }
+  ],
+  "184_yingchuan": [
+   {
+    "city": "luoyang",
+    "governor": "何苗",
+    "staff": [
+     "刘宏",
+     "何进",
+     "袁隗",
+     "张让",
+     "赵忠",
+     "袁绍",
+     "袁术",
+     "荀攸",
+     "孔融",
+     "刘焉",
+     "刘虞",
+     "曹操"
+    ],
+    "basis": "何进为大将军，率左右羽林五营士屯都亭；何苗为河南尹；骑都尉曹操将兵待发，后从皇甫嵩"
+   },
+   {
+    "city": "commandery_city_021",
+    "governor": null,
+    "staff": [
+     "卢植",
+     "宗员"
+    ],
+    "basis": "卢植为北中郎将，宗员为副，将北军五校士讨张角；广宗无节点，前军寄于邯郸"
+   },
+   {
+    "city": "commandery_city_003",
+    "governor": "董卓",
+    "staff": [],
+    "basis": "董卓为河东太守"
+   },
+   {
+    "city": "xinye",
+    "governor": null,
+    "staff": [
+     "秦颉",
+     "徐璆"
+    ],
+    "basis": "秦颉以江夏都尉、徐璆以荆州刺史讨南阳黄巾"
+   },
+   {
+    "city": "commandery_city_012",
+    "governor": null,
+    "staff": [
+     "王允",
+     "皇甫嵩",
+     "朱儁",
+     "傅燮",
+     "孙坚",
+     "程普",
+     "黄盖",
+     "韩当",
+     "祖茂"
+    ],
+    "basis": "王允为豫州刺史，讨颍川、汝南黄巾；皇甫嵩、朱儁受命讨颍川，傅燮为护军司马、孙坚为佐军司马（三月出师，开局前军已至陈国为近似）"
+   },
+   {
+    "city": "commandery_city_126",
+    "governor": null,
+    "staff": [
+     "赵谦"
+    ],
+    "basis": "赵谦为汝南太守，与黄巾战于邵陵，败退"
+   },
+   {
+    "city": "commandery_city_088",
+    "governor": null,
+    "staff": [
+     "邹靖",
+     "公孙瓒",
+     "刘备",
+     "关羽",
+     "张飞",
+     "简雍"
+    ],
+    "basis": "刘备与关羽、张飞率乡里少年从校尉邹靖讨黄巾；公孙瓒时为涿令"
+   },
+   {
+    "city": "tianshui",
+    "governor": null,
+    "staff": [
+     "盖勋"
+    ],
+    "basis": "盖勋为汉阳长史"
+   },
+   {
+    "city": "jincheng",
+    "governor": null,
+    "staff": [
+     "韩遂"
+    ],
+    "basis": "韩遂为凉州从事，金城人"
+   },
+   {
+    "city": "longxi",
+    "governor": null,
+    "staff": [
+     "马腾"
+    ],
+    "basis": "马腾为凉州军从事"
+   },
+   {
+    "city": "commandery_city_015",
+    "governor": null,
+    "staff": [
+     "张角",
+     "张梁"
+    ],
+    "basis": "张角自称天公将军，据巨鹿；广宗无节点，寄于瘿陶"
+   },
+   {
+    "city": "commandery_city_018",
+    "governor": null,
+    "staff": [
+     "张宝",
+     "高升",
+     "周仓",
+     "裴元绍"
+    ],
+    "basis": "张宝称地公将军；安平王刘续为黄巾所虏，下曲阳无节点，寄于信都"
+   },
+   {
+    "city": "ji",
+    "governor": null,
+    "staff": [
+     "程远志",
+     "邓茂"
+    ],
+    "basis": "广阳黄巾杀幽州刺史郭勋及太守刘卫；程远志、邓茂为演义幽州黄巾"
+   },
+   {
+    "city": "puyang",
+    "governor": null,
+    "staff": [
+     "卜己",
+     "卞喜"
+    ],
+    "basis": "卜己为东郡黄巾帅，屯仓亭"
+   },
+   {
+    "city": "commandery_city_008",
+    "governor": null,
+    "staff": [
+     "波才"
+    ],
+    "basis": "波才为颍川黄巾帅"
+   },
+   {
+    "city": "commandery_city_009",
+    "governor": null,
+    "staff": [
+     "彭脱",
+     "何仪",
+     "刘辟",
+     "龚都"
+    ],
+    "basis": "彭脱为汝南黄巾帅；何仪、刘辟、龚都为汝南黄巾余部，184 年随驻为推定"
+   },
+   {
+    "city": "wan",
+    "governor": null,
+    "staff": [
+     "张曼成",
+     "赵弘",
+     "韩忠",
+     "孙夏"
+    ],
+    "basis": "张曼成称神上使，杀南阳太守褚贡，屯宛下百余日；赵弘、韩忠、孙夏相继代领"
+   },
+   {
+    "city": "commandery_city_027",
+    "governor": null,
+    "staff": [
+     "胡母班"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；泰山人，执金吾，奉董卓命出使关东，为王匡所杀。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷6（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "吴修"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；将作大匠，与胡母班奉诏出使关东遇害。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷6（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xiapi",
+    "governor": null,
+    "staff": [
+     "陈瑀"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；陈球之子，袁术所用扬州刺史，曾拒袁术入寿春，后依袁绍。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷6（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷06",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王宏"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字长文，王允之兄，历弘农太守、右扶风，李傕乱长安时被杀。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "guangling",
+    "governor": null,
+    "staff": [
+     "臧旻"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；臧洪之父，历匈奴中郎将、中山及太原太守；卒年未详，作为早期人物收录，不延配晚期军职。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷7（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷07",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "hanzhong",
+    "governor": null,
+    "staff": [
+     "苏固"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；汉中太守，为张鲁、张脩进军所杀；不将后来的张鲁统治倒推到190年。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷8（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xiapi",
+    "governor": null,
+    "staff": [
+     "秦宜禄"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；吕布部将、秦朗之父，出使袁术，后归曹操；为张飞所杀。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷9（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷09",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_01_04",
+    "governor": null,
+    "staff": [
+     "荀闳"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；荀氏宗族成员，官至黄门侍郎，荀恽字景文者为其从孙；不误认荀彧长子荀恽。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷10（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷10",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_012",
+    "governor": null,
+    "staff": [
+     "袁霸"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；袁涣从弟，魏初大司农；汉末早期留乡，后期曹营配置为推定。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_012",
+    "governor": null,
+    "staff": [
+     "袁徽"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；袁霸之弟，避乱交州，公府征辟不至，与荀彧书称许靖；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_002",
+    "governor": null,
+    "staff": [
+     "张范"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；河内修武人，辞袁术征请，后参曹操军事，与邴原留辅世子。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_002",
+    "governor": null,
+    "staff": [
+     "张承（河内）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字公先，张范之弟，历伊阙都尉、赵郡太守；与张昭之子吴国张承分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_002",
+    "governor": null,
+    "staff": [
+     "张昭（河内）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；张范、张承之弟，议郎，自长安返乡劝兄择所归附；与吴国张昭分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_24_02",
+    "governor": null,
+    "staff": [
+     "脂习"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；京兆人，太医令，天子西迁东归皆随从，与孔融善；高龄卒而确切年不详。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_015",
+    "governor": null,
+    "staff": [
+     "张臶"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；巨鹿人，游学后隐居上党，袁绍礼命不就，后迁任县；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷11（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷11",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "changan",
+    "governor": null,
+    "staff": [
+     "隗禧"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；京兆人，避乱荆州携书采薪，曹操定荆州后为军谋掾。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷13（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷13",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_41_02",
+    "governor": null,
+    "staff": [
+     "司马防"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；河内温人，司马朗、懿等八人之父，历洛阳令、京兆尹，晚年骑都尉。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷15（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷15",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_006",
+    "governor": null,
+    "staff": [
+     "杨沛"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；冯翊万年人，新郑长储粮济曹操，后历邺令、乐安太守。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷15（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷15",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_41_02",
+    "governor": null,
+    "staff": [
+     "赵咨（河内）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字君初，与司马朗同徙黎阳，官至太常；与吴国使者赵咨分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷15（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷15",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_04_05",
+    "governor": null,
+    "staff": [
+     "赵威孙"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；黎阳监营谒者，与司马朗乡里旧婚，统有兵马；不把三字名拆作姓赵名威。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷15（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷15",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_029",
+    "governor": null,
+    "staff": [
+     "李乾"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；李典从父，聚宗族宾客数千家从曹操，为薛兰、李封所杀；巨野寄山阳节点。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷18（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷18",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "runan",
+    "governor": null,
+    "staff": [
+     "陈恭"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；与李通共起兵于朗陵，后被妻弟陈郃所杀；不与陈宫同人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷18（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷18",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "runan",
+    "governor": null,
+    "staff": [
+     "周直"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；聚二千余家，与李通、陈恭外和内违，后为李通所杀；只记早期地方武人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷18（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷18",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_075",
+    "governor": null,
+    "staff": [
+     "赵娥"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；庞淯之母，亲报父仇，事迹见裴注；无官属，保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷18（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷18",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xiapi",
+    "governor": null,
+    "staff": [
+     "缪斐"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字文雅，经学名儒，征博士、侍中皆不就；缪袭之父，保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷21（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷21",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_076",
+    "governor": null,
+    "staff": [
+     "张芝"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；敦煌酒泉一带书家，字伯英，张奂之子，草书名家；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷1（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷01",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_076",
+    "governor": null,
+    "staff": [
+     "张昶"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；张芝之弟，字文舒，善章草；不因书艺虚授军政官。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷1（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷01",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_019",
+    "governor": null,
+    "staff": [
+     "张超（河间）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字子并，河间鄚人，作赋善书，曾从朱儁征黄巾；与广陵太守张超分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷1（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷01",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_003",
+    "governor": null,
+    "staff": [
+     "裴茂"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；裴潜之父，灵帝时历县令郡守尚书，率关中诸将讨李傕有功。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷23（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_006",
+    "governor": null,
+    "staff": [
+     "严干"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；冯翊人，历蒲阪令、弘农太守、汉阳太守，慕公羊学。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷23（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_006",
+    "governor": null,
+    "staff": [
+     "李义"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；冯翊人，李丰之父，历平陵令、魏尚书左仆射；魏官不当作汉官授予。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷23（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷23",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_08_06",
+    "governor": null,
+    "staff": [
+     "韩暨"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；南阳堵阳人，避乱荆州，刘表礼辟不从，曹操定荆州后督冶，革新水排。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷24（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷24",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_120",
+    "governor": null,
+    "staff": [
+     "华佗"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；沛国谯人，通医药针灸，辞征辟，后为曹操所杀；卒年有不同推算，不填确年；晚期不配置出仕。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷29（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷29",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "杜夔"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；河南人，汉雅乐郎，避乱荆州，与孟曜为刘表合雅乐，曹操定荆州后掌乐。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷29（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷29",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xiangyang",
+    "governor": null,
+    "staff": [
+     "孟曜"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；与杜夔为刘表合雅乐，籍贯未详，按荆州音乐活动安置。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷29（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷29",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "beiping",
+    "governor": null,
+    "staff": [
+     "乌延"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；右北平乌丸首领，自称汗鲁王，后奔辽东被杀；保持独立在野，不强配汉吏。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷30（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷30",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_094",
+    "governor": null,
+    "staff": [
+     "丘力居"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；辽西乌丸大人，楼班之父、蹋顿从父，曾与张纯合兵；卒年未详，晚期不强制出仕。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷30（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷30",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_096",
+    "governor": null,
+    "staff": [
+     "尉仇台"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；夫余王，与公孙度联姻，夫余故地在当前地图之外，寄玄菟边城并标注近似。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷30（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷30",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_059",
+    "governor": null,
+    "staff": [
+     "任岐"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；犍为太守，与贾龙反刘焉被杀；190年配置在既有刘焉版图内，不另造势力。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_059",
+    "governor": null,
+    "staff": [
+     "陈超"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；州从事，与任岐举兵反刘焉，事败；早期地方协作属推定。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "chengdu",
+    "governor": null,
+    "staff": [
+     "王咸"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；益州豪强，为刘焉借故所杀；卒年未详，仅作亲属名录，不强配晚期出仕。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_28_04",
+    "governor": null,
+    "staff": [
+     "李权"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字伯豫，临邛长，李福之父，为刘焉所杀；早期受害前快照。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_055",
+    "governor": null,
+    "staff": [
+     "扈瑁"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；颍川人，长安朝廷所拜益州刺史，入汉中未能取代刘璋；不强授实际益州辖权。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jiangling",
+    "governor": null,
+    "staff": [
+     "刘阖"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；荆州别驾，与沈弥、娄发、甘宁反刘璋，失败走荆州；早期任属为推定。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷31（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷31",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "langzhong",
+    "governor": null,
+    "staff": [
+     "周舒"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；周群之父，少学术，屡辞州郡征辟；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷42（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷42",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "langzhong",
+    "governor": null,
+    "staff": [
+     "谯𡸫"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；谯周之父，字荣始，通经与图纬，不应州郡命；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷42（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷42",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_37_05",
+    "governor": null,
+    "staff": [
+     "徐琨"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；孙坚外甥，初从征伐，领丹阳太守，后讨黄祖时战死；卒年未详，不填208。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷50（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷50",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_37_05",
+    "governor": null,
+    "staff": [
+     "孙香"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；孙孺之子，孙坚从侄，从军，后依袁术为汝南太守；不并为孙辅。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷51（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷51",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "wu",
+    "governor": null,
+    "staff": [
+     "高岱"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；吴郡名士，为许贡求援于陶谦，后遭孙策杀害；不强迫归孙。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷46（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷46",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "kuaiji",
+    "governor": null,
+    "staff": [
+     "盛宪"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；会稽人，吴郡太守，后避孙策，孔融曾荐于曹操；被孙权所杀。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷46（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷46",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_37_04",
+    "governor": null,
+    "staff": [
+     "许昭"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；吴郡豪族，曾容盛宪及严白虎，孙策因其有义未伐；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷46（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷46",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_11_03",
+    "governor": null,
+    "staff": [
+     "唐固"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；丹阳经学家，讲授数十人，孙权为吴王后始为议郎、尚书仆射；汉末在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷53（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷53",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_48_06",
+    "governor": null,
+    "staff": [
+     "商升"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；侯官长，为王朗起兵，后向贺齐请降，被张雅等杀；早期保持地方官身份。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷60（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷60",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_052",
+    "governor": null,
+    "staff": [
+     "韩晏"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；永宁长，孙策署南部都尉，讨商升败，由贺齐代；与韩胤不同人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷60（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷60",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_052",
+    "governor": null,
+    "staff": [
+     "钟离绪"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；钟离牧之父，楼船都尉，属于会稽钟离氏；仅早期家族军吏。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷60（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷60",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "changan",
+    "governor": null,
+    "staff": [
+     "种拂"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；种暠之子，种劭之父，历宛令、司空、太常，李傕乱长安时战死。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷56",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷56",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xiapi",
+    "governor": null,
+    "staff": [
+     "陈琮"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；陈球之子，汝阴太守，与兄陈瑀同见家传；早期本乡，晚期不推官职。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷56",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷56",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": null,
+    "staff": [
+     "赵岐"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；京兆长陵人，注《孟子》，献帝时太仆，出使调解袁绍等，晚年留荆州。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷64",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷64",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "宋翼"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；王允同郡人，左冯翊，与右扶风王宏同被征诛；不与王翼混名。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "胡种"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；司隶校尉，与王宏有隙，王宏死后病卒；不虚构长期任期。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王盖"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；王允长子，侍中，与父、弟景定俱被杀。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王景（太原）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；王允之子，与王盖、王定俱遭诛；与东汉水利名臣王景分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王定"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；王允之子，李傕乱时同族遇害；不与地方同名者混并。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷66",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷66",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_029",
+    "governor": null,
+    "staff": [
+     "张俭"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；山阳高平人，党锢亡命获救者众，晚年辞辟，散财救荒；保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷67",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷67",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_044",
+    "governor": null,
+    "staff": [
+     "岑晊"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；南阳棘阳人，曾为南阳功曹，党锢后逃匿，终于江夏山中；卒年未详，保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷67",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷67",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_040",
+    "governor": null,
+    "staff": [
+     "李笃"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；东莱人，张俭逃亡时以仁义容之，又说外黄令毛钦使免；不虚构官位。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷67",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷67",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "chenliu",
+    "governor": null,
+    "staff": [
+     "毛钦"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；外黄令，受命捕张俭，经李笃劝说后放行；早期县吏身份，不延配晚年官。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷67",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷67",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王柔"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字叔优，太原晋阳人，郭泰所识，后为护匈奴中郎将；不据同郡同姓并入王允家。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "王泽"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；王柔之弟，字季道，通经，官代郡太守；与王昶诸支具体联系不强定。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "chenliu",
+    "governor": null,
+    "staff": [
+     "茅容"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；陈留人，郭泰见其礼敬，劝学而成德；无任官记载，保持在野。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "孟敏"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；巨鹿杨氏人，客居太原，破甑不顾，受郭泰劝学，三公辟不就。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_01_04",
+    "governor": null,
+    "staff": [
+     "庾乘"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；颍川鄢陵人，出身县门士，讲学有名，征辟不起；不与鄢陵庾氏后人强攀亲。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": null,
+    "staff": [
+     "宋果"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；扶风人，受郭泰劝戒改行，历侍御史、并州刺史；任年未详，不提前强授刺史。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "jinyang",
+    "governor": null,
+    "staff": [
+     "贾淑"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；太原人，曾因报仇入狱，郭泰代为申理，后折节修行；与贾诩未见同宗。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_030",
+    "governor": null,
+    "staff": [
+     "黄允"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；济阴人，博学隽才，遭郭泰批评后名望受损；图无籍贯县，寄济阴定陶。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_009",
+    "governor": null,
+    "staff": [
+     "谢甄"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；字子微，汝南召陵人，与陈留边让齐名，后因不拘细行被毁；非济阴定陶人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "chenliu",
+    "governor": null,
+    "staff": [
+     "边让"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；陈留浚仪人，善文辩，历九江太守，归乡后为曹操所杀；不让其成为曹氏幕僚。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷68",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷68",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": null,
+    "staff": [
+     "皇甫坚寿"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；皇甫嵩之子，与董卓旧善，入见责卓救父；不因旧交设成董氏养子。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷71",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷71",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "刘艾"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；董卓长史，曾与董卓议孙坚，后献帝侍中、史官；具体晚期存殁未详。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷72",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷72",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "changan",
+    "governor": null,
+    "staff": [
+     "董越"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；董卓东中郎将，屯黾池防关东，后为牛辅所杀；不与董卓亲支强并。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷72",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷72",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "luoyang",
+    "governor": null,
+    "staff": [
+     "宣璠"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；光禄勋，持节拜董卓太师；后任及卒年未详，仅京畿官属早期配置。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷72",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷72",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "xian_08_03",
+    "governor": null,
+    "staff": [
+     "张温（太尉）"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；南阳穰人，汉太尉，曾统军讨韩遂，为董卓诬杀；与吴郡张温分人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷72",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷72",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_007",
+    "governor": null,
+    "staff": [
+     "周慎"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；荡寇将军，张温部将，拒孙坚断粮建议后败退；仅早期军旅配置。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷72",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷72",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_016",
+    "governor": null,
+    "staff": [
+     "孙瑾"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；故常山相，刘虞遇害时赴难骂公孙瓒，与张逸张瓒俱死。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷8（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "ji",
+    "governor": null,
+    "staff": [
+     "张逸"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；刘虞州掾，赴难骂公孙瓒而死；不与其他张逸合并。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷8（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "ji",
+    "governor": null,
+    "staff": [
+     "张瓒"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；刘虞州掾，与孙瑾张逸同赴难；不误并公孙瓒。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国志》卷8（含裴松之注）",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷08",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_059",
+    "governor": null,
+    "staff": [
+     "赵媛姜"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；犍为盛道之妻，救丈夫及幼子盛翔出狱，自己被杀；只有家族与地方身份，不强授军职。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷84",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷84",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_059",
+    "governor": null,
+    "staff": [
+     "盛道"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "史书人物；犍为人，建安五年聚众事败，妻赵媛姜舍命助其逃脱，后获赦归。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《后汉书》卷84",
+    "sourceUrl": "https://zh.wikisource.org/wiki/後漢書/卷84",
+    "expansionBatch": "rosters-20261015"
+   },
+   {
+    "city": "commandery_city_027",
+    "governor": null,
+    "staff": [
+     "鲍忠"
+    ],
+    "force": "neutral",
+    "free": true,
+    "basisType": "estimate",
+    "basis": "演义人物；演义鲍信之弟，先攻汜水关被华雄斩；不与史实鲍韬合人。；本年缺少确切任职，按籍贯或活动地保留在野。",
+    "source": "《三国演义》第5回",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國演義/第005回",
+    "expansionBatch": "rosters-20261015"
+   }
   ]
  },
  "commands": {
@@ -35180,11 +36710,11 @@
      },
      {
       "kind": "jun",
-      "holder": "韩玄",
+      "holder": "张羡",
       "commanderies": [
        "长沙郡"
       ],
-      "basis": "演义：长沙太守韩玄"
+      "basis": "张羡为长沙太守，后率长沙、零陵、桂阳拒刘表（《桓阶传》）"
      }
     ],
     "centralBasis": {
@@ -37531,36 +39061,143 @@
     },
     "posts": []
    }
+  },
+  "184_yingchuan": {
+   "han": {
+    "central": {
+     "advisor": "荀攸",
+     "chief": "袁隗",
+     "marshal": "何进"
+    },
+    "centralBasis": {
+     "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "皇甫嵩",
+      "provinces": [
+       "豫州"
+      ],
+      "title": "左中郎将·讨颍川",
+      "basis": "皇甫嵩为左中郎将，持节，与朱儁共讨颍川、汝南、陈国黄巾"
+     },
+     {
+      "kind": "dudu",
+      "holder": "卢植",
+      "provinces": [
+       "冀州"
+      ],
+      "title": "北中郎将·讨张角",
+      "basis": "卢植为北中郎将，持节，讨张角于冀州"
+     },
+     {
+      "kind": "zhou",
+      "holder": "王允",
+      "provinces": [
+       "豫州"
+      ],
+      "parent": "皇甫嵩",
+      "basis": "王允为豫州刺史，与皇甫嵩、朱儁分兵讨黄巾"
+     },
+     {
+      "kind": "zhou",
+      "holder": "徐璆",
+      "provinces": [
+       "荆州"
+      ],
+      "basis": "徐璆为荆州刺史，与秦颉共讨南阳黄巾"
+     },
+     {
+      "kind": "jun",
+      "holder": "董卓",
+      "commanderies": [
+       "河东郡"
+      ],
+      "basis": "汉庭剧本初值列本郡长官；按当前本方实控郡域映射实际郡守，不代管他方城池。",
+      "expansionBatch": "rosters-20261015"
+     }
+    ]
+   },
+   "zhang_jiao": {
+    "central": {
+     "chief": "张宝",
+     "marshal": "张梁"
+    },
+    "centralBasis": {
+     "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+    },
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "波才",
+      "commanderies": [
+       "颍川郡",
+       "汝南郡"
+      ],
+      "title": "颍川渠帅",
+      "basis": "波才为颍川黄巾帅，汝南彭脱相应"
+     },
+     {
+      "kind": "dudu",
+      "holder": "张曼成",
+      "commanderies": [
+       "南阳郡"
+      ],
+      "title": "神上使",
+      "basis": "张曼成称神上使，据宛"
+     }
+    ]
+   }
   }
  },
  "mapCompatibility": {
-  "194_puyang": {
-   "current": "7219aaf4",
+  "190_coalition": {
+   "current": "c81b5d0",
    "previous": [
+    "f4227335"
+   ]
+  },
+  "194_puyang": {
+   "current": "a35ecf69",
+   "previous": [
+    "7219aaf4",
     "5ef2f88f",
     "3aea6b2b",
     "322c81bb"
    ]
   },
   "200_guandu": {
-   "current": "c7f4838c",
+   "current": "387388c2",
    "previous": [
+    "c7f4838c",
     "b3ac0f02",
     "bbee916d",
     "fcf0545d"
    ]
   },
-  "211_tongguan": {
-   "current": "cb1ee75f",
+  "208_red_cliffs": {
+   "current": "cffa54eb",
    "previous": [
+    "24045fe8"
+   ]
+  },
+  "211_tongguan": {
+   "current": "658dab70",
+   "previous": [
+    "cb1ee75f",
     "bc02de58",
     "121f0225",
     "e7a9f4b5"
    ]
   },
   "219_xiangyang": {
-   "current": "46b7cd1b",
+   "current": "100686e6",
    "previous": [
+    "46b7cd1b",
     "c20cc005",
     "8f080db2",
     "8ad2a6a2"

@@ -2763,6 +2763,164 @@
           "kind": "alliance"
         }
       ]
+    },
+    {
+      "id": "changshe_fire",
+      "name": "长社火攻",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "zhang_jiao"
+        ],
+        "date_from": "184-04",
+        "date_to": "184-07",
+        "at_war": [
+          [
+            "han",
+            "zhang_jiao"
+          ]
+        ],
+        "officers_serving": {
+          "皇甫嵩": "han",
+          "波才": "zhang_jiao"
+        },
+        "cities_owned": {
+          "commandery_city_008": "zhang_jiao"
+        },
+        "commanders_at": {
+          "波才": [
+            "commandery_city_008",
+            "xuchang",
+            "xian_01_03",
+            "xian_01_04",
+            "xian_01_05"
+          ]
+        }
+      },
+      "text": "波才围皇甫嵩于长社，依草结营。会大风，嵩令军士束苣乘城，夜纵火大呼，城上举燎应之，嵩鼓而奔其阵；骑都尉曹操兵适至，合战大破之，斩首数万级。",
+      "world": [
+        {
+          "type": "army",
+          "commander": "波才",
+          "soldiers_ratio": 0.3,
+          "morale": -40,
+          "supply": -30
+        },
+        {
+          "type": "army",
+          "commander": "皇甫嵩",
+          "morale": 15
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "xian_01_03",
+            "xian_01_04",
+            "xian_01_05",
+            "xuchang"
+          ],
+          "from": "zhang_jiao",
+          "to": "han"
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "颍川郡",
+            "汝南郡",
+            "陈郡"
+          ],
+          "order": 4,
+          "note": "颍川黄巾溃散，汝南、陈国人心稍定"
+        }
+      ]
+    },
+    {
+      "id": "zhang_jiao_illness",
+      "name": "张角病死",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "date_from": "184-08",
+        "date_to": "184-11",
+        "officers_serving": {
+          "张角": "zhang_jiao"
+        }
+      },
+      "text": "张角先已病死于广宗，其弟张梁、张宝分领余众，坚守广宗、下曲阳。",
+      "world": [
+        {
+          "type": "officer",
+          "name": "张角",
+          "status": "dead"
+        },
+        {
+          "type": "army",
+          "force": "zhang_jiao",
+          "morale": -15
+        }
+      ]
+    },
+    {
+      "id": "liangzhou_rebellion",
+      "name": "凉州叛乱",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "date_from": "184-11",
+        "date_to": "185-04",
+        "cities_owned": {
+          "jincheng": "han"
+        },
+        "officers_serving": {
+          "韩遂": "han"
+        }
+      },
+      "text": "湟中义从胡北宫伯玉、李文侯反，劫金城人边章、韩遂，使专任军政，杀金城太守陈懿，攻烧州郡。",
+      "world": [
+        {
+          "type": "transfer",
+          "cities": [
+            "jincheng",
+            "commandery_city_070",
+            "xian_14_03",
+            "xian_14_04",
+            "xian_14_05"
+          ],
+          "from": "han",
+          "to": "neutral"
+        },
+        {
+          "type": "officer",
+          "name": "韩遂",
+          "force": "neutral",
+          "city": "jincheng",
+          "status": "free"
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "陇西郡",
+            "汉阳郡",
+            "安定郡",
+            "北地郡"
+          ],
+          "order": -8,
+          "note": "凉州诸郡震动"
+        }
+      ]
     }
   ]
 }

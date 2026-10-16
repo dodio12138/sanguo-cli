@@ -728,7 +728,7 @@ export const literatureSources = Object.fromEntries([...new Set(records.map(r=>r
  return [key,{title:`《${title}》${book==="novel"?`第${n}回`:`卷${n}`}${book==="sgz"?"（含裴松之注）":""}`,url:`https://zh.wikisource.org/wiki/${path}/${book==="novel"?"第":"卷"}${String(n).padStart(pad,"0")}${book==="novel"?"回":""}`,kind:book==="novel"?"演义":"史书"}];
 }));
 export function materializeLiterature(){
- const years=[190,194,200,208,211,219,222,228],placements={},freeByScenario={};
+ const years=[184,190,194,200,208,211,219,222,228],placements={},freeByScenario={};
  for(const year of years){const lines=[],free=[];
   for(const r of records){
    if(r.debutYear>year||r.deathYear&&r.deathYear<year||r.availableUntilYear&&year>r.availableUntilYear)continue;

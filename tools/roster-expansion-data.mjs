@@ -6,10 +6,12 @@ export const batch = "rosters-20261015";
 // 本批修改前实际加载的六剧本基线指纹；只接纳指定新版基线下的旧指纹，不放宽其他地图变更检查。
 // 指纹差异来自新开局官员分驻/太守字段；不是旧地图地形或归档重建。
 export const mapCompatibility = {
-  "194_puyang":{current:"7219aaf4",previous:["5ef2f88f","3aea6b2b","322c81bb"]},
-  "200_guandu":{current:"c7f4838c",previous:["b3ac0f02","bbee916d","fcf0545d"]},
-  "211_tongguan":{current:"cb1ee75f",previous:["bc02de58","121f0225","e7a9f4b5"]},
-  "219_xiangyang":{current:"46b7cd1b",previous:["c20cc005","8f080db2","8ad2a6a2"]},
+  "190_coalition":{current:"c81b5d0",previous:["f4227335"]},
+  "194_puyang":{current:"a35ecf69",previous:["7219aaf4","5ef2f88f","3aea6b2b","322c81bb"]},
+  "200_guandu":{current:"387388c2",previous:["c7f4838c","b3ac0f02","bbee916d","fcf0545d"]},
+  "208_red_cliffs":{current:"cffa54eb",previous:["24045fe8"]},
+  "211_tongguan":{current:"658dab70",previous:["cb1ee75f","bc02de58","121f0225","e7a9f4b5"]},
+  "219_xiangyang":{current:"100686e6",previous:["46b7cd1b","c20cc005","8f080db2","8ad2a6a2"]},
 };
 const book = (volume, title) => ({title:`《三国志》卷${volume}·${title}`,url:`https://zh.wikisource.org/wiki/三國志/卷${String(volume).padStart(2,"0")}`,kind:"史书"});
 export const sources = {
@@ -36,6 +38,7 @@ export const sources = {
   novel73:{title:"《三国演义》第七十三回",url:"https://zh.wikisource.org/wiki/三國演義/第073回",kind:"演义"},
   novel74:{title:"《三国演义》第七十四回",url:"https://zh.wikisource.org/wiki/三國演義/第074回",kind:"演义"},
   liuZhang:book(31,"刘二牧传"), zhugeLiang:book(35,"诸葛亮传"), wuLu:book(58,"陆逊传"), wei9:book(9,"诸夏侯曹传"),
+  han31:{title:"《后汉书》卷三十一·郭杜孔张廉王苏羊贾陆列传",url:"https://zh.wikisource.org/wiki/後漢書/卷31",kind:"史书"},
 };
 
 // [姓名, 游戏登场年, 史载卒年或 null, 籍贯/活动地, 五维(统武智政魅), 出处, 人物依据]
@@ -145,6 +148,8 @@ export const people = [
 // 各行：势力 @ 据点 : 人物（空格分隔） | 来源 | 配置依据。
 // 只补未任职人物；已经在任者仍遵从原有剧本和任官表，避免覆盖明确史载驻防。
 export const placements = {
+// 184：主要人物由剧本 officer_assignments 与任官表点名，此处不再另配。
+184:``,
 190:`
 dong@洛阳: 荀爽 伍琼 黄琬 何颙 | dong | 朝臣及董卓幕府；开局时点保留当年稍后身故者。
 dong@河南: 郑泰 | dong | 尚书官属的洛阳周边配置；未虚授河南尹。
@@ -810,7 +815,7 @@ cao@成纪: 韩琪 | novel92 | 演义韩德四子，被赵云斩；不与韩瑶�
 export const freeNames = new Set("郑玄 胡昭 王烈 刘熙 王儁 宋忠 任安 司马徽 庞德公 黄承彦 崔州平 管宁 邴原 吉茂 王基 陆瑁".split(" "));
 export const freeByScenario = {
   190:"张羡 宋忠 王儁 刘熙 管亥 田畴 阎柔 杨奉 李乐 胡才 徐晃 宋建", 194:"郭嘉 许褚 田畴 荀棐 刘延 魏种 鲜于辅 鲜于银 齐周 刘馥 刘惇 张昭 张纮 邓当 孙静 凌操 朱桓 朱然 吴范 魏滕 殷观 姜叙 赵昂",
-  200:"司马孚 乐详 许慈",208:"孙资 刘磐 吕乂 陈术 苏则 赵咨",211:"郑浑 吕乂 陈术 魏平",219:"陈术 陆瑁 王基",222:"王基",228:"王基",
+  200:"司马孚 乐详 许慈",208:"孙资 刘磐 吕乂 陈术 苏则 赵咨",211:"郑浑 吕乂 陈术 魏平",219:"陈术 陆瑁 王基",184:"",222:"王基",228:"王基",
 };
 
 // 仅有史载宗族关系者入族；同姓不同籍、同籍未见亲属者不自动合并。
@@ -839,7 +844,7 @@ export const newClans = [
 // 原99条顺序固定：supp_ext_001–099不得因后续补遗重排。
 const literature=materializeLiterature();
 Object.assign(sources,literatureSources);people.push(...literature.people);
-// 2026-10-16 夷陵、天水两剧本补录：只收传文点名者，事迹不详者不收；接在文献补遗之后，既有编号不变。
+// 2026-10-16 补录（夷陵、天水两剧本，及各剧本史载郡守）：只收传文点名者，事迹不详者不收；接在文献补遗之后，既有编号不变。
 export const threeKingdomsPeople = [
   ["张南（蜀）",210,222,"成都","58 61 40 36 45","shuPeople","字文进，《季汉辅臣赞》称先主东征时为前部督，章武二年殁于军；与袁绍降将张南同名异人。籍贯不详，寄于成都。"],
   ["辅匡",210,null,"襄阳","57 54 55 52 53","shuPeople","字元弼，襄阳人，随先主入蜀，东征时为别督，后主时官至镇南将军（《季汉辅臣赞》）。"],
@@ -857,9 +862,13 @@ export const threeKingdomsPeople = [
   ["刘阐",210,null,"成都","36 30 52 55 58","liuZhang","刘璋次子，随父居公安；吕蒙取荆州后入吴，孙权以为益州刺史，处交、益界首。"],
   ["戴良",220,null,"番禺","48 44 52 54 50","wu","黄武五年士燮卒，孙权以戴良为交州刺史，与陈时同入交阯（《士燮传》）。"],
   ["陈时",220,null,"番禺","46 44 50 52 46","wu","校尉，士燮卒后孙权以为交阯太守，代士徽（《士燮传》）。"],
+  ["陆康",184,195,"吴县","48 40 66 72 74","han31","吴郡吴人，陆逊从祖；灵帝时为庐江太守，兴平中袁术遣孙策攻之，城陷月余病卒。"],
+  ["曹寅",184,null,"武陵","38 30 55 58 46","sgz46","武陵太守，与荆州刺史王叡不睦，诈作檄文使孙坚杀叡（《孙坚传》注引《吴录》）。"],
+  ["朱光",208,null,"庐江","50 48 46 52 42","wuStrategy","曹操所署庐江太守，屯皖田，招诱鄱阳贼帅；建安十九年为吕蒙所擒（《吕蒙传》）。"],
+  ["东里衮",210,null,"宛","40 34 50 56 48","sgz1","南阳太守；建安二十四年宛守将侯音反，执衮，功曹宗子卿说音释之（《武帝纪》注引《曹瞒传》）。"],
 ];
 people.push(...threeKingdomsPeople);
-for(const year of [190,194,200,208,211,219,222,228]){
+for(const year of [184,190,194,200,208,211,219,222,228]){
  // 文献补遗只补本年未点名者：222、228 沿用任所的人物不再以在野重复列出。
  const named=new Set(placements[year].trim().split("\n").flatMap(line=>(line.split("|")[0].split(":")[1]||"").trim().split(/\s+/)));
  placements[year]+="\n"+literature.placements[year].split("\n").filter(line=>!(line.split("|")[0].split(":")[1]||"").trim().split(/\s+/).some(name=>named.has(name))).join("\n");
