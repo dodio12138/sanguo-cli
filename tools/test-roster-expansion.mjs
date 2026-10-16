@@ -18,7 +18,7 @@ assert.equal(supplement.length,people.length);
 assert.equal(new Set(supplement.map(o=>o.id)).size,people.length);
 assert.equal(new Set(supplement.map(o=>o.name)).size,people.length);
 for(const o of supplement){assert(o.sourceUrl&&o.basis&&o.chronologyBasis&&o.homeCity,o.name);assert.equal(o.birthYear,null);for(const key of ["command","war","intelligence","politics","charm"])assert(Number.isFinite(o[key])&&o[key]>=0&&o[key]<=100,`${o.name} ${key}`)}
-const baseline={190:187,194:245,200:257,208:201,211:237,219:204};let late;
+const baseline={190:187,194:245,200:257,208:201,211:237,219:204,222:208,228:177};let late;
 for(const entry of read("game/data/history/scenarios/index.json").scenarios){
   const data=await loader.loadScenario(entry.id,{useSavedMap:false}),year=Number(entry.id.slice(0,3)),cities=new Map(data.cities.map(c=>[c.id,c])),byName=new Map(data.officers.map(o=>[o.name,o]));
   assert.deepEqual(data.meta.officerPostings.skipped,[],entry.id);

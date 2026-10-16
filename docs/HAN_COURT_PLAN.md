@@ -227,3 +227,14 @@
 新增称号核对自公版原文：[《后汉书》卷117「百官四」](https://zh.wikisource.org/wiki/後漢書/卷117)（城门与北军五校）、[《三国志》卷55](https://zh.wikisource.org/wiki/三國志/卷55)（韩当先登校尉、程普荡寇中郎将、黄盖武锋中郎将、蒋钦讨越中郎将）。称号作为游戏同类官职选项，不额外模拟各营编制。既有将军号沿用官制数据；四征与杂号可参见[《三国志》卷17](https://zh.wikisource.org/wiki/三國志/卷17)。
 
 验证：`node tools/test-court-edicts.mjs`、`node tools/run-tests.mjs han-court court-history terminal-select`；隔离浏览器实际选择、输入与下诏，并检查官职列表。截图 `output/playwright/court-custom-title.png`。
+
+## 汉祚终后的朝廷（2026-10-16）
+
+夷陵（222）、天水（228）两剧本开局即为魏廷。剧本初值新增三个可选字段：
+
+- `dynasty`：新朝国号。有此字段即视为受禅之后，加官进爵、奉迎天子、衣带诏等汉末专属操作按原逻辑关闭（`court.dynasty` 已存在）。
+- `usurpers`：另立正朔的势力（蜀汉）。服从归零，可被讨逆；`hanLoyalty` 在此语境表示对现朝的向背，界面显示为「向魏」。
+- `ruler_styles`：开局卡片的帝号（如「魏文帝 · 黄初」「汉帝 · 章武（自立）」），优先于官爵推算。
+
+`engine.courtName()` / `courtSeal()` 给出窗口与按钮称谓（汉庭 / 魏廷、漢 / 魏），开局、读档、日结后同步；受禅时国号取 `promotion_fief`（曹氏为「魏」），不再以人名称朝。天子状态补「在位」。
+

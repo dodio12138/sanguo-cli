@@ -20189,6 +20189,8 @@
     {
       "id": "history_shi_xie",
       "name": "士燮",
+      "birthYear": 137,
+      "deathYear": 226,
       "force": "shi_xie",
       "city": "jiaozhi",
       "status": "serving",

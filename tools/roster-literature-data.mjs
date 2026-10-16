@@ -713,7 +713,7 @@ export const existingNames = new Set("李蒙 王方 赵昱 张修 枣祗 朱皓 
 const sourceOverrides = {王沈:"sgz27",刘整:"sgz4",骆秀:"sgz58",甘醴:"sgz60",虞褒:"sgz53",孙弘:"sgz64",孙瑾:"sgz8",张逸:"sgz8",张瓒:"sgz8",韩扁:"sgz58",王宏:"han66",李邹:"sgz17",阎志:"sgz30",徐他:"sgz18",孔桂:"sgz3",夏侯献:"sgz14",韩龙:"sgz30",姜冏:"sgz44",张芝:"sgz1",张昶:"sgz1","张超（河间）":"sgz1",徐琨:"sgz50",孙香:"sgz51",袁龙:"sgz60",公孙晃:"sgz8",张约:"sgz64",费栈:"sgz58",胡冲:"sgz62"};
 // 不存在于当前地图的籍贯用明确寄置，绝不创建城池、改变地图或划转城镇。
 export const placeAliases = {高阳:"卢奴",临沂:"琅琊",巨野:"昌邑",安平:"信都",高平:"昌邑",馆陶:"魏县",沛郡:"相县",太原:"晋阳",牟平:"黄县",淮阴:"高邮",临江:"江州",南阳:"宛",乌程:"余杭",安汉:"阆中"};
-const forceIds = {刘虞:"liu_yu",鲍信:"bao_xin",董卓:"dong",曹操:"cao",袁绍:"yuan",韩馥:"han_fu",张超:"zhang_chao",陶谦:"tao_qian",李傕:"li_jue",吕布:"lu_bu",公孙度:"gongsun_du",公孙康:"gongsun_kang",张鲁:"zhang_lu",刘焉:"liu_yan",刘璋:"liu_zhang",韦端:"wei_duan",韦康:"wei_kang",马超:"ma_chao",韩遂:"han_sui",孙坚:"sun_jian",孙策:"sun",孙权:"sun",袁术:"yuan_shu",刘表:"liu_biao",刘备:"liu",刘宠:"liu_chong",陈温:"chen_wen",刘繇:"liu_yao",周昕:"zhou_xin",王朗:"wang_lang",士燮:"shi_xie",在野:"neutral"};
+const forceIds = {刘虞:"liu_yu",鲍信:"bao_xin",董卓:"dong",曹操:"cao",袁绍:"yuan",韩馥:"han_fu",张超:"zhang_chao",陶谦:"tao_qian",李傕:"li_jue",吕布:"lu_bu",公孙度:"gongsun_du",公孙康:"gongsun_kang",公孙恭:"gongsun_gong",公孙渊:"gongsun_yuan",曹丕:"cao",曹叡:"cao",刘禅:"liu",张鲁:"zhang_lu",刘焉:"liu_yan",刘璋:"liu_zhang",韦端:"wei_duan",韦康:"wei_kang",马超:"ma_chao",韩遂:"han_sui",孙坚:"sun_jian",孙策:"sun",孙权:"sun",袁术:"yuan_shu",刘表:"liu_biao",刘备:"liu",刘宠:"liu_chong",陈温:"chen_wen",刘繇:"liu_yao",周昕:"zhou_xin",王朗:"wang_lang",士燮:"shi_xie",在野:"neutral"};
 export const availabilityEnds={华佗:208,臧旻:190,"张承（河内）":215,秦松:200,陈端:200,霍笃:200,"张允（吴郡）":208};
 
 export const records = groups.flatMap(([volume,text])=>text.trim().split("\n").map(line=>{
@@ -728,7 +728,7 @@ export const literatureSources = Object.fromEntries([...new Set(records.map(r=>r
  return [key,{title:`《${title}》${book==="novel"?`第${n}回`:`卷${n}`}${book==="sgz"?"（含裴松之注）":""}`,url:`https://zh.wikisource.org/wiki/${path}/${book==="novel"?"第":"卷"}${String(n).padStart(pad,"0")}${book==="novel"?"回":""}`,kind:book==="novel"?"演义":"史书"}];
 }));
 export function materializeLiterature(){
- const years=[190,194,200,208,211,219],placements={},freeByScenario={};
+ const years=[190,194,200,208,211,219,222,228],placements={},freeByScenario={};
  for(const year of years){const lines=[],free=[];
   for(const r of records){
    if(r.debutYear>year||r.deathYear&&r.deathYear<year||r.availableUntilYear&&year>r.availableUntilYear)continue;

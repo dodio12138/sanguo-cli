@@ -105,15 +105,18 @@ for(const r of report){const year=Number(r.id.slice(0,3)),data=await officeLoade
     config.offices.push(tuple);records.push({tuple,basis,source:sources[key]});
   }
   config.rosterExpansion={batch,offices:records,deferred};
-  for(const raw of String(centralAssignments[year]||"").trim().split("\n")){
+  for(const raw of String(centralAssignments[year]||"").trim().split("\n").filter(Boolean)){
     const [force,names]=raw.split("@"),config=(table.commands[r.id]??={})[force]??={central:{},posts:[]};config.central??={};config.centralBasis??={};
     names.split("/").map(s=>s.trim()).forEach((name,index)=>{if(name==="-")return;const role=["advisor","chief","marshal"][index],officer=data.officers.find(o=>o.name===name&&o.force===force&&o.status==="serving");if(!officer)throw new Error(`${r.id} 幕府 ${force}·${name} 不在任`);config.central[role]=name;config.centralBasis[role]="按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"});
   }
 }
 // 任官与分散驻地只在干净的新开局上结算一次，报告不能用已套任官的对象再次统计。
+// 幕府以本次剥离后的任官表开局，不受离线镜像中上轮生成方面的影响，重复运行结果不漂移。
 const finalLoader=new DataLoader(sandbox.window.SANGUO_DATA);await finalLoader.load({useSavedMap:false});
+// 开局自动补设郡守方面（civilPrefect）晚于本表引入：规划时停用，按任官表原样推演，避免与表内方面互相顶替。
+for(const name of ["synchronizePrefectPost","synchronizePrefectPosts","synchronizeProvincePosts"])RuleEngine.prototype[name]=function(){return null};
 for(const r of report){
-  r.data=await finalLoader.loadScenario(r.id,{useSavedMap:false});const game=new GameState(structuredClone(r.data),{playerForceId:r.data.scenario.default_player_force}),e=game.engine;r.governmentDeferred=[];
+  r.data=await finalLoader.loadScenario(r.id,{useSavedMap:false});r.data.officerPostings={...r.data.officerPostings,commands:table.commands};const game=new GameState(structuredClone(r.data),{playerForceId:r.data.scenario.default_player_force}),e=game.engine;r.governmentDeferred=[];
   if(game.court.skipped.length||game.forceCommandSkipped.length)throw new Error(`${r.id} 原有官制有跳过项：${[...game.court.skipped,...game.forceCommandSkipped].join("；")}`);
   const candidates=(hanCourt.scenarios[r.id].offices||[]).filter(row=>row[0]==="taishou").map(([,name,seat])=>({holder:name,kind:"jun",commanderies:[seat],basis:"汉庭剧本初值列本郡长官；按当前本方实控郡域映射实际郡守，不代管他方城池。"}));
   candidates.push(...(extraPosts[Number(r.id.slice(0,3))]||[]));
@@ -171,7 +174,7 @@ const literatureDoc=["# 史籍人物补遗与六剧本配置（第二轮，2026-
 "1000–3700 的区间只是检索规模参考，本轮未据此宣称全书穷尽。名录只用于查漏；正文、裴注、后汉书、晋书和演义分开注明，姓名、父系与剧本配置以对应原文核对。晚期子孙收入共享人物库，不能提前在汉末当官；早夭与无法确认独立身份者不计入可用新人物。","",
 `原文见证 **${literatureRecords.length} 条**（其中 ${existingNames.size} 名已见于原有剧本专有库，不重复新建），分属 ${Object.keys(literatureSources).length} 卷/回。见证存于 「game/data/reference/literature-roster-evidence.json」，含来源、正文/裴注标记、对应简称、摘录及原始 wikitext SHA-256。底稿 「tools/roster-literature-data.mjs」、「tools/roster-literature-clans.mjs」、「tools/roster-literature-government.mjs」；生成器普通执行与检查均无需联网。`,"",
 "## 六剧本实际变化","","| 年份 | 在任（上轮→本轮） | 本轮增加 | 有驻员城镇（上轮→本轮） |","|---|---:|---:|---:|",
-...report.map(r=>{const year=Number(r.id.slice(0,3)),p=previousRound[year];return `| ${year} | ${p.serving} → ${r.after.serving} | +${r.after.serving-p.serving} | ${p.towns} → ${r.after.towns} |`}),"",
+...report.map(r=>{const year=Number(r.id.slice(0,3)),p=previousRound[year];if(!p)return `| ${year} | 新剧本 → ${r.after.serving} | — | 新剧本 → ${r.after.towns} |`;return `| ${year} | ${p.serving} → ${r.after.serving} | +${r.after.serving-p.serving} | ${p.towns} → ${r.after.towns} |`}),"",
 "同一人在多个剧本重复登场，不重复计算独立人数。城镇按籍贯、军旅、流寓或任职地域配置；无精确县址者明注寄置。隐士、不仕者及部落首领只定位，不因城属某势力就自动成为臣下。能力为保守的角色模板估值，并非史书评分；生年未载不造数，登场年是游戏可用参数。", "",
 "卒年未详而史载早卒者，采用与卒年分开的 availableUntilYear，限制新开局的保守可用区间，不把最后可确认活动年写成卒年；已在旧局中的人物仍按存档进度恢复。凌统幼子、孙登及孙霸后辈均不提前出仕。", "",
 "## 同名与家谱校勘","",

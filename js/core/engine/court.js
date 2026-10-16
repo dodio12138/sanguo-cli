@@ -17,7 +17,8 @@ Object.assign(window.RuleEngine.prototype,{
   // 新开战局按剧本初值建立朝廷；人物按姓名匹配在任者，名录中找不到的人跳过并记入 court.skipped。
   initCourt(state){const config=this.courtData().scenarios?.[this.data.scenario?.id];if(!config){state.court=null;return null}
     const officerByName=new Map();for(const officer of this.data.officers)if(officer.status==="serving"&&!officerByName.has(officer.name))officerByName.set(officer.name,officer);
-    const court={version:1,emperor:{...config.emperor},capital:config.capital,controller:config.controller||null,authority:config.authority??50,control:config.control??50,baseline:config.authority??50,offices:[],titles:[],stances:{},skipped:[],usurpers:[],rebels:[],defiance:{}};
+    // 汉祚已终的剧本（222 之后）：dynasty 记新朝国号，usurpers 记另立年号者（蜀汉自承汉统，在新朝看来即自立）。
+    const court={version:1,emperor:{...config.emperor},capital:config.capital,controller:config.controller||null,authority:config.authority??50,control:config.control??50,baseline:config.authority??50,offices:[],titles:[],stances:{},skipped:[],usurpers:[...(config.usurpers||[])],rebels:[],defiance:{}};if(config.dynasty)court.dynasty=config.dynasty;
     for(const [office,name,seat=null,variant=null,self=false] of config.offices||[]){const officer=officerByName.get(name);if(!officer||!this.courtOffice(office)){court.skipped.push(`${name}·${variant||this.courtOffice(office)?.name||office}`);continue}court.offices.push({office,seat,variant,officerId:officer.id,forceId:officer.force,self:Boolean(self),grantedTurn:0,grantedBy:self?officer.force:"court"})}
     for(const [title,name,fief=null,self=false] of config.titles||[]){const officer=officerByName.get(name);if(!officer||!this.courtTitle(title)){court.skipped.push(`${name}·${this.courtTitle(title)?.name||title}`);continue}court.titles.push({title,fief,officerId:officer.id,forceId:officer.force,self:Boolean(self),grantedTurn:0,grantedBy:self?officer.force:"court"})}
     for(const force of this.data.forces){if(force.id==="neutral")continue;const loyalty=config.han_loyalty?.[force.id]??50;court.stances[force.id]={hanLoyalty:loyalty,obedience:force.id===court.controller?100:this.courtClamp(loyalty*court.authority/100),legitimacy:0}}
@@ -27,6 +28,9 @@ Object.assign(window.RuleEngine.prototype,{
 
   forceStrength(forceId){let total=0;for(const army of this.data.armies)if(army.force===forceId)total+=army.soldiers||0;for(const city of this.data.cities)if(city.force===forceId)total+=city.garrison||0;return total},
   forceSeat(forceId){const force=this.data.forces.find(item=>item.id===forceId),ruler=force?.ruler&&this.data.officers.find(officer=>officer.name===force.ruler&&officer.force===forceId),city=ruler&&this.data.cities.find(item=>item.id===ruler.city&&item.force===forceId);return city||this.data.cities.find(item=>item.force===forceId)||null},
+  // 朝廷称谓：汉祚未终称汉庭；受禅后以新朝国号称（魏廷）。
+  courtName(state=this.popState){const dynasty=state?.court?.dynasty;return dynasty?`${dynasty}廷`:"汉庭"},
+  courtSeal(state=this.popState){const dynasty=state?.court?.dynasty;return dynasty?dynasty[0]:"漢"},
   courtCapitalCity(state){return this.data.cities.find(city=>city.id===state.court?.capital)||null},
 
   // 服从的目标值。底数看「挟天子者的名分」：挟天子者忠汉越低，诏书越像矫诏——忠汉高者越不肯奉，

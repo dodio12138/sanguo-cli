@@ -18,7 +18,7 @@ assert.equal(supplements.find(o=>o.id==="supp_ext_001").name,"郑泰");assert.eq
 for(const o of newPeople){assert(byEvidence.has(o.name));assert(o.sourceLayer&&o.evidenceRef);if(o.availableUntilYear)assert(o.availabilityBasis&&!o.deathYear,"活动上限不伪装成卒年")}
 for(const name of Object.keys(exclusions))assert(!newPeople.some(o=>o.name===name),`${name} 待核或仅族谱条目不得计作新人物`);
 const loader=new DataLoader(sb.window.SANGUO_DATA);await loader.load({useSavedMap:false});
-const baseline={190:252,194:287,200:325,208:296,211:307,219:285};let final;
+const baseline={190:252,194:287,200:325,208:296,211:307,219:285,222:264,228:218};let final;
 for(const s of read("game/data/history/scenarios/index.json").scenarios){
  const data=await loader.loadScenario(s.id,{useSavedMap:false}),year=Number(s.id.slice(0,3)),game=new GameState(structuredClone(data)),e=game.engine;
  assert.deepEqual(data.meta.officerPostings.skipped,[]);assert.deepEqual(game.court.skipped,[]);assert.deepEqual(game.forceCommandSkipped,[]);
