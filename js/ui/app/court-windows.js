@@ -3,9 +3,12 @@ SanguoApp.define("courtWindows",app=>{
   const {$,map,state,toast}=app;
   // 汉庭窗口与官制图（CourtUI 出标记，这里负责开关、翻页、展开州郡与拖动平移；每日结算后若开着就刷新）。
   var courtTab="overview",courtChartExpanded=new Set();
-  function openCourt(tab=courtTab){courtTab=tab;$("courtContent").innerHTML=CourtUI.render(state,courtTab);if(!$("courtDialog").open)$("courtDialog").showModal()}
+  // 汉祚终后窗口与按钮改称新朝（魏廷）；开局、读档与受禅后同步。
+  function syncCourtLabels(){const name=state.engine.courtName(state);$("courtButton").textContent=name;$("courtDialog").querySelector(".dialog-title span").textContent=name;$("courtChartDialog").querySelector(".dialog-title span").textContent=`${name}官制图`}
+  function openCourt(tab=courtTab){courtTab=tab;syncCourtLabels();$("courtContent").innerHTML=CourtUI.render(state,courtTab);if(!$("courtDialog").open)$("courtDialog").showModal()}
   function openCourtChart(){const box=$("courtChartContent"),fresh=!$("courtChartDialog").open;box.innerHTML=CourtUI.chart(state,courtChartExpanded);if(fresh)$("courtChartDialog").showModal();if(fresh)requestAnimationFrame(()=>{const root=box.querySelector(".chart-node.is-root");if(root){const r=root.getBoundingClientRect(),b=box.getBoundingClientRect();box.scrollLeft=Math.max(0,box.scrollLeft+r.left-b.left+r.width/2-box.clientWidth/2)}box.scrollTop=0})}
-  function refreshCourtWindows(){if($("courtDialog").open)$("courtContent").innerHTML=CourtUI.render(state,courtTab);if($("courtChartDialog").open){const box=$("courtChartContent"),left=box.scrollLeft,top=box.scrollTop;box.innerHTML=CourtUI.chart(state,courtChartExpanded);box.scrollLeft=left;box.scrollTop=top}}
+  function refreshCourtWindows(){syncCourtLabels();if($("courtDialog").open)$("courtContent").innerHTML=CourtUI.render(state,courtTab);if($("courtChartDialog").open){const box=$("courtChartContent"),left=box.scrollLeft,top=box.scrollTop;box.innerHTML=CourtUI.chart(state,courtChartExpanded);box.scrollLeft=left;box.scrollTop=top}}
+  syncCourtLabels();for(const event of ["turn","restore"])state.addEventListener(event,syncCourtLabels);
   $("courtButton").onclick=()=>openCourt();$("courtChartButton").onclick=openCourtChart;
   $("courtContent").addEventListener("click",event=>{const tab=event.target.closest("[data-court-tab]");if(tab)openCourt(tab.dataset.courtTab);if(event.target.closest("[data-court-chart]"))openCourtChart();
     // 诏令页：下诏、奉诏 / 抗诏、批复表章、上表朝贡。结果写入当日战报的汉庭消息并刷新。

@@ -2752,6 +2752,292 @@
           "order": -8
         }
       }
+    },
+    "222_yiling": {
+      "default": {
+        "population": 1.02,
+        "garrison": 1.12,
+        "agriculture": 3,
+        "commerce": 2,
+        "order": 3,
+        "food_stock": 0.7,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.02,
+          "agriculture": 4,
+          "order": 5
+        },
+        "central": {
+          "population": 1,
+          "agriculture": 5,
+          "order": 4
+        },
+        "northwest": {
+          "population": 0.8,
+          "order": 2
+        },
+        "jingzhou": {
+          "population": 0.86,
+          "garrison": 1.35,
+          "order": -4
+        },
+        "jiangdong": {
+          "population": 1.18,
+          "garrison": 1.15,
+          "agriculture": 5,
+          "commerce": 6,
+          "order": 5,
+          "food_stock": 0.84,
+          "gold_stock": 1.14
+        },
+        "huainan": {
+          "population": 0.72,
+          "garrison": 1.4
+        },
+        "yizhou": {
+          "population": 1.04,
+          "garrison": 1.05,
+          "agriculture": 3,
+          "order": 3,
+          "food_stock": 0.68
+        },
+        "jiaozhou": {
+          "population": 1.06,
+          "agriculture": 3,
+          "commerce": 4,
+          "order": 3
+        }
+      },
+      "cities": {
+        "xiangyang": {
+          "garrison": 1.4
+        },
+        "jiangling": {
+          "population": 0.9,
+          "garrison": 1.3,
+          "order": -2
+        },
+        "hanzhong": {
+          "population": 0.66,
+          "garrison": 1.4,
+          "order": -2
+        },
+        "changan": {
+          "population": 0.92,
+          "garrison": 1.3
+        },
+        "hefei": {
+          "garrison": 1.8
+        },
+        "wan": {
+          "population": 0.86,
+          "garrison": 1.3,
+          "order": -4
+        },
+        "yiling": {
+          "garrison": 1.4,
+          "order": -6
+        },
+        "commandery_city_125": {
+          "garrison": 1.4,
+          "order": -4
+        },
+        "luoyang": {
+          "population": 1.1,
+          "order": 4
+        }
+      }
+    },
+    "228_tianshui": {
+      "default": {
+        "population": 1.04,
+        "garrison": 1.12,
+        "agriculture": 3,
+        "commerce": 2,
+        "order": 3,
+        "food_stock": 0.74,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.02,
+          "agriculture": 4,
+          "order": 5
+        },
+        "central": {
+          "population": 1,
+          "agriculture": 5,
+          "order": 4
+        },
+        "northwest": {
+          "population": 0.82,
+          "order": -1
+        },
+        "jingzhou": {
+          "population": 0.92,
+          "garrison": 1.2,
+          "order": 1
+        },
+        "jiangdong": {
+          "population": 1.16,
+          "garrison": 1.15,
+          "agriculture": 5,
+          "commerce": 6,
+          "order": 5,
+          "food_stock": 0.82,
+          "gold_stock": 1.12
+        },
+        "huainan": {
+          "population": 0.72,
+          "garrison": 1.4
+        },
+        "yizhou": {
+          "population": 1.06,
+          "garrison": 1.12,
+          "agriculture": 4,
+          "order": 5,
+          "food_stock": 0.82
+        },
+        "jiaozhou": {
+          "population": 1.04,
+          "agriculture": 3,
+          "commerce": 4,
+          "order": -2
+        }
+      },
+      "cities": {
+        "xiangyang": {
+          "garrison": 1.4
+        },
+        "hanzhong": {
+          "population": 0.7,
+          "garrison": 1.6,
+          "order": 2
+        },
+        "changan": {
+          "population": 0.94,
+          "garrison": 1.2
+        },
+        "hefei": {
+          "garrison": 1.8
+        },
+        "shouchun": {
+          "garrison": 1.4
+        },
+        "tianshui": {
+          "order": -10
+        },
+        "commandery_city_068": {
+          "order": -10
+        },
+        "anding": {
+          "order": -8
+        },
+        "shangyong": {
+          "order": -12,
+          "food_stock": 0.6
+        },
+        "commandery_city_111": {
+          "garrison": 1.5
+        },
+        "luoyang": {
+          "population": 1.12,
+          "order": 5
+        }
+      }
+    },
+    "184_yingchuan": {
+      "default": {
+        "population": 1.08,
+        "garrison": 0.82,
+        "agriculture": 2,
+        "commerce": 1,
+        "order": -2,
+        "food_stock": 0.62,
+        "gold_stock": 1
+      },
+      "regions": {
+        "north": {
+          "population": 1.12
+        },
+        "central": {
+          "population": 1.15
+        },
+        "xuzhou": {
+          "population": 1.18
+        },
+        "jingzhou": {
+          "population": 1.06
+        },
+        "jiangdong": {
+          "population": 0.9,
+          "agriculture": -2,
+          "commerce": -3
+        },
+        "huainan": {
+          "population": 1.05
+        },
+        "northwest": {
+          "population": 1.08
+        },
+        "yizhou": {
+          "population": 1.02
+        },
+        "liaodong": {
+          "population": 1.04
+        },
+        "jiaozhou": {
+          "population": 1
+        }
+      },
+      "cities": {
+        "luoyang": {
+          "population": 1.15,
+          "garrison": 1.3,
+          "order": 4
+        },
+        "changan": {
+          "population": 1.25,
+          "garrison": 1.25
+        },
+        "xuchang": {
+          "population": 0.92,
+          "garrison": 0.55,
+          "commerce": -6
+        },
+        "ye": {
+          "population": 1.1,
+          "garrison": 0.82
+        },
+        "jianye": {
+          "population": 0.78,
+          "commerce": -7
+        },
+        "wu": {
+          "population": 0.9
+        },
+        "wan": {
+          "order": -12,
+          "food_stock": 0.5
+        },
+        "commandery_city_015": {
+          "order": -10
+        },
+        "commandery_city_008": {
+          "order": -10
+        },
+        "commandery_city_009": {
+          "order": -10
+        },
+        "puyang": {
+          "order": -8
+        },
+        "ji": {
+          "order": -8
+        }
+      }
     }
   },
   "population_reference": {

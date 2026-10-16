@@ -2260,6 +2260,667 @@
           "delta": 20
         }
       ]
+    },
+    {
+      "id": "yiling_burning_camps",
+      "name": "火烧连营",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "222_yiling"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu",
+          "sun"
+        ],
+        "date_from": "222-06",
+        "date_to": "222-09",
+        "at_war": [
+          [
+            "liu",
+            "sun"
+          ]
+        ],
+        "cities_owned": {
+          "commandery_city_125": "sun"
+        },
+        "officers_serving": {
+          "陆逊": "sun",
+          "刘备": "liu"
+        },
+        "commanders_at": {
+          "刘备": [
+            "yiling"
+          ]
+        }
+      },
+      "text": "陆逊令军士各持茅以火攻，一时俱齐，破蜀四十余营；冯习、张南、沙摩柯等战死，杜路、刘宁穷逼请降，黄权道隔不得还，率众降魏。刘备夜遁，退还永安。",
+      "world": [
+        {
+          "type": "army",
+          "commander": "刘备",
+          "soldiers_ratio": 0.35,
+          "morale": -40,
+          "supply": -35
+        },
+        {
+          "type": "army",
+          "commander": "冯习",
+          "soldiers_ratio": 0.1,
+          "morale": -50
+        },
+        {
+          "type": "army",
+          "commander": "吴班",
+          "soldiers_ratio": 0.5,
+          "morale": -25
+        },
+        {
+          "type": "army",
+          "commander": "陆逊",
+          "morale": 15
+        },
+        {
+          "type": "officer",
+          "name": "冯习",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "张南（蜀）",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "沙摩柯",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "傅彤",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "程畿",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "马良",
+          "status": "dead"
+        },
+        {
+          "type": "officer",
+          "name": "黄权",
+          "force": "cao",
+          "city": "wan",
+          "loyalty": 70
+        },
+        {
+          "type": "officer",
+          "name": "杜路",
+          "force": "sun",
+          "city": "commandery_city_125",
+          "loyalty": 60
+        },
+        {
+          "type": "officer",
+          "name": "刘宁",
+          "force": "sun",
+          "city": "commandery_city_125",
+          "loyalty": 60
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "yiling"
+          ],
+          "from": "liu",
+          "to": "sun"
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "宜都郡",
+            "南郡",
+            "武陵郡"
+          ],
+          "order": -6,
+          "note": "荆州西境兵火之后，五溪诸蛮各还山落"
+        }
+      ]
+    },
+    {
+      "id": "sun_quan_huangwu_break",
+      "name": "孙权改元黄武",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "222_yiling"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao",
+          "sun"
+        ],
+        "date_from": "222-09",
+        "date_to": "222-12",
+        "forces_alive": [
+          "cao",
+          "sun"
+        ],
+        "not_at_war": [
+          [
+            "cao",
+            "sun"
+          ]
+        ],
+        "officers_serving": {
+          "孙权": "sun",
+          "曹丕": "cao"
+        }
+      },
+      "text": "孙权不肯遣子孙登入侍，曹丕遣曹休、张辽、臧霸出洞口，曹仁出濡须，曹真、夏侯尚、张郃围江陵；孙权改元黄武，临江拒守。",
+      "world": [
+        {
+          "type": "break",
+          "a": "cao",
+          "b": "sun",
+          "relation": -45,
+          "war": true,
+          "reason": "孙权不遣任子，魏三道伐吴"
+        }
+      ]
+    },
+    {
+      "id": "wu_shu_reconcile",
+      "name": "吴蜀复通",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "222_yiling"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu",
+          "sun"
+        ],
+        "date_from": "223-10",
+        "date_to": "224-12",
+        "forces_alive": [
+          "liu",
+          "sun"
+        ],
+        "at_war": [
+          [
+            "liu",
+            "sun"
+          ],
+          [
+            "cao",
+            "sun"
+          ]
+        ],
+        "officers_serving": {
+          "邓芝": "liu"
+        }
+      },
+      "text": "诸葛亮遣邓芝使吴，孙权绝魏，与蜀连和；吴遣张温报聘。",
+      "world": [
+        {
+          "type": "treaty",
+          "a": "liu",
+          "b": "sun",
+          "kind": "alliance"
+        },
+        {
+          "type": "relation",
+          "a": "liu",
+          "b": "sun",
+          "delta": 40
+        }
+      ]
+    },
+    {
+      "id": "nanzhong_revolt",
+      "name": "南中叛乱",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "222_yiling"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "liu"
+        ],
+        "date_from": "223-06",
+        "date_to": "224-06",
+        "forces_alive": [
+          "liu"
+        ],
+        "officers_serving": {
+          "雍闿": "liu"
+        },
+        "cities_owned": {
+          "jianing": "liu"
+        }
+      },
+      "text": "先主殂后，益州郡大姓雍闿杀太守正昂，缚太守张裔送吴；牂柯太守朱褒、越巂夷王高定皆叛应之，唯永昌吕凯、王伉闭境拒守。",
+      "world": [
+        {
+          "type": "transfer",
+          "cities": [
+            "jianing",
+            "yunnan",
+            "commandery_city_062",
+            "commandery_city_060",
+            "commandery_city_061"
+          ],
+          "from": "liu",
+          "to": "neutral"
+        },
+        {
+          "type": "officer",
+          "name": "雍闿",
+          "force": "neutral",
+          "city": "jianing",
+          "status": "free"
+        },
+        {
+          "type": "officer",
+          "name": "朱褒",
+          "force": "neutral",
+          "city": "commandery_city_060",
+          "status": "free"
+        },
+        {
+          "type": "officer",
+          "name": "高定",
+          "force": "neutral",
+          "city": "commandery_city_061",
+          "status": "free"
+        }
+      ]
+    },
+    {
+      "id": "three_commanderies_rise",
+      "name": "三郡叛魏应亮",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "228_tianshui"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao"
+        ],
+        "date_from": "228-01",
+        "date_to": "228-08",
+        "at_war": [
+          [
+            "cao",
+            "liu"
+          ]
+        ],
+        "cities_owned": {
+          "tianshui": "cao"
+        },
+        "officers_serving": {
+          "诸葛亮": "liu"
+        },
+        "commanders_at": {
+          "诸葛亮": [
+            "commandery_city_069",
+            "xian_22_05",
+            "xian_22_03",
+            "xian_22_02",
+            "tianshui",
+            "commandery_city_068",
+            "longxi"
+          ]
+        }
+      },
+      "text": "诸葛亮身率诸军攻祁山，戎阵整齐，赏罚肃而号令明；天水、南安、安定三郡叛魏应亮，关中响震。天水太守马遵疑其下，夜亡保上邽，姜维、梁绪、尹赏、梁虔遂诣亮。",
+      "world": [
+        {
+          "type": "transfer",
+          "cities": [
+            "tianshui",
+            "commandery_city_068",
+            "xian_22_02",
+            "xian_22_03",
+            "xian_22_04",
+            "xian_22_05"
+          ],
+          "from": "cao",
+          "to": "liu"
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "anding",
+            "commandery_city_071",
+            "xian_21_02",
+            "xian_21_03",
+            "xian_21_04",
+            "xian_21_05"
+          ],
+          "from": "cao",
+          "to": "liu"
+        },
+        {
+          "type": "officer",
+          "name": "马遵",
+          "force": "cao",
+          "city": "xian_extra_13"
+        },
+        {
+          "type": "officer",
+          "name": "姜维",
+          "force": "liu",
+          "city": "tianshui",
+          "loyalty": 80
+        },
+        {
+          "type": "officer",
+          "name": "梁绪",
+          "force": "liu",
+          "city": "tianshui",
+          "loyalty": 70
+        },
+        {
+          "type": "officer",
+          "name": "尹赏",
+          "force": "liu",
+          "city": "tianshui",
+          "loyalty": 70
+        },
+        {
+          "type": "officer",
+          "name": "梁虔",
+          "force": "liu",
+          "city": "tianshui",
+          "loyalty": 70
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "京兆尹",
+            "左冯翊",
+            "右扶风",
+            "汉兴郡",
+            "陇西郡"
+          ],
+          "order": -6,
+          "note": "关中响震，陇右诸县观望"
+        }
+      ]
+    },
+    {
+      "id": "shiting_ambush",
+      "name": "石亭之战",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "228_tianshui"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "cao",
+          "sun"
+        ],
+        "date_from": "228-08",
+        "date_to": "228-11",
+        "at_war": [
+          [
+            "cao",
+            "sun"
+          ]
+        ],
+        "officers_serving": {
+          "周鲂": "sun",
+          "曹休": "cao",
+          "陆逊": "sun"
+        },
+        "cities_owned": {
+          "commandery_city_118": "sun"
+        }
+      },
+      "text": "鄱阳太守周鲂断发诈降，诱曹休率步骑十万向皖；陆逊与朱桓、全琮三道俱进，大破休于石亭，斩获万余，牛马骡驴车乘万两，军资器械略尽。",
+      "world": [
+        {
+          "type": "army",
+          "commander": "曹休",
+          "soldiers_ratio": 0.45,
+          "morale": -35,
+          "supply": -35
+        },
+        {
+          "type": "army",
+          "commander": "陆逊",
+          "morale": 15
+        },
+        {
+          "type": "resources",
+          "force": "sun",
+          "gold": 3000,
+          "food": 20000
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "九江郡",
+            "庐江郡"
+          ],
+          "order": -5,
+          "note": "淮南震动"
+        }
+      ]
+    },
+    {
+      "id": "sun_quan_emperor",
+      "name": "孙权称帝",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "228_tianshui"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "sun"
+        ],
+        "date_from": "229-04",
+        "date_to": "229-12",
+        "forces_alive": [
+          "sun"
+        ],
+        "court_dynasty": true,
+        "officers_serving": {
+          "孙权": "sun"
+        }
+      },
+      "text": "孙权即皇帝位于武昌，改元黄龙；蜀遣陈震庆贺，两国盟约中分天下。",
+      "world": [
+        {
+          "type": "court",
+          "op": "proclaim",
+          "force": "sun",
+          "rank": "emperor"
+        },
+        {
+          "type": "treaty",
+          "a": "liu",
+          "b": "sun",
+          "kind": "alliance"
+        }
+      ]
+    },
+    {
+      "id": "changshe_fire",
+      "name": "长社火攻",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "exclude_forces": [
+          "zhang_jiao"
+        ],
+        "date_from": "184-04",
+        "date_to": "184-07",
+        "at_war": [
+          [
+            "han",
+            "zhang_jiao"
+          ]
+        ],
+        "officers_serving": {
+          "皇甫嵩": "han",
+          "波才": "zhang_jiao"
+        },
+        "cities_owned": {
+          "commandery_city_008": "zhang_jiao"
+        },
+        "commanders_at": {
+          "波才": [
+            "commandery_city_008",
+            "xuchang",
+            "xian_01_03",
+            "xian_01_04",
+            "xian_01_05"
+          ]
+        }
+      },
+      "text": "波才围皇甫嵩于长社，依草结营。会大风，嵩令军士束苣乘城，夜纵火大呼，城上举燎应之，嵩鼓而奔其阵；骑都尉曹操兵适至，合战大破之，斩首数万级。",
+      "world": [
+        {
+          "type": "army",
+          "commander": "波才",
+          "soldiers_ratio": 0.3,
+          "morale": -40,
+          "supply": -30
+        },
+        {
+          "type": "army",
+          "commander": "皇甫嵩",
+          "morale": 15
+        },
+        {
+          "type": "transfer",
+          "cities": [
+            "xian_01_03",
+            "xian_01_04",
+            "xian_01_05",
+            "xuchang"
+          ],
+          "from": "zhang_jiao",
+          "to": "han"
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "颍川郡",
+            "汝南郡",
+            "陈郡"
+          ],
+          "order": 4,
+          "note": "颍川黄巾溃散，汝南、陈国人心稍定"
+        }
+      ]
+    },
+    {
+      "id": "zhang_jiao_illness",
+      "name": "张角病死",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "date_from": "184-08",
+        "date_to": "184-11",
+        "officers_serving": {
+          "张角": "zhang_jiao"
+        }
+      },
+      "text": "张角先已病死于广宗，其弟张梁、张宝分领余众，坚守广宗、下曲阳。",
+      "world": [
+        {
+          "type": "officer",
+          "name": "张角",
+          "status": "dead"
+        },
+        {
+          "type": "army",
+          "force": "zhang_jiao",
+          "morale": -15
+        }
+      ]
+    },
+    {
+      "id": "liangzhou_rebellion",
+      "name": "凉州叛乱",
+      "type": "world",
+      "weight": 100,
+      "trigger": {
+        "scenario_ids": [
+          "184_yingchuan"
+        ],
+        "once": true,
+        "date_from": "184-11",
+        "date_to": "185-04",
+        "cities_owned": {
+          "jincheng": "han"
+        },
+        "officers_serving": {
+          "韩遂": "han"
+        }
+      },
+      "text": "湟中义从胡北宫伯玉、李文侯反，劫金城人边章、韩遂，使专任军政，杀金城太守陈懿，攻烧州郡。",
+      "world": [
+        {
+          "type": "transfer",
+          "cities": [
+            "jincheng",
+            "commandery_city_070",
+            "xian_14_03",
+            "xian_14_04",
+            "xian_14_05"
+          ],
+          "from": "han",
+          "to": "neutral"
+        },
+        {
+          "type": "officer",
+          "name": "韩遂",
+          "force": "neutral",
+          "city": "jincheng",
+          "status": "free"
+        },
+        {
+          "type": "region",
+          "commanderies": [
+            "陇西郡",
+            "汉阳郡",
+            "安定郡",
+            "北地郡"
+          ],
+          "order": -8,
+          "note": "凉州诸郡震动"
+        }
+      ]
     }
   ]
 }
