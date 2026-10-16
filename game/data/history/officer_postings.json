@@ -36399,6 +36399,1514 @@
     "sourceUrl": "https://zh.wikisource.org/wiki/三國演義/第005回",
     "expansionBatch": "rosters-20261015"
    }
+  ],
+  "249_gaopingling": [
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "曹芳",
+     "曹爽",
+     "曹羲",
+     "曹训",
+     "曹彦",
+     "曹则",
+     "曹皑",
+     "何晏",
+     "邓飏",
+     "丁谧",
+     "毕轨",
+     "桓范",
+     "杨伟",
+     "孙谦",
+     "张当"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷09",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "司马懿",
+     "司马师",
+     "司马昭",
+     "司马孚",
+     "蒋济",
+     "高柔",
+     "孙礼",
+     "王观",
+     "卢毓",
+     "刘放",
+     "孙资",
+     "王肃",
+     "王祥",
+     "傅嘏",
+     "许允",
+     "钟毓",
+     "钟会",
+     "王沈",
+     "何曾"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷001",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "夏侯玄",
+     "杜预",
+     "郭配",
+     "夏侯和"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷09",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "tianshui",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "郭淮",
+     "邓艾",
+     "戴陵"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷26",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "longxi",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "夏侯霸",
+     "徐质"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷09",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jinyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "陈泰",
+     "刘靖"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷22",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "shouchun",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王凌",
+     "文钦",
+     "唐咨",
+     "吴纲"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "puyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "令狐愚"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王昶",
+     "王基",
+     "州泰"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiangyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "胡遵",
+     "胡奋"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "pengcheng",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "胡质"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "ji",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王颀"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "runan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "石苞"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷033",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘禅",
+     "陈祗",
+     "黄皓",
+     "董厥",
+     "樊建",
+     "谯周",
+     "郤正",
+     "来敏",
+     "杜琼",
+     "张绍",
+     "宗预",
+     "诸葛瞻",
+     "刘永"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷39",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "langzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "张翼"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷45",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "hanzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "费祎",
+     "姜维",
+     "张嶷",
+     "廖化",
+     "胡济",
+     "赵广",
+     "傅佥",
+     "蒋舒",
+     "句安"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yangping",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘隐"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiangzhou",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "邓芝"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷45",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yongan",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "阎宇",
+     "罗宪"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianing",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "霍弋",
+     "爨习"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianye",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙权",
+     "诸葛恪",
+     "孙峻",
+     "滕胤",
+     "诸葛融",
+     "潘濬",
+     "孙弘",
+     "孙和",
+     "孙霸",
+     "孙休",
+     "韦昭",
+     "张布",
+     "丁固",
+     "孟宗"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiangling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "朱然",
+     "朱绩",
+     "陆抗"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yiling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "步协"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xian_10_04",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆凯",
+     "吕岱"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "pukou",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "朱异",
+     "丁奉",
+     "丁封"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chaisang",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "吕据",
+     "留赞"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷64",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changsha",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "留平"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "panyu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆胤"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61",
+    "expansionBatch": "late-scenarios-20261016"
+   }
+  ],
+  "253_hefei": [
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "曹芳",
+     "司马师",
+     "司马昭",
+     "司马孚",
+     "高柔",
+     "卢毓",
+     "王观",
+     "王肃",
+     "王祥",
+     "何曾",
+     "傅嘏",
+     "钟毓",
+     "钟会",
+     "荀顗",
+     "荀勖",
+     "王沈",
+     "许允",
+     "张缉",
+     "夏侯玄",
+     "贾充",
+     "裴秀"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷002",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "郭淮",
+     "陈泰",
+     "胡遵",
+     "徐质",
+     "杜预"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷22",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "tianshui",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "邓艾"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "shouchun",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "毌丘俭",
+     "文钦",
+     "文鸯",
+     "吴纲"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "hefei",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "张特",
+     "乐綝"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王昶",
+     "王基",
+     "州泰",
+     "石苞"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiangyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "胡奋",
+     "胡烈"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "runan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "诸葛诞"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "ji",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "刘靖",
+     "王颀"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘禅",
+     "陈祗",
+     "黄皓",
+     "董厥",
+     "樊建",
+     "谯周",
+     "郤正",
+     "来敏",
+     "张绍",
+     "诸葛瞻",
+     "刘璿",
+     "刘谌",
+     "刘永"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷39",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "hanzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "姜维",
+     "张翼",
+     "廖化",
+     "胡济",
+     "张嶷",
+     "夏侯霸",
+     "傅佥",
+     "赵广",
+     "蒋舒"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yangping",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘隐"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "langzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "宗预"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷45",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yongan",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "阎宇",
+     "罗宪"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianing",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "霍弋",
+     "李遗"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianye",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙亮",
+     "诸葛恪",
+     "孙峻",
+     "滕胤",
+     "张布",
+     "孟宗",
+     "丁固",
+     "韦昭",
+     "华核",
+     "薛莹",
+     "朱损",
+     "孙仪"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷64",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiangling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "朱绩",
+     "陆抗"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yiling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "步协",
+     "步阐"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xian_10_04",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆凯",
+     "吕岱"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "pukou",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "丁奉",
+     "丁封",
+     "朱异"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chaisang",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "吕据",
+     "留赞",
+     "留平"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷64",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙休",
+     "孙和"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "panyu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆胤"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61",
+    "expansionBatch": "late-scenarios-20261016"
+   }
+  ],
+  "263_jiange": [
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "曹奂",
+     "司马昭",
+     "司马炎",
+     "司马攸",
+     "司马孚",
+     "贾充",
+     "荀顗",
+     "荀勖",
+     "王沈",
+     "何曾",
+     "裴秀",
+     "钟毓",
+     "王祥",
+     "山涛",
+     "任恺",
+     "裴楷",
+     "李胤"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷002",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "钟会",
+     "卫瓘",
+     "杜预",
+     "胡烈",
+     "许仪",
+     "荀恺",
+     "师纂",
+     "胡奋"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "tianshui",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "邓艾",
+     "牵弘",
+     "杨欣",
+     "邓忠",
+     "王颀"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "longxi",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "诸葛绪",
+     "田续"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "shouchun",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "石苞",
+     "陈骞",
+     "王浑"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷033",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "hefei",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "司马伷"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷038",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiangyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王戎",
+     "羊祜"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷034",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘禅",
+     "诸葛瞻",
+     "樊建",
+     "黄皓",
+     "谯周",
+     "郤正",
+     "张绍",
+     "刘璿",
+     "刘谌",
+     "李密",
+     "陈寿"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷33",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "董厥",
+     "廖化",
+     "张翼"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "commandery_city_069",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "姜维"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "hanzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "胡济",
+     "蒋斌",
+     "傅佥",
+     "蒋舒"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yangping",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "刘隐"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yongan",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "阎宇",
+     "罗宪"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianing",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "霍弋",
+     "霍汜"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "langzhong",
+    "force": "liu",
+    "governor": null,
+    "staff": [
+     "宗预"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷45",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianye",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙休",
+     "濮阳兴",
+     "张布",
+     "华核",
+     "薛莹",
+     "韦昭",
+     "孟宗",
+     "丁固",
+     "张悌",
+     "何植"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙皓"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiangling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆抗",
+     "朱绩"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yiling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "步协",
+     "步阐"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xian_10_04",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆凯",
+     "留平"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "pukou",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "丁奉",
+     "丁封"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chaisang",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "诸葛靓",
+     "沈莹",
+     "孙震"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "panyu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "滕修"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "commandery_city_102",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙谅",
+     "陶璜",
+     "刘俊",
+     "修则"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiaozhi",
+    "force": "lv_xing",
+    "governor": null,
+    "staff": [
+     "吕兴"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   }
+  ],
+  "279_jianye": [
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "司马炎",
+     "司马攸",
+     "贾充",
+     "荀顗",
+     "荀勖",
+     "卫瓘",
+     "张华",
+     "山涛",
+     "任恺",
+     "裴楷",
+     "李胤",
+     "杨珧",
+     "杨骏",
+     "杨济",
+     "刘毅",
+     "和峤",
+     "刘颂"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷003",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "shouchun",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王浑",
+     "周浚",
+     "陈勰",
+     "张乔",
+     "蒋班",
+     "薛胜"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "司马骏"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷038",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "陈骞"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷033",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiapi",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "司马伷"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷038",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiangyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "杜预",
+     "胡奋",
+     "周旨"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷034",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王戎"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷043",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "王濬"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yongan",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "唐彬",
+     "罗袭"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "luoyang",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "文立",
+     "陈寿",
+     "卫恒",
+     "孙楷",
+     "孙秀",
+     "文鸯",
+     "王济"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷036",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "chengdu",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "李密"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷088",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jincheng",
+    "force": "cao",
+    "governor": null,
+    "staff": [
+     "马隆"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jianye",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "孙皓",
+     "张悌",
+     "何植",
+     "薛莹",
+     "胡冲",
+     "岑昏",
+     "孙震",
+     "诸葛靓",
+     "张象",
+     "周处"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xian_10_04",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陶濬"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiangling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "伍延",
+     "孙歆"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yiling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "留宪",
+     "成据"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "commandery_city_125",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆晏",
+     "陆景"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "yiling",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "吾彦"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "commandery_city_050",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "沈莹"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "wu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陆机",
+     "陆云",
+     "孙拯",
+     "陆喜",
+     "顾荣"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "changsha",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "滕修"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "cangwu",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "王毅"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "commandery_city_102",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "闾丰"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "jiaozhi",
+    "force": "sun",
+    "governor": null,
+    "staff": [
+     "陶璜"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "panyu",
+    "force": "guo_ma",
+    "governor": null,
+    "staff": [
+     "郭马",
+     "何典",
+     "王族",
+     "吴述",
+     "殷兴"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+    "expansionBatch": "late-scenarios-20261016"
+   },
+   {
+    "city": "xiliang",
+    "force": "tufa_shujineng",
+    "governor": null,
+    "staff": [
+     "秃发树机能"
+    ],
+    "basis": "按本批纪传核对所属及活动区域；仅随驻，不由此授太守。",
+    "source": "史籍分驻审校",
+    "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷003",
+    "expansionBatch": "late-scenarios-20261016"
+   }
   ]
  },
  "commands": {
@@ -39151,6 +40659,545 @@
       "basis": "张曼成称神上使，据宛"
      }
     ]
+   }
+  },
+  "249_gaopingling": {
+   "cao": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "夏侯玄",
+      "commanderies": [
+       "京兆尹"
+      ],
+      "title": "长安军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷09"
+     },
+     {
+      "kind": "dudu",
+      "holder": "郭淮",
+      "commanderies": [
+       "汉阳郡"
+      ],
+      "title": "关陇军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷26"
+     },
+     {
+      "kind": "dudu",
+      "holder": "王凌",
+      "commanderies": [
+       "九江郡"
+      ],
+      "title": "寿春军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28"
+     },
+     {
+      "kind": "dudu",
+      "holder": "王昶",
+      "commanderies": [
+       "南阳郡"
+      ],
+      "title": "宛军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27"
+     }
+    ]
+   },
+   "liu": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "费祎",
+      "commanderies": [
+       "汉中郡"
+      ],
+      "title": "大将军军府",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+      "subordinateCommanders": [
+       "姜维"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "邓芝",
+      "commanderies": [
+       "巴郡"
+      ],
+      "title": "江州军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷45"
+     },
+     {
+      "kind": "dudu",
+      "holder": "霍弋",
+      "commanderies": [
+       "益州郡"
+      ],
+      "title": "建宁军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
+     }
+    ]
+   },
+   "sun": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "朱然",
+      "commanderies": [
+       "南郡"
+      ],
+      "title": "江陵军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+      "subordinateCommanders": [
+       "陆抗"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "丁奉",
+      "commanderies": [
+       "庐江郡"
+      ],
+      "title": "濡须口军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56"
+     },
+     {
+      "kind": "dudu",
+      "holder": "陆凯",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "title": "鄂县军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61"
+     }
+    ]
+   }
+  },
+  "253_hefei": {
+   "cao": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "郭淮",
+      "commanderies": [
+       "京兆尹"
+      ],
+      "title": "关陇军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷22",
+      "subordinateCommanders": [
+       "陈泰"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "邓艾",
+      "commanderies": [
+       "汉阳郡"
+      ],
+      "title": "天水军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28"
+     },
+     {
+      "kind": "dudu",
+      "holder": "毌丘俭",
+      "commanderies": [
+       "九江郡"
+      ],
+      "title": "寿春军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28",
+      "subordinateCommanders": [
+       "张特"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "王昶",
+      "commanderies": [
+       "南阳郡"
+      ],
+      "title": "宛军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27"
+     }
+    ]
+   },
+   "liu": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "姜维",
+      "commanderies": [
+       "汉中郡"
+      ],
+      "title": "北境军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+      "subordinateCommanders": [
+       "夏侯霸"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "阎宇",
+      "commanderies": [
+       "巴郡"
+      ],
+      "title": "永安军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     },
+     {
+      "kind": "dudu",
+      "holder": "霍弋",
+      "commanderies": [
+       "益州郡"
+      ],
+      "title": "建宁军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
+     }
+    ]
+   },
+   "sun": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "丁奉",
+      "commanderies": [
+       "庐江郡"
+      ],
+      "title": "濡须口军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56"
+     },
+     {
+      "kind": "dudu",
+      "holder": "朱绩",
+      "commanderies": [
+       "南郡"
+      ],
+      "title": "江陵军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷56",
+      "subordinateCommanders": [
+       "陆抗"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "吕据",
+      "commanderies": [
+       "豫章郡"
+      ],
+      "title": "柴桑军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷64"
+     }
+    ]
+   }
+  },
+  "263_jiange": {
+   "cao": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "钟会",
+      "commanderies": [
+       "京兆尹"
+      ],
+      "title": "长安军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28"
+     },
+     {
+      "kind": "dudu",
+      "holder": "邓艾",
+      "commanderies": [
+       "汉阳郡"
+      ],
+      "title": "天水军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28"
+     },
+     {
+      "kind": "dudu",
+      "holder": "诸葛绪",
+      "commanderies": [
+       "陇西郡"
+      ],
+      "title": "陇西军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷28"
+     },
+     {
+      "kind": "dudu",
+      "holder": "石苞",
+      "commanderies": [
+       "九江郡"
+      ],
+      "title": "寿春军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷033"
+     }
+    ]
+   },
+   "liu": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "姜维",
+      "commanderies": [
+       "武都郡"
+      ],
+      "title": "北境军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44"
+     },
+     {
+      "kind": "dudu",
+      "holder": "胡济",
+      "commanderies": [
+       "汉中郡"
+      ],
+      "title": "汉中军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷44",
+      "subordinateCommanders": [
+       "傅佥",
+       "刘隐"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "阎宇",
+      "commanderies": [
+       "巴郡"
+      ],
+      "title": "永安军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     },
+     {
+      "kind": "dudu",
+      "holder": "霍弋",
+      "commanderies": [
+       "益州郡"
+      ],
+      "title": "建宁军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
+     }
+    ]
+   },
+   "sun": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "陆抗",
+      "commanderies": [
+       "南郡"
+      ],
+      "title": "吴西线军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+      "subordinateCommanders": [
+       "朱绩",
+       "步协"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "丁奉",
+      "commanderies": [
+       "庐江郡"
+      ],
+      "title": "濡须口军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48"
+     },
+     {
+      "kind": "dudu",
+      "holder": "陶璜",
+      "commanderies": [
+       "合浦郡"
+      ],
+      "title": "交州军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     }
+    ]
+   },
+   "lv_xing": {
+    "central": {},
+    "posts": []
+   }
+  },
+  "279_jianye": {
+   "cao": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "王濬",
+      "commanderies": [
+       "蜀郡"
+      ],
+      "title": "益州水军",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042"
+     },
+     {
+      "kind": "dudu",
+      "holder": "杜预",
+      "commanderies": [
+       "襄阳郡"
+      ],
+      "title": "都督荆州诸军事",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷034"
+     },
+     {
+      "kind": "dudu",
+      "holder": "王浑",
+      "commanderies": [
+       "九江郡"
+      ],
+      "title": "都督扬州诸军事",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042"
+     },
+     {
+      "kind": "dudu",
+      "holder": "司马伷",
+      "commanderies": [
+       "下邳国"
+      ],
+      "title": "都督徐州诸军事",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷038"
+     },
+     {
+      "kind": "dudu",
+      "holder": "王戎",
+      "commanderies": [
+       "南阳郡"
+      ],
+      "title": "宛军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷043"
+     },
+     {
+      "kind": "dudu",
+      "holder": "唐彬",
+      "commanderies": [
+       "巴郡"
+      ],
+      "title": "永安军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷042"
+     },
+     {
+      "kind": "dudu",
+      "holder": "马隆",
+      "commanderies": [
+       "金城郡"
+      ],
+      "title": "讨凉募军",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     }
+    ]
+   },
+   "sun": {
+    "central": {},
+    "posts": [
+     {
+      "kind": "dudu",
+      "holder": "伍延",
+      "commanderies": [
+       "南郡"
+      ],
+      "title": "江陵军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48",
+      "subordinateCommanders": [
+       "孙歆",
+       "留宪",
+       "吾彦"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "陆晏",
+      "commanderies": [
+       "宜都郡"
+      ],
+      "title": "夷道军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷58",
+      "subordinateCommanders": [
+       "陆景"
+      ]
+     },
+     {
+      "kind": "dudu",
+      "holder": "陶濬",
+      "commanderies": [
+       "江夏郡"
+      ],
+      "title": "鄂县军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷48"
+     },
+     {
+      "kind": "dudu",
+      "holder": "滕修",
+      "commanderies": [
+       "长沙郡"
+      ],
+      "title": "长沙军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     },
+     {
+      "kind": "dudu",
+      "holder": "陶璜",
+      "commanderies": [
+       "交趾郡"
+      ],
+      "title": "交州军务",
+      "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
+      "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
+     }
+    ]
+   },
+   "guo_ma": {
+    "central": {},
+    "posts": []
+   },
+   "tufa_shujineng": {
+    "central": {},
+    "posts": []
    }
   }
  },

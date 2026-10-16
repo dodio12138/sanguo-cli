@@ -29,7 +29,7 @@ Object.assign(window.RuleEngine.prototype,{
   remainingMarchDays(army){if(!army?.route?.length)return 0;return Math.max(0,this.routeDays([army.city,...army.route],army.soldiers)-(army.legElapsed||0))},
   routeDays(route,soldiers=0){let days=0;for(let index=1;index<(route?.length||0);index++)days+=this.legDaysFor(this.legInfo(route[index-1],route[index]),soldiers);return days},
   armyLegDays(state,army){const leg=this.legInfo(army.city,army.route[0]);return Math.ceil(this.legDaysFor(leg,army.soldiers+this.prisonerCount(army.prisoners))*this.marchDrag(state,army))},
-  armyDailyMarch(state,army){const movement=this.data.rules.movement||{},retreat=army.retreat,rules=this.battleRules();return GameClock.factor(state)*10*(retreat?(retreat.routed?rules.rout_march_factor:rules.withdraw_march_factor):army.movementMode==="forced_march"?(movement.forced_march_multiplier||1.6):1)},
+  armyDailyMarch(state,army){const movement=this.data.rules.movement||{},retreat=army.retreat,rules=this.battleRules();return GameClock.factor(state)*10*(army.fieldDisruption?.untilTurn>=state.turn?1-Math.max(0,Math.min(.7,army.fieldDisruption.slow||0)):1)*(retreat?(retreat.routed?rules.rout_march_factor:rules.withdraw_march_factor):army.movementMode==="forced_march"?(movement.forced_march_multiplier||1.6):1)},
   // 仅按有溃军的路段检查：同向追上或迎面截击，双方都按实际路段进度接战。
   resolveRoadPursuits(state,events){const roads=new Map();
     for(const army of this.data.armies){if(!army.route?.length||(army.retreat&&army.retreat.startedTurn===state.turn))continue;const from=army.city,to=army.route[0],key=[from,to].sort().join(":");if(!roads.has(key))roads.set(key,[]);const days=this.armyLegDays(state,army),fraction=Math.min(1,(army.legElapsed||0)/days),speed=this.armyDailyMarch(state,army)/days;roads.get(key).push({army,from,to,days,fraction,speed})}
@@ -72,7 +72,7 @@ Object.assign(window.RuleEngine.prototype,{
   plannedRoute(from,to,forceId=null,{waypoints=[],roadsOnly=false}={}){const stops=[from,...waypoints.filter(id=>id&&id!==from&&id!==to),to],route=[from];for(let i=1;i<stops.length;i++){const part=this.path(stops[i-1],stops[i],forceId,{roadsOnly});if(!part)return null;route.push(...part.slice(1))}return route},
   path(from,to,forceId=null,options={}){return this.searchRoute(from,to,city=>!forceId||!city||[forceId,"neutral"].includes(city.force),options)},
   logisticsPath(from,to,forceId){
-    const usable=id=>{const city=this.data.cities.find(item=>item.id===id);return city?.force===forceId&&!this.isCityBesieged(id)&&!this.data.armies.some(army=>army.city===id&&army.force!==forceId&&!army.siegeTarget)};
+    const usable=id=>{const city=this.data.cities.find(item=>item.id===id);return city?.force===forceId&&!this.isCityBesieged(id)&&!this.data.armies.some(army=>!army.fieldPosition&&army.city===id&&army.force!==forceId&&!army.siegeTarget)};
     // 转运与补给线只走官路与水路；野径仅供行军。
     if(!usable(from)||!usable(to))return null;return this.searchRoute(from,to,(city,id)=>usable(id),{roadsOnly:true});
   }

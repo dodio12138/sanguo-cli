@@ -20,7 +20,10 @@ for(const name of Object.keys(exclusions))assert(!newPeople.some(o=>o.name===nam
 const loader=new DataLoader(sb.window.SANGUO_DATA);await loader.load({useSavedMap:false});
 const baseline={190:252,194:287,200:325,208:296,211:307,219:285,222:264,228:218};let final;
 for(const s of read("game/data/history/scenarios/index.json").scenarios){
- const data=await loader.loadScenario(s.id,{useSavedMap:false}),year=Number(s.id.slice(0,3)),game=new GameState(structuredClone(data)),e=game.engine;
+ const data=await loader.loadScenario(s.id,{useSavedMap:false});
+ // 后期专门名册由 test-late-scenarios 校验，不要求包含本轮早期人物和同名身份。
+ if(data.scenario.patch?.roster_names)continue;
+ const year=Number(s.id.slice(0,3)),game=new GameState(structuredClone(data)),e=game.engine;
  assert.deepEqual(data.meta.officerPostings.skipped,[]);assert.deepEqual(game.court.skipped,[]);assert.deepEqual(game.forceCommandSkipped,[]);
  const cityById=new Map(data.cities.map(c=>[c.id,c]));
  for(const o of data.officers.filter(o=>o.expansionRound===round)){

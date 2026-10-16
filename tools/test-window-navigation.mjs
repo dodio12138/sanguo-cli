@@ -37,8 +37,9 @@ class Element {
   }
   get innerHTML(){return this.markup||""}
   insertAdjacentHTML(_,value){this.innerHTML=this.innerHTML+value}
+  prepend(node){this.innerHTML=node.innerHTML+this.innerHTML}
   querySelectorAll(selector){const attribute=selector.match(/^\[([^\]]+)\]$/)?.[1];return this.nodes.filter(node=>attribute in node.attributes)}
-  querySelector(selector){return this.querySelectorAll(selector)[0]||null}
+  querySelector(selector){if(selector===".army-detail-page")return this;return this.querySelectorAll(selector)[0]||null}
   addEventListener(type,fn){this[`on${type}`]=fn}
   showModal(){this.open=true;this.style.zIndex=String(++z)}
   close(){this.open=false}
@@ -50,7 +51,7 @@ class Element {
 let z=10;
 const elements=new Map();
 const $=id=>{if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id)};
-const document={listeners:new Map(),addEventListener(type,fn){this.listeners.set(type,[...(this.listeners.get(type)||[]),fn])},querySelector:()=>null,querySelectorAll:()=>[...elements.values()].filter(element=>element.open)};
+const document={createElement:()=>new Element(),listeners:new Map(),addEventListener(type,fn){this.listeners.set(type,[...(this.listeners.get(type)||[]),fn])},querySelector:()=>null,querySelectorAll:()=>[...elements.values()].filter(element=>element.open)};
 // 界面模块：载入注册表与相关模块，以桩对象充当壳的 app 上下文；壳内的关窗与迷雾判定函数原样取自 app.js
 const loader={},context=vm.createContext({$,state,document,MapGrid,RuleEngine,FiscalUI,getComputedStyle:element=>element.style,loader});context.window=context;
 vm.runInContext(fs.readFileSync(new URL("../js/ui/clan-ui.js",import.meta.url),"utf8"),context);

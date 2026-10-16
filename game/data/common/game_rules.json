@@ -650,6 +650,22 @@
       "note": "郡守托管：郡治开关管本郡我方县邑，按前线（守城底数4倍）或腹地（2倍）设募兵目标，并以本城府库督查最弱一项",
       "boost_cost": 160
     },
+    "skirmish": {
+      "note": "小股部队逐格行动：城镇仅作后方归属锚点，野外位置独立；组织度随行军与接战下降，休整恢复。",
+      "max_soldiers": 3000,
+      "max_detachments": 8,
+      "max_distance": 24,
+      "max_steps": 90,
+      "cells_per_day": 0.9,
+      "contact_radius": 1.1,
+      "cooldown_days": 2,
+      "ai_chance": 0.07,
+      "cohesion_march": 0.45,
+      "cohesion_field": 0.8,
+      "cohesion_rest": 1.2,
+      "cohesion_city": 4,
+      "cohesion_camp": 2.5
+    },
     "field_logistics": {
       "note": "大军在外由补给来源派运粮队实运；携粮超过轻松携带天数则组织度下降；轻装（≤ light_threshold）不设粮道、敌境就食",
       "light_threshold": 3000,

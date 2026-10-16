@@ -21,7 +21,7 @@ for(const entry of catalog.scenarios){
   const data=await loader.loadScenario(entry.id),diagnostics=loader.diagnose(data);
   if(!diagnostics.ok)throw new Error(`${entry.id} 校验失败：${diagnostics.errors.join("；")}`);
   // 已故人物不入名册，晚期剧本名册自然较短；在任者另按剧本断言。
-  if(data.officers.length<400)throw new Error(`${entry.id} 人物名册未完整载入：${data.officers.length}`);
+  if(!data.scenario.patch?.roster_names&&data.officers.length<400)throw new Error(`${entry.id} 人物名册未完整载入：${data.officers.length}`);
   const playable=data.scenario.playable_forces||[];
   // 黄巾（184）只有汉廷与黄巾两阵营，全部可选即可。
   if(playable.length<Math.min(3,data.forces.length-1))throw new Error(`${entry.id} 可选势力不足`);

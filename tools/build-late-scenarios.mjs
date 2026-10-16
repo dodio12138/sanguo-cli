@@ -1,0 +1,91 @@
+// 仅写后期剧本、人物／官制资料及登记；不写地图、区划、道路、地形或用户存档。
+import fs from 'node:fs';
+import {sources,additions,corrections,rosters} from './late-scenario-roster.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),write=(p,d)=>{const old=fs.existsSync(p)?fs.readFileSync(p,'utf8'):'';const indent=old.match(/\n( +)\"/)?.[1].length||2;fs.writeFileSync(p,JSON.stringify(d,null,indent)+'\n')};
+const root='game/data/',hist=root+'history/',common=root+'common/';
+const reference=read(root+'reference/officers-san11.json').officers,supp=read(hist+'officers_supplement.json'),known=new Map([...reference,...read(hist+'officers/200_guandu.json').officers,...supp.officers].map(o=>[o.name,o])),cities=read(hist+'cities/200_guandu.json').cities,cityById=new Map(cities.map(c=>[c.id,c])),base=read(hist+'scenarios/228_tianshui.json'),postings=read(hist+'officer_postings.json'),court=read(common+'han_court.json'),catalog=read(hist+'scenarios/index.json'),families=read(common+'genealogies.json'),profiles=read(hist+'city_resource_profiles.json');
+const batch='late-scenarios-20261016',evidence={batch,note:'史书人物与任职按所引传记核对；驻地非本传明确时为游戏近似。first/last为本批采用事迹区间，不等于生卒年。既有人物能力沿用游戏参考，不称史实数值。',sources,people:[],scenarios:{}};
+let added=0;
+// 本批自有条目可修订，既有人物不覆盖；同批重复执行保留稳定 ID。
+const ownNames=new Set(additions.map(row=>row[0]));
+supp.officers=supp.officers.filter(o=>o.expansionBatch!==batch||ownNames.has(o.name));
+const historicalAbilities={陶璜:[84,67,78,79,75],马隆:[86,75,83,66,72],秃发树机能:[77,78,63,42,68],山涛:[37,21,82,91,84],裴楷:[30,22,84,85,81],李胤:[38,24,75,85,76],刘毅:[35,25,78,83,72],任恺:[40,24,79,84,78],周浚:[78,68,73,66,68],刘隐:[77,72,68,62,70],周处:[78,83,65,69,73]};
+for(const [name,first,last,source,basis,birth,death] of additions){
+ if(!sources[source])throw Error(`未登记来源 ${source}`);
+ const existing=supp.officers.find(o=>o.name===name),own=existing?.expansionBatch===batch;
+ if(!known.has(name)||own){
+  const values=historicalAbilities[name]||[50,40,55,55,55];
+  const home=Object.values(rosters).flat().find(g=>g[2].split(' ').includes(name))?.[1]||'luoyang';
+  const o={id:existing?.id||`late_${[...name].map(c=>c.codePointAt(0).toString(16)).join('_')}`,name,...Object.fromEntries(['command','war','intelligence','politics','charm'].map((k,i)=>[k,values[i]])),aptitude:{spear:'C',halberd:'C',crossbow:'C',cavalry:'C',siege:'C',navy:'C'},homeCity:home,debutYear:first,availableUntilYear:last,source:'史书',sourceTitle:sources[source][0],sourceUrl:sources[source][1],basis,statsBasis:'inferred',statsNote:'能力是依据事迹的游戏估值，不是史载数值；事迹不足者采用保守基准。',dateBasis:'出场按本批最早采用事迹年，不详生卒不补造',expansionBatch:batch,scenarioScope:['249_gaopingling','253_hefei','263_jiange','279_jianye']};
+  if(birth)o.birthYear=birth;if(death)o.deathYear=death;
+  if(own)supp.officers[supp.officers.indexOf(existing)]=o;else {supp.officers.push(o);added++}
+  known.set(name,o);
+ }
+ evidence.people.push({name,first,last,source,basis,...(birth?{birthYear:birth}:{}),...(death?{deathYear:death}:{})});
+}
+// 固定 ID，重复生成不按“本次新增数量”重新编号。
+const extraByName=new Map(additions.map(row=>[row[0],row]));
+for(const [name,override]of Object.entries(corrections)){const p={...known.get(name),...override};for(const k of ['birthYear','deathYear','debutYear'])if(p[k]===null)delete p[k];known.set(name,p)}
+const office=(id,name,seat=null,variant=null,self=false)=>[id,name,seat,variant,self];
+if(!court.offices.some(o=>o.id==='taifu'))court.offices.push({id:'taifu',name:'太傅',branch:'central',parent:'emperor',rank:'万石',grade:1,quota:1,legitimacy:30,duty:'辅导天子，魏晋多用于顾命辅政；不等于军队统帅。'});
+const definitions=[
+ {year:249,id:'249_gaopingling',name:'高平陵',date:'249-01-01',era:'正始十年',emperor:'曹芳',rulers:{cao:'曹芳',liu:'刘禅',sun:'孙权'},dynasty:'魏',default:'cao',brief:'正始十年年初，曹芳在位，曹爽与司马懿同受顾命而权势相争。取高平陵政变发生前的可干预时点，曹爽党羽尚在；蜀由费祎、姜维经略，吴值孙权暮年。开局月份按游戏历法作历史阶段近似，不声称公历与汉魏月日精确换算。',description:'高平陵政变前，曹爽掌禁军、司马懿隐忍待机；费祎制衡姜维，孙权暮年二宫相争。',offices:[office('dajiangjun','曹爽'),office('taifu','司马懿'),office('taiwei','蒋济'),office('shangshuling','司马孚'),office('sili','毕轨'),office('shangshu','何晏'),office('shangshu','邓飏'),office('shangshu','丁谧'),office('cheqi','王凌'),office('cishi','陈泰','并州'),office('cishi','郭淮','雍州'),office('cishi','令狐愚','兖州'),office('dajiangjun','费祎',null,null,true),office('weijiangjun','姜维',null,null,true)],capitals:{cao:'luoyang',liu:'chengdu',sun:'jianye'}},
+ {year:253,id:'253_hefei',name:'合肥新城',date:'253-03-01',era:'建兴二年',emperor:'曹芳',rulers:{cao:'曹芳',liu:'刘禅',sun:'孙亮'},dynasty:'魏',default:'sun',brief:'东兴战后，诸葛恪挟胜辅吴少主孙亮，谋攻合肥新城；蜀费祎已于正月遇刺，姜维北伐制约减弱。魏由司马师辅政，曹芳尚未被废，毌丘俭文钦尚未起兵；开局不预设诸葛恪必败或必死。',description:'东兴大捷之后，诸葛恪准备围合肥新城；费祎遇害，姜维将出陇右，司马师掌魏政。',offices:[office('dajiangjun','司马师'),office('taiwei','司马孚'),office('zhengjiangjun','郭淮',null,'征西将军'),office('cishi','陈泰','雍州'),office('zhengjiangjun','毌丘俭',null,'征东将军'),office('weijiangjun','姜维',null,null,true),office('taifu','诸葛恪',null,null,true),office('dajiangjun','诸葛恪',null,null,true)],capitals:{cao:'luoyang',liu:'chengdu',sun:'jianye'},dead:['费祎']},
+ {year:263,id:'263_jiange',name:'剑阁',date:'263-07-01',era:'景元四年',emperor:'曹奂',rulers:{cao:'曹奂',liu:'刘禅',sun:'孙休',lv_xing:'吕兴'},dynasty:'魏',default:'liu',brief:'景元四年夏，司马昭筹划大举伐蜀，钟会邓艾诸葛绪分别集结。姜维避黄皓屯沓中，北境诸围仍守，成都尚未失陷。吕兴已在交趾杀孙谞叛吴、求通魏，魏晋正式派官接收在后；作为交趾地方势力保留其过渡状态。',description:'魏军将伐蜀，姜维屯沓中；钟会邓艾分道集结，孙休待援，交趾吕兴新叛。',offices:[office('dajiangjun','司马昭'),office('taifu','司马孚'),office('zhengjiangjun','邓艾',null,'征西将军'),office('zhenjiangjun','钟会',null,'镇西将军'),office('tingwei','卫瓘'),office('cishi','诸葛绪','雍州'),office('dajiangjun','姜维',null,null,true),office('weijiangjun','诸葛瞻',null,null,true),office('chengxiang','濮阳兴',null,null,true),office('dajiangjun','丁奉',null,null,true)],capitals:{cao:'luoyang',liu:'chengdu',sun:'jianye',lv_xing:'jiaozhi'},dead:['孙谞']},
+ {year:279,id:'279_jianye',name:'建业',date:'279-11-01',era:'天纪三年／咸宁五年',emperor:'司马炎',rulers:{cao:'司马炎',sun:'孙皓',guo_ma:'郭马',tufa_shujineng:'秃发树机能'},dynasty:'晋',default:'sun',brief:'咸宁五年冬，晋将发多路大军伐吴，王濬在蜀造舟、杜预督荆州、王浑临淮南。吴羊祜、陆抗、丁奉等上一代名将已先后离世，孙皓仍据建业。广州郭马叛乱未平，凉州秃发树机能抗晋，马隆将率募士西进。疆域仍按既有郡县地图投影，边乱仅表示据点核心，不宣称占尽该州。',description:'晋军六路伐吴前夕；孙皓守江东，郭马乱广州，马隆将平凉州，王濬战舰待发。',offices:[office('taiwei','贾充'),office('situ','李胤'),office('sikong','司马攸'),office('shangshuling','卫瓘'),office('shizhong','张华'),office('zahao','王浑',null,'安东将军'),office('zhengjiangjun','司马骏',null,'征西将军'),office('zhenjiangjun','杜预',null,'镇南将军'),office('cishi','王戎','豫州'),office('zahao','王濬',null,'龙骧将军'),office('taishou','马隆','武威郡'),office('chengxiang','张悌',null,null,true),office('situ','何植',null,null,true),office('guanglu','薛莹',null,null,true),office('zhoumu','陶璜','交州',null,true),office('taishou','沈莹','丹阳郡',null,true),office('taishou','王毅','苍梧郡',null,true)],capitals:{cao:'luoyang',sun:'jianye',guo_ma:'panyu',tufa_shujineng:'xiliang'},dead:['虞授','修允']},
+];
+const civilian='辛宪英 张春华 羊徽瑜 王元姬 杨艳 杨芷 全氏（孙亮后） 滕氏（孙皓后） 阮籍 嵇康 向秀 郤诜 刘渊 曹髦 曹奂 孙鲁班 孙鲁育 陆机 陆云 诸葛京'.split(' ');
+const statsNames=['command','war','intelligence','politics','charm'];
+const named=new Set([...Object.values(rosters).flatMap(groups=>groups.flatMap(g=>g[2].split(' '))),...civilian,...additions.map(r=>r[0])]);
+for(const name of named)if(!known.has(name))throw Error(`人物资料缺失：${name}`);
+const exclusions=[],outSummary=[];
+for(const def of definitions){
+ const year=def.year,groups=rosters[year],assign={},audit=[],cityForces=structuredClone(base.patch.city_forces);
+ for(const c of cities){let force=cityForces[c.id]||'neutral';if(force==='gongsun_yuan')force='cao';if(c.commandery==='上庸郡')force='cao';if(['武都郡','阴平郡'].includes(c.commandery))force='liu';if(year===279&&force==='liu')force='cao';if(year===263&&['jiaozhi','commandery_city_103'].includes(c.id))force='lv_xing';if(year===279&&c.commandery==='南海郡')force='guo_ma';if(year===279&&c.commandery==='武威郡')force='tufa_shujineng';cityForces[c.id]=force}
+ // 交趾、广州与凉州仅围绕实际据点投影，不扩充/重绘任何郡界或陆海。
+ if(year===263)for(const c of cities)if(c.commandery==='交趾郡')cityForces[c.id]='lv_xing';
+ for(const [force,city,names,src,basis] of groups){if(!cityById.has(city))throw Error(`地点不存在 ${city}`);for(const name of names.split(' ')){
+  const p=known.get(name),row=extraByName.get(name),death=p.deathYear;
+  if(death&&death<year||row&&row[2]<year){exclusions.push({scenario:def.id,name,reason:'早于开局的参考卒年／采用区间，不配置为在任'});continue}
+  if((p.birthYear&&p.birthYear+14>year||corrections[name]?.debutYear>year)&&name!==def.rulers[force]){exclusions.push({scenario:def.id,name,reason:'未出生或尚幼，列未登场，不配置现职'});continue}
+  if(cityForces[city]!==force)throw Error(`${def.id} ${name} 驻敌城 ${city}：${cityForces[city]} != ${force}`);
+  assign[name]={force,city,loyalty:name===def.rulers[force]?100:80,stationBasis:basis,stationSource:sources[src][0],stationSourceUrl:sources[src][1],stationBasisType:'estimate',...Object.fromEntries(Object.entries(corrections[name]||{}).filter(([k])=>['birthYear','deathYear','debutYear'].includes(k)))};
+  audit.push({name,force,city,source:src,basis,locationBasis:'传记活动区域与现有节点的游戏近似；精确职务另见朝廷与方面'});
+ }}
+ const rosterNames=new Set(Object.keys(assign));
+ for(const name of named){const p=known.get(name),row=extraByName.get(name);if(p.deathYear&&p.deathYear<year||p.availableUntilYear&&p.availableUntilYear<year||row&&row[2]<year)continue;rosterNames.add(name)}
+ for(const name of def.dead||[]){const p=known.get(name);if(p){rosterNames.add(name);assign[name]={force:'neutral',city:name==='孙谞'?'jiaozhi':name==='虞授'||name==='修允'?'panyu':'luoyang',status:'dead',deathYear:year,loyalty:0,stationBasis:'本剧本起点前已遇害或病卒；年月按相关纪传核定，不沿用同年仍在世默认。'}}}
+ // 皇后、文士与未执军职宗室在家谱/人物中可见，不当作带兵官员。
+ for(const name of civilian)if(rosterNames.has(name)&&!assign[name]&&!(def.dead||[]).includes(name)){const p=known.get(name),row=extraByName.get(name),city=(name.startsWith('孙')||name.startsWith('全')||name.startsWith('滕')||name.startsWith('陆'))?'wu':name==='诸葛京'&&year<279?'chengdu':'luoyang';assign[name]={force:'neutral',city,status:(p.birthYear&&p.birthYear>year||Math.max(p.debutYear||0,row?.[1]||0)>year)?'not_appeared':'hidden',loyalty:0,stationBasis:'未载本期开局现职，作为家属、宗室或在野文士；不凭亲属身份授官。',...corrections[name]}}
+ const patch={forces:Object.entries(def.rulers).map(([id,name])=>({id,name,color:({cao:'#b89044',liu:'#637fa5',sun:'#a35448',lv_xing:'#7c8c67',guo_ma:'#b27a56',tufa_shujineng:'#8b79a6'})[id],capital:def.capitals[id],soldiers:0,cities:cities.filter(c=>(c.type||'city')==='city'&&cityForces[c.id]===id).length})).concat({id:'neutral',name:'地方官府',color:'#777568',soldiers:0,cities:cities.filter(c=>(c.type||'city')==='city'&&cityForces[c.id]==='neutral').length}),city_forces:cityForces,governors:{},officer_assignments:assign,officer_profiles:corrections,roster_names:[...rosterNames].sort(),roster_policy:{scope:'historical-curated',basis:'本批按史籍筛选；不载入未核对的早期在野者或演义独有人物。',sourceFile:'game/data/reference/late-scenario-evidence.json'},extra_officers:[],treaties:[],armies:[]};
+ const scenario={schema_version:2,id:def.id,name:def.name,start_date:def.date,map:base.map,default_player_force:def.default,playable_forces:Object.keys(def.rulers),description:def.description,historical_brief:def.brief,force_briefs:{},objectives:{},patch};
+ for(const [f,n]of Object.entries(def.rulers)){scenario.force_briefs[f]=({cao:year===279?'司马炎据晋廷，南北两线用兵；须协调荆州、益州与淮南大军。':'魏帝在位而大将军掌政；既须守关陇、淮南，也要处理朝中兵权与任官。',liu:'刘禅承蜀汉国统，经营汉中与南中；援军与粮道决定北境得失。',sun:year===279?'孙皓据江东，晋水军将顺江而下，广州又有郭马之乱，须重建江防。':'吴廷据江东与荆州，北拒魏军，与蜀保持联盟；地方江防与朝中继承同样重要。',lv_xing:'交趾吕兴已叛吴求附魏，正式接收未定；吴军将从合浦方向来攻。',guo_ma:'郭马据广州，遣将攻苍梧与始兴；吴军尚未平乱，晋军又将南下。',tufa_shujineng:'据凉州抗晋，马隆募兵西来；仅武威核心表示本方控制，不视为占尽河西。'})[f];scenario.objectives[f]=({cao:year===279?'协调多路攻吴，平定凉州，避免后方空虚':'保住魏廷与关陇淮南，协调中枢和边军',liu:'守住汉中、剑阁与永安，稳定成都和南中',sun:year===279?'守住长江上游与建业，平广州之乱':'保全江防，争取淮南战机，稳定朝局',lv_xing:'稳住交趾，争取北援，抵挡吴军',guo_ma:'保住广州据点，防吴军南下',tufa_shujineng:'保住武威核心，击退马隆西征'})[f]}
+ const ids=Object.keys(def.rulers);for(let a=0;a<ids.length;a++)for(let b=a+1;b<ids.length;b++){const x=ids[a],y=ids[b];patch.treaties.push({a:x,b:y,type:x==='liu'&&y==='sun'?'alliance':x==='cao'&&y==='lv_xing'?'non_aggression':x==='sun'&&y==='lv_xing'||x==='sun'&&y==='guo_ma'||x==='cao'&&y==='tufa_shujineng'||['cao','liu','sun'].includes(x)&&['cao','liu','sun'].includes(y)?'war':'non_aggression'})}
+ // 每个地方军区一支估计规模部队；非史载精确兵额，不从所有文官另造部曲。
+ const leaders=({249:['夏侯玄','郭淮','王凌','王昶','毌丘俭','费祎','姜维','邓芝','霍弋','朱然','陆抗','丁奉','陆凯'],253:['郭淮','陈泰','邓艾','毌丘俭','王昶','张特','姜维','夏侯霸','阎宇','霍弋','诸葛恪','丁奉','朱绩','陆抗','吕据'],263:['钟会','邓艾','诸葛绪','石苞','王基','姜维','胡济','傅佥','刘隐','阎宇','霍弋','陆抗','朱绩','丁奉','步协','陶璜','吕兴'],279:['王濬','杜预','王浑','司马伷','王戎','唐彬','马隆','张悌','伍延','孙歆','留宪','吾彦','陆晏','陆景','陶濬','滕修','陶璜','郭马','秃发树机能']})[year];
+ for(const [i,name]of leaders.entries()){const a=assign[name];if(!a||a.status)continue;const soldiers=name==='马隆'?3500:name==='刘隐'||name==='傅佥'?3000:['钟会','王濬','诸葛恪'].includes(name)?30000:['杜预','王浑','姜维','费祎','张悌','郭马'].includes(name)?18000:8000;const cavalry=['cao','tufa_shujineng'].includes(a.force)?Math.floor(soldiers*.2/100)*100:Math.floor(soldiers*.05/100)*100,archers=Math.floor(soldiers*.25/100)*100;patch.armies.push({id:`${def.id}_army_${i+1}`,name:`${name}所部`,force:a.force,city:a.city,commander:name,soldiers,units:{infantry:soldiers-cavalry-archers,cavalry,archers},morale:72,training:68,supply:80,stance:'驻扎',formation:'balanced',tactic:'balanced',soldiersBasis:name==='马隆'?'《晋书》卷57记募士三千五百人；日期、兵种拆分为近似。':'为开局平衡按军区与职责估计，非史载精确军额。'})}
+ for(const f of patch.forces)f.soldiers=patch.armies.filter(a=>a.force===f.id).reduce((n,a)=>n+a.soldiers,0);
+ // 任官表只钉住核对的分驻，不把军将、皇帝、随驻人员一概授为郡守。
+ const groupsByCity=new Map();for(const [name,a]of Object.entries(assign)){if(a.status)continue;const key=`${a.force}:${a.city}:${a.stationSourceUrl}`,g=groupsByCity.get(key)||{city:a.city,force:a.force,governor:null,staff:[],basis:'按本批纪传核对所属及活动区域；仅随驻，不由此授太守。',source:'史籍分驻审校',sourceUrl:a.stationSourceUrl,expansionBatch:batch};g.staff.push(name);groupsByCity.set(key,g)}
+ postings.scenarios[def.id]=[...groupsByCity.values()];
+ // 方面只采用明确军事负责人；辖区按当前地图映射，不冒充魏晋真实州郡新划界。
+ const command={};for(const f of ids){command[f]={central:{},posts:[]};const relevant=patch.armies.filter(a=>a.force===f);for(const army of relevant){const c=cityById.get(army.city),rulerCity=cityById.get(assign[def.rulers[f]]?.city);if(c.commandery===rulerCity?.commandery)continue;const parent=command[f].posts.find(p=>p.commanderies.includes(c.commandery));if(parent){(parent.subordinateCommanders??=[]).push(army.commander);continue}const title=({'王濬':'益州水军','杜预':'都督荆州诸军事','王浑':'都督扬州诸军事','司马伷':'都督徐州诸军事','郭淮':'关陇军务','陈泰':'雍州军务','姜维':'北境军务','费祎':'大将军军府','诸葛恪':'太傅大将军府','马隆':'讨凉募军','陶璜':'交州军务','陆抗':'吴西线军务'})[army.commander]||`${c.name}军务`;command[f].posts.push({kind:'dudu',holder:army.commander,commanderies:[c.commandery],title,basis:'据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。',sourceUrl:assign[army.commander].stationSourceUrl})}}
+ postings.commands[def.id]=command;
+ const offices=def.offices.filter(row=>assign[row[1]]&&!assign[row[1]].status);for(const row of offices)if(!court.offices.some(o=>o.id===row[0]))throw Error(`无官职${row[0]}`);
+ court.scenarios[def.id]={dynasty:def.dynasty,emperor:{name:def.emperor,temple:year===279?'武帝':'魏帝',era:year===249?'正始':year===253?'嘉平':year===263?'景元':'咸宁',status:'reigning'},capital:'luoyang',controller:'cao',authority:year===279?75:50,control:90,usurpers:ids.filter(id=>['liu','sun'].includes(id)),han_loyalty:Object.fromEntries(ids.map(id=>[id,id==='cao'?100:10])),offices,titles:[],ruler_styles:Object.fromEntries(Object.entries(def.rulers).map(([id,n])=>[id,id==='cao'?`${def.dynasty}帝 · ${n}`:id==='liu'?`汉帝 · 刘禅（自立）`:id==='sun'?`吴帝 · ${n}（自立）`:'地方军首领']))};
+ profiles.scenarios[def.id]=structuredClone(profiles.scenarios['228_tianshui']||profiles.scenarios['219_xiangyang']||{default:{}});profiles.scenarios[def.id].basis='沿用后期剧本资源尺度作游戏估计，不将汉代户口当成本年实测人口。';
+ const entry={id:def.id,name:def.name,date:`${def.era} / ${year}年${year===279?'冬':year===263?'夏':year===253?'春':'初'}`,description:def.description,enabled:true,definition:`${def.id}.json`};const at=catalog.scenarios.findIndex(e=>e.id===def.id);if(at<0)catalog.scenarios.push(entry);else catalog.scenarios[at]=entry;
+ write(hist+`scenarios/${def.id}.json`,scenario);evidence.scenarios[def.id]={startDate:def.date,assignments:[...new Map(audit.map(a=>[a.name,a])).values()],rosterCount:rosterNames.size};outSummary.push({scenario:def.id,serving:Object.values(assign).filter(a=>!a.status).length,roster:rosterNames.size,armies:patch.armies.length});
+}
+// 后期家系：有明确父子／夫妻关系才连边；不把同姓一律视为同族。
+const familyRows=[
+ ['late_sima','河内司马氏','sima',[['司马懿','司马师','父子'],['司马懿','司马昭','父子'],['司马昭','司马炎','父子'],['司马昭','司马攸','父子'],['司马师','羊徽瑜','夫妻'],['司马昭','王元姬','夫妻'],['司马懿','司马骏','父子'],['司马懿','司马伷','父子']],['j2','j31','j38']],
+ ['late_tao','丹阳陶璜家系',null,[['陶基','陶璜','父子'],['陶基','陶濬','父子'],['陶基','陶抗','父子'],['陶璜','陶融','父子'],['陶璜','陶威','父子']],['j57']],
+ ['late_luo','襄阳罗宪家系',null,[['罗蒙','罗宪','父子'],['罗宪','罗袭','父子']],['j57']],
+ ['late_liu_bao','匈奴刘豹家系',null,[['刘豹','刘渊','父子']],['j101']],
+ ['late_yang','弘农杨氏晋初支系',null,[['杨骏','杨芷','父女'],['司马炎','杨芷','夫妻'],['司马炎','杨艳','夫妻']],['j31','j40']],
+ ['late_lu','吴郡陆抗家系','lu',[['陆逊','陆抗','父子'],['陆抗','陆晏','父子'],['陆抗','陆景','父子'],['陆抗','陆机','父子'],['陆抗','陆云','父子']],['s58']],
+ ];
+for(const [id,name,clanId,kin,src]of familyRows){const members=[...new Set(kin.flatMap(e=>e.slice(0,2)))],existing=families.families.find(f=>f.id===id||f.clanId===id);if(existing){existing.members=[...new Set([...existing.members,...members])];existing.scenarioScope=definitions.map(d=>d.id);existing.kin=existing.id.startsWith('late_')?kin:[...new Map([...existing.kin,...kin].map(e=>[JSON.stringify(e),e])).values()]}else families.families.push({id,name,clanId,members,kin,scenarioScope:definitions.map(d=>d.id),people:{},sources:src.map(k=>({title:sources[k][0],url:sources[k][1]})),basis:'魏晋家系按所引纪传补录；没有资料不建立远支关系。'})}
+write(hist+'officers_supplement.json',supp);write(hist+'officer_postings.json',postings);write(common+'han_court.json',court);write(common+'genealogies.json',families);write(hist+'city_resource_profiles.json',profiles);fs.writeFileSync(hist+'scenarios/index.json',JSON.stringify({schema_version:catalog.schema_version}).slice(0,-1)+',"scenarios":[\n'+catalog.scenarios.map(e=>'  '+JSON.stringify(e)).join(',\n')+'\n]}\n');evidence.excludedAssignments=exclusions;write(root+'reference/late-scenario-evidence.json',evidence);
+console.log(JSON.stringify({addedOfficers:added,scenarios:outSummary,excluded:exclusions.length},null,2));
