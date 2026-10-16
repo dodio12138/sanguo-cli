@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://jiuzhou.local/schema/save.schema.json",
+  "$id": "https://sanguo.local/schema/save.schema.json",
   "title": "终端三国存档",
   "type": "object",
   "required": ["version","scenarioId","playerForceId","turn","date","resources","world"],

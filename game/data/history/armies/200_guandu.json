@@ -1,21 +1,512 @@
 {
   "schema_version": 1,
   "armies": [
-    {"id":"cao_central","name":"中军","force":"cao","city":"xuchang","commander":"曹操","soldiers":18000,"units":{"infantry":10000,"cavalry":5000,"archers":3000},"morale":88,"training":78},
-    {"id":"cao_west","name":"虎豹营","force":"cao","city":"luoyang","commander":"夏侯惇","soldiers":9000,"units":{"infantry":3000,"cavalry":5000,"archers":1000},"morale":82,"training":84},
-    {"id":"yuan_vanguard","name":"河北先锋","force":"yuan","city":"ye","commander":"颜良","soldiers":24000,"units":{"infantry":15000,"cavalry":7000,"archers":2000},"morale":79,"training":72},
-    {"id":"liu_left","name":"左将军本队","force":"liu","city":"xiapi","commander":"刘备","soldiers":8000,"units":{"infantry":5500,"cavalry":1000,"archers":1500},"morale":91,"training":76},
-    {"id":"sun_jiangdong","name":"江东军","force":"sun","city":"jianye","commander":"孙策","soldiers":13000,"units":{"infantry":7000,"cavalry":2500,"archers":3500},"morale":90,"training":82},
-    {"id":"liu_biao_jingzhou","name":"荆州军","force":"liu_biao","city":"xiangyang","commander":"文聘","soldiers":12000,"units":{"infantry":7500,"cavalry":1500,"archers":3000},"morale":78,"training":74},
-    {"id":"liu_zhang_shu","name":"益州军","force":"liu_zhang","city":"chengdu","commander":"张任","soldiers":11000,"units":{"infantry":8000,"cavalry":1000,"archers":2000},"morale":76,"training":68,"supply":90,"stance":"驻扎"},
-    {"id":"zhang_lu_hanzhong","name":"汉中守军","force":"zhang_lu","city":"hanzhong","commander":"杨任","soldiers":7000,"units":{"infantry":4800,"cavalry":700,"archers":1500},"morale":78,"training":66,"supply":88,"stance":"驻扎"},
-    {"id":"ma_teng_liangzhou","name":"西凉铁骑","force":"ma_teng","city":"commandery_city_007","commander":"马超","soldiers":8500,"units":{"infantry":2500,"cavalry":5200,"archers":800},"morale":86,"training":78,"supply":85,"stance":"驻扎"},
-    {"id":"han_sui_anding","name":"金城军","force":"han_sui","city":"anding","commander":"韩遂","soldiers":6500,"units":{"infantry":3500,"cavalry":2300,"archers":700},"morale":76,"training":72,"supply":82,"stance":"驻扎"},
-    {"id":"gongsun_du_liaodong","name":"辽东军","force":"gongsun_du","city":"xiangping","commander":"公孙度","soldiers":5200,"units":{"infantry":3500,"cavalry":1200,"archers":500},"morale":74,"training":65,"supply":88,"stance":"驻扎"},
-    {"id":"shi_xie_200","name":"士燮部","force":"shi_xie","city":"jiaozhi","commander":"士燮","soldiers":6000,"units":{"infantry":3600,"cavalry":1500,"archers":900},"morale":72,"training":64,"supply":84,"stance":"驻扎"},
-    {"id":"zhang_jin_200","name":"张津部","force":"zhang_jin","city":"cangwu","commander":"张津","soldiers":4000,"units":{"infantry":2400,"cavalry":1000,"archers":600},"morale":72,"training":64,"supply":84,"stance":"驻扎"},
-    {"id":"handan_shang_200","name":"邯郸商部","force":"handan_shang","city":"commandery_city_074","commander":"邯郸商","soldiers":4000,"units":{"infantry":2400,"cavalry":1000,"archers":600},"morale":72,"training":64,"supply":84,"stance":"驻扎"},
-    {"id":"zhang_meng_200","name":"张猛部","force":"zhang_meng","city":"xiliang","commander":"张猛","soldiers":5000,"units":{"infantry":3000,"cavalry":1250,"archers":750},"morale":72,"training":64,"supply":84,"stance":"驻扎"},
-    {"id":"wei_duan_200","name":"韦端部","force":"wei_duan","city":"tianshui","commander":"韦端","soldiers":4000,"units":{"infantry":2400,"cavalry":1000,"archers":600},"morale":72,"training":64,"supply":84,"stance":"驻扎"}
+    {
+      "id": "cao_central",
+      "name": "中军",
+      "force": "cao",
+      "city": "xuchang",
+      "commander": "曹操",
+      "soldiers": 13000,
+      "units": {
+        "infantry": 7222,
+        "cavalry": 3611,
+        "archers": 2167
+      },
+      "morale": 88,
+      "training": 78,
+      "deputyOfficerIds": [
+        "koei11_260",
+        "koei11_492"
+      ],
+      "formation": "balanced",
+      "tactic": "cautious",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "originalSoldiers": 18000,
+        "originalUnits": {
+          "infantry": 10000,
+          "cavalry": 5000,
+          "archers": 3000
+        }
+      }
+    },
+    {
+      "id": "cao_west",
+      "name": "虎豹营",
+      "force": "cao",
+      "city": "luoyang",
+      "commander": "夏侯惇",
+      "soldiers": 9000,
+      "units": {
+        "infantry": 3000,
+        "cavalry": 5000,
+        "archers": 1000
+      },
+      "morale": 82,
+      "training": 84,
+      "deputyOfficerIds": [
+        "supp_081",
+        "history_han_fu_luoyang"
+      ],
+      "formation": "wedge",
+      "tactic": "aggressive"
+    },
+    {
+      "id": "yuan_vanguard",
+      "name": "河北先锋",
+      "force": "yuan",
+      "city": "ye",
+      "commander": "颜良",
+      "soldiers": 19000,
+      "units": {
+        "infantry": 11875,
+        "cavalry": 5542,
+        "archers": 1583
+      },
+      "morale": 79,
+      "training": 72,
+      "deputyOfficerIds": [
+        "koei11_412",
+        "koei11_304"
+      ],
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "originalSoldiers": 24000,
+        "originalUnits": {
+          "infantry": 15000,
+          "cavalry": 7000,
+          "archers": 2000
+        }
+      }
+    },
+    {
+      "id": "liu_left",
+      "name": "左将军本队",
+      "force": "liu",
+      "city": "xiapi",
+      "commander": "刘备",
+      "soldiers": 8000,
+      "units": {
+        "infantry": 5500,
+        "cavalry": 1000,
+        "archers": 1500
+      },
+      "morale": 91,
+      "training": 76,
+      "deputyOfficerIds": [
+        "koei11_99",
+        "history_liu_yan_weishuo"
+      ],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "sun_jiangdong",
+      "name": "江东军",
+      "force": "sun",
+      "city": "jianye",
+      "commander": "孙策",
+      "soldiers": 9800,
+      "units": {
+        "infantry": 5277,
+        "cavalry": 1885,
+        "archers": 2638
+      },
+      "morale": 90,
+      "training": 82,
+      "deputyOfficerIds": [
+        "koei11_662",
+        "koei11_295"
+      ],
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "originalSoldiers": 13000,
+        "originalUnits": {
+          "infantry": 7000,
+          "cavalry": 2500,
+          "archers": 3500
+        }
+      }
+    },
+    {
+      "id": "liu_biao_jingzhou",
+      "name": "荆州军",
+      "force": "liu_biao",
+      "city": "xiangyang",
+      "commander": "文聘",
+      "soldiers": 9000,
+      "units": {
+        "infantry": 5625,
+        "cavalry": 1125,
+        "archers": 2250
+      },
+      "morale": 78,
+      "training": 74,
+      "deputyOfficerIds": [
+        "koei11_220",
+        "koei11_55"
+      ],
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "originalSoldiers": 12000,
+        "originalUnits": {
+          "infantry": 7500,
+          "cavalry": 1500,
+          "archers": 3000
+        }
+      }
+    },
+    {
+      "id": "liu_zhang_shu",
+      "name": "益州军",
+      "force": "liu_zhang",
+      "city": "chengdu",
+      "commander": "张任",
+      "soldiers": 11000,
+      "units": {
+        "infantry": 8000,
+        "cavalry": 1000,
+        "archers": 2000
+      },
+      "morale": 76,
+      "training": 68,
+      "supply": 90,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_210",
+        "koei11_593"
+      ],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "zhang_lu_hanzhong",
+      "name": "汉中守军",
+      "force": "zhang_lu",
+      "city": "hanzhong",
+      "commander": "杨任",
+      "soldiers": 7000,
+      "units": {
+        "infantry": 4800,
+        "cavalry": 700,
+        "archers": 1500
+      },
+      "morale": 78,
+      "training": 66,
+      "supply": 88,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_443",
+        "koei11_22"
+      ],
+      "formation": "balanced",
+      "tactic": "aggressive"
+    },
+    {
+      "id": "ma_teng_liangzhou",
+      "name": "西凉铁骑",
+      "force": "ma_teng",
+      "city": "commandery_city_007",
+      "commander": "马超",
+      "soldiers": 8500,
+      "units": {
+        "infantry": 2500,
+        "cavalry": 5200,
+        "archers": 800
+      },
+      "morale": 86,
+      "training": 78,
+      "supply": 85,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_559",
+        "koei11_513"
+      ],
+      "formation": "wedge",
+      "tactic": "aggressive"
+    },
+    {
+      "id": "han_sui_anding",
+      "name": "金城军",
+      "force": "han_sui",
+      "city": "anding",
+      "commander": "韩遂",
+      "soldiers": 6500,
+      "units": {
+        "infantry": 3500,
+        "cavalry": 2300,
+        "archers": 700
+      },
+      "morale": 76,
+      "training": 72,
+      "supply": 82,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_584",
+        "koei11_465"
+      ],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "gongsun_du_liaodong",
+      "name": "辽东军",
+      "force": "gongsun_du",
+      "city": "xiangping",
+      "commander": "公孙度",
+      "soldiers": 5200,
+      "units": {
+        "infantry": 3500,
+        "cavalry": 1200,
+        "archers": 500
+      },
+      "morale": 74,
+      "training": 65,
+      "supply": 88,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "history_liu_yi_liaodong",
+        "history_yang_yi_liaodong"
+      ],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "shi_xie_200",
+      "name": "士燮部",
+      "force": "shi_xie",
+      "city": "jiaozhi",
+      "commander": "士燮",
+      "soldiers": 6000,
+      "units": {
+        "infantry": 3600,
+        "cavalry": 1500,
+        "archers": 900
+      },
+      "morale": 72,
+      "training": 64,
+      "supply": 84,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_469",
+        "koei11_144"
+      ],
+      "formation": "balanced",
+      "tactic": "cautious"
+    },
+    {
+      "id": "zhang_jin_200",
+      "name": "张津部",
+      "force": "zhang_jin",
+      "city": "cangwu",
+      "commander": "张津",
+      "soldiers": 4000,
+      "units": {
+        "infantry": 2400,
+        "cavalry": 1000,
+        "archers": 600
+      },
+      "morale": 72,
+      "training": 64,
+      "supply": 84,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "handan_shang_200",
+      "name": "邯郸商部",
+      "force": "handan_shang",
+      "city": "commandery_city_074",
+      "commander": "邯郸商",
+      "soldiers": 4000,
+      "units": {
+        "infantry": 2400,
+        "cavalry": 1000,
+        "archers": 600
+      },
+      "morale": 72,
+      "training": 64,
+      "supply": 84,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "formation": "balanced",
+      "tactic": "cautious"
+    },
+    {
+      "id": "zhang_meng_200",
+      "name": "张猛部",
+      "force": "zhang_meng",
+      "city": "xiliang",
+      "commander": "张猛",
+      "soldiers": 5000,
+      "units": {
+        "infantry": 3000,
+        "cavalry": 1250,
+        "archers": 750
+      },
+      "morale": 72,
+      "training": 64,
+      "supply": 84,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "formation": "balanced",
+      "tactic": "balanced"
+    },
+    {
+      "id": "wei_duan_200",
+      "name": "韦端部",
+      "force": "wei_duan",
+      "city": "tianshui",
+      "commander": "韦端",
+      "soldiers": 4000,
+      "units": {
+        "infantry": 2400,
+        "cavalry": 1000,
+        "archers": 600
+      },
+      "morale": 72,
+      "training": 64,
+      "supply": 84,
+      "stance": "驻扎",
+      "deputyOfficerIds": [
+        "koei11_590",
+        "history_wei_kang"
+      ],
+      "formation": "balanced",
+      "tactic": "cautious"
+    },
+    {
+      "id": "200_guandu_retinue_koei11_79",
+      "name": "夏侯渊部",
+      "force": "cao",
+      "city": "chenliu",
+      "commander": "夏侯渊",
+      "commanderOfficerId": "koei11_79",
+      "soldiers": 5000,
+      "units": {
+        "infantry": 2778,
+        "cavalry": 1389,
+        "archers": 833
+      },
+      "morale": 88,
+      "training": 78,
+      "supply": 100,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "staffOfficerId": null,
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "splitFrom": "cao_central",
+        "basis": "inferred",
+        "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+        "stationBasis": null,
+        "stationSource": null,
+        "stationSourceUrl": null
+      }
+    },
+    {
+      "id": "200_guandu_retinue_koei11_546",
+      "name": "文丑部",
+      "force": "yuan",
+      "city": "ye",
+      "commander": "文丑",
+      "commanderOfficerId": "koei11_546",
+      "soldiers": 5000,
+      "units": {
+        "infantry": 3125,
+        "cavalry": 1458,
+        "archers": 417
+      },
+      "morale": 79,
+      "training": 72,
+      "supply": 100,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "staffOfficerId": null,
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "splitFrom": "yuan_vanguard",
+        "basis": "inferred",
+        "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+        "stationBasis": null,
+        "stationSource": null,
+        "stationSourceUrl": null
+      }
+    },
+    {
+      "id": "200_guandu_retinue_koei11_467",
+      "name": "程普部",
+      "force": "sun",
+      "city": "chaisang",
+      "commander": "程普",
+      "commanderOfficerId": "koei11_467",
+      "soldiers": 3200,
+      "units": {
+        "infantry": 1723,
+        "cavalry": 615,
+        "archers": 862
+      },
+      "morale": 90,
+      "training": 82,
+      "supply": 100,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "staffOfficerId": null,
+      "formation": "balanced",
+      "tactic": "balanced",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "splitFrom": "sun_jiangdong",
+        "basis": "inferred",
+        "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+        "stationBasis": null,
+        "stationSource": null,
+        "stationSourceUrl": null
+      }
+    },
+    {
+      "id": "200_guandu_retinue_koei11_119",
+      "name": "甘宁部",
+      "force": "liu_biao",
+      "city": "xiakou",
+      "commander": "甘宁",
+      "commanderOfficerId": "koei11_119",
+      "soldiers": 3000,
+      "units": {
+        "infantry": 1875,
+        "cavalry": 375,
+        "archers": 750
+      },
+      "morale": 78,
+      "training": 74,
+      "supply": 100,
+      "stance": "驻扎",
+      "deputyOfficerIds": [],
+      "staffOfficerId": null,
+      "formation": "balanced",
+      "tactic": "aggressive",
+      "initialDeployment": {
+        "batch": "initial-retinues-2026-10-15",
+        "splitFrom": "liu_biao_jingzhou",
+        "basis": "inferred",
+        "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+        "stationBasis": null,
+        "stationSource": null,
+        "stationSourceUrl": null
+      }
+    }
   ]
 }

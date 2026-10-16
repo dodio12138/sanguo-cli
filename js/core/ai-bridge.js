@@ -1,6 +1,6 @@
 window.AIBridge = class AIBridge {
   constructor(state){this.state=state;this.audit=[];}
-  manifest(){const object=(properties={},required=[])=>({type:"object",properties,required,additionalProperties:false}),string={type:"string"};return {name:"jiuzhou-strategy",version:"1.0",phase:"planning",connection:{connected:false,mode:this.state.controlMode||"manual"},tools:[
+  manifest(){const object=(properties={},required=[])=>({type:"object",properties,required,additionalProperties:false}),string={type:"string"};return {name:"sanguo-strategy",version:"1.0",phase:"planning",connection:{connected:false,mode:this.state.controlMode||"manual"},tools:[
     {name:"list_commands",description:"列出游戏命令及参数定义",readOnly:true,inputSchema:object({category_id:string})},
     {name:"inspect_command",description:"查询单条命令的完整说明、分类、状态与参数约定；提交前先查不熟悉的命令",readOnly:true,inputSchema:object({command_id:string},["command_id"])},
     {name:"inspect_turn_reports",description:"按日查询本局战报/日报历史，包含实际下达命令与结算反馈；可查指定日期或按日期范围分页",readOnly:true,inputSchema:object({turn:{type:"integer"},from_turn:{type:"integer"},to_turn:{type:"integer"},limit:{type:"integer",minimum:1,maximum:30}})},

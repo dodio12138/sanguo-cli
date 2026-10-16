@@ -42,9 +42,9 @@ Object.assign(window.RuleEngine.prototype,{
   // 清理：去空、小 POP 并入同处编户农民、超出软上限时把最小的并入同阶层最大者。
   popCompact(place){const rules=this.popRules();if(!place.pops)return;place.pops=place.pops.filter(p=>total(p)>0||p[HH]>0);
     const absorb=(small,into)=>{if(small===into)return;const before=total(into),amount=total(small),after=before+amount;if(after>0){into[RR]=r2((into[RR]*before+small[RR]*amount)/after);into[HP]=r2((into[HP]*before+small[HP]*amount)/after)}for(let i=0;i<4;i++)into[CH+i]+=small[CH+i];into[HH]+=small[HH];place.pops.splice(place.pops.indexOf(small),1)};
-    const anchor=()=>place.pops.find(p=>p[OCC]===FARM&&p[CLS]===FREE)||place.pops.slice().sort((a,b)=>total(b)-total(a))[0];
-    for(const pop of place.pops.slice())if(total(pop)<rules.min_pop&&place.pops.length>1){const into=anchor();if(into&&into!==pop)absorb(pop,into)}
-    while(place.pops.length>rules.max_pops){const sorted=place.pops.slice().sort((a,b)=>total(a)-total(b)),small=sorted[0],into=sorted.slice(1).reverse().find(p=>p[CLS]===small[CLS])||sorted.at(-1);absorb(small,into)}},
+    const protectedPop=p=>String(p[CLAN]).startsWith("household:"),anchor=()=>place.pops.find(p=>!protectedPop(p)&&p[OCC]===FARM&&p[CLS]===FREE)||place.pops.filter(p=>!protectedPop(p)).sort((a,b)=>total(b)-total(a))[0];
+    for(const pop of place.pops.slice())if(!protectedPop(pop)&&total(pop)<rules.min_pop&&place.pops.length>1){const into=anchor();if(into&&into!==pop)absorb(pop,into)}
+    while(place.pops.length>rules.max_pops){const sorted=place.pops.filter(p=>!protectedPop(p)).sort((a,b)=>total(a)-total(b));if(sorted.length<2)break;const small=sorted[0],into=sorted.slice(1).reverse().find(p=>p[CLS]===small[CLS])||sorted.at(-1);absorb(small,into)}},
   popRescale(place,target){const current=place.pops.reduce((n,p)=>n+total(p),0);target=Math.max(0,Math.round(target));if(current===target||!place.pops.length)return;if(!current){place.pops=[];place.population=target;delete place.pops;return}const factor=target/current;
     for(const p of place.pops){for(let i=0;i<4;i++)p[CH+i]=Math.floor(p[CH+i]*factor);p[HH]=Math.round(p[HH]*factor)}const diff=target-place.pops.reduce((n,p)=>n+total(p),0);place.pops[0][AM]+=diff;this.popSync(place)},
   popSync(place){if(!place.pops)return;let all=0,registered=0,households=0,regHouseholds=0;for(const p of place.pops){const n=total(p);all+=n;registered+=n*p[RR];households+=p[HH];regHouseholds+=p[HH]*p[RR]}
@@ -117,18 +117,23 @@ Object.assign(window.RuleEngine.prototype,{
           if(toClan)this.popMove(place,p,amount*toClan,FARM,DEP,top[0],{householdFactor:1.6,registered:registrationTarget.dependent(top[0])});this.popMove(place,p,amount*(1-toClan)/(1-amount*toClan),FARM,FREE,"",{householdFactor:1.6,registered:.6});continue}
         const dest=this.popMigrationTarget(state,place);if(!dest)continue;const packet=this.popSplit(p,rules.refugee.migrate);let lost=0;packet.buckets=packet.buckets.map(v=>{const gone=Math.floor(v*rules.refugee.loss);lost+=gone;return v-gone});state.popStats.lost+=lost;this.popAdd(dest,FARM,DRIFT,"",packet.buckets,packet.households,rules.registered[DRIFT],packet.health);this.popCompact(dest);this.popSync(dest)}
       this.popCompact(place);this.popSync(place)}
-    this.runClanAI?.(state,events)},
+    this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
   popMigrationTarget(state,place){let best=null;for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const {food,war,node}=this.popConditions(state,dest),crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1),score=food*2+(node.order||50)/100-war*2-crowd*3;if(score>1.6&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
   // 登记率目标：编户看户曹（或世家县令）能力，依附户看世家与据点主的关系。
   registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=magistrate?magistrate.ability:(this.officialProfile?.(node,"population")?.score??45),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
     return {free,dependent:clanId=>Math.max(.2,Math.min(.8,rules.dependent_base*this.clanRelation(state,clanId,node.force)/60))}},
+
+  // 对外共用县报：历史分配记录只作为底层账目，界面按县合计，不消费随机数或写 POP。
+  countyPopulationPlaces(city){return [...new Map([city,...this.countiesForCity(city.id)].map(place=>[place.id,place])).values()]},
+  countyPopulationReport(state,city){const places=this.countyPopulationPlaces(city),reports=places.map(p=>this.popReport(state,p)),sum=key=>reports.reduce((n,r)=>n+(r[key]||0),0);return {places,registered:sum("registered"),registeredHouseholds:sum("registeredHouseholds"),estimate:sum("estimate"),refugees:sum("refugees"),recruitable:sum("recruitable"),error:reports.length?Math.max(...reports.map(r=>r.error)):0}},
 
   // —— 县报：本方看登记数为准，真实人口只有估计 ——
   popReport(state,place){const rules=this.popRules().estimate,node=this.popNode(place),inspected=state.clans?.inspections?.[node.id],years=inspected==null?3:Math.max(0,(state.turn-inspected)/360),error=Math.min(rules.max,rules.base+years*rules.per_year);
     const seed=[...place.id].reduce((n,c)=>n+c.charCodeAt(0),0)+Math.floor(state.turn/90),bias=((seed*9301+49297)%233280)/233280*2-1,truth=place.population||0;
     const drift=(place.pops||[]).filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0);
     return {registered:this.registeredPopulation(place),registeredHouseholds:place.registeredHouseholds??place.households??0,estimate:Math.max(this.registeredPopulation(place),Math.round(truth*(1+bias*error)/100)*100),error,refugees:Math.round(drift*(1+bias*error)/100)*100,recruitable:this.recruitableAt(state,place)}},
-  popComposition(place){const rows=new Map();for(const p of place.pops||[]){const label=p[CLS]===DRIFT?"流民":p[CLS]===DEP?`${this.clanName?.(p[CLAN])||"世家"}依附户`:["农户","工商","士吏"][p[OCC]];const row=rows.get(label)||{label,people:0,registered:0,households:0,adultMales:0};row.people+=total(p);row.registered+=Math.round(total(p)*p[RR]);row.households+=Math.round(p[HH]*p[RR]);row.adultMales+=p[AM];rows.set(label,row)}return [...rows.values()]}
+  popComposition(place){const rows=new Map();for(const p of place.pops||[]){const label=p[CLS]===DRIFT?"流民":p[CLS]===DEP?`${this.clanName?.(p[CLAN])||"世家"}依附户`:["农户","工商","士吏"][p[OCC]];const row=rows.get(label)||{label,clanId:p[CLS]===DEP?p[CLAN]:null,people:0,registered:0,households:0,adultMales:0};row.people+=total(p);row.registered+=total(p)*p[RR];row.households+=p[HH]*p[RR];row.adultMales+=p[AM];rows.set(label,row)}// 先合计后取整，并按小数余数分配尾差；分类合计与县报一致，不改实际 POP。
+    const result=[...rows.values()];for(const key of ["registered","households"]){const target=Math.round(result.reduce((n,r)=>n+r[key],0)),ranked=result.map((row,index)=>({row,index,remainder:row[key]-Math.floor(row[key])})).sort((a,b)=>b.remainder-a.remainder||a.index-b.index);for(const row of result)row[key]=Math.floor(row[key]);const extra=target-result.reduce((n,r)=>n+r[key],0);for(let i=0;i<extra;i++)ranked[i].row[key]++}return result}
 });
 window.RuleEngine.POP={OCC,CLS,CLAN,CH,AM,AF,EL,HH,RR,HP,FARM,TRADE,SCHOLAR,FREE,DEP,DRIFT,total};
 })();

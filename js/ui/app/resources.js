@@ -1,6 +1,8 @@
 // 府库与预估：资源栏、收支变化明细、本旬命令预估、府库窗口与阶段目标。
 SanguoApp.define("resources",app=>{
   const {$,esc,state,toast}=app;
+  document.addEventListener("click",event=>{const button=event.target.closest?.("[data-cargo-route]");if(!button)return;if(!app.map.focusShipment(button.dataset.cargoRoute)){toast("该批粮食已送达或运输记录已失效");return}button.closest("dialog")?.querySelector('.os-dialog-buttons button[aria-label="最小化窗口"]')?.click();document.querySelector('.os-app-launcher[data-shortcut-window="mapWindow"]')?.click();app.map.canvas.scrollIntoView?.({block:"nearest",inline:"nearest"})});
+  document.addEventListener("click",event=>{const button=event.target.closest?.("[data-supply-config], [data-supply-build]");if(!button||state.observerMode)return;const command=state.data.commandCatalog.commands.find(c=>c.id===(button.hasAttribute("data-supply-build")?"build_supply_depot":"set_supply_route")),supplyLine=FiscalSystem.supplyRoutes(state).find(line=>line.id===button.dataset.supplyConfig);if(!command)return;FiscalUI.open({command,state,supplyLine,contextCity:state.data.cities.find(c=>c.id===supplyLine?.sourceCityId)||state.selected?.value,dialog:$("plannerDialog"),form:$("plannerForm"),title:$("plannerTitle"),toast,map:app.map})});
   function renderResources(){
     FiscalSystem.initialize(state);
     for(const [id,key,unit] of [["goldValue","gold","贯"],["foodValue","food","石"],["silkValue","silk","品"]])$(id).textContent=state.observerMode?"—":`${state.resources[key].toLocaleString()}${unit}`;

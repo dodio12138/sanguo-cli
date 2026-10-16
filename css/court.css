@@ -111,7 +111,12 @@
 
 /* 幕府：本势力官制图与方面指挥 */
 .force-command-dialog{width:min(1180px,calc(100vw - 24px));max-width:none}
-.cmd-chart{max-height:min(46vh,460px)}
+.cmd-chart{cursor:auto;max-height:min(66vh,700px);border:1px solid var(--line-dim);overscroll-behavior:contain;scrollbar-gutter:stable}
+.cmd-structure .chart-node{min-width:108px;max-width:145px;text-align:center}
+.cmd-structure .chart-node small{white-space:normal;overflow-wrap:anywhere}
+.cmd-structure .chart-node b{color:#ecd99a;font-size:12px}
+.cmd-structure .is-root{min-width:150px}
+.cmd-structure .is-root b{font-size:16px}
 .cmd-node{cursor:pointer;font:inherit;text-align:center}
 .cmd-node span{display:block;font-size:9px;color:var(--muted)}
 .cmd-node.is-selected{border-color:#e0bd55;box-shadow:0 0 0 1px #e0bd55}
@@ -135,6 +140,52 @@
 .cmd-juns div{display:flex;justify-content:space-between;gap:6px;font-size:8px;color:var(--muted);white-space:nowrap}
 .cmd-juns b{color:#cfc89c;font-weight:500}
 .cmd-toggle{justify-self:center;margin-top:2px;border:1px solid var(--line-dim);background:#0b100c;color:#a9a07a;font-size:8px;padding:0 6px;cursor:pointer}
+/* 方面管理：纵向隶属树与详情并列，分别滚动；官制图独立展示架构。 */
+.force-command-content{container-type:inline-size;container-name:command-window;min-height:0}
+.force-command-content>.court-tabs{position:sticky;top:0;z-index:3;background:#101710}
+.cmd-overview{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line-dim);background:#0b100c}
+.cmd-overview strong{display:block;color:var(--amber);font:16px/1.4 serif}
+.cmd-overview span{display:block;margin-top:3px;color:var(--muted);font-size:9px}
+.cmd-overview button,.cmd-tree-tools button,.cmd-new,.cmd-fold,.cmd-org-pick,.cmd-head-actions button{font:inherit;color:var(--text);background:#101710;border:1px solid var(--line-dim);cursor:pointer}
+.cmd-overview button{padding:5px 9px;white-space:nowrap}
+.cmd-workspace{display:grid;grid-template-columns:minmax(220px,.34fr) minmax(0,1fr);gap:10px;min-width:0;align-items:start}
+.cmd-tree-pane,.cmd-inspector{min-width:0;max-height:min(62vh,650px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.cmd-tree-pane{border:1px solid var(--line-dim);background:#0b100c;padding:7px}
+.cmd-tree-tools{position:sticky;top:-7px;z-index:1;display:flex;align-items:center;gap:4px;padding:5px 0;background:#0b100c}
+.cmd-tree-tools b{margin-right:auto;color:var(--amber);font-size:10px}
+.cmd-tree-tools button{font-size:8px;padding:3px}
+.cmd-ruler-line{margin:5px 0 8px;padding:5px;border-left:3px solid var(--amber);color:#e5d5a0}
+.cmd-org-tree,.cmd-org-tree ul{display:grid;gap:4px;list-style:none;margin:0;padding:0}
+.cmd-org-tree ul{margin:4px 0 0 9px;padding-left:9px;border-left:1px solid #4a533b}
+.cmd-org-row{display:grid;grid-template-columns:19px minmax(0,1fr);gap:3px;align-items:stretch}
+.cmd-fold{padding:0;font-size:11px}
+.cmd-branch-mark{align-self:center;text-align:center;color:var(--muted)}
+.cmd-org-pick{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 5px;text-align:left;padding:6px}
+.cmd-org-pick>span{grid-column:1/-1;color:#b0b696;font-size:9px;overflow-wrap:anywhere}
+.cmd-org-pick>b{color:#e6d6a1;font-size:11px;font-weight:500}
+.cmd-org-pick>small{color:var(--muted);font-size:8px;align-self:end}
+.cmd-org-pick.active{border-color:var(--amber);background:#1c2417}
+.cmd-direct{margin-top:10px;padding:7px 0;border-top:1px solid var(--line-dim);color:var(--muted);font-size:9px}
+.cmd-new{width:100%;padding:7px;margin-top:5px;text-align:left;color:var(--amber)}
+.cmd-inspector .cmd-head{position:relative;border:1px solid var(--line-dim);padding:10px;background:#101710}
+.cmd-inspector .cmd-head h3{margin:4px 0;font:16px/1.4 serif;color:#e5d5a0}
+.cmd-head>small{color:var(--muted);font-size:9px}
+.cmd-head-actions{display:flex;gap:5px;margin-top:8px}
+.cmd-detail-tabs{flex-wrap:wrap;margin:8px 0;gap:3px}
+.cmd-detail-tabs button{padding:5px 8px;font-size:9px}
+.cmd-inspector>.court-block:not(.cmd-head){padding:9px;border:1px solid var(--line-dim);background:#0b100c}
+.cmd-jurisdiction h3:not(:first-child){margin-top:15px}
+.cmd-reparent{display:flex;align-items:end;gap:6px;flex-wrap:wrap}
+.cmd-reparent label{flex:1 1 180px;display:grid;gap:4px;color:var(--muted)}
+.cmd-reparent button{min-height:29px}
+.cmd-jurisdiction .cmd-juns{padding-top:7px;margin:5px 0}
+.cmd-jurisdiction .cmd-juns>div{font-size:10px;white-space:normal;padding:5px 0;border-bottom:1px dotted #30392c}
+.cmd-children{display:flex;gap:5px;flex-wrap:wrap}
+.cmd-central,.cmd-source{padding:8px;border:1px solid var(--line-dim);color:var(--muted);font-size:9px}
+.cmd-central>.court-edict-form{margin-top:8px}
+.cmd-list{max-height:62vh;overflow:auto}
+.cmd-main{min-width:0}
+@container command-window (max-width:660px){.cmd-workspace{grid-template-columns:1fr}.cmd-tree-pane{max-height:230px}.cmd-inspector{max-height:none;overflow:visible}.cmd-overview{align-items:flex-start}.cmd-org-pick{grid-template-columns:minmax(0,1fr) auto}.cmd-org-pick>span{grid-column:auto}.cmd-org-pick>small{grid-column:1/-1}.cmd-reparent{align-items:stretch}.cmd-reparent label{flex-basis:100%}}
 /* 世家窗口 */
 .clan-dialog{width:min(1120px,calc(100vw - 24px));max-width:none}
 .clan-toolbar{display:flex;gap:8px;align-items:center;margin:4px 0 8px;font-size:10px;color:var(--muted)}
@@ -180,6 +231,14 @@
 .clan-tree text{fill:#c9b77a;font-size:9px;text-anchor:middle;paint-order:stroke;stroke:#0b100c;stroke-width:3px}
 .clan-node{position:absolute;width:84px;display:flex;justify-content:center}
 .clan-node .clan-person{margin:0;background:#101710}
+.clan-person small{display:block;margin-left:4px;font-size:9px;font-weight:normal;color:var(--muted,#aaa68b)}
+.clan-node .clan-person{display:flex;flex-direction:column;text-align:center;max-width:100%;white-space:normal}
+.clan-node .clan-person small{margin-left:0}
+.family-controls{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.family-controls label{display:flex;flex-direction:column;gap:4px;min-width:130px;font-size:11px}
+.family-panel .detail-actions{display:flex;flex-wrap:wrap;gap:6px}
+.clan-content a,.biography a{color:var(--gold,#d8c180);text-decoration:underline}
+.clan-person.is-gone{opacity:.72}
 .clan-loose{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin:6px 0 0;font-size:10px}
 .clan-loose span{color:var(--muted);margin-right:4px}
 .clan-dist{display:grid;grid-template-columns:260px 1fr;gap:10px;align-items:start}
@@ -200,3 +259,5 @@
 @media (max-width:720px){.clan-hero{grid-template-columns:44px 1fr}.clan-stats{grid-column:1/-1;grid-template-columns:repeat(3,auto)}.clan-dist{grid-template-columns:1fr}}
 .clan-content>*,.clan-content .court-block{min-width:0;max-width:100%}
 .clan-tree-wrap{max-width:100%}
+
+.family-office-slot{cursor:default}.family-office-slot .clan-link{max-width:100%;font-size:8px}.family-office-slot>button{margin-top:5px;font-size:8px;padding:3px 6px;border:1px solid var(--line-dim);background:#172015;color:var(--gold);cursor:pointer}.family-office-slot b>button{font-size:9px}

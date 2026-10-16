@@ -5,7 +5,7 @@ window.MapView = class MapView {
     this.routes=[];this.roadGraphSignature="";this.syncRoads(true);
     this.waterways=MapGrid.waterways(state.data.map);
     this.landmarks=MapGrid.landmarks(state.data.map);
-    this.cells=this.makeCells();this.rebuildDerivedMapData();this.bind();this.resize();
+    this.cells=this.makeCells();this.rebuildDerivedMapData();this.rememberMapGeometry();this.bind();this.resize();
   }
   refreshLabels(){
     const place=item=>({...item,...MapGrid.remapPoint(item.x,item.y,{width:40,height:32},MapGrid.dimensions(this.state.data.map))});
@@ -17,24 +17,29 @@ window.MapView = class MapView {
   provinceAt(x,y){return this.cell(x,y)?.province||"域外"}
   terrainAt(x,y){return this.cell(x,y)?.terrain||"ocean"}
   makeCells(){
-    const map=this.state.data.map,{width,height}=map,countySeats=this.state.data.counties||this.state.data.administrativeDivisions?.county_seats||[],layers=MapGrid.layers(map,this.state.data.cities,countySeats,this.state.data.administrativeDivisions),cells=[],countyByCell=new Map(countySeats.map(county=>[`${county.x},${county.y}`,county])),sources=this.state.data.cities.filter(city=>city.force===this.state.playerForceId).map(city=>({city,status:this.state.engine.citySupplyStatus(this.state,city.id)}));
+    const map=this.state.data.map,{width,height}=map,countySeats=this.state.data.counties||this.state.data.administrativeDivisions?.county_seats||[],layers=MapGrid.layers(map,this.state.data.cities,countySeats,this.state.data.administrativeDivisions),cells=[],countyByCell=new Map(countySeats.map(county=>[`${county.x},${county.y}`,county])),sources=this.state.data.cities.filter(city=>city.force===this.state.playerForceId).map(city=>({city,status:(this.state.engine.citySupplyBand?.(this.state,city)||this.state.engine.citySupplyStatus(this.state,city.id))}));
     for(let y=0;y<height;y++)for(let x=0;x<width;x++){
       const point={x,y},index=y*width+x,terrain=layers.terrain[index],geographicProvince=layers.provinces[index];let nearest=null,distance=Infinity;
       for(const source of sources){const value=MapGrid.groundDistance(map,point,source.city);if(value<distance){distance=value;nearest=source}}
       const county=countyByCell.get(`${x},${y}`)||null,province=geographicProvince,terrainPenalty=["mountain","plateau","desert","marsh"].includes(terrain)?1:0,supply=terrain==="ocean"||!province||province==="域外"||!nearest?0:Math.max(0,Math.min(9,nearest.status.level*2+3-Math.floor(distance/2)-terrainPenalty));
-      cells.push({x,y,terrain,province,commandery:layers.commanderies[index],county,supply,supplySource:nearest?.city.id||null});
+      cells.push({x,y,terrain,province,commandery:layers.commanderies[index],county,supply,supplySource:nearest?.city.id||null,supplyDistance:distance});
     }
     return cells;
   }
   cell(x,y){const {width,height}=this.state.data.map;return x>=0&&y>=0&&x<width&&y<height?this.cells[y*width+x]:null}
   scheduleDraw(){if(this.drawFrame)return;this.drawFrame=requestAnimationFrame(()=>{this.drawFrame=0;this.draw()})}
-  refreshSupply(forceRoads=false){this.refreshLabels();this.waterways=MapGrid.waterways(this.state.data.map);this.landmarks=MapGrid.landmarks(this.state.data.map);this.syncRoads(forceRoads);this.waterLegCache=null;this.cells=this.makeCells();this.rebuildDerivedMapData();this.draw()}
+  // 地理内容与节点归属不变时，保留格子、最近补给源和政治归属；仅更新动态补给与颜色。
+  mapGeometryKey(){const data=this.state.data;return JSON.stringify([data.map,data.administrativeDivisions,this.state.playerForceId,(data.cities||[]).map(c=>[c.id,c.name,c.x,c.y,c.force,c.province,c.commandery,c.countyNode,c.commanderySeatNode,c.capital]),(data.counties||[]).map(c=>[c.id,c.name,c.x,c.y,c.province,c.commandery,c.cityId,c.jurisdictionCityId,c.capital]),(data.forces||[]).map(f=>[f.id,f.name,f.color])])}
+  rememberMapGeometry(key=this.mapGeometryKey()){const d=this.state.data;this.geometryKey=key;this.geometrySources=[d.map,d.cities,d.counties,d.forces,d.administrativeDivisions];this.supplyLevelsKey=null}
+  updateCellSupply(){const sources=this.state.data.cities.filter(city=>city.force===this.state.playerForceId),levels=new Map(sources.map(city=>[city.id,(this.state.engine.citySupplyBand?.(this.state,city)||this.state.engine.citySupplyStatus(this.state,city.id)).level])),key=JSON.stringify([...levels]);if(key===this.supplyLevelsKey)return;for(const cell of this.cells){const level=levels.get(cell.supplySource),penalty=["mountain","plateau","desert","marsh"].includes(cell.terrain)?1:0;cell.supply=cell.terrain==="ocean"||!cell.province||cell.province==="域外"||level===undefined?0:Math.max(0,Math.min(9,level*2+3-Math.floor(cell.supplyDistance/2)-penalty))}this.supplyLevelsKey=key}
+  refreshSupply(forceRoads=false){const d=this.state.data,key=this.mapGeometryKey(),sources=[d.map,d.cities,d.counties,d.forces,d.administrativeDivisions],rebuild=forceRoads||key!==this.geometryKey||sources.some((source,i)=>source!==this.geometrySources?.[i]);const roadsChanged=this.syncRoads(forceRoads);if(rebuild){this.refreshLabels();this.waterways=MapGrid.waterways(d.map);this.landmarks=MapGrid.landmarks(d.map);this.cells=this.makeCells();this.rebuildDerivedMapData();this.rememberMapGeometry(key)}else{this.updateCellSupply();this.invalidateColors()}if(rebuild||roadsChanged)this.waterLegCache=null;this.draw()}
+
   drawCommanderySeats(c,m){if(this.state.layer!=="commandery"||this.legendHidden("县治"))return;const seats=this.state.data.map.commanderySeats||this.state.data.administrativeDivisions?.commandery_seats_140||[],cityCells=new Set(this.state.data.cities.map(city=>`${city.x},${city.y}`));c.save();c.textAlign="center";for(const seat of seats){if(cityCells.has(`${seat.x},${seat.y}`)||!this.inView(seat,m))continue;const x=m.startX+(seat.x+.5)*m.cell,y=m.startY+(seat.y+.5)*m.cell,r=Math.max(2,Math.min(4,m.cell*.17));c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fillStyle="#090b09";c.strokeStyle="#f0cf7d";c.lineWidth=1.25;c.fill();c.stroke();if(this.scale>=1.6){c.font=`${Math.max(7,Math.min(10,m.cell*.31))}px serif`;c.fillStyle="#eedb9b";c.fillText(seat.name.replace(/[郡国]$/,""),x,y-r-3)}}c.restore()}
-  syncRoads(force=false){const signature=JSON.stringify([this.state.data.rules.city_graph||{},this.state.data.map?.roads||[]]);if(force||signature!==this.roadGraphSignature){this.routes=MapGrid.roadNetwork(this.state.data.map,this.state.data.cities,this.state.data.counties||[],this.state.data.rules.city_graph||{});this.roadGraphSignature=signature}}
+  syncRoads(force=false){const signature=JSON.stringify([this.state.data.rules.city_graph||{},this.state.data.map?.roads||[]]);if(force||signature!==this.roadGraphSignature){this.routes=MapGrid.roadNetwork(this.state.data.map,this.state.data.cities,this.state.data.counties||[],this.state.data.rules.city_graph||{});this.roadGraphSignature=signature;return true}return false}
   bind(){
     new ResizeObserver(()=>this.resize()).observe(this.frame);
     this.bindInput();
-    this.state.addEventListener("layer",()=>this.draw());this.state.addEventListener("turn",()=>this.refreshSupply());
+    this.state.addEventListener("restore",()=>{this.shipmentFocusId=null;this.cargoPreview=[]});this.state.addEventListener("layer",()=>this.draw());this.state.addEventListener("turn",()=>this.refreshSupply());
   }
   bindInput(){
     this.disposeInput?.();this.drag=null;
@@ -82,6 +87,7 @@ window.MapView = class MapView {
   drawClanFocus(c,m){const focus=this.clanFocus;if(!focus)return;c.save();for(const p of focus.points){const x=m.startX+(p.x+.5)*m.cell,y=m.startY+(p.y+.5)*m.cell,r=Math.max(5,m.cell*(.45+Math.sqrt(p.share)*1.4));c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fillStyle=p.color||"#e0bd55";c.globalAlpha=.32;c.fill();c.globalAlpha=1;c.lineWidth=p.seat?3:1.5;c.strokeStyle=p.seat?"#f4d36b":"#e0bd55";c.stroke()}
     c.font="bold 13px serif";c.textAlign="left";c.fillStyle="#f4d36b";c.strokeStyle="#050705";c.lineWidth=3;const label=`${focus.name} · 地产 ${focus.points.length} 处`;c.strokeText(label,12,22);c.fillText(label,12,22);c.restore()}
   setPlannedRoute(cityIds=[],armyId=null){this.plannedRoute=Array.isArray(cityIds)&&cityIds.length>1?[...cityIds]:[];this.plannedArmyId=this.plannedRoute.length||armyId?armyId:null;this.draw()}
+  forceLegend(){return this.state.data.forces.map(force=>[force.name,force.color,`force:${force.id}`])}
   setLegendVisibility(key,visible){if(visible)this.hiddenLegendItems.delete(key);else this.hiddenLegendItems.add(key);this.invalidateColors();this.draw()}
   legendHidden(key){return this.hiddenLegendItems.has(key)}
   rebuildDerivedMapData(){
@@ -93,10 +99,22 @@ window.MapView = class MapView {
     this.invalidateColors();
   }
   invalidateColors(){this.cellColors=null;this.colorCacheLayer=null;this.colorCacheRevision=-1;this.colorRevision=(this.colorRevision||0)+1}
-  ensureColors(){const stamp=MapView.DYNAMIC_LAYERS.has(this.state.layer)?`${this.state.turn}|${this.perspectiveForce()}|${[...(this.hiddenLegendItems||[])].join(",")}`:"";if(this.cellColors&&this.colorCacheLayer===this.state.layer&&this.colorCacheRevision===this.colorRevision&&this.colorCacheStamp===stamp)return;this.cellColors=this.cells.map(cell=>this.color(cell));this.colorCacheLayer=this.state.layer;this.colorCacheRevision=this.colorRevision;this.colorCacheStamp=stamp}
+  ensureColors(){const hierarchy=this.state.layer==="mufu"?this.mufuModel().stamp:"",stamp=MapView.DYNAMIC_LAYERS.has(this.state.layer)?`${this.state.turn}|${this.perspectiveForce()}|${[...(this.hiddenLegendItems||[])].join(",")}|${hierarchy}`:"";if(this.cellColors&&this.colorCacheLayer===this.state.layer&&this.colorCacheRevision===this.colorRevision&&this.colorCacheStamp===stamp)return;this.cellColors=this.cells.map(cell=>this.color(cell));this.colorCacheLayer=this.state.layer;this.colorCacheRevision=this.colorRevision;this.colorCacheStamp=stamp}
   // 关系、粮食、武将三个分析图层：按郡与势力汇总（每日更新），他方数值受情报约束。
   static MAX_ZOOM=8;
-  static DYNAMIC_LAYERS=new Set(["relation","food","officers","courtNominal","courtActual"]);
+  static DYNAMIC_LAYERS=new Set(["relation","food","officers","courtNominal","courtActual","mufu"]);
+  mufuModel(){const forceId=this.perspectiveForce(),command=this.state.forceCommand?.[forceId],posts=Object.values(command?.posts||{}),stamp=JSON.stringify([forceId,this.colorRevision,posts.map(p=>[p.id,p.title,p.holderId,p.parentId,p.scope])]);if(this.mufuCache?.stamp===stamp&&this.mufuCache.source===command)return this.mufuCache;
+    const engine=this.state.engine,byCommandery=new Map(),roots=new Map(),rows=new Map(),colorOf=id=>{let hash=0;for(const char of id)hash=(hash*31+char.charCodeAt(0))>>>0;return `hsl(${hash%360},34%,40%)`};
+    for(const post of posts){const chain=[...engine.postAncestors(this.state,forceId,post)].reverse().concat(post),root=chain[0],holder=engine.postHolder(post),label=`${root.title}·${engine.postHolder(root)?.name||"出缺"}`,row={post,chain,root,holder,label,color:colorOf(root.id),key:post.id};rows.set(post.id,row);roots.set(root.id,{post:root,label,color:row.color})}
+    for(const city of this.state.data.cities.filter(c=>c.force===forceId)){if(byCommandery.has(city.commandery))continue;const post=engine.postOfCity(this.state,forceId,city);byCommandery.set(city.commandery,post?rows.get(post.id):null)}
+    return this.mufuCache={stamp,source:command,forceId,rows,roots,byCommandery}}
+  mufuCell(cell){if(!cell||cell.terrain==="ocean")return null;const owner=this.politicalOwner(cell),model=this.mufuCache;if(!model||owner.force?.id!==model.forceId||!(owner.administrative||owner.distance<this.territoryRadius))return null;return model.byCommandery.get(cell.commandery||owner.city?.commandery)||{key:"direct",label:"主公直辖",color:"#b49a58",chain:[]}}
+  mufuLegend(){const model=this.mufuModel();return [["主公直辖","#b49a58"],...[...model.roots.values()].map(row=>[row.label,row.color]),["其他势力","#30372f"]]}
+  mufuTooltip(cell,city){this.mufuModel();if(cell.terrain==="ocean")return "海域";const row=this.mufuCell(cell),engine=this.state.engine,force=this.state.data.forces.find(f=>f.id===this.mufuCache.forceId),ruler=engine.forceRulerOfficer?.(force?.id),head=`${city?.name||cell.commandery||cell.province||""}｜${force?.name||"本方"}幕府`;
+    if(!row)return `${city?.name||cell.commandery||""}｜其他势力辖区`;
+    return [head,[`主公 ${ruler?.name||force?.name||""}`,...row.chain.map(p=>`${p.title} ${engine.postHolder(p)?.name||"出缺"}`)].join(" → "),row.post?`方针：${engine.commandRules().policy_names[row.post.policy.type]||"听调"}`:"未任命地方方面，主公直辖"].join("\n")}
+  drawMufuOverlay(c,m,visibleCells){if(this.state.layer!=="mufu")return;const sides=[[1,0],[0,1],[-1,0],[0,-1]],trace=(cell,dx,dy)=>{const x=m.startX+cell.x*m.cell,y=m.startY+cell.y*m.cell;c.moveTo(x+(dx>0?m.cell:0),y+(dy>0?m.cell:0));c.lineTo(x+(dx===0?m.cell:dx>0?m.cell:0),y+(dy===0?m.cell:dy>0?m.cell:0))};c.save();c.beginPath();for(const cell of visibleCells){const row=this.mufuCell(cell);if(!row||this.legendHidden(row.label))continue;for(const [dx,dy] of sides){const other=this.mufuCell(this.cell(cell.x+dx,cell.y+dy));if(!other||row.key!==other.key)trace(cell,dx,dy)}}c.strokeStyle="#d8dfbb";c.lineWidth=1;c.stroke();
+    c.beginPath();for(const cell of visibleCells){const row=this.mufuCell(cell);if(!row||this.legendHidden(row.label))continue;for(const [dx,dy] of sides){const other=this.mufuCell(this.cell(cell.x+dx,cell.y+dy));if(!other||row.root?.id!==other.root?.id)trace(cell,dx,dy)}}c.strokeStyle="#efd587";c.lineWidth=2;c.stroke();c.restore()}
   // 汉庭两图：名义（是否奉汉）与实控（对挟天子者的服从分档），按郡与势力着色；独立县描边，名义图另为朝廷所授州牧刺史之州描金边。
   static COURT_NOMINAL_BANDS={奉汉:"#9a3d33",逆贼:"#4a2a5a",自立:"#6a4a8a",化外:"#3b3d36"};
   static COURT_ACTUAL_BANDS={直辖:"#c9a95a",奉诏:"#9a3d33",观望:"#8a6a3c",不奉诏:"#4d5a68",逆贼:"#5a2a6a",化外:"#3b3d36"};
@@ -132,10 +150,12 @@ window.MapView = class MapView {
   foodBand(group){if(!group)return null;if(group.level<2)return "不详";return MapView.FOOD_BANDS.find(([,days])=>group.days>=days)?.[0]||"告急"}
   officerBand(group){if(!group)return null;if(group.level<2)return "不详";return MapView.OFFICER_BANDS.find(([,count])=>group.officers.length>=count)?.[0]||"空缺"}
   analysisColor(cell){const owner=this.politicalOwner(cell),controlled=owner.administrative||owner.distance<this.territoryRadius;if(!controlled)return "#3b3d36";
+    if(this.state.layer==="mufu"){const row=this.mufuCell(cell);return row&&!this.legendHidden(row.label)?row.color:"#30372f"}
     if(this.state.layer==="relation"){const band=this.relationBand(owner.force?.id);return this.legendHidden(band)?"#30372f":MapView.RELATION_BANDS[band]}
     if(MapView.COURT_LAYERS.has(this.state.layer)){const band=this.courtBandOf(owner.force?.id),bands=this.state.layer==="courtNominal"?MapView.COURT_NOMINAL_BANDS:MapView.COURT_ACTUAL_BANDS;return this.legendHidden(band)?"#30372f":bands[band]||"#3b3d36"}
     const group=this.layerGroupAt(cell);if(!group)return "#3b3d36";const band=this.state.layer==="food"?this.foodBand(group):this.officerBand(group);if(this.legendHidden(band))return "#30372f";if(band==="不详")return "#1b201a";return (this.state.layer==="food"?MapView.FOOD_BANDS:MapView.OFFICER_BANDS).find(([name])=>name===band)?.[2]||"#3b3d36"}
   analysisTooltip(cell,city,commandery){if(cell.terrain==="ocean")return "海域";const owner=this.politicalOwner(cell),force=owner.force,name=city?.name||commandery||"";if(!force||force.id==="neutral")return `${name}｜无主`;
+    if(this.state.layer==="mufu")return this.mufuTooltip(cell,city);
     if(this.state.layer==="relation")return `${name}｜${force.name}｜${this.relationBand(force.id)}${force.id!==this.perspectiveForce()&&this.state.engine?`（关系值 ${this.state.engine.worldRelation(this.state,this.perspectiveForce(),force.id)}）`:""}`;
     if(MapView.COURT_LAYERS.has(this.state.layer))return this.courtTooltip(cell,force,name);
     const group=this.layerGroupAt(cell);if(!group)return `${name}｜${force.name}`;const head=`${group.commandery}·${force.name}（${group.cities.length} 处据点）`;if(group.level<2)return `${head}｜情报不足，${this.state.layer==="food"?"仓储":"驻将"}不详`;
@@ -157,7 +177,7 @@ window.MapView = class MapView {
     if(this.state.layer==="supply"){const band=cell.supply>=6?"充足":cell.supply>=3?"一般":"匮乏";return this.legendHidden(band)?"#30372f":`hsl(${cell.supply*10}, 42%, ${20+cell.supply*3}%)`}
     if(MapView.DYNAMIC_LAYERS.has(this.state.layer))return this.analysisColor(cell);
     if(this.state.layer==="intel"){const owner=this.politicalOwner(cell),level=this.intelLevel(owner.city);if(!level)return this.legendHidden("未查明")?"#0c100c":"#111711";const band=this.intelBand(owner.city.garrison);if(this.legendHidden(band.label))return "#111711";return this.intelColor(band.heat,level,1-owner.distance/(this.territoryRadius+2))}
-    const owner=this.politicalOwner(cell);return (owner.administrative||owner.distance<this.territoryRadius)&&!this.legendHidden(owner.force?.name)?owner.force.color:"#4c4e45";
+    const owner=this.politicalOwner(cell);return (owner.administrative||owner.distance<this.territoryRadius)&&!this.legendHidden(`force:${owner.force?.id}`)?owner.force.color:"#4c4e45";
   }
   colorWithAlpha(color,alpha){
     const match=/^#([0-9a-f]{6})$/i.exec(color||"");
@@ -172,7 +192,7 @@ window.MapView = class MapView {
   isPlayerTerritory(cell,owners){if(!cell||cell.terrain==="ocean"||cell.province==="域外")return false;const owner=this.territoryOwner(cell,owners);return owner.force?.id===this.state.playerForceId&&(owner.administrative||owner.distance<this.territoryRadius);}
   drawPlayerTerritoryOutline(c,m,cells){
     if(this.state.observerMode)return;
-    const force=this.state.data.forces.find(item=>item.id===this.state.playerForceId);if(!force||this.legendHidden(force.name))return;
+    const force=this.state.data.forces.find(item=>item.id===this.state.playerForceId);if(!force||this.legendHidden(`force:${force.id}`))return;
     const owners=new Map(),sides=[[1,0],[0,1],[-1,0],[0,-1]],edges=[];
     for(const cell of cells){if(!this.isPlayerTerritory(cell,owners))continue;const open=sides.filter(([dx,dy])=>!this.isPlayerTerritory(this.cell(cell.x+dx,cell.y+dy),owners));if(open.length)edges.push({x:m.startX+cell.x*m.cell,y:m.startY+cell.y*m.cell,open})}
     if(!edges.length)return;
@@ -186,10 +206,10 @@ window.MapView = class MapView {
   draw(){
     if(!this.size)return;const c=this.ctx,m=this.metrics(),{width,height}=this.state.data.map,bounds=this.visibleBounds(m),visibleCells=[];for(let y=bounds.minY;y<=bounds.maxY;y++)for(let x=bounds.minX;x<=bounds.maxX;x++)visibleCells.push(this.cells[y*width+x]);c.clearRect(0,0,this.size.w,this.size.h);c.fillStyle="#080d10";c.fillRect(0,0,this.size.w,this.size.h);
     this.ensureColors();c.save();c.beginPath();c.rect(0,0,this.size.w,this.size.h);c.clip();for(const cell of visibleCells){const x=m.startX+cell.x*m.cell,y=m.startY+cell.y*m.cell;c.fillStyle=this.cellColors[cell.y*width+cell.x];c.fillRect(x,y,m.cell+.25,m.cell+.25);if(!this.drag?.moved&&m.cell>=12)this.drawTerrainBlend(c,m,cell)}this.drawAdministrativeEdges(c,m,visibleCells);if(this.state.layer!=="province"&&this.state.layer!=="commandery")this.drawColorEdges(c,m,visibleCells);if(m.cell>=5)this.drawCoastEdges(c,m,visibleCells);
-    if(!this.legendHidden("水道"))this.drawWaterways(c,m);if(!this.legendHidden("道路")){this.drawRoutes(c,m);this.drawPlannedRoute(c,m)}this.drawSupplyRoutes(c,m);if(m.cell>15)this.drawLabels(c,m);this.drawCounties(c,m);if(this.state.layer==="commandery"){this.drawCommanderySeats(c,m);this.drawCommanderyLabels(c,m)}this.drawLandmarks(c,m);this.drawPlayerTerritoryOutline(c,m,visibleCells);this.drawCourtOverlay(c,m,visibleCells);
+    if(!this.legendHidden("水道"))this.drawWaterways(c,m);if(!this.legendHidden("道路")){this.drawRoutes(c,m);this.drawPlannedRoute(c,m)}this.drawSupplyRoutes(c,m);if(m.cell>15)this.drawLabels(c,m);this.drawCounties(c,m);if(this.state.layer==="commandery"){this.drawCommanderySeats(c,m);this.drawCommanderyLabels(c,m)}this.drawLandmarks(c,m);this.drawPlayerTerritoryOutline(c,m,visibleCells);this.drawCourtOverlay(c,m,visibleCells);this.drawMufuOverlay(c,m,visibleCells);
     this.drawCityNodes(c,m);this.drawClanFocus(c,m);
     if(this.state.layer==="intel")this.drawIntel(c,m);
-    this.drawSieges(c,m);this.drawBattles(c,m);this.drawArmyRoutes(c,m);this.drawSupplyLines(c,m);this.drawArmies(c,m);
+    this.drawSieges(c,m);this.drawBattles(c,m);this.drawArmyRoutes(c,m);this.drawSupplyLines(c,m);this.drawGrainShipments(c,m);this.drawArmies(c,m);
     if(this.hover){const hx=m.startX+this.hover.x*m.cell,hy=m.startY+this.hover.y*m.cell;c.strokeStyle="#fff2a8";c.lineWidth=2;c.strokeRect(hx+1,hy+1,m.cell-2,m.cell-2)}
     c.strokeStyle="#526051";c.strokeRect(m.startX,m.startY,width*m.cell,height*m.cell);c.restore();
   }
@@ -279,24 +299,49 @@ window.MapView = class MapView {
   // 补给线：在途粮队沿路网画金线并标出粮车所在；粮道被截时自来源至军团画红线。本方军团常显，他方在「补给」图层且情报洞悉时显示。
   drawSupplyLines(c,m){const engine=this.state.engine;if(!engine?.supplyCut)return;const cityAt=id=>this.state.data.cities.find(city=>city.id===id),center=city=>[m.startX+(city.x+.5)*m.cell,m.startY+(city.y+.5)*m.cell];c.save();c.lineCap="round";
     for(const army of this.state.data.armies||[]){const own=army.force===this.state.playerForceId;if(!own&&!(this.state.layer==="supply"&&(this.state.intelligence.armies[army.id]||0)>=3))continue;const cut=engine.supplyCut(this.state,army);
-      if(army.convoy){const points=army.convoy.path.map(cityAt).filter(Boolean).map(center);if(points.length<2)continue;c.strokeStyle=cut?"rgba(214,74,58,.85)":"rgba(201,169,90,.75)";c.lineWidth=Math.max(1,m.cell*.08);c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.stroke();const at=points[Math.min(army.convoy.index,points.length-1)],size=Math.max(3,m.cell*.32);c.fillStyle="#e9d18a";c.strokeStyle="#2a2416";c.lineWidth=1;c.fillRect(at[0]-size/2,at[1]-size/2,size,size);c.strokeRect(at[0]-size/2,at[1]-size/2,size,size)}
+      if(army.convoy){const convoy=army.convoy,points=convoy.path.map(cityAt).filter(Boolean).map(center);if(!points.length)continue;c.strokeStyle=cut?"rgba(214,74,58,.85)":"rgba(201,169,90,.75)";c.lineWidth=Math.max(1,m.cell*.08);c.beginPath();this.traceCityRoute(c,m,convoy.path);c.stroke();const node=cityAt(convoy.path[convoy.index]);if(!node)continue;const next=convoy.path[convoy.index+1],days=next?engine.legDaysBetween(node.id,next):1,point=next?this.splitPolyline(this.legPoints(node.id,next,false),1-convoy.legLeft/days).point:null,at=point?[m.startX+(point[0]+.5)*m.cell,m.startY+(point[1]+.5)*m.cell]:points[Math.min(convoy.index,points.length-1)],size=Math.max(3,m.cell*.32);c.fillStyle="#e9d18a";c.strokeStyle="#2a2416";c.lineWidth=1;c.fillRect(at[0]-size/2,at[1]-size/2,size,size);c.strokeRect(at[0]-size/2,at[1]-size/2,size,size)}
       else if(cut&&army.supplySourceId){const from=cityAt(army.supplySourceId),to=cityAt(army.city);if(!from||!to)continue;const [x1,y1]=center(from),[x2,y2]=center(to);c.strokeStyle="rgba(214,74,58,.85)";c.lineWidth=Math.max(1,m.cell*.08);c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke()}}
     c.restore()}
+  // 手动调粮与自动粮队共享路线和进度几何；只绘制仍在运输中的粮食。
+  grainShipments(){return (this.state.policies?.fiscalAccounts?.shipments||[]).filter(c=>c.resource==="food"&&["在途","受阻"].includes(c.status)&&(c.forceId===this.state.playerForceId||this.state.observerMode))}
+  shipmentPosition(cargo){const route=cargo.route||[],index=Math.max(0,Math.min(cargo.nextIndex||0,route.length-1)),city=this.state.data.cities.find(c=>c.id===route[index]);if(!city)return null;
+    const next=route[index+1],days=cargo.legDays?.[index]??cargo.edgeDays??1,fraction=next?Math.max(0,Math.min(1,1-(cargo.segmentRemainingDays??days)/Math.max(1,days))):0,points=next?this.legPoints(route[index],next,false):[],split=points.length>1?this.splitPolyline(points,fraction):null;
+    return {x:split?.point?.[0]??city.x,y:split?.point?.[1]??city.y,index,rest:split?.rest||[],fraction};
+  }
+  setCargoPreview(route=[]){this.cargoPreview=Array.isArray(route)?[...route]:[];this.draw()}
+  focusShipment(id){const cargo=this.grainShipments().find(c=>c.id===id);if(!cargo)return false;this.shipmentFocusId=id;
+    const nodes=(cargo.route||[]).map(key=>this.state.data.cities.find(c=>c.id===key)).filter(Boolean),points=[...nodes,...this.legSegments(cargo.route||[]).flatMap(s=>s.points.map(([x,y])=>({x,y})))];if(!points.length)return false;
+    const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y)),{width,height}=this.state.data.map,base=Math.max(1,Math.min((this.size.w-30)/width,(this.size.h-30)/height));
+    this.setZoom(Math.min((this.size.w-70)/Math.max(4,maxX-minX+4),(this.size.h-90)/Math.max(4,maxY-minY+4))/base);const cell=this.metrics().cell;this.offset={x:(width/2-(minX+maxX+1)/2)*cell,y:(height/2-(minY+maxY+1)/2)*cell};this.draw();return true;
+  }
+  shipmentTooltip(cargo){const city=id=>this.state.data.cities.find(c=>c.id===id)?.name||"未知粮仓",at=this.shipmentPosition(cargo);return `调粮：${city(cargo.sourceCityId)} → ${city(cargo.targetCityId)}\n${cargo.status} · 发粮 ${Math.floor(cargo.amount||0).toLocaleString()} 石 · 预计入库 ${Math.floor(cargo.delivered||0).toLocaleString()} 石\n${city(cargo.route?.[at?.index||0])}${cargo.status==="受阻"?"附近受阻，等待道路恢复":`附近 · 尚需约 ${Math.max(0,cargo.arriveTurn-this.state.turn)} 日`}`}
+  shipmentAt(x,y){const cargos=this.grainShipments().filter(c=>c.purpose!=="上缴"||this.state.layer==="supply"||c.id===this.shipmentFocusId);if(!cargos.length)return null;const m=this.metrics();return cargos.find(c=>{const p=this.shipmentPosition(c);return p&&Math.hypot(x-m.startX-(p.x+.5)*m.cell,y-m.startY-(p.y+.5)*m.cell)<=Math.max(7,m.cell*.35)})||null}
+  drawGrainShipments(c,m){const project=p=>[m.startX+(p.x+.5)*m.cell,m.startY+(p.y+.5)*m.cell];let focused=null;
+    for(const cargo of this.grainShipments()){if(cargo.purpose==="上缴"&&this.state.layer!=="supply"&&cargo.id!==this.shipmentFocusId)continue;const p=this.shipmentPosition(cargo);if(!p)continue;const selected=cargo.id===this.shipmentFocusId,color=cargo.status==="受阻"?"#e27962":selected?"#ffe29b":"#c9a95a",route=cargo.route||[];
+      const past=this.legSegments(route.slice(0,p.index+1)),head=p.rest.length>1?{points:p.rest,mode:this.state.engine?.legInfo?.(route[p.index],route[p.index+1])?.mode||"land"}:null,remaining=head?this.legSegments(route.slice(p.index+1),head):this.legSegments(route.slice(p.index));
+      c.save();c.globalAlpha=.35;this.drawMarchPath(c,m,past,color);c.restore();this.drawMarchPath(c,m,remaining,color,selected);
+      const [x,y]=project(p),size=Math.max(5,m.cell*.32);c.save();c.fillStyle=color;c.strokeStyle="#261f10";c.lineWidth=1;c.fillRect(x-size/2,y-size/2,size,size);c.strokeRect(x-size/2,y-size/2,size,size);if(cargo.status==="受阻"){c.strokeStyle="#f2a48e";c.beginPath();c.moveTo(x-4,y-4);c.lineTo(x+4,y+4);c.moveTo(x+4,y-4);c.lineTo(x-4,y+4);c.stroke()}c.restore();if(selected)focused=cargo;
+    }
+    if(this.cargoPreview?.length>1)this.drawMarchPath(c,m,this.legSegments(this.cargoPreview),"#f6ce77",true);
+    if(focused){const lines=this.shipmentTooltip(focused).split("\n");c.save();c.font="10px serif";c.fillStyle="rgba(9,15,10,.92)";c.fillRect(7,7,Math.min(this.size.w-14,Math.max(...lines.map(line=>c.measureText(line).width))+18),lines.length*15+12);c.fillStyle=focused.status==="受阻"?"#ed9a82":"#e6d19a";c.textAlign="left";lines.forEach((line,i)=>c.fillText(line,15,23+i*15,this.size.w-30));c.restore()}
+  }
   drawLabels(c,m){c.textAlign="center";for(const label of this.seaLabels){if(!this.inView(label,m))continue;c.fillStyle="rgba(130,169,173,.47)";c.font=`${Math.min(12,m.cell*.55)}px serif`;c.fillText(label.name,m.startX+(label.x+.5)*m.cell,m.startY+(label.y+.5)*m.cell)}if(this.state.layer!=="political")for(const label of this.landLabels){if(!this.inView(label,m))continue;c.fillStyle="rgba(216,204,164,.31)";c.font=`${Math.min(10,m.cell*.42)}px serif`;c.fillText(label.name,m.startX+(label.x+.5)*m.cell,m.startY+(label.y+.5)*m.cell)}}
+  cityOfficerTooltip(city){if(!city)return "";const level=this.intelLevel(city);if(level<2)return "驻地武将：未探明";const count=(this.state.data.officers||[]).filter(o=>o.city===city.id&&o.force===city.force&&["serving","injured"].includes(o.status)).length;return `驻地武将：${count}人`}
   tooltipText(cell){
     const city=this.state.data.cities.find(c=>c.x===cell.x&&c.y===cell.y),county=cell.county||(city&&(this.state.data.counties||[]).find(item=>item.cityId===city.id)),commandery=cell.commandery||city?.commandery||county?.commandery;
-    if(MapView.DYNAMIC_LAYERS.has(this.state.layer))return this.analysisTooltip(cell,city,commandery);
+    if(MapView.DYNAMIC_LAYERS.has(this.state.layer))return [this.analysisTooltip(cell,city,commandery),this.cityOfficerTooltip(city)].filter(Boolean).join("\n");
     if(this.state.layer==="political"){
       if(cell.terrain==="ocean")return "海域";
       const owner=this.politicalOwner(cell),controlled=cell.province!=="域外"&&(owner.administrative||owner.distance<this.territoryRadius),force=city?this.state.data.forces.find(item=>item.id===city.force):controlled?owner.force:null;
-      return [city?.name,`所属势力：${force?.name||"无主"}`,`州郡：${cell.province||city?.province||county?.province||"州属未详"} · ${commandery||"郡属未详"}`].filter(Boolean).join("\n");
+      return [city?.name,this.cityOfficerTooltip(city),`所属势力：${force?.name||"无主"}`,`州郡：${cell.province||city?.province||county?.province||"州属未详"} · ${commandery||"郡属未详"}`].filter(Boolean).join("\n");
     }
     // 迷雾：县域户口与农商治、围城与交战动态按所属据点情报显示；己方全知，未探明者不显示。
-    const seat=county?this.state.data.cities.find(item=>item.id===county.jurisdictionCityId)||city:city,level=seat?this.intelLevel(seat):0,known=level>=1,siege=known&&city?.siegeTurns?`｜${level>=2&&city.siegeMethod?`${this.state.engine?.siegeMethods?.()[city.siegeMethod]?.name||"围城"}`:"围城"} ${city.siegeTurns*(Number.isInteger(this.state.date?.day)?10:1)}日${level>=2?`｜城防 ${Math.max(0,100-(city.defenseDamage||0))}%`:""}`:"",battle=known&&city?.lastBattleTurn&&this.state.turn-city.lastBattleTurn<=1?`｜${city.lastBattle}`:"",occupation=known&&city?.occupiedUntil&&city.occupiedUntil>this.state.turn?`｜占领管制 ${city.occupiedUntil-this.state.turn}日`:"",countyInfo=!county?"":level>=3?`｜编户 ${(county.population||0).toLocaleString()}｜农${county.agriculture} 商${county.commerce} 治${county.order}`:level>=2?`｜编户 ${MapView.intelEstimate(county.population||0,level)}`:"";
-    return city?`${city.name}｜${cell.province||city.province} · ${commandery||"郡属未详"}${countyInfo}${siege}${battle}${occupation}`:`${this.provinceLabel(cell)}${commandery?` · ${commandery}`:""}${county?` · ${county.name}`:""}${countyInfo}｜${this.terrainDef(cell.terrain).name}`;
+    const countyTown=county&&this.state.data.cities.find(item=>item.id===county.cityId),countyRegistered=countyTown?this.state.engine?.countyPopulationReport?.(this.state,countyTown)?.registered:county?this.state.engine?.registeredPopulation?.(county):0;
+    const seat=county?this.state.data.cities.find(item=>item.id===county.jurisdictionCityId)||city:city,level=seat?this.intelLevel(seat):0,known=level>=1,siege=known&&city?.siegeTurns?`｜${level>=2&&city.siegeMethod?`${this.state.engine?.siegeMethods?.()[city.siegeMethod]?.name||"围城"}`:"围城"} ${city.siegeTurns*(Number.isInteger(this.state.date?.day)?10:1)}日${level>=2?`｜城防 ${Math.max(0,100-(city.defenseDamage||0))}%`:""}`:"",battle=known&&city?.lastBattleTurn&&this.state.turn-city.lastBattleTurn<=1?`｜${city.lastBattle}`:"",occupation=known&&city?.occupiedUntil&&city.occupiedUntil>this.state.turn?`｜占领管制 ${city.occupiedUntil-this.state.turn}日`:"",countyInfo=!county?"":level>=3?`｜编户 ${(countyRegistered??county.population??0).toLocaleString()}｜农${county.agriculture} 商${county.commerce} 治${county.order}`:level>=2?`｜编户 ${MapView.intelEstimate(countyRegistered??county.population??0,level)}`:"";
+    return city?`${city.name}｜${this.cityOfficerTooltip(city)}｜${cell.province||city.province} · ${commandery||"郡属未详"}${countyInfo}${siege}${battle}${occupation}`:`${this.provinceLabel(cell)}${commandery?` · ${commandery}`:""}${county?` · ${county.name}`:""}${countyInfo}｜${this.terrainDef(cell.terrain).name}`;
   }
   tooltip(hide,x=0,y=0){
-    const tip=document.getElementById("mapTooltip");tip.hidden=hide;if(hide||!this.hover)return;tip.textContent=this.tooltipText(this.hover);
+    const tip=document.getElementById("mapTooltip");tip.hidden=hide;if(hide||!this.hover)return;const cargo=this.shipmentAt(x,y);tip.textContent=cargo?this.shipmentTooltip(cargo):this.tooltipText(this.hover);
     const width=tip.offsetWidth||200,height=tip.offsetHeight||35,pad=5;
     tip.style.left=`${Math.max(pad,Math.min(x+14,this.size.w-width-pad))}px`;tip.style.top=`${Math.max(pad,Math.min(y+14,this.size.h-height-pad))}px`;
   }

@@ -243,7 +243,388 @@
         "cities": 42
       }
     ],
-    "city_forces": {"anding":"han_sui","badong":"liu_zhang","baima":"lu_bu","beihai":"kong_rong","beiping":"gongsun","cangwu":"neutral","chaisang":"liu_yao","changan":"li_jue","changsha":"liu_biao","chengdu":"liu_zhang","chenliu":"lu_bu","commandery_city_002":"zhang_yang","commandery_city_003":"li_jue","commandery_city_006":"li_jue","commandery_city_007":"li_jue","commandery_city_008":"neutral","commandery_city_009":"yuan_shu","commandery_city_010":"neutral","commandery_city_011":"liu","commandery_city_012":"liu_chong","commandery_city_013":"neutral","commandery_city_015":"yuan","commandery_city_016":"yuan","commandery_city_017":"yuan","commandery_city_018":"yuan","commandery_city_019":"yuan","commandery_city_020":"yuan","commandery_city_021":"yuan","commandery_city_025":"lu_bu","commandery_city_026":"lu_bu","commandery_city_027":"lu_bu","commandery_city_028":"lu_bu","commandery_city_029":"lu_bu","commandery_city_030":"lu_bu","commandery_city_031":"tao_qian","commandery_city_032":"tao_qian","commandery_city_036":"gongsun","commandery_city_038":"gongsun","commandery_city_039":"kong_rong","commandery_city_040":"gongsun","commandery_city_044":"liu_biao","commandery_city_045":"liu_biao","commandery_city_046":"liu_biao","commandery_city_047":"liu_biao","commandery_city_048":"liu_biao","commandery_city_049":"yuan_shu","commandery_city_050":"liu_yao","commandery_city_051":"neutral","commandery_city_052":"wang_lang","commandery_city_054":"liu_yao","commandery_city_055":"zhang_lu","commandery_city_057":"liu_zhang","commandery_city_059":"liu_zhang","commandery_city_060":"liu_zhang","commandery_city_061":"liu_zhang","commandery_city_062":"liu_zhang","commandery_city_063":"liu_zhang","commandery_city_064":"liu_zhang","commandery_city_065":"liu_zhang","commandery_city_066":"liu_zhang","commandery_city_067":"ma_teng","commandery_city_068":"ma_teng","commandery_city_069":"zhang_lu","commandery_city_070":"han_sui","commandery_city_071":"han_sui","commandery_city_072":"han_sui","commandery_city_074":"handan_shang","commandery_city_075":"handan_shang","commandery_city_076":"handan_shang","commandery_city_077":"handan_shang","commandery_city_078":"handan_shang","commandery_city_079":"zhang_yang","commandery_city_081":"neutral","commandery_city_082":"neutral","commandery_city_083":"neutral","commandery_city_084":"neutral","commandery_city_085":"neutral","commandery_city_086":"neutral","commandery_city_087":"neutral","commandery_city_088":"gongsun","commandery_city_090":"gongsun","commandery_city_091":"gongsun","commandery_city_092":"gongsun","commandery_city_093":"gongsun","commandery_city_094":"gongsun","commandery_city_096":"gongsun","commandery_city_097":"gongsun_du","commandery_city_098":"gongsun_du","commandery_city_100":"neutral","commandery_city_101":"neutral","commandery_city_102":"neutral","commandery_city_103":"shi_xie","commandery_city_104":"shi_xie","commandery_city_105":"neutral","commandery_city_106":"yuan","commandery_city_107":"liu_zhang","commandery_city_108":"tao_qian","commandery_city_109":"liu_biao","commandery_city_110":"liu_zhang","commandery_city_111":"li_jue","commandery_city_112":"liu_zhang","commandery_city_113":"gongsun","commandery_city_114":"zhang_yan","commandery_city_115":"tao_qian","commandery_city_116":"liu_yao","commandery_city_117":"liu_biao","commandery_city_118":"liu_yao","commandery_city_119":"yuan_shu","commandery_city_120":"cao","commandery_city_121":"liu_zhang","commandery_city_122":"zhang_lu","commandery_city_123":"handan_shang","commandery_city_124":"han_sui","commandery_city_125":"liu_biao","commandery_city_126":"yuan_shu","commandery_city_127":"liu_zhang","commandery_city_128":"liu_biao","commandery_city_129":"yuan","commandery_city_130":"liu_zhang","custom_1":"tao_qian","daixian":"gongsun","fuling":"liu_zhang","guandu":"neutral","guangling":"tao_qian","guiyang":"liu_biao","hangu":"neutral","hanzhong":"zhang_lu","hefei":"yuan_shu","henei":"zhang_yang","hongnong":"li_jue","hulao":"neutral","ji":"gongsun","jiameng":"liu_zhang","jianan":"wang_lang","jiangling":"liu_biao","jiangyou":"liu_zhang","jiangzhou":"liu_zhang","jianing":"liu_zhang","jianmen":"liu_zhang","jianye":"liu_yao","jiaozhi":"shi_xie","jincheng":"han_sui","jinyang":"neutral","kuaiji":"wang_lang","langya":"tao_qian","langzhong":"liu_zhang","lelang":"gongsun_du","lingling":"liu_biao","linzi":"gongsun","longxi":"ma_teng","lujiang":"neutral","luoyang":"neutral","mengjin":"neutral","nanpi":"yuan","panyu":"neutral","pengcheng":"tao_qian","pingyuan":"gongsun","pukou":"neutral","puyang":"lu_bu","qiao":"cao","runan":"yuan_shu","shangdang":"zhang_yang","shangyong":"zhang_lu","shouchun":"yuan_shu","tianshui":"ma_teng","tongguan":"li_jue","wan":"liu_biao","wu":"liu_yao","wuguan":"li_jue","wuling":"liu_biao","xiakou":"liu_biao","xian_01_03":"neutral","xian_01_04":"neutral","xian_01_05":"neutral","xian_02_02":"lu_bu","xian_02_03":"lu_bu","xian_02_04":"lu_bu","xian_02_05":"lu_bu","xian_03_02":"neutral","xian_03_03":"neutral","xian_03_04":"neutral","xian_03_05":"neutral","xian_04_02":"yuan","xian_04_03":"yuan","xian_04_04":"yuan","xian_04_05":"yuan","xian_05_02":"gongsun","xian_05_03":"gongsun","xian_05_04":"gongsun","xian_06_03":"lu_bu","xian_06_04":"cao","xian_06_05":"lu_bu","xian_07_02":"tao_qian","xian_07_03":"tao_qian","xian_07_04":"tao_qian","xian_08_03":"liu_biao","xian_08_04":"liu_biao","xian_08_05":"liu_biao","xian_08_06":"liu_biao","xian_09_04":"liu_biao","xian_09_05":"liu_biao","xian_10_03":"liu_biao","xian_10_04":"liu_biao","xian_10_05":"liu_biao","xian_11_03":"liu_yao","xian_11_04":"liu_yao","xian_11_05":"liu_yao","xian_12_03":"yuan_shu","xian_12_05":"yuan_shu","xian_13_02":"handan_shang","xian_13_03":"handan_shang","xian_13_04":"handan_shang","xian_13_05":"handan_shang","xian_14_03":"han_sui","xian_14_04":"han_sui","xian_14_05":"han_sui","xian_15_03":"gongsun","xian_15_04":"gongsun","xian_16_02":"gongsun_du","xian_16_03":"gongsun_du","xian_16_04":"gongsun_du","xian_16_05":"gongsun_du","xian_17_02":"neutral","xian_17_03":"neutral","xian_17_04":"neutral","xian_17_05":"neutral","xian_18_02":"yuan","xian_18_03":"yuan","xian_18_04":"yuan","xian_18_05":"yuan","xian_19_02":"gongsun","xian_19_03":"gongsun","xian_19_04":"gongsun","xian_19_05":"gongsun","xian_20_02":"kong_rong","xian_20_03":"kong_rong","xian_20_04":"kong_rong","xian_20_05":"kong_rong","xian_21_02":"han_sui","xian_21_03":"han_sui","xian_21_04":"han_sui","xian_21_05":"han_sui","xian_22_02":"ma_teng","xian_22_03":"ma_teng","xian_22_04":"ma_teng","xian_22_05":"ma_teng","xian_23_02":"li_jue","xian_23_03":"li_jue","xian_23_04":"li_jue","xian_23_05":"li_jue","xian_24_02":"li_jue","xian_24_03":"li_jue","xian_24_04":"li_jue","xian_24_05":"li_jue","xian_25_04":"liu","xian_25_05":"liu","xian_26_03":"zhang_lu","xian_26_04":"zhang_lu","xian_26_05":"zhang_lu","xian_27_03":"liu_zhang","xian_27_04":"liu_zhang","xian_27_05":"liu_zhang","xian_28_02":"liu_zhang","xian_28_03":"liu_zhang","xian_28_04":"liu_zhang","xian_28_05":"liu_zhang","xian_29_04":"liu_zhang","xian_30_03":"liu_zhang","xian_30_04":"liu_zhang","xian_30_05":"liu_zhang","xian_31_02":"liu_biao","xian_31_03":"liu_biao","xian_31_04":"liu_biao","xian_31_05":"liu_biao","xian_32_02":"liu_biao","xian_32_03":"liu_biao","xian_32_04":"liu_biao","xian_32_05":"liu_biao","xian_33_03":"liu_biao","xian_33_04":"liu_biao","xian_33_05":"liu_biao","xian_34_02":"liu_biao","xian_34_03":"liu_biao","xian_34_04":"liu_biao","xian_34_05":"liu_biao","xian_35_03":"neutral","xian_35_04":"neutral","xian_35_05":"neutral","xian_36_03":"liu_yao","xian_36_04":"liu_yao","xian_36_05":"liu_yao","xian_37_02":"liu_yao","xian_37_03":"liu_yao","xian_37_04":"liu_yao","xian_37_05":"liu_yao","xian_38_02":"gongsun_du","xian_38_03":"gongsun_du","xian_38_04":"gongsun_du","xian_38_05":"gongsun_du","xian_39_02":"gongsun","xian_39_03":"gongsun","xian_39_04":"gongsun","xian_40_01":"zhang_yang","xian_40_03":"zhang_yang","xian_40_04":"zhang_yang","xian_40_05":"zhang_yang","xian_41_02":"zhang_yang","xian_41_03":"zhang_yang","xian_41_04":"zhang_yang","xian_41_05":"zhang_yang","xian_42_02":"gongsun","xian_42_03":"gongsun","xian_42_04":"gongsun","xian_42_05":"gongsun","xian_43_02":"tao_qian","xian_43_03":"tao_qian","xian_43_04":"tao_qian","xian_43_05":"tao_qian","xian_44_02":"tao_qian","xian_44_03":"tao_qian","xian_44_04":"tao_qian","xian_44_05":"tao_qian","xian_45_02":"yuan_shu","xian_45_03":"yuan_shu","xian_45_04":"yuan_shu","xian_45_05":"yuan_shu","xian_46_02":"tao_qian","xian_46_03":"tao_qian","xian_46_04":"tao_qian","xian_46_05":"tao_qian","xian_47_02":"ma_teng","xian_47_03":"ma_teng","xian_47_04":"ma_teng","xian_47_05":"ma_teng","xian_48_02":"wang_lang","xian_48_03":"wang_lang","xian_48_04":"wang_lang","xian_48_06":"wang_lang","xian_49_02":"shi_xie","xian_49_03":"shi_xie","xian_49_04":"shi_xie","xian_49_05":"shi_xie","xian_50_02":"liu_biao","xian_50_03":"liu_biao","xian_50_04":"liu_biao","xian_50_05":"liu_biao","xian_51_02":"neutral","xian_51_03":"neutral","xian_51_04":"neutral","xian_51_05":"neutral","xian_extra_01":"lu_bu","xian_extra_02":"neutral","xian_extra_03":"neutral","xian_extra_04":"cao","xian_extra_05":"liu_biao","xian_extra_06":"liu_biao","xian_extra_07":"liu_biao","xian_extra_08":"liu_biao","xian_extra_09":"neutral","xian_extra_10":"liu_yao","xian_extra_11":"liu_yao","xian_extra_12":"liu_yao","xian_extra_13":"ma_teng","xian_extra_14":"liu_biao","xian_extra_15":"liu_biao","xiangping":"gongsun_du","xiangyang":"liu_biao","xiaopei":"liu","xiapi":"tao_qian","xiliang":"handan_shang","xinye":"liu_biao","xuchang":"neutral","yangping":"zhang_lu","yanjin":"lu_bu","ye":"yuan","yiling":"liu_biao","yongan":"liu_zhang","yunnan":"liu_zhang","yuzhang":"liu_yao","zitong":"liu_zhang"},
+    "city_forces": {
+      "anding": "han_sui",
+      "badong": "liu_zhang",
+      "baima": "lu_bu",
+      "beihai": "kong_rong",
+      "beiping": "gongsun",
+      "cangwu": "neutral",
+      "chaisang": "liu_yao",
+      "changan": "li_jue",
+      "changsha": "liu_biao",
+      "chengdu": "liu_zhang",
+      "chenliu": "lu_bu",
+      "commandery_city_002": "zhang_yang",
+      "commandery_city_003": "li_jue",
+      "commandery_city_006": "li_jue",
+      "commandery_city_007": "li_jue",
+      "commandery_city_008": "neutral",
+      "commandery_city_009": "yuan_shu",
+      "commandery_city_010": "neutral",
+      "commandery_city_011": "liu",
+      "commandery_city_012": "liu_chong",
+      "commandery_city_013": "neutral",
+      "commandery_city_015": "yuan",
+      "commandery_city_016": "yuan",
+      "commandery_city_017": "yuan",
+      "commandery_city_018": "yuan",
+      "commandery_city_019": "yuan",
+      "commandery_city_020": "yuan",
+      "commandery_city_021": "yuan",
+      "commandery_city_025": "lu_bu",
+      "commandery_city_026": "lu_bu",
+      "commandery_city_027": "lu_bu",
+      "commandery_city_028": "lu_bu",
+      "commandery_city_029": "lu_bu",
+      "commandery_city_030": "lu_bu",
+      "commandery_city_031": "tao_qian",
+      "commandery_city_032": "tao_qian",
+      "commandery_city_036": "gongsun",
+      "commandery_city_038": "gongsun",
+      "commandery_city_039": "kong_rong",
+      "commandery_city_040": "gongsun",
+      "commandery_city_044": "liu_biao",
+      "commandery_city_045": "liu_biao",
+      "commandery_city_046": "liu_biao",
+      "commandery_city_047": "liu_biao",
+      "commandery_city_048": "liu_biao",
+      "commandery_city_049": "yuan_shu",
+      "commandery_city_050": "liu_yao",
+      "commandery_city_051": "neutral",
+      "commandery_city_052": "wang_lang",
+      "commandery_city_054": "liu_yao",
+      "commandery_city_055": "zhang_lu",
+      "commandery_city_057": "liu_zhang",
+      "commandery_city_059": "liu_zhang",
+      "commandery_city_060": "liu_zhang",
+      "commandery_city_061": "liu_zhang",
+      "commandery_city_062": "liu_zhang",
+      "commandery_city_063": "liu_zhang",
+      "commandery_city_064": "liu_zhang",
+      "commandery_city_065": "liu_zhang",
+      "commandery_city_066": "liu_zhang",
+      "commandery_city_067": "ma_teng",
+      "commandery_city_068": "ma_teng",
+      "commandery_city_069": "zhang_lu",
+      "commandery_city_070": "han_sui",
+      "commandery_city_071": "han_sui",
+      "commandery_city_072": "han_sui",
+      "commandery_city_074": "handan_shang",
+      "commandery_city_075": "handan_shang",
+      "commandery_city_076": "handan_shang",
+      "commandery_city_077": "handan_shang",
+      "commandery_city_078": "handan_shang",
+      "commandery_city_079": "zhang_yang",
+      "commandery_city_081": "neutral",
+      "commandery_city_082": "neutral",
+      "commandery_city_083": "neutral",
+      "commandery_city_084": "neutral",
+      "commandery_city_085": "neutral",
+      "commandery_city_086": "neutral",
+      "commandery_city_087": "neutral",
+      "commandery_city_088": "gongsun",
+      "commandery_city_090": "gongsun",
+      "commandery_city_091": "gongsun",
+      "commandery_city_092": "gongsun",
+      "commandery_city_093": "gongsun",
+      "commandery_city_094": "gongsun",
+      "commandery_city_096": "gongsun",
+      "commandery_city_097": "gongsun_du",
+      "commandery_city_098": "gongsun_du",
+      "commandery_city_100": "neutral",
+      "commandery_city_101": "neutral",
+      "commandery_city_102": "neutral",
+      "commandery_city_103": "shi_xie",
+      "commandery_city_104": "shi_xie",
+      "commandery_city_105": "neutral",
+      "commandery_city_106": "yuan",
+      "commandery_city_107": "liu_zhang",
+      "commandery_city_108": "tao_qian",
+      "commandery_city_109": "liu_biao",
+      "commandery_city_110": "liu_zhang",
+      "commandery_city_111": "li_jue",
+      "commandery_city_112": "liu_zhang",
+      "commandery_city_113": "gongsun",
+      "commandery_city_114": "zhang_yan",
+      "commandery_city_115": "tao_qian",
+      "commandery_city_116": "liu_yao",
+      "commandery_city_117": "liu_biao",
+      "commandery_city_118": "liu_yao",
+      "commandery_city_119": "yuan_shu",
+      "commandery_city_120": "cao",
+      "commandery_city_121": "liu_zhang",
+      "commandery_city_122": "zhang_lu",
+      "commandery_city_123": "handan_shang",
+      "commandery_city_124": "han_sui",
+      "commandery_city_125": "liu_biao",
+      "commandery_city_126": "yuan_shu",
+      "commandery_city_127": "liu_zhang",
+      "commandery_city_128": "liu_biao",
+      "commandery_city_129": "yuan",
+      "commandery_city_130": "liu_zhang",
+      "custom_1": "tao_qian",
+      "daixian": "gongsun",
+      "fuling": "liu_zhang",
+      "guandu": "neutral",
+      "guangling": "tao_qian",
+      "guiyang": "liu_biao",
+      "hangu": "neutral",
+      "hanzhong": "zhang_lu",
+      "hefei": "yuan_shu",
+      "henei": "zhang_yang",
+      "hongnong": "li_jue",
+      "hulao": "neutral",
+      "ji": "gongsun",
+      "jiameng": "liu_zhang",
+      "jianan": "wang_lang",
+      "jiangling": "liu_biao",
+      "jiangyou": "liu_zhang",
+      "jiangzhou": "liu_zhang",
+      "jianing": "liu_zhang",
+      "jianmen": "liu_zhang",
+      "jianye": "liu_yao",
+      "jiaozhi": "shi_xie",
+      "jincheng": "han_sui",
+      "jinyang": "neutral",
+      "kuaiji": "wang_lang",
+      "langya": "tao_qian",
+      "langzhong": "liu_zhang",
+      "lelang": "gongsun_du",
+      "lingling": "liu_biao",
+      "linzi": "gongsun",
+      "longxi": "ma_teng",
+      "lujiang": "neutral",
+      "luoyang": "neutral",
+      "mengjin": "neutral",
+      "nanpi": "yuan",
+      "panyu": "neutral",
+      "pengcheng": "tao_qian",
+      "pingyuan": "gongsun",
+      "pukou": "neutral",
+      "puyang": "lu_bu",
+      "qiao": "cao",
+      "runan": "yuan_shu",
+      "shangdang": "zhang_yang",
+      "shangyong": "zhang_lu",
+      "shouchun": "yuan_shu",
+      "tianshui": "ma_teng",
+      "tongguan": "li_jue",
+      "wan": "liu_biao",
+      "wu": "liu_yao",
+      "wuguan": "li_jue",
+      "wuling": "liu_biao",
+      "xiakou": "liu_biao",
+      "xian_01_03": "neutral",
+      "xian_01_04": "neutral",
+      "xian_01_05": "neutral",
+      "xian_02_02": "lu_bu",
+      "xian_02_03": "lu_bu",
+      "xian_02_04": "lu_bu",
+      "xian_02_05": "lu_bu",
+      "xian_03_02": "neutral",
+      "xian_03_03": "neutral",
+      "xian_03_04": "neutral",
+      "xian_03_05": "neutral",
+      "xian_04_02": "yuan",
+      "xian_04_03": "yuan",
+      "xian_04_04": "yuan",
+      "xian_04_05": "yuan",
+      "xian_05_02": "gongsun",
+      "xian_05_03": "gongsun",
+      "xian_05_04": "gongsun",
+      "xian_06_03": "lu_bu",
+      "xian_06_04": "cao",
+      "xian_06_05": "lu_bu",
+      "xian_07_02": "tao_qian",
+      "xian_07_03": "tao_qian",
+      "xian_07_04": "tao_qian",
+      "xian_08_03": "liu_biao",
+      "xian_08_04": "liu_biao",
+      "xian_08_05": "liu_biao",
+      "xian_08_06": "liu_biao",
+      "xian_09_04": "liu_biao",
+      "xian_09_05": "liu_biao",
+      "xian_10_03": "liu_biao",
+      "xian_10_04": "liu_biao",
+      "xian_10_05": "liu_biao",
+      "xian_11_03": "liu_yao",
+      "xian_11_04": "liu_yao",
+      "xian_11_05": "liu_yao",
+      "xian_12_03": "yuan_shu",
+      "xian_12_05": "yuan_shu",
+      "xian_13_02": "handan_shang",
+      "xian_13_03": "handan_shang",
+      "xian_13_04": "handan_shang",
+      "xian_13_05": "handan_shang",
+      "xian_14_03": "han_sui",
+      "xian_14_04": "han_sui",
+      "xian_14_05": "han_sui",
+      "xian_15_03": "gongsun",
+      "xian_15_04": "gongsun",
+      "xian_16_02": "gongsun_du",
+      "xian_16_03": "gongsun_du",
+      "xian_16_04": "gongsun_du",
+      "xian_16_05": "gongsun_du",
+      "xian_17_02": "neutral",
+      "xian_17_03": "neutral",
+      "xian_17_04": "neutral",
+      "xian_17_05": "neutral",
+      "xian_18_02": "yuan",
+      "xian_18_03": "yuan",
+      "xian_18_04": "yuan",
+      "xian_18_05": "yuan",
+      "xian_19_02": "gongsun",
+      "xian_19_03": "gongsun",
+      "xian_19_04": "gongsun",
+      "xian_19_05": "gongsun",
+      "xian_20_02": "kong_rong",
+      "xian_20_03": "kong_rong",
+      "xian_20_04": "kong_rong",
+      "xian_20_05": "kong_rong",
+      "xian_21_02": "han_sui",
+      "xian_21_03": "han_sui",
+      "xian_21_04": "han_sui",
+      "xian_21_05": "han_sui",
+      "xian_22_02": "ma_teng",
+      "xian_22_03": "ma_teng",
+      "xian_22_04": "ma_teng",
+      "xian_22_05": "ma_teng",
+      "xian_23_02": "li_jue",
+      "xian_23_03": "li_jue",
+      "xian_23_04": "li_jue",
+      "xian_23_05": "li_jue",
+      "xian_24_02": "li_jue",
+      "xian_24_03": "li_jue",
+      "xian_24_04": "li_jue",
+      "xian_24_05": "li_jue",
+      "xian_25_04": "liu",
+      "xian_25_05": "liu",
+      "xian_26_03": "zhang_lu",
+      "xian_26_04": "zhang_lu",
+      "xian_26_05": "zhang_lu",
+      "xian_27_03": "liu_zhang",
+      "xian_27_04": "liu_zhang",
+      "xian_27_05": "liu_zhang",
+      "xian_28_02": "liu_zhang",
+      "xian_28_03": "liu_zhang",
+      "xian_28_04": "liu_zhang",
+      "xian_28_05": "liu_zhang",
+      "xian_29_04": "liu_zhang",
+      "xian_30_03": "liu_zhang",
+      "xian_30_04": "liu_zhang",
+      "xian_30_05": "liu_zhang",
+      "xian_31_02": "liu_biao",
+      "xian_31_03": "liu_biao",
+      "xian_31_04": "liu_biao",
+      "xian_31_05": "liu_biao",
+      "xian_32_02": "liu_biao",
+      "xian_32_03": "liu_biao",
+      "xian_32_04": "liu_biao",
+      "xian_32_05": "liu_biao",
+      "xian_33_03": "liu_biao",
+      "xian_33_04": "liu_biao",
+      "xian_33_05": "liu_biao",
+      "xian_34_02": "liu_biao",
+      "xian_34_03": "liu_biao",
+      "xian_34_04": "liu_biao",
+      "xian_34_05": "liu_biao",
+      "xian_35_03": "neutral",
+      "xian_35_04": "neutral",
+      "xian_35_05": "neutral",
+      "xian_36_03": "liu_yao",
+      "xian_36_04": "liu_yao",
+      "xian_36_05": "liu_yao",
+      "xian_37_02": "liu_yao",
+      "xian_37_03": "liu_yao",
+      "xian_37_04": "liu_yao",
+      "xian_37_05": "liu_yao",
+      "xian_38_02": "gongsun_du",
+      "xian_38_03": "gongsun_du",
+      "xian_38_04": "gongsun_du",
+      "xian_38_05": "gongsun_du",
+      "xian_39_02": "gongsun",
+      "xian_39_03": "gongsun",
+      "xian_39_04": "gongsun",
+      "xian_40_01": "zhang_yang",
+      "xian_40_03": "zhang_yang",
+      "xian_40_04": "zhang_yang",
+      "xian_40_05": "zhang_yang",
+      "xian_41_02": "zhang_yang",
+      "xian_41_03": "zhang_yang",
+      "xian_41_04": "zhang_yang",
+      "xian_41_05": "zhang_yang",
+      "xian_42_02": "gongsun",
+      "xian_42_03": "gongsun",
+      "xian_42_04": "gongsun",
+      "xian_42_05": "gongsun",
+      "xian_43_02": "tao_qian",
+      "xian_43_03": "tao_qian",
+      "xian_43_04": "tao_qian",
+      "xian_43_05": "tao_qian",
+      "xian_44_02": "tao_qian",
+      "xian_44_03": "tao_qian",
+      "xian_44_04": "tao_qian",
+      "xian_44_05": "tao_qian",
+      "xian_45_02": "yuan_shu",
+      "xian_45_03": "yuan_shu",
+      "xian_45_04": "yuan_shu",
+      "xian_45_05": "yuan_shu",
+      "xian_46_02": "tao_qian",
+      "xian_46_03": "tao_qian",
+      "xian_46_04": "tao_qian",
+      "xian_46_05": "tao_qian",
+      "xian_47_02": "ma_teng",
+      "xian_47_03": "ma_teng",
+      "xian_47_04": "ma_teng",
+      "xian_47_05": "ma_teng",
+      "xian_48_02": "wang_lang",
+      "xian_48_03": "wang_lang",
+      "xian_48_04": "wang_lang",
+      "xian_48_06": "wang_lang",
+      "xian_49_02": "shi_xie",
+      "xian_49_03": "shi_xie",
+      "xian_49_04": "shi_xie",
+      "xian_49_05": "shi_xie",
+      "xian_50_02": "liu_biao",
+      "xian_50_03": "liu_biao",
+      "xian_50_04": "liu_biao",
+      "xian_50_05": "liu_biao",
+      "xian_51_02": "neutral",
+      "xian_51_03": "neutral",
+      "xian_51_04": "neutral",
+      "xian_51_05": "neutral",
+      "xian_extra_01": "lu_bu",
+      "xian_extra_02": "neutral",
+      "xian_extra_03": "neutral",
+      "xian_extra_04": "cao",
+      "xian_extra_05": "liu_biao",
+      "xian_extra_06": "liu_biao",
+      "xian_extra_07": "liu_biao",
+      "xian_extra_08": "liu_biao",
+      "xian_extra_09": "neutral",
+      "xian_extra_10": "liu_yao",
+      "xian_extra_11": "liu_yao",
+      "xian_extra_12": "liu_yao",
+      "xian_extra_13": "ma_teng",
+      "xian_extra_14": "liu_biao",
+      "xian_extra_15": "liu_biao",
+      "xiangping": "gongsun_du",
+      "xiangyang": "liu_biao",
+      "xiaopei": "liu",
+      "xiapi": "tao_qian",
+      "xiliang": "handan_shang",
+      "xinye": "liu_biao",
+      "xuchang": "neutral",
+      "yangping": "zhang_lu",
+      "yanjin": "lu_bu",
+      "ye": "yuan",
+      "yiling": "liu_biao",
+      "yongan": "liu_zhang",
+      "yunnan": "liu_zhang",
+      "yuzhang": "liu_yao",
+      "zitong": "liu_zhang"
+    },
     "governors": {
       "xian_extra_04": "荀彧",
       "xian_06_04": "程昱",
@@ -1581,7 +1962,73 @@
         "loyalty": 100
       }
     },
-    "treaties": [{"a": "cao", "b": "lu_bu", "type": "war"}, {"a": "cao", "b": "tao_qian", "type": "war"}, {"a": "tao_qian", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "gongsun", "type": "war"}, {"a": "yuan", "b": "cao", "type": "alliance"}, {"a": "gongsun", "b": "tao_qian", "type": "alliance"}, {"a": "gongsun", "b": "yuan_shu", "type": "alliance"}, {"a": "yuan_shu", "b": "liu_yao", "type": "war"}, {"a": "yuan_shu", "b": "liu_biao", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}, {"a": "li_jue", "b": "ma_teng", "type": "war"}, {"a": "lu_bu", "b": "zhang_yang", "type": "non_aggression"}, {"a": "yuan", "b": "kong_rong", "type": "war"}],
+    "treaties": [
+      {
+        "a": "cao",
+        "b": "lu_bu",
+        "type": "war"
+      },
+      {
+        "a": "cao",
+        "b": "tao_qian",
+        "type": "war"
+      },
+      {
+        "a": "tao_qian",
+        "b": "liu",
+        "type": "alliance"
+      },
+      {
+        "a": "yuan",
+        "b": "gongsun",
+        "type": "war"
+      },
+      {
+        "a": "yuan",
+        "b": "cao",
+        "type": "alliance"
+      },
+      {
+        "a": "gongsun",
+        "b": "tao_qian",
+        "type": "alliance"
+      },
+      {
+        "a": "gongsun",
+        "b": "yuan_shu",
+        "type": "alliance"
+      },
+      {
+        "a": "yuan_shu",
+        "b": "liu_yao",
+        "type": "war"
+      },
+      {
+        "a": "yuan_shu",
+        "b": "liu_biao",
+        "type": "war"
+      },
+      {
+        "a": "ma_teng",
+        "b": "han_sui",
+        "type": "alliance"
+      },
+      {
+        "a": "li_jue",
+        "b": "ma_teng",
+        "type": "war"
+      },
+      {
+        "a": "lu_bu",
+        "b": "zhang_yang",
+        "type": "non_aggression"
+      },
+      {
+        "a": "yuan",
+        "b": "kong_rong",
+        "type": "war"
+      }
+    ],
     "armies": [
       {
         "id": "cao_main",
@@ -1589,16 +2036,31 @@
         "force": "cao",
         "city": "xian_extra_04",
         "commander": "曹操",
-        "soldiers": 26000,
+        "soldiers": 21000,
         "units": {
-          "infantry": 15000,
-          "cavalry": 6000,
-          "archers": 5000
+          "infantry": 12115,
+          "cavalry": 4846,
+          "archers": 4039
         },
         "morale": 78,
         "training": 80,
         "supply": 70,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_86",
+          "koei11_610"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 26000,
+          "originalUnits": {
+            "infantry": 15000,
+            "cavalry": 6000,
+            "archers": 5000
+          }
+        }
       },
       {
         "id": "cao_donga",
@@ -1615,7 +2077,13 @@
         "morale": 82,
         "training": 66,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_656",
+          "supp_ext_173"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
       },
       {
         "id": "lu_bu_puyang",
@@ -1623,16 +2091,31 @@
         "force": "lu_bu",
         "city": "puyang",
         "commander": "吕布",
-        "soldiers": 16000,
+        "soldiers": 11000,
         "units": {
-          "infantry": 7000,
-          "cavalry": 6500,
-          "archers": 2500
+          "infantry": 4812,
+          "cavalry": 4469,
+          "archers": 1719
         },
         "morale": 86,
         "training": 82,
         "supply": 84,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_440",
+          "koei11_170"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 16000,
+          "originalUnits": {
+            "infantry": 7000,
+            "cavalry": 6500,
+            "archers": 2500
+          }
+        }
       },
       {
         "id": "lu_bu_chenliu",
@@ -1649,7 +2132,13 @@
         "morale": 72,
         "training": 64,
         "supply": 82,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_xu_si",
+          "koei11_403"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
       },
       {
         "id": "tao_xu",
@@ -1666,7 +2155,13 @@
         "morale": 66,
         "training": 64,
         "supply": 84,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "supp_038",
+          "koei11_534"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "tao_zangba",
@@ -1683,7 +2178,10 @@
         "morale": 78,
         "training": 72,
         "supply": 82,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "liu_xiaopei",
@@ -1700,7 +2198,13 @@
         "morale": 86,
         "training": 72,
         "supply": 78,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_99",
+          "koei11_478"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "yuan_ye",
@@ -1708,16 +2212,31 @@
         "force": "yuan",
         "city": "ye",
         "commander": "颜良",
-        "soldiers": 30000,
+        "soldiers": 25000,
         "units": {
-          "infantry": 18000,
-          "cavalry": 5000,
-          "archers": 7000
+          "infantry": 15000,
+          "cavalry": 4167,
+          "archers": 5833
         },
         "morale": 82,
         "training": 78,
         "supply": 90,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_412",
+          "koei11_304"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 30000,
+          "originalUnits": {
+            "infantry": 18000,
+            "cavalry": 5000,
+            "archers": 7000
+          }
+        }
       },
       {
         "id": "yuan_qing",
@@ -1734,7 +2253,12 @@
         "morale": 76,
         "training": 70,
         "supply": 84,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_215"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "gongsun_youzhou",
@@ -1742,16 +2266,31 @@
         "force": "gongsun",
         "city": "ji",
         "commander": "公孙瓒",
-        "soldiers": 20000,
+        "soldiers": 15000,
         "units": {
-          "infantry": 8000,
-          "cavalry": 9000,
-          "archers": 3000
+          "infantry": 6000,
+          "cavalry": 6750,
+          "archers": 2250
         },
         "morale": 74,
         "training": 80,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_182",
+          "koei11_112"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 20000,
+          "originalUnits": {
+            "infantry": 8000,
+            "cavalry": 9000,
+            "archers": 3000
+          }
+        }
       },
       {
         "id": "gongsun_qing",
@@ -1768,7 +2307,10 @@
         "morale": 70,
         "training": 66,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "yuan_shu_main",
@@ -1776,16 +2318,31 @@
         "force": "yuan_shu",
         "city": "shouchun",
         "commander": "纪灵",
-        "soldiers": 22000,
+        "soldiers": 17000,
         "units": {
-          "infantry": 13000,
-          "cavalry": 3000,
-          "archers": 6000
+          "infantry": 10046,
+          "cavalry": 2318,
+          "archers": 4636
         },
         "morale": 78,
         "training": 72,
         "supply": 86,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_409",
+          "koei11_17"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 22000,
+          "originalUnits": {
+            "infantry": 13000,
+            "cavalry": 3000,
+            "archers": 6000
+          }
+        }
       },
       {
         "id": "yuan_shu_sunce",
@@ -1802,7 +2359,13 @@
         "morale": 90,
         "training": 84,
         "supply": 86,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_147",
+          "koei11_409"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "liu_biao_main",
@@ -1810,16 +2373,31 @@
         "force": "liu_biao",
         "city": "xiangyang",
         "commander": "蔡瑁",
-        "soldiers": 22000,
+        "soldiers": 17000,
         "units": {
-          "infantry": 12000,
-          "cavalry": 2000,
-          "archers": 8000
+          "infantry": 9273,
+          "cavalry": 1545,
+          "archers": 6182
         },
         "morale": 76,
         "training": 70,
         "supply": 90,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_119",
+          "koei11_55"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 22000,
+          "originalUnits": {
+            "infantry": 12000,
+            "cavalry": 2000,
+            "archers": 8000
+          }
+        }
       },
       {
         "id": "liu_biao_jiangxia",
@@ -1836,7 +2414,12 @@
         "morale": 74,
         "training": 72,
         "supply": 88,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_355"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "liu_zhang_main",
@@ -1844,16 +2427,31 @@
         "force": "liu_zhang",
         "city": "chengdu",
         "commander": "张任",
-        "soldiers": 16000,
+        "soldiers": 12000,
         "units": {
-          "infantry": 11000,
-          "cavalry": 1000,
-          "archers": 4000
+          "infantry": 8250,
+          "cavalry": 750,
+          "archers": 3000
         },
         "morale": 72,
         "training": 66,
         "supply": 90,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_210",
+          "koei11_593"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 16000,
+          "originalUnits": {
+            "infantry": 11000,
+            "cavalry": 1000,
+            "archers": 4000
+          }
+        }
       },
       {
         "id": "zhang_lu_main",
@@ -1870,7 +2468,13 @@
         "morale": 78,
         "training": 66,
         "supply": 88,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_443",
+          "koei11_22"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "kong_rong_main",
@@ -1887,7 +2491,12 @@
         "morale": 68,
         "training": 58,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_191"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
       },
       {
         "id": "li_jue_main",
@@ -1895,16 +2504,31 @@
         "force": "li_jue",
         "city": "changan",
         "commander": "郭汜",
-        "soldiers": 22000,
+        "soldiers": 17000,
         "units": {
-          "infantry": 9000,
-          "cavalry": 10000,
-          "archers": 3000
+          "infantry": 6955,
+          "cavalry": 7727,
+          "archers": 2318
         },
         "morale": 80,
         "training": 74,
         "supply": 78,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_291",
+          "koei11_61"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 22000,
+          "originalUnits": {
+            "infantry": 9000,
+            "cavalry": 10000,
+            "archers": 3000
+          }
+        }
       },
       {
         "id": "li_jue_hongnong",
@@ -1921,7 +2545,13 @@
         "morale": 76,
         "training": 70,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_416",
+          "koei11_204"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "ma_teng_main",
@@ -1938,7 +2568,13 @@
         "morale": 82,
         "training": 78,
         "supply": 80,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_559",
+          "koei11_506"
+        ],
+        "formation": "wedge",
+        "tactic": "aggressive"
       },
       {
         "id": "han_sui_main",
@@ -1955,7 +2591,13 @@
         "morale": 80,
         "training": 76,
         "supply": 82,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_110",
+          "koei11_315"
+        ],
+        "formation": "wedge",
+        "tactic": "aggressive"
       },
       {
         "id": "gongsun_du_main",
@@ -1972,7 +2614,13 @@
         "morale": 76,
         "training": 70,
         "supply": 88,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_183",
+          "history_liu_yi_liaodong"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "liu_yao_main",
@@ -1980,16 +2628,31 @@
         "force": "liu_yao",
         "city": "jianye",
         "commander": "樊能",
-        "soldiers": 12000,
+        "soldiers": 9000,
         "units": {
-          "infantry": 7000,
-          "cavalry": 1000,
-          "archers": 4000
+          "infantry": 5250,
+          "cavalry": 750,
+          "archers": 3000
         },
         "morale": 72,
         "training": 64,
         "supply": 86,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_390",
+          "koei11_643"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "originalSoldiers": 12000,
+          "originalUnits": {
+            "infantry": 7000,
+            "cavalry": 1000,
+            "archers": 4000
+          }
+        }
       },
       {
         "id": "wang_lang_main",
@@ -2006,7 +2669,13 @@
         "morale": 68,
         "training": 60,
         "supply": 86,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_240",
+          "koei11_152"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "zhang_yang_main",
@@ -2023,7 +2692,13 @@
         "morale": 72,
         "training": 66,
         "supply": 82,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "koei11_582",
+          "koei11_493"
+        ],
+        "formation": "balanced",
+        "tactic": "balanced"
       },
       {
         "id": "zhang_yan_main",
@@ -2040,7 +2715,10 @@
         "morale": 74,
         "training": 60,
         "supply": 70,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "liu_chong_main",
@@ -2057,7 +2735,12 @@
         "morale": 84,
         "training": 80,
         "supply": 88,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_luo_jun"
+        ],
+        "formation": "balanced",
+        "tactic": "aggressive"
       },
       {
         "id": "shi_xie_main",
@@ -2074,7 +2757,13 @@
         "morale": 70,
         "training": 60,
         "supply": 88,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [
+          "history_shi_yi_jiaozhi",
+          "history_shi_wu"
+        ],
+        "formation": "balanced",
+        "tactic": "cautious"
       },
       {
         "id": "handan_main",
@@ -2091,7 +2780,289 @@
         "morale": 66,
         "training": 60,
         "supply": 84,
-        "stance": "驻扎"
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "formation": "balanced",
+        "tactic": "cautious"
+      },
+      {
+        "id": "194_puyang_retinue_koei11_79",
+        "name": "夏侯渊部",
+        "force": "cao",
+        "city": "xian_extra_04",
+        "commander": "夏侯渊",
+        "commanderOfficerId": "koei11_79",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2885,
+          "cavalry": 1154,
+          "archers": 961
+        },
+        "morale": 78,
+        "training": 80,
+        "supply": 70,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "cao_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_128",
+        "name": "魏续部",
+        "force": "lu_bu",
+        "city": "puyang",
+        "commander": "魏续",
+        "commanderOfficerId": "koei11_128",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2188,
+          "cavalry": 2031,
+          "archers": 781
+        },
+        "morale": 86,
+        "training": 82,
+        "supply": 84,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "lu_bu_puyang",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_546",
+        "name": "文丑部",
+        "force": "yuan",
+        "city": "ye",
+        "commander": "文丑",
+        "commanderOfficerId": "koei11_546",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 3000,
+          "cavalry": 833,
+          "archers": 1167
+        },
+        "morale": 82,
+        "training": 78,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "yuan_ye",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_324",
+        "name": "单经部",
+        "force": "gongsun",
+        "city": "pingyuan",
+        "commander": "单经",
+        "commanderOfficerId": "koei11_324",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2000,
+          "cavalry": 2250,
+          "archers": 750
+        },
+        "morale": 74,
+        "training": 80,
+        "supply": 80,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "gongsun_youzhou",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_467",
+        "name": "程普部",
+        "force": "yuan_shu",
+        "city": "commandery_city_049",
+        "commander": "程普",
+        "commanderOfficerId": "koei11_467",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2954,
+          "cavalry": 682,
+          "archers": 1364
+        },
+        "morale": 78,
+        "training": 72,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "yuan_shu_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_635",
+        "name": "刘磐部",
+        "force": "liu_biao",
+        "city": "xian_32_02",
+        "commander": "刘磐",
+        "commanderOfficerId": "koei11_635",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2727,
+          "cavalry": 455,
+          "archers": 1818
+        },
+        "morale": 76,
+        "training": 70,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "liu_biao_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_163",
+        "name": "吴懿部",
+        "force": "liu_zhang",
+        "city": "fuling",
+        "commander": "吴懿",
+        "commanderOfficerId": "koei11_163",
+        "soldiers": 4000,
+        "units": {
+          "infantry": 2750,
+          "cavalry": 250,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 66,
+        "supply": 90,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "balanced",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "liu_zhang_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_526",
+        "name": "樊稠部",
+        "force": "li_jue",
+        "city": "commandery_city_007",
+        "commander": "樊稠",
+        "commanderOfficerId": "koei11_526",
+        "soldiers": 5000,
+        "units": {
+          "infantry": 2045,
+          "cavalry": 2273,
+          "archers": 682
+        },
+        "morale": 80,
+        "training": 74,
+        "supply": 78,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "li_jue_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
+      },
+      {
+        "id": "194_puyang_retinue_koei11_223",
+        "name": "笮融部",
+        "force": "liu_yao",
+        "city": "jianye",
+        "commander": "笮融",
+        "commanderOfficerId": "koei11_223",
+        "soldiers": 3000,
+        "units": {
+          "infantry": 1750,
+          "cavalry": 250,
+          "archers": 1000
+        },
+        "morale": 72,
+        "training": 64,
+        "supply": 86,
+        "stance": "驻扎",
+        "deputyOfficerIds": [],
+        "staffOfficerId": null,
+        "formation": "balanced",
+        "tactic": "aggressive",
+        "initialDeployment": {
+          "batch": "initial-retinues-2026-10-15",
+          "splitFrom": "liu_yao_main",
+          "basis": "inferred",
+          "note": "依据本剧本人物隶属与驻地推定分编；兵数及兵种为游戏估计，从原主力扣除，不代表史载独立建制。",
+          "stationBasis": null,
+          "stationSource": null,
+          "stationSourceUrl": null
+        }
       }
     ]
   }

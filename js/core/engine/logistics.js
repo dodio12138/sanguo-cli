@@ -8,7 +8,7 @@ Object.assign(window.RuleEngine.prototype,{
   easyCarryDays(army){const r=this.fieldLogisticsRules();return Math.round(Math.max(r.easy_days_min,Math.min(r.easy_days_max,r.easy_days_base*Math.sqrt(r.easy_days_ref/Math.max(1,army?.soldiers||1)))))},
   armyCarryDays(army){return Math.max(1,Math.min(90,Number.isFinite(army?.carryDays)?army.carryDays:this.easyCarryDays(army)))},
   // 每日口粮（石）：健卒、伤员全份，俘虏半份。
-  dailyRation(state,army){const rate=this.data.rules?.balance?.food?.army_ration??.066;return Math.max(1,((army?.soldiers||0)+(army?.wounded||0)+this.prisonerCount(army?.prisoners)*.5)*rate)},
+  dailyRation(state,army){const context=state||{data:this.data,date:{day:1}};return FiscalSystem.armyDailyNeed(context,army)/(GameClock.isDaily(context)?1:10)},
   isStationed(army){const city=this.data.cities.find(c=>c.id===army?.city);return !!city&&city.force===army.force&&!army.route?.length&&!army.siegeTarget&&!this.isCityBesieged(city)},
   // 组织度：驻在己方城中为满；在外按军仓存粮相对「轻松携带天数」的倍数下降（辎重拖长队列）。
   armyOrganization(state,army){if(!army)return 100;if(this.isStationed(army))return 100;const r=this.fieldLogisticsRules(),days=(army.stores?.food||0)/this.dailyRation(state,army),ratio=days/Math.max(1,this.easyCarryDays(army));return Math.round(Math.max(r.org_min,Math.min(100,100*Math.min(1,1/Math.max(1e-6,ratio))**.5)))},
@@ -16,11 +16,29 @@ Object.assign(window.RuleEngine.prototype,{
   organizationRoutShift(state,army){return Math.round(this.fieldLogisticsRules().org_rout*(100-this.armyOrganization(state,army)))},
   marchDrag(state,army){return 1+this.fieldLogisticsRules().org_march*(1-this.armyOrganization(state,army)/100)},
 
+  // 军粮展示共用的只读快照：存粮、实际耗粮与运输分别说明，不把城仓等级或历史粮道文案当成军队断粮。
+  armySupplyStatus(state,army,{transport=false}={}){
+    const dailyNeed=this.dailyRation(state,army),carried=Math.max(0,army.stores?.food||0),carriedDays=carried/dailyNeed,city=FiscalSystem.stationedCity(state,army),localFood=Math.max(0,city?.localFood||0),available=carried+localFood,besieged=!!city&&this.isCityBesieged(city),rules=this.fieldLogisticsRules(),light=this.isLightArmy(army);
+    const last=army.stores?.lastConsumption,recent=last&&last.turn<=state.turn&&last.turn>=state.turn-1?last:null;
+    let label,tone="good",reason;
+    if(available>=dailyNeed){label=city?(localFood>=dailyNeed?(besieged?"城内供粮":"城仓供粮"):localFood>0?"接续供粮":"军仓供粮"):"军仓有粮";reason=city?(besieged?"被围期间优先取用城内现粮，军仓兜底；围困阻断外调。":localFood>=dailyNeed?`驻${city.name}，优先取用城仓，军仓作为备用。`:"城仓不足，当前可用随军粮；驻地不足部分按粮政调拨。"):"行军、围城及野外驻扎均消耗随军军仓。";
+      if(!city&&carriedDays<rules.resupply_days){label="军粮偏少";tone="warn"}}
+    else if(city){label=besieged?"城内军粮不足":recent?.short>0?"供粮不足":"待地方调粮";tone=besieged||recent?.short>0?"bad":"warn";reason=besieged?"城仓与军仓不足一日，外调被围困阻断。":recent?.short>0?"上次结算未领足口粮，当前城仓与军仓仍不足一日。":"城仓与军仓不足一日，需由驻地调粮；以每日实耗为准。"}
+    else{label=carried>0?"不足一日":"军仓已空";tone="bad";reason="在途粮食尚未入仓，当前随军粮不足一日所需。"}
+    if(city&&!besieged&&FiscalSystem.managedDepot(state,city)){reason="该地为指定前线仓，军团取用城仓与随军现粮；后方按供粮线路实运，未到粮食不能使用。";if(available<dailyNeed&&!recent?.short)label="等待前线粮队"}
+    const convoy=army.convoy,manual=(state.policies?.fiscalAccounts?.shipments||[]).filter(c=>c.targetKind==="army"&&c.armyId===army.id&&c.forceId===army.force&&c.resource==="food"&&["在途","受阻"].includes(c.status)),cut=this.supplyCut(state,army),cityBy=id=>this.data.cities.find(c=>c.id===id);
+    let delivery={label:city?(besieged?"城内存粮供给（围困）":"驻地直接供粮"):light?"轻装自携／就食":"尚无粮队在途",mode:city?"local":light?"light":"idle",source:city,eta:null};
+    if(convoy){let eta=Math.max(0,convoy.legLeft||0);if(transport)for(let i=convoy.index+1;i<convoy.path.length-1;i++)eta+=this.legDaysBetween(convoy.path[i],convoy.path[i+1]);delivery={label:"粮队在途",mode:"convoy",source:cityBy(convoy.sourceId),eta:transport?Math.ceil(eta):null,redirect:convoy.path.at(-1)!==army.city,food:Math.floor(convoy.food),escort:convoy.escort};}
+    else if(!city&&!light&&transport&&carriedDays<rules.resupply_days){const source=this.pickSupplySource(state,army);delivery.source=source?.city||null;delivery.label=source?"等待后方派粮":"无可达补给城";delivery.mode=source?"waiting":"unreachable"}
+    if(!city&&delivery.mode==="convoy"&&delivery.eta>carriedDays)delivery.warning=`军仓约可支撑${Math.floor(carriedDays)}日，粮队约${delivery.eta}日后抵达，可能接续不上。`;
+    return {label,tone,reason,dailyNeed,carried,carriedDays,city,localFood,besieged,recent,lastConsumption:last&&last.turn<=state.turn?last:null,delivery,manual,cut,light,condition:army.supply??100,organization:this.armyOrganization(state,army),easyDays:this.easyCarryDays(army),carryDays:this.armyCarryDays(army),targetFood:FiscalSystem.armyFoodTarget(state,army)};
+  },
+
   // 路网上的最少段数路径（运粮队不择官民道，只求可达）；超出 maxHops 即不通。
   graphPath(fromId,toId,maxHops=14){if(fromId===toId)return [fromId];const graph=this.data.rules.city_graph||{},prev=new Map([[fromId,null]]);let frontier=[fromId];for(let depth=0;depth<maxHops&&frontier.length;depth++){const next=[];for(const id of frontier)for(const n of graph[id]||[]){if(prev.has(n))continue;prev.set(n,id);if(n===toId){const path=[n];let cur=id;while(cur){path.unshift(cur);cur=prev.get(cur)}return path}next.push(n)}frontier=next}return null},
   // 补给来源：己方未被围的城，前进粮仓视为近若干段；只考虑直线距离 source_cells 以内的。
-  pickSupplySource(state,army){const r=this.fieldLogisticsRules(),here=this.data.cities.find(c=>c.id===army.city);if(!here)return null;let best=null;
-    for(const city of this.data.cities){if(city.force!==army.force||this.isCityBesieged(city))continue;const reach=Math.hypot(city.x-here.x,city.y-here.y);if(reach>r.source_cells*(city.depot?1.5:1))continue;const path=this.graphPath(city.id,army.city,r.convoy_max_hops);if(!path)continue;const score=path.length-(city.depot?r.depot_hop_bonus:0);if(!best||score<best.score)best={city,path,score}}return best},
+  pickSupplySource(state,army){const r=this.fieldLogisticsRules(),here=this.data.cities.find(c=>c.id===army.city);if(!here)return null;const network=FiscalSystem.supplyRoutes(state,army.force).some(line=>line.enabled);let best=null;
+    for(const city of this.data.cities){if(city.force!==army.force||this.isCityBesieged(city)||network&&(city.localFood||0)<=FiscalSystem.garrisonDailyFood(state,city.garrison)*30)continue;const reach=Math.hypot(city.x-here.x,city.y-here.y);if(reach>r.source_cells*(city.depot?1.5:1))continue;const path=this.graphPath(city.id,army.city,r.convoy_max_hops);if(!path)continue;const score=path.length-(city.depot||FiscalSystem.managedDepot(state,city)?r.depot_hop_bonus:0);if(!best||score<best.score)best={city,path,score}}return best},
   legDaysBetween(a,b){const leg=this.legInfo?.(a,b);return Math.max(1,Math.round(leg?.days||3))},
   escortFor(army,loaded,source){const r=this.fieldLogisticsRules(),level=r.escort_levels[army.escortLevel||"normal"]??1;return Math.max(0,Math.min(Math.round(loaded*r.escort_ratio*level),Math.floor((source.garrison||0)*r.escort_garrison_share)))},
 
@@ -28,7 +46,7 @@ Object.assign(window.RuleEngine.prototype,{
   fieldResupply(state,army,events){const r=this.fieldLogisticsRules();army.stores??={gold:0,food:0,silk:0};const ration=this.dailyRation(state,army);
     if(this.isLightArmy(army)){const node=this.data.cities.find(c=>c.id===army.city);if(node&&node.force!==army.force&&(node.force==="neutral"||this.worldWar(state,node.force,army.force))&&army.stores.food<ration*5){const take=Math.min(Math.ceil(ration*2),Math.max(0,Math.floor(node.localFood||0)));if(take>0){node.localFood-=take;army.stores.food+=take;node.order=Math.max(0,(node.order??50)-r.forage_order);army.foragedTurn=state.turn}}return}
     if(army.convoy||army.stores.food>=ration*r.resupply_days)return;const pick=this.pickSupplySource(state,army);if(!pick){army.supplyStatus="无补给来源";return}
-    const source=pick.city,wanted=Math.max(0,Math.ceil(ration*this.armyCarryDays(army)-army.stores.food)),own=Math.min(wanted,Math.max(0,Math.floor((source.localFood||0)-FiscalSystem.garrisonDailyFood(state,source.garrison)*30)));source.localFood-=own;const loaded=own+(own<wanted?FiscalSystem.drawRegionalFood(state,source,wanted-own,army.force):0);if(loaded<=0){army.supplyStatus="后方无粮可运";return}
+    const source=pick.city,wanted=Math.max(0,Math.ceil(ration*this.armyCarryDays(army)-army.stores.food)),own=Math.min(wanted,Math.max(0,Math.floor((source.localFood||0)-FiscalSystem.garrisonDailyFood(state,source.garrison)*30)));source.localFood-=own;const loaded=own+(own<wanted&&!FiscalSystem.supplyRoutes(state,army.force).some(line=>line.enabled)?FiscalSystem.drawRegionalFood(state,source,wanted-own,army.force):0);if(loaded<=0){army.supplyStatus="后方无粮可运";return}
     const escort=this.escortFor(army,loaded,source);source.garrison=Math.max(0,(source.garrison||0)-escort);army.supplyStatus="粮队在途";army.supplySourceId=source.id;
     army.convoy={sourceId:source.id,path:pick.path,index:0,legLeft:pick.path.length>1?this.legDaysBetween(pick.path[0],pick.path[1]):0,food:loaded,escort,departedTurn:state.turn};
     if(army.force===state.playerForceId)events.push({phase:"后勤",armyId:army.id,siteId:source.id,text:`粮队自${source.name}启运 ${loaded} 石赴${army.name}，经 ${pick.path.length-1} 段，护送 ${escort} 人`})},

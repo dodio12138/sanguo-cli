@@ -4,7 +4,7 @@ window.BrowserMCPServer = class BrowserMCPServer {
   async request(message){
     const id=message?.id??null,ok=result=>({jsonrpc:"2.0",id,result}),fail=(code,message,data)=>({jsonrpc:"2.0",id,error:{code,message,...(data?{data}:{})}});
     if(message?.jsonrpc!=="2.0")return fail(-32600,"Invalid Request");
-    if(message.method==="initialize")return ok({protocolVersion:this.protocolVersion,capabilities:{tools:{listChanged:false}},serverInfo:{name:"jiuzhou-strategy-browser",version:"1.0.0"}});
+    if(message.method==="initialize")return ok({protocolVersion:this.protocolVersion,capabilities:{tools:{listChanged:false}},serverInfo:{name:"sanguo-strategy-browser",version:"1.0.0"}});
     if(message.method==="notifications/initialized")return null;
     if(message.method==="ping")return ok({});
     if(message.method==="tools/list")return ok({tools:this.tools()});

@@ -549,3 +549,90 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .pop-panel button{border:1px solid var(--line-dim);padding:3px 8px;background:#0b100c;color:#cfc89c;font-size:10px;cursor:pointer}
 .pop-panel button.danger{border-color:#7a3a30;color:#e09080}
 .pop-panel [data-inspect-registry]{border-color:#786638;background:#1d1c12;color:#ecd99a}
+
+.campaign-select .campaign-force-layout .force-choices>.force-choice{display:grid;grid-template-columns:minmax(0,1fr);gap:3px}.campaign-select .campaign-force-layout .force-choices>.force-choice b,.campaign-select .campaign-force-layout .force-choices>.force-choice small{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.4}
+
+/* 郡档案：沿用官署的紧凑资料样式，表格在窗口内滚动。 */
+.commandery-table-scroll{overflow-x:auto}
+.commandery-content .ledger-table{min-width:620px}
+.commandery-content .ledger-table td{white-space:nowrap}
+.commandery-family{padding:8px 0;border-bottom:1px solid var(--line-dim)}
+.commandery-family h4{margin:0 0 6px}
+.commandery-family h4 small{font-weight:normal;color:var(--muted)}
+.commandery-content .city-stock-values{overflow-wrap:anywhere}
+
+/* 城市档案：摘要与入口常驻，详细资料按工作内容分层。 */
+#detailDialog{width:min(840px,94vw);height:min(720px,calc(100dvh - 86px));max-width:94vw}
+#detailDialog #detailContent{flex:1;padding:0 14px 14px;scroll-padding-top:230px}
+#detailDialog .city-detail-summary{position:sticky;top:0;z-index:3;background:#101710;padding:10px 0 0}
+#detailDialog .city-detail-hero{grid-template-columns:42px minmax(0,1fr) auto;gap:10px;padding:0 0 7px}
+#detailDialog .city-detail-hero .detail-seal{width:40px;height:43px;font-size:23px}
+#detailDialog .city-hero-main h2{font-size:21px;margin:2px 0 3px}
+#detailDialog .city-kpi-grid{margin:7px 0;gap:5px}
+#detailDialog .city-kpi-grid article{padding:6px 8px}
+#detailDialog .city-detail-actions{margin:5px 0 8px;gap:5px}
+#detailDialog .city-detail-actions button{padding:6px 8px}
+#detailDialog .city-detail-actions small{font-size:8px;margin-top:3px}
+#detailDialog .city-page-tabs{margin:0;display:flex;gap:0;border-bottom:1px solid #8f7a43;overflow-x:auto;flex-wrap:nowrap;background:#141c13}
+#detailDialog .city-page-tabs button{flex:1;min-width:max-content;padding:8px 10px;font-size:10px;white-space:nowrap;border:1px solid transparent;border-bottom:0;color:#aab194;background:transparent;cursor:pointer}
+#detailDialog .city-page-tabs button.active{color:#e1ce86;background:#242c1b;border-color:#756536;box-shadow:inset 0 2px #b69b52}
+#detailDialog [data-city-page][hidden]{display:none!important}
+#detailDialog [data-city-page]{margin-top:10px}
+#detailDialog .city-detail-columns{display:contents}
+#detailDialog .city-detail-columns:has([data-city-page="garrison"]:not([hidden])){display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:9px;margin:0}
+#detailDialog .city-army-panel{grid-column:auto}
+#detailDialog .city-officer-list,#detailDialog .city-army-list{max-height:none;overflow:visible}
+#detailDialog .city-army-list{grid-template-columns:1fr}
+#detailDialog .city-officer-card{grid-template-columns:28px minmax(70px,1fr) auto;padding:7px}
+#detailDialog .city-panel-title small{font-size:9px}
+#detailDialog .city-history-basis{padding:7px 0;margin-bottom:4px;line-height:1.6}
+#detailDialog .office-slot{padding:8px}
+#detailDialog .office-slot span,#detailDialog .office-slot small{font-size:9px}
+#detailDialog .office-slot b{font-size:11px}
+#detailDialog .office-slot em{font-size:8px}
+@media(max-width:600px){
+  #detailDialog #detailContent{padding:0 9px 9px;scroll-padding-top:270px}
+  #detailDialog .city-detail-summary{padding-top:7px}
+  #detailDialog .city-kpi-grid article{padding:5px 7px}
+  #detailDialog .city-detail-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #detailDialog .city-detail-actions button{display:block;padding:6px 4px;text-align:center}
+  #detailDialog .city-detail-actions small{display:none}
+  #detailDialog .city-detail-actions b{font-size:9px}
+  #detailDialog .city-page-tabs button{padding:8px 6px;font-size:9px}
+  #detailDialog .city-detail-columns:has([data-city-page="garrison"]:not([hidden])){grid-template-columns:1fr}
+}
+@media(max-height:560px){#detailDialog .city-detail-summary{position:static}}
+@media(max-width:600px){
+  #detailDialog .city-hero-status{display:none}
+  #detailDialog .city-kpi-grid article{padding:4px 6px}
+  #detailDialog .city-kpi-grid b{margin:3px 0}
+}
+
+/* 军团档案：军粮只保留一个口径，概况、运输、军职与作战分开浏览。 */
+#armyDetailDialog{width:min(940px,calc(100vw - 24px));max-width:none}
+#armyDetailContent{container-type:inline-size;container-name:army-detail}
+.army-detail-head{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line-dim)}
+.army-detail-head .detail-seal{width:46px;height:50px;font-size:27px}
+.army-detail-title h2{margin:0 0 4px;font:22px/1.3 serif;color:#ecd99a;overflow-wrap:anywhere}
+.army-detail-title p{margin:3px 0;color:var(--muted);font-size:10px}
+.army-food-status{text-align:right;border-left:1px solid var(--line-dim);padding-left:12px}
+.army-food-status b{display:block;font-size:13px}.army-food-status small{display:block;margin-top:5px;color:var(--muted);font-size:10px}
+.army-supply-good{color:#b4c697}.army-supply-warn{color:#e0bd55}.army-supply-bad{color:#e09080}
+.army-detail-tabs{position:sticky;top:-12px;z-index:2;background:#0c120d;display:flex;flex-wrap:wrap;gap:4px;padding:9px 0;margin:0}
+.army-detail-tabs button{font-size:10px;padding:6px 10px}
+.army-detail-page{min-width:0}.army-detail-grid,.army-food-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.army-detail-page .detail-section{min-width:0;border:1px solid var(--line-dim);padding:10px;background:#0b100c}
+.army-detail-page h3{font-size:12px;margin:0 0 9px;color:#d7c78e}
+.army-detail-page .data-row{gap:10px;padding:6px 0;font-size:10px;align-items:baseline}.army-detail-page .data-row>b{text-align:right;overflow-wrap:anywhere}
+.army-food-overview{margin-top:10px;padding:10px;border:1px solid var(--line-dim);border-left:3px solid currentColor;background:#0b100c}
+.army-food-overview p,.army-food-note{font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 10px}
+.army-food-panel h4{color:#d7c78e;font-size:11px;margin:0 0 5px}.army-food-columns>section{min-width:0}
+.army-food-columns>section+section{border-left:1px solid var(--line-dim);padding-left:12px}
+.army-carry-settings{border-top:1px solid var(--line-dim);margin-top:12px;padding-top:12px}
+.army-escort-setting{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:10px;margin:8px 0}.army-escort-setting select{min-width:140px}
+.army-supply-warning{color:#e0bd55;font-size:10px;line-height:1.6}
+.army-detail-page .biography{margin-top:0;padding-top:8px}.army-detail-page .court-note{font-size:10px;line-height:1.65}
+.army-other-stores,.army-combat-factors{margin-top:12px;padding:8px;border:1px solid var(--line-dim);color:var(--muted);font-size:10px}
+.army-detail-page button:not(.office-slot){border:1px solid var(--line-dim);background:#101710;color:#d8c78e;font:inherit;font-size:10px;padding:5px 9px;cursor:pointer}
+.ledger-table td .army-supply-compact{display:grid;gap:3px;font-size:10px}.army-supply-compact small{color:var(--muted);font-size:9px}
+@container army-detail (max-width:560px){.army-detail-head{grid-template-columns:42px minmax(0,1fr);gap:8px}.army-detail-head .detail-seal{width:40px;height:44px}.army-food-status{grid-column:2;text-align:left;border:0;padding:0}.army-food-status b,.army-food-status small{display:inline-block;margin:0 8px 0 0}.army-detail-grid,.army-food-columns{grid-template-columns:1fr}.army-food-columns>section+section{border-left:0;border-top:1px solid var(--line-dim);padding:10px 0 0}.army-detail-tabs button{flex:1;padding:6px 4px}.army-detail-title h2{font-size:19px}}
