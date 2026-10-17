@@ -21,5 +21,9 @@ pointer("pointerdown",20,20,{buttons:1});pointer("pointermove",70,60);assert.equ
 for(const type of ["pointercancel","lostpointercapture"]){pointer("pointerdown",20,20,{buttons:1});pointer(type,20,20);assert.equal(map.drag,null);assert.equal(captures.size,0)}
 pointer("pointerdown",20,20,{buttons:1});document.hidden=true;document.dispatchEvent(new Event("visibilitychange"));assert.equal(map.drag,null);document.hidden=false;
 map.bindInput();pointer("pointerdown",20,20,{buttons:1});pointer("pointerup",20,20);assert.equal(map.picks,2); // Rebinding must not duplicate handlers.
+// 滚轮：手势中只缩放旧图（不整图重画），停手后合并成一次完整重画；触控板小步也能平滑缩放。
+await new Promise(r=>setTimeout(r,50));{let draws=0,scheduled=0,previews=0;Object.assign(map,{size:{w:200,h:150},draw(){draws++},scheduleDraw(){scheduled++},drawZoomPreview(){previews++;return true}});const before=map.scale;
+for(let i=0;i<10;i++){const e=new Event("wheel",{cancelable:true});Object.assign(e,{deltaY:-6,deltaMode:0});canvas.dispatchEvent(e)}
+assert(map.scale>before*1.05&&map.scale<before*1.1,`小步滚动平滑放大 ${map.scale}`);assert.equal(draws,0,"手势中不整图重画");await new Promise(r=>setTimeout(r,200));assert.equal(scheduled,1,"停手后只重画一次");assert(previews>=1);assert.equal(draws,0)}
 map.disposeInput();assert.equal(captures.size,0);
-console.log("地图输入回归通过：仅左键拖动 / 悬浮不选中 / 出界释放不点击 / 失焦与取消清理 / 松开后不粘住 / 无重复绑定");
+console.log("地图输入回归通过：仅左键拖动 / 悬浮不选中 / 出界释放不点击 / 失焦与取消清理 / 松开后不粘住 / 无重复绑定 / 滚轮缩放合并重画");
