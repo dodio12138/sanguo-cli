@@ -49,6 +49,6 @@ SanguoApp.define("armyDetail",app=>{
     if(!$("armyDetailDialog").open)$("armyDetailDialog").showModal();
   }
   function refreshArmyDetail(){if(!$("armyDetailDialog").open||$("armyDetailContent").querySelector("input:focus,select:focus,.terminal-select:focus-within"))return;const army=state.data.armies.find(a=>a.id===selectedArmyId);if(army&&armyIntelLevel(army)>=1)openArmyDetail(army);else if(selectedArmyId)$("armyDetailDialog").close()}
-  state.addEventListener("turn",refreshArmyDetail);state.addEventListener("appointments",refreshArmyDetail);state.addEventListener("restore",refreshArmyDetail);
+  state.addEventListener("turn",()=>SanguoApp.refreshLater("armyDetail",refreshArmyDetail));state.addEventListener("appointments",refreshArmyDetail);state.addEventListener("restore",refreshArmyDetail);
   return {armyIntelLevel,openArmyDetail};
 });

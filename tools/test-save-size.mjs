@@ -11,7 +11,8 @@ for(let day=1;day<=360;day++){state.endTurn();if(day===180)half=size();if(day>18
 const full=size(),ledger=state.policies.fiscalAccounts;
 // 人口 POP（约 2,600 组）入档后约增 100KB，上限由 1MB 放宽到 1.2MB（docs/POP_CLAN_PLAN.md 第 1 节第 9 条）。
 // 2026-10-17 内政改制后同一推演多出野战（旧战报只留战事条目），一年档 1211→1294KB；放宽到 1.3MB，主档与备份合计仍远低于 5MB。
-assert.ok(full<1.3*1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1.3MB`);
+// 2026-10-17 月度全局事件分到月内各日后，同一推演多出战报、在途转运与军团（日报 +11KB、转运 +10KB、军团 +7KB），一年档 1304→1332KB；放宽到 1.4MB。
+assert.ok(full<1.4*1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1.4MB`);
 assert.ok(full-half<half*.4,`下半年存档增长 ${((full-half)/1024)|0}KB，增长过快`);
 // 在途条数随各城征收日起伏，单日取样不稳；以下半年日均衡量（同一推演约 300 条，已完成的每势力只留 30 条）。
 assert.ok(shipSum/180<400,`下半年在途与近期转运日均 ${Math.round(shipSum/180)} 条，应有上限`);
