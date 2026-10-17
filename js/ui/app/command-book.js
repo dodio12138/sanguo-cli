@@ -1,4 +1,4 @@
-// 命令书：按类别列命令、为所选城池生成命令模板（commandTemplate）、打开城池命令（openCityCommands）。
+// 命令书：按十二类政务列命令、为所选城池生成命令模板（commandTemplate）、打开城池命令（openCityCommands）。
 SanguoApp.define("commandBook",app=>{
   const {$,esc,state,submit,toast}=app;
   const cityTargetCommandIds=new Set([
@@ -29,14 +29,27 @@ SanguoApp.define("commandBook",app=>{
     if(command.categoryId==="personal")return ["travel","personal_investigation"].includes(command.id)?`${prefix} ${own.name} ${selected.name}`:`${prefix} ${own.name}`;
     if(command.id==="form_army")return `${prefix} ${selected.name} 3000`;if(["disband_army","reinforce","train_troops"].includes(command.id))return `${prefix} ${army?.name||"中军"}`;if(command.categoryId==="march"){if(command.id==="explore")return `${prefix} ${army?.name||"中军"}`;if(command.id==="raid")return `${prefix} ${army?.name||"中军"} ${selected.name}`;return ["camp","ambush"].includes(command.id)?`${prefix} ${army?.name||"中军"}`:`${prefix} ${army?.name||"中军"} 至 ${destination.name}`};if(command.categoryId==="military")return `${prefix} ${army?.name||"中军"} 至 ${destination.name}`;return `${prefix} ${selected.name}`;
   }
-  function renderCommandBook(categoryId,city=null,allowedCategoryIds=null){
-    const hostileCityCommandIds=new Set(["move","forced_march","raid","retreat","scout_city","investigate_route","investigate_terrain","incite","establish_inside_contact","sabotage","spread_rumor"]),commands=state.data.commandCatalog.commands.filter(command=>!city||((city.force===state.playerForceId?cityTargetCommandIds:hostileCityCommandIds).has(command.id)&&(!allowedCategoryIds||allowedCategoryIds.includes(command.categoryId)))),categoryIds=new Set(commands.map(command=>command.categoryId)),categories=state.data.commandCatalog.categories.filter(category=>categoryIds.has(category.id));
-    categoryId=categoryIds.has(categoryId)?categoryId:categories[0]?.id;
-    $("commandCategories").innerHTML=categories.map(category=>`<button data-command-category="${category.id}" class="${category.id===categoryId?"active":""}">${category.name}</button>`).join("");
-    $("commandList").innerHTML=commands.filter(command=>command.categoryId===categoryId).map(command=>`<button class="command-choice ${command.status==="active"?"active-command":""}" data-command-id="${command.id}" data-tip="${esc(command.description)}"><span>${command.name}</span><small>${city?`目标：${city.name}`:command.status==="active"?"点击下令":"规划中 · 可排队"}</small></button>`).join("");
-    $("commandCategories").querySelectorAll("[data-command-category]").forEach(button=>button.onclick=()=>renderCommandBook(button.dataset.commandCategory,city,allowedCategoryIds));
+  // 命令簿按十二类政务排列（commands.json 的 affairs），原动作分类作二级筛选；未登记政务的命令归入"其他"。
+  function commandAffairs(){
+    const catalog=state.data.commandCatalog,modes=catalog.affairModes||{},byCommand=new Map();
+    const affairs=(catalog.affairs||[]).map(affair=>({...affair,commands:new Map(affair.commands)}));
+    if(!affairs.length)return {affairs:catalog.categories.map(category=>({id:category.id,name:category.name,kind:"affair",commands:new Map()})),affairOf:command=>({affairId:command.categoryId,mode:""})};
+    for(const affair of affairs)for(const [id,mode] of affair.commands)byCommand.set(id,{affairId:affair.id,mode:modes[mode]||""});
+    affairs.push({id:"other",name:"其他",kind:"support",description:"尚未归入政务类的命令",commands:new Map()});
+    return {affairs,affairOf:command=>byCommand.get(command.id)||{affairId:"other",mode:""}};
+  }
+  function renderCommandBook(affairId,city=null,allowedCategoryIds=null,categoryFilter=null){
+    const hostileCityCommandIds=new Set(["move","forced_march","raid","retreat","scout_city","investigate_route","investigate_terrain","incite","establish_inside_contact","sabotage","spread_rumor"]),commands=state.data.commandCatalog.commands.filter(command=>!city||((city.force===state.playerForceId?cityTargetCommandIds:hostileCityCommandIds).has(command.id)&&(!allowedCategoryIds||allowedCategoryIds.includes(command.categoryId)))),{affairs,affairOf}=commandAffairs(),affairIds=new Set(commands.map(command=>affairOf(command).affairId)),shown=affairs.filter(affair=>affairIds.has(affair.id));
+    affairId=affairIds.has(affairId)?affairId:shown[0]?.id;
+    const current=shown.find(affair=>affair.id===affairId),inAffair=commands.filter(command=>affairOf(command).affairId===affairId),categoryIds=[...new Set(inAffair.map(command=>command.categoryId))],categories=state.data.commandCatalog.categories.filter(category=>categoryIds.includes(category.id));
+    if(!categoryIds.includes(categoryFilter))categoryFilter=null;
+    $("commandCategories").innerHTML=shown.map((affair,index)=>`${affair.kind==="support"&&shown[index-1]?.kind!=="support"?`<div class="command-affair-divider">辅助</div>`:""}<button data-command-affair="${affair.id}" class="${affair.id===affairId?"active":""}" ${affair.description?`data-tip="${esc(affair.description)}"`:""}>${affair.order?`<i>${affair.order}</i>`:""}${esc(affair.name)}</button>`).join("");
+    const filters=categories.length>1?`<button data-command-category="" class="${categoryFilter?"":"active"}">全部</button>${categories.map(category=>`<button data-command-category="${category.id}" class="${category.id===categoryFilter?"active":""}">${esc(category.name)}</button>`).join("")}`:"";
+    $("commandList").innerHTML=`<div class="command-affair-head">${current?.description?`<p>${esc(current.description)}</p>`:""}${filters?`<div class="command-subfilter">${filters}</div>`:""}</div>`+inAffair.filter(command=>!categoryFilter||command.categoryId===categoryFilter).map(command=>{const mode=affairOf(command).mode;return `<button class="command-choice ${command.status==="active"?"active-command":""}" data-command-id="${command.id}" data-tip="${esc(command.description)}"><span>${command.name}</span><small>${city?`目标：${city.name}`:command.status==="active"?`${mode?`${mode} · `:""}${esc(command.categoryName)}`:"规划中 · 可排队"}</small></button>`}).join("");
+    $("commandCategories").querySelectorAll("[data-command-affair]").forEach(button=>button.onclick=()=>renderCommandBook(button.dataset.commandAffair,city,allowedCategoryIds));
+    $("commandList").querySelectorAll("[data-command-category]").forEach(button=>button.onclick=()=>renderCommandBook(affairId,city,allowedCategoryIds,button.dataset.commandCategory||null));
     $("commandList").querySelectorAll("[data-command-id]").forEach(button=>button.onclick=()=>{const command=state.data.commandCatalog.commands.find(item=>item.id===button.dataset.commandId),army=state.data.armies.find(a=>a.force===state.playerForceId);if(command.id==="army_farming"){if(army)app.openArmyDetail(army);else toast("暂无本方军团");return}if(command.id==="merge_army"){app.openMergePlanner(army);return}if(command.id==="field_operation"){app.openFieldPlanner(army);return}if(command.id==="construct_building"&&city){app.openBuildingPlanner(city);return}if(command.id==="form_army"&&city?.force===state.playerForceId){app.openArmyPlanner(city);return}if(command.id==="reorganize_army"&&army){app.openReorganizePlanner(army);return}if(command.id==="return_garrison"&&army){app.openTroopTransferPlanner(army,"return");return}if(CommandPlanner.open({command,state,contextCity:city,dialog:$("plannerDialog"),form:$("plannerForm"),title:$("plannerTitle"),toast,map:app.map})){return}const text=commandTemplate(command,city);if(submit(text)){toast(`${command.categoryName}/${command.name} 已加入本日命令`);$("commandDialog").close()}})
   }
-  function openCityCommands(city,allowedCategoryIds=null,groupName="城市命令"){state.selected={type:"city",value:city};$("commandDialogTitle").textContent=`${city.name} · ${groupName}`;renderCommandBook(allowedCategoryIds?.[0]||null,city,allowedCategoryIds);$("commandDialog").showModal()}
+  function openCityCommands(city,allowedCategoryIds=null,groupName="城市命令"){state.selected={type:"city",value:city};$("commandDialogTitle").textContent=`${city.name} · ${groupName}`;renderCommandBook(null,city,allowedCategoryIds);$("commandDialog").showModal()}
   return {openCityCommands,prefill,renderCommandBook};
 });

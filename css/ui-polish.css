@@ -100,6 +100,13 @@ select option { color: var(--text); background: #101710; }
 .command-choice { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; align-content: center; min-width: 0; max-width: 100%; overflow: hidden; }
 .command-choice > span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; color: #ddd5aa; }
 .command-choice small { float: none; min-width: 0; max-width: 100%; overflow-wrap: anywhere; text-align: left; white-space: normal; line-height: 1.4; }
+.command-browser nav button i { display: inline-block; min-width: 1.6em; color: var(--muted); font-style: normal; font-size: .85em; }
+.command-affair-divider { margin: 10px 8px 2px; color: var(--muted); font-size: 9px; letter-spacing: .2em; }
+.command-affair-head { grid-column: 1 / -1; display: grid; gap: 6px; min-width: 0; }
+.command-affair-head p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.command-subfilter { display: flex; flex-wrap: wrap; gap: 4px; }
+.command-browser .command-subfilter button { display: inline-block; width: auto; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 3px 8px; font-size: 10px; cursor: pointer; }
+.command-browser .command-subfilter button.active { color: var(--amber); border-color: var(--amber); background: #87945c16; }
 
 .ui-tooltip {
   position: fixed;

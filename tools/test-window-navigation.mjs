@@ -102,7 +102,8 @@ const detailScroll=$("detailContent").scrollTop,frontOrder=[...elements.values()
 for(const id of ["form_army","reorganize_army","return_garrison","construct_building","agriculture"]){
   const command=state.data.commandCatalog.commands.find(command=>command.id===id);
   // 军团类命令不以城池为目标，按总命令书打开
-  app.renderCommandBook(command.categoryId,["reorganize_army","return_garrison"].includes(id)?null:city);$("commandDialog").showModal();
+  const affairId=state.data.commandCatalog.affairs.find(affair=>affair.commands.some(([commandId])=>commandId===id)).id;
+  app.renderCommandBook(affairId,["reorganize_army","return_garrison"].includes(id)?null:city);$("commandDialog").showModal();
   const button=$("commandList").querySelectorAll("[data-command-id]").find(button=>button.dataset.commandId===id);
   assert(button,id);retained("commandDialog",()=>button.onclick());assert.equal($("plannerDialog").open,true,id);
   $("plannerDialog").close();

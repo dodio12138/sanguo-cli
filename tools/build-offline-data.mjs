@@ -24,7 +24,7 @@ const payload={
   officerSupplement:read("game/data/history/officers_supplement.json"),
   forces:read(scenario.data_files.forces).forces,cities:read(scenario.data_files.cities).cities,
   officers:read(scenario.data_files.officers).officers,armies:read(scenario.data_files.armies).armies,
-  commandCatalog:{schemaVersion:commands.schema_version,categories:commands.categories.map(({id,name})=>({id,name})),commands:commands.categories.flatMap(category=>category.commands.map(entry=>{const [id,name,status="active"]=entry;return {id,name,status,description:window.SANGUO_COMMAND_DESCRIPTION(id,name,category.id),categoryId:category.id,categoryName:category.name,parameters:["actor_id","target_ids","amount","options"]}}))}
+  commandCatalog:{schemaVersion:commands.schema_version,categories:commands.categories.map(({id,name})=>({id,name})),commands:commands.categories.flatMap(category=>category.commands.map(entry=>{const [id,name,status="active"]=entry;return {id,name,status,description:window.SANGUO_COMMAND_DESCRIPTION(id,name,category.id),categoryId:category.id,categoryName:category.name,parameters:["actor_id","target_ids","amount","options"]}})),affairs:commands.affairs||[],affairModes:commands.affair_modes||{}}
 };
 payload.counties=structuredClone(payload.administrativeDivisions.county_seats||[]);
 const loader=new window.DataLoader(payload);loader.applyCityResources(payload,scenario.id);loader.assignCommanderySeatOwners(payload);loader.applyCountyResources(payload,scenario.id);loader.mergeOfficerSupplement(payload);

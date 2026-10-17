@@ -45,7 +45,7 @@ try{
     const out=[],catalog=window.SANGUO_COMMAND_CATALOG.commands;
     for(const command of catalog){
       document.querySelectorAll('dialog[open]').forEach(dialog=>dialog.close());document.getElementById('clearOrders')?.click();document.getElementById('commandBookButton')?.click();
-      const category=document.querySelector('[data-command-category="'+command.categoryId+'"]');category?.click();const button=document.querySelector('[data-command-id="'+command.id+'"]');button?.click();
+      const affairId=(window.SANGUO_DATA?.commandCatalog?.affairs||[]).find(affair=>affair.commands.some(([id])=>id===command.id))?.id,category=document.querySelector('[data-command-affair="'+affairId+'"]');category?.click();const button=document.querySelector('[data-command-id="'+command.id+'"]');button?.click();
       const planner=document.getElementById('plannerDialog'),commandDialog=document.getElementById('commandDialog'),queued=Number(document.getElementById('orderCount')?.textContent||0),selects=[...document.querySelectorAll('#plannerForm select')];
       out.push({id:command.id,category:command.categoryId,categoryFound:Boolean(category),buttonFound:Boolean(button),result:planner?.open?'planner':queued?'queued':commandDialog?.open?'command-dialog':'closed',plannerFields:document.querySelectorAll('#plannerForm input,#plannerForm select').length,emptySelects:selects.filter(select=>!select.options.length).length});
       planner?.close();commandDialog?.close();document.getElementById('clearOrders')?.click();

@@ -1,7 +1,7 @@
 window.AIBridge = class AIBridge {
   constructor(state){this.state=state;this.audit=[];}
   manifest(){const object=(properties={},required=[])=>({type:"object",properties,required,additionalProperties:false}),string={type:"string"};return {name:"sanguo-strategy",version:"1.0",phase:"planning",connection:{connected:false,mode:this.state.controlMode||"manual"},tools:[
-    {name:"list_commands",description:"列出游戏命令及参数定义",readOnly:true,inputSchema:object({category_id:string})},
+    {name:"list_commands",description:"列出游戏命令及参数定义；affair_id 按十二类政务筛选",readOnly:true,inputSchema:object({category_id:string,affair_id:string})},
     {name:"inspect_command",description:"查询单条命令的完整说明、分类、状态与参数约定；提交前先查不熟悉的命令",readOnly:true,inputSchema:object({command_id:string},["command_id"])},
     {name:"inspect_turn_reports",description:"按日查询本局战报/日报历史，包含实际下达命令与结算反馈；可查指定日期或按日期范围分页",readOnly:true,inputSchema:object({turn:{type:"integer"},from_turn:{type:"integer"},to_turn:{type:"integer"},limit:{type:"integer",minimum:1,maximum:30}})},
     {name:"inspect_city",description:"读取情报权限允许的城市资料",readOnly:true,inputSchema:object({city_id:string},["city_id"])},
@@ -21,7 +21,7 @@ window.AIBridge = class AIBridge {
   ],commandCount:this.state.data.commandCatalog.commands.length};}
   call(name,args={},actor="player-ai"){
     const record={at:new Date().toISOString(),turn:this.state.turn,actor,name,args,status:"rejected"};let result;
-    if(name==="list_commands"){result=this.state.data.commandCatalog.commands.filter(c=>!args.category_id||c.categoryId===args.category_id);record.status="ok"}
+    if(name==="list_commands"){const catalog=this.state.data.commandCatalog,modes=catalog.affairModes||{},affairOf=new Map((catalog.affairs||[]).flatMap(affair=>affair.commands.map(([id,mode])=>[id,{affairId:affair.id,affairName:affair.name,affairMode:modes[mode]||mode}])));result=catalog.commands.filter(c=>!args.category_id||c.categoryId===args.category_id).map(c=>({...c,...affairOf.get(c.id)})).filter(c=>!args.affair_id||c.affairId===args.affair_id);record.status="ok"}
     else if(name==="inspect_command"){result=this.inspectCommand(args.command_id);record.status=result?"ok":"rejected"}
     else if(name==="inspect_turn_reports"){result=this.inspectTurnReports(args);record.status="ok"}
     else if(name==="inspect_city"){result=this.visibleCity(args.city_id);record.status=result?"ok":"rejected"}
