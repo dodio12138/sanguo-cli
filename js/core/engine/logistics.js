@@ -8,7 +8,7 @@ Object.assign(window.RuleEngine.prototype,{
   easyCarryDays(army){const r=this.fieldLogisticsRules();return Math.round(Math.max(r.easy_days_min,Math.min(r.easy_days_max,r.easy_days_base*Math.sqrt(r.easy_days_ref/Math.max(1,army?.soldiers||1)))))},
   armyCarryDays(army){return Math.max(1,Math.min(90,Number.isFinite(army?.carryDays)?army.carryDays:this.easyCarryDays(army)))},
   // 每日口粮（石）：健卒、伤员全份，俘虏半份。
-  dailyRation(state,army){const context=state||{data:this.data,date:{day:1}};return FiscalSystem.armyDailyNeed(context,army)/(GameClock.isDaily(context)?1:10)},
+  dailyRation(state,army){const context=state||{data:this.data,engine:this,date:{day:1}};return FiscalSystem.armyDailyNeed(context,army)/(GameClock.isDaily(context)?1:10)},
   isStationed(army){const city=this.data.cities.find(c=>c.id===army?.city);return !!city&&city.force===army.force&&!army.fieldPosition&&!army.route?.length&&!army.siegeTarget&&!this.isCityBesieged(city)},
   // 组织度：驻在己方城中为满；在外按军仓存粮相对「轻松携带天数」的倍数下降（辎重拖长队列）。
   armyOrganization(state,army){if(!army)return 100;if(this.isStationed(army))return Math.round(Math.max(0,Math.min(100,army.cohesion??100)));const r=this.fieldLogisticsRules(),days=(army.stores?.food||0)/this.dailyRation(state,army),ratio=days/Math.max(1,this.easyCarryDays(army));return Math.round(Math.min(army.cohesion??100,Math.max(r.org_min,Math.min(100,100*Math.min(1,1/Math.max(1e-6,ratio))**.5))))},
@@ -31,7 +31,7 @@ Object.assign(window.RuleEngine.prototype,{
     if(convoy){let eta=Math.max(0,convoy.legLeft||0);if(transport)for(let i=convoy.index+1;i<convoy.path.length-1;i++)eta+=this.legDaysBetween(convoy.path[i],convoy.path[i+1]);delivery={label:"粮队在途",mode:"convoy",source:cityBy(convoy.sourceId),eta:transport?Math.ceil(eta):null,redirect:convoy.path.at(-1)!==army.city,food:Math.floor(convoy.food),escort:convoy.escort};}
     else if(!city&&!light&&transport&&carriedDays<rules.resupply_days){const source=this.pickSupplySource(state,army);delivery.source=source?.city||null;delivery.label=source?"等待后方派粮":"无可达补给城";delivery.mode=source?"waiting":"unreachable"}
     if(!city&&delivery.mode==="convoy"&&delivery.eta>carriedDays)delivery.warning=`军仓约可支撑${Math.floor(carriedDays)}日，粮队约${delivery.eta}日后抵达，可能接续不上。`;
-    return {label,tone,reason,dailyNeed,carried,carriedDays,city,localFood,besieged,recent,lastConsumption:last&&last.turn<=state.turn?last:null,delivery,manual,cut,light,condition:army.supply??100,organization:this.armyOrganization(state,army),easyDays:this.easyCarryDays(army),carryDays:this.armyCarryDays(army),targetFood:FiscalSystem.armyFoodTarget(state,army)};
+    return {label,tone,reason,ration:FiscalSystem.armyRationProfile(state,army),fieldDailyNeed:FiscalSystem.armyDailyNeed(state,army,{field:true})/(GameClock.isDaily(state)?1:10),dailyNeed,carried,carriedDays,city,localFood,besieged,recent,lastConsumption:last&&last.turn<=state.turn?last:null,delivery,manual,cut,light,condition:army.supply??100,organization:this.armyOrganization(state,army),easyDays:this.easyCarryDays(army),carryDays:this.armyCarryDays(army),targetFood:FiscalSystem.armyFoodTarget(state,army)};
   },
 
   // 路网上的最少段数路径（运粮队不择官民道，只求可达）；超出 maxHops 即不通。

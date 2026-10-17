@@ -53,7 +53,7 @@ const elements=new Map();
 const $=id=>{if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id)};
 const document={createElement:()=>new Element(),listeners:new Map(),addEventListener(type,fn){this.listeners.set(type,[...(this.listeners.get(type)||[]),fn])},querySelector:()=>null,querySelectorAll:()=>[...elements.values()].filter(element=>element.open)};
 // 界面模块：载入注册表与相关模块，以桩对象充当壳的 app 上下文；壳内的关窗与迷雾判定函数原样取自 app.js
-const loader={},context=vm.createContext({$,state,document,MapGrid,RuleEngine,FiscalUI,getComputedStyle:element=>element.style,loader});context.window=context;
+const loader={},context=vm.createContext({$,state,document,MapGrid,RuleEngine,FiscalSystem,FiscalUI,getComputedStyle:element=>element.style,loader});context.window=context;
 vm.runInContext(fs.readFileSync(new URL("../js/ui/clan-ui.js",import.meta.url),"utf8"),context);
 vm.runInContext(fs.readFileSync(new URL("../js/ui/command-planner.js",import.meta.url),"utf8").replace("window.CommandPlanner","globalThis.CommandPlanner"),context);
 vm.runInContext(fs.readFileSync(new URL("../js/ui/population-ui.js",import.meta.url),"utf8").replace("window.PopulationUI","globalThis.PopulationUI"),context);

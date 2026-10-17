@@ -15,7 +15,7 @@ function fixture(){
   data.officers=[{id:"official",name:"官员",force:"cao",city:"a",status:"serving",politics:95,intelligence:95,charm:95,command:95,war:70,loyalty:90}];
   data.armies=[{id:"army",name:"军团",force:"cao",city:"a",commander:"官员",soldiers:6000,units:{infantry:6000,cavalry:0,archers:0}}];
   data.rules.city_graph={a:["b"],b:["a","c"],c:["b"]};
-  return new GameState(data,{playerForceId:"cao"});
+  return new GameState(data,{playerForceId:"cao",initializeGrain:false});
 }
 let state=fixture(),city=state.data.cities[2];
 city.fiscal.accrued.land=10000;
@@ -40,7 +40,7 @@ city.publicSupport=10;assert(FiscalSystem.governance(state,city).support<high.su
 state=fixture();city=state.data.cities[0];
 const population=state.data.counties[0].population;
 const group=FiscalSystem.levyLabor(state,city,10000,[]);assert(group);assert.equal(state.data.counties[0].population,population-group.people);
-const workingCrop=structuredClone(state.serialize());const idle=fixture();FiscalSystem.settle(idle,[]);FiscalSystem.settle(state,[]);assert(city.fiscal.cropAccrued<idle.data.cities[0].fiscal.cropAccrued,"徭役占用降低收成");
+state.date.month=3;const workingCrop=structuredClone(state.serialize());const idle=fixture();idle.date.month=3;FiscalSystem.settle(idle,[]);FiscalSystem.settle(state,[]);assert(city.fiscal.cropAccrued<idle.data.cities[0].fiscal.cropAccrued,"徭役占用降低收成");
 const beforeDismiss=state.data.counties[0].population;FiscalSystem.dismissLabor(state,city.id,[]);assert.equal(state.data.counties[0].population,beforeDismiss+group.people);FiscalSystem.dismissLabor(state,city.id,[]);assert.equal(state.data.counties[0].population,beforeDismiss+group.people,"不可重复返还人口");
 const restored=fixture();restored.applySave(restored.migrateSave(workingCrop));assert.equal(restored.policies.fiscalAccounts.laborGroups[0].people,group.people);assert.equal(restored.data.counties[0].population,population-group.people);
 
@@ -52,16 +52,16 @@ assert.equal(stationed.stores.lastConsumption.source,"城市粮仓");
 FiscalSystem.stockArmy(state,stationed);assert.equal(stationed.stores.food,FiscalSystem.armyFoodTarget(state,stationed),"就仓必须把军仓补到满仓");
 const marchedFood=city.localFood;stationed.route=["b"];FiscalSystem.consumeArmy(state,stationed,[]);
 assert.equal(city.localFood,marchedFood,"行军途中不得再消耗城市粮食");
-assert.equal(stationed.stores.food,FiscalSystem.armyFoodTarget(state,stationed)-ration,"行军途中只能消耗随军军仓");
+assert.equal(stationed.stores.food,FiscalSystem.armyFoodTarget(state,stationed)-FiscalSystem.armyDailyNeed(state,stationed),"行军途中只能消耗随军军仓");
 assert.equal(stationed.stores.lastConsumption.source,"随军军仓");
 delete stationed.route;state.data.cities[0].force="yuan";stationed.stores.food=500;const foreignFood=city.localFood;
 FiscalSystem.consumeArmy(state,stationed,[]);
 assert.equal(city.localFood,foreignFood,"客地不得消耗他城粮食");
-assert.ok(stationed.stores.food>=500-ration,"客地军仓可由最近的己方城池续运");if(stationed.stores.food>500-ration)assert.ok(stationed.stores.lastResupply?.cityId&&state.data.cities.find(c=>c.id===stationed.stores.lastResupply.cityId)?.force===stationed.force,"续运须出自己方城池");
+assert.ok(stationed.stores.food>=500-FiscalSystem.armyDailyNeed(state,stationed),"客地军仓可由最近的己方城池续运");if(stationed.stores.food>500-FiscalSystem.armyDailyNeed(state,stationed))assert.ok(stationed.stores.lastResupply?.cityId&&state.data.cities.find(c=>c.id===stationed.stores.lastResupply.cityId)?.force===stationed.force,"续运须出自己方城池");
 state=fixture();{const fed=state.data.armies[0],home=state.data.cities.find(c=>c.id===fed.city);fed.stores.food=0;home.localFood=0;const centralBefore=state.resources.food;FiscalSystem.consumeArmy(state,fed,[]);assert.equal(fed.stores.lastConsumption.short,0,"本城无粮时应就近调粮");assert.ok(fed.stores.lastConsumption.fromRegion>0,"调粮来自本郡或中央");assert.ok(state.data.cities.some(c=>c.id!==home.id&&c.force===home.force)||state.resources.food<centralBefore)}
 state=fixture();const hungry=state.data.armies[0];hungry.stores.food=0;for(const c of state.data.cities)if(c.force===state.playerForceId)c.localFood=0;state.resources.food=0;const hungerEvents=[];
 FiscalSystem.consumeArmy(state,hungry,hungerEvents);
-assert.equal(hungry.stores.lastConsumption.short,ration);assert.equal(hungry.stores.lastConsumption.source,"缺粮");
+assert.equal(hungry.stores.lastConsumption.short,FiscalSystem.armyDailyNeed(state,hungry));assert.equal(hungry.stores.lastConsumption.source,"缺粮");
 assert(hungerEvents.some(event=>/缺粮/.test(event.text)),"断粮必须产生缺粮事件");
 
 state=fixture();city=state.data.cities[0];state.date={year:200,month:8,xun:2};FiscalSystem.settle(state,[]);assert.equal(city.fiscal.accrued.food,0);
@@ -127,10 +127,10 @@ assert(chartMarkup.includes("城b"),"来源图必须列出郡县名称");
 
 state=fixture();city=state.data.cities[0];const owed=state.data.armies[0];
 city.localFood=0;city.fiscal.pendingRemittance.food=6000;FiscalSystem.account(state).arrears="retain";
-const shipmentsBefore=state.policies.fiscalAccounts.shipments.length,retainEvents=[];
+const shipmentsBefore=state.policies.fiscalAccounts.shipments.filter(c=>c.purpose==="补缴").length,retainEvents=[];
 FiscalSystem.settle(state,retainEvents);
 assert.equal(city.fiscal.pendingRemittance.food,0,"地方留用必须清空欠额，不得继续追缴");
-assert.equal(state.policies.fiscalAccounts.shipments.length,shipmentsBefore,"地方留用不得再发出补缴运输");
+assert.equal(state.policies.fiscalAccounts.shipments.filter(c=>c.purpose==="补缴").length,shipmentsBefore,"地方留用不得再发出补缴运输");
 assert.equal(city.localFood,0,"地方留用只改变归属，不得凭空生成粮食");
 assert(retainEvents.some(event=>/转为地方留用/.test(event.text)));
 assert(FiscalSystem.pendingArrears(state).food===0);

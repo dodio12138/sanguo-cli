@@ -16,7 +16,7 @@ const data=await loader.loadScenario("219_xiangyang",{useSavedMap:false});
 // 开局府库：玩家与 AI 同一公式，随据点与兵力增减。
 const liu=new GameState(structuredClone(data),{playerForceId:"liu"}),sun=new GameState(structuredClone(data),{playerForceId:"sun"});
 const expected=FiscalSystem.startingResources(liu.data,liu.data.forces.find(force=>force.id==="liu"),276);
-assert.equal(liu.resources.gold,expected.gold);assert.equal(liu.resources.food,expected.food);
+assert.equal(liu.resources.gold,expected.gold);assert(liu.resources.food>=expected.food,"开局中央至少保留原基线，另承担县仓不足的储备");
 assert.equal(sun.data.forces.find(force=>force.id==="liu").resources?.gold??FiscalSystem.startingResources(sun.data,sun.data.forces.find(force=>force.id==="liu")).gold,expected.gold,"同一势力由玩家或 AI 操控，开局钱数一致");
 assert.notEqual(liu.resources.gold,new GameState(structuredClone(data),{playerForceId:"shi_xie"}).resources.gold,"开局府库随势力规模变化");
 
@@ -32,7 +32,7 @@ assert.equal(drawn,20000);assert.equal(force.resources.food,centralBefore,"境�
   assert.equal(FiscalSystem.grainDispatch(game,"liu"),"nearby","默认就近调运");
   const order=game.addStructuredOrder("reform",{text:"科技/推行改革 粮政·中央统筹",options:{choice:"粮政·中央统筹"}});assert(order,"推行改革可选粮政");
   let events=[];game.engine.resolveOrder(game,order,events);assert.equal(game.policies.grainDispatch,"central");assert(events.some(event=>/中央统筹/.test(event.text)));
-  let before=stock(),central=game.resources.food;FiscalSystem.drawRegionalFood(game,city,20000,"liu");assert(game.resources.food<central,"中央统筹先动用中央府库");assert(before-stock()<20000,"中央统筹时境内城仓少动");
+  let before=stock(),central=game.resources.food;FiscalSystem.drawRegionalFood(game,city,20000,"liu");assert.equal(game.resources.food,central,"中央统筹不再瞬移支付军粮");assert(before-stock()<20000,"中央统筹时不跨郡抽粮");city.localFood=0;FiscalSystem.advanceGrainRelief(game,[]);assert(game.resources.food<central,"中央统筹由中央济粮实运支付");assert(game.policies.fiscalAccounts.shipments.some(c=>c.purpose==="中央济粮"&&c.targetCityId===city.id),"地方缺粮有真实济粮运输");
   events=[];game.engine.resolveOrder(game,{type:"reform",text:"科技/推行改革 粮政·郡县自给"},events);assert.equal(game.policies.grainDispatch,"local");
   const far=own.filter(item=>!(game.engine.reinforcementSources(city,"liu")||[]).some(source=>source.city.id===item.id)&&item.id!==city.id),farBefore=far.reduce((sum,item)=>sum+(item.localFood||0),0);game.resources.food=0;FiscalSystem.drawRegionalFood(game,city,50000,"liu");
   assert.equal(far.reduce((sum,item)=>sum+(item.localFood||0),0),farBefore,"郡县自给不跨郡调运");

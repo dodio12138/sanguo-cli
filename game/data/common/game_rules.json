@@ -693,9 +693,27 @@
       "depot_storage": 30000,
       "depot_hop_bonus": 3
     },
+    "grain": {
+      "note": "首轮沿用统一秋收，3—9月为抽象生长期；年度规模沿用原税粮口径，非全社会粮产。新局补田间进度与储备，旧局保留已有资源。济粮每五日检查，按缺粮程度排序、限制批次并真实运输。",
+      "sow_month": 3,
+      "harvest_month": 9,
+      "opening_reserve_days": 60,
+      "relief_review_days": 5,
+      "relief_trigger_days": 30,
+      "relief_target_days": 90,
+      "central_reserve_days": 30,
+      "relief_batch": 20000,
+      "relief_max_dispatches": 8,
+      "farming_soldier_share": 0.5,
+      "farming_land_share": 0.1,
+      "farming_ration_factor": 0.5,
+      "farming_food_per_worker": 3,
+      "farming_training_factor": 0.5
+    },
     "food": {
-      "note": "口粮按汉简与史载：行军士卒月食约二石（日0.066石），屯驻守卒月一石半（日0.05石）。仓容、开局存粮与新建仓库按 stock_scale 放大；crop_scale 调整官府收粮。v17及更早存档的存粮读档时同比换算",
+      "note": "野战口粮参考汉简大石粟口径，日0.066石；安全驻城军团的官仓净支出日0.033石，为就地供养的游戏抽象，不代表实际饮食减半或史载统一标准。普通守军参数另计。仓容、开局存粮与新建仓库按 stock_scale 放大；crop_scale 调整官府收粮。v17及更早存档的存粮读档时同比换算",
       "army_ration": 0.066,
+      "stationed_ration": 0.033,
       "garrison_ration": 0.05,
       "crop_scale": 1.2,
       "stock_scale": 4
