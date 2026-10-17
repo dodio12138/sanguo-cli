@@ -108,7 +108,7 @@ Object.assign(window.RuleEngine.prototype,{
     for(const [forceId,command] of Object.entries(state.forceCommand)){const force=this.data.forces.find(f=>f.id===forceId);if(!force||force.eliminated)continue;const player=forceId===state.playerForceId,log=(text,lv=1)=>{if(player)events.push({phase:"方面",text,lv})};
       for(const post of Object.values(command.posts)){if(!this.holderActive(post,forceId)){if(this.postHolder(post)?.force!==forceId){this.removePost(state,forceId,post.id,[],"出缺：");log(`${post.title}出缺，辖区暂归上级`,2)}continue}
         this.claimPostArmies(state,forceId,post);for(const army of this.postArmies(post,forceId))if(!this.data.cities.some(c=>c.id===army.city))army.postId=null;
-        const holder=this.postHolder(post),marshal=this.data.officers.find(o=>o.id===command.central.marshal),speed=Math.min(1,.5+(holder.command||50)/200+(marshal?(marshal.command||0)/1000:0));post.journal??=[];
+        const holder=this.postHolder(post),marshal=this.data.officers.find(o=>o.id===command.central.marshal),speed=Math.min(1,(.5+((holder.command||50)+this.postHolderBoost(post))/200)*this.officeBonus(this.centralScore(forceId,"marshal"),1.06,.97));post.journal??=[];
         this.postGarrisonTargets(state,forceId,post);if(state.random()>speed){post.journal.push(`${state.turn}:迟缓`);continue}
         const refusing=post.status.mode!=="恭顺";this.postDefend(state,forceId,post,log);if(refusing)continue;
         for(const d of post.directives.filter(x=>x.status==="进行"))this.runDirective(state,forceId,post,d,log);
@@ -135,7 +135,7 @@ Object.assign(window.RuleEngine.prototype,{
     if(atRally.length&&(ratio>=need||target.force==="neutral")){const lead=atRally.sort((a,b)=>b.soldiers-a.soldiers)[0],route=this.path(lead.city,target.id,forceId),forceRef=forceId===state.playerForceId?{id:forceId,resources:state.resources,get campaign(){return post.campaign},set campaign(v){post.campaign=v}}:this.data.forces.find(f=>f.id===forceId),decision=this.campaignDecision(state,forceRef,lead,atRally.filter(a=>a!==lead).map(a=>({army:a})),{city:target,route});
       if(!decision.approved){if(post.lastHold!==decision.reason){post.lastHold=decision.reason;log(`${post.title}议取${target.name}，以${decision.reason}暂缓`)}return}
       for(const army of atRally)this.marchArmy(army,this.path(army.city,target.id,forceId),target.id);log(`${post.title}${holder.name}率 ${atRally.length} 军攻${target.name}（评估${ratio>=1.1?"优势":ratio>=.85?"相当":"冒险"}）`,2);return}
-    for(const army of idle.filter(a=>!atRally.includes(a))){const route=this.path(army.city,rally.city.id,forceId);if(route&&this.routeDays(route,army.soldiers)<=rules.rally_days)this.marchArmy(army,route,rally.city.id,"集结")}},
+    for(const army of idle.filter(a=>!atRally.includes(a))){const route=this.path(army.city,rally.city.id,forceId);if(route&&this.routeDays(route,army.soldiers)<=Math.round(rules.rally_days*this.marshalFactor(forceId,"rally")))this.marchArmy(army,route,rally.city.id,"集结")}},
   // AI 方面大员就地编军：辖内各城超额守军抽成一军，由大员或辖内闲将统领（每月至多一次）
   aiPostForm(state,forceId,post,log){const rules=this.commandRules(),force=this.data.forces.find(f=>f.id===forceId),pool=force?.resources;if(!pool||(pool.gold||0)<(rules.ai_form_gold||400)||post.formedTurn&&state.turn-post.formedTurn<GameClock.duration(state,3))return;
     const personality=this.aiPersonality(forceId),cities=this.postCities(post,forceId).filter(c=>!this.isCityBesieged(c)),sources=cities.map(c=>({city:c,surplus:Math.max(0,(c.garrison||0)-this.aiGarrisonTarget(c,force,personality))})).filter(x=>x.surplus>0),seat=this.seatOfScope(post.scope,forceId);if(!seat)return;
@@ -173,12 +173,12 @@ Object.assign(window.RuleEngine.prototype,{
         const target=this.data.cities.find(c=>c.id===post.policy.targetCityId);lines.push(`方针：${names[post.policy.type]}${target?`（图${target.name}）`:""}`);
         for(const d of post.directives.filter(x=>x.status==="进行"))lines.push(`${rules.directive_names[d.type]}：${d.type==="grain"?`已发 ${d.shipped}/${d.food} 石`:d.type==="reinforce"?`已遣 ${d.sent}/${d.soldiers} 人`:"进行中"}`);
         // 敌情估计：大员（或军师）智力越低，误差越大
-        const wit=Math.max(holder.intelligence||50,(advisor?.intelligence||0)*.8),error=(100-wit)/250,enemies=this.data.armies.filter(a=>a.force!==forceId&&!this.worldFriendly(state,forceId,a.force)&&cities.some(c=>c.id===a.city||(this.data.rules.city_graph[c.id]||[]).includes(a.city)));
+        const wit=Math.max((holder.intelligence||50)+this.postHolderBoost(post),(advisor?.intelligence||0)*.8),error=(100-wit)/250,enemies=this.data.armies.filter(a=>a.force!==forceId&&!this.worldFriendly(state,forceId,a.force)&&cities.some(c=>c.id===a.city||(this.data.rules.city_graph[c.id]||[]).includes(a.city)));
         if(enemies.length){const seed=(state.turn+post.id.length)%7/7*2-1,estimate=Math.round(enemies.reduce((n,a)=>n+a.soldiers,0)*(1+seed*error)/100)*100;alerts.push(`境上敌军约 ${estimate.toLocaleString()} 人`)}
         for(const city of cities)if(this.isCityBesieged(city))alerts.push(`${city.name}被围`);
         const monthNeed=cities.reduce((n,c)=>n+FiscalSystem.garrisonDailyFood(state,c.garrison)*30,0)+this.postArmies(post,forceId).reduce((n,a)=>n+FiscalSystem.armyDailyNeed(state,a)*30,0);if(s.food<monthNeed*3)requests.push(`请粮约 ${Math.round(monthNeed*3-s.food).toLocaleString()} 石`);
         if(post.policy.type==="advance"&&!this.idlePostArmies(post,forceId).length)requests.push("请兵：辖内无可用之军");if(s.vacant)requests.push(`请人：${s.vacant} 处郡治无太守`);if(post.status.mode!=="恭顺")alerts.push(post.status.mode==="截留"?`截留赋税累计 ${post.status.withheld||0} 金`:"不听调遣");
-        const report={turn:state.turn,date:`${state.date.year}年${state.date.month}月`,lines,alerts,requests};post.reports.unshift(report);post.reports=post.reports.slice(0,rules.report_keep);delete post.journal;
+        const report={turn:state.turn,date:`${state.date.year}年${state.date.month}月`,lines,alerts,requests};post.reports.unshift(report);post.reports=post.reports.slice(0,rules.report_keep+(forceId===state.playerForceId?this.maxPlayerOrders(state)-(this.data.rules?.orders?.max_player_orders_per_turn||8):0));delete post.journal;
         if(player)events.push({phase:"方面",lv:alerts.length?2:1,postId:post.id,text:`${post.title}${holder.name}月报：${[lines[0],...alerts,...requests].join("；")}`})}}},
 
   // —— 旧档：军团（corps）并入方面 ——

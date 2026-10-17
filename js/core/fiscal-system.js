@@ -48,7 +48,7 @@ window.FiscalSystem=class FiscalSystem {
     const ability=(governor.score+county.score+finance.score+households.score)/4;
     // 手动征收的"注意力"并入县令的行政负荷（offices.js）：县令过劳时其分数下降，过 80% 后贪腐另增（质量下降）。
     const efficiency=this.clamp(.48+ability/180,.25,.98);
-    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload)/100-(governor.score+finance.score)/700,.01,.45);
+    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload+(engine.secretaryCorruption?.(city)||0))/100-(governor.score+finance.score)/700,.01,.45);
     const population=(city.population||0)+engine.countiesForCity(city.id).reduce((sum,county)=>sum+(county.population||0),0),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
     return {efficiency,corruption,support,ability,agriculture:agriculture.score,bureaucracy,population};
   }
@@ -59,8 +59,8 @@ window.FiscalSystem=class FiscalSystem {
     const source=state.data.cities.find(city=>city.id===sourceCityId),score=this.governance(state,source).ability,distance=Math.max(0,route.length-1);
     // 转运按路段里程与类型计损耗与日程：漕运最省，栈道山道最费；大宗粮秣超出道路通行量时车队延误。
     const cfg=state.data.rules.balance?.logistics||{},legs=state.data.routeNetwork&&state.engine.legInfo?route.slice(1).map((id,index)=>state.engine.legInfo(route[index],id)):null,baseRate=resource==="food"?.025:resource==="silk"?.012:.008;
-    const rawLoss=legs?legs.reduce((sum,leg)=>sum+(leg.li?leg.li/100*(cfg.loss_per_100li?.[resource]??baseRate*.6)*(cfg.kind_loss?.[leg.kind]??1):baseRate),0):distance*baseRate,lossRate=this.clamp(rawLoss*(1-score/160),0,cfg.max_loss??.45),loss=Math.floor(amount*lossRate);
-    const daily=GameClock.isDaily(state),edgeDays=daily?10:1,legDays=daily&&legs?legs.map(leg=>{const convoy=amount/Math.max(.1,(leg.capacity??1)*(cfg.cargo_per_capacity??20000));return Math.max(1,Math.ceil(leg.days*(convoy<=1?1:1+(convoy-1)*(cfg.cargo_delay??.5))))}):null,travel=legDays?legDays.reduce((sum,days)=>sum+days,0):distance*edgeDays,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,...(legDays?{legDays}:{}),segmentRemainingDays:route.length>1?legDays?.[0]??edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,travel),purpose,status:"在途"};
+    const rawLoss=legs?legs.reduce((sum,leg)=>sum+(leg.li?leg.li/100*(cfg.loss_per_100li?.[resource]??baseRate*.6)*(cfg.kind_loss?.[leg.kind]??1):baseRate),0):distance*baseRate,office=state.engine.convoyModifiers?.(state,{forceId,route,resource,purpose,targetKind}),lossRate=this.clamp(rawLoss*(1-score/160)*(office?.loss??1),0,cfg.max_loss??.45),loss=Math.floor(amount*lossRate);
+    const daily=GameClock.isDaily(state),edgeDays=daily?10:1,legDays=daily&&legs?legs.map((leg,index)=>{const convoy=amount/Math.max(.1,(leg.capacity??1)*(office?.legCapacity?.[index]??1)*(cfg.cargo_per_capacity??20000));return Math.max(1,Math.ceil(leg.days*(convoy<=1?1:1+(convoy-1)*(cfg.cargo_delay??.5))*(office?.legDays?.[index]??1)))}):null,travel=legDays?legDays.reduce((sum,days)=>sum+days,0):distance*edgeDays,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,...(legDays?{legDays}:{}),segmentRemainingDays:route.length>1?legDays?.[0]??edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,travel),purpose,status:"在途"};
     ledger.shipments.push(shipment);return shipment;
   }
   static advanceShipments(state,events){
@@ -130,7 +130,7 @@ window.FiscalSystem=class FiscalSystem {
     for(const army of active.sort((a,b)=>a.id.localeCompare(b.id))){const wanted=Math.floor(army.soldiers*rules.farming_soldier_share),workers=Math.max(0,Math.min(left,wanted));left-=workers;rows.push({armyId:army.id,workers,wanted})}
     return rows;
   }
-  static armyFarming(state,army){const city=this.stationedCity(state,army),eligible=this.canFarmArmy(state,army),row=city&&army.farming?.cityId===city.id?this.farmingAt(state,city).find(r=>r.armyId===army.id):null,rules=this.grainRules(state),workers=row?.workers||0,share=workers/Math.max(1,row?.wanted||0);return {eligible,active:eligible&&workers>0,workers,rateFactor:1-(1-rules.farming_ration_factor)*share,trainingFactor:1-(1-rules.farming_training_factor)*share,annualFood:workers*rules.farming_food_per_worker}}
+  static armyFarming(state,army){const city=this.stationedCity(state,army),eligible=this.canFarmArmy(state,army),row=city&&army.farming?.cityId===city.id?this.farmingAt(state,city).find(r=>r.armyId===army.id):null,rules=this.grainRules(state),workers=row?.workers||0,share=workers/Math.max(1,row?.wanted||0);return {eligible,active:eligible&&workers>0,workers,rateFactor:1-(1-rules.farming_ration_factor)*share,trainingFactor:1-(1-rules.farming_training_factor)*share,annualFood:workers*rules.farming_food_per_worker*(city?state.engine.farmingFactor?.(city)??1:1)}}
   static advanceFarming(state,city){
     for(const army of state.data.armies.filter(a=>a.farming?.cityId===city.id))if(!this.canFarmArmy(state,army)||army.city!==army.farming.cityId)delete army.farming;
     const fiscal=city.fiscal,rows=this.farmingAt(state,city),stamp=`${state.date.year}-${state.date.month}-${state.date.day??state.date.xun}`;
@@ -183,8 +183,8 @@ window.FiscalSystem=class FiscalSystem {
       if(!source||!pool||state.engine.isCityBesieged(source))continue;
       const protectedFood=Math.max(this.localDailyGrain(state,source)*rules.central_reserve_days,...this.supplyRoutes(state,force.id).filter(l=>l.enabled&&l.sourceKind==="central").map(l=>l.reserveFood)),candidates=[];
       for(const city of state.data.cities){if(city.force!==force.id)continue;const daily=this.localDailyGrain(state,city),incoming=this.incomingGrain(state,city).reduce((s,c)=>s+c.delivered,0),stock=Math.max(0,city.localFood||0),managed=this.managedDepot(state,city);
-        city.fiscal.grainRelief={status:managed?"指定粮线供粮":!daily||stock+incoming>=daily*rules.relief_trigger_days?"储粮充足":incoming?"中央粮在途":"待中央调拨",incoming};
-        if(managed||!daily||stock+incoming>=daily*rules.relief_trigger_days)continue;
+        const trigger=daily&&stock+incoming<daily*Math.max(rules.relief_trigger_days,90)?state.engine.reliefTriggerDays?.(state,force.id,city,rules.relief_trigger_days)??rules.relief_trigger_days:rules.relief_trigger_days;city.fiscal.grainRelief={status:managed?"指定粮线供粮":!daily||stock+incoming>=daily*trigger?"储粮充足":incoming?"中央粮在途":"待中央调拨",incoming};
+        if(managed||!daily||stock+incoming>=daily*trigger)continue;
         if(state.engine.isCityBesieged(city)){city.fiscal.grainRelief.status="被围无法调入";continue}
         candidates.push({city,daily,incoming,stock,cover:stock/daily});
       }
@@ -192,7 +192,7 @@ window.FiscalSystem=class FiscalSystem {
       for(const row of candidates){const {city,daily,incoming,stock}=row;if(dispatched>=rules.relief_max_dispatches)break;
         const spare=Math.max(0,Math.floor((pool.food||0)-protectedFood));if(spare<=0){city.fiscal.grainRelief.status="中央余粮不足";continue}
         const goal=Math.min(city.storage||20000,Math.ceil(daily*rules.relief_target_days)),need=Math.max(0,goal-stock-incoming);if(need<=0)continue;
-        const amount=Math.floor(Math.min(need,rules.relief_batch,spare)),cargo=this.enqueue(state,{forceId:force.id,sourceCityId:source.id,targetCityId:city.id,resource:"food",amount,targetKind:"local",purpose:"中央济粮"});
+        const amount=Math.floor(Math.min(need,state.engine.reliefBatch?.(force.id,rules.relief_batch)??rules.relief_batch,spare)),cargo=this.enqueue(state,{forceId:force.id,sourceCityId:source.id,targetCityId:city.id,resource:"food",amount,targetKind:"local",purpose:"中央济粮"});
         if(!cargo){city.fiscal.grainRelief.status="道路不通";continue}
         pool.food-=amount;cargo.grainRelief=true;city.fiscal.grainRelief={status:"中央粮在途",incoming:incoming+cargo.delivered,cargoId:cargo.id};dispatched++;
         if(force.id===state.playerForceId)events.push({phase:"后勤",siteId:city.id,text:`中央自${source.name}拨粮 ${amount} 石救济${city.name}，预计 ${cargo.arriveTurn-state.turn} 日后入县仓，路损 ${cargo.transportLoss} 石`});
