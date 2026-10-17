@@ -23,14 +23,21 @@ state.engine.declareWorldWar(state,"lu_bu","liu",[],"测试");view.relationCache
 for(const band of Object.values({a:view.relationBand("cao"),b:view.relationBand("yuan")}))assert(Object.keys(MapView.RELATION_BANDS).includes(band));
 
 // 粮食与武将：按郡与势力汇总；己方给实数，他方未详查时为“不详”。
+state.layer="food";
 const xiaopei=cityOf("xiaopei"),own=view.layerGroupAt(cellOf(xiaopei));
 assert.equal(own.force,"liu");assert(own.food>0&&own.need>0&&Number.isFinite(own.days));assert(MapView.FOOD_BANDS.some(([name])=>name===view.foodBand(own)));
 assert(own.officers.some(officer=>officer.name==="刘备"),"小沛驻将含刘备");assert.equal(own.officers.length,state.data.officers.filter(officer=>officer.status==="serving"&&officer.force==="liu"&&["xiaopei","commandery_city_011"].includes(officer.city)).length,"沛郡：小沛与相县驻将合计");assert(own.officers.length>=6);assert.equal(view.officerBand(own),"众将");
 const tip=view.analysisTooltip.call(Object.assign(view,{}),cellOf(xiaopei),xiaopei,xiaopei.commandery);
-state.layer="officers";assert.match(view.tooltipText(cellOf(xiaopei)),/驻将 \d+ 人：.*刘备/);state.layer="food";assert.match(view.tooltipText(cellOf(xiaopei)),/仓储 [\d,]+ 石｜日耗 [\d,]+ 石｜可支/);
+state.layer="officers";assert.match(view.tooltipText(cellOf(xiaopei)),/驻将 \d+ 人：.*刘备/);state.layer="food";assert.match(view.tooltipText(cellOf(xiaopei)),/仓储 [\d,]+ 石｜日耗 [\d,]+ 石[\s\S]*预计可用：[\s\S]*下次收获：/);
 const enemy=state.data.cities.find(city=>city.force==="yuan"),enemyGroup=view.layerGroupAt(cellOf(enemy));assert.equal(view.foodBand(enemyGroup),"不详","未探明他方仓储不详");assert.equal(view.officerBand(enemyGroup),"不详");
 assert.match(view.tooltipText(cellOf(enemy)),/情报不足/);
-state.intelligence.cities[enemy.id]=3;view.layerGroupCache=null;assert.notEqual(view.foodBand(view.layerGroupAt(cellOf(enemy))),"不详","详查后显示他方仓储");
+state.intelligence.cities[enemy.id]=3;view.layerGroupCache=null;assert.match(view.tooltipText(cellOf(enemy)),/预计可用：[\s\S]*下次收获：/,'详查后显示本县预报');
+const partial=view.layerGroupAt(cellOf(enemy));if(partial.cities.length>1){assert.equal(view.foodBand(partial),"不详","不能因探明一县暴露全郡粮仓");assert.match(view.tooltipText(cellOf(enemy)),/同郡其他县仓情报不全/)}
+for(const city of partial.cities)state.intelligence.cities[city.id]=3;view.layerGroupCache=null;assert.notEqual(view.foodBand(view.layerGroupAt(cellOf(enemy))),"不详","全郡详查后显示合计");
+const forecast=FiscalSystem.grainForecast(state,xiaopei),ownNeed=own.cities.reduce((sum,c)=>sum+FiscalSystem.localDailyGrain(state,c),0);assert.equal(own.need,ownNeed,'图层日耗与真实官粮口径相同');
+assert(view.tooltipText(cellOf(xiaopei)).includes(`${forecast.year}年${forecast.month}月末`));assert(view.tooltipText(cellOf(xiaopei)).includes(`${forecast.coverDays} 日`));
+const snapshot=()=>JSON.stringify({data:state.data,resources:state.resources,policies:state.policies,rng:state.rngState}),before=snapshot();view.tooltipText(cellOf(xiaopei));assert.equal(snapshot(),before,'悬停预报不改变资源、运输与随机序列');
+state.intelligence.cities[enemy.id]=2;view.layerGroupCache=null;assert.match(view.tooltipText(cellOf(enemy)),/仓储 约/);state.intelligence.cities[enemy.id]=0;view.layerGroupCache=null;assert.doesNotMatch(view.tooltipText(cellOf(enemy)),/预计可用|下次收获|日耗/);
 
 // 每日更新：缓存随日期刷新，粮仓见底则转为告急。
 for(const city of state.data.cities.filter(item=>item.force==="liu"&&item.commandery===xiaopei.commandery))city.localFood=0;state.turn++;assert.equal(view.foodBand(view.layerGroupAt(cellOf(xiaopei))),"告急");

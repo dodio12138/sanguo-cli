@@ -13,3 +13,16 @@ view.setCargoPreview(["a","b","c"]);assert.deepEqual(view.cargoPreview,["a","b",
 // 自动补给粮队也沿同一弯路画线，不再从仓点之间拉直线。
 state.data.armies=[{id:"army",force:"cao",convoy:{path:["a","b"],index:0,legLeft:5}}];const lines=[];ctx.lineTo=(x,y)=>lines.push([x,y]);view.drawSupplyLines(ctx,{startX:0,startY:0,cell:10});assert(lines.some(([x,y])=>x===5&&y===25));
 console.log("调粮舆图通过：本方在途粮食 / 沿真实弯路插值 / 剩余路线与方向 / 受阻红线 / 已到粮队移除 / 悬停详情 / 整线定位 / 规划预览 / 自动粮队同口径 / 只读不改资源与地图");
+
+// 粮食图层显示上缴线；线段与粮车都可悬停，分类与图例隐藏一致。
+state.layer="food";state.data.armies=[];cargo.status="在途";cargo.purpose="上缴";cargo.targetKind="central";
+assert.equal(view.grainRouteKind(cargo),"remit");assert(view.grainRouteVisible(cargo));assert.match(view.shipmentTooltip(cargo),/上缴中央：[\s\S]*运输损耗 50 石[\s\S]*中央府库/);
+const fm=view.metrics();assert.equal(view.shipmentAt(fm.startX+(.5)*fm.cell,fm.startY+(1.5)*fm.cell)?.id,cargo.id,'粮道的真实弯路线段可以悬停');
+view.hiddenLegendItems=new Set(["上缴中央"]);assert(!view.grainRouteVisible(cargo));view.hiddenLegendItems.clear();
+assert.equal(view.grainRouteKind({...cargo,purpose:"中央济粮",targetKind:"local"}),"relief");assert.equal(view.grainRouteKind({...cargo,purpose:"调运",targetKind:"local"}),"local");
+// 军队粮道适配同一悬停与定位入口，旧档没有原发运量时不伪造累计路损。
+state.data.armies=[{id:"army",name:"前军",force:"cao",city:"b",convoy:{sourceId:"a",path:["a","b"],index:0,legLeft:5,food:1000,loadedFood:1050,escort:30}}];
+let armyCargo=view.armyGrainTransports()[0];assert.equal(armyCargo.arriveTurn-state.turn,5);assert.equal(armyCargo.transportLoss,50);assert(armyCargo.delivered<armyCargo.currentFood);assert.match(view.shipmentTooltip(armyCargo),/军队粮道：[\s\S]*前军[\s\S]*护送 30 人/);assert(view.focusShipment(armyCargo.id));
+delete state.data.armies[0].convoy.loadedFood;armyCargo=view.armyGrainTransports()[0];assert.match(view.shipmentTooltip(armyCargo),/原发运数未记录/);assert.match(view.shipmentTooltip(armyCargo),/累计路损未详/);
+state.data.armies[0].force="yuan";assert.equal(view.armyGrainTransports().length,0,'不泄露敌方粮道');
+console.log("粮食线路增强通过：上缴与济粮分类 / 粮道整段命中 / 图例过滤 / 军队余粮、路损与到达时间 / 旧档未知量 / 敌方隐藏");

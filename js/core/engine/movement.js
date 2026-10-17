@@ -32,7 +32,7 @@ Object.assign(window.RuleEngine.prototype,{
   armyDailyMarch(state,army){const movement=this.data.rules.movement||{},retreat=army.retreat,rules=this.battleRules();return GameClock.factor(state)*10*(army.fieldDisruption?.untilTurn>=state.turn?1-Math.max(0,Math.min(.7,army.fieldDisruption.slow||0)):1)*(retreat?(retreat.routed?rules.rout_march_factor:rules.withdraw_march_factor):army.movementMode==="forced_march"?(movement.forced_march_multiplier||1.6):1)},
   // 仅按有溃军的路段检查：同向追上或迎面截击，双方都按实际路段进度接战。
   resolveRoadPursuits(state,events){const roads=new Map();
-    for(const army of this.data.armies){if(!army.route?.length||(army.retreat&&army.retreat.startedTurn===state.turn))continue;const from=army.city,to=army.route[0],key=[from,to].sort().join(":");if(!roads.has(key))roads.set(key,[]);const days=this.armyLegDays(state,army),fraction=Math.min(1,(army.legElapsed||0)/days),speed=this.armyDailyMarch(state,army)/days;roads.get(key).push({army,from,to,days,fraction,speed})}
+    for(const army of this.data.armies){if(army.engagementId||!army.route?.length||(army.retreat&&army.retreat.startedTurn===state.turn))continue;const from=army.city,to=army.route[0],key=[from,to].sort().join(":");if(!roads.has(key))roads.set(key,[]);const days=this.armyLegDays(state,army),fraction=Math.min(1,(army.legElapsed||0)/days),speed=this.armyDailyMarch(state,army)/days;roads.get(key).push({army,from,to,days,fraction,speed})}
     const engaged=new Set();
     for(const group of roads.values()){if(!group.some(p=>p.army.retreat))continue;
       for(let i=0;i<group.length;i++)for(let j=i+1;j<group.length;j++){const a=group[i],b=group[j];if(engaged.has(a.army)||engaged.has(b.army)||!this.data.armies.includes(a.army)||!this.data.armies.includes(b.army)||!(a.army.retreat||b.army.retreat)||!this.worldWar(state,a.army.force,b.army.force))continue;
@@ -45,7 +45,7 @@ Object.assign(window.RuleEngine.prototype,{
         const attacker=a.army.retreat&&!b.army.retreat?b:a,defender=attacker===a?b:a,site=this.data.cities.find(c=>c.id===attacker.from),from=this.data.cities.find(c=>c.id===attacker.to),retreatTo=new Map();
         for(const p of [a,b]){const own=this.data.cities.find(c=>c.id===(p.army.retreat?p.to:p.from));if(own)retreatTo.set(p.army,own)}
         events.push({phase:"行军",siteId:site.id,armyId:attacker.army.id,text:`${attacker.army.name}在${site.name}附近${same?"追上":"截住"}${defender.army.name}，展开野战`});
-        this.resolveFieldBattle(attacker.army,[defender.army],from,site,"road",state,events,{attackers:[attacker.army],retreatTo,roadPositions:positions});
+        this.startFieldBattle(attacker.army,[defender.army],from,site,"road",state,events,{attackers:[attacker.army],retreatTo,roadPositions:positions});
         for(const p of [a,b]){p.army.defeatedThisTurn=true;engaged.add(p.army)}
       }
     }

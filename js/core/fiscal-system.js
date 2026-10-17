@@ -290,7 +290,7 @@ window.FiscalSystem=class FiscalSystem {
     return city&&!state.engine.isCityBesieged(city)?city:null;
   }
   static stationedCity(state,army){
-    if(army.fieldPosition||army.route?.length||army.siegeTarget)return null;
+    if(army.engagementId||army.fieldPosition||army.route?.length||army.siegeTarget)return null;
     // 被围的城内仍能就仓；围困只阻断外调，不使城内现存粮消失。
     return state.data.cities.find(city=>city.id===army.city&&city.force===army.force)||null;
   }

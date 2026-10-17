@@ -9,7 +9,7 @@ Object.assign(window.RuleEngine.prototype,{
   armyCarryDays(army){return Math.max(1,Math.min(90,Number.isFinite(army?.carryDays)?army.carryDays:this.easyCarryDays(army)))},
   // 每日口粮（石）：健卒、伤员全份，俘虏半份。
   dailyRation(state,army){const context=state||{data:this.data,engine:this,date:{day:1}};return FiscalSystem.armyDailyNeed(context,army)/(GameClock.isDaily(context)?1:10)},
-  isStationed(army){const city=this.data.cities.find(c=>c.id===army?.city);return !!city&&city.force===army.force&&!army.fieldPosition&&!army.route?.length&&!army.siegeTarget&&!this.isCityBesieged(city)},
+  isStationed(army){const city=this.data.cities.find(c=>c.id===army?.city);return !!city&&!army.engagementId&&city.force===army.force&&!army.fieldPosition&&!army.route?.length&&!army.siegeTarget&&!this.isCityBesieged(city)},
   // 组织度：驻在己方城中为满；在外按军仓存粮相对「轻松携带天数」的倍数下降（辎重拖长队列）。
   armyOrganization(state,army){if(!army)return 100;if(this.isStationed(army))return Math.round(Math.max(0,Math.min(100,army.cohesion??100)));const r=this.fieldLogisticsRules(),days=(army.stores?.food||0)/this.dailyRation(state,army),ratio=days/Math.max(1,this.easyCarryDays(army));return Math.round(Math.min(army.cohesion??100,Math.max(r.org_min,Math.min(100,100*Math.min(1,1/Math.max(1e-6,ratio))**.5))))},
   organizationPower(state,army){const r=this.fieldLogisticsRules();return 1-r.org_power*(1-this.armyOrganization(state,army)/100)},
@@ -48,7 +48,7 @@ Object.assign(window.RuleEngine.prototype,{
     if(army.convoy||army.stores.food>=ration*r.resupply_days)return;const pick=this.pickSupplySource(state,army);if(!pick){army.supplyStatus="无补给来源";return}
     const source=pick.city,wanted=Math.max(0,Math.ceil(ration*this.armyCarryDays(army)-army.stores.food)),own=Math.min(wanted,Math.max(0,Math.floor((source.localFood||0)-FiscalSystem.garrisonDailyFood(state,source.garrison)*30)));source.localFood-=own;const loaded=own+(own<wanted&&!FiscalSystem.supplyRoutes(state,army.force).some(line=>line.enabled)?FiscalSystem.drawRegionalFood(state,source,wanted-own,army.force):0);if(loaded<=0){army.supplyStatus="后方无粮可运";return}
     const escort=this.escortFor(army,loaded,source);source.garrison=Math.max(0,(source.garrison||0)-escort);army.supplyStatus="粮队在途";army.supplySourceId=source.id;
-    army.convoy={sourceId:source.id,path:pick.path,index:0,legLeft:pick.path.length>1?this.legDaysBetween(pick.path[0],pick.path[1]):0,food:loaded,escort,departedTurn:state.turn};
+    army.convoy={sourceId:source.id,path:pick.path,index:0,legLeft:pick.path.length>1?this.legDaysBetween(pick.path[0],pick.path[1]):0,food:loaded,loadedFood:loaded,escort,departedTurn:state.turn};
     if(army.force===state.playerForceId)events.push({phase:"后勤",armyId:army.id,siteId:source.id,text:`粮队自${source.name}启运 ${loaded} 石赴${army.name}，经 ${pick.path.length-1} 段，护送 ${escort} 人`})},
 
   // 截粮判定：袭扰者（骑兵越多越好）对护送兵。主动袭扰成算高于路遇敌军的顺手截获。
