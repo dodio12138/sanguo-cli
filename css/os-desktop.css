@@ -372,3 +372,5 @@ body>.app-shell>footer{display:none}
 .os-context-menu button{display:block;width:100%;padding:6px 12px;border:0;border-radius:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer;white-space:nowrap}
 .os-context-menu hr{border:0;border-top:1px solid var(--line-dim);margin:3px 5px}
 .os-shortcut-seal{display:grid;place-items:center;width:48px;height:48px;border:2px solid #8e9876;box-shadow:inset 2px 2px #414d34,inset -2px -2px #050905;background:#182115;color:var(--amber);font:26px serif;font-style:normal}
+
+.game-started .map-tooltip.grain-tooltip{max-width:min(360px,calc(100% - 10px));font-size:10px;line-height:1.5}
