@@ -2,7 +2,7 @@
 // 另以全局代理处理任何窗口里的链接：data-clan-open 开世家详情、data-officer-open 开人物档案、data-city-open 开据点档案。
 SanguoApp.define("clanWindow",app=>{
   const {$,state,map,toast,log}=app;
-  function renderClan(){const box=$("clanContent"),top=box.scrollTop;box.innerHTML=ClanUI.render(state);box.scrollTop=top;const canvas=box.querySelector("[data-clan-map]");if(canvas)ClanUI.drawMap(canvas,state,canvas.dataset.clanMap)}
+  function renderClan(){const box=$("clanContent"),top=box.scrollTop;if(!SanguoApp.setHtml(box,ClanUI.render(state)))return;box.scrollTop=top;const canvas=box.querySelector("[data-clan-map]");if(canvas)ClanUI.drawMap(canvas,state,canvas.dataset.clanMap)}
   async function openClan(clanId=null){if(clanId&&state.engine.clanDef(clanId)){ClanUI.view.clanId=clanId;ClanUI.view.tab="detail"}renderClan();if(!$("clanDialog").open)$("clanDialog").showModal();if(!state.data.officerReference){try{state.data.officerReference=(await app.loader.loadOfficerReference()).officers;if($("clanDialog").open)renderClan()}catch(error){toast(`人物资料载入失败：${error.message}`)}}}
   function refreshClan(){if($("clanDialog").open)renderClan()}
   function renderGenealogy(){const box=$("genealogyContent"),dialog=$("genealogyDialog"),person=ClanUI.findPerson(state,null,dialog.personId);if(!person)return;const e=ClanUI.esc,families=ClanUI.familiesForPerson(state,person),top=box.scrollTop;$("genealogyTitle").textContent=`人物族谱 · ${person.name}`;box.innerHTML=families.length?families.map(f=>`<section class="court-block"><h3>${e(f.name)}</h3>${ClanUI.tree(state,f.id,f)}${f.sources?.length?`<p class="court-note">${f.sources.map(s=>`<a href="${e(s.url)}" target="_blank" rel="noopener noreferrer">${e(s.title)}</a>`).join(" · ")}</p>`:""}</section>`).join(""):`<section class="court-block"><h3>${e(person.name)}家系</h3>${ClanUI.personLink(state,person.name,person)}<p class="court-note">暂无明确亲属记载，待史料补充。</p></section>`;box.scrollTop=top}
@@ -20,7 +20,7 @@ SanguoApp.define("clanWindow",app=>{
     const person=event.target.closest("[data-officer-open]");if(person){event.preventDefault();const officer=ClanUI.findPerson(state,null,person.dataset.officerOpen);if(officer)app.openOfficerDetail(officer);return}
     const city=event.target.closest("[data-city-open]");if(city){event.preventDefault();const target=state.data.cities.find(c=>c.id===city.dataset.cityOpen);if(target)app.openCityDetail(target)}});
   state.addEventListener("appointments",refreshClan);
-  state.addEventListener("selection",()=>{if(map.clanFocus)map.setClanFocus(null)});state.addEventListener("turn",refreshClan);state.addEventListener("restore",refreshClan);
-  const refreshGenealogy=()=>{if($("genealogyDialog").open)renderGenealogy()};state.addEventListener("turn",refreshGenealogy);state.addEventListener("restore",refreshGenealogy);
+  state.addEventListener("selection",()=>{if(map.clanFocus)map.setClanFocus(null)});state.addEventListener("turn",()=>SanguoApp.refreshLater("clan",refreshClan));state.addEventListener("restore",refreshClan);
+  const refreshGenealogy=()=>{if($("genealogyDialog").open)renderGenealogy()};state.addEventListener("turn",()=>SanguoApp.refreshLater("genealogy",refreshGenealogy));state.addEventListener("restore",refreshGenealogy);
   return {openClan,openGenealogy};
 });

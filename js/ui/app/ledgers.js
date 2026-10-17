@@ -47,6 +47,6 @@ SanguoApp.define("ledgers",app=>{
     html+=`<div class="ai-contract">军师只能生成待执行命令，不能直接修改战局。审计记录：${aiBridge.audit.length} 条。</div>`;$("ledgerContent").innerHTML=html;if(kind==="domestic")$("ledgerContent").querySelectorAll("[data-delegate]").forEach(button=>button.onclick=event=>{event.preventDefault();toggleDelegation(button.dataset.delegate);button.textContent=state.engine.commanderyDelegated(button.dataset.delegate,state.playerForceId)?"郡守托管中":"郡务自理"});if(kind==="military")$("ledgerContent").querySelectorAll("[data-army-detail]").forEach(row=>row.onclick=()=>{app.openArmyDetail(state.data.armies.find(a=>a.id===row.dataset.armyDetail))});if(kind==="officers"){bindScenarioOfficerRoster();bindOfficerArchive()}if(kind==="diplomacy")bindDiplomacyNetwork();$("ledgerDialog").showModal();
   }
   const refreshPeople=()=>{if($("ledgerDialog").open&&$("ledgerDialog").dataset.panelKind==="officers"){refreshScenarioOfficers();refreshOfficerArchive()}};
-  state.addEventListener("turn",refreshPeople);state.addEventListener("restore",refreshPeople);
+  state.addEventListener("turn",()=>SanguoApp.refreshLater("people",refreshPeople));state.addEventListener("restore",refreshPeople);
   return {openLedger,toggleDelegation};
 });

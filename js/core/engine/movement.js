@@ -55,24 +55,25 @@ Object.assign(window.RuleEngine.prototype,{
   frontageFactor(total,frontage){const cfg=this.frontageRules(),capacity=Math.max(.5,frontage)*(cfg.men_per_frontage??8000);if(!total||total<=capacity)return 1;return (capacity+(total-capacity)*(cfg.reserve_share??.25))/total},
   siteFrontage(site,leg){const cfg=this.frontageRules(),kind=window.MapGrid?.nodeKind?.(site)||site?.type;return Math.min(leg?.frontage??(cfg.open_field??4),kind==="pass"?(cfg.pass??1):Infinity)},
   wallFrontage(city){const cfg=this.frontageRules().walls||{},kind=window.MapGrid?.nodeKind?.(city)||city?.type,rank=window.MapGrid?.nodeRank?.(city,this.data.administrativeDivisions);return kind==="pass"?cfg.pass??1:rank==="province"?cfg.province??4:rank==="commandery"?cfg.commandery??3:cfg.county??2},
-  searchRoute(from,to,allow,{roadsOnly=false}={}){
-    if(from===to)return [from];
-    if(this.cityIndexSource!==this.data.cities){this.cityIndexSource=this.data.cities;this.cityIndex=new Map(this.data.cities.map(city=>[city.id,city]))}const graph=this.data.rules.city_graph||{},index=this.cityIndex,weighted=!!this.data.routeNetwork,distance=new Map([[from,0]]),previous=new Map(),done=new Set(),heap=[[0,from]],push=item=>{heap.push(item);let i=heap.length-1;while(i){const p=(i-1)>>1;if(heap[p][0]<=heap[i][0])break;[heap[p],heap[i]]=[heap[i],heap[p]];i=p}},pop=()=>{const top=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){const l=i*2+1,r=l+1;let m=i;if(l<heap.length&&heap[l][0]<heap[m][0])m=l;if(r<heap.length&&heap[r][0]<heap[m][0])m=r;if(m===i)break;[heap[m],heap[i]]=[heap[i],heap[m]];i=m}}return top};
-    // 有路网时按行军天数求最短；无路网时以段数为主、地面距离为次，保持旧行为。
-    const weight=(a,b)=>weighted?this.legInfo(a,b).days+this.groundDistance(index.get(a),index.get(b))*1e-6:1000+this.groundDistance(index.get(a),index.get(b));
-    while(heap.length){const [cost,id]=pop();if(done.has(id))continue;done.add(id);if(id===to)break;
-      const offroad=weighted&&this.offroadRules().enabled!==false&&!roadsOnly?this.offroadGraph().get(id):null,neighbors=offroad?.size?[...(graph[id]||[]),...offroad.keys()]:graph[id]||[];
-      for(const next of neighbors){if(done.has(next))continue;if(next!==to&&!allow(index.get(next),next))continue;const value=cost+weight(id,next);if(value<(distance.get(next)??Infinity)){distance.set(next,value);previous.set(next,id);push([value,next])}}}
-    if(!distance.has(to))return null;
-    const route=[to];
-    while(route[0]!==from){const parent=previous.get(route[0]);if(parent===undefined)return null;route.unshift(parent)}
-    return route;
-  },
+  // 寻路邻接表：按节点缓存相邻据点与边权（有路网时按行军天数，否则以段数为主、地面距离为次）；路网对象、据点、野径换新时整体重建，
+  // 某节点的相邻数组被替换或增删（编辑器、测试就地修改）时只重建该节点。
+  routeAdjacency(roadsOnly=false){const graph=this.data.rules.city_graph||{},network=this.data.routeNetwork,weighted=!!network,useOffroad=weighted&&this.offroadRules().enabled!==false&&!roadsOnly,off=useOffroad?this.offroadGraph():null;let cache=this._routeAdj;if(!cache||cache.graph!==graph||cache.network!==network||cache.cities!==this.data.cities||cache.off!==(this.offroadEdges||null)){cache=this._routeAdj={graph,network,cities:this.data.cities,off:this.offroadEdges||null,lists:[new Map,new Map]}}
+    if(this.cityIndexSource!==this.data.cities){this.cityIndexSource=this.data.cities;this.cityIndex=new Map(this.data.cities.map(city=>[city.id,city]))}const index=this.cityIndex,lists=cache.lists[useOffroad?1:0],weight=(a,b)=>weighted?this.legInfo(a,b).days+this.groundDistance(index.get(a),index.get(b))*1e-6:1000+this.groundDistance(index.get(a),index.get(b));
+    return id=>{const road=graph[id],offroad=off?.get(id);let entry=lists.get(id);if(!entry||entry.road!==road||entry.roadLength!==(road?.length||0)||entry.offroad!==offroad||entry.offroadSize!==(offroad?.size||0)){const ids=offroad?.size?[...(road||[]),...offroad.keys()]:road||[];entry={road,roadLength:road?.length||0,offroad,offroadSize:offroad?.size||0,list:ids.map(next=>[next,weight(id,next)])};lists.set(id,entry)}return entry.list}},
+  // Dijkstra：to 为空时求整棵最短路径树（目标不受 allow 限制，只作终点、不再展开），供 AI 一次评估多个目标。
+  routeSearchCore(from,to,allow,{roadsOnly=false}={}){const neighbors=this.routeAdjacency(roadsOnly),index=this.cityIndex,distance=new Map([[from,0]]),previous=new Map(),done=new Set(),heap=[[0,from]],push=item=>{heap.push(item);let i=heap.length-1;while(i){const p=(i-1)>>1;if(heap[p][0]<=heap[i][0])break;[heap[p],heap[i]]=[heap[i],heap[p]];i=p}},pop=()=>{const top=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){const l=i*2+1,r=l+1;let m=i;if(l<heap.length&&heap[l][0]<heap[m][0])m=l;if(r<heap.length&&heap[r][0]<heap[m][0])m=r;if(m===i)break;[heap[m],heap[i]]=[heap[i],heap[m]];i=m}}return top};
+    while(heap.length){const [cost,id]=pop();if(done.has(id))continue;done.add(id);if(id===to)break;if(to==null&&id!==from&&!allow(index.get(id),id))continue;
+      for(const [next,w] of neighbors(id)){if(done.has(next))continue;if(to!=null&&next!==to&&!allow(index.get(next),next))continue;const value=cost+w;if(value<(distance.get(next)??Infinity)){distance.set(next,value);previous.set(next,id);push([value,next])}}}
+    return {from,distance,previous}},
+  routeFromTree(tree,to){if(to===tree.from)return [to];if(!tree.distance.has(to))return null;const route=[to];while(route[0]!==tree.from){const parent=tree.previous.get(route[0]);if(parent===undefined)return null;route.unshift(parent)}return route},
+  searchRoute(from,to,allow,options={}){if(from===to)return [from];return this.routeFromTree(this.routeSearchCore(from,to,allow,options),to)},
+  // AI 评估期间（_pathTreeScope）同一出发点、同一势力的寻路共用一棵最短路径树。
+  routeTree(from,forceId,options={}){const allow=city=>!forceId||!city||[forceId,"neutral"].includes(city.force),scope=this._pathTreeScope;if(!scope)return this.routeSearchCore(from,null,allow,options);const key=`${from}|${forceId}|${options.roadsOnly?1:0}`;let tree=scope.get(key);if(!tree){tree=this.routeSearchCore(from,null,allow,options);scope.set(key,tree)}return tree},
   // 玩家行军方案：最快（官路与野径并用）、只走官路，或依次经过自定义停留节点；任何一段不通即整条不通。
   plannedRoute(from,to,forceId=null,{waypoints=[],roadsOnly=false}={}){const stops=[from,...waypoints.filter(id=>id&&id!==from&&id!==to),to],route=[from];for(let i=1;i<stops.length;i++){const part=this.path(stops[i-1],stops[i],forceId,{roadsOnly});if(!part)return null;route.push(...part.slice(1))}return route},
-  path(from,to,forceId=null,options={}){return this.searchRoute(from,to,city=>!forceId||!city||[forceId,"neutral"].includes(city.force),options)},
+  path(from,to,forceId=null,options={}){if(this._pathTreeScope&&from!==to)return this.routeFromTree(this.routeTree(from,forceId,options),to);return this.searchRoute(from,to,city=>!forceId||!city||[forceId,"neutral"].includes(city.force),options)},
   logisticsPath(from,to,forceId){
-    const usable=id=>{const city=this.data.cities.find(item=>item.id===id);return city?.force===forceId&&!this.isCityBesieged(id)&&!this.data.armies.some(army=>!army.fieldPosition&&army.city===id&&army.force!==forceId&&!army.siegeTarget)};
+    let hostile=null;const usable=id=>{const city=this.cityById?.(id)||this.data.cities.find(item=>item.id===id);if(city?.force!==forceId||this.isCityBesieged(id))return false;if(!hostile){hostile=new Set;for(const army of this.data.armies)if(!army.fieldPosition&&army.force!==forceId&&!army.siegeTarget)hostile.add(army.city)}return !hostile.has(id)};
     // 转运与补给线只走官路与水路；野径仅供行军。
     if(!usable(from)||!usable(to))return null;return this.searchRoute(from,to,(city,id)=>usable(id),{roadsOnly:true});
   }

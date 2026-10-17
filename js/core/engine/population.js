@@ -98,8 +98,14 @@ Object.assign(window.RuleEngine.prototype,{
   popNeighbors(place){const node=this.popNode(place),graph=this.data.rules.city_graph||{},ids=[];for(const id of graph[node.id]||[]){const county=(this.data.counties||[]).find(c=>c.cityId===id);ids.push(county?.id||id)}if(place!==node)ids.unshift(node.id);return ids.filter(id=>id!==place.id).slice(0,this.popRules().refugee.neighbors)},
 
   // —— 每月结算 ——
-  resolvePopulation(state,events){if(!GameClock.isMonthEnd(state))return;if(!state.clans)this.ensurePopulation(state);const rules=this.popRules(),month=state.date.month,quarter=month%3===0,newYear=month===12;this.resolveClans?.(state,events);
-    const places=this.popPlaces(),rounding=(seed,value)=>{const whole=Math.floor(value),frac=value-whole;return whole+(((seed*2654435761)>>>0)%1000/1000<frac?1:0)};let seed=state.turn*31;
+  // 人口按月结算。逐日模拟（rolling）时各地点分在月内不同日子结算（按地点分 28 组，每月一次），不再全部挤在月末；
+  // 世家、家族月结仍在月末。直接调用（测试、旬制）时月末一次结算全部地点。
+  popPlaceDay(id){const map=this._popPlaceDays??=new Map;let d=map.get(id);if(d===undefined){let h=7;for(const ch of String(id))h=(h*33+ch.charCodeAt(0))|0;d=1+Math.abs(h)%28;map.set(id,d)}return d},
+  resolvePopulation(state,events,{rolling=false}={}){const spread=rolling&&GameClock.isDaily(state),monthEnd=GameClock.isMonthEnd(state);if(!spread&&!monthEnd)return;if(!state.clans)this.ensurePopulation(state);
+    if(spread){const day=state.date.day,places=this.popPlaces().filter(place=>this.popPlaceDay(place.id)===day);if(places.length)this.resolvePopulationPlaces(state,places);if(monthEnd){this.resolveClans?.(state,events);this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)}return}
+    this.resolveClans?.(state,events);this.resolvePopulationPlaces(state,this.popPlaces());this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
+  resolvePopulationPlaces(state,places){const rules=this.popRules(),month=state.date.month,quarter=month%3===0,newYear=month===12;
+    const rounding=(seed,value)=>{const whole=Math.floor(value),frac=value-whole;return whole+(((seed*2654435761)>>>0)%1000/1000<frac?1:0)};let seed=state.turn*31;
     for(const place of places){if(!place.pops?.length)continue;const {food,war,node}=this.popConditions(state,place),registrationTarget=this.registrationTargets(state,place,node);
       for(const p of place.pops){seed++;const mort=rules.mortality,extra=rules.famine_mortality*(1-food)+rules.war_mortality*war;
         const births=rounding(seed,p[AF]*rules.fertility/12*food*p[HP]);p[CH]+=births;state.popStats.births+=births;
@@ -119,8 +125,7 @@ Object.assign(window.RuleEngine.prototype,{
         if(settled){const shares=this.clanSharesAt(state,place.id),top=Object.entries(shares).sort((a,b)=>b[1]-a[1])[0],toClan=top&&top[1]>=.15?.5:0,amount=rules.refugee.settle;
           if(toClan)this.popMove(place,p,amount*toClan,FARM,DEP,top[0],{householdFactor:1.6,registered:registrationTarget.dependent(top[0])});this.popMove(place,p,amount*(1-toClan)/(1-amount*toClan),FARM,FREE,"",{householdFactor:1.6,registered:.6});continue}
         const dest=this.popMigrationTarget(state,place);if(!dest)continue;const packet=this.popSplit(p,rules.refugee.migrate);let lost=0;packet.buckets=packet.buckets.map(v=>{const gone=Math.floor(v*rules.refugee.loss);lost+=gone;return v-gone});state.popStats.lost+=lost;this.popAdd(dest,FARM,DRIFT,"",packet.buckets,packet.households,rules.registered[DRIFT],packet.health);this.popCompact(dest);this.popSync(dest)}
-      this.popCompact(place);this.popSync(place)}
-    this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
+      this.popCompact(place);this.popSync(place)}},
   popMigrationTarget(state,place){let best=null;for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const {food,war,node}=this.popConditions(state,dest),crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1),score=food*2+(node.order||50)/100-war*2-crowd*3;if(score>1.6&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
   // 登记率目标：编户看户曹（或世家县令）能力，依附户看世家与据点主的关系。
   registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=45+((magistrate?magistrate.ability:(this.affairScore?.(node,"registry")?.score??60))-60)*(this.abilityConfig?.().admin.registration??1),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
