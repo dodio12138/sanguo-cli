@@ -20,6 +20,9 @@ class SaveLibraryStore {
       for(const record of records)this.remember(record.id,record.save,record.backup);
     }catch{this.database?.close();this.database=null}
   }
+  // 删除档案：IndexedDB 记录与本地存储里的同号旧槽、备份一并清除。
+  remove(id){const recordId=String(id);this.records.delete(recordId);try{for(const key of [`sanguo-cli.slot.${recordId}`,`sanguo-cli.slot.${recordId}.backup`,...(recordId==="1"?["sanguo-cli.save.v1"]:[])])localStorage.removeItem(key)}catch{}
+    this.pending=this.pending.catch(()=>false).then(()=>new Promise(resolve=>{if(!this.database){resolve(true);return}try{const transaction=this.database.transaction('saves','readwrite');transaction.objectStore('saves').delete(recordId);transaction.oncomplete=()=>resolve(true);transaction.onabort=()=>resolve(false)}catch{resolve(false)}}));return this.pending}
   put(id,save){
     const recordId=String(id);if(!this.validId(recordId))return Promise.resolve(false);
     // Detach from live game state before the asynchronous transaction starts.

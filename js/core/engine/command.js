@@ -32,8 +32,12 @@ Object.assign(window.RuleEngine.prototype,{
   // 将民政实任与方面统一；初始化/旧档补齐不抢走已有军团的明确划归。
   synchronizePrefectPost(state,city,{initial=false}={}){if(!state||!city.commandery||city.force==="neutral")return null;const forceId=city.force,command=this.commandOf(state,forceId),head=this.actualCommanderyGovernor(city),existing=this.commandPosts(state,forceId).find(p=>this.isCivilPrefectPost(p)&&p.scope.commanderies?.length===1&&p.scope.commanderies[0]===city.commandery);
     if(!head){if(existing)this.removePost(state,forceId,existing.id,[],"免职");return null}
-    if(existing){if(existing.holderId!==head.id||existing.civilPrefect!==true){existing.holderId=head.id;existing.civilPrefect=true;this.commandChanged(state,forceId)}return existing}
-    const scope={provinces:[],commanderies:[city.commandery]},parent=this.commandPosts(state,forceId).filter(p=>p.kind!=="jun"&&this.scopeWithin(scope,p.scope)).sort((a,b)=>this.postDepth(state,forceId,b)-this.postDepth(state,forceId,a)||a.id.localeCompare(b.id))[0];
+    // 郡级军区（如夏口督、永安都督）辖本郡时，本郡郡守方面隶属其下，不与之并列。
+    const military=this.commandPosts(state,forceId).find(p=>p.kind==="jun"&&!this.isCivilPrefectPost(p)&&p.scope.commanderies?.length===1&&p.scope.commanderies[0]===city.commandery);
+    // 督与本郡太守同一人时，不另设郡守方面（督即兼领郡府）。
+    if(military&&military.holderId===head.id){if(existing)this.removePost(state,forceId,existing.id,[],"并入");return military}
+    if(existing){let changed=false;if(existing.holderId!==head.id||existing.civilPrefect!==true){existing.holderId=head.id;existing.civilPrefect=true;changed=true}if(military&&!existing.parentId&&existing.explicitParent!==true){existing.parentId=military.id;changed=true}if(changed)this.commandChanged(state,forceId);return existing}
+    const scope={provinces:[],commanderies:[city.commandery]},parent=military||this.commandPosts(state,forceId).filter(p=>p.kind!=="jun"&&this.scopeWithin(scope,p.scope)).sort((a,b)=>this.postDepth(state,forceId,b)-this.postDepth(state,forceId,a)||a.id.localeCompare(b.id))[0];
     let id;do{id=`post_${forceId}_${command.seq++}`}while(command.posts[id]);
     const post={id,kind:"jun",civilPrefect:true,scope,holderId:head.id,parentId:parent?.id||null,title:this.courtSeatTitle?.("taishou",city.commandery)||`${city.commandery}太守`,policy:{type:"hold",targetCityId:null},directives:[],reports:[],doctrine:null,autoArmies:initial?forceId!==state.playerForceId:true,status:{defiance:0,mode:"恭顺"},createdTurn:state.turn};command.posts[id]=post;this.commandChanged(state,forceId);if(!initial)this.claimPostArmies(state,forceId,post);return post},
   synchronizePrefectPosts(state,{initial=true}={}){if(this._syncingPrefectPosts)return;this._syncingPrefectPosts=true;try{this.initializeAdministration();const seen=new Set;for(const city of this.data.cities){const key=`${city.force}:${city.commandery}`;if(seen.has(key))continue;seen.add(key);this.synchronizePrefectPost(state,city,{initial})}}finally{this._syncingPrefectPosts=false}},
@@ -75,6 +79,8 @@ Object.assign(window.RuleEngine.prototype,{
   seatOfScope(scope,forceId){const cities=this.data.cities.filter(c=>c.force===forceId&&this.scopeContains(scope,c)&&!c.countyNode),one=!scope.provinces?.length&&scope.commanderies?.length===1?this.commanderySeatCity?.(scope.commanderies[0]):scope.provinces?.length===1&&!scope.commanderies?.length?this.data.cities.find(c=>c.id===this.data.administrativeDivisions?.province_seats?.[scope.provinces[0]]):null;if(one&&cities.includes(one))return one;return cities.sort((a,b)=>(b.level||1)-(a.level||1)||(b.population||0)-(a.population||0))[0]||null},
 
   // —— 任免 ——
+  // 方面改名（主公自定，如"北伐军区"）；空名恢复按辖区的默认名。
+  renamePost(state,forceId,postId,title){const post=this.commandOf(state,forceId).posts[postId];if(!post)return {ok:false,error:"方面不存在"};const name=String(title||"").trim().slice(0,16);const area=post.kind==="jun"?post.scope.commanderies?.[0]:post.kind==="zhou"?post.scope.provinces?.[0]:[...(post.scope.provinces||[]),...(post.scope.commanderies||[])].slice(0,2).join("、"),fallback=post.kind==="jun"?(this.courtSeatTitle?.("taishou",area)||`${area}太守`):`${area}${post.kind==="zhou"?"刺史":"都督"}`,before=post.title;post.title=name||fallback;post.customTitle=!!name;this.commandChanged(state,forceId);return {ok:true,text:`${before}改称${post.title}`}},
   createPost(state,forceId,{kind,scope,holderId,parentId=null,policy={type:"hold"},title=null},events=[]){const command=this.commandOf(state,forceId),holder=this.data.officers.find(o=>o.id===holderId);
     if(!KIND_NAMES[kind])return {ok:false,error:"未知职位"};if(!scope||!(scope.provinces?.length||scope.commanderies?.length))return {ok:false,error:"须划定辖区"};
     if(!holder||holder.force!==forceId||holder.status!=="serving")return {ok:false,error:"须任用本方在任人物"};if(this.commandPosts(state,forceId).some(p=>p.holderId===holderId&&(kind==="jun"||!this.isCivilPrefectPost(p))))return {ok:false,error:`${holder.name}已任方面之职`};
@@ -86,7 +92,8 @@ Object.assign(window.RuleEngine.prototype,{
     if(overlap)return {ok:false,error:`辖区与${overlap.title}重叠`};
     const id=`post_${forceId}_${command.seq++}`,area=kind==="jun"?scope.commanderies?.[0]:kind==="zhou"?scope.provinces?.[0]:[...(scope.provinces||[]),...(scope.commanderies||[])].slice(0,2).join("、"),courtTitle=kind==="zhou"?this.courtProvinceTitle?.(state,holder,scope.provinces?.[0]):null;
     const post={id,kind,scope:{provinces:[...(scope.provinces||[])],commanderies:[...(scope.commanderies||[])],...(scope.excludedCommanderies?{excludedCommanderies:[...scope.excludedCommanderies]}:{})},holderId,parentId:parent?.id||null,policy:{type:policy.type||"hold",targetCityId:policy.targetCityId||null},directives:[],reports:[],doctrine:null,autoArmies:true,status:{defiance:0,mode:"恭顺"},createdTurn:state.turn,courtTitle};
-    if(kind==="jun")post.civilPrefect=!title||/太守|郡守|国相|尹|属国都尉/.test(title);post.title=title||(kind==="jun"?(this.courtSeatTitle?.("taishou",area)||`${area}太守`):`${area}${kind==="zhou"?(courtTitle||"牧"):"都督"}`);command.posts[id]=post;for(const child of adopt){child.parentId=id;child.explicitParent=false}this.commandChanged(state,forceId);
+    if(kind==="jun")post.civilPrefect=!title||/太守|郡守|国相|尹|属国都尉/.test(title);// 幕府方面是主公自设的体系，名称可自定；默认按辖区命名（郡守沿用郡名的太守、尹、相，州为刺史，军区为都督），不套用汉庭授官的称号。
+    post.title=String(title||"").trim().slice(0,16)||(kind==="jun"?(this.courtSeatTitle?.("taishou",area)||`${area}太守`):`${area}${kind==="zhou"?"刺史":"都督"}`);if(title)post.customTitle=true;command.posts[id]=post;for(const child of adopt){child.parentId=id;child.explicitParent=false}this.commandChanged(state,forceId);
     // 已在辖区内者留驻原地（郡守在本郡他城亦可治事）；否则赴治所，郡守兼领治所
     const seat=this.seatOfScope(post.scope,forceId),here=this.data.cities.find(c=>c.id===holder.city),inside=here&&here.force===forceId&&this.scopeContains(post.scope,here);
     if(!inside&&seat){holder.city=seat.id;if(this.isCivilPrefectPost(post)&&!seat.countyNode)seat.governor=holder.name}else if(inside&&this.isCivilPrefectPost(post)&&!here.countyNode&&!this.cityGovernorName?.(here))here.governor=holder.name
@@ -206,7 +213,7 @@ Object.assign(window.RuleEngine.prototype,{
       for(const seed of config.posts||[]){const holder=byName(seed.holder),scope={provinces:seed.provinces||[],commanderies:seed.commanderies||[]};
         if(!holder){skipped.push(`${forceId}·${seed.holder}（不在任）`);continue}if(rulerCity&&this.scopeContains(scope,rulerCity)){skipped.push(`${forceId}·${seed.holder}（辖区含主公驻地）`);continue}if(!this.data.cities.some(c=>c.force===forceId&&this.scopeContains(scope,c))){skipped.push(`${forceId}·${seed.holder}（辖区无城）`);continue}
         const r=this.createPost(state,forceId,{kind:seed.kind,title:seed.title,scope,holderId:holder.id,parentId:seed.parent?ids.get(seed.parent)||null:null,policy:{type:seed.policy||"hold"}});if(!r.ok){skipped.push(`${forceId}·${seed.holder}（${r.error}）`);continue}
-        ids.set(seed.holder,r.post.id);if(seed.title)r.post.title=seed.title;if(seed.basis)r.post.basis=seed.basis;
+        ids.set(seed.holder,r.post.id);if(seed.title)r.post.title=seed.title;if(seed.basis)r.post.basis=seed.basis;for(const [role,name] of Object.entries(seed.staff||{})){const o=byName(name);if(!o||!this.setProvinceOffice?.(state,r.post.id,role,o.id)?.ok)skipped.push(`${forceId}·${name}（${seed.title||seed.holder}属吏）`)}
         // 玩家开局的军团仍归主公直辖，由玩家自行划归方面
         if(forceId===state.playerForceId){r.post.autoArmies=false;for(const army of this.postArmies(r.post,forceId))army.postId=null}}}},
 

@@ -6,7 +6,8 @@ await import("../js/data/offline-data.generated.js");
 await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
-const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),e=state.engine,ledger=FiscalSystem.initialize(state);
+// 本测试对照"空缺与在任"，关闭开局补任。
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao",openingStaff:false}),e=state.engine,ledger=FiscalSystem.initialize(state);
 const city=state.data.cities.find(c=>c.id==="xuchang");city.localGold=20000;
 const before=city.agriculture,events=[];assert(FiscalSystem.handleOrder(state,{type:"reclaim_land",commandName:"开垦",cityIds:[city.id],options:{}},events));
 const project=ledger.projects.find(p=>p.type==="reclaim_land");assert(project,events.map(x=>x.text).join("；"));

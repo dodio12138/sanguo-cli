@@ -6,7 +6,8 @@ await import("../js/data/offline-data.generated.js");
 await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
-const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),e=state.engine,near=(a,b,eps=1e-6)=>Math.abs(a-b)<eps;
+// 本测试对照"空缺与在任"，关闭开局补任。
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao",openingStaff:false}),e=state.engine,near=(a,b,eps=1e-6)=>Math.abs(a-b)<eps;
 let serial=0;const sage=(city,extra={})=>{const o={id:`qa_sage_${++serial}`,name:`试吏${serial}`,force:"cao",city:city.id,status:"serving",command:90,war:90,intelligence:90,politics:90,charm:90,loyalty:90,officeRank:0,...extra};state.hydrateOfficer(o);state.data.officers.push(o);return o};
 // 及格 60 为 1；90 分、20 分的偏离再乘 bonus_scale（1.5）。
 assert.equal(e.officeBonus(60,.9),1);assert(near(e.officeBonus(90,.9),.85));assert(near(e.officeBonus(20,.9,1.1),1.15));assert(near(e.officeBonus(75,.9),.925));assert.equal(e.defaultAbility(),60);

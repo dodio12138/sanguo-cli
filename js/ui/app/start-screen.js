@@ -1,6 +1,6 @@
 // 开局画面：剧本、势力、开局设置三步，读档、设置与开局小地图。返回所选剧本与势力（chooseCampaign）。
 SanguoApp.define("startScreen",app=>{
-  const {$,activeSlot,availableSlots,clearActive,finishResume,loader,mapEditor,markActive,readSlot,safeLocalSet,saveRows,scenarioCatalog,settingsKey,toast}=app;
+  const {$,activeSlot,availableSlots,bindSaveDeletes,clearActive,finishResume,loader,mapEditor,markActive,readSlot,safeLocalSet,saveRows,scenarioCatalog,settingsKey,toast}=app;
   function chooseCampaign(){return new Promise(resolve=>{
     const scenarios=scenarioCatalog.scenarios;let scenario=scenarios.find(s=>s.id===app.data.scenario.id)||scenarios.find(s=>s.enabled),scenarioData=app.data,scenarioPicked=false,force=null,loading=false,currentView="home",pendingNewSlot="1",newStep=1,furthestStep=1;
     const forces=()=>[...scenarioData.forces.filter(f=>f.id!=="neutral").map(f=>({...f,playable:(scenarioData.scenario.playable_forces||[]).includes(f.id)&&scenarioData.officers.some(o=>o.force===f.id&&o.status==="serving")})),{id:"observer",name:"观察者",color:"#8b927f",playable:true,observer:true}];
@@ -44,7 +44,7 @@ SanguoApp.define("startScreen",app=>{
       $("difficultyChoice").value=app.userSettings.difficulty||"normal";$("observerDefaultSpeed").value=String(app.userSettings.observerDelay||3000);TerminalSelect.refresh($("observerDefaultSpeed"));$("confirmEndTurn").checked=!!app.userSettings.confirmEndTurn;$("chronicleEnabled").checked=!!app.userSettings.chronicleEnabled;$("globalHistorianEnabled").checked=!!app.userSettings.globalHistorianEnabled;
       $("campaignDifficultyChoice").value=$("difficultyChoice").value;$("campaignSpeedChoice").value=$("observerDefaultSpeed").value;TerminalSelect.refresh($("campaignDifficultyChoice"));TerminalSelect.refresh($("campaignSpeedChoice"));
       const slots=availableSlots().sort((a,b)=>(b.save.savedAt||"").localeCompare(a.save.savedAt||""));$("startSaveSlots").innerHTML=slots.length?saveRows(slots,"data-load-slot"):'<p class="no-saves">尚无存档。开始新游戏后会创建独立档案。</p>';
-      $("startSaveSlots").querySelectorAll("[data-load-slot]").forEach(button=>button.onclick=()=>resumeSlot(button.dataset.loadSlot));
+      $("startSaveSlots").querySelectorAll("[data-load-slot]").forEach(button=>button.onclick=()=>resumeSlot(button.dataset.loadSlot));bindSaveDeletes($("startSaveSlots"),()=>{const index=slots.findIndex(item=>!availableSlots().some(x=>x.slot===item.slot));if(index>=0)slots.splice(index,1)});
       $("continueGameButton").onclick=()=>{const latest=slots[0];if(latest)resumeSlot(latest.slot);else switchView("new")};
       document.querySelectorAll("[data-scenario]:not([disabled])").forEach(b=>b.onclick=async()=>{const next=scenarios.find(s=>s.id===b.dataset.scenario);if(next.id===scenario.id){scenarioPicked=true;newStep=2;furthestStep=2;paint();focusStep();return}const previous=scenario;scenario=next;loading=true;paint();try{scenarioData=await loader.loadScenario(next.id);app.data=scenarioData;force=null;scenarioPicked=true;newStep=2;furthestStep=2}catch(error){toast(`剧本载入失败：${error.message}`);scenario=previous;scenarioPicked=false;newStep=1;furthestStep=1}finally{loading=false;paint();focusStep()}});
       document.querySelectorAll("[data-start-force]:not([disabled])").forEach(b=>b.onclick=()=>{const id=b.dataset.startForce;pickForce(id);document.querySelector(`[data-start-force="${id}"]`)?.focus({preventScroll:true})});
