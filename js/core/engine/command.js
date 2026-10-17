@@ -128,7 +128,7 @@ Object.assign(window.RuleEngine.prototype,{
         if(post.policy.type==="advance"&&!post.directives.some(x=>x.status==="进行"&&x.type==="holdfast"))this.postAdvance(state,forceId,post,log)}
       for(const op of command.operations.filter(x=>x.status==="进行"))this.runOperation(state,forceId,command,op,log);
       command.operations=command.operations.filter(op=>op.status==="进行"||state.turn-op.issuedTurn<GameClock.duration(state,12))}
-    if(GameClock.isMonthEnd(state)){this.resolvePostLoyalty(state,events);this.writePostReports(state,events);this.runCentralAI(state,events)}},
+    if(GameClock.isMonthEnd(state)){this.resolvePostLoyalty(state,events);this.writePostReports(state,events);if(!(this._rolling&&GameClock.isDaily(state)))this.runCentralAI(state,events)}},
   // 守军目标：固守按前线四倍、腹地二倍守城底数；屯田只留守城底数的一倍半
   postGarrisonTargets(state,forceId,post){const policy=post.policy.type;if(policy==="standby"||forceId!==state.playerForceId)return;for(const city of this.postCities(post,forceId)){if(this.postOfCity(state,forceId,city)?.id!==post.id)continue;const base=this.reserveGarrison(city),multiplier=policy==="develop"?1.5:this.isFrontierCity(city)?4:2,hold=post.directives.some(d=>d.status==="进行"&&d.type==="holdfast"&&d.cityId===city.id)?1.5:1;city.administration??={};city.administration.recruitmentTarget=Math.round(base*multiplier*hold/100)*100}},
   idlePostArmies(post,forceId){const rules=this.commandRules();return this.postArmies(post,forceId).filter(a=>!a.engagementId&&!a.fieldPosition&&!a.route?.length&&!a.siegeTarget&&(a.supply??100)>=rules.min_supply&&(a.morale??70)>=rules.min_morale&&a.soldiers>=2000)},

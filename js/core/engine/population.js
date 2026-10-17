@@ -102,7 +102,7 @@ Object.assign(window.RuleEngine.prototype,{
   // 世家、家族月结仍在月末。直接调用（测试、旬制）时月末一次结算全部地点。
   popPlaceDay(id){const map=this._popPlaceDays??=new Map;let d=map.get(id);if(d===undefined){let h=7;for(const ch of String(id))h=(h*33+ch.charCodeAt(0))|0;d=1+Math.abs(h)%28;map.set(id,d)}return d},
   resolvePopulation(state,events,{rolling=false}={}){const spread=rolling&&GameClock.isDaily(state),monthEnd=GameClock.isMonthEnd(state);if(!spread&&!monthEnd)return;if(!state.clans)this.ensurePopulation(state);
-    if(spread){const day=state.date.day,places=this.popPlaces().filter(place=>this.popPlaceDay(place.id)===day);if(places.length)this.resolvePopulationPlaces(state,places);if(monthEnd){this.resolveClans?.(state,events);this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)}return}
+    if(spread){const day=state.date.day,places=this.popPlaces().filter(place=>this.popPlaceDay(place.id)===day);if(places.length)this.resolvePopulationPlaces(state,places);if(this.monthlyDue(state,25)){this.resolveClans?.(state,events);this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)}return}
     this.resolveClans?.(state,events);this.resolvePopulationPlaces(state,this.popPlaces());this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
   resolvePopulationPlaces(state,places){const rules=this.popRules(),month=state.date.month,quarter=month%3===0,newYear=month===12;
     const rounding=(seed,value)=>{const whole=Math.floor(value),frac=value-whole;return whole+(((seed*2654435761)>>>0)%1000/1000<frac?1:0)};let seed=state.turn*31;

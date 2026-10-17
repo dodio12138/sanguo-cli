@@ -226,7 +226,9 @@ window.FiscalSystem=class FiscalSystem {
   // 逐日结算时（rolling），田租、商税、布帛各城按固定日子在月内征收（按城分 28 组，每月一次），不再全部挤在月末；
   // 粮食随秋收在月末入账，仍在月末征收。直接调用（测试）时仍在月末统一征收。
   static collectDay(city){const map=this.collectDays??=new Map;let d=map.get(city.id);if(d===undefined){let h=11;for(const ch of String(city.id))h=(h*37+ch.charCodeAt(0))|0;d=1+Math.abs(h)%28;map.set(city.id,d)}return d}
-  static settle(state,events,{rolling=false}={}){
+  // 结算期间按城索引驻军（粮食留底等逐城查驻军时不再遍历全部军团）；结算内军团不换城，结束即弃。
+  static settle(state,events,options={}){const index=new Map;for(const army of state.data.armies){let rows=index.get(army.city);if(!rows)index.set(army.city,rows=[]);rows.push(army)}this._armiesByCity=index;try{return this.settleCore(state,events,options)}finally{this._armiesByCity=null}}
+  static settleCore(state,events,{rolling=false}={}){
     this.initialize(state);for(const army of state.data.armies)if(army.farming&&(!this.canFarmArmy(state,army)||army.city!==army.farming.cityId))delete army.farming;state.engine.syncCountyControl();state.engine.initializeAdministration();this.advanceShipments(state,events);this.advanceProjects(state,events);
     const scale=GameClock.factor(state),month=this.monthIndex(state.date),monthEnd=GameClock.isMonthEnd(state),autumn=state.date.month===this.grainRules(state).harvest_month&&monthEnd;
     for(const force of state.data.forces.filter(force=>force.id!=="neutral"&&!force.eliminated)){
@@ -291,7 +293,7 @@ window.FiscalSystem=class FiscalSystem {
   static armyDailyNeed(state,army,options){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.armyRationProfile(state,army,options).rate*(GameClock.isDaily(state)?1:10)*(state.engine?.quartermasterFactor?.(army,"ration")??1)))}
   // 随军满仓按携粮天数（玩家可调，默认为该军轻松携带的天数）；超出会压低组织度，见 engine/logistics.js。
   static armyFoodTarget(state,army){const days=state.engine?.armyCarryDays?state.engine.armyCarryDays(army):60;return Math.ceil(this.armyDailyNeed(state,army,{field:true})*(GameClock.isDaily(state)?days:days/10))}
-  static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>!army.fieldPosition&&army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
+  static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=(this._armiesByCity?this._armiesByCity.get(city.id)||[]:state.data.armies).filter(army=>!army.fieldPosition&&army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
   static supplyCity(state,army){
     if(army.fieldPosition)return null;const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
     return city&&!state.engine.isCityBesieged(city)?city:null;

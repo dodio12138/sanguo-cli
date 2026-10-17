@@ -71,6 +71,8 @@ SanguoApp.define("cityDetail",app=>{
     bindCityPages(city);
     if(!refresh)$("detailDialog").showModal()
   }
-  for(const event of ["appointments","turn","restore"])state.addEventListener(event,()=>{const city=state.data.cities.find(c=>c.id===currentCityId);if(city&&$("detailDialog").open){const box=$("detailContent"),top=box.scrollTop;openCityDetail(city,{refresh:true});box.scrollTop=top}});
+  // 每日刷新合并到空闲时（见 SanguoApp.refreshLater），任免与读档仍立即刷新。
+  const refreshCityDetail=()=>{const city=state.data.cities.find(c=>c.id===currentCityId);if(city&&$("detailDialog").open){const box=$("detailContent"),top=box.scrollTop;openCityDetail(city,{refresh:true});box.scrollTop=top}};
+  for(const event of ["appointments","restore"])state.addEventListener(event,refreshCityDetail);state.addEventListener("turn",()=>SanguoApp.refreshLater("cityDetail",refreshCityDetail));
   return {openCityDetail};
 });

@@ -37,7 +37,8 @@ window.GameState = class GameState extends EventTarget {
   // 自动存档节流：距上次自动存档满 15 秒才写（每日序列化整档约百毫秒），其间记为待存并定时补写；暂停、切走页面时立即补写。
   // 自动存档按游戏时间分期（每日/每旬/每月/每季/每年，默认每季度）：到期末存档，期中只记待存，暂停或离开页面时补存。
   autosaveBoundary(){const p=this.autosavePeriod||"quarter";return p==="day"||(p==="xun"&&GameClock.isTenDayEnd(this))||(p==="month"&&GameClock.isMonthEnd(this))||(p==="quarter"&&GameClock.isQuarterEnd(this))||(p==="year"&&GameClock.isMonthEnd(this)&&this.date.month===12)}
-  autosaveSoon(){if(this.autosaveDue){this.autosaveDue=false;this.flushAutosave()}else this.autosavePending=true}
+  // 到期的自动存档放到浏览器空闲时序列化与写入（日与日之间状态完整），不占当日结算；无空闲回调（Node）时立即保存。
+  autosaveSoon(){if(!this.autosaveDue){this.autosavePending=true;return}this.autosaveDue=false;if(typeof requestIdleCallback!=="function"){this.flushAutosave();return}this.autosavePending=true;if(this.autosaveIdle)return;this.autosaveIdle=requestIdleCallback(()=>{this.autosaveIdle=0;this.flushAutosave()},{timeout:3000})}
   flushAutosave(){this.autosavePending=false;this.save("auto",this.saveSlot||"1")}
   random(){let x=this.rngState|0;x^=x<<13;x^=x>>>17;x^=x<<5;this.rngState=x>>>0;return this.rngState/4294967296}
   // 存档瘦身：开局即有的城池、县、人物不重复保存运行中从不改写的史籍与坐标字段（读档时由基础数据补回），小数统一保留四位。
