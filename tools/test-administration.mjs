@@ -14,8 +14,11 @@ const local=state.engine.officialProfile(city,"agriculture");if(!local.familyId|
 const cache=state.engine._familyCountyOfficials;state.engine._familyCountyOfficials=new Map();if(state.engine.officialProfile(city,"agriculture").displayName!=="普通官员"||state.engine.officialProfile(city,"agriculture").raw!==45)throw new Error("无在地世家的空缺官槽没有普通官员兜底");state.engine._familyCountyOfficials=cache;
 
 const official=officers.find(o=>o.name==="荀彧")||officers[0],second=officers.find(o=>o.id!==official.id&&!state.engine.isOfficerAssigned(o));
-const appointed=state.engine.assignCityAdministration(city.id,{governor:official.id,agriculture:official.id,commerce:official.id,order:official.id,recruitment:official.id,commanderyGovernor:official.id});
-if(!appointed.ok||state.engine.officerDutyCount(official.id)<5||state.engine.dutyEfficiency(official.id)>=1)throw new Error("兼任职务或效率递减未生效");
+// 郡掾只设在郡府（郡治或行郡事）据点；许昌不是颍川郡治，只设县廷三职。
+const seat=state.engine.commanderyOfficeNode(city);if(!seat||seat===city||state.engine.assignCityAdministration(city.id,{agriculture:official.id}).ok)throw new Error("非郡府据点不应能任命郡掾");
+official.city=seat.id;const appointed=state.engine.assignCityAdministration(seat.id,{countyGovernor:official.id,agriculture:official.id,commerce:official.id,order:official.id,recruitment:official.id,granary:official.id,commanderyGovernor:official.id});
+if(!appointed.ok||state.engine.officerDutyCount(official.id)<7||state.engine.dutyEfficiency(official.id)>=1||state.engine.officerLoad(official.id).rate<=1)throw new Error("兼任职务未按行政容量超载降效");
+official.city="xuchang";state.engine.assignCityAdministration(seat.id,{countyGovernor:null,agriculture:null,commerce:null,order:null,recruitment:null,granary:null});
 
 city.administration.boosts.agriculture=state.turn+5;const agricultureBefore=city.agriculture,garrisonBefore=city.garrison;city.administration.manualRecruitment=true;city.administration.recruitmentTarget=city.garrison+600;for(let i=0;i<5;i++)state.engine.resolveAdministration(state,[]);
 if(city.agriculture<=agricultureBefore||city.garrison<=garrisonBefore)throw new Error("持续农业发展或自动征募未生效");

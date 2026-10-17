@@ -44,10 +44,11 @@ window.FiscalSystem=class FiscalSystem {
   }
   static account(state,forceId=state.playerForceId){return this.initialize(state).forces[forceId]}
   static governance(state,city){
-    const engine=state.engine,profile=role=>engine.officialProfile(city,role),governor=profile("governor"),county=profile("commanderyGovernor"),finance=profile("commerce"),agriculture=profile("agriculture"),households=profile("population"),support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
+    const engine=state.engine,profile=role=>engine.officialProfile(city,role),affair=id=>engine.affairScore?engine.affairScore(city,id):profile({commerce:"commerce",agriculture:"agriculture",registry:"population"}[id]),governor=profile("governor"),county=profile("commanderyGovernor"),finance=affair("commerce"),agriculture=affair("agriculture"),households=affair("registry"),magistrate=engine.magistrateRole?profile(engine.magistrateRole(city)):null,overload=magistrate?.officer&&!magistrate.familyId?engine.officerLoad?.(magistrate.officer.id)?.corruption||0:engine.loadCorruption?.(engine.administrativeLoads?.().nodes.get(city.id)?.defaultRate||0)||0,support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
     const ability=(governor.score+county.score+finance.score+households.score)/4;
-    const efficiency=this.clamp(.48+ability/180-(city.fiscal?.attention||0)/250,.25,.98);
-    const corruption=this.clamp((city.fiscal?.corruption??25)/100-(governor.score+finance.score)/700,.01,.45);
+    // 手动征收的"注意力"并入县令的行政负荷（offices.js）：县令过劳时其分数下降，过 80% 后贪腐另增（质量下降）。
+    const efficiency=this.clamp(.48+ability/180,.25,.98);
+    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload)/100-(governor.score+finance.score)/700,.01,.45);
     const population=(city.population||0)+engine.countiesForCity(city.id).reduce((sum,county)=>sum+(county.population||0),0),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
     return {efficiency,corruption,support,ability,agriculture:agriculture.score,bureaucracy,population};
   }

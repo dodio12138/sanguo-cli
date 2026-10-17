@@ -35,6 +35,31 @@
       "initial_garrison_target_per_level": 500,
       "default_training_target": 80
     },
+    "offices": {
+      "note": "内政改制 P2：行政容量与县郡州幕府职位，见 docs/ADMINISTRATION_REFORM_PLAN.md 乙编",
+      "capacity": {"base": 60, "per_score": 0.8, "injured": 0.72},
+      "curve": {"soft": 0.8, "at_full": 0.92, "exponent": 0.8, "minimum": 0.38},
+      "tier_weights": {"court": 0.10, "commandery": 0.27, "county": 0.63, "province": 0.07},
+      "acting_commandery_factor": 0.9,
+      "acting_commandery_clerks": 2,
+      "lodged_load_factor": 1.25,
+      "assistant_share": {"assistant": 0.35, "secretary": 0.30, "biejia": 0.30, "zhizhong": 0.20, "chief": 0.30},
+      "assistant_full_score": 80,
+      "secretary_relief": [0.08, 0.15],
+      "concurrent_county_load": 0.5,
+      "loads": {
+        "magistrate": {"base": 18, "per_10k_population": 3, "per_subcounty": 4, "per_5k_garrison": 2},
+        "commandant": {"base": 12, "per_3k_garrison": 3, "frontier": 10},
+        "prefect": {"base": 20, "per_node": 5, "per_50k_population": 3, "frontier": 10},
+        "clerk": {"base": 14, "per_node": 3},
+        "province_governor": {"base": 20, "per_commandery": 6, "per_army": 4, "max_armies": 10},
+        "province_clerk": {"base": 16, "per_commandery": 3},
+        "court": {"base": 20, "per_node": 0.2, "per_post": 2, "per_uncovered_commandery": 2},
+        "army": {"commander": 30, "deputy": 15, "staff": 15},
+        "temporary": {"besieged": 20, "occupied": 15, "inspection": 8, "lord_away": 15, "farming_army": 3}
+      },
+      "quality": {"corruption_at_full": 2, "corruption_per_overload": 0.2}
+    },
     "siege": {
       "breach_ratio": 0.55,
       "supply_drain_per_xun": 7,

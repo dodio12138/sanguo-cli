@@ -643,3 +643,8 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .army-detail-page button:not(.office-slot){border:1px solid var(--line-dim);background:#101710;color:#d8c78e;font:inherit;font-size:10px;padding:5px 9px;cursor:pointer}
 .ledger-table td .army-supply-compact{display:grid;gap:3px;font-size:10px}.army-supply-compact small{color:var(--muted);font-size:9px}
 @container army-detail (max-width:560px){.army-detail-head{grid-template-columns:42px minmax(0,1fr);gap:8px}.army-detail-head .detail-seal{width:40px;height:44px}.army-food-status{grid-column:2;text-align:left;border:0;padding:0}.army-food-status b,.army-food-status small{display:inline-block;margin:0 8px 0 0}.army-detail-grid,.army-food-columns{grid-template-columns:1fr}.army-food-columns>section+section{border-left:0;border-top:1px solid var(--line-dim);padding:10px 0 0}.army-detail-tabs button{flex:1;padding:6px 4px}.army-detail-title h2{font-size:19px}}
+
+/* 内政改制：官署任命分郡府、县廷两节；官员负荷 80% 以上标黄，100% 以上标红。 */
+.planner-section { grid-column: 1 / -1; margin: 6px 0 0; padding-bottom: 3px; border-bottom: 1px solid var(--line-dim); color: var(--amber); font-size: 11px; letter-spacing: .12em; }
+.office-slot.is-busy small { color: #d8b55a; }
+.office-slot.is-overloaded small { color: #d9785f; }
