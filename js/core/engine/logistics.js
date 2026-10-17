@@ -5,7 +5,7 @@ Object.assign(window.RuleEngine.prototype,{
   fieldLogisticsRules(){return {light_threshold:3000,easy_days_base:30,easy_days_ref:3000,easy_days_min:5,easy_days_max:30,org_min:30,org_power:.15,org_rout:.2,org_march:.5,resupply_days:8,convoy_loss_per_day:.004,convoy_max_hops:14,source_cells:30,escort_ratio:.03,escort_levels:{light:.4,normal:1,heavy:2.5},escort_garrison_share:.15,forage_order:.4,raid_base:.55,passive_base:.35,raid_capture:.5,raid_fail_loss:.04,cut_days:10,cut_morale:5,depot_gold:800,depot_days:20,depot_storage:30000,depot_hop_bonus:3,...(this.data.rules?.balance?.field_logistics||{})}},
   isLightArmy(army){return (army?.soldiers||0)<=this.fieldLogisticsRules().light_threshold},
   // 轻松携带的天数：兵越多辎重越长，可带的天数越少（三千人约三十日、三万人约九日）。
-  easyCarryDays(army){const r=this.fieldLogisticsRules();return Math.round(Math.max(r.easy_days_min,Math.min(r.easy_days_max,r.easy_days_base*Math.sqrt(r.easy_days_ref/Math.max(1,army?.soldiers||1)))))},
+  easyCarryDays(army){const r=this.fieldLogisticsRules();return Math.round(Math.max(r.easy_days_min,Math.min(r.easy_days_max,r.easy_days_base*Math.sqrt(r.easy_days_ref/Math.max(1,army?.soldiers||1))))*(army?this.quartermasterFactor?.(army,"carry")??1:1))},
   armyCarryDays(army){return Math.max(1,Math.min(90,Number.isFinite(army?.carryDays)?army.carryDays:this.easyCarryDays(army)))},
   // 每日口粮（石）：健卒、伤员全份，俘虏半份。
   dailyRation(state,army){const context=state||{data:this.data,engine:this,date:{day:1}};return FiscalSystem.armyDailyNeed(context,army)/(GameClock.isDaily(context)?1:10)},
@@ -55,7 +55,7 @@ Object.assign(window.RuleEngine.prototype,{
   raidChance(raider,convoy,active=true){const r=this.fieldLogisticsRules(),cavalry=(raider.units?.cavalry||0)/Math.max(1,raider.soldiers),power=raider.soldiers*(1+cavalry*.5),guard=Math.max(1,convoy.escort*2);return Math.max(.05,Math.min(.9,(active?r.raid_base:r.passive_base)*2*(power/(power+guard))*(1+cavalry*.2)))},
   interceptConvoy(state,army,raider,node,active,events){const r=this.fieldLogisticsRules(),convoy=army.convoy,chance=this.raidChance(raider,convoy,active),success=state.random()<chance,source=this.data.cities.find(c=>c.id===convoy.sourceId),involved=[army.force,raider.force].includes(state.playerForceId);
     if(!success){if(active){this.removeTroops(raider,Math.round(raider.soldiers*r.raid_fail_loss));raider.morale=Math.max(0,(raider.morale??70)-5);if(involved)events.push({phase:"后勤",armyId:raider.id,siteId:node.id,text:`${raider.name}于${node.name}截击${army.name}粮队不成，护送力战击退`})}return false}
-    const captured=Math.round(convoy.food*r.raid_capture);raider.stores??={gold:0,food:0,silk:0};raider.stores.food+=captured;army.convoy=null;army.supplyCutTurn=state.turn;army.supplyStatus="粮道被截";army.morale=Math.max(0,(army.morale??70)-r.cut_morale);
+    const captured=Math.round(convoy.food*r.raid_capture*(this.quartermasterFactor?.(army,"raid")??1));raider.stores??={gold:0,food:0,silk:0};raider.stores.food+=captured;army.convoy=null;army.supplyCutTurn=state.turn;army.supplyStatus="粮道被截";army.morale=Math.max(0,(army.morale??70)-r.cut_morale);
     if(involved)events.push({phase:"后勤",armyId:army.id,siteId:node.id,lv:army.force===state.playerForceId?2:1,text:`${raider.name}于${node.name}截获${army.name}粮队：缴粮 ${captured} 石，余者焚毁，护送 ${convoy.escort} 人溃散`});return true},
   // 每日推进运粮队：逐段前行、途损；进入有敌军之处被截（守在路旁一段内的袭扰部队也会出击）；到达即交粮，护送回营。军团若已转移则改道追送。
   advanceConvoys(state,events){const r=this.fieldLogisticsRules(),days=GameClock.factor(state)*10;this.aiRaidPosture(state);

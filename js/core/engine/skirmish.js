@@ -52,7 +52,8 @@ Object.assign(window.RuleEngine.prototype,{
     for(const key of ['soldiers','wounded','veterans','stragglers'])target[key]=(target[key]||0)+(source[key]||0);
     for(const key of ['stores','prisoners']){target[key]??={};for(const [k,n]of Object.entries(source[key]||{}))if(typeof n==='number')target[key][k]=(target[key][k]||0)+n}
     target.peakSoldiers=Math.max(total,target.peakSoldiers||0);target.reinforcementTarget=Math.max(total,target.reinforcementTarget||0);
-    const assigned=new Set([target.commanderOfficerId,target.staffOfficerId,...(target.deputyOfficerIds||[])]);target.deputyOfficerIds??=[];for(const id of [source.commanderOfficerId,source.staffOfficerId,...(source.deputyOfficerIds||[])])if(id&&!assigned.has(id)){target.deputyOfficerIds.push(id);assigned.add(id)}
+    // 并回的将校：别部主将转为本军部将并领回其兵，其余随军人物转为不领兵的部将。
+    const assigned=new Set([target.commanderOfficerId,target.staffOfficerId,target.quartermasterOfficerId,target.marshalOfficerId,...(target.deputyOfficerIds||[]),...(target.lieutenants||[]).map(row=>row.officerId)]);target.deputyOfficerIds??=[];target.lieutenants??=[];const sourceUnits={...(source.units||{infantry:source.soldiers||0})};for(const id of [source.commanderOfficerId,source.staffOfficerId,source.quartermasterOfficerId,source.marshalOfficerId,...(source.deputyOfficerIds||[]),...(source.lieutenants||[]).map(row=>row.officerId)])if(id&&!assigned.has(id)){target.lieutenants.push({officerId:id,units:id===source.commanderOfficerId?{infantry:sourceUnits.infantry||0,cavalry:sourceUnits.cavalry||0,archers:sourceUnits.archers||0}:{infantry:0,cavalry:0,archers:0}});assigned.add(id)}
     for(const a of this.data.armies)if(a.detachedFrom===source.id){if(a===target)delete a.detachedFrom;else a.detachedFrom=target.id;}
     for(const corps of state.corps||[])if(corps.armyIds)corps.armyIds=corps.armyIds.filter(id=>id!==source.id);
     this.data.armies=this.data.armies.filter(a=>a!==source);if(state.selected?.type==='army'&&state.selected.value.id===source.id)state.selected.value=target;
@@ -78,14 +79,16 @@ Object.assign(window.RuleEngine.prototype,{
     if(!detach&&army.soldiers>rules.max_soldiers)return fail(`逐格行动限 ${rules.max_soldiers} 人，请先分遣小队`);
     if(options.afterMission==='merge'&&!detach&&!army.detachedFrom)return fail('自动合并须先分遣小队，或选择已有别部');
     if(detach&&this.data.armies.filter(a=>a.force===forceId&&a.detachedFrom).length>=rules.max_detachments)return fail('本方分遣小队已达上限');
-    const officer=options.officerId?this.data.officers.find(o=>o.id===options.officerId&&o.force===forceId&&o.city===army.city&&o.status==='serving'&&!this.isOfficerAssigned(o)):null;
-    if(options.officerId&&!officer)return fail('主将须为同驻地未编入其他部队的在任人物');
+    // 分遣小队须由随军人物带队（副将、军师、军需官、军司马或部将）；未指定时取统武最高者。AI 无随军人物时临时点用同城闲将。
+    let officer=null;if(detach){const escorts=(this.armyEscorts?.(army)||[]).map(m=>m.officer).filter(o=>o.status==='serving');officer=options.officerId?escorts.find(o=>o.id===options.officerId)||null:null;if(options.officerId&&!officer)return fail('带队人物须为本军随军人物（副将、军师、军需官、军司马或部将）');
+      if(!officer)officer=escorts.sort((a,b)=>(b.command+b.war)-(a.command+a.war))[0]||null;if(!officer&&(forceId!==state.playerForceId||state.observerMode))officer=this.data.officers.find(o=>o.force===forceId&&o.city===army.city&&o.status==='serving'&&!this.isOfficerAssigned(o))||null;if(!officer)return fail('分遣小队须由随军人物带队：请先为本军任命部将或其他军职')}
+    const share=officer&&(this.lieutenantShares?.(army)||[]).find(s=>s.officerId===officer.id),shareUnits=share&&Object.values(share.units).reduce((a,b)=>a+b,0)===amount?share.units:null;
     let target=options.target;if(options.mission==='withdraw'){const at=this.armyWorldPosition(army);target=this.data.cities.filter(c=>c.force===forceId&&!this.isCityBesieged(c)).sort((a,b)=>Math.hypot(a.x-at.x,a.y-at.y)-Math.hypot(b.x-at.x,b.y-at.y))[0]}
     const preview=this.fieldRoute(army,target,amount||army.soldiers);if(!preview.ok)return fail(preview.error);
     let unit=army;
     if(detach){
       army.stores??={gold:0,food:0,silk:0};const beforeVeterans=army.veterans||0,ratio=amount/army.soldiers,units={};let left=amount;for(const type of ['cavalry','archers']){units[type]=Math.min(left,Math.floor((army.units?.[type]||0)*ratio));left-=units[type]}units.infantry=left;
-      const veterans=Math.floor((army.veterans||0)*ratio),stores=Object.fromEntries(['gold','food','silk'].map(k=>[k,Math.floor((army.stores?.[k]||0)*ratio)]));
+      if(shareUnits){units.infantry=shareUnits.infantry||0;units.cavalry=shareUnits.cavalry||0;units.archers=shareUnits.archers||0}if(officer)this.detachOfficerFromArmy(officer);const veterans=Math.floor((army.veterans||0)*ratio),stores=Object.fromEntries(['gold','food','silk'].map(k=>[k,Math.floor((army.stores?.[k]||0)*ratio)]));
       for(const [k,n]of Object.entries(stores))army.stores[k]=Math.max(0,(army.stores[k]||0)-n);
       const beforeUnits=army.units?{...army.units}:{infantry:army.soldiers,cavalry:0,archers:0};this.removeTroops(army,amount);army.units=Object.fromEntries(Object.keys(units).map(k=>[k,(beforeUnits[k]||0)-units[k]]));army.veterans=Math.max(0,beforeVeterans-veterans);
       unit={id:`field_${forceId}_${state.turn}_${this.data.armies.length+1}`,name:`${army.name}别部`,force:forceId,city:army.city,commander:officer?.name||'别部军吏',commanderOfficerId:officer?.id||null,deputyOfficerIds:[],staffOfficerId:null,soldiers:amount,peakSoldiers:amount,reinforcementTarget:amount,units,veterans,wounded:0,morale:army.morale,training:army.training,supply:army.supply,cohesion:army.cohesion??100,formation:army.formation,tactic:army.tactic,stores,stance:'野外行军',detachedFrom:army.id};this.data.armies.push(unit);
@@ -154,9 +157,10 @@ Object.assign(window.RuleEngine.prototype,{
   },
   resolveArmyCohesion(state){const r=this.skirmishRules(),days=GameClock.factor(state)*10;for(const army of this.data.armies){let value=army.cohesion??100;
     if(army.lastSkirmishTurn===state.turn||army.lastCombatTurn===state.turn)continue;
-    if(army.route?.length)value-=r.cohesion_march*(army.movementMode==='forced_march'?3:1)*days;
-    else if(army.fieldPosition&&army.fieldMovedTurn===state.turn)value-=r.cohesion_field*days;
-    else if(!army.engagementId)value+=(this.isStationed(army)?r.cohesion_city:army.stance==='扎营'||army.fieldOrder?.mission==='hold'?r.cohesion_camp:r.cohesion_rest)*days;
+    const loss=this.marshalArmyFactor?.(army,'loss')??1,recover=this.marshalArmyFactor?.(army,'recover')??1;
+    if(army.route?.length)value-=r.cohesion_march*(army.movementMode==='forced_march'?3:1)*days*loss;
+    else if(army.fieldPosition&&army.fieldMovedTurn===state.turn)value-=r.cohesion_field*days*loss;
+    else if(!army.engagementId)value+=(this.isStationed(army)?r.cohesion_city:army.stance==='扎营'||army.fieldOrder?.mission==='hold'?r.cohesion_camp:r.cohesion_rest)*days*recover;
     if(army.supply===0)value-=4*days;army.cohesion=Math.max(0,Math.min(100,value));
   }},
   runFieldAI(state,events){if(!window.MapGrid)return;const r=this.skirmishRules();for(const force of this.data.forces){if(force.id==='neutral'||force.eliminated||force.id===state.playerForceId&&!state.observerMode)continue;

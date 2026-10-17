@@ -9,6 +9,9 @@ const keyOf=p=>`${p[OCC]}|${p[CLS]}|${p[CLAN]}`;
 const r2=x=>Math.round(x*100)/100;
 
 Object.assign(window.RuleEngine.prototype,{
+  // 安置流民项目（内政改制 P4）：统计某据点及辖县的流民；完工时按比例落户为自耕编户（登记率九成）。
+  refugeeCount(city){return this.countyPopulationPlaces(city).reduce((n,place)=>n+(place.pops||[]).filter(p=>p[CLS]===DRIFT).reduce((m,p)=>m+total(p),0),0)},
+  settleRefugees(city,fraction){let moved=0;for(const place of this.countyPopulationPlaces(city))for(const p of (place.pops||[]).filter(pop=>pop[CLS]===DRIFT)){const before=total(p);this.popMove(place,p,fraction,FARM,FREE,"",{householdFactor:1.6,registered:.9});moved+=before-total(p)}for(const place of this.countyPopulationPlaces(city))this.popSync?.(place);return moved},
   popRules(){return this._popRules??=this.buildPopRules()},
   buildPopRules(){const base={age:{children:.35,adult_male:.27,adult_female:.27,elderly:.11},household_size:[5.2,6.5,8],registered:[.92,.5,.1],scholar_registered:.95,health:.85,
       urban_mix:{trade:.28,scholar:.04},county_mix:{trade:.06,scholar:.02},refugee_start:{default:.03,"190_coalition":.05,"194_puyang":.06},
@@ -120,7 +123,7 @@ Object.assign(window.RuleEngine.prototype,{
     this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
   popMigrationTarget(state,place){let best=null;for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const {food,war,node}=this.popConditions(state,dest),crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1),score=food*2+(node.order||50)/100-war*2-crowd*3;if(score>1.6&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
   // 登记率目标：编户看户曹（或世家县令）能力，依附户看世家与据点主的关系。
-  registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=magistrate?magistrate.ability:(this.officialProfile?.(node,"population")?.score??45),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
+  registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=45+((magistrate?magistrate.ability:(this.affairScore?.(node,"registry")?.score??60))-60)*(this.abilityConfig?.().admin.registration??1),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
     return {free,dependent:clanId=>Math.max(.2,Math.min(.8,rules.dependent_base*this.clanRelation(state,clanId,node.force)/60))}},
 
   // 对外共用县报：历史分配记录只作为底层账目，界面按县合计，不消费随机数或写 POP。

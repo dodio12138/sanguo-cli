@@ -22,10 +22,10 @@ window.FiscalSystem=class FiscalSystem {
     const ledger=state.policies.fiscalAccounts;
     ledger.supplyRoutes??=[];ledger.forces??={};ledger.shipments??=[];ledger.laborGroups??=[];ledger.projects??=[];ledger.sequence??=0;
     state.resources.silk??=0;
-    for(const army of data.armies){army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0}
-    // 一回合内只做一次完整初始化（据点逾三百，逐次遍历开销大）；势力账户与各城财政字段在此补齐。
+    // 一回合内只做一次完整初始化（据点逾三百、军团上百，逐次遍历开销大）；军团数变化（新编、分遣）时重做以补齐军资字段。
     const playerForce=data.forces.find(force=>force.id===state.playerForceId);if(playerForce)playerForce.resources=state.resources;
-    this.initStamps??=new WeakMap();const stamp=`${state.turn}|${state.playerForceId}|${data.cities.length}|${data.forces.length}`;if(this.initStamps.get(ledger)===stamp)return ledger;this.initStamps.set(ledger,stamp);
+    this.initStamps??=new WeakMap();const stamp=`${state.turn}|${state.playerForceId}|${data.cities.length}|${data.forces.length}|${data.armies.length}|${data.armies.at(-1)?.id}`;if(this.initStamps.get(ledger)===stamp)return ledger;this.initStamps.set(ledger,stamp);
+    for(const army of data.armies){army.stores??={gold:0,food:0,silk:0};for(const key of ["gold","food","silk"])army.stores[key]??=0}
     for(const city of data.cities){city.localSilk??=0;city.publicSupport??=city.order??60;city.fiscal??={};const fiscal=city.fiscal;fiscal.accrued??={land:0,commercial:0,food:0,silk:0};fiscal.lastCollected??={};fiscal.pendingRemittance??={gold:0,food:0,silk:0};fiscal.attention??=0;fiscal.corruption??=25;fiscal.cropAccrued??=0;fiscal.cropYear??=state.date.year;fiscal.lastHarvestYear??=null;fiscal.localConsumption??={gold:0,food:0}}
     if(data.commandCatalog)for(const [id,name,categoryId,categoryName,description] of this.commands)if(!data.commandCatalog.commands.some(command=>command.id===id))data.commandCatalog.commands.push({id,name,categoryId,categoryName,description,status:"active",parameters:["actor_id","target_ids","amount","options"]});
     for(const force of data.forces.filter(force=>force.id!=="neutral")){
@@ -44,10 +44,14 @@ window.FiscalSystem=class FiscalSystem {
   }
   static account(state,forceId=state.playerForceId){return this.initialize(state).forces[forceId]}
   static governance(state,city){
-    const engine=state.engine,profile=role=>engine.officialProfile(city,role),governor=profile("governor"),county=profile("commanderyGovernor"),finance=profile("commerce"),agriculture=profile("agriculture"),households=profile("population"),support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
+    // 官员相关部分随行政负荷缓存（每旬或任免时重建），每日只算民心、贪腐底数等实时项。
+    const engine=state.engine,cache=engine.administrativeLoads?.().governance,cached=cache?.get(city.id),officials=cached||(()=>{const profile=role=>engine.officialProfile(city,role),affair=id=>engine.affairScore?engine.affairScore(city,id):profile({commerce:"commerce",agriculture:"agriculture",registry:"population"}[id]),magistrate=engine.magistrateRole?profile(engine.magistrateRole(city)):null;return {governor:profile("governor"),county:profile("commanderyGovernor"),finance:affair("commerce"),agriculture:affair("agriculture"),households:affair("registry"),overload:magistrate?.officer&&!magistrate.familyId?engine.officerLoad?.(magistrate.officer.id)?.corruption||0:engine.loadCorruption?.(engine.administrativeLoads?.().nodes.get(city.id)?.defaultRate||0)||0,secretary:engine.secretaryCorruption?.(city)||0}})();if(cache&&!cached)cache.set(city.id,officials);const {governor,county,finance,agriculture,households,overload}=officials,support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
     const ability=(governor.score+county.score+finance.score+households.score)/4;
-    const efficiency=this.clamp(.48+ability/180-(city.fiscal?.attention||0)/250,.25,.98);
-    const corruption=this.clamp((city.fiscal?.corruption??25)/100-(governor.score+finance.score)/700,.01,.45);
+    // 手动征收的"注意力"并入县令的行政负荷（offices.js）：县令过劳时其分数下降，过 80% 后贪腐另增（质量下降）。
+    const A=engine.abilityConfig?.().admin||{fiscal_efficiency:.35,corruption_scale:1.5},pivot=engine.abilityConfig?.().pivot??60;
+    // 能力 60（默认官员）时效率 73%、贪腐减免 0.129，与改制前默认一致；高低按差值放大。
+    const efficiency=this.clamp(.73+(ability-pivot)/pivot*A.fiscal_efficiency,.25,.98);
+    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload+officials.secretary)/100-.1286-(governor.score+finance.score-2*pivot)/700*A.corruption_scale,.01,.45);
     const population=(city.population||0)+engine.countiesForCity(city.id).reduce((sum,county)=>sum+(county.population||0),0),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
     return {efficiency,corruption,support,ability,agriculture:agriculture.score,bureaucracy,population};
   }
@@ -58,8 +62,8 @@ window.FiscalSystem=class FiscalSystem {
     const source=state.data.cities.find(city=>city.id===sourceCityId),score=this.governance(state,source).ability,distance=Math.max(0,route.length-1);
     // 转运按路段里程与类型计损耗与日程：漕运最省，栈道山道最费；大宗粮秣超出道路通行量时车队延误。
     const cfg=state.data.rules.balance?.logistics||{},legs=state.data.routeNetwork&&state.engine.legInfo?route.slice(1).map((id,index)=>state.engine.legInfo(route[index],id)):null,baseRate=resource==="food"?.025:resource==="silk"?.012:.008;
-    const rawLoss=legs?legs.reduce((sum,leg)=>sum+(leg.li?leg.li/100*(cfg.loss_per_100li?.[resource]??baseRate*.6)*(cfg.kind_loss?.[leg.kind]??1):baseRate),0):distance*baseRate,lossRate=this.clamp(rawLoss*(1-score/160),0,cfg.max_loss??.45),loss=Math.floor(amount*lossRate);
-    const daily=GameClock.isDaily(state),edgeDays=daily?10:1,legDays=daily&&legs?legs.map(leg=>{const convoy=amount/Math.max(.1,(leg.capacity??1)*(cfg.cargo_per_capacity??20000));return Math.max(1,Math.ceil(leg.days*(convoy<=1?1:1+(convoy-1)*(cfg.cargo_delay??.5))))}):null,travel=legDays?legDays.reduce((sum,days)=>sum+days,0):distance*edgeDays,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,...(legDays?{legDays}:{}),segmentRemainingDays:route.length>1?legDays?.[0]??edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,travel),purpose,status:"在途"};
+    const rawLoss=legs?legs.reduce((sum,leg)=>sum+(leg.li?leg.li/100*(cfg.loss_per_100li?.[resource]??baseRate*.6)*(cfg.kind_loss?.[leg.kind]??1):baseRate),0):distance*baseRate,office=state.engine.convoyModifiers?.(state,{forceId,route,resource,purpose,targetKind}),lossRate=this.clamp(rawLoss*(1-score/160)*(office?.loss??1),0,cfg.max_loss??.45),loss=Math.floor(amount*lossRate);
+    const daily=GameClock.isDaily(state),edgeDays=daily?10:1,legDays=daily&&legs?legs.map((leg,index)=>{const convoy=amount/Math.max(.1,(leg.capacity??1)*(office?.legCapacity?.[index]??1)*(cfg.cargo_per_capacity??20000));return Math.max(1,Math.ceil(leg.days*(convoy<=1?1:1+(convoy-1)*(cfg.cargo_delay??.5))*(office?.legDays?.[index]??1)))}):null,travel=legDays?legDays.reduce((sum,days)=>sum+days,0):distance*edgeDays,shipment={id:`cargo-${++ledger.sequence}`,forceId,sourceCityId,targetCityId,targetKind,armyId,resource,amount:Math.floor(amount),transportLoss:loss,delivered:Math.floor(amount)-loss,route,nextIndex:0,edgeDays,...(legDays?{legDays}:{}),segmentRemainingDays:route.length>1?legDays?.[0]??edgeDays:1,departedTurn:state.turn,arriveTurn:state.turn+Math.max(1,travel),purpose,status:"在途"};
     ledger.shipments.push(shipment);return shipment;
   }
   static advanceShipments(state,events){
@@ -129,7 +133,7 @@ window.FiscalSystem=class FiscalSystem {
     for(const army of active.sort((a,b)=>a.id.localeCompare(b.id))){const wanted=Math.floor(army.soldiers*rules.farming_soldier_share),workers=Math.max(0,Math.min(left,wanted));left-=workers;rows.push({armyId:army.id,workers,wanted})}
     return rows;
   }
-  static armyFarming(state,army){const city=this.stationedCity(state,army),eligible=this.canFarmArmy(state,army),row=city&&army.farming?.cityId===city.id?this.farmingAt(state,city).find(r=>r.armyId===army.id):null,rules=this.grainRules(state),workers=row?.workers||0,share=workers/Math.max(1,row?.wanted||0);return {eligible,active:eligible&&workers>0,workers,rateFactor:1-(1-rules.farming_ration_factor)*share,trainingFactor:1-(1-rules.farming_training_factor)*share,annualFood:workers*rules.farming_food_per_worker}}
+  static armyFarming(state,army){const city=this.stationedCity(state,army),eligible=this.canFarmArmy(state,army),row=city&&army.farming?.cityId===city.id?this.farmingAt(state,city).find(r=>r.armyId===army.id):null,rules=this.grainRules(state),workers=row?.workers||0,share=workers/Math.max(1,row?.wanted||0);return {eligible,active:eligible&&workers>0,workers,rateFactor:1-(1-rules.farming_ration_factor)*share,trainingFactor:1-(1-rules.farming_training_factor)*share,annualFood:workers*rules.farming_food_per_worker*(city?state.engine.farmingFactor?.(city)??1:1)}}
   static advanceFarming(state,city){
     for(const army of state.data.armies.filter(a=>a.farming?.cityId===city.id))if(!this.canFarmArmy(state,army)||army.city!==army.farming.cityId)delete army.farming;
     const fiscal=city.fiscal,rows=this.farmingAt(state,city),stamp=`${state.date.year}-${state.date.month}-${state.date.day??state.date.xun}`;
@@ -182,8 +186,8 @@ window.FiscalSystem=class FiscalSystem {
       if(!source||!pool||state.engine.isCityBesieged(source))continue;
       const protectedFood=Math.max(this.localDailyGrain(state,source)*rules.central_reserve_days,...this.supplyRoutes(state,force.id).filter(l=>l.enabled&&l.sourceKind==="central").map(l=>l.reserveFood)),candidates=[];
       for(const city of state.data.cities){if(city.force!==force.id)continue;const daily=this.localDailyGrain(state,city),incoming=this.incomingGrain(state,city).reduce((s,c)=>s+c.delivered,0),stock=Math.max(0,city.localFood||0),managed=this.managedDepot(state,city);
-        city.fiscal.grainRelief={status:managed?"指定粮线供粮":!daily||stock+incoming>=daily*rules.relief_trigger_days?"储粮充足":incoming?"中央粮在途":"待中央调拨",incoming};
-        if(managed||!daily||stock+incoming>=daily*rules.relief_trigger_days)continue;
+        const trigger=daily&&stock+incoming<daily*Math.max(rules.relief_trigger_days,90)?state.engine.reliefTriggerDays?.(state,force.id,city,rules.relief_trigger_days)??rules.relief_trigger_days:rules.relief_trigger_days;city.fiscal.grainRelief={status:managed?"指定粮线供粮":!daily||stock+incoming>=daily*trigger?"储粮充足":incoming?"中央粮在途":"待中央调拨",incoming};
+        if(managed||!daily||stock+incoming>=daily*trigger)continue;
         if(state.engine.isCityBesieged(city)){city.fiscal.grainRelief.status="被围无法调入";continue}
         candidates.push({city,daily,incoming,stock,cover:stock/daily});
       }
@@ -191,7 +195,7 @@ window.FiscalSystem=class FiscalSystem {
       for(const row of candidates){const {city,daily,incoming,stock}=row;if(dispatched>=rules.relief_max_dispatches)break;
         const spare=Math.max(0,Math.floor((pool.food||0)-protectedFood));if(spare<=0){city.fiscal.grainRelief.status="中央余粮不足";continue}
         const goal=Math.min(city.storage||20000,Math.ceil(daily*rules.relief_target_days)),need=Math.max(0,goal-stock-incoming);if(need<=0)continue;
-        const amount=Math.floor(Math.min(need,rules.relief_batch,spare)),cargo=this.enqueue(state,{forceId:force.id,sourceCityId:source.id,targetCityId:city.id,resource:"food",amount,targetKind:"local",purpose:"中央济粮"});
+        const amount=Math.floor(Math.min(need,state.engine.reliefBatch?.(force.id,rules.relief_batch)??rules.relief_batch,spare)),cargo=this.enqueue(state,{forceId:force.id,sourceCityId:source.id,targetCityId:city.id,resource:"food",amount,targetKind:"local",purpose:"中央济粮"});
         if(!cargo){city.fiscal.grainRelief.status="道路不通";continue}
         pool.food-=amount;cargo.grainRelief=true;city.fiscal.grainRelief={status:"中央粮在途",incoming:incoming+cargo.delivered,cargoId:cargo.id};dispatched++;
         if(force.id===state.playerForceId)events.push({phase:"后勤",siteId:city.id,text:`中央自${source.name}拨粮 ${amount} 石救济${city.name}，预计 ${cargo.arriveTurn-state.turn} 日后入县仓，路损 ${cargo.transportLoss} 石`});
@@ -281,7 +285,7 @@ window.FiscalSystem=class FiscalSystem {
   static garrisonDailyFood(state,soldiers){return Math.max(0,soldiers||0)*this.foodRules(state).garrison_ration}
   // 驻屯按较低的官仓净支出计；这是就地供养的平衡抽象，不是把士卒饮食减半。
   static armyRationProfile(state,army,{field=false}={}){const rules=this.foodRules(state),city=field?null:this.stationedCity(state,army),stationed=!!city&&!army.retreat&&army.stance!=="败退"&&!army.raiding&&!state.engine?.isCityBesieged(city),farm=stationed&&army.farming&&state.engine?this.armyFarming(state,army):null;return {mode:farm?.active?"farming":stationed?"stationed":"field",label:farm?.active?"屯田供养":stationed?"驻屯供养":"行军战备",rate:stationed?rules.stationed_ration*(farm?.rateFactor??1):rules.army_ration}}
-  static armyDailyNeed(state,army,options){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.armyRationProfile(state,army,options).rate*(GameClock.isDaily(state)?1:10)))}
+  static armyDailyNeed(state,army,options){return Math.max(1,Math.ceil(((army.soldiers||0)+(army.wounded||0)+Object.values(army.prisoners||{}).reduce((n,v)=>n+v,0)*.5)*this.armyRationProfile(state,army,options).rate*(GameClock.isDaily(state)?1:10)*(state.engine?.quartermasterFactor?.(army,"ration")??1)))}
   // 随军满仓按携粮天数（玩家可调，默认为该军轻松携带的天数）；超出会压低组织度，见 engine/logistics.js。
   static armyFoodTarget(state,army){const days=state.engine?.armyCarryDays?state.engine.armyCarryDays(army):60;return Math.ceil(this.armyDailyNeed(state,army,{field:true})*(GameClock.isDaily(state)?days:days/10))}
   static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=state.data.armies.filter(army=>!army.fieldPosition&&army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);return Math.max(0,garrisonReserve+armyReserve,...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
@@ -356,8 +360,8 @@ window.FiscalSystem=class FiscalSystem {
     for(const group of ledger.laborGroups.filter(group=>group.status==="服役"&&group.startedTurn<state.turn)){group.usedDays+=Math.min(group.people*(GameClock.isDaily(state)?1:10),Math.max(0,group.totalDays-group.usedDays));if(!group.projectId&&!group.cargoId&&group.usedDays>=group.totalDays)this.dismissLabor(state,group.cityId,events,group.id)}
     for(const project of ledger.projects.filter(project=>project.status==="施工"&&project.startedTurn<state.turn)){
       const city=state.data.cities.find(city=>city.id===project.cityId);if(!city||city.force!==project.forceId){project.status="中止";this.dismissLabor(state,project.cityId,events);continue}if(state.engine.isCityBesieged(city))continue;
-      const labor=ledger.laborGroups.filter(group=>group.projectId===project.id&&group.status==="服役").reduce((sum,group)=>sum+group.people*(GameClock.isDaily(state)?1:10),0);project.completedDays=Math.min(project.requiredDays,project.completedDays+labor);if(project.completedDays<project.requiredDays)continue;
-      this.completeProject(state,project,city);project.status="完成";for(const group of ledger.laborGroups.filter(group=>group.projectId===project.id))this.dismissLabor(state,city.id,events,group.id);events.push({phase:"建设",siteId:city.id,text:`${city.name}${project.name}完工，共 ${project.requiredDays}人日`});
+      const labor=ledger.laborGroups.filter(group=>group.projectId===project.id&&group.status==="服役").reduce((sum,group)=>sum+group.people*(GameClock.isDaily(state)?1:10),0)*(state.engine.projectSpeed?.(state.engine.projectDefaults(project,city),city)??1);project.completedDays=Math.min(project.requiredDays,project.completedDays+labor);if(project.completedDays<project.requiredDays)continue;
+      this.completeProject(state,project,city);project.status="完成";state.engine.invalidateDuties?.();for(const group of ledger.laborGroups.filter(group=>group.projectId===project.id))this.dismissLabor(state,city.id,events,group.id);events.push({phase:"建设",siteId:city.id,text:`${city.name}${project.name}完工，共 ${project.requiredDays}人日`});
     }
   }
   static completeProject(state,project,city){
@@ -367,11 +371,14 @@ window.FiscalSystem=class FiscalSystem {
     if(project.type==="build_warehouse"){city.storage+=10000*this.foodRules(state).stock_scale;city.buildings.push("仓库")}
     if(project.type==="fortify")city.level=Math.min(5,city.level+1);
     if(project.type==="waterworks"){city.agriculture+=2;city.floodResistance=Math.min(80,(city.floodResistance||0)+20);city.buildings.push("水利")}
+    // 内政改制 P4 新增项目：开垦提高农业；安置流民按六成落户为编户，治安小升。
+    if(project.type==="reclaim_land"){city.agriculture=Math.min(100,(city.agriculture||0)+4);for(const county of state.engine.countiesForCity(city.id))county.agriculture=Math.min(100,(county.agriculture||0)+2)}
+    if(project.type==="settle_refugees"){project.settled=state.engine.settleRefugees(city,.6);city.order=Math.min(100,(city.order||0)+2)}
     if(project.type==="relieve_fire"){city.fireDamage=0;city.defenseDamage=Math.max(0,city.defenseDamage-10)}
     if(project.type==="build_road"){const graph=state.data.rules.city_graph,target=project.targetCityId;graph[city.id]??=[];graph[target]??=[];if(!graph[city.id].includes(target))graph[city.id].push(target);if(!graph[target].includes(city.id))graph[target].push(city.id);(state.data.builtRoads??=[]).push([city.id,target])}
   }
   static handleOrder(state,order,events){
-    if(!["army_farming","build_supply_depot","set_supply_route","set_collection_policy","set_capital","dispatch_resources","dismiss_labor","relieve_fire","collect_tax","set_tax_rate","reward_officer","requisition_labor","transfer_gold","transfer_food","transport","construct_building","repair","build_road","build_warehouse","fortify","waterworks"].includes(order.type))return false;
+    if(!["army_farming","build_supply_depot","set_supply_route","set_collection_policy","set_capital","dispatch_resources","dismiss_labor","relieve_fire","collect_tax","set_tax_rate","reward_officer","requisition_labor","transfer_gold","transfer_food","transport","construct_building","repair","build_road","build_warehouse","fortify","waterworks","reclaim_land","settle_refugees"].includes(order.type))return false;
     this.initialize(state);const engine=state.engine,city=state.data.cities.find(city=>city.id===order.cityIds?.[0]),own=city?.force===state.playerForceId,options=order.options||{},account=this.account(state),fail=message=>{events.push({phase:"财政",text:message});return true};
     if(order.type==="army_farming"){
       const army=state.data.armies.find(a=>a.force===state.playerForceId&&(order.armyIds?.length?a.id===order.armyIds[0]:order.text?.includes(a.name)));
@@ -403,10 +410,10 @@ window.FiscalSystem=class FiscalSystem {
       if(options.useLabor==="yes"){const days=Math.max(10,Math.ceil(amount*Math.max(1,route.length-1)*.2)),fee=Math.ceil(Math.min(Math.ceil(days/10),Math.floor(engine.countyPopulation(source.id)*.02))*.04);if(!central&&resource==="gold"&&city.localGold<amount+fee)return fail("调运及徭役征发经费不足");group=this.levyLabor(state,source,days,events);if(!group)return fail("运输徭役征发失败：地方人口或经费不足")}
       const cargo=this.enqueue(state,{forceId:state.playerForceId,sourceCityId:source.id,targetCityId:destination.id,resource,amount,targetKind:army?"army":"local",armyId:army?.id,purpose:"调运"});if(group){group.cargoId=cargo.id;cargo.laborId=group.id}pool[balanceKey]-=amount;events.push({phase:"后勤",text:`调运 ${amount}${this.units[resource]}${this.names[resource]}，预计 ${Math.max(1,cargo.route.length-1)}回合后到达，路损 ${cargo.transportLoss}`});return true;
     }
-    if(["construct_building","repair","build_road","build_warehouse","fortify","waterworks","relieve_fire"].includes(order.type)){
-      if(!own||engine.isCityBesieged(city))return fail("工程需要未受围困的己方城市");const ledger=this.initialize(state),def=state.data.rules.buildings?.[options.building],pending=ledger.projects.filter(project=>project.cityId===city.id&&project.status==="施工"),cost={repair:300,build_road:1000,build_warehouse:700,fortify:600,waterworks:800,relieve_fire:100}[order.type]??def?.cost;
+    if(["construct_building","repair","build_road","build_warehouse","fortify","waterworks","relieve_fire","reclaim_land","settle_refugees"].includes(order.type)){
+      if(!own||engine.isCityBesieged(city))return fail("工程需要未受围困的己方城市");const ledger=this.initialize(state),def=state.data.rules.buildings?.[options.building],pending=ledger.projects.filter(project=>project.cityId===city.id&&project.status==="施工"),refugees=order.type==="settle_refugees"?engine.refugeeCount(city):0,cost={repair:300,build_road:1000,build_warehouse:700,fortify:600,waterworks:800,relieve_fire:100,reclaim_land:900,settle_refugees:Math.max(200,Math.round(refugees*.04))}[order.type]??def?.cost;if(order.type==="settle_refugees"&&refugees<200)return fail(`${city.name}流民不足 200 人，无需安置`);if(pending.some(project=>project.type===order.type&&["reclaim_land","settle_refugees","waterworks"].includes(order.type)))return fail(`${city.name}已有同类项目在办`);
       if(order.type==="construct_building"&&(!def||city.buildings.length+pending.filter(project=>project.type==="construct_building").length>=(city.level||1)+2))return fail("工程失败：建筑无效或槽位已满");const target=state.data.cities.find(target=>target.id===order.cityIds?.[1]&&target.force===city.force);if(order.type==="build_road"&&!target)return fail("道路工程需要另一座己方城市");if(!Number.isFinite(cost)||city.localGold<cost)return fail(`工程需地方资金 ${cost||0}贯`);
-      const project={id:`project-${++ledger.sequence}`,forceId:city.force,cityId:city.id,targetCityId:target?.id,type:order.type,name:def?.name||order.commandName||order.type,options,requiredDays:Math.max(500,cost*8),completedDays:0,startedTurn:state.turn,status:"施工"},levyFee=Math.ceil(Math.min(Math.ceil(project.requiredDays/10),Math.floor(engine.countyPopulation(city.id)*.02))*.04);if(city.localGold<cost+levyFee)return fail(`工程及征发需要地方经费 ${cost+levyFee}贯`);const group=this.levyLabor(state,city,project.requiredDays,events,project.id);if(!group)return fail("工程失败：无法征发辖县劳动力");city.localGold-=cost;project.laborId=group.id;ledger.projects.push(project);return fail(`${city.name}${project.name}开工，地方投入 ${cost}贯，需 ${project.requiredDays}人日`);
+      const project={id:`project-${++ledger.sequence}`,forceId:city.force,cityId:city.id,targetCityId:target?.id,type:order.type,name:def?.name||order.commandName||order.type,options,requiredDays:Math.max(500,cost*8),completedDays:0,startedTurn:state.turn,status:"施工"},levyFee=Math.ceil(Math.min(Math.ceil(project.requiredDays/10),Math.floor(engine.countyPopulation(city.id)*.02))*.04);if(city.localGold<cost+levyFee)return fail(`工程及征发需要地方经费 ${cost+levyFee}贯`);const group=this.levyLabor(state,city,project.requiredDays,events,project.id);if(!group)return fail("工程失败：无法征发辖县劳动力");city.localGold-=cost;project.laborId=group.id;engine.projectDefaults?.(project,city);if(Number(options.deadlineDays)>0)project.deadlineTurn=state.turn+Math.round(Number(options.deadlineDays));else project.deadlineTurn=state.turn+Math.ceil(project.requiredDays/Math.max(1,group.people)*1.3);if(options.priority&&engine.projectPriorities?.().includes(options.priority))project.priority=options.priority;ledger.projects.push(project);engine.invalidateDuties?.();return fail(`${city.name}${project.name}立项开工：地方投入 ${cost}贯，需 ${project.requiredDays}人日，主责 ${engine.officerById(project.leadId)?.name||"普通官员"}`);
     }
     return false;
   }

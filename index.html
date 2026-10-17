@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10150f">
   <title>&lt;&lt;&lt;三国</title>
-  <link rel="stylesheet" href="css/style.css?v=a3ce7e78d8">
+  <link rel="stylesheet" href="css/style.css?v=d7cbd65d2d">
   <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
-  <link rel="stylesheet" href="css/ui-polish.css?v=092aeed05e">
+  <link rel="stylesheet" href="css/ui-polish.css?v=bfda846f4a">
   <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=5094066e1c">
@@ -28,7 +28,7 @@
         <nav class="campaign-steps" aria-label="开局步骤"><button data-campaign-step="1">一 · 选择剧本</button><button data-campaign-step="2" disabled>二 · 选择势力</button><button data-campaign-step="3" disabled>三 · 开局设置</button></nav>
         <div id="campaignSelect" class="campaign-select"><section id="startScenarioStep" class="campaign-pane"><div class="campaign-heading"><h2 tabindex="-1">选择剧本</h2><p id="scenarioStepHint">选择一段历史，进入天下局势。</p></div><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
         <section id="startForceStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">选择势力</h2><p id="campaignScenarioName"></p></div><div class="campaign-force-layout"><div id="campaignMinimap" class="campaign-minimap"><canvas id="campaignMinimapCanvas" role="img" aria-label="势力范围小地图"></canvas><div id="campaignMinimapTip" class="campaign-minimap-tip" hidden></div></div><div id="forceChoices" class="force-choices"></div><aside class="campaign-brief" aria-label="势力介绍"><h3 id="startBriefTitle"></h3><p id="startHistoricalBrief" class="start-historical-brief"></p><h4>阶段目标</h4><p id="startForceObjective"></p></aside></div></section></div>
-        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label></div></div></section>
+        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label>自动存档<select id="gameAutosavePeriod"><option value="day">每日</option><option value="xun">每旬</option><option value="month">每月</option><option value="quarter">每季度</option><option value="year">每年</option></select></label></div></div></section>
       </section>
       <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
       <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="observerDefaultSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="confirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
@@ -104,7 +104,7 @@
             <button data-layer="political">势力</button><button data-layer="military" data-tip="军事：部队兵力条与组织度；小队可逐格突击、阻击、袭扰">军事</button>
             <button data-layer="province">州域</button>
             <button data-layer="commandery">郡域</button>
-            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button><button data-layer="courtNominal" data-tip="汉庭名义控制区：奉汉、自立、化外；金边为朝廷所授州牧刺史之州">名义</button><button data-layer="courtActual" data-tip="汉庭实际控制区：按对挟天子者的服从分档">实控</button><button data-layer="mufu" data-tip="幕府辖区：各方面着色，悬停查看主公、州郡隶属">幕府</button>
+            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button><button data-layer="courtNominal" data-tip="汉庭名义控制区：奉汉、自立、化外；金边为朝廷所授州牧刺史之州">名义</button><button data-layer="courtActual" data-tip="汉庭实际控制区：按对挟天子者的服从分档">实控</button><button data-layer="mufu" data-tip="幕府辖区：各方面着色，悬停查看主公、州郡隶属">幕府</button><button data-layer="admin" data-tip="行政负荷：本方各郡按郡府与县廷的负荷着色，悬停查看太守、郡掾与县令">行政</button>
           </div>
           <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
         </div>
@@ -417,42 +417,46 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="uiTooltip" class="ui-tooltip" role="tooltip" hidden></div>
 
-  <script src="js/data/command-catalog.js?v=f16df3a4aa"></script>
+  <script src="js/data/command-catalog.js?v=7fd3188eef"></script>
   <script src="js/data/game-data.js?v=35f9cdf9c1"></script>
-  <script src="js/data/offline-data.generated.js?v=e8ff7dcd7a"></script>
-  <script src="js/core/data-loader.js?v=8aaf262dd8"></script>
+  <script src="js/data/offline-data.generated.js?v=8532a3bd72"></script>
+  <script src="js/core/data-loader.js?v=068acf8085"></script>
   <script src="js/core/game-clock.js?v=320d75a5c4"></script>
   <script src="js/core/simulation-clock.js?v=e1c04e8ed0"></script>
-  <script src="js/core/fiscal-system.js?v=1c426a37ae"></script>
-  <script src="js/core/rule-engine.js?v=ad675917e3"></script>
+  <script src="js/core/fiscal-system.js?v=0b84fa3bc7"></script>
+  <script src="js/core/rule-engine.js?v=a64fd34720"></script>
   <script src="js/core/engine/movement.js?v=a37a9f6a41"></script>
   <script src="js/core/engine/siege.js?v=50cf598238"></script>
   <script src="js/core/engine/diplomacy.js?v=4b3e8ca120"></script>
-  <script src="js/core/engine/events.js?v=a1314f67f8"></script>
+  <script src="js/core/engine/events.js?v=c642bec2a8"></script>
   <script src="js/core/engine/ai.js?v=6356cc5450"></script>
-  <script src="js/core/engine/administration.js?v=697aa3df09"></script>
+  <script src="js/core/engine/administration.js?v=d16665828b"></script>
+  <script src="js/core/engine/projects.js?v=18fe554b4b"></script>
+  <script src="js/core/engine/office-effects.js?v=4ac169a452"></script>
+  <script src="js/core/engine/army-offices.js?v=72cb050e4d"></script>
+  <script src="js/core/engine/offices.js?v=a67d5e46e3"></script>
   <script src="js/core/engine/court.js?v=2ca8b7aa09"></script>
   <script src="js/core/engine/court-edicts.js?v=059f10593e"></script>
   <script src="js/core/engine/court-crisis.js?v=025d297e6a"></script>
-  <script src="js/core/engine/battle.js?v=cbb78ac7ee"></script>
-  <script src="js/core/engine/skirmish.js?v=e3423ce506"></script>
-  <script src="js/core/engine/logistics.js?v=b428e6e73f"></script>
-  <script src="js/core/engine/population.js?v=0968933ab1"></script>
+  <script src="js/core/engine/battle.js?v=b1e661229f"></script>
+  <script src="js/core/engine/skirmish.js?v=db756783b9"></script>
+  <script src="js/core/engine/logistics.js?v=31b6ed936e"></script>
+  <script src="js/core/engine/population.js?v=c1e7f04e86"></script>
   <script src="js/core/engine/clans.js?v=4d28e62d1e"></script>
-  <script src="js/core/engine/family-dynamics.js?v=9a306b294d"></script>
-  <script src="js/core/engine/families.js?v=3656967279"></script>
+  <script src="js/core/engine/family-dynamics.js?v=6965e572b7"></script>
+  <script src="js/core/engine/families.js?v=9dfa6c0d40"></script>
   <script src="js/core/engine/family-migration.js?v=040f315993"></script>
-  <script src="js/core/engine/command.js?v=bc822539d7"></script>
-  <script src="js/core/ai-bridge.js?v=4d65084218"></script>
+  <script src="js/core/engine/command.js?v=0c09a9143c"></script>
+  <script src="js/core/ai-bridge.js?v=e49d49e48a"></script>
   <script src="js/core/mcp-adapter.js?v=07c6d784f2"></script>
-  <script src="js/core/ai-controller.js?v=d99b172770"></script>
+  <script src="js/core/ai-controller.js?v=0323068a31"></script>
   <script src="js/core/save-library.js?v=8cf1ae0e94"></script>
-  <script src="js/core/game-state.js?v=e1921ff3ca"></script>
+  <script src="js/core/game-state.js?v=c246c83d91"></script>
   <script src="js/core/map-grid.js?v=c7d347eb25"></script>
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=81629f44d5"></script>
   <script src="js/core/scenario-officer-store.js?v=00a1f6ae1a"></script>
-  <script src="js/ui/map-view.js?v=ae5731dc7a"></script>
+  <script src="js/ui/map-view.js?v=42085cdcc3"></script>
   <script src="js/ui/map-editor-reference.js?v=1abff8a11b"></script>
   <script src="js/ui/map-editor.js?v=8e6f205fec"></script>
   <script src="js/ui/officer-editor.js?v=fa617e6107"></script>
@@ -461,7 +465,8 @@
   <script src="js/ui/court-ui.js?v=1c3a7c34c3"></script>
   <script src="js/ui/population-ui.js?v=e600a66915"></script>
   <script src="js/ui/clan-ui.js?v=f9873d121a"></script>
-  <script src="js/ui/command-ui.js?v=49f7995c2a"></script>
+  <script src="js/ui/admin-chart-ui.js?v=fce52e9d02"></script>
+  <script src="js/ui/command-ui.js?v=27f5748ebc"></script>
   <script src="js/ui/command-planner.js?v=10966f161d"></script>
   <script src="js/ui/button-feedback.js?v=4866e2dd45"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
@@ -469,23 +474,23 @@
   <script src="js/ui/message-center.js?v=a56caaf5e6"></script>
   <script src="js/ui/app/registry.js?v=3067599fb4"></script>
   <script src="js/ui/app/start-screen.js?v=5ba045fa78"></script>
-  <script src="js/ui/app/command-book.js?v=ee2ffd8935"></script>
+  <script src="js/ui/app/command-book.js?v=7c3a130a7f"></script>
   <script src="js/ui/app/resources.js?v=cb1b0197a6"></script>
   <script src="js/ui/app/reports.js?v=7095f1dcd9"></script>
   <script src="js/ui/app/court-windows.js?v=efd969be6f"></script>
-  <script src="js/ui/app/force-command-window.js?v=3552bce67e"></script>
+  <script src="js/ui/app/force-command-window.js?v=169a423383"></script>
   <script src="js/ui/app/ledgers.js?v=4933bd5952"></script>
   <script src="js/ui/app/mod-tools.js?v=5b02fa3dce"></script>
-  <script src="js/ui/app/field-operations.js?v=6ec154a856"></script>
-  <script src="js/ui/app/planners.js?v=915b5520b8"></script>
+  <script src="js/ui/app/field-operations.js?v=2b0030493a"></script>
+  <script src="js/ui/app/planners.js?v=8466dfc267"></script>
   <script src="js/ui/app/commandery-detail.js?v=c53bbb9912"></script>
-  <script src="js/ui/app/city-detail.js?v=a6929c3828"></script>
-  <script src="js/ui/app/army-detail.js?v=9bd6c12bda"></script>
+  <script src="js/ui/app/city-detail.js?v=1ee8341803"></script>
+  <script src="js/ui/app/army-detail.js?v=6aeb7e82a6"></script>
   <script src="js/ui/app/battle-detail.js?v=30cfee4531"></script>
-  <script src="js/ui/app/officers.js?v=f583d64178"></script>
+  <script src="js/ui/app/officers.js?v=124d8b9e63"></script>
   <script src="js/ui/app/clan-window.js?v=2ba8bc7081"></script>
   <script src="js/ui/app/ai-panel.js?v=a5838d629e"></script>
-  <script src="js/ui/app.js?v=afea5971e4"></script>
+  <script src="js/ui/app.js?v=04ae119be8"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
   <script src="js/ui/os-window-manager.js?v=c6af27fe2e"></script>
 </body>
