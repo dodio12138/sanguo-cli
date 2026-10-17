@@ -6,7 +6,8 @@ await import("../js/data/offline-data.generated.js");
 await import("../js/core/game-clock.js");await import("../js/core/fiscal-system.js");await import("../js/core/rule-engine.js");
 await import("../js/core/game-state.js");
 
-const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),e=state.engine,cities=state.data.cities;
+// 本测试逐项核对负荷与任免，关闭开局补任。
+const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao",openingStaff:false}),e=state.engine,cities=state.data.cities;
 
 // 负荷曲线：80% 以内满效，100% 为 0.92，150% 约 0.67；最低 0.38。
 assert.equal(e.loadEfficiency(.5),1);assert.equal(e.loadEfficiency(.8),1);assert(Math.abs(e.loadEfficiency(1)-.92)<1e-9);assert(Math.abs(e.loadEfficiency(.9)-.96)<1e-9);
