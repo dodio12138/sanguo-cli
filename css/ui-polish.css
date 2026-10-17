@@ -648,3 +648,46 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .planner-section { grid-column: 1 / -1; margin: 6px 0 0; padding-bottom: 3px; border-bottom: 1px solid var(--line-dim); color: var(--amber); font-size: 11px; letter-spacing: .12em; }
 .office-slot.is-busy small { color: #d8b55a; }
 .office-slot.is-overloaded small { color: #d9785f; }
+
+/* 幕府图·行政（内政改制 P3）：职位卡按负荷着色——≤80% 常色、80%～100% 黄、>100% 红；选定政务时不承担者变淡。 */
+.admin-chart { display: grid; gap: 8px; min-width: 0; }
+.admin-toolbar { display: grid; gap: 6px; }
+.admin-switch { display: flex; flex-wrap: wrap; gap: 4px; }
+.admin-switch button { border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 3px 9px; font-size: 11px; cursor: pointer; }
+.admin-switch button.active { color: var(--amber); border-color: var(--amber); background: #87945c16; }
+.admin-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); gap: 10px; min-height: 0; }
+.admin-tree { display: grid; gap: 8px; align-content: start; max-height: min(64vh, 680px); overflow: auto; padding-right: 4px; }
+.admin-side { border: 1px solid var(--line-dim); padding: 10px; max-height: min(64vh, 680px); overflow: auto; font-size: 11px; }
+.admin-side h4 { margin: 0 0 6px; color: var(--amber); font-size: 13px; }
+.admin-side h5, .admin-level > h5 { margin: 8px 0 4px; color: var(--muted); font-size: 10px; letter-spacing: .15em; }
+.admin-level { border-left: 2px solid var(--line-dim); padding-left: 8px; }
+.admin-province { border-left-color: #87945c; }
+.admin-posts { display: flex; flex-wrap: wrap; gap: 4px; }
+.admin-post { display: grid; gap: 1px; min-width: 92px; padding: 4px 7px; border: 1px solid var(--line-dim); background: #111a11; color: var(--text); text-align: left; cursor: pointer; }
+.admin-post small { color: var(--muted); font-size: 9px; }
+.admin-post b { font-size: 12px; font-weight: 600; }
+.admin-post em { font-style: normal; font-size: 10px; color: #9fb47a; }
+.admin-post.is-busy em { color: #d8b55a; }
+.admin-post.is-over { border-color: #8a4a3a; }
+.admin-post.is-over em { color: #d9785f; }
+.admin-post.is-vacant { opacity: .6; border-style: dashed; }
+.admin-post.is-vacant em { color: var(--muted); }
+.admin-post.is-dim { opacity: .28; }
+.admin-post.is-picked { outline: 1px solid var(--amber); }
+.admin-commandery { margin: 6px 0; padding: 6px; border: 1px solid var(--line-dim); background: #0d140d; }
+.admin-commandery header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+.admin-commandery header small { color: var(--muted); font-size: 10px; }
+.admin-commandery header button { margin-left: auto; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); font-size: 10px; padding: 2px 6px; cursor: pointer; }
+.admin-warn { color: #d9785f; font-style: normal; }
+.admin-counties { display: grid; gap: 4px; margin-top: 6px; }
+.admin-county { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 6px; align-items: center; }
+.admin-county > span { font-size: 11px; color: #ddd5aa; }
+.admin-county > span small { display: block; color: var(--muted); font-size: 9px; }
+.admin-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+.admin-list li { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted var(--line-dim); padding: 2px 0; }
+.admin-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.admin-bars li { display: grid; grid-template-columns: 84px minmax(0, 1fr) 36px; gap: 6px; align-items: center; }
+.admin-bars i { display: block; height: 6px; background: #87945c; }
+.admin-bars b { text-align: right; font-weight: 500; }
+.admin-side > button { margin-top: 8px; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 3px 8px; cursor: pointer; }
+@media (max-width: 760px) { .admin-layout { grid-template-columns: minmax(0, 1fr); } }

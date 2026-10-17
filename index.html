@@ -7,7 +7,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=a3ce7e78d8">
   <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
-  <link rel="stylesheet" href="css/ui-polish.css?v=32f0624680">
+  <link rel="stylesheet" href="css/ui-polish.css?v=7f58b0e89a">
   <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=5094066e1c">
@@ -103,7 +103,7 @@
             <button data-layer="political">势力</button><button data-layer="military" data-tip="军事：部队兵力条与组织度；小队可逐格突击、阻击、袭扰">军事</button>
             <button data-layer="province">州域</button>
             <button data-layer="commandery">郡域</button>
-            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button><button data-layer="courtNominal" data-tip="汉庭名义控制区：奉汉、自立、化外；金边为朝廷所授州牧刺史之州">名义</button><button data-layer="courtActual" data-tip="汉庭实际控制区：按对挟天子者的服从分档">实控</button><button data-layer="mufu" data-tip="幕府辖区：各方面着色，悬停查看主公、州郡隶属">幕府</button>
+            <button data-layer="supply">补给</button><button data-layer="intel">情报</button><button data-layer="relation">关系</button><button data-layer="food">粮食</button><button data-layer="officers">武将</button><button data-layer="courtNominal" data-tip="汉庭名义控制区：奉汉、自立、化外；金边为朝廷所授州牧刺史之州">名义</button><button data-layer="courtActual" data-tip="汉庭实际控制区：按对挟天子者的服从分档">实控</button><button data-layer="mufu" data-tip="幕府辖区：各方面着色，悬停查看主公、州郡隶属">幕府</button><button data-layer="admin" data-tip="行政负荷：本方各郡按郡府与县廷的负荷着色，悬停查看太守、郡掾与县令">行政</button>
           </div>
           <div class="map-actions"><button id="zoomOut" aria-label="缩小" data-tip="缩小战略地图">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="放大" data-tip="放大战略地图">＋</button><button id="centerMap" data-tip="恢复地图居中与默认缩放">归中</button></div>
         </div>
@@ -430,7 +430,7 @@
   <script src="js/core/engine/events.js?v=a1314f67f8"></script>
   <script src="js/core/engine/ai.js?v=6356cc5450"></script>
   <script src="js/core/engine/administration.js?v=d8d6f0cc2a"></script>
-  <script src="js/core/engine/offices.js?v=78fb5d97dd"></script>
+  <script src="js/core/engine/offices.js?v=232422ae47"></script>
   <script src="js/core/engine/court.js?v=2ca8b7aa09"></script>
   <script src="js/core/engine/court-edicts.js?v=059f10593e"></script>
   <script src="js/core/engine/court-crisis.js?v=025d297e6a"></script>
@@ -452,7 +452,7 @@
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=81629f44d5"></script>
   <script src="js/core/scenario-officer-store.js?v=00a1f6ae1a"></script>
-  <script src="js/ui/map-view.js?v=ae5731dc7a"></script>
+  <script src="js/ui/map-view.js?v=71acb5e45e"></script>
   <script src="js/ui/map-editor-reference.js?v=1abff8a11b"></script>
   <script src="js/ui/map-editor.js?v=8e6f205fec"></script>
   <script src="js/ui/officer-editor.js?v=fa617e6107"></script>
@@ -461,7 +461,8 @@
   <script src="js/ui/court-ui.js?v=1c3a7c34c3"></script>
   <script src="js/ui/population-ui.js?v=e600a66915"></script>
   <script src="js/ui/clan-ui.js?v=f9873d121a"></script>
-  <script src="js/ui/command-ui.js?v=d3669ec540"></script>
+  <script src="js/ui/admin-chart-ui.js?v=0bd0555749"></script>
+  <script src="js/ui/command-ui.js?v=c1fd096348"></script>
   <script src="js/ui/command-planner.js?v=10966f161d"></script>
   <script src="js/ui/button-feedback.js?v=4866e2dd45"></script>
   <script src="js/ui/keyboard-shortcuts.js?v=b301a5a012"></script>
@@ -473,7 +474,7 @@
   <script src="js/ui/app/resources.js?v=cb1b0197a6"></script>
   <script src="js/ui/app/reports.js?v=7095f1dcd9"></script>
   <script src="js/ui/app/court-windows.js?v=efd969be6f"></script>
-  <script src="js/ui/app/force-command-window.js?v=29ba880f4d"></script>
+  <script src="js/ui/app/force-command-window.js?v=e3a4c39ea8"></script>
   <script src="js/ui/app/ledgers.js?v=4933bd5952"></script>
   <script src="js/ui/app/mod-tools.js?v=5b02fa3dce"></script>
   <script src="js/ui/app/field-operations.js?v=6ec154a856"></script>
@@ -485,7 +486,7 @@
   <script src="js/ui/app/officers.js?v=124d8b9e63"></script>
   <script src="js/ui/app/clan-window.js?v=2ba8bc7081"></script>
   <script src="js/ui/app/ai-panel.js?v=a5838d629e"></script>
-  <script src="js/ui/app.js?v=afea5971e4"></script>
+  <script src="js/ui/app.js?v=860b9e23db"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
   <script src="js/ui/os-window-manager.js?v=c6af27fe2e"></script>
 </body>

@@ -69,4 +69,13 @@ assert.equal(GameState.SAVE_VERSION,19);
 // 负荷随职位叠加：一人兼郡府多职后超过 100%，效率随之下降。
 const busy=roster.find(o=>!e.officerLoad(o.id)&&o.id!==pick.id&&o.id!==staffer.id),seatOffice=seat;busy.city=seatOffice.id;e.assignCityAdministration(seatOffice.id,{agriculture:busy.id});const one=e.officerLoad(busy.id).rate;
 e.assignCityAdministration(seatOffice.id,{agriculture:busy.id,commerce:busy.id,order:busy.id,population:busy.id});const four=e.officerLoad(busy.id);assert(four.rate>one*3.5&&four.efficiency<e.loadEfficiency(one),"兼职越多负荷越高、效率越低");
-console.log(`行政容量通过：曲线 80%/100%/150% · 郡府/行郡事/寄领 · 默认 45 衔接 · 幕府六席 · 州府属吏 · 旧官署迁移 · 兼职负荷 ${Math.round(one*100)}%→${Math.round(four.rate*100)}%`);
+// 幕府图（P3）：组织树、政务来源与阻碍、界面切换。
+const chart=e.administrationChart("cao");assert.equal(chart.court.length,6);assert(chart.commanderies.length>=10);assert(chart.provinces.some(p=>p.postId===zhou.id));
+assert(chart.commanderies.every(c=>c.counties.length&&c.head&&c.clerks.length===8),"每个郡府列出太守、主簿与七掾及其县廷");
+const sources=chart.affairSources,granaryTotal=Object.values(sources.granary.departments).reduce((a,b)=>a+b,0);assert(Math.abs(granaryTotal-sources.granary.total)<1e-6);assert(sources.granary.departments["县廷县令"]>0);
+for(const id of ["talent","registry","agriculture","finance","granary","works","order","conscription","training","intelligence","operations","diplomacy"])assert(sources[id],`政务 ${id} 有来源统计`);
+assert(sources.granary.blockers.some(x=>x.includes("仓曹掾")),"郡府缺仓曹掾列为阻碍");
+const busyPost=chart.commanderies.flatMap(c=>c.clerks).find(x=>x.officerId===busy.id);assert(busyPost&&busyPost.rate>1&&Object.keys(busyPost.affairs).length===1,"郡掾负荷只计入本类政务");
+await import("../js/ui/admin-chart-ui.js");const html=AdminChartUI.render(state);for(const text of ["负荷率","余量","质量","粮储调拨","幕府","行政总览"])assert(html.includes(text),`幕府图缺少 ${text}`);
+AdminChartUI.affair="granary";const filtered=AdminChartUI.render(state);assert(filtered.includes("容量来源")&&filtered.includes("is-dim"),"按政务筛选高亮与来源侧栏");AdminChartUI.affair="";AdminChartUI.picked=`court:cao:lord`;assert(AdminChartUI.render(state).includes("返回总览"));AdminChartUI.picked=null;
+console.log(`行政容量通过：曲线 80%/100%/150% · 郡府/行郡事/寄领 · 默认 45 衔接 · 幕府六席 · 州府属吏 · 旧官署迁移 · 幕府图 · 兼职负荷 ${Math.round(one*100)}%→${Math.round(four.rate*100)}%`);

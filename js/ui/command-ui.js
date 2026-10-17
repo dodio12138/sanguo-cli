@@ -7,8 +7,8 @@ window.CommandUI=class CommandUI{
   static num(value){return Math.round(value||0).toLocaleString()}
   static officerLoadLabel(state,o){const load=state.engine.officerLoad(o.id);return `${CommandUI.officerLabel(o)}${load?` · 负荷${Math.round(load.rate*100)}%`:""}`}
   static select(field,options,value,placeholder="—"){const e=CommandUI.esc;return `<select data-cmd-field="${field}"><option value="">${e(placeholder)}</option>${options.map(([id,label])=>`<option value="${e(id)}" ${String(id)===String(value)?"selected":""}>${e(label)}</option>`).join("")}</select>`}
-  static TABS=[["chart","官制图"],["posts","方面"],["reports","汇报"]];
-  static render(state,tab="chart"){const e=CommandUI.esc;state.engine.commandOf(state,state.playerForceId);const body=tab==="posts"?CommandUI.posts(state):tab==="reports"?CommandUI.reports(state):CommandUI.chart(state);
+  static TABS=[["chart","官制图"],["admin","行政"],["posts","方面"],["reports","汇报"]];
+  static render(state,tab="chart"){const e=CommandUI.esc;state.engine.commandOf(state,state.playerForceId);const body=tab==="admin"?AdminChartUI.render(state):tab==="posts"?CommandUI.posts(state):tab==="reports"?CommandUI.reports(state):CommandUI.chart(state);
     return `<nav class="ui-tabs court-tabs" role="tablist">${CommandUI.TABS.map(([id,name])=>`<button type="button" role="tab" data-cmd-tab="${id}" class="${tab===id?"active":""}" aria-selected="${tab===id}">${name}</button>`).join("")}</nav>${body}`}
   static officerLabel(o){return o?`${o.name}（统${o.command} 智${o.intelligence} 政${o.politics} · 忠${o.loyalty??"—"}）`:"空缺"}
   static ownOfficers(state){return state.data.officers.filter(o=>o.force===state.playerForceId&&o.status==="serving")}
