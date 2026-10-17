@@ -27,7 +27,7 @@
         <nav class="campaign-steps" aria-label="开局步骤"><button data-campaign-step="1">一 · 选择剧本</button><button data-campaign-step="2" disabled>二 · 选择势力</button><button data-campaign-step="3" disabled>三 · 开局设置</button></nav>
         <div id="campaignSelect" class="campaign-select"><section id="startScenarioStep" class="campaign-pane"><div class="campaign-heading"><h2 tabindex="-1">选择剧本</h2><p id="scenarioStepHint">选择一段历史，进入天下局势。</p></div><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
         <section id="startForceStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">选择势力</h2><p id="campaignScenarioName"></p></div><div class="campaign-force-layout"><div id="campaignMinimap" class="campaign-minimap"><canvas id="campaignMinimapCanvas" role="img" aria-label="势力范围小地图"></canvas><div id="campaignMinimapTip" class="campaign-minimap-tip" hidden></div></div><div id="forceChoices" class="force-choices"></div><aside class="campaign-brief" aria-label="势力介绍"><h3 id="startBriefTitle"></h3><p id="startHistoricalBrief" class="start-historical-brief"></p><h4>阶段目标</h4><p id="startForceObjective"></p></aside></div></section></div>
-        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label></div></div></section>
+        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label>自动存档<select id="gameAutosavePeriod"><option value="day">每日</option><option value="xun">每旬</option><option value="month">每月</option><option value="quarter">每季度</option><option value="year">每年</option></select></label></div></div></section>
       </section>
       <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
       <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="observerDefaultSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="confirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
@@ -450,7 +450,7 @@
   <script src="js/core/mcp-adapter.js?v=07c6d784f2"></script>
   <script src="js/core/ai-controller.js?v=0323068a31"></script>
   <script src="js/core/save-library.js?v=8cf1ae0e94"></script>
-  <script src="js/core/game-state.js?v=ad91e92641"></script>
+  <script src="js/core/game-state.js?v=c246c83d91"></script>
   <script src="js/core/map-grid.js?v=c7d347eb25"></script>
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=81629f44d5"></script>
@@ -489,7 +489,7 @@
   <script src="js/ui/app/officers.js?v=124d8b9e63"></script>
   <script src="js/ui/app/clan-window.js?v=2ba8bc7081"></script>
   <script src="js/ui/app/ai-panel.js?v=a5838d629e"></script>
-  <script src="js/ui/app.js?v=860b9e23db"></script>
+  <script src="js/ui/app.js?v=b8bc89c730"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
   <script src="js/ui/os-window-manager.js?v=c6af27fe2e"></script>
 </body>
