@@ -707,3 +707,22 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .admin-blockers { margin: 0; padding-left: 16px; color: #d8b55a; font-size: 10px; }
 @media (max-width: 760px) { .admin-project-fields { grid-template-columns: minmax(0, 1fr); } }
 .admin-project.is-emergency { border-left: 3px solid #a8433a; }
+
+/* 军职任命（出征军职）：副将、部将可增删；负荷 80% 以上标黄、100% 以上标红。 */
+.army-office-list { display: grid; gap: 6px; border: 1px solid var(--line-dim); padding: 6px 8px; }
+.army-office-list legend { color: var(--muted); font-size: 11px; }
+.army-office-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: end; }
+.army-office-row > label:first-child { flex: 1 1 220px; }
+.army-office-num { width: 72px; }
+.army-office-row button, .army-office-list > button { border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 3px 8px; cursor: pointer; }
+#plannerForm label.is-busy select, .planner-summary.is-busy { border-color: #b08a3c; color: #d8b55a; }
+#plannerForm label.is-over select, .planner-summary.is-over { border-color: #a8433a; color: #d9785f; }
+.office-slot .office-effect { color: #9fb47a; font-size: 10px; line-height: 1.4; }
+.office-slot.is-busy > small:first-of-type { color: #d8b55a; }
+.office-slot.is-overloaded { border-color: #8a4a3a; }
+.office-slot.is-overloaded > small:first-of-type { color: #d9785f; }
+.admin-county { grid-template-columns: 120px minmax(0, 1fr); }
+.admin-subcounties { color: var(--muted); font-size: 9px; line-height: 1.4; }
+.affair-row { display: grid; gap: 2px; padding: 4px 0; border-bottom: 1px dotted var(--line-dim); }
+.affair-row span { font-size: 11px; color: #ddd5aa; }
+.affair-row small { font-size: 10px; color: var(--muted); line-height: 1.5; }

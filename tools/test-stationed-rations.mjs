@@ -11,6 +11,8 @@ const data=await loader.loadScenario('200_guandu',{useSavedMap:false}),g=new Gam
 const army=g.data.armies.find(a=>a.force===g.playerForceId),city=g.data.cities.find(c=>c.id===army.city);
 Object.assign(army,{soldiers:10000,wounded:0,prisoners:{},stores:{food:0},stance:'驻扎'});
 delete army.route;delete army.siegeTarget;delete army.retreat;army.raiding=false;
+// 口粮标定不含军职修正：不设主将与军需官（无人兼领军需）。
+Object.assign(army,{commanderOfficerId:null,commander:'普通将领',quartermasterOfficerId:null});e.invalidateDuties();
 assert.equal(FiscalSystem.armyRationProfile(g,army).mode,'stationed');
 assert.equal(e.dailyRation(g,army),330);assert.equal(e.dailyRation(null,army),330);
 const target=FiscalSystem.armyFoodTarget(g,army),days=e.armyCarryDays(army);assert.equal(target,660*days,'驻城出征备粮按完整野战日粮');
@@ -31,5 +33,5 @@ const mixed={...army,soldiers:1000,wounded:100,prisoners:{yuan:200}};assert.equa
 assert.equal(FiscalSystem.armyDailyNeed({...g,date:{year:200,month:1,xun:0}},army),3300,'旧旬口径仅乘十一次');
 const html=FiscalUI.armyMarkup(g,army);assert(html.includes('驻屯供养'));assert(html.includes('出征日粮'));assert(html.includes('660 石 / 日'));
 const save=g.serialize(),restored=new GameState(structuredClone(data));restored.applySave(restored.migrateSave(save));
-const loaded=restored.data.armies.find(a=>a.id===army.id);assert.equal(loaded.stores.food,army.stores.food,'读档不增发或折算库存');assert.equal(restored.engine.dailyRation(restored,loaded),330);
+const loaded=restored.data.armies.find(a=>a.id===army.id);assert.equal(loaded.stores.food,army.stores.food,'读档不增发或折算库存');assert.equal(restored.engine.dailyRation(restored,loaded),Math.ceil(330*restored.engine.quartermasterFactor(loaded,'ration')-1e-9),'读档后口粮按同一军职修正');
 console.log('驻屯口粮通过：万人三十日9900石 / 出征660石每日 / 野外围城无折减 / 备粮天数不缩水 / 新旧时基 / 实耗展示 / 存档库存保留');

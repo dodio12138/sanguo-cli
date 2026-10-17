@@ -55,7 +55,7 @@
         "province_governor": {"base": 20, "per_commandery": 6, "per_army": 4, "max_armies": 10},
         "province_clerk": {"base": 16, "per_commandery": 3},
         "court": {"base": 20, "per_node": 0.2, "per_post": 2, "per_uncovered_commandery": 2},
-        "army": {"commander": 30, "deputy": 15, "staff": 15},
+        "army": {"commander_base": 20, "per_1k_soldiers": 2, "campaign": 10, "staff_base": 8, "quartermaster_base": 6, "marshal_base": 6, "lieutenant_base": 4},
         "temporary": {"besieged": 20, "occupied": 15, "inspection": 8, "lord_away": 15, "farming_army": 3, "disaster": 10, "prisoners": 10, "blocked_shipment": 4}
       },
       "quality": {"corruption_at_full": 2, "corruption_per_overload": 0.2}

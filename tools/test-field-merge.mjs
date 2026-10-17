@@ -14,7 +14,9 @@ function fresh(){
  const template=g.data.cities[0];g.data.cities=[{...structuredClone(template),id:'home',name:'后方',x:1,y:2,force:'cao',localFood:90000},{...structuredClone(template),id:'enemy',name:'敌城',x:12,y:2,force:'yuan',localFood:90000}];
  g.data.rules.city_graph={home:['enemy'],enemy:['home']};g.data.routeNetwork={li_per_cell:48,kinds:{road:{name:'官道',speed_li:48,mode:'land',capacity:1,frontage:4}},routes:[{a:'home',b:'enemy',kind:'road'}]};
  g.data.armies=[];g.diplomacy.wars=['yuan'];g.diplomacy.worldWars=[];g.turn=10;
- const make=(id,soldiers,force='cao',extra={})=>{const army={id,name:id,force,city:'home',commander:'普通将领',soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:80,training:60,supply:100,cohesion:100,veterans:Math.floor(soldiers*.4),stores:{gold:100,food:5000,silk:100},stance:'驻扎',...extra};g.hydrateArmy(army);g.data.armies.push(army);return army};
+ const make=(id,soldiers,force='cao',extra={})=>{const army={id,name:id,force,city:'home',commander:'普通将领',soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:80,training:60,supply:100,cohesion:100,veterans:Math.floor(soldiers*.4),stores:{gold:100,food:5000,silk:100},stance:'驻扎',...extra};g.hydrateArmy(army);g.data.armies.push(army);
+  // 分遣小队须由随军人物带队：每支军团配两名不领兵的部将。
+  army.lieutenants=[1,2].map(n=>{const officer={id:`lt_${id}_${n}`,name:`${id}部将${n}`,force,city:'home',status:'serving',command:60,war:60,intelligence:50,politics:40,charm:40,loyalty:80};g.hydrateOfficer(officer);g.data.officers.push(officer);return {officerId:officer.id,units:{infantry:0,cavalry:0,archers:0}}});return army};
  const field=(army,mission='block',x=5,y=3)=>{army.fieldPosition={x,y};army.fieldOrder={mission,path:[],target:{x,y},credit:0,originCityId:'home'};army.stance=e.fieldMissionName(mission);return army};
  return {g,e,make,field};
 }
@@ -24,7 +26,7 @@ function fresh(){
  const {g,e,make}=fresh(),parent=make('本军',8000),child=make('别部',1000);
  child.force='cao';child.detachedFrom=parent.id;child.wounded=123;child.stragglers=45;child.prisoners={yuan:234};const officer=g.data.officers.find(o=>o.force==='cao'&&o.status==='serving');officer.city='home';child.commanderOfficerId=officer.id;child.commander=officer.name;
  const stock=parent.stores.food+child.stores.food,vets=parent.veterans+child.veterans;
- assert(e.mergeArmies(g,child,parent,[]).ok);assert.equal(parent.soldiers,9000);assert.equal(parent.units.infantry,9000);assert.equal(parent.stores.food,stock);assert.equal(parent.veterans,vets);assert.equal(parent.wounded,123);assert.equal(parent.stragglers,45);assert.equal(parent.prisoners.yuan,234);assert(parent.deputyOfficerIds.includes(officer.id));assert(!g.data.armies.includes(child));assert(!parent.detachedFrom);
+ assert(e.mergeArmies(g,child,parent,[]).ok);assert.equal(parent.soldiers,9000);assert.equal(parent.units.infantry,9000);assert.equal(parent.stores.food,stock);assert.equal(parent.veterans,vets);assert.equal(parent.wounded,123);assert.equal(parent.stragglers,45);assert.equal(parent.prisoners.yuan,234);assert(parent.lieutenants.some(row=>row.officerId===officer.id),"别部主将并回后转为部将");assert(!g.data.armies.includes(child));assert(!parent.detachedFrom);
  const far=make('远军',1000);far.fieldPosition={x:7,y:7};const before=JSON.stringify(g.data.armies);assert(!e.mergeArmies(g,far,parent,[]).ok);assert.equal(JSON.stringify(g.data.armies),before);far.fieldPosition={x:1,y:2};far.engagementId='test';assert(!e.mergeArmies(g,far,parent,[]).ok);
 }
 // 下令时指定返军合并：期限从到位后计算，实际逐格返回后才并入。

@@ -14,7 +14,9 @@ function fresh(){
  const template=g.data.cities[0];g.data.cities=[{...structuredClone(template),id:'home',name:'后方',x:1,y:2,force:'cao',localFood:90000},{...structuredClone(template),id:'enemy',name:'敌城',x:12,y:2,force:'yuan',localFood:90000}];
  g.data.rules.city_graph={home:['enemy'],enemy:['home']};g.data.routeNetwork={li_per_cell:48,kinds:{road:{name:'官道',speed_li:48,mode:'land',capacity:1,frontage:4}},routes:[{a:'home',b:'enemy',kind:'road'}]};
  g.data.armies=[];g.diplomacy.wars=['yuan'];g.diplomacy.worldWars=[];g.turn=10;
- const make=(id,soldiers,force='cao',extra={})=>{const army={id,name:id,force,city:'home',commander:'普通将领',soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:80,training:60,supply:100,cohesion:100,veterans:Math.floor(soldiers*.4),stores:{gold:100,food:5000,silk:100},stance:'驻扎',...extra};g.hydrateArmy(army);g.data.armies.push(army);return army};
+ const make=(id,soldiers,force='cao',extra={})=>{const army={id,name:id,force,city:'home',commander:'普通将领',soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:80,training:60,supply:100,cohesion:100,veterans:Math.floor(soldiers*.4),stores:{gold:100,food:5000,silk:100},stance:'驻扎',...extra};g.hydrateArmy(army);g.data.armies.push(army);
+  // 分遣小队须由随军人物带队：每支军团配三名不领兵的部将。
+  army.lieutenants=[1,2,3].map(n=>{const officer={id:`lt_${id}_${n}`,name:`${id}部将${n}`,force,city:'home',status:'serving',command:60,war:60,intelligence:50,politics:40,charm:40,loyalty:80};g.hydrateOfficer(officer);g.data.officers.push(officer);return {officerId:officer.id,units:{infantry:0,cavalry:0,archers:0}}});return army};
  const field=(army,mission='block',x=5,y=3)=>{army.fieldPosition={x,y};army.fieldOrder={mission,path:[],target:{x,y},credit:0,originCityId:'home'};army.stance=e.fieldMissionName(mission);return army};
  return {g,e,make,field};
 }
