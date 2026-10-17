@@ -45,7 +45,7 @@ window.FiscalSystem=class FiscalSystem {
   static account(state,forceId=state.playerForceId){return this.initialize(state).forces[forceId]}
   static governance(state,city){
     // 官员相关部分随行政负荷缓存（每旬或任免时重建），每日只算民心、贪腐底数等实时项。
-    const engine=state.engine,cache=engine.administrativeLoads?.().governance,cached=cache?.get(city.id),officials=cached||(()=>{const profile=role=>engine.officialProfile(city,role),affair=id=>engine.affairScore?engine.affairScore(city,id):profile({commerce:"commerce",agriculture:"agriculture",registry:"population"}[id]),magistrate=engine.magistrateRole?profile(engine.magistrateRole(city)):null;return {governor:profile("governor"),county:profile("commanderyGovernor"),finance:affair("commerce"),agriculture:affair("agriculture"),households:affair("registry"),overload:magistrate?.officer&&!magistrate.familyId?engine.officerLoad?.(magistrate.officer.id)?.corruption||0:engine.loadCorruption?.(engine.administrativeLoads?.().nodes.get(city.id)?.defaultRate||0)||0,secretary:engine.secretaryCorruption?.(city)||0}})();if(cache&&!cached)cache.set(city.id,officials);const {governor,county,finance,agriculture,households,overload}=officials,support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
+    const engine=state.engine,build=()=>{const profile=role=>engine.officialProfile(city,role),affair=id=>engine.affairScore?engine.affairScore(city,id):profile({commerce:"commerce",agriculture:"agriculture",registry:"population"}[id]),magistrate=engine.magistrateRole?profile(engine.magistrateRole(city)):null;return {governor:profile("governor"),county:profile("commanderyGovernor"),finance:affair("commerce"),agriculture:affair("agriculture"),households:affair("registry"),overload:magistrate?.officer&&!magistrate.familyId?engine.officerLoad?.(magistrate.officer.id)?.corruption||0:engine.loadCorruption?.(engine.administrativeLoads?.().nodes.get(city.id)?.defaultRate||0)||0,secretary:engine.secretaryCorruption?.(city)||0}},officials=engine.cityCached?engine.cityCached("governance",city.id,city.id,build):build();const {governor,county,finance,agriculture,households,overload}=officials,support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
     const ability=(governor.score+county.score+finance.score+households.score)/4;
     // 手动征收的"注意力"并入县令的行政负荷（offices.js）：县令过劳时其分数下降，过 80% 后贪腐另增（质量下降）。
     const A=engine.abilityConfig?.().admin||{fiscal_efficiency:.35,corruption_scale:1.5},pivot=engine.abilityConfig?.().pivot??60;
@@ -223,7 +223,10 @@ window.FiscalSystem=class FiscalSystem {
     if(city.force===state.playerForceId)events.push({phase:"财政",siteId:city.id,text:`${city.name}${{land:"田租",commercial:"商业税",food:"粮食",silk:"布帛"}[type]}征收 ${gross}${this.units[resource]}：行政损耗 ${inefficiencyLoss}、贪污 ${corruptionLoss}、地方耗用 ${localUse}、留用 ${retained}、${shipment?"上缴在途":batched?"零星待解":"道路不通留存"} ${remittable}；征收经费 ${cost}贯`});
     return {ok:true,...fiscal.lastCollection[type]};
   }
-  static settle(state,events){
+  // 逐日结算时（rolling），田租、商税、布帛各城按固定日子在月内征收（按城分 28 组，每月一次），不再全部挤在月末；
+  // 粮食随秋收在月末入账，仍在月末征收。直接调用（测试）时仍在月末统一征收。
+  static collectDay(city){const map=this.collectDays??=new Map;let d=map.get(city.id);if(d===undefined){let h=11;for(const ch of String(city.id))h=(h*37+ch.charCodeAt(0))|0;d=1+Math.abs(h)%28;map.set(city.id,d)}return d}
+  static settle(state,events,{rolling=false}={}){
     this.initialize(state);for(const army of state.data.armies)if(army.farming&&(!this.canFarmArmy(state,army)||army.city!==army.farming.cityId))delete army.farming;state.engine.syncCountyControl();state.engine.initializeAdministration();this.advanceShipments(state,events);this.advanceProjects(state,events);
     const scale=GameClock.factor(state),month=this.monthIndex(state.date),monthEnd=GameClock.isMonthEnd(state),autumn=state.date.month===this.grainRules(state).harvest_month&&monthEnd;
     for(const force of state.data.forces.filter(force=>force.id!=="neutral"&&!force.eliminated)){
@@ -252,7 +255,7 @@ window.FiscalSystem=class FiscalSystem {
         fiscal.foodExpenseRemainder=(fiscal.foodExpenseRemainder||0)+(besieged?0:(g.bureaucracy*.35+this.garrisonDailyFood(state,city.garrison)*(GameClock.isDaily(state)?1:10))*scale);const foodExpense=Math.floor(fiscal.foodExpenseRemainder),foodTaken=Math.min(city.localFood||0,foodExpense);fiscal.foodExpenseRemainder-=foodExpense;
         city.localGold=Math.max(0,(city.localGold||0)-expense);city.localFood=Math.max(0,(city.localFood||0)-foodTaken);fiscal.localConsumption={gold:expense,food:foodTaken,foodNeed:foodExpense};upkeep+=foodExpense;
         if(!besieged&&foodTaken<foodExpense){city.order=Math.max(0,(city.order||50)-1);city.publicSupport=Math.max(0,city.publicSupport-1)}
-        if(monthEnd)for(const type of ["land","commercial","food","silk"]){const period=account.periods[type],last=fiscal.lastCollected[type];const due=Number.isFinite(last)?month-last>=period:type==="food"?autumn:(month+1)%period===0;if(due)this.collect(state,city,type,events)}
+        const spreadToday=rolling&&GameClock.isDaily(state)?state.date.day===this.collectDay(city):monthEnd;for(const type of ["land","commercial","food","silk"]){if(!(type==="food"?monthEnd:spreadToday))continue;const period=account.periods[type],last=fiscal.lastCollected[type];const due=Number.isFinite(last)?month-last>=period:type==="food"?autumn:(month+1)%period===0;if(due)this.collect(state,city,type,events)}
         city.publicSupport=this.clamp(city.publicSupport+(account.landRate+account.commercialRate<=20?.06:-.03)*scale,0,100);
         // 人口增减由人口系统按月结算（出生、死亡、迁徙），这里只分摊县的收入
         for(const county of counties){const share=base(county)*comply/Math.max(1,rural);county.lastIncome={gold:Math.floor((land+commercial)*share),food:Math.floor(cityHarvest*share)}}

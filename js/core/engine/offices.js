@@ -125,7 +125,13 @@ Object.assign(window.RuleEngine.prototype,{
   nodeDefaultEfficiency(city){return this.administrativeLoads().nodes.get(city?.id)?.defaultEfficiency??1},
   lordAwayFromCapital(forceId){this.administrativeLoads();return Boolean(this._lordAway?.get(forceId))},
   // 合成一项政务的分数：Σ环节权重×(该环节主责人能力×负荷效率)。空缺按及格 60 分计。
-  affairScore(city,affairId){const cache=this.administrativeLoads().scores??=new Map,key=`${city.id}|${affairId}`;if(cache.has(key))return cache.get(key);const result=this.computeAffairScore(city,affairId);cache.set(key,result);return result},
+  // 各城事务分数与财政用官员分数按城分十组滚动到期：每组在旬内不同日子重算，不再每旬全部城同一天重算；任免等显式作废仍全部清空。
+  cityBucket(id){const map=this._cityBuckets??=new Map;let b=map.get(id);if(b===undefined){let h=0;for(const ch of String(id))h=(h*31+ch.charCodeAt(0))|0;b=Math.abs(h)%10;map.set(id,b)}return b},
+  cityEpoch(id){return Math.floor(((this.popState?.turn??0)+this.cityBucket(id))/10)},
+  cityCached(kind,cityId,key,compute){const map=(this._scoreCache??={scores:new Map,governance:new Map})[kind],hit=map.get(key),epoch=this.cityEpoch(cityId);if(hit&&hit.epoch===epoch)return hit.value;const value=compute();map.set(key,{epoch,value});return value},
+  // 只作废某些势力所属城的分数缓存（AI 补任后用，不清其他势力已滚动缓存的城）。
+  dropCityScores(forceIds){const cache=this._scoreCache;if(!cache)return;for(const map of [cache.scores,cache.governance])for(const key of map.keys()){const city=this.cityById(String(key).split("|")[0]);if(!city||forceIds.has(city.force))map.delete(key)}},
+  affairScore(city,affairId){return this.cityCached("scores",city.id,`${city.id}|${affairId}`,()=>this.computeAffairScore(city,affairId))},
   computeAffairScore(city,affairId){const def=AFFAIRS[affairId],cfg=this.officeConfig(),w=cfg.tier_weights,parts=[];if(!def)return {score:this.defaultAbility(),parts};
     const exec=def.exec==="magistrate"?this.officialProfile(city,this.magistrateRole(city)):this.officialProfile(city,def.exec),court=this.centralProfile(city.force,def.court);parts.push({tier:"court",weight:w.court,profile:court},{tier:"county",weight:w.county,profile:exec});
     if(def.clerk||def.province){const {office,mode}=this.commanderyOffice(city),province=def.province?this.provinceProfile(city,def.province):null,useProvince=province?.post,orgWeight=useProvince?w.commandery-w.province:w.commandery;

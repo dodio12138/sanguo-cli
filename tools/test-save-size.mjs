@@ -6,14 +6,15 @@ try{await import("../js/core/ai-controller.js")}catch{}await import("../js/core/
 
 // 浏览器本地存储约 5MB，主档与备份并存：开局一年后单档须小于 1MB，且转运、战报不随时间无限增长。
 const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"});state.date={year:200,month:1,day:1};
-const size=()=>JSON.stringify(state.serialize()).length;let half=0;
-for(let day=1;day<=360;day++){state.endTurn();if(day===180)half=size()}
+const size=()=>JSON.stringify(state.serialize()).length;let half=0,shipSum=0;
+for(let day=1;day<=360;day++){state.endTurn();if(day===180)half=size();if(day>180)shipSum+=state.policies.fiscalAccounts.shipments.length}
 const full=size(),ledger=state.policies.fiscalAccounts;
 // 人口 POP（约 2,600 组）入档后约增 100KB，上限由 1MB 放宽到 1.2MB（docs/POP_CLAN_PLAN.md 第 1 节第 9 条）。
 // 2026-10-17 内政改制后同一推演多出野战（旧战报只留战事条目），一年档 1211→1294KB；放宽到 1.3MB，主档与备份合计仍远低于 5MB。
 assert.ok(full<1.3*1024*1024,`一年后存档 ${(full/1024)|0}KB，应小于 1.3MB`);
 assert.ok(full-half<half*.4,`下半年存档增长 ${((full-half)/1024)|0}KB，增长过快`);
-assert.ok(ledger.shipments.length<200,`在途与近期转运 ${ledger.shipments.length} 条，应有上限`);
+// 在途条数随各城征收日起伏，单日取样不稳；以下半年日均衡量（同一推演约 300 条，已完成的每势力只留 30 条）。
+assert.ok(shipSum/180<400,`下半年在途与近期转运日均 ${Math.round(shipSum/180)} 条，应有上限`);
 assert.ok(Object.keys(ledger.archive||{}).length,"已结束转运应并入汇总");
 assert.ok(state.reports.length<=GameState.REPORT_MAX&&state.reports.slice(GameState.REPORT_FULL).every(report=>report.pruned&&!report.resourceDelta),"旧战报只留战事条目");
 assert.ok(ledger.shipments.every(cargo=>cargo.status!=="在途"||cargo.amount>=FiscalSystem.minRemittance(state,cargo.resource)||cargo.purpose!=="上缴"),"零星上缴应攒批起运");
