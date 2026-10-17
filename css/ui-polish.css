@@ -691,3 +691,19 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .admin-bars b { text-align: right; font-weight: 500; }
 .admin-side > button { margin-top: 8px; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 3px 8px; cursor: pointer; }
 @media (max-width: 760px) { .admin-layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* 项目事务表（内政改制 P4） */
+.admin-projects { display: grid; gap: 8px; }
+.admin-project { border: 1px solid var(--line-dim); background: #0d140d; padding: 8px; display: grid; gap: 6px; }
+.admin-project.has-blockers { border-left: 3px solid #b08a3c; }
+.admin-project header { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.admin-project header small, .admin-project-meta { color: var(--muted); font-size: 10px; margin: 0; }
+.admin-progress { position: relative; height: 16px; background: #1b231a; border: 1px solid var(--line-dim); }
+.admin-progress i { position: absolute; inset: 0 auto 0 0; background: #4f6e3c; }
+.admin-progress span { position: relative; padding-left: 6px; font-size: 10px; line-height: 16px; }
+.admin-project-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.admin-project-fields label { display: grid; gap: 2px; font-size: 10px; color: var(--muted); }
+.admin-project-meta button { margin-left: 6px; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); font-size: 10px; cursor: pointer; }
+.admin-blockers { margin: 0; padding-left: 16px; color: #d8b55a; font-size: 10px; }
+@media (max-width: 760px) { .admin-project-fields { grid-template-columns: minmax(0, 1fr); } }
+.admin-project.is-emergency { border-left: 3px solid #a8433a; }

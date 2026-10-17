@@ -42,7 +42,7 @@ function payloadFor(command,ctx){
   const item=id=>{payload.itemIds.push(id);payload.targetIds.push(id)};
   const ownOfficerCommands=new Set(["transfer_officer","recall_officer","exile_officer","reward_officer","punish_officer","appoint_office","dismiss_office","promote_office","demote_office","designate_heir","set_advisor","study","personal_training","rest"]);
   const armyCommands=new Set(["train_troops","disband_army","reinforce","return_garrison","camp","ambush","explore"]);
-  const ownCityCommands=new Set(["search_talent","agriculture","commerce","public_order","population","city_defense","recruit_troops","collect_tax","construct_building","repair","build_warehouse","fortify","waterworks","set_storage","requisition_labor","promote_technology"]);
+  const ownCityCommands=new Set(["search_talent","agriculture","commerce","public_order","population","city_defense","recruit_troops","collect_tax","construct_building","repair","build_warehouse","fortify","waterworks","set_storage","requisition_labor","promote_technology","reclaim_land","settle_refugees"]);
   if(ownCityCommands.has(command.id))city(ownCity.id);
   if(armyCommands.has(command.id))army(ownArmy.id);
   if(ownOfficerCommands.has(command.id))officer(command.id==="exile_officer"?(ownOfficers.find(item=>item.name!==state.data.forces.find(force=>force.id===state.playerForceId)?.name)||ownOfficers[0]).id:ownOfficers[0].id);

@@ -3,7 +3,7 @@ SanguoApp.define("commandBook",app=>{
   const {$,esc,state,submit,toast}=app;
   const cityTargetCommandIds=new Set([
     "search_talent","transfer_officer","create_corps","adjust_jurisdiction",
-    "agriculture","commerce","public_order","population","city_defense","recruit_troops","train_troops","collect_tax",
+    "agriculture","commerce","public_order","population","city_defense","recruit_troops","train_troops","collect_tax","settle_refugees","reclaim_land",
     "construct_building","repair","build_road","build_warehouse","fortify","waterworks",
     "transfer_gold","transfer_food","transport","establish_supply_route","set_storage","requisition_labor",
     "form_army","redeploy","move","forced_march","raid","retreat","set_collection_policy","set_capital","build_supply_depot","set_supply_route","dispatch_resources","dismiss_labor","relieve_fire",

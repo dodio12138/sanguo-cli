@@ -9,6 +9,9 @@ const keyOf=p=>`${p[OCC]}|${p[CLS]}|${p[CLAN]}`;
 const r2=x=>Math.round(x*100)/100;
 
 Object.assign(window.RuleEngine.prototype,{
+  // 安置流民项目（内政改制 P4）：统计某据点及辖县的流民；完工时按比例落户为自耕编户（登记率九成）。
+  refugeeCount(city){return this.countyPopulationPlaces(city).reduce((n,place)=>n+(place.pops||[]).filter(p=>p[CLS]===DRIFT).reduce((m,p)=>m+total(p),0),0)},
+  settleRefugees(city,fraction){let moved=0;for(const place of this.countyPopulationPlaces(city))for(const p of (place.pops||[]).filter(pop=>pop[CLS]===DRIFT)){const before=total(p);this.popMove(place,p,fraction,FARM,FREE,"",{householdFactor:1.6,registered:.9});moved+=before-total(p)}for(const place of this.countyPopulationPlaces(city))this.popSync?.(place);return moved},
   popRules(){return this._popRules??=this.buildPopRules()},
   buildPopRules(){const base={age:{children:.35,adult_male:.27,adult_female:.27,elderly:.11},household_size:[5.2,6.5,8],registered:[.92,.5,.1],scholar_registered:.95,health:.85,
       urban_mix:{trade:.28,scholar:.04},county_mix:{trade:.06,scholar:.02},refugee_start:{default:.03,"190_coalition":.05,"194_puyang":.06},
