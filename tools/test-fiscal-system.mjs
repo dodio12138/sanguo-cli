@@ -33,7 +33,7 @@ for(let day=0;day<20&&cargo.status!=="完成";day++){state.turn++;FiscalSystem.a
 state.turn++;FiscalSystem.advanceShipments(state,[]);assert.equal(state.resources.gold,central+cargo.delivered,"货物只能入库一次");
 
 state=fixture();city=state.data.cities[0];state.engine.initializeAdministration();
-const low=FiscalSystem.governance(state,city);city.administration.governorId="official";city.administration.commerceId="official";
+const low=FiscalSystem.governance(state,city);city.administration.governorId="official";city.administration.commerceId="official";state.engine.invalidateDuties();
 const high=FiscalSystem.governance(state,city);assert(high.efficiency>low.efficiency);assert(high.corruption<low.corruption);
 city.publicSupport=10;assert(FiscalSystem.governance(state,city).support<high.support);
 

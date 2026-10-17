@@ -1,4 +1,4 @@
-// 汉庭 P3：讨逆诏、联军攻势（集结与发动日、失约）、迁都、加官进爵至受禅、奉迎天子、衣带诏、称王称帝、AI 朝局操作与长局。
+// 汉庭 P3：讨逆诏、联军攻势（集结与发动日、失约）、迁都、加官进爵至受禅、奉迎天子、衣带诏、称王称帝、AI 朝局操作；长局另见 test-court-longrun-*。
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -45,8 +45,5 @@ const fresh=(player="cao")=>{const game=new GameState(structuredClone(scenario),
 {const {game}=fresh();CourtUI.draft={kind:"coalition"};const html=CourtUI.render(game,"edicts");assert.match(html,/data-crisis-issue/);assert.match(html,/集结地/);CourtUI.draft={kind:"promote"};assert.match(CourtUI.render(game,"edicts"),/下一步：自为丞相|下一步：受封/);
   const other=fresh("liu");CourtUI.draft={kind:"grant_office"};const page=CourtUI.render(other.game,"edicts");for(const kind of ["receive","conspiracy","proclaim_king","proclaim_emperor"])assert(page.includes(`data-crisis="${kind}"`),kind);
   const app=appSource();assert(app.includes("[data-crisis-issue]")&&app.includes("state.engine.courtCrisisAction("))}
-// 9. 长局：六剧本各推演两年，朝局操作不崩，天子归属与名分合法
-for(const id of ["190_coalition","194_puyang","200_guandu","208_red_cliffs","211_tongguan","219_xiangyang"]){const data=await loader.loadScenario(id),game=new GameState(structuredClone(data),{playerForceId:data.scenario.default_player_force});game.observerMode=true;const texts=[];const log=game.engine.courtLog;game.engine.courtLog=function(ev,text,extra){texts.push(text);return log.call(this,ev,text,extra)};
-  for(let i=0;i<730;i++)game.endTurn();const court=game.court;assert(!court.controller||game.data.cities.some(c=>c.force===court.controller),`${id} 挟天子者仍有据点`);for(const stance of Object.values(court.stances))assert(stance.obedience>=0&&stance.obedience<=100&&stance.hanLoyalty>=0);
-  const notable=texts.filter(t=>/讨伐|联军|迁都|丞相|九锡|王|禅|奉迎|衣带|称帝|出奔/.test(t));console.log(`${id} 两年：挟天子者 ${court.controller||"无"} · ${notable.slice(0,5).join("｜")||"无大事"}`)}
-console.log("汉庭 P3 通过：讨逆 / 联军攻势 / 迁都 / 加官进爵至受禅 / 奉迎 / 衣带诏 / 称王称帝 / 界面 / 长局");
+// 9. 长局（六剧本各推演两年）拆到 test-court-longrun-a/b/c.mjs，可与其他测试并行。
+console.log("汉庭 P3 通过：讨逆 / 联军攻势 / 迁都 / 加官进爵至受禅 / 奉迎 / 衣带诏 / 称王称帝 / 界面（长局见 test-court-longrun-*）");
