@@ -1,5 +1,5 @@
 {
- "note": "剧本开局的太守、守将与随驻人物：每条 [据点 id, 太守或守将（可空）, 随驻人物, 依据]。只移动该剧本里在任且属同一势力的人物；人物不在名册或势力不符时跳过。未列入的人物若在一城扎堆，由载入器按就近原则派往本方未设太守的郡治（记为推定）。 commands：开局方面大员与中枢属官（幕府），按势力列 central（advisor 军师、chief 长史、marshal 司马）与 posts（kind 都督 dudu／州牧刺史 zhou／郡守 jun，辖 provinces 或 commanderies，parent 按上级人名引用须先列）；人物不在任、辖区含主公驻地或本方在辖区内无城者跳过。",
+ "note": "剧本开局的太守、守将与随驻人物：每条 [据点 id, 太守或守将（可空）, 随驻人物, 依据]。只移动该剧本里在任且属同一势力的人物；人物不在名册或势力不符时跳过。未列入的人物若在一城扎堆，由载入器按就近原则派往本方未设太守的郡治（记为推定）。 commands：开局方面大员与中枢属官（幕府），按势力列 central（advisor 军师、chief 长史、marshal 司马）与 posts（kind 都督 dudu／州牧刺史 zhou／郡守 jun，辖 provinces 或 commanderies，parent 按上级人名引用须先列）；人物不在任、辖区含主公驻地或本方在辖区内无城者跳过。 方面条目的 staff 为州府属吏（biejia 别驾、zhizhong 治中、gongcao 功曹从事、bingcao 兵曹从事）。central 增设 secretary 主簿、talent 功曹、treasurer 度支官，按史载职掌映射（东西曹掾、治中、吏部主选举→功曹；典农、财计、盐铁、大司农→度支官；主簿、记室、典机密→主簿）。开局其余空缺由各势力按适配度补任。",
  "family": [
   "卞氏",
   "甄氏",
@@ -37915,7 +37915,8 @@
     "central": {
      "advisor": "李儒",
      "chief": "刘艾",
-     "marshal": "徐荣"
+     "marshal": "徐荣",
+     "talent": "周毖"
     },
     "posts": [
      {
@@ -37931,7 +37932,8 @@
     ],
     "centralBasis": {
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "周毖为吏部尚书，与伍琼共典选举，董卓用其所举"
     }
    },
    "liu_biao": {
@@ -38064,13 +38066,15 @@
     "central": {
      "advisor": "陈珪",
      "chief": "糜竺",
-     "marshal": "曹豹"
+     "marshal": "曹豹",
+     "treasurer": "陈登"
     },
     "posts": [],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "陶谦表陈登为典农校尉，巡土田、兴水利"
     }
    },
    "kong_rong": {
@@ -38326,12 +38330,14 @@
     "central": {
      "advisor": "陈珪",
      "chief": "糜竺",
-     "marshal": "曹豹"
+     "marshal": "曹豹",
+     "treasurer": "陈登"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "陈登为陶谦典农校尉"
     }
    },
    "lu_bu": {
@@ -38360,13 +38366,15 @@
     "central": {
      "advisor": "程昱",
      "chief": "荀彧",
-     "marshal": "夏侯惇"
+     "marshal": "夏侯惇",
+     "talent": "毛玠"
     },
     "posts": [],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "曹操领兖州牧，辟毛玠为治中从事，主选举"
     }
    },
    "liu": {
@@ -38386,13 +38394,15 @@
     "central": {
      "advisor": "田丰",
      "chief": "审配",
-     "marshal": "沮授"
+     "marshal": "沮授",
+     "secretary": "陈琳"
     },
     "posts": [],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "陈琳避难冀州，袁绍使典文章"
     }
    },
    "yuan_shu": {
@@ -38504,7 +38514,9 @@
     "central": {
      "advisor": "荀攸",
      "chief": "荀彧",
-     "marshal": "韩浩"
+     "marshal": "韩浩",
+     "talent": "毛玠",
+     "treasurer": "任峻"
     },
     "posts": [
      {
@@ -38590,14 +38602,17 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "毛玠为司空东曹掾，与崔琰并典选举",
+     "treasurer": "任峻为典农中郎将，募民屯田许下，军国之饶起于枣祗而成于峻"
     }
    },
    "yuan": {
     "central": {
      "advisor": "沮授",
      "chief": "审配",
-     "marshal": "淳于琼"
+     "marshal": "淳于琼",
+     "secretary": "陈琳"
     },
     "posts": [
      {
@@ -38606,7 +38621,13 @@
       "provinces": [
        "青州"
       ],
-      "basis": "袁绍以长子袁谭为青州刺史"
+      "basis": "袁绍以长子袁谭为青州刺史",
+      "staff": {
+       "biejia": "王修"
+      },
+      "staffBasis": {
+       "biejia": "袁谭为青州刺史，以王修为别驾"
+      }
      },
      {
       "kind": "zhou",
@@ -38626,14 +38647,16 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "陈琳为袁绍典文章，作檄州郡"
     }
    },
    "sun": {
     "central": {
      "chief": "张昭",
      "advisor": "周瑜",
-     "marshal": "程普"
+     "marshal": "程普",
+     "treasurer": "吕范"
     },
     "posts": [
      {
@@ -38671,7 +38694,8 @@
     ],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "孙策使吕范典主财计"
     }
    },
    "liu_biao": {
@@ -38734,12 +38758,14 @@
     "central": {
      "advisor": "张松",
      "chief": "董和",
-     "marshal": "张任"
+     "marshal": "张任",
+     "secretary": "黄权"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "黄权为刘璋主簿"
     }
    },
    "shi_xie": {
@@ -38862,7 +38888,9 @@
     "central": {
      "advisor": "荀攸",
      "chief": "荀彧",
-     "marshal": "韩浩"
+     "marshal": "韩浩",
+     "talent": "毛玠",
+     "treasurer": "国渊"
     },
     "posts": [
      {
@@ -38910,7 +38938,13 @@
       "provinces": [
        "扬州"
       ],
-      "basis": "刘馥为扬州刺史"
+      "basis": "刘馥为扬州刺史",
+      "staff": {
+       "biejia": "蒋济"
+      },
+      "staffBasis": {
+       "biejia": "蒋济为扬州别驾"
+      }
      },
      {
       "kind": "jun",
@@ -38947,14 +38981,18 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "曹操为丞相，毛玠为东曹掾，崔琰为西曹掾，典选举",
+     "treasurer": "国渊典屯田事，课殖五年仓廪丰实"
     }
    },
    "sun": {
     "central": {
      "chief": "张昭",
      "advisor": "鲁肃",
-     "marshal": "周瑜"
+     "marshal": "周瑜",
+     "treasurer": "胡综",
+     "secretary": "是仪"
     },
     "posts": [
      {
@@ -38988,7 +39026,9 @@
     ],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "孙权为讨虏将军，以胡综为金曹从事，掌钱谷",
+     "secretary": "是仪随孙权典机密"
     }
    },
    "liu_zhang": {
@@ -39015,12 +39055,14 @@
     "central": {
      "advisor": "张松",
      "chief": "董和",
-     "marshal": "张任"
+     "marshal": "张任",
+     "secretary": "黄权"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "黄权为刘璋主簿"
     }
    },
    "shi_xie": {
@@ -39163,7 +39205,10 @@
     "central": {
      "advisor": "荀攸",
      "chief": "荀彧",
-     "marshal": "韩浩"
+     "marshal": "韩浩",
+     "talent": "崔琰",
+     "secretary": "杨修",
+     "treasurer": "国渊"
     },
     "posts": [
      {
@@ -39188,7 +39233,13 @@
       "provinces": [
        "扬州"
       ],
-      "basis": "温恢为扬州刺史，张辽、乐进、李典屯合肥"
+      "basis": "温恢为扬州刺史，张辽、乐进、李典屯合肥",
+      "staff": {
+       "biejia": "蒋济"
+      },
+      "staffBasis": {
+       "biejia": "蒋济为扬州别驾，与刺史温恢共守"
+      }
      },
      {
       "kind": "jun",
@@ -39225,7 +39276,10 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "崔琰为丞相东西曹掾属，典选举",
+     "secretary": "杨修为丞相主簿，总知外内",
+     "treasurer": "国渊典屯田"
     }
    },
    "liu": {
@@ -39282,7 +39336,8 @@
     "central": {
      "chief": "张昭",
      "advisor": "鲁肃",
-     "marshal": "吕蒙"
+     "marshal": "吕蒙",
+     "treasurer": "胡综"
     },
     "posts": [
      {
@@ -39313,7 +39368,8 @@
     ],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "胡综为金曹从事"
     }
    },
    "liu_zhang": {
@@ -39450,7 +39506,8 @@
     "central": {
      "advisor": "贾诩",
      "chief": "钟繇",
-     "marshal": "曹仁"
+     "marshal": "曹仁",
+     "secretary": "杨修"
     },
     "posts": [
      {
@@ -39585,14 +39642,18 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "杨修为魏王主簿"
     }
    },
    "liu": {
     "central": {
      "advisor": "法正",
      "chief": "诸葛亮",
-     "marshal": "张飞"
+     "marshal": "张飞",
+     "talent": "刘巴",
+     "treasurer": "王连",
+     "secretary": "杨仪"
     },
     "posts": [
      {
@@ -39720,14 +39781,19 @@
      }
     ],
     "centralBasis": {
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "talent": "刘巴为左将军西曹掾，主选举",
+     "treasurer": "王连为司盐校尉，较盐铁之利，利入甚多",
+     "secretary": "刘备为汉中王，拔杨仪为尚书"
     }
    },
    "sun": {
     "central": {
      "chief": "张昭",
      "advisor": "陆逊",
-     "marshal": "吕蒙"
+     "marshal": "吕蒙",
+     "secretary": "是仪",
+     "treasurer": "胡综"
     },
     "posts": [
      {
@@ -39786,7 +39852,9 @@
     ],
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "是仪典机密",
+     "treasurer": "胡综掌钱谷"
     }
    },
    "shi_xie": {
@@ -40046,12 +40114,14 @@
     "central": {
      "advisor": "马良",
      "chief": "诸葛亮",
-     "marshal": "赵云"
+     "marshal": "赵云",
+     "treasurer": "王连"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "treasurer": "王连为司盐校尉"
     },
     "posts": [
      {
@@ -40132,12 +40202,14 @@
     "central": {
      "advisor": "张昭",
      "chief": "孙邵",
-     "marshal": "陆逊"
+     "marshal": "陆逊",
+     "secretary": "是仪"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "是仪典机密"
     },
     "posts": [
      {
@@ -40400,12 +40472,14 @@
     "central": {
      "advisor": "马谡",
      "chief": "蒋琬",
-     "marshal": "魏延"
+     "marshal": "魏延",
+     "secretary": "杨仪"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "杨仪为丞相参军，规画分部，筹度粮谷"
     },
     "posts": [
      {
@@ -40478,12 +40552,14 @@
     "central": {
      "advisor": "张昭",
      "chief": "顾雍",
-     "marshal": "陆逊"
+     "marshal": "陆逊",
+     "secretary": "是仪"
     },
     "centralBasis": {
      "advisor": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
      "chief": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
-     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。"
+     "marshal": "按史载所属、谋议、行政或军旅职责映射为游戏军师／长史／司马；不等于同名汉官。",
+     "secretary": "是仪专典机密，校诸官府及州郡文书"
     },
     "posts": [
      {
@@ -40663,7 +40739,12 @@
   },
   "249_gaopingling": {
    "cao": {
-    "central": {},
+    "central": {
+     "marshal": "曹爽",
+     "chief": "司马懿",
+     "talent": "何晏",
+     "treasurer": "桓范"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40705,10 +40786,20 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27"
      }
-    ]
+    ],
+    "centralBasis": {
+     "marshal": "曹爽为大将军，总统兵马",
+     "chief": "司马懿为太傅，与曹爽并受遗诏辅政",
+     "talent": "何晏为吏部尚书，典选举",
+     "treasurer": "桓范为大司农，号为智囊"
+    }
    },
    "liu": {
-    "central": {},
+    "central": {
+     "chief": "费祎",
+     "marshal": "姜维",
+     "secretary": "陈祗"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40743,10 +40834,18 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "费祎为大将军，录尚书事",
+     "marshal": "姜维为卫将军，与费祎共录尚书事",
+     "secretary": "陈祗为侍中，代董允典宫省机要"
+    }
    },
    "sun": {
-    "central": {},
+    "central": {
+     "marshal": "朱然",
+     "advisor": "诸葛恪"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40781,12 +40880,20 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷61"
      }
-    ]
+    ],
+    "centralBasis": {
+     "marshal": "朱然为左大司马",
+     "advisor": "诸葛恪为大将军，领荆州事"
+    }
    }
   },
   "253_hefei": {
    "cao": {
-    "central": {},
+    "central": {
+     "marshal": "司马师",
+     "advisor": "钟会",
+     "chief": "司马孚"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40834,10 +40941,18 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷27"
      }
-    ]
+    ],
+    "centralBasis": {
+     "marshal": "司马师为大将军，录尚书事",
+     "advisor": "钟会为中书侍郎，参与机密",
+     "chief": "司马孚为太尉"
+    }
    },
    "liu": {
-    "central": {},
+    "central": {
+     "marshal": "姜维",
+     "chief": "陈祗"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40872,10 +40987,17 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
      }
-    ]
+    ],
+    "centralBasis": {
+     "marshal": "姜维为卫将军，总督诸军",
+     "chief": "陈祗为尚书令，内主政事"
+    }
    },
    "sun": {
-    "central": {},
+    "central": {
+     "chief": "诸葛恪",
+     "marshal": "孙峻"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40910,12 +41032,21 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷64"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "诸葛恪为太傅，总统内外",
+     "marshal": "孙峻为武卫将军，典宿卫"
+    }
    }
   },
   "263_jiange": {
    "cao": {
-    "central": {},
+    "central": {
+     "chief": "司马昭",
+     "marshal": "钟会",
+     "advisor": "荀勖",
+     "talent": "山涛"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -40957,10 +41088,21 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷033"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "司马昭为大将军，录尚书事",
+     "marshal": "钟会为镇西将军，都督关中",
+     "advisor": "荀勖为大将军从事中郎，参与谋议",
+     "talent": "山涛为吏部郎，典选举"
+    }
    },
    "liu": {
-    "central": {},
+    "central": {
+     "marshal": "姜维",
+     "chief": "董厥",
+     "advisor": "诸葛瞻",
+     "secretary": "樊建"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -41006,10 +41148,20 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/三國志/卷43"
      }
-    ]
+    ],
+    "centralBasis": {
+     "marshal": "姜维为大将军",
+     "chief": "董厥为辅国大将军，与诸葛瞻共平尚书事",
+     "advisor": "诸葛瞻为卫将军，平尚书事",
+     "secretary": "樊建为尚书令"
+    }
    },
    "sun": {
-    "central": {},
+    "central": {
+     "chief": "濮阳兴",
+     "marshal": "丁奉",
+     "advisor": "张布"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -41045,7 +41197,12 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "濮阳兴为丞相",
+     "marshal": "丁奉为大将军",
+     "advisor": "张布为左将军，与濮阳兴共掌朝政"
+    }
    },
    "lv_xing": {
     "central": {},
@@ -41054,7 +41211,13 @@
   },
   "279_jianye": {
    "cao": {
-    "central": {},
+    "central": {
+     "chief": "贾充",
+     "advisor": "张华",
+     "marshal": "杜预",
+     "secretary": "荀勖",
+     "talent": "山涛"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -41126,10 +41289,21 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "贾充为司空、侍中、尚书令",
+     "advisor": "张华为中书令，力主伐吴，筹画方略",
+     "marshal": "杜预为镇南大将军，都督荆州诸军",
+     "secretary": "荀勖为中书监，掌机要",
+     "talent": "山涛为尚书仆射，领吏部，典选举"
+    }
    },
    "sun": {
-    "central": {},
+    "central": {
+     "chief": "张悌",
+     "marshal": "沈莹",
+     "advisor": "薛莹"
+    },
     "posts": [
      {
       "kind": "dudu",
@@ -41189,7 +41363,12 @@
       "basis": "据人物军旅职责映射游戏方面；具体辖县按现有地图近似，不宣称即史载全辖区。",
       "sourceUrl": "https://zh.wikisource.org/wiki/晉書/卷057"
      }
-    ]
+    ],
+    "centralBasis": {
+     "chief": "张悌为丞相",
+     "marshal": "沈莹为丹杨太守，统丹杨锐卒",
+     "advisor": "薛莹为光禄勋"
+    }
    },
    "guo_ma": {
     "central": {},

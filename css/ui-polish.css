@@ -757,3 +757,14 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .cmd-scope-chips button { border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: 0 0 0 4px; }
 .cmd-scope-add { display: flex; gap: 6px; align-items: center; font-size: 11px; color: var(--muted); margin: 4px 0 8px; }
 .cmd-link { border: 0; background: transparent; color: var(--amber); cursor: pointer; font-size: 10px; padding: 0; }
+
+/* 幕府官制图：与汉庭官制图一致，展开收起为节点框底部通栏；方面节点内上部为选择区。 */
+.chart-node .cmd-toggle{display:block;width:100%;margin-top:3px;text-align:center;white-space:nowrap}
+.chart-node .cmd-toggle:hover,.chart-node .cmd-toggle:focus-visible{border-color:#a99a5e;color:#f0dc98}
+.chart-node.cmd-node{cursor:default}
+.cmd-node-pick{display:grid;gap:3px;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:center;cursor:pointer}
+
+/* 存档列表：载入与删除并列，删除需二次确认。 */
+.save-slot-actions{display:flex;gap:6px;align-items:center}
+.save-slot .save-delete{color:#c9a08a;border-color:#5a4234}
+.save-slot .save-delete.is-armed{color:#ffd2c2;border-color:#b0503c;background:#2a1210}
