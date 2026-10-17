@@ -677,7 +677,7 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .admin-commandery { margin: 6px 0; padding: 6px; border: 1px solid var(--line-dim); background: #0d140d; }
 .admin-commandery header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-bottom: 4px; }
 .admin-commandery header small { color: var(--muted); font-size: 10px; }
-.admin-commandery header button { margin-left: auto; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); font-size: 10px; padding: 2px 6px; cursor: pointer; }
+.admin-commandery header button { margin-left: 4px; border: 1px solid var(--line-dim); background: transparent; color: var(--muted); font-size: 10px; padding: 2px 6px; cursor: pointer; }
 .admin-warn { color: #d9785f; font-style: normal; }
 .admin-counties { display: grid; gap: 4px; margin-top: 6px; }
 .admin-county { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 6px; align-items: center; }
@@ -726,3 +726,34 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .affair-row { display: grid; gap: 2px; padding: 4px 0; border-bottom: 1px dotted var(--line-dim); }
 .affair-row span { font-size: 11px; color: #ddd5aa; }
 .affair-row small { font-size: 10px; color: var(--muted); line-height: 1.5; }
+.cmd-county.is-seat { border-color: #87945c; }
+.cmd-county small i { font-style: normal; color: var(--amber); }
+.cmd-seats { margin-top: 8px; }
+.cmd-seat-group h4 { margin: 8px 0 4px; color: var(--amber); font-size: 12px; }
+.cmd-seat-commandery h5 { margin: 6px 0 2px; color: var(--muted); font-size: 11px; }
+.cmd-seat-row { display: grid; grid-template-columns: 90px 140px minmax(0, 1fr) minmax(0, 1.4fr); gap: 6px; align-items: center; padding: 3px 0; border-bottom: 1px dotted var(--line-dim); font-size: 11px; }
+.cmd-seat-row:not(.is-seat) { grid-template-columns: 90px 140px minmax(0, 1fr); }
+.cmd-seat-row label { display: flex; gap: 4px; align-items: center; color: var(--muted); }
+.cmd-seat-row select { min-width: 0; flex: 1; }
+@media (max-width: 760px) { .cmd-seat-row, .cmd-seat-row:not(.is-seat) { grid-template-columns: minmax(0, 1fr); } }
+.cmd-plan-group h4 { margin: 10px 0 4px; color: var(--amber); font-size: 12px; }
+.cmd-plan-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 3px 0; border-bottom: 1px dotted var(--line-dim); font-size: 11px; }
+.cmd-plan-row small, .cmd-plan-office small { color: var(--muted); font-size: 10px; margin-left: 4px; }
+.cmd-plan-row button, .cmd-plan-office header button { border: 1px solid #87945c; background: transparent; color: var(--amber); font-size: 10px; padding: 2px 8px; cursor: pointer; }
+.cmd-plan-office { border: 1px solid var(--line-dim); padding: 6px; margin: 4px 0; display: grid; gap: 4px; }
+.cmd-plan-office header { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.cmd-plan-members { display: flex; flex-wrap: wrap; gap: 4px; }
+.cmd-plan-members span { border: 1px solid var(--line-dim); padding: 1px 6px; font-size: 11px; }
+.cmd-plan-members i { font-style: normal; color: var(--amber); font-size: 9px; margin-left: 3px; }
+.cmd-plan-members button { border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: 0 0 0 3px; }
+.cmd-plan-office label, .cmd-plan-row label { display: flex; gap: 4px; align-items: center; color: var(--muted); font-size: 10px; }
+.cmd-chart-level { display: flex; gap: 4px; align-items: center; margin: 4px 0 6px; font-size: 11px; color: var(--muted); }
+.cmd-chart-level button { border: 1px solid var(--line-dim); background: transparent; color: var(--muted); padding: 2px 10px; cursor: pointer; }
+.cmd-chart-level button.active { color: var(--amber); border-color: var(--amber); }
+.chart-node .cmd-staff { display: block; font-style: normal; font-size: 9px; color: #9fb47a; max-width: 180px; white-space: normal; line-height: 1.35; }
+.cmd-scope-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
+.cmd-scope-chips span { border: 1px solid var(--line-dim); padding: 2px 6px; font-size: 11px; }
+.cmd-scope-chips small { color: var(--muted); font-size: 9px; margin-left: 3px; }
+.cmd-scope-chips button { border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: 0 0 0 4px; }
+.cmd-scope-add { display: flex; gap: 6px; align-items: center; font-size: 11px; color: var(--muted); margin: 4px 0 8px; }
+.cmd-link { border: 0; background: transparent; color: var(--amber); cursor: pointer; font-size: 10px; padding: 0; }

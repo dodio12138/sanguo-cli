@@ -12,7 +12,7 @@ const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),e=
 assert.equal(e.loadEfficiency(.5),1);assert.equal(e.loadEfficiency(.8),1);assert(Math.abs(e.loadEfficiency(1)-.92)<1e-9);assert(Math.abs(e.loadEfficiency(.9)-.96)<1e-9);
 assert(Math.abs(e.loadEfficiency(1.5)-.92*Math.pow(1/1.5,.8))<1e-9);assert.equal(e.loadEfficiency(20),.38);
 assert.equal(e.loadCorruption(.8),0);assert.equal(e.loadCorruption(1),2);assert(e.loadCorruption(1.5)>e.loadCorruption(1));
-assert.equal(Math.round(e.officeCapacity(45)),96);assert.equal(Math.round(e.officeCapacity(90)),132);
+assert.equal(Math.round(e.officeCapacity(45)),95);assert.equal(Math.round(e.officeCapacity(90)),140);
 
 // 郡府所在：占郡治者为郡府；其余本郡据点归郡府。
 const xuchang=cities.find(c=>c.id==="xuchang"),seat=e.commanderyOfficeNode(xuchang);
@@ -24,23 +24,32 @@ assert.deepEqual(e.cityOfficeRoles(xuchang).county,[e.magistrateRole(xuchang),"a
 const byCommandery=new Map;for(const c of cities){if(!byCommandery.has(c.commandery))byCommandery.set(c.commandery,[]);byCommandery.get(c.commandery).push(c)}
 const [actingName,actingNodes]=[...byCommandery].find(([,list])=>list.length>=4&&list.some(c=>c.commanderySeatNode)&&list.every(c=>c.force!=="cao"));
 const actingSeat=actingNodes.find(c=>c.commanderySeatNode),pair=actingNodes.filter(c=>!c.commanderySeatNode).slice(0,2),saved=actingNodes.map(c=>[c,c.force]);
-for(const c of pair)c.force="cao";actingSeat.force=actingSeat.force==="cao"?"yuan":actingSeat.force;e.invalidateDuties();
+// 行郡事、寄领是 AI 势力的自动规则：本段以观察者模式运行（玩家势力改按自定行政区划，见后文）。
+state.observerMode=true;for(const c of pair)c.force="cao";actingSeat.force=actingSeat.force==="cao"?"yuan":actingSeat.force;e.invalidateDuties();
 const acting=e.commanderyOffice(pair[0]);assert.equal(acting.mode,"acting",`${actingName}应设行郡事`);assert(pair.includes(acting.office.node));
 const host=acting.office.node,local=state.data.officers.filter(o=>o.force==="cao"&&o.status==="serving").slice(0,3);for(const o of local)o.city=host.id;
 assert(e.assignCityAdministration(host.id,{agriculture:local[0].id,commerce:local[1].id}).ok,"行郡事可设两名郡掾");
 assert(!e.assignCityAdministration(host.id,{order:local[2].id}).ok,"行郡事不能超过两名郡掾");
 assert(e.assignCityAdministration(host.id,{secretary:local[2].id}).ok,"主簿不计入郡掾名额");
+// 玩家安排治所：县可改属四跳内的本方郡府；恢复自动后回到行郡事。
+const hostOpt=e.countyAssignmentOptions("cao",pair[1]).options.find(o=>o.value!==acting.office.key);if(hostOpt){assert(e.setCountyAssignment(state,"cao",pair[1].id,hostOpt.value).ok);assert.equal(e.commanderyOffice(pair[1]).mode,"lodged","县改属他郡郡府");assert(e.setCountyAssignment(state,"cao",pair[1].id,null).ok)}
+assert(!e.setCountyAssignment(state,"cao",pair[1].id,"cao|不存在郡").ok);assert.equal(e.commanderyOffice(pair[1]).mode,"acting","恢复自动");
 const score=e.affairScore(pair[1],"agriculture"),org=score.parts.find(p=>p.tier==="commandery");assert.equal(org.mode,"acting");assert.equal(org.factor,.9);
 e.assignCityAdministration(host.id,{agriculture:null,commerce:null,secretary:null});
 const lone=pair[1];const neighbor=e.officeMap().offices.filter(o=>o.force==="cao").flatMap(o=>o.nodes.map(item=>item.city)).flatMap(c=>(state.data.rules.city_graph[c.id]||[]).map(id=>cities.find(n=>n.id===id))).find(c=>c&&!c.commanderySeatNode&&byCommandery.get(c.commandery).every(n=>n.force!=="cao")),kin=byCommandery.get(neighbor.commandery),kinForces=kin.map(c=>[c,c.force]);for(const c of kin)c.force="neutral";neighbor.force="cao";e.invalidateDuties();
 const info=e.commanderyOffice(neighbor);assert.equal(info.mode,"lodged","单据点之郡寄领邻郡郡府");assert.equal(info.office.force,"cao");assert.equal(info.office.nodes.find(item=>item.city===neighbor).weight,1.25);assert.equal(e.commanderyOfficeNode(neighbor),info.office.node);
 for(const [c,force] of kinForces)c.force=force;
-lone.force="cao";for(const [c,force] of saved)c.force=force;e.invalidateDuties();
+lone.force="cao";for(const [c,force] of saved)c.force=force;state.observerMode=false;e.invalidateDuties();
+// 玩家行政区划：未据郡治的郡不设府、各县为未分配；郡治可开府；县可划入、移出郡府。
+{const loose=e.unassignedCounties("cao");for(const c of loose)assert.equal(e.commanderyOffice(c).mode,"court");const office=e.officeMap().offices.find(o=>o.force==="cao"&&o.nodes.length>1),member=office.nodes.map(x=>x.city).find(c=>c!==office.node);
+  assert(e.setCountyAssignment(state,"cao",member.id,"none").ok);assert(e.unassignedCounties("cao").includes(member),"移出后为未分配");assert(!e.setCountyAssignment(state,"cao",office.node.id,"none").ok,"郡府治所不能移出");
+  const other=e.officeMap().offices.find(o=>o.force==="cao"&&o!==office);assert(e.setCountyAssignment(state,"cao",member.id,other.key).ok);assert.equal(e.commanderyOffice(member).office.key,other.key,"划入他郡郡府");assert(e.setCountyAssignment(state,"cao",member.id,null).ok);assert.equal(e.commanderyOffice(member).office.key,office.key,"恢复随本郡")}
+
 
 // 三环节合成：所有环节为默认官员且负荷正常时，政务分数等于 45，与旧结算衔接。
 const cache=e._familyCountyOfficials;e._familyCountyOfficials=new Map;const plain=cities.find(c=>c.force==="cao"&&c.countyNode&&!c.administration?.governorId&&!c.administration?.commandantId&&!c.fiscal?.attention&&!e.concurrentMagistrate(c)&&!e.isCityBesieged(c)),command=state.forceCommand.cao,central={...command.central};command.central={};e.invalidateDuties();
 const officeNode=e.commanderyOfficeNode(plain),clerks={};for(const role of ["agriculture","commerce","order","defense","population","recruitment","granary"]){clerks[role]=officeNode.administration[`${role}Id`];officeNode.administration[`${role}Id`]=null}e.invalidateDuties();
-for(const affair of ["agriculture","commerce","order","works","registry","conscription","training"])assert(Math.abs(e.affairScore(plain,affair).score-45)<1e-9,`${affair} 默认分数应为 45`);
+for(const affair of ["agriculture","commerce","order","works","registry","conscription","training"])assert(Math.abs(e.affairScore(plain,affair).score-60)<1e-9,`${affair} 默认分数应为及格 60`);
 Object.assign(officeNode.administration,Object.fromEntries(Object.entries(clerks).map(([role,id])=>[`${role}Id`,id])));e._familyCountyOfficials=cache;
 
 // 幕府六席：任命后计入负荷；长史分担君主负荷。
@@ -78,4 +87,8 @@ assert(sources.granary.blockers.some(x=>x.includes("仓曹掾")),"郡府缺仓�
 const busyPost=chart.commanderies.flatMap(c=>c.clerks).find(x=>x.officerId===busy.id);assert(busyPost&&busyPost.rate>1&&Object.keys(busyPost.affairs).length===1,"郡掾负荷只计入本类政务");
 await import("../js/ui/admin-chart-ui.js");const html=AdminChartUI.render(state);for(const text of ["负荷率","余量","质量","粮储调拨","幕府","行政总览"])assert(html.includes(text),`幕府图缺少 ${text}`);
 AdminChartUI.affair="granary";const filtered=AdminChartUI.render(state);assert(filtered.includes("容量来源")&&filtered.includes("is-dim"),"按政务筛选高亮与来源侧栏");AdminChartUI.affair="";AdminChartUI.picked=`court:cao:lord`;assert(AdminChartUI.render(state).includes("返回总览"));AdminChartUI.picked=null;
-console.log(`行政容量通过：曲线 80%/100%/150% · 郡府/行郡事/寄领 · 默认 45 衔接 · 幕府六席 · 州府属吏 · 旧官署迁移 · 幕府图 · 兼职负荷 ${Math.round(one*100)}%→${Math.round(four.rate*100)}%`);
+// 郡治不开府：无太守、诸县另属；有郡太守方面时须先召还；重新开府恢复。
+{const seatCity=state.data.cities.find(c=>c.force==="cao"&&c.commanderySeatNode&&!Object.values(state.forceCommand.cao.posts).some(p=>e.isCivilPrefectPost(p)&&(p.scope?.commanderies||[]).includes(c.commandery)));assert(e.setSeatOpen(state,"cao",seatCity.id,false).ok);assert(!e.isCommanderyOfficeNode(seatCity),"不开府的郡治不设郡府");assert.notEqual(e.commanderyOffice(seatCity).office?.commandery,seatCity.commandery,"郡治本身改属他郡或幕府代行");
+  const guarded=state.data.cities.find(c=>c.force==="cao"&&c.commanderySeatNode&&Object.values(state.forceCommand.cao.posts).some(p=>e.isCivilPrefectPost(p)&&(p.scope?.commanderies||[]).includes(c.commandery)));if(guarded)assert(!e.setSeatOpen(state,"cao",guarded.id,false).ok,"有郡太守方面时须先召还");
+  assert(e.setSeatOpen(state,"cao",seatCity.id,true).ok);assert(e.isCommanderyOfficeNode(seatCity));assert(!e.setSeatOpen(state,"cao",state.data.cities.find(c=>c.force==="cao"&&!c.commanderySeatNode).id,false).ok,"非郡治无开府选项")}
+console.log(`行政容量通过：曲线 80%/100%/150% · 郡府/行郡事/寄领 · 默认 60 及格 · 幕府六席 · 州府属吏 · 旧官署迁移 · 幕府图 · 兼职负荷 ${Math.round(one*100)}%→${Math.round(four.rate*100)}%`);

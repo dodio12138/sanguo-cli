@@ -100,7 +100,7 @@ const source=fs.readFileSync(new URL("../js/ui/map-view.js",import.meta.url),"ut
 for(const feature of ["this.state.layer===\"intel\"","intelBand","intelLevel","intelColor","intelStrength","drawIntel(c,m)","static intelBands=[","state.intelligence?.cities"])if(!source.includes(feature))throw new Error(`舆图缺少情报图层：${feature}`);
 const intelCall=source.indexOf("if(this.state.layer===\"intel\")this.drawIntel(c,m);"),siegeCall=source.indexOf("this.drawSieges(c,m);"),hoverCall=source.indexOf("strokeRect(hx+1,hy+1");
 if(!(intelCall>=0&&siegeCall>intelCall))throw new Error("情报图层应在据点标记之后、军事叠加之前绘制");
-if(!(hoverCall>siegeCall))throw new Error("悬停光标框必须在情报与军事叠加之后绘制，避免被覆写");
+{const drawFn=source.indexOf("  draw(){"),sceneCall=source.indexOf("this.renderScene();",drawFn),hover=source.indexOf("this.drawHover(this.ctx",drawFn),scene=source.indexOf("renderScene(){");if(!(siegeCall>scene&&sceneCall>drawFn&&hover>sceneCall))throw new Error("悬停光标框必须在情报与军事叠加之后绘制，避免被覆写")}
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 if(!html.includes('<button data-layer="intel">情报</button>'))throw new Error("舆图图层按钮缺少情报入口");
 if(!html.includes("F1～F6"))throw new Error("帮助文本未更新为六个图层");

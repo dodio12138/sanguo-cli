@@ -123,7 +123,7 @@ Object.assign(window.RuleEngine.prototype,{
     this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
   popMigrationTarget(state,place){let best=null;for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const {food,war,node}=this.popConditions(state,dest),crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1),score=food*2+(node.order||50)/100-war*2-crowd*3;if(score>1.6&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
   // 登记率目标：编户看户曹（或世家县令）能力，依附户看世家与据点主的关系。
-  registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=magistrate?magistrate.ability:(this.affairScore?.(node,"registry")?.score??45),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
+  registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=45+((magistrate?magistrate.ability:(this.affairScore?.(node,"registry")?.score??60))-60)*(this.abilityConfig?.().admin.registration??1),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
     return {free,dependent:clanId=>Math.max(.2,Math.min(.8,rules.dependent_base*this.clanRelation(state,clanId,node.force)/60))}},
 
   // 对外共用县报：历史分配记录只作为底层账目，界面按县合计，不消费随机数或写 POP。

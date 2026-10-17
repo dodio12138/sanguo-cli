@@ -11,7 +11,7 @@ const state=new GameState(structuredClone(SANGUO_DATA),{playerForceId:"cao"}),ci
 if(state.engine.officialProfile(city,"commanderyGovernor").displayName==="普通官员")throw new Error("旧城市太守初值未迁入统一郡职");
 if(city.commandery!=="颍川郡"||!city.counties.includes("阳翟")||city.administration.recruitmentTarget<=city.garrison)throw new Error("郡县资料或城市治理初值未载入");
 const local=state.engine.officialProfile(city,"agriculture");if(!local.familyId||local.defaulted)throw new Error("在地世家没有接入空缺属官槽");
-const cache=state.engine._familyCountyOfficials;state.engine._familyCountyOfficials=new Map();if(state.engine.officialProfile(city,"agriculture").displayName!=="普通官员"||state.engine.officialProfile(city,"agriculture").raw!==45)throw new Error("无在地世家的空缺官槽没有普通官员兜底");state.engine._familyCountyOfficials=cache;
+const cache=state.engine._familyCountyOfficials;state.engine._familyCountyOfficials=new Map();if(state.engine.officialProfile(city,"agriculture").displayName!=="普通官员"||state.engine.officialProfile(city,"agriculture").raw!==60)throw new Error("无在地世家的空缺官槽没有普通官员兜底");state.engine._familyCountyOfficials=cache;
 
 const official=officers.find(o=>o.name==="荀彧")||officers[0],second=officers.find(o=>o.id!==official.id&&!state.engine.isOfficerAssigned(o));
 // 郡掾只设在郡府（郡治或行郡事）据点；许昌不是颍川郡治，只设县廷三职。
@@ -28,7 +28,7 @@ if(!military.ok||army.reinforcementTarget!==army.soldiers+500)throw new Error("�
 const soldiersBefore=army.soldiers;city.garrison=Math.max(city.garrison,3000);state.engine.resolveAdministration(state,[]);if(army.soldiers<=soldiersBefore)throw new Error("军团没有按目标自动补员");
 
 const save=state.serialize(),migrated=state.migrateSave({...save,version:13});if(save.version!==GameState.SAVE_VERSION||migrated.version!==GameState.SAVE_VERSION||!save.world.cities.find(c=>c.id==="xuchang").administration||!save.world.counties?.length)throw new Error("v17 存档没有持久化治理及县域状态");
-const view=appSource();for(const text of ["郡县官署任命","普通官员 · 能力45","军职任命","自动补员目标","data-office-role","更换 / 任命","data-officer-appointment"])if(!view.includes(text))throw new Error(`治理 UI 缺少 ${text}`);
+const view=appSource();for(const text of ["郡县官署任命","普通官员 · 能力60","军职任命","自动补员目标","data-office-role","更换 / 任命","data-officer-appointment"])if(!view.includes(text))throw new Error(`治理 UI 缺少 ${text}`);
 
 console.log("郡县治理通过：郡守/太守/属官槽 / 普通官员 / 兼任衰减 / 持续发展 / 自动征募补员 / 军职槽 / v17 存档");
 

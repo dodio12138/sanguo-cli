@@ -57,6 +57,7 @@ assert.ok(segments(run(makeView({layer:"terrain"})))[0]>0,"非势力图层也应
 const view=fs.readFileSync(new URL("../js/ui/map-view.js",import.meta.url),"utf8");
 for(const feature of ["this.territoryRadius=8","politicalOwner","lightenColor","isPlayerTerritory","drawPlayerTerritoryOutline","this.drawPlayerTerritoryOutline(c,m,visibleCells)","c.setLineDash("])if(!view.includes(feature))throw new Error(`地图缺少我方疆界描边：${feature}`);
 if(!/owner\.distance<this\.territoryRadius/.test(view))throw new Error("势力归属没有复用统一的疆域半径");
-const outlineCall=view.indexOf("this.drawPlayerTerritoryOutline(c,m,visibleCells)"),hoverCall=view.indexOf("strokeRect(hx+1,hy+1");
-if(!(outlineCall>=0&&hoverCall>outlineCall))throw new Error("悬停光标框必须在我方疆界描边之后绘制，避免被描边遮盖");
+// 悬停框由 draw() 在 renderScene()（含疆界描边）之后单独绘制，悬停移动时贴回快照再画框。
+const scene=view.indexOf("renderScene(){"),outlineCall=view.indexOf("this.drawPlayerTerritoryOutline(c,m,visibleCells)",scene),drawFn=view.indexOf("  draw(){"),hoverCall=view.indexOf("this.drawHover(this.ctx",drawFn),sceneCall=view.indexOf("this.renderScene();",drawFn);
+if(!(outlineCall>scene&&sceneCall>drawFn&&hoverCall>sceneCall))throw new Error("悬停光标框必须在我方疆界描边之后绘制，避免被描边遮盖");
 console.log("我方疆界描边通过：归属与政治层同源 / 边界段数 / 细虚线双描边与提亮势力色 / 海面排除 / 观察模式与图例隐藏 / 全图层标示 / 悬停光标框不被遮盖");

@@ -48,8 +48,10 @@ window.FiscalSystem=class FiscalSystem {
     const engine=state.engine,cache=engine.administrativeLoads?.().governance,cached=cache?.get(city.id),officials=cached||(()=>{const profile=role=>engine.officialProfile(city,role),affair=id=>engine.affairScore?engine.affairScore(city,id):profile({commerce:"commerce",agriculture:"agriculture",registry:"population"}[id]),magistrate=engine.magistrateRole?profile(engine.magistrateRole(city)):null;return {governor:profile("governor"),county:profile("commanderyGovernor"),finance:affair("commerce"),agriculture:affair("agriculture"),households:affair("registry"),overload:magistrate?.officer&&!magistrate.familyId?engine.officerLoad?.(magistrate.officer.id)?.corruption||0:engine.loadCorruption?.(engine.administrativeLoads?.().nodes.get(city.id)?.defaultRate||0)||0,secretary:engine.secretaryCorruption?.(city)||0}})();if(cache&&!cached)cache.set(city.id,officials);const {governor,county,finance,agriculture,households,overload}=officials,support=this.clamp((city.publicSupport??city.order??60)/100,.1,1);
     const ability=(governor.score+county.score+finance.score+households.score)/4;
     // 手动征收的"注意力"并入县令的行政负荷（offices.js）：县令过劳时其分数下降，过 80% 后贪腐另增（质量下降）。
-    const efficiency=this.clamp(.48+ability/180,.25,.98);
-    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload+officials.secretary)/100-(governor.score+finance.score)/700,.01,.45);
+    const A=engine.abilityConfig?.().admin||{fiscal_efficiency:.35,corruption_scale:1.5},pivot=engine.abilityConfig?.().pivot??60;
+    // 能力 60（默认官员）时效率 73%、贪腐减免 0.129，与改制前默认一致；高低按差值放大。
+    const efficiency=this.clamp(.73+(ability-pivot)/pivot*A.fiscal_efficiency,.25,.98);
+    const corruption=this.clamp(((city.fiscal?.corruption??25)+overload+officials.secretary)/100-.1286-(governor.score+finance.score-2*pivot)/700*A.corruption_scale,.01,.45);
     const population=(city.population||0)+engine.countiesForCity(city.id).reduce((sum,county)=>sum+(county.population||0),0),bureaucracy=Math.max(10,Math.ceil(population/12000)+(city.level||1)*8);
     return {efficiency,corruption,support,ability,agriculture:agriculture.score,bureaucracy,population};
   }
