@@ -1,9 +1,32 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-const html=fs.readFileSync(new URL('../docs/game-turn-map.html',import.meta.url),'utf8');
-for(const id of ['economyDetail','worldDetail','ordersDetail','adminDetail','aiDetail','warDetail','peopleDetail','eventDetail']){
-  assert(html.includes(`id="${id}"`));assert(html.includes(`data-detail-target="${id}"`));
+import vm from 'node:vm';
+const root=new URL('../',import.meta.url),html=fs.readFileSync(new URL('docs/game-turn-map.html',root),'utf8');
+const block=html.match(/<script id="flow-data" type="application\/json">([\s\S]*?)<\/script>/);
+assert(block,'流程数据随 HTML 发布，不额外依赖未复制的数据文件');
+const modules=JSON.parse(block[1]),ids=new Set(modules.map(m=>m.id));
+assert.equal(ids.size,modules.length,'系统 ID 唯一，深链接不会指错');
+const periods=new Set(['daily','tenday','monthly','quarterly','yearly','due','manual','newgame']);
+for(const m of modules){
+ assert(m.title&&m.intro&&m.entry&&m.loop&&m.steps.length,`${m.id} 有说明、入口、流程与回路`);
+ assert(m.pace.length&&m.pace.every(p=>periods.has(p)),`${m.id} 明确结算周期`);
+ assert(m.steps.every(s=>s.title&&s.body),`${m.id} 步骤说明完整`);
+ for(const id of m.links)assert(ids.has(id),`${m.id} 的关联流程 ${id} 可跳转`);
+ for(const file of m.sources)assert(fs.existsSync(new URL(file,root)),`${m.id} 的代码依据 ${file} 存在`);
 }
-for(const label of ['每日模拟','暂停','0.5 秒／日','概率决策','没有固定行动日期','中央府库','军队仓储','人日','九月月末','月末','季度末','军团每日粮需 = ceil(兵力 ÷ 600)','每十日一段','每五日一段'])assert(html.includes(label),label);
-assert(!html.includes('旬'));assert(!html.includes('结束回合'));assert(html.includes('@media(max-width:600px)'));
-console.log('每日流程图通过：8 个可展开阶段、连续模拟、概率 AI、财政与运输、日/十日/月/季/年周期、响应式布局');
+const commands=modules.flatMap(m=>m.commands||[]),commandIds=new Set(commands.map(c=>c.id));
+assert.equal(commandIds.size,commands.length,'每条注册命令明确归入一个流程，不遗漏也不重复');
+const catalog=JSON.parse(fs.readFileSync(new URL('game/data/common/commands.json',root),'utf8'));
+const expected=new Set(catalog.categories.flatMap(c=>c.commands.map(row=>row[0])));
+const fiscal=fs.readFileSync(new URL('js/core/fiscal-system.js',root),'utf8').split('static commands=')[1].split('  ];')[0]+']';
+for(const row of JSON.parse(fiscal))expected.add(row[0]);
+assert.deepEqual([...commandIds].sort(),[...expected].sort(),'当前基础目录及财政扩展命令均有说明入口');
+for(const id of ['economyDetail','worldDetail','ordersDetail','adminDetail','aiDetail','warDetail','peopleDetail','eventDetail'])assert(ids.has(id),'保留旧的八阶段深链接');
+for(const key of ['flowSearch','paceFilter','expandAll','collapseAll','printAtlas','dailyPhases','cadenceRows','cycles','moduleNav'])assert(html.includes(`id="${key}"`),key);
+for(const script of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
+assert(html.includes('beforeprint')&&html.includes('afterprint'),'打印全展开后恢复阅读状态');
+assert(html.includes('@media(max-width:600px)'));
+assert(!html.includes('军团每日粮需 = ceil(兵力 ÷ 600)'),'不再传播已经废弃的军粮公式');
+assert(!html.includes('围城每十日结算'),'围城说明符合当前逐日执行');
+assert(!/\b(?:localStorage|sessionStorage|fetch)\s*[.(]/.test(html),'说明页不读写存档、不请求游戏数据');
+console.log(`流程图谱通过：${modules.length} 项系统、${modules.reduce((n,m)=>n+m.steps.length,0)} 步，深链接、周期、回路与代码依据完整；脚本可解析`);
