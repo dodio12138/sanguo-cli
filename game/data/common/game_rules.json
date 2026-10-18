@@ -15,8 +15,8 @@
       "milestone_interval": 12
     },
     "economy": {
-      "population_base_growth_per_xun": 0.00008,
-      "population_order_growth_per_point": 0.000006,
+      "population_base_growth_per_xun": 8e-05,
+      "population_order_growth_per_point": 6e-06,
       "population_occupation_growth_per_xun": -0.0005,
       "food_harvest_per_agriculture": 3.5,
       "min_remittance": {
@@ -40,34 +40,125 @@
       "pivot": 60,
       "default": 60,
       "bonus_scale": 1.5,
-      "battle": {"leadership": 0.39, "martial": 0.27, "tactics": 0.18, "steady": 0.3, "charge_per_point": 0.2, "deputy_cap": 0.15, "staff_cap": 0.12, "calibration": 0.8413},
-      "admin": {"growth": 1.0, "county_governance": 0.3, "commandery_governance": 0.2, "recruit": 1.0, "training": 1.0, "fiscal_efficiency": 0.35, "corruption_scale": 1.5, "registration": 1.5}
+      "battle": {
+        "leadership": 0.39,
+        "martial": 0.27,
+        "tactics": 0.18,
+        "steady": 0.3,
+        "charge_per_point": 0.2,
+        "deputy_cap": 0.15,
+        "staff_cap": 0.12,
+        "calibration": 0.8413
+      },
+      "admin": {
+        "growth": 1.0,
+        "county_governance": 0.3,
+        "commandery_governance": 0.2,
+        "recruit": 1.0,
+        "training": 1.0,
+        "fiscal_efficiency": 0.35,
+        "corruption_scale": 1.5,
+        "registration": 1.5
+      }
     },
     "offices": {
       "note": "内政改制 P2：行政容量与县郡州幕府职位，见 docs/ADMINISTRATION_REFORM_PLAN.md 乙编",
-      "capacity": {"base": 50, "per_score": 1, "injured": 0.72},
-      "curve": {"soft": 0.8, "at_full": 0.92, "exponent": 0.8, "minimum": 0.38},
-      "tier_weights": {"court": 0.10, "commandery": 0.27, "county": 0.63, "province": 0.07},
+      "capacity": {
+        "base": 50,
+        "per_score": 1,
+        "injured": 0.72
+      },
+      "curve": {
+        "soft": 0.8,
+        "at_full": 0.92,
+        "exponent": 0.8,
+        "minimum": 0.38
+      },
+      "tier_weights": {
+        "court": 0.1,
+        "commandery": 0.27,
+        "county": 0.63,
+        "province": 0.07
+      },
       "acting_commandery_factor": 0.9,
       "convoy_floor": 0.6,
       "acting_commandery_clerks": 2,
       "lodged_load_factor": 1.25,
-      "assistant_share": {"assistant": 0.35, "secretary": 0.30, "biejia": 0.30, "zhizhong": 0.20, "chief": 0.30},
+      "assistant_share": {
+        "assistant": 0.35,
+        "secretary": 0.3,
+        "biejia": 0.3,
+        "zhizhong": 0.2,
+        "chief": 0.3
+      },
       "assistant_full_score": 80,
-      "secretary_relief": [0.08, 0.15],
+      "secretary_relief": [
+        0.08,
+        0.15
+      ],
       "concurrent_county_load": 0.5,
       "loads": {
-        "magistrate": {"base": 18, "per_10k_population": 3, "per_subcounty": 4, "per_5k_garrison": 2},
-        "commandant": {"base": 12, "per_3k_garrison": 3, "frontier": 10},
-        "prefect": {"base": 20, "per_node": 5, "per_50k_population": 3, "frontier": 10},
-        "clerk": {"base": 14, "per_node": 3},
-        "province_governor": {"base": 20, "per_commandery": 6, "per_army": 4, "max_armies": 10},
-        "province_clerk": {"base": 16, "per_commandery": 3},
-        "court": {"base": 20, "per_node": 0.2, "per_post": 2, "per_uncovered_commandery": 2},
-        "army": {"commander_base": 20, "per_1k_soldiers": 2, "campaign": 10, "staff_base": 8, "quartermaster_base": 6, "marshal_base": 6, "lieutenant_base": 4},
-        "temporary": {"besieged": 20, "occupied": 15, "inspection": 8, "lord_away": 15, "farming_army": 3, "disaster": 10, "prisoners": 10, "blocked_shipment": 4}
+        "magistrate": {
+          "base": 18,
+          "per_10k_population": 3,
+          "per_subcounty": 4,
+          "per_5k_garrison": 2
+        },
+        "commandant": {
+          "base": 12,
+          "per_3k_garrison": 3,
+          "frontier": 10
+        },
+        "prefect": {
+          "base": 20,
+          "per_node": 5,
+          "per_50k_population": 3,
+          "frontier": 10
+        },
+        "clerk": {
+          "base": 14,
+          "per_node": 3
+        },
+        "province_governor": {
+          "base": 20,
+          "per_commandery": 6,
+          "per_army": 4,
+          "max_armies": 10
+        },
+        "province_clerk": {
+          "base": 16,
+          "per_commandery": 3
+        },
+        "court": {
+          "base": 20,
+          "per_node": 0.2,
+          "per_post": 2,
+          "per_uncovered_commandery": 2
+        },
+        "army": {
+          "commander_base": 20,
+          "per_1k_soldiers": 2,
+          "campaign": 10,
+          "staff_base": 8,
+          "quartermaster_base": 6,
+          "marshal_base": 6,
+          "lieutenant_base": 4
+        },
+        "temporary": {
+          "besieged": 20,
+          "occupied": 15,
+          "inspection": 8,
+          "lord_away": 15,
+          "farming_army": 3,
+          "disaster": 10,
+          "prisoners": 10,
+          "blocked_shipment": 4
+        }
       },
-      "quality": {"corruption_at_full": 2, "corruption_per_overload": 0.2}
+      "quality": {
+        "corruption_at_full": 2,
+        "corruption_per_overload": 0.2
+      }
     },
     "siege": {
       "breach_ratio": 0.55,
@@ -716,7 +807,11 @@
       "convoy_max_hops": 14,
       "source_cells": 30,
       "escort_ratio": 0.03,
-      "escort_levels": {"light": 0.4, "normal": 1, "heavy": 2.5},
+      "escort_levels": {
+        "light": 0.4,
+        "normal": 1,
+        "heavy": 2.5
+      },
       "escort_garrison_share": 0.15,
       "raid_base": 0.55,
       "passive_base": 0.35,
@@ -728,10 +823,13 @@
       "depot_hop_bonus": 3
     },
     "grain": {
-      "note": "首轮沿用统一秋收，3—9月为抽象生长期；年度规模沿用原税粮口径，非全社会粮产。新局补田间进度与储备，旧局保留已有资源。济粮每五日检查，按缺粮程度排序、限制批次并真实运输。",
+      "note": "统一秋收。地方按实际驻屯日耗保障至下次秋收并留45日缓冲，最低90日、最长410日且受仓容约束；余粮上缴。济粮每五日检查，低于30日触发、补至90日，每批上限2万石并真实运输。旧局不补发库存。",
       "sow_month": 3,
       "harvest_month": 9,
       "opening_reserve_days": 60,
+      "opening_stationed_city_bonus": 0.2,
+      "storage_reserve_days": 240,
+      "storage_per_person": 0.5,
       "relief_review_days": 5,
       "relief_trigger_days": 30,
       "relief_target_days": 90,
@@ -742,15 +840,19 @@
       "farming_land_share": 0.1,
       "farming_ration_factor": 0.5,
       "farming_food_per_worker": 3,
-      "farming_training_factor": 0.5
+      "farming_training_factor": 0.5,
+      "local_reserve_min_days": 90,
+      "local_harvest_buffer_days": 45,
+      "local_reserve_max_days": 410
     },
     "food": {
-      "note": "野战口粮参考汉简大石粟口径，日0.066石；安全驻城军团的官仓净支出日0.033石，为就地供养的游戏抽象，不代表实际饮食减半或史载统一标准。普通守军参数另计。仓容、开局存粮与新建仓库按 stock_scale 放大；crop_scale 调整官府收粮。v17及更早存档的存粮读档时同比换算",
+      "note": "野战口粮参考汉简大石粟口径，日0.066石；安全驻城军团的官仓净支出日0.033石，为就地供养的游戏抽象，不代表实际饮食减半或史载统一标准。普通守军参数另计。仓容、开局存粮与新建仓库按 stock_scale 放大；crop_scale 调整官府收粮。v17及更早存档的存粮读档时同比换算 安全城普通守军的官仓净支出按garrison_ration×garrison_stationed_factor计，默认日0.004石／人；围城和行军口粮不随之减免。",
       "army_ration": 0.066,
       "stationed_ration": 0.033,
       "garrison_ration": 0.05,
       "crop_scale": 1.2,
-      "stock_scale": 4
+      "stock_scale": 4,
+      "garrison_stationed_factor": 0.08
     }
   },
   "buildings": {
@@ -944,8 +1046,16 @@
     "rout_line": 25,
     "rout_command_scale": 0.12,
     "rout_veteran_shift": 10,
-    "retreat_line_by_tactic": {"aggressive": 0, "balanced": 30, "cautious": 40},
-    "split": {"killed": 0.3, "wounded": 0.45, "scattered": 0.25},
+    "retreat_line_by_tactic": {
+      "aggressive": 0,
+      "balanced": 30,
+      "cautious": 40
+    },
+    "split": {
+      "killed": 0.3,
+      "wounded": 0.45,
+      "scattered": 0.25
+    },
     "rout_loss": 0.1,
     "withdraw_loss": 0.03,
     "straggler_return": 0.4,
@@ -953,7 +1063,10 @@
     "veteran_power": 0.3,
     "veteran_gain": 1.6,
     "veteran_gain_cap": 0.3,
-    "veteran_initial": {"floor": 40, "scale": 1},
+    "veteran_initial": {
+      "floor": 40,
+      "scale": 1
+    },
     "wound_recover_city": 0.03,
     "wound_recover_field": 0.005,
     "wound_death_field": 0.01,
@@ -1003,14 +1116,116 @@
       "crossing_days": 1,
       "capacity": 0.5,
       "frontage": 2,
-      "terrain_cost": {"plains": 1, "grassland": 1, "basin": 1, "highland": 1.1, "river": 1.3, "desert": 1.3, "plateau": 1.4, "forest": 1.5, "hills": 1.6, "marsh": 2.2, "mountain": 2.8}
+      "terrain_cost": {
+        "plains": 1,
+        "grassland": 1,
+        "basin": 1,
+        "highland": 1.1,
+        "river": 1.3,
+        "desert": 1.3,
+        "plateau": 1.4,
+        "forest": 1.5,
+        "hills": 1.6,
+        "marsh": 2.2,
+        "mountain": 2.8
+      }
     }
   },
   "succession": {
-    "陶谦": ["刘备"], "刘表": ["刘琮", "刘琦"], "公孙度": ["公孙康"], "公孙康": ["公孙恭"], "孙坚": ["孙策", "孙权"], "孙策": ["孙权"],
-    "袁绍": ["袁尚", "袁谭", "袁熙"], "刘焉": ["刘璋"], "刘璋": ["刘循"], "马腾": ["马超"], "曹操": ["曹丕", "曹植", "曹彰"], "刘备": ["刘禅"],
-    "孙权": ["孙登", "孙亮"], "董卓": ["李傕", "郭汜"], "李傕": ["郭汜"], "韦端": ["韦康"], "张鲁": ["张卫"], "公孙瓒": ["公孙续"],
-    "袁术": ["袁胤"], "刘繇": ["太史慈"], "张杨": ["眭固"], "韩遂": ["成公英"], "曹丕": ["曹叡"], "刘禅": ["刘璿"], "公孙恭": ["公孙渊"], "张角": ["张宝", "张梁"], "张宝": ["张梁"], "刘宏": ["刘辩", "刘协"]
+    "陶谦": [
+      "刘备"
+    ],
+    "刘表": [
+      "刘琮",
+      "刘琦"
+    ],
+    "公孙度": [
+      "公孙康"
+    ],
+    "公孙康": [
+      "公孙恭"
+    ],
+    "孙坚": [
+      "孙策",
+      "孙权"
+    ],
+    "孙策": [
+      "孙权"
+    ],
+    "袁绍": [
+      "袁尚",
+      "袁谭",
+      "袁熙"
+    ],
+    "刘焉": [
+      "刘璋"
+    ],
+    "刘璋": [
+      "刘循"
+    ],
+    "马腾": [
+      "马超"
+    ],
+    "曹操": [
+      "曹丕",
+      "曹植",
+      "曹彰"
+    ],
+    "刘备": [
+      "刘禅"
+    ],
+    "孙权": [
+      "孙登",
+      "孙亮"
+    ],
+    "董卓": [
+      "李傕",
+      "郭汜"
+    ],
+    "李傕": [
+      "郭汜"
+    ],
+    "韦端": [
+      "韦康"
+    ],
+    "张鲁": [
+      "张卫"
+    ],
+    "公孙瓒": [
+      "公孙续"
+    ],
+    "袁术": [
+      "袁胤"
+    ],
+    "刘繇": [
+      "太史慈"
+    ],
+    "张杨": [
+      "眭固"
+    ],
+    "韩遂": [
+      "成公英"
+    ],
+    "曹丕": [
+      "曹叡"
+    ],
+    "刘禅": [
+      "刘璿"
+    ],
+    "公孙恭": [
+      "公孙渊"
+    ],
+    "张角": [
+      "张宝",
+      "张梁"
+    ],
+    "张宝": [
+      "张梁"
+    ],
+    "刘宏": [
+      "刘辩",
+      "刘协"
+    ]
   },
   "edge_modifiers": {
     "henei:mengjin": "river",

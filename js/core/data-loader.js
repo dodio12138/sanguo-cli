@@ -42,7 +42,7 @@ window.DataLoader = class DataLoader {
       city.historical=DataLoader.populationHistory(config,commandery,basis);city.commandery=commandery;if(!city.province)city.province=data.administrativeDivisions?.frontier_commandery_provinces?.[commandery]||data.administrativeDivisions?.commandery_seats_140?.find(seat=>seat.name===commandery)?.province||"";city.counties=[...counties];city.resourceRegion=basis.resource_region||"other";city.resourceScenario=scenarioId;
       city.population=Math.max(1000,Math.round(basePopulation*(adjustment.population??1)/500)*500);city.garrison=Math.max(city.type==="city"?500:100,Math.round(baseGarrison*(adjustment.garrison??1)/100)*100);
       city.agriculture=Math.max(0,Math.min(100,Math.round((city.agriculture||0)+(adjustment.agriculture||0))));city.commerce=Math.max(0,Math.min(100,Math.round((city.commerce||0)+(adjustment.commerce||0))));city.order=Math.max(0,Math.min(100,Math.round((city.order||0)+(adjustment.order||0))));
-      const levelCapacity=config.storage_by_level?.[String(city.level||1)]||20000;city.storage=config.type_storage?.[city.harbor?"port":city.type]||levelCapacity;
+      const levelCapacity=config.storage_by_level?.[String(city.level||1)]||20000;city.storage=(city.type||"city")==="city"?Math.max(levelCapacity,city.harbor?config.type_storage?.port||0:0):config.type_storage?.[city.type]||levelCapacity;
       const foodRatio=Math.max(.2,Math.min(.95,adjustment.food_stock??.74)),goldFactor=Math.max(.2,adjustment.gold_stock??1);city.localFood=Math.min(city.storage,Math.round(city.storage*foodRatio/100)*100);city.localGold=Math.round((city.population/32+city.commerce*28)*goldFactor/100)*100;city.reserveRatio=city.type==="city"?25:35;
     }
     return data;
