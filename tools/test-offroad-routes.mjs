@@ -38,7 +38,9 @@ for(let i=1;i<custom.length;i++)assert(!engine.legInfo(custom[i-1],custom[i]).le
 // 命令执行沿用玩家指定的停留点，而不是重新求最快路线。
 const forceId=data.scenario.player_force||"cao",army=data.armies.find(item=>item.force===forceId),state=new GameState(structuredClone(data),{playerForceId:forceId});
 const own=state.data.cities.filter(city=>city.force===forceId),home=state.data.armies.find(item=>item.id===army.id),goal=own.find(city=>city.id!==home.city&&state.engine.path(home.city,city.id,forceId)?.length>3),via=own.find(city=>![home.city,goal.id].includes(city.id)&&!state.engine.path(home.city,goal.id,forceId).includes(city.id)&&state.engine.plannedRoute(home.city,goal.id,forceId,{waypoints:[city.id]}));
+state.engine.playerForceId=forceId; // 直接调用命令入口时补上日结通常设置的玩家权限。
 const events=[];state.engine.resolveOrder?.(state,{type:"move",armyIds:[home.id],cityIds:[goal.id],options:{routeMode:"custom",waypoints:[via.id]}},events);
+assert(home.route,`行军未建立路线：${events.map(e=>e.text).join("；")}`);
 assert([home.city,...home.route].includes(via.id),`军团应经停 ${via.name}：${events.map(e=>e.text).join("；")}`);
 const view=fs.readFileSync(path.join(root,"js/ui/map-view.js"),"utf8"),app=appSource();
 assert(/leg\?\.kind==="offroad"&&leg\.points/.test(view),"野径行军沿地形折线绘制");

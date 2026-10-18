@@ -1,0 +1,34 @@
+// 大城市持续断粮、战乱记忆、邻近避难与关津隔离；测试副本，不访问用户存档。
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+globalThis.window=globalThis;globalThis.location={protocol:'http:'};
+globalThis.fetch=async url=>{try{return {ok:true,json:async()=>JSON.parse(fs.readFileSync(new URL('../'+String(url).replace(/^\//,''),import.meta.url),'utf8'))}}catch{return {ok:false,status:404}}};
+if(typeof CustomEvent==='undefined')globalThis.CustomEvent=class extends Event{constructor(t,o={}){super(t);this.detail=o.detail}};
+await import('../js/data/offline-data.generated.js');
+for(const n of ['data-loader','game-clock','fiscal-system','rule-engine','game-state'])await import(`../js/core/${n}.js`);
+const loader=new DataLoader(SANGUO_DATA);await loader.load({useSavedMap:false});
+const data=await loader.loadScenario('200_guandu',{useSavedMap:false}),game=new GameState(structuredClone(data)),e=game.engine,P=RuleEngine.POP;
+const [city,safe]=e.data.cities.filter(c=>c.force==='cao'&&c.type==='city').sort((a,b)=>b.population-a.population),pass=e.data.cities.find(c=>c.type==='pass');
+assert(city.population>100000,'以人口逾十万的大城市测试');
+const rules=e.popRules();e._popRules={...rules,fertility:0,mortality:{children:0,adult:0,elderly:0},refugee:{...rules.refugee,loss:0}};
+for(const node of [city,safe,pass]){node.pops=[[0,0,'',35000,27000,27000,11000,19000,.9,.85]];node.force='cao';node.localFood=100000;delete node.lastBattleTurn;delete node.occupiedUntil;delete node.populationStress;e.popSync(node)}
+e.data.rules.city_graph={...e.data.rules.city_graph,[city.id]:[safe.id,pass.id],[safe.id]:[city.id],[pass.id]:[city.id]};
+e.popNeighbors=place=>e.data.rules.city_graph[place.id]||[];
+const next=()=>{game.turn++;game.date=GameClock.next(game.date);e.updatePopulationStress(game)},drift=c=>c.pops.filter(p=>p[P.CLS]===P.DRIFT).reduce((n,p)=>n+P.total(p),0);
+city.localFood=0;pass.localFood=0;
+for(let d=0;d<7;d++)next();assert.equal(e.popConditions(game,city).food,1,'空仓七日内先缓冲');
+const stamp=structuredClone(city.populationStress);e.updatePopulationStress(game);assert.deepEqual(city.populationStress,stamp,'同一日重复调用不累计压力');
+assert.equal(e.popConditions(game,pass).food,1,'关津常见军粮不足不触发居民饥荒');assert(!pass.populationStress,'关津不占城市饥荒记忆');
+for(let d=7;d<60;d++)next();assert.equal(e.popConditions(game,city).food,.35,'持续两月空仓严重饥荒');
+const before=city.population+safe.population,stats={...game.popStats};e.resolvePopulationPlaces(game,[city,safe]);
+assert(city.population<100000,'大城市持续缺粮后人口减少');assert(drift(city)>0,'饥荒产生流民');assert(safe.population>100000,'流民迁往邻近有粮城市');assert.equal(city.population+safe.population,before-(game.popStats.deaths-stats.deaths),'迁徙只转移人口，损失记账');
+assert(game.popStats.deaths-stats.deaths<1000,'每月缓慢减少而非一次清空');
+city.localFood=100000;for(let d=0;d<30;d++)next();assert.equal(e.popConditions(game,city).food,1,'恢复供粮后饥荒逐步消退');
+for(let d=0;d<20;d++){game.turn++;game.date=GameClock.next(game.date);city.lastBattleTurn=game.turn;e.updatePopulationStress(game)}assert.equal(e.popConditions(game,city).war,1,'反复交战积累战争压力');
+const warBefore=drift(city);e.resolvePopulationPlaces(game,[city]);assert(drift(city)>warBefore,'有粮但战乱的大城市同样产生流民');
+const siegeArmy={id:'stress_siege',force:'yuan',city:safe.id,soldiers:5000,siegeTarget:city.id};e.data.armies.push(siegeArmy);assert.equal(e.popMigrationTarget(game,safe),null,'不迁入被围城市');const safeBefore=safe.population;e.resolvePopulationPlaces(game,[city]);assert.equal(safe.population,safeBefore,'围城中流民不能穿越封锁瞬移逃出');e.data.armies.pop();
+for(let d=0;d<120;d++)next();assert.equal(e.popConditions(game,city).war,0,'长期和平可恢复');
+const save=JSON.parse(JSON.stringify(game.serialize())),restored=new GameState(structuredClone(data));restored.applySave(restored.migrateSave(save));assert.deepEqual(restored.engine.popPlace(city.id).populationStress,city.populationStress,'压力记忆可保存读回');
+assert.strictEqual(restored.engine.popPlace(city.id),restored.data.cities.find(c=>c.id===city.id),'同条数读档必须使用恢复后的节点而不是旧索引');
+const snapshot=JSON.stringify(game.serialize()),rng=game.rngState;e.popConditions(game,city);e.popMigrationTarget(game,city);const after=JSON.parse(JSON.stringify(game.serialize())),beforeRead=JSON.parse(snapshot);delete after.savedAt;delete beforeRead.savedAt;assert.deepEqual(after,beforeRead,'只读评估不改账本');assert.equal(game.rngState,rng,'只读评估不耗随机数');
+console.log('大城市人口压力通过：七日缓冲／长期缺粮缓慢死亡与外迁／反复战争流民／和平恢复／关津隔离／围城封锁／人口守恒／日去重与存档');

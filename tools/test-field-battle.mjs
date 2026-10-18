@@ -17,7 +17,8 @@ assert(data.rules.battle?.max_rounds,"game_rules 含 battle 段");
 // 在官渡附近找一处两军可交战的据点：攻方自相邻己方城出发
 const fresh=()=>{const game=new GameState(structuredClone(scenario),{playerForceId:"liu"}),e=game.engine;game.diplomacy.wars.push("yuan");
   const site=game.data.cities.find(c=>c.force==="cao"&&(game.data.rules.city_graph[c.id]||[]).length),from=game.data.cities.find(c=>c.id===game.data.rules.city_graph[site.id][0]);
-  const make=(id,force,soldiers,extra={})=>{const army={id,name:`${id}军`,force,city:site.id,commander:"无名将",soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:70,training:60,supply:100,valor:0,tactic:"balanced",formation:"balanced",stance:"驻扎",stores:{gold:0,food:0,silk:0},...extra};game.hydrateArmy(army);game.data.armies.push(army);return army};
+  // 攻方来处须为己方据点，不能把敌占城当成安全退路。
+  from.force="yuan";const make=(id,force,soldiers,extra={})=>{const army={id,name:`${id}军`,force,city:site.id,commander:"无名将",soldiers,units:{infantry:soldiers,cavalry:0,archers:0},morale:70,training:60,supply:100,valor:0,tactic:"balanced",formation:"balanced",stance:"驻扎",stores:{gold:0,food:0,silk:0},...extra};game.hydrateArmy(army);game.data.armies.push(army);return army};
   return {game,e,site,from,make}};
 const fight=(attackerSoldiers,defenderSoldiers,attackerExtra={},defenderExtra={})=>{const {game,e,site,from,make}=fresh();game.data.armies=game.data.armies.filter(a=>a.city!==site.id);
   const attacker=make("A","yuan",attackerSoldiers,{city:from.id,...attackerExtra}),defender=make("D","cao",defenderSoldiers,defenderExtra),events=[];attacker.city=site.id;const won=e.resolveFieldBattle(attacker,[defender],from,site,"road",game,events);

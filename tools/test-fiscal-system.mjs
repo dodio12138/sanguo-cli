@@ -92,6 +92,8 @@ assert(formed,"编军应生成新军团");assert(formed.stores,"新军团必须�
 state=fixture();city=state.data.cities[0];const garrisonArmy=state.data.armies[0];
 city.localFood=30000;city.fiscal.pendingRemittance.food=50000;
 const backlog=city.fiscal.pendingRemittance.food,reserve=FiscalSystem.localFoodReserve(state,city,FiscalSystem.governance(state,city));
+// 保底改为覆盖至下次秋收；测试仍提供确实超过新保底的余粮，并验证余粮可上缴。
+city.localFood=Math.max(city.localFood,reserve+15000);
 FiscalSystem.settle(state,[]);
 assert(reserve>=FiscalSystem.armyFoodTarget(state,garrisonArmy),"保底粮必须覆盖驻城军团就仓目标");
 assert(city.localFood>=reserve-40,"补缴必须给驻军口粮与军团就仓留足保底");

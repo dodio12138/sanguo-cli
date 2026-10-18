@@ -25,11 +25,20 @@ Object.assign(window.RuleEngine.prototype,{
 
   // —— 处所 ——
   popPlaces(){return [...this.data.cities,...(this.data.counties||[])]},
-  popPlace(id){if(!this._popPlaceIndex||this._popPlaceIndexSize!==this.data.cities.length+(this.data.counties||[]).length){this._popPlaceIndex=new Map(this.popPlaces().map(place=>[place.id,place]));this._popPlaceIndexSize=this._popPlaceIndex.size}return this._popPlaceIndex.get(id)||null},
+  popPlace(id){if(!this._popPlaceIndex||this._popCitySource!==this.data.cities||this._popCountySource!==this.data.counties||this._popPlaceIndexSize!==this.data.cities.length+(this.data.counties||[]).length){this._popPlaceIndex=new Map(this.popPlaces().map(place=>[place.id,place]));this._popPlaceIndexSize=this._popPlaceIndex.size;this._popCitySource=this.data.cities;this._popCountySource=this.data.counties}return this._popPlaceIndex.get(id)||null},
   // 县记录的位置与粮仓看本县县治节点；没有县治节点的看所属郡治。
   popNode(place){if(!place.jurisdictionCityId)return place;return this.data.cities.find(city=>city.id===place.cityId)||this.data.cities.find(city=>city.id===place.jurisdictionCityId)||place},
-  popConditions(state,place){const node=this.popNode(place),besieged=this.isCityBesieged?.(node),recent=(node.lastBattleTurn&&state.turn-node.lastBattleTurn<=30)||(node.occupiedUntil&&node.occupiedUntil>=state.turn);
-    const food=besieged?.35:(node.localFood||0)<=0&&node.force!=="neutral"?.6:1;return {food,war:besieged||recent?1:0,node}},
+  // 每日只记录节点压力，POP 仍分摊到月内结算。关津军粮短缺不等于居民饥荒。
+  updatePopulationStress(state){if(!GameClock.isDaily(state))return;const stamp=`${state.date.year}-${state.date.month}-${state.date.day}`,sieges=new Set(this.data.armies.filter(a=>a.siegeTarget&&a.soldiers>0&&(this.data.rules.city_graph?.[a.city]||[]).includes(a.siegeTarget)&&this.popPlace(a.siegeTarget)?.force!==a.force).map(a=>a.siegeTarget));
+    for(const node of this.data.cities){if((node.type||"city")!=="city")continue;const old=node.populationStress;if(old?.lastDay===stamp)continue;
+      const hungry=!(node.localFood>0)&&node.force!=="neutral",battle=Number.isFinite(node.lastBattleTurn)&&node.lastBattleTurn===state.turn,war=sieges.has(node.id)||battle||(node.occupiedUntil!=null&&node.occupiedUntil>=state.turn);
+      node.populationStress={lastDay:stamp,hungerDays:Math.max(0,Math.min(90,(old?.hungerDays||0)+(hungry?1:-2))),warDays:Math.max(0,Math.min(60,(old?.warDays||0)+(war?1:-.25)))};
+    }},
+  popConditions(state,place){const node=this.popNode(place),besieged=!!this.isCityBesieged?.(node),recent=(Number.isFinite(node.lastBattleTurn)&&state.turn>=node.lastBattleTurn&&state.turn-node.lastBattleTurn<=30)||(node.occupiedUntil!=null&&node.occupiedUntil>=state.turn),stress=node.populationStress,town=(node.type||"city")==="city";
+    // 七日缓冲，连续空仓约两个月达到严重饥荒；恢复供粮后压力逐步消退，不每天另扣人口。
+    const hunger=town?(stress?Math.max(0,Math.min(1,(stress.hungerDays-7)/53)):!(node.localFood>0)&&node.force!=="neutral"?.4/.65:0):0;
+    const war=stress?Math.max(besieged?.5:0,Math.min(1,stress.warDays/20),recent?.25:0):besieged||recent?1:0;
+    return {food:1-.65*hunger,war,node,besieged}},
 
   // —— 拆分与合并 ——
   popAdd(place,occ,cls,clan,buckets,households,registered,health){place.pops??=[];const amount=buckets.reduce((n,v)=>n+v,0);if(amount<=0&&households<=0)return null;
@@ -101,12 +110,12 @@ Object.assign(window.RuleEngine.prototype,{
   // 人口按月结算。逐日模拟（rolling）时各地点分在月内不同日子结算（按地点分 28 组，每月一次），不再全部挤在月末；
   // 世家、家族月结仍在月末。直接调用（测试、旬制）时月末一次结算全部地点。
   popPlaceDay(id){const map=this._popPlaceDays??=new Map;let d=map.get(id);if(d===undefined){let h=7;for(const ch of String(id))h=(h*33+ch.charCodeAt(0))|0;d=1+Math.abs(h)%28;map.set(id,d)}return d},
-  resolvePopulation(state,events,{rolling=false}={}){const spread=rolling&&GameClock.isDaily(state),monthEnd=GameClock.isMonthEnd(state);if(!spread&&!monthEnd)return;if(!state.clans)this.ensurePopulation(state);
+  resolvePopulation(state,events,{rolling=false}={}){const spread=rolling&&GameClock.isDaily(state),monthEnd=GameClock.isMonthEnd(state);if(rolling)this.updatePopulationStress(state);if(!spread&&!monthEnd)return;if(!state.clans)this.ensurePopulation(state);
     if(spread){const day=state.date.day,places=this.popPlaces().filter(place=>this.popPlaceDay(place.id)===day);if(places.length)this.resolvePopulationPlaces(state,places);if(this.monthlyDue(state,25)){this.resolveClans?.(state,events);this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)}return}
     this.resolveClans?.(state,events);this.resolvePopulationPlaces(state,this.popPlaces());this.runClanAI?.(state,events);this.resolveFamiliesMonthly?.(state,events)},
   resolvePopulationPlaces(state,places){const rules=this.popRules(),month=state.date.month,quarter=month%3===0,newYear=month===12;
     const rounding=(seed,value)=>{const whole=Math.floor(value),frac=value-whole;return whole+(((seed*2654435761)>>>0)%1000/1000<frac?1:0)};let seed=state.turn*31;
-    for(const place of places){if(!place.pops?.length)continue;const {food,war,node}=this.popConditions(state,place),registrationTarget=this.registrationTargets(state,place,node);
+    for(const place of places){if(!place.pops?.length)continue;const {food,war,node,besieged}=this.popConditions(state,place),registrationTarget=this.registrationTargets(state,place,node);
       for(const p of place.pops){seed++;const mort=rules.mortality,extra=rules.famine_mortality*(1-food)+rules.war_mortality*war;
         const births=rounding(seed,p[AF]*rules.fertility/12*food*p[HP]);p[CH]+=births;state.popStats.births+=births;
         for(const [i,base] of [[CH,mort.children],[AM,mort.adult],[AF,mort.adult],[EL,mort.elderly]]){const deaths=Math.min(p[i],rounding(seed+i,p[i]*(base+extra)/12));p[i]-=deaths;state.popStats.deaths+=deaths}
@@ -121,12 +130,13 @@ Object.assign(window.RuleEngine.prototype,{
         const burden=Math.max(0,((FiscalSystem.account?.(state,node.force)?.landRate)??10)-10)/10,rate=(rules.dependency.base+rules.dependency.famine*(1-food)+rules.dependency.tax*burden+rules.dependency.war*war)*Math.min(1,shareSum*2);
         if(free&&room>0&&rate>0)this.popMove(place,free,Math.min(rate,room/Math.max(1,total(free))),FARM,DEP,top[0],{registered:registrationTarget.dependent(top[0])})}}
       // 流民：不安定处迁往邻近较好处；安定处逐月定居
-      for(const p of place.pops.filter(pop=>pop[CLS]===DRIFT)){if(total(p)<=0)continue;const settled=!war&&food>=.9;
+      for(const p of place.pops.filter(pop=>pop[CLS]===DRIFT)){if(total(p)<=0)continue;const settled=war<.1&&food>=.9;
         if(settled){const shares=this.clanSharesAt(state,place.id),top=Object.entries(shares).sort((a,b)=>b[1]-a[1])[0],toClan=top&&top[1]>=.15?.5:0,amount=rules.refugee.settle;
           if(toClan)this.popMove(place,p,amount*toClan,FARM,DEP,top[0],{householdFactor:1.6,registered:registrationTarget.dependent(top[0])});this.popMove(place,p,amount*(1-toClan)/(1-amount*toClan),FARM,FREE,"",{householdFactor:1.6,registered:.6});continue}
-        const dest=this.popMigrationTarget(state,place);if(!dest)continue;const packet=this.popSplit(p,rules.refugee.migrate);let lost=0;packet.buckets=packet.buckets.map(v=>{const gone=Math.floor(v*rules.refugee.loss);lost+=gone;return v-gone});state.popStats.lost+=lost;this.popAdd(dest,FARM,DRIFT,"",packet.buckets,packet.households,rules.registered[DRIFT],packet.health);this.popCompact(dest);this.popSync(dest)}
+        if(besieged)continue;const dest=this.popMigrationTarget(state,place);if(!dest)continue;const packet=this.popSplit(p,rules.refugee.migrate);let lost=0;packet.buckets=packet.buckets.map(v=>{const gone=Math.floor(v*rules.refugee.loss);lost+=gone;return v-gone});state.popStats.lost+=lost;this.popAdd(dest,FARM,DRIFT,"",packet.buckets,packet.households,rules.registered[DRIFT],packet.health);this.popCompact(dest);this.popSync(dest)}
       this.popCompact(place);this.popSync(place)}},
-  popMigrationTarget(state,place){let best=null;for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const {food,war,node}=this.popConditions(state,dest),crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1),score=food*2+(node.order||50)/100-war*2-crowd*3;if(score>1.6&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
+  popMigrationTarget(state,place){const scoreAt=dest=>{const {food,war,node,besieged}=this.popConditions(state,dest);if(besieged||(node.type||"city")!=="city")return -Infinity;const crowd=dest.pops.filter(p=>p[CLS]===DRIFT).reduce((n,p)=>n+total(p),0)/Math.max(1,dest.population||1);return food*2+(node.order??50)/100-war*2-crowd*3},origin=scoreAt(place);let best=null;
+    for(const id of this.popNeighbors(place)){const dest=this.popPlace(id);if(!dest?.pops)continue;const score=scoreAt(dest);if(score>Math.max(1.6,origin+.15)&&(!best||score>best.score))best={dest,score}}return best?.dest||null},
   // 登记率目标：编户看户曹（或世家县令）能力，依附户看世家与据点主的关系。
   registrationTargets(state,place,node){const rules=this.popRules().registration,magistrate=this.countyMagistrate?.(state,place),score=45+((magistrate?magistrate.ability:(this.affairScore?.(node,"registry")?.score??60))-60)*(this.abilityConfig?.().admin.registration??1),free=Math.min(rules.free_max,rules.free_base+score*rules.free_per_score);
     return {free,dependent:clanId=>Math.max(.2,Math.min(.8,rules.dependent_base*this.clanRelation(state,clanId,node.force)/60))}},

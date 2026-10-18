@@ -58,3 +58,28 @@ army.farming={cityId:'b',startedTurn:1};const profile=FiscalSystem.armyFarming(g
 for(let i=0;i<8;i++)g.data.armies.push({...structuredClone(army),id:'farm-'+i,soldiers:10000,farming:{cityId:'b',startedTurn:g.turn}});
 const workforce=FiscalSystem.farmingAt(g,city).reduce((s,r)=>s+r.workers,0);assert(workforce<=FiscalSystem.governance(g,city).population*.1,'土地承载限制，不按军团数量无限叠加');
 console.log('粮食季节、中央济粮与屯田通过：首年作物 / 储备 / 秋收去重 / 旧档不补发 / 真实运输 / 围困断路 / 预报只读 / 屯田命令、官粮减免、土地上限与下次收获');
+
+// 秋收先按实际驻屯保留至下一次收成，再上缴剩余粮；留底受仓容约束。
+{
+ const s=fixture(9,false),c=s.data.cities[1];s.date.day=30;c.fiscal.lastHarvestYear=s.date.year;c.localFood=0;c.fiscal.accrued.food=1000000;
+ const governance=FiscalSystem.governance(s,c),target=FiscalSystem.localFoodReserve(s,c,governance,false),days=FiscalSystem.localGrainReserveDays(s,c);assert(days>=365&&days<=410);assert(target>=FiscalSystem.localDailyGrain(s,c)*365);const result=FiscalSystem.collect(s,c,'food',[],true);assert(result.ok);assert(c.localFood>=target,'当年净税粮充足时应先保住次年驻屯口粮');assert(c.localFood<=c.storage);const line=c.fiscal.lastCollection.food;assert.equal(line.gross,line.inefficiencyLoss+line.corruptionLoss+line.localUse+line.retained+line.remitted+line.pending,'留用与上缴不重复记账');
+ c.storage=5000;assert(FiscalSystem.localFoodReserve(s,c,governance,false)<=5000,'自动留底不能超仓容');
+}
+// 安全城普通守军预估与每日实扣同口径；围城、野战的完整口粮不随之减免。
+{
+ const s=fixture(1,false),c=s.data.cities[1];s.data.armies=[];c.garrison=10000;c.localFood=100000;c.fiscal.foodExpenseRemainder=0;const daily=FiscalSystem.localDailyGrain(s,c);FiscalSystem.settle(s,[]);assert.equal(c.fiscal.localConsumption.foodNeed,Math.floor(daily));assert(FiscalSystem.localGarrisonDailyFood(s,10000)<FiscalSystem.garrisonDailyFood(s,10000));
+}
+
+// 有实际驻屯军团的城市开局多留20%原存粮；不改口粮，不额外照顾关津，不超仓、不重复发。
+{
+ const s=fixture(7,false),c=s.data.cities[1],army=s.data.armies[0];s.data.cityResourceProfiles={scenarios:{[s.data.scenario.id]:{default:{food_stock:.5}}}};
+ const before=c.localFood,armyNeed=FiscalSystem.armyDailyNeed(s,army);FiscalSystem.seedOpeningGrain(s);
+ assert.equal(c.localFood,Math.ceil(before*1.2),'紧缺剧本的驻屯城市也只适度增加原存粮');assert.equal(c.fiscal.openingGrain.stationedBonus,Math.ceil(before*.2));assert.equal(c.fiscal.openingGrain.added,c.localFood-before);
+ assert.equal(s.data.cities[0].localFood,1000,'无驻屯军团的城市不发这笔补充');assert.equal(FiscalSystem.armyDailyNeed(s,army),armyNeed,'驻屯军团粮耗不变');const seeded=c.localFood;FiscalSystem.seedOpeningGrain(s);assert.equal(c.localFood,seeded,'不能重复领取');
+ const save=JSON.parse(JSON.stringify(s.serialize())),back=fixture();back.applySave(back.migrateSave(save));assert.equal(back.data.cities[1].localFood,seeded,'读档不补发');FiscalSystem.seedOpeningGrain(back);assert.equal(back.data.cities[1].localFood,seeded);
+}
+for(const kind of ['full','pass','moving']){
+ const s=fixture(7,false),c=s.data.cities[1];s.data.cityResourceProfiles={scenarios:{[s.data.scenario.id]:{default:{food_stock:.5}}}};
+ if(kind==='full'){c.storage=c.localFood+100;s.policies.fiscalAccounts.storageCapacityVersion=1;}if(kind==='pass')c.type='pass';if(kind==='moving')s.data.armies[0].route=['c'];FiscalSystem.seedOpeningGrain(s);
+ assert.equal(c.localFood,kind==='full'?1100:1000,kind);assert(c.localFood<=c.storage,'开局补粮不超仓容');
+}

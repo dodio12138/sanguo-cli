@@ -1,0 +1,7639 @@
+{
+  "date": "2026-10-18",
+  "scope": "13 enabled scenarios; all playable forces 1 live day; each default force context 730 static economy days over all forces, plus 60 live simulation days",
+  "before": [
+    {
+      "id": "184_yingchuan",
+      "name": "颍川",
+      "player": "han",
+      "playable": 2,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 3,
+      "bonusFood": 43760,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 2583,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 284,
+      "postHungryArmyDays": 0,
+      "dispatches": 320,
+      "dispatchByForce": {
+        "han": 201,
+        "zhang_jiao": 119
+      },
+      "shortCities": [
+        {
+          "id": "wan",
+          "name": "宛",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 393000,
+          "garrison": 8600,
+          "stationed": 25000,
+          "initiallyBesieged": false,
+          "opening": 96000,
+          "bonus": 16000,
+          "dispatches": 13,
+          "shortDays": 22,
+          "maxShortStreak": 22,
+          "shortStreak": 0,
+          "emptyDays": 22,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xinye",
+          "name": "新野",
+          "force": "han",
+          "type": "city",
+          "population": 241000,
+          "garrison": 6600,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 5,
+          "shortDays": 69,
+          "maxShortStreak": 49,
+          "shortStreak": 0,
+          "emptyDays": 71,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_008",
+          "name": "阳翟",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 201300,
+          "garrison": 2100,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 90,
+          "shortDays": 33,
+          "maxShortStreak": 33,
+          "shortStreak": 0,
+          "emptyDays": 33,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "puyang",
+          "name": "濮阳",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 146000,
+          "garrison": 4600,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 98750,
+          "bonus": 13880,
+          "dispatches": 0,
+          "shortDays": 360,
+          "maxShortStreak": 259,
+          "shortStreak": 46,
+          "emptyDays": 361,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "ji",
+          "name": "蓟",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 127500,
+          "garrison": 5100,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 99194,
+          "bonus": 13880,
+          "dispatches": 0,
+          "shortDays": 301,
+          "maxShortStreak": 245,
+          "shortStreak": 56,
+          "emptyDays": 302,
+          "hungryArmyDays": 284
+        },
+        {
+          "id": "commandery_city_012",
+          "name": "陈县",
+          "force": "han",
+          "type": "city",
+          "population": 68500,
+          "garrison": 2100,
+          "stationed": 46000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 140,
+          "shortDays": 3,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 3,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_009",
+          "name": "平舆",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 46500,
+          "garrison": 2100,
+          "stationed": 15000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 16,
+          "shortDays": 6,
+          "maxShortStreak": 6,
+          "shortStreak": 0,
+          "emptyDays": 6,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_018",
+          "name": "信都",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 28000,
+          "garrison": 2100,
+          "stationed": 20000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 636,
+          "maxShortStreak": 345,
+          "shortStreak": 131,
+          "emptyDays": 637,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_088",
+          "name": "涿县",
+          "force": "han",
+          "type": "city",
+          "population": 27500,
+          "garrison": 2100,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 10,
+          "shortDays": 167,
+          "maxShortStreak": 36,
+          "shortStreak": 30,
+          "emptyDays": 174,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_015",
+          "name": "瘿陶",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 26000,
+          "garrison": 2100,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 665,
+          "maxShortStreak": 353,
+          "shortStreak": 139,
+          "emptyDays": 666,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_003",
+          "name": "安邑",
+          "force": "han",
+          "type": "city",
+          "population": 25500,
+          "garrison": 2100,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 12,
+          "shortDays": 146,
+          "maxShortStreak": 15,
+          "shortStreak": 9,
+          "emptyDays": 156,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_021",
+          "name": "邯郸",
+          "force": "han",
+          "type": "city",
+          "population": 8000,
+          "garrison": 2100,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 19,
+          "shortDays": 175,
+          "maxShortStreak": 23,
+          "shortStreak": 10,
+          "emptyDays": 191,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 18725350,
+        "armies": 19
+      },
+      "seconds": 42.8,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 184,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_08_03",
+          "name": "穰县",
+          "force": "han",
+          "type": "city",
+          "food": 114823,
+          "storage": 40000,
+          "excess": 163376
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 184,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_08_04",
+          "name": "涅阳",
+          "force": "han",
+          "type": "city",
+          "food": 121368,
+          "storage": 40000,
+          "excess": 174415
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 184,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_08_05",
+          "name": "西鄂",
+          "force": "zhang_jiao",
+          "type": "city",
+          "food": 134798,
+          "storage": 40000,
+          "excess": 167438
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 184,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_08_06",
+          "name": "博望",
+          "force": "zhang_jiao",
+          "type": "city",
+          "food": 125187,
+          "storage": 40000,
+          "excess": 184046
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 186,
+            "month": 3,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_08_03",
+          "before": [
+            "xian_08_03",
+            202858,
+            40000,
+            0,
+            0,
+            11500
+          ],
+          "after": [
+            "xian_08_03",
+            40000,
+            40000,
+            0,
+            0,
+            11500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 186,
+            "month": 3,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_08_04",
+          "before": [
+            "xian_08_04",
+            213897,
+            40000,
+            0,
+            0,
+            11500
+          ],
+          "after": [
+            "xian_08_04",
+            40000,
+            40000,
+            0,
+            0,
+            11500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 186,
+            "month": 3,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_08_05",
+          "before": [
+            "xian_08_05",
+            206920,
+            40000,
+            0,
+            0,
+            11500
+          ],
+          "after": [
+            "xian_08_05",
+            40000,
+            40000,
+            0,
+            0,
+            11500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 186,
+            "month": 3,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_08_06",
+          "before": [
+            "xian_08_06",
+            223528,
+            40000,
+            0,
+            0,
+            11500
+          ],
+          "after": [
+            "xian_08_06",
+            40000,
+            40000,
+            0,
+            0,
+            11500
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "190_coalition",
+      "name": "洛阳",
+      "player": "cao",
+      "playable": 28,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 14,
+      "bonusFood": 276544,
+      "towns": 335,
+      "posts": 14,
+      "cityShortDays": 925,
+      "postShortDays": 116,
+      "cityHungryArmyDays": 90,
+      "postHungryArmyDays": 0,
+      "dispatches": 111,
+      "dispatchByForce": {
+        "dong": 45,
+        "kong_zhou": 6,
+        "yuan": 8,
+        "gongsun": 5,
+        "liu_chong": 5,
+        "bao_xin": 7,
+        "ma_teng": 8,
+        "yuan_yi": 5,
+        "zhou_xin": 3,
+        "liu_yan": 4,
+        "han_sui": 9,
+        "gongsun_du": 4,
+        "sun_jian": 1,
+        "cao": 1
+      },
+      "shortCities": [
+        {
+          "id": "luoyang",
+          "name": "洛阳",
+          "force": "dong",
+          "type": "city",
+          "population": 305400,
+          "garrison": 16200,
+          "stationed": 21000,
+          "initiallyBesieged": false,
+          "opening": 160000,
+          "bonus": 0,
+          "dispatches": 10,
+          "shortDays": 56,
+          "maxShortStreak": 56,
+          "shortStreak": 0,
+          "emptyDays": 55,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "fuling",
+          "name": "涪陵",
+          "force": "liu_yan",
+          "type": "city",
+          "population": 107200,
+          "garrison": 1600,
+          "stationed": 3500,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 4,
+          "shortDays": 13,
+          "maxShortStreak": 13,
+          "shortStreak": 0,
+          "emptyDays": 14,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "beiping",
+          "name": "北平",
+          "force": "gongsun",
+          "type": "city",
+          "population": 67100,
+          "garrison": 5900,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 3,
+          "shortDays": 251,
+          "maxShortStreak": 192,
+          "shortStreak": 59,
+          "emptyDays": 252,
+          "hungryArmyDays": 32
+        },
+        {
+          "id": "xiliang",
+          "name": "武威",
+          "force": "ma_teng",
+          "type": "city",
+          "population": 43500,
+          "garrison": 2100,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 8,
+          "shortDays": 229,
+          "maxShortStreak": 167,
+          "shortStreak": 32,
+          "emptyDays": 233,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "han_sui",
+          "type": "city",
+          "population": 22300,
+          "garrison": 2000,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 9,
+          "shortDays": 77,
+          "maxShortStreak": 32,
+          "shortStreak": 32,
+          "emptyDays": 82,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_028",
+          "name": "卢县",
+          "force": "bao_xin",
+          "type": "city",
+          "population": 10500,
+          "garrison": 2100,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 7,
+          "shortDays": 37,
+          "maxShortStreak": 37,
+          "shortStreak": 37,
+          "emptyDays": 38,
+          "hungryArmyDays": 38
+        },
+        {
+          "id": "commandery_city_093",
+          "name": "土垠",
+          "force": "gongsun",
+          "type": "city",
+          "population": 1000,
+          "garrison": 2100,
+          "stationed": 3000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 240,
+          "dispatches": 2,
+          "shortDays": 262,
+          "maxShortStreak": 175,
+          "shortStreak": 87,
+          "emptyDays": 263,
+          "hungryArmyDays": 20
+        }
+      ],
+      "live": {
+        "population": 20128916,
+        "armies": 54
+      },
+      "seconds": 53.3,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "lingling",
+          "name": "零陵",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 208289,
+          "storage": 112000,
+          "excess": 210222
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "guiyang",
+          "name": "桂阳",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 96215,
+          "storage": 72000,
+          "excess": 59815
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "wu",
+          "name": "吴",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 178417,
+          "storage": 160000,
+          "excess": 63048
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "runan",
+          "name": "汝南",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 411252,
+          "storage": 160000,
+          "excess": 525759
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "kuaiji",
+          "name": "会稽",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 176848,
+          "storage": 160000,
+          "excess": 59813
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "jianan",
+          "name": "建安",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 76950,
+          "storage": 72000,
+          "excess": 21914
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_009",
+          "name": "平舆",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 50185,
+          "storage": 40000,
+          "excess": 26598
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_010",
+          "name": "下邑",
+          "force": "kong_zhou",
+          "type": "city",
+          "food": 41114,
+          "storage": 40000,
+          "excess": 8547
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_011",
+          "name": "相县",
+          "force": "kong_zhou",
+          "type": "city",
+          "food": 119174,
+          "storage": 40000,
+          "excess": 164070
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_027",
+          "name": "奉高",
+          "force": "liu_dai",
+          "type": "city",
+          "food": 41164,
+          "storage": 40000,
+          "excess": 8651
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_030",
+          "name": "定陶",
+          "force": "liu_dai",
+          "type": "city",
+          "food": 47007,
+          "storage": 40000,
+          "excess": 20289
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_040",
+          "name": "黄县",
+          "force": "jiao_he",
+          "type": "city",
+          "food": 41375,
+          "storage": 40000,
+          "excess": 9067
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_045",
+          "name": "泉陵",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 101896,
+          "storage": 40000,
+          "excess": 129658
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_126",
+          "name": "弋阳",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 83556,
+          "storage": 40000,
+          "excess": 93712
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_129",
+          "name": "东平舒",
+          "force": "han_fu",
+          "type": "city",
+          "food": 59056,
+          "storage": 40000,
+          "excess": 44901
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_03_02",
+          "name": "河南",
+          "force": "dong",
+          "type": "city",
+          "food": 75367,
+          "storage": 40000,
+          "excess": 77375
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_03_03",
+          "name": "偃师",
+          "force": "dong",
+          "type": "city",
+          "food": 66211,
+          "storage": 40000,
+          "excess": 59139
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_03_04",
+          "name": "巩县",
+          "force": "dong",
+          "type": "city",
+          "food": 66211,
+          "storage": 40000,
+          "excess": 59139
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_25_04",
+          "name": "竹邑",
+          "force": "kong_zhou",
+          "type": "city",
+          "food": 72169,
+          "storage": 40000,
+          "excess": 71025
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_25_05",
+          "name": "公丘",
+          "force": "kong_zhou",
+          "type": "city",
+          "food": 72169,
+          "storage": 40000,
+          "excess": 71025
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_03",
+          "name": "营浦",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 66272,
+          "storage": 40000,
+          "excess": 59279
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_04",
+          "name": "泠道",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 66272,
+          "storage": 40000,
+          "excess": 59279
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_05",
+          "name": "始安",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 63873,
+          "storage": 40000,
+          "excess": 54488
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_02",
+          "name": "耒阳",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 44094,
+          "storage": 40000,
+          "excess": 15088
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_03",
+          "name": "便县",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40997,
+          "storage": 40000,
+          "excess": 8915
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_04",
+          "name": "临武",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40997,
+          "storage": 40000,
+          "excess": 8915
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_05",
+          "name": "南平",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40997,
+          "storage": 40000,
+          "excess": 8915
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_37_02",
+          "name": "娄县",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 68068,
+          "storage": 40000,
+          "excess": 62861
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_37_03",
+          "name": "海盐",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 60302,
+          "storage": 40000,
+          "excess": 47387
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_37_04",
+          "name": "余杭",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 57033,
+          "storage": 40000,
+          "excess": 40869
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_37_05",
+          "name": "富春",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 56963,
+          "storage": 40000,
+          "excess": 40734
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_45_02",
+          "name": "新息",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 123301,
+          "storage": 40000,
+          "excess": 172607
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_45_03",
+          "name": "慎阳",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 105579,
+          "storage": 40000,
+          "excess": 137438
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_45_04",
+          "name": "上蔡",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 105579,
+          "storage": 40000,
+          "excess": 137438
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_45_05",
+          "name": "安城",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 98195,
+          "storage": 40000,
+          "excess": 122704
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_48_02",
+          "name": "会稽",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 45634,
+          "storage": 40000,
+          "excess": 18153
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_48_03",
+          "name": "余姚",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 40772,
+          "storage": 40000,
+          "excess": 772
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_48_04",
+          "name": "上虞",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 41776,
+          "storage": 40000,
+          "excess": 1776
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_48_06",
+          "name": "侯官",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 42187,
+          "storage": 40000,
+          "excess": 11286
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_49_03",
+          "name": "朱鸢",
+          "force": "shi_xie",
+          "type": "city",
+          "food": 57120,
+          "storage": 40000,
+          "excess": 41048
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_49_05",
+          "name": "曲阳",
+          "force": "shi_xie",
+          "type": "city",
+          "food": 57120,
+          "storage": 40000,
+          "excess": 41048
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_02",
+          "name": "猛陵",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 43288,
+          "storage": 40000,
+          "excess": 13482
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_03",
+          "name": "高要",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40418,
+          "storage": 40000,
+          "excess": 7761
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_04",
+          "name": "端溪",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40418,
+          "storage": 40000,
+          "excess": 7761
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_05",
+          "name": "临贺",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 40418,
+          "storage": 40000,
+          "excess": 7761
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_02",
+          "name": "中牟",
+          "force": "dong",
+          "type": "city",
+          "food": 48278,
+          "storage": 40000,
+          "excess": 23414
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_05",
+          "name": "樊城",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 91644,
+          "storage": 40000,
+          "excess": 109791
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_10",
+          "name": "京口",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 47039,
+          "storage": 40000,
+          "excess": 20960
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 190,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_11",
+          "name": "曲阿",
+          "force": "chen_wen",
+          "type": "city",
+          "food": 46158,
+          "storage": 40000,
+          "excess": 19201
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 191,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_013",
+          "name": "鲁县",
+          "force": "kong_zhou",
+          "type": "city",
+          "food": 45679,
+          "storage": 40000,
+          "excess": 5679
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 191,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_119",
+          "name": "蕲春",
+          "force": "yuan_shu",
+          "type": "city",
+          "food": 40320,
+          "storage": 40000,
+          "excess": 320
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 191,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_22_02",
+          "name": "成纪",
+          "force": "ma_teng",
+          "type": "city",
+          "food": 42367,
+          "storage": 40000,
+          "excess": 2367
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "lingling",
+          "before": [
+            "lingling",
+            320508,
+            112000,
+            0,
+            0,
+            100500
+          ],
+          "after": [
+            "lingling",
+            112000,
+            112000,
+            0,
+            0,
+            100500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "guiyang",
+          "before": [
+            "guiyang",
+            130484,
+            72000,
+            0,
+            0,
+            72000
+          ],
+          "after": [
+            "guiyang",
+            72000,
+            72000,
+            0,
+            0,
+            72000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "wu",
+          "before": [
+            "wu",
+            220843,
+            160000,
+            0,
+            0,
+            87500
+          ],
+          "after": [
+            "wu",
+            160000,
+            160000,
+            0,
+            0,
+            87500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "runan",
+          "before": [
+            "runan",
+            682580,
+            160000,
+            0,
+            0,
+            189500
+          ],
+          "after": [
+            "runan",
+            160000,
+            160000,
+            0,
+            0,
+            189500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "kuaiji",
+          "before": [
+            "kuaiji",
+            217500,
+            160000,
+            0,
+            0,
+            93500
+          ],
+          "after": [
+            "kuaiji",
+            160000,
+            160000,
+            0,
+            0,
+            93500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "jianan",
+          "before": [
+            "jianan",
+            93070,
+            72000,
+            0,
+            0,
+            32500
+          ],
+          "after": [
+            "jianan",
+            72000,
+            72000,
+            0,
+            0,
+            32500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_009",
+          "before": [
+            "commandery_city_009",
+            65787,
+            40000,
+            0,
+            0,
+            46500
+          ],
+          "after": [
+            "commandery_city_009",
+            40000,
+            40000,
+            0,
+            0,
+            46500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_010",
+          "before": [
+            "commandery_city_010",
+            47742,
+            40000,
+            0,
+            0,
+            19000
+          ],
+          "after": [
+            "commandery_city_010",
+            40000,
+            40000,
+            0,
+            0,
+            19000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_011",
+          "before": [
+            "commandery_city_011",
+            203223,
+            40000,
+            0,
+            0,
+            18500
+          ],
+          "after": [
+            "commandery_city_011",
+            40000,
+            40000,
+            0,
+            0,
+            18500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_013",
+          "before": [
+            "commandery_city_013",
+            44874,
+            40000,
+            0,
+            0,
+            18500
+          ],
+          "after": [
+            "commandery_city_013",
+            40000,
+            40000,
+            0,
+            0,
+            18500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_027",
+          "before": [
+            "commandery_city_027",
+            47846,
+            40000,
+            0,
+            0,
+            19500
+          ],
+          "after": [
+            "commandery_city_027",
+            40000,
+            40000,
+            0,
+            0,
+            19500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_030",
+          "before": [
+            "commandery_city_030",
+            59480,
+            40000,
+            0,
+            0,
+            29500
+          ],
+          "after": [
+            "commandery_city_030",
+            40000,
+            40000,
+            0,
+            0,
+            29500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_040",
+          "before": [
+            "commandery_city_040",
+            48262,
+            40000,
+            0,
+            0,
+            20500
+          ],
+          "after": [
+            "commandery_city_040",
+            40000,
+            40000,
+            0,
+            0,
+            20500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_045",
+          "before": [
+            "commandery_city_045",
+            168821,
+            40000,
+            0,
+            0,
+            20000
+          ],
+          "after": [
+            "commandery_city_045",
+            40000,
+            40000,
+            0,
+            0,
+            20000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_119",
+          "before": [
+            "commandery_city_119",
+            40104,
+            40000,
+            0,
+            0,
+            9000
+          ],
+          "after": [
+            "commandery_city_119",
+            40000,
+            40000,
+            0,
+            0,
+            9000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_126",
+          "before": [
+            "commandery_city_126",
+            133477,
+            40000,
+            0,
+            0,
+            92500
+          ],
+          "after": [
+            "commandery_city_126",
+            40000,
+            40000,
+            0,
+            0,
+            92500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "commandery_city_129",
+          "before": [
+            "commandery_city_129",
+            84678,
+            40000,
+            0,
+            0,
+            47500
+          ],
+          "after": [
+            "commandery_city_129",
+            40000,
+            40000,
+            0,
+            0,
+            47500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_03_02",
+          "before": [
+            "xian_03_02",
+            117142,
+            40000,
+            0,
+            0,
+            8000
+          ],
+          "after": [
+            "xian_03_02",
+            40000,
+            40000,
+            0,
+            0,
+            8000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_03_03",
+          "before": [
+            "xian_03_03",
+            98910,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_03_03",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_03_04",
+          "before": [
+            "xian_03_04",
+            98910,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_03_04",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_22_02",
+          "before": [
+            "xian_22_02",
+            42151,
+            40000,
+            0,
+            0,
+            1000
+          ],
+          "after": [
+            "xian_22_02",
+            40000,
+            40000,
+            0,
+            0,
+            1000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_25_04",
+          "before": [
+            "xian_25_04",
+            110792,
+            40000,
+            0,
+            0,
+            7500
+          ],
+          "after": [
+            "xian_25_04",
+            40000,
+            40000,
+            0,
+            0,
+            7500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_25_05",
+          "before": [
+            "xian_25_05",
+            110792,
+            40000,
+            0,
+            0,
+            7500
+          ],
+          "after": [
+            "xian_25_05",
+            40000,
+            40000,
+            0,
+            0,
+            7500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_33_03",
+          "before": [
+            "xian_33_03",
+            99050,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_33_03",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_33_04",
+          "before": [
+            "xian_33_04",
+            99050,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_33_04",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_33_05",
+          "before": [
+            "xian_33_05",
+            94259,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_33_05",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_34_02",
+          "before": [
+            "xian_34_02",
+            54872,
+            40000,
+            0,
+            0,
+            2000
+          ],
+          "after": [
+            "xian_34_02",
+            40000,
+            40000,
+            0,
+            0,
+            2000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_34_03",
+          "before": [
+            "xian_34_03",
+            48699,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_03",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_34_04",
+          "before": [
+            "xian_34_04",
+            48699,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_04",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_34_05",
+          "before": [
+            "xian_34_05",
+            48699,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_05",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_37_02",
+          "before": [
+            "xian_37_02",
+            102638,
+            40000,
+            0,
+            0,
+            4500
+          ],
+          "after": [
+            "xian_37_02",
+            40000,
+            40000,
+            0,
+            0,
+            4500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_37_03",
+          "before": [
+            "xian_37_03",
+            87167,
+            40000,
+            0,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_37_03",
+            40000,
+            40000,
+            0,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_37_04",
+          "before": [
+            "xian_37_04",
+            80649,
+            40000,
+            0,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_37_04",
+            40000,
+            40000,
+            0,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_37_05",
+          "before": [
+            "xian_37_05",
+            80514,
+            40000,
+            0,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_37_05",
+            40000,
+            40000,
+            0,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_45_02",
+          "before": [
+            "xian_45_02",
+            212122,
+            40000,
+            0,
+            0,
+            19000
+          ],
+          "after": [
+            "xian_45_02",
+            40000,
+            40000,
+            0,
+            0,
+            19000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_45_03",
+          "before": [
+            "xian_45_03",
+            177076,
+            40000,
+            0,
+            0,
+            14500
+          ],
+          "after": [
+            "xian_45_03",
+            40000,
+            40000,
+            0,
+            0,
+            14500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_45_04",
+          "before": [
+            "xian_45_04",
+            177076,
+            40000,
+            0,
+            0,
+            14500
+          ],
+          "after": [
+            "xian_45_04",
+            40000,
+            40000,
+            0,
+            0,
+            14500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_45_05",
+          "before": [
+            "xian_45_05",
+            162342,
+            40000,
+            0,
+            0,
+            14500
+          ],
+          "after": [
+            "xian_45_05",
+            40000,
+            40000,
+            0,
+            0,
+            14500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_48_02",
+          "before": [
+            "xian_48_02",
+            57933,
+            40000,
+            0,
+            0,
+            2500
+          ],
+          "after": [
+            "xian_48_02",
+            40000,
+            40000,
+            0,
+            0,
+            2500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_48_04",
+          "before": [
+            "xian_48_04",
+            40702,
+            40000,
+            0,
+            0,
+            2500
+          ],
+          "after": [
+            "xian_48_04",
+            40000,
+            40000,
+            0,
+            0,
+            2500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_48_06",
+          "before": [
+            "xian_48_06",
+            51070,
+            40000,
+            0,
+            0,
+            2500
+          ],
+          "after": [
+            "xian_48_06",
+            40000,
+            40000,
+            0,
+            0,
+            2500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_49_03",
+          "before": [
+            "xian_49_03",
+            80825,
+            40000,
+            0,
+            0,
+            4500
+          ],
+          "after": [
+            "xian_49_03",
+            40000,
+            40000,
+            0,
+            0,
+            4500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_49_05",
+          "before": [
+            "xian_49_05",
+            80825,
+            40000,
+            0,
+            0,
+            4500
+          ],
+          "after": [
+            "xian_49_05",
+            40000,
+            40000,
+            0,
+            0,
+            4500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_50_02",
+          "before": [
+            "xian_50_02",
+            53266,
+            40000,
+            0,
+            0,
+            2000
+          ],
+          "after": [
+            "xian_50_02",
+            40000,
+            40000,
+            0,
+            0,
+            2000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_50_03",
+          "before": [
+            "xian_50_03",
+            47545,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_50_03",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_50_04",
+          "before": [
+            "xian_50_04",
+            47545,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_50_04",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_50_05",
+          "before": [
+            "xian_50_05",
+            47545,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_50_05",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_extra_02",
+          "before": [
+            "xian_extra_02",
+            63194,
+            40000,
+            0,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_extra_02",
+            40000,
+            40000,
+            0,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_extra_05",
+          "before": [
+            "xian_extra_05",
+            149562,
+            40000,
+            0,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_extra_05",
+            40000,
+            40000,
+            0,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_extra_10",
+          "before": [
+            "xian_extra_10",
+            60744,
+            40000,
+            0,
+            0,
+            2000
+          ],
+          "after": [
+            "xian_extra_10",
+            40000,
+            40000,
+            0,
+            0,
+            2000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 192,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_extra_11",
+          "before": [
+            "xian_extra_11",
+            58985,
+            40000,
+            0,
+            0,
+            2000
+          ],
+          "after": [
+            "xian_extra_11",
+            40000,
+            40000,
+            0,
+            0,
+            2000
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "194_puyang",
+      "name": "濮阳",
+      "player": "cao",
+      "playable": 22,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 34,
+      "bonusFood": 376160,
+      "towns": 324,
+      "posts": 9,
+      "cityShortDays": 3824,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 3038,
+      "postHungryArmyDays": 0,
+      "dispatches": 195,
+      "dispatchByForce": {
+        "tao_qian": 22,
+        "yuan": 33,
+        "zhang_yan": 4,
+        "yuan_shu": 28,
+        "liu_chong": 5,
+        "lu_bu": 15,
+        "li_jue": 13,
+        "han_sui": 11,
+        "gongsun": 13,
+        "gongsun_du": 7,
+        "ma_teng": 8,
+        "liu_biao": 21,
+        "liu_yao": 5,
+        "liu_zhang": 3,
+        "handan_shang": 4,
+        "zhang_lu": 3
+      },
+      "shortCities": [
+        {
+          "id": "linzi",
+          "name": "临淄",
+          "force": "gongsun",
+          "type": "city",
+          "population": 155000,
+          "garrison": 6800,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 107520,
+          "bonus": 17920,
+          "dispatches": 0,
+          "shortDays": 14,
+          "maxShortStreak": 14,
+          "shortStreak": 14,
+          "emptyDays": 15,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "li_jue",
+          "type": "city",
+          "population": 149200,
+          "garrison": 11700,
+          "stationed": 17000,
+          "initiallyBesieged": false,
+          "opening": 104880,
+          "bonus": 17480,
+          "dispatches": 5,
+          "shortDays": 377,
+          "maxShortStreak": 198,
+          "shortStreak": 179,
+          "emptyDays": 378,
+          "hungryArmyDays": 209
+        },
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "zhang_lu",
+          "type": "city",
+          "population": 89100,
+          "garrison": 3800,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 102120,
+          "bonus": 17020,
+          "dispatches": 3,
+          "shortDays": 6,
+          "maxShortStreak": 4,
+          "shortStreak": 2,
+          "emptyDays": 8,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hongnong",
+          "name": "弘农",
+          "force": "li_jue",
+          "type": "city",
+          "population": 58900,
+          "garrison": 3400,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 36240,
+          "bonus": 6040,
+          "dispatches": 4,
+          "shortDays": 340,
+          "maxShortStreak": 179,
+          "shortStreak": 179,
+          "emptyDays": 341,
+          "hungryArmyDays": 210
+        },
+        {
+          "id": "commandery_city_012",
+          "name": "陈县",
+          "force": "liu_chong",
+          "type": "city",
+          "population": 51000,
+          "garrison": 2300,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 20160,
+          "bonus": 3360,
+          "dispatches": 5,
+          "shortDays": 204,
+          "maxShortStreak": 160,
+          "shortStreak": 160,
+          "emptyDays": 204,
+          "hungryArmyDays": 204
+        },
+        {
+          "id": "xiangping",
+          "name": "襄平",
+          "force": "gongsun_du",
+          "type": "city",
+          "population": 50300,
+          "garrison": 2300,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 48360,
+          "bonus": 8060,
+          "dispatches": 7,
+          "shortDays": 85,
+          "maxShortStreak": 85,
+          "shortStreak": 85,
+          "emptyDays": 86,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "tianshui",
+          "name": "天水",
+          "force": "ma_teng",
+          "type": "city",
+          "population": 49500,
+          "garrison": 2900,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 64560,
+          "bonus": 10760,
+          "dispatches": 8,
+          "shortDays": 274,
+          "maxShortStreak": 210,
+          "shortStreak": 210,
+          "emptyDays": 275,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_06_04",
+          "name": "东阿",
+          "force": "cao",
+          "type": "city",
+          "population": 25100,
+          "garrison": 500,
+          "stationed": 4000,
+          "initiallyBesieged": false,
+          "opening": 20160,
+          "bonus": 3360,
+          "dispatches": 0,
+          "shortDays": 600,
+          "maxShortStreak": 326,
+          "shortStreak": 204,
+          "emptyDays": 601,
+          "hungryArmyDays": 571
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "han_sui",
+          "type": "city",
+          "population": 18800,
+          "garrison": 2200,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 41520,
+          "bonus": 6920,
+          "dispatches": 11,
+          "shortDays": 343,
+          "maxShortStreak": 184,
+          "shortStreak": 184,
+          "emptyDays": 349,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_23_02",
+          "name": "陕县",
+          "force": "li_jue",
+          "type": "city",
+          "population": 12800,
+          "garrison": 500,
+          "stationed": 0,
+          "initiallyBesieged": false,
+          "opening": 16800,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 41,
+          "maxShortStreak": 41,
+          "shortStreak": 41,
+          "emptyDays": 42,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_04",
+          "name": "鄄城",
+          "force": "cao",
+          "type": "city",
+          "population": 12800,
+          "garrison": 500,
+          "stationed": 26000,
+          "initiallyBesieged": false,
+          "opening": 20160,
+          "bonus": 3360,
+          "dispatches": 0,
+          "shortDays": 683,
+          "maxShortStreak": 354,
+          "shortStreak": 232,
+          "emptyDays": 684,
+          "hungryArmyDays": 1170
+        },
+        {
+          "id": "commandery_city_114",
+          "name": "沾县",
+          "force": "zhang_yan",
+          "type": "city",
+          "population": 5000,
+          "garrison": 500,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 26880,
+          "bonus": 4480,
+          "dispatches": 4,
+          "shortDays": 500,
+          "maxShortStreak": 262,
+          "shortStreak": 238,
+          "emptyDays": 501,
+          "hungryArmyDays": 501
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "li_jue",
+          "type": "city",
+          "population": 3000,
+          "garrison": 2300,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 20160,
+          "bonus": 3360,
+          "dispatches": 4,
+          "shortDays": 357,
+          "maxShortStreak": 194,
+          "shortStreak": 138,
+          "emptyDays": 359,
+          "hungryArmyDays": 173
+        }
+      ],
+      "live": {
+        "population": 17013867,
+        "armies": 64
+      },
+      "seconds": 34.2,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "pingyuan",
+          "name": "平原",
+          "force": "gongsun",
+          "type": "city",
+          "food": 166492,
+          "storage": 112000,
+          "excess": 98976
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_113",
+          "name": "乐陵",
+          "force": "gongsun",
+          "type": "city",
+          "food": 42318,
+          "storage": 40000,
+          "excess": 21505
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_19_02",
+          "name": "高唐",
+          "force": "gongsun",
+          "type": "city",
+          "food": 84420,
+          "storage": 40000,
+          "excess": 105371
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_19_03",
+          "name": "般县",
+          "force": "gongsun",
+          "type": "city",
+          "food": 72619,
+          "storage": 40000,
+          "excess": 81879
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_19_04",
+          "name": "鬲县",
+          "force": "gongsun",
+          "type": "city",
+          "food": 69367,
+          "storage": 40000,
+          "excess": 75384
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_19_05",
+          "name": "安德",
+          "force": "gongsun",
+          "type": "city",
+          "food": 70772,
+          "storage": 40000,
+          "excess": 78191
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_42_02",
+          "name": "西安",
+          "force": "gongsun",
+          "type": "city",
+          "food": 54873,
+          "storage": 40000,
+          "excess": 46518
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_42_03",
+          "name": "昌国",
+          "force": "gongsun",
+          "type": "city",
+          "food": 46440,
+          "storage": 40000,
+          "excess": 29721
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_42_04",
+          "name": "广县",
+          "force": "gongsun",
+          "type": "city",
+          "food": 46440,
+          "storage": 40000,
+          "excess": 29721
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 194,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_42_05",
+          "name": "般阳",
+          "force": "gongsun",
+          "type": "city",
+          "food": 46452,
+          "storage": 40000,
+          "excess": 29746
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 195,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_06_05",
+          "name": "顿丘",
+          "force": "lu_bu",
+          "type": "city",
+          "food": 49501,
+          "storage": 40000,
+          "excess": 9501
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 195,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_03",
+          "name": "便县",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 44195,
+          "storage": 40000,
+          "excess": 4195
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 195,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_05",
+          "name": "南平",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 44195,
+          "storage": 40000,
+          "excess": 4195
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 195,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_04",
+          "name": "端溪",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 43034,
+          "storage": 40000,
+          "excess": 3034
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "pingyuan",
+          "before": [
+            "pingyuan",
+            160643,
+            112000,
+            84925.3147,
+            0,
+            104000
+          ],
+          "after": [
+            "pingyuan",
+            112000,
+            112000,
+            84925.3147,
+            0,
+            104000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_113",
+          "before": [
+            "commandery_city_113",
+            60917,
+            40000,
+            14261.209,
+            0,
+            40000
+          ],
+          "after": [
+            "commandery_city_113",
+            40000,
+            40000,
+            14261.209,
+            0,
+            40000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_06_05",
+          "before": [
+            "xian_06_05",
+            48921,
+            40000,
+            11893.2667,
+            0,
+            2500
+          ],
+          "after": [
+            "xian_06_05",
+            40000,
+            40000,
+            11893.2667,
+            0,
+            2500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_19_02",
+          "before": [
+            "xian_19_02",
+            144757,
+            40000,
+            44552.1147,
+            0,
+            8500
+          ],
+          "after": [
+            "xian_19_02",
+            40000,
+            40000,
+            44552.1147,
+            0,
+            8500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_19_03",
+          "before": [
+            "xian_19_03",
+            121282,
+            40000,
+            35307.3286,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_19_03",
+            40000,
+            40000,
+            35307.3286,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_19_04",
+          "before": [
+            "xian_19_04",
+            114787,
+            40000,
+            34462.7476,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_19_04",
+            40000,
+            40000,
+            34462.7476,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_19_05",
+          "before": [
+            "xian_19_05",
+            117594,
+            40000,
+            34758.1266,
+            0,
+            6000
+          ],
+          "after": [
+            "xian_19_05",
+            40000,
+            40000,
+            34758.1266,
+            0,
+            6000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_34_03",
+          "before": [
+            "xian_34_03",
+            43624,
+            40000,
+            5787.2813,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_03",
+            40000,
+            40000,
+            5787.2813,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_34_05",
+          "before": [
+            "xian_34_05",
+            43624,
+            40000,
+            5787.2813,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_05",
+            40000,
+            40000,
+            5787.2813,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_42_02",
+          "before": [
+            "xian_42_02",
+            85930,
+            40000,
+            22834.2977,
+            0,
+            4000
+          ],
+          "after": [
+            "xian_42_02",
+            40000,
+            40000,
+            22834.2977,
+            0,
+            4000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_42_03",
+          "before": [
+            "xian_42_03",
+            69141,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_42_03",
+            40000,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_42_04",
+          "before": [
+            "xian_42_04",
+            69141,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_42_04",
+            40000,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_42_05",
+          "before": [
+            "xian_42_05",
+            69166,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ],
+          "after": [
+            "xian_42_05",
+            40000,
+            40000,
+            16942.9381,
+            0,
+            3000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 196,
+            "month": 5,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_50_04",
+          "before": [
+            "xian_50_04",
+            42463,
+            40000,
+            5380.8108,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_50_04",
+            40000,
+            40000,
+            5380.8108,
+            0,
+            1500
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "200_guandu",
+      "name": "官渡",
+      "player": "cao",
+      "playable": 15,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 15,
+      "bonusFood": 254020,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 482,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 262,
+      "postHungryArmyDays": 0,
+      "dispatches": 55,
+      "dispatchByForce": {
+        "ma_teng": 5,
+        "yuan": 14,
+        "handan_shang": 8,
+        "han_sui": 7,
+        "zhang_meng": 6,
+        "gongsun_du": 5,
+        "zhang_lu": 3,
+        "cao": 3,
+        "zhang_jin": 1,
+        "sun": 1,
+        "liu": 1,
+        "wei_duan": 1
+      },
+      "shortCities": [
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "zhang_lu",
+          "type": "city",
+          "population": 85500,
+          "garrison": 4200,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 102135,
+          "bonus": 16580,
+          "dispatches": 3,
+          "shortDays": 15,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 16,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "anding",
+          "name": "安定",
+          "force": "han_sui",
+          "type": "city",
+          "population": 33100,
+          "garrison": 2600,
+          "stationed": 6500,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 7,
+          "shortDays": 106,
+          "maxShortStreak": 18,
+          "shortStreak": 0,
+          "emptyDays": 112,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "ma_teng",
+          "type": "city",
+          "population": 3500,
+          "garrison": 2500,
+          "stationed": 8500,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 5,
+          "shortDays": 347,
+          "maxShortStreak": 276,
+          "shortStreak": 67,
+          "emptyDays": 349,
+          "hungryArmyDays": 262
+        },
+        {
+          "id": "commandery_city_074",
+          "name": "觻得",
+          "force": "handan_shang",
+          "type": "city",
+          "population": 1000,
+          "garrison": 2500,
+          "stationed": 4000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 8,
+          "shortDays": 14,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 21,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17447756,
+        "armies": 31
+      },
+      "seconds": 27.5,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 200,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_05",
+          "name": "樊城",
+          "force": "cao",
+          "type": "city",
+          "food": 79439,
+          "storage": 40000,
+          "excess": 88714
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 201,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_04",
+          "name": "端溪",
+          "force": "liu_biao",
+          "type": "city",
+          "food": 41175,
+          "storage": 40000,
+          "excess": 1175
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 202,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_50_04",
+          "before": [
+            "xian_50_04",
+            40959,
+            40000,
+            0,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_50_04",
+            40000,
+            40000,
+            0,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 202,
+            "month": 1,
+            "day": 1,
+            "xun": 0
+          },
+          "id": "xian_extra_05",
+          "before": [
+            "xian_extra_05",
+            128488,
+            40000,
+            0,
+            0,
+            5500
+          ],
+          "after": [
+            "xian_extra_05",
+            40000,
+            40000,
+            0,
+            0,
+            5500
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "208_red_cliffs",
+      "name": "赤壁",
+      "player": "liu",
+      "playable": 16,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 10,
+      "bonusFood": 123908,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 667,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 270,
+      "postHungryArmyDays": 0,
+      "dispatches": 97,
+      "dispatchByForce": {
+        "ma_chao": 5,
+        "cao": 48,
+        "sun": 13,
+        "han_sui": 5,
+        "liu": 4,
+        "zhang_meng": 6,
+        "gongsun_kang": 5,
+        "zhang_lu": 3,
+        "jin_xuan": 2,
+        "zhao_fan": 2,
+        "wei_kang": 2,
+        "wu_ju": 2
+      },
+      "shortCities": [
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "zhang_lu",
+          "type": "city",
+          "population": 87900,
+          "garrison": 4500,
+          "stationed": 6500,
+          "initiallyBesieged": false,
+          "opening": 112000,
+          "bonus": 0,
+          "dispatches": 3,
+          "shortDays": 15,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 18,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiakou",
+          "name": "夏口",
+          "force": "liu",
+          "type": "city",
+          "population": 38200,
+          "garrison": 7500,
+          "stationed": 11000,
+          "initiallyBesieged": false,
+          "opening": 120000,
+          "bonus": 0,
+          "dispatches": 4,
+          "shortDays": 163,
+          "maxShortStreak": 163,
+          "shortStreak": 163,
+          "emptyDays": 163,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "han_sui",
+          "type": "city",
+          "population": 17100,
+          "garrison": 2600,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 5,
+          "shortDays": 140,
+          "maxShortStreak": 140,
+          "shortStreak": 140,
+          "emptyDays": 140,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "ma_chao",
+          "type": "city",
+          "population": 3000,
+          "garrison": 2700,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 5,
+          "shortDays": 349,
+          "maxShortStreak": 338,
+          "shortStreak": 338,
+          "emptyDays": 350,
+          "hungryArmyDays": 270
+        }
+      ],
+      "live": {
+        "population": 15484956,
+        "armies": 28
+      },
+      "seconds": 28.8,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "211_tongguan",
+      "name": "潼关",
+      "player": "ma_chao",
+      "playable": 9,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 15,
+      "bonusFood": 260402,
+      "towns": 362,
+      "posts": 14,
+      "cityShortDays": 1768,
+      "postShortDays": 548,
+      "cityHungryArmyDays": 435,
+      "postHungryArmyDays": 282,
+      "dispatches": 265,
+      "dispatchByForce": {
+        "cao": 162,
+        "ma_chao": 47,
+        "zhang_lu": 12,
+        "han_sui": 10,
+        "liu": 17,
+        "gongsun_kang": 8,
+        "sun": 8,
+        "liu_zhang": 1
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "ma_chao",
+          "type": "city",
+          "population": 141900,
+          "garrison": 11700,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 174720,
+          "bonus": 29120,
+          "dispatches": 0,
+          "shortDays": 208,
+          "maxShortStreak": 208,
+          "shortStreak": 208,
+          "emptyDays": 209,
+          "hungryArmyDays": 202
+        },
+        {
+          "id": "anding",
+          "name": "安定",
+          "force": "han_sui",
+          "type": "city",
+          "population": 28700,
+          "garrison": 3100,
+          "stationed": 11300,
+          "initiallyBesieged": false,
+          "opening": 60480,
+          "bonus": 10080,
+          "dispatches": 7,
+          "shortDays": 410,
+          "maxShortStreak": 134,
+          "shortStreak": 134,
+          "emptyDays": 418,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_14",
+          "name": "陆口",
+          "force": "sun",
+          "type": "city",
+          "population": 23600,
+          "garrison": 600,
+          "stationed": 14000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 582,
+          "maxShortStreak": 308,
+          "shortStreak": 274,
+          "emptyDays": 583,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "han_sui",
+          "type": "city",
+          "population": 17800,
+          "garrison": 2900,
+          "stationed": 3700,
+          "initiallyBesieged": false,
+          "opening": 60480,
+          "bonus": 10080,
+          "dispatches": 3,
+          "shortDays": 196,
+          "maxShortStreak": 185,
+          "shortStreak": 185,
+          "emptyDays": 200,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_006",
+          "name": "高陵",
+          "force": "ma_chao",
+          "type": "city",
+          "population": 5000,
+          "garrison": 2800,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 33600,
+          "bonus": 5600,
+          "dispatches": 2,
+          "shortDays": 372,
+          "maxShortStreak": 209,
+          "shortStreak": 209,
+          "emptyDays": 374,
+          "hungryArmyDays": 233
+        }
+      ],
+      "live": {
+        "population": 16947415,
+        "armies": 34
+      },
+      "seconds": 25.8,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 211,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "cangwu",
+          "name": "苍梧",
+          "force": "sun",
+          "type": "city",
+          "food": 88338,
+          "storage": 72000,
+          "excess": 48766
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 211,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_extra_15",
+          "name": "巴丘",
+          "force": "sun",
+          "type": "city",
+          "food": 40042,
+          "storage": 40000,
+          "excess": 42
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 212,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_03",
+          "name": "便县",
+          "force": "liu",
+          "type": "city",
+          "food": 41268,
+          "storage": 40000,
+          "excess": 1268
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 212,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_34_05",
+          "name": "南平",
+          "force": "liu",
+          "type": "city",
+          "food": 41268,
+          "storage": 40000,
+          "excess": 1268
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 212,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_35_03",
+          "name": "居巢",
+          "force": "cao",
+          "type": "city",
+          "food": 43498,
+          "storage": 40000,
+          "excess": 3498
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 212,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_35_04",
+          "name": "临湖",
+          "force": "cao",
+          "type": "city",
+          "food": 43498,
+          "storage": 40000,
+          "excess": 3498
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 212,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_50_04",
+          "name": "端溪",
+          "force": "liu",
+          "type": "city",
+          "food": 40319,
+          "storage": 40000,
+          "excess": 319
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 213,
+            "month": 7,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "cangwu",
+          "before": [
+            "cangwu",
+            115421,
+            72000,
+            40457.8356,
+            0,
+            64500
+          ],
+          "after": [
+            "cangwu",
+            72000,
+            72000,
+            40457.8356,
+            0,
+            64500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 213,
+            "month": 7,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_34_03",
+          "before": [
+            "xian_34_03",
+            40435,
+            40000,
+            8273.1817,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_03",
+            40000,
+            40000,
+            8273.1817,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 213,
+            "month": 7,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_34_05",
+          "before": [
+            "xian_34_05",
+            40435,
+            40000,
+            8273.1817,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_34_05",
+            40000,
+            40000,
+            8273.1817,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 213,
+            "month": 7,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_35_03",
+          "before": [
+            "xian_35_03",
+            42544,
+            40000,
+            10108.9064,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_35_03",
+            40000,
+            40000,
+            10108.9064,
+            0,
+            1500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 213,
+            "month": 7,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_35_04",
+          "before": [
+            "xian_35_04",
+            42544,
+            40000,
+            10108.9064,
+            0,
+            1500
+          ],
+          "after": [
+            "xian_35_04",
+            40000,
+            40000,
+            10108.9064,
+            0,
+            1500
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "219_xiangyang",
+      "name": "襄阳",
+      "player": "liu",
+      "playable": 5,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 9,
+      "bonusFood": 155254,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 718,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 542,
+      "dispatchByForce": {
+        "cao": 213,
+        "liu": 173,
+        "sun": 148,
+        "gongsun_kang": 8
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 163600,
+          "garrison": 11700,
+          "stationed": 40000,
+          "initiallyBesieged": false,
+          "opening": 208000,
+          "bonus": 5581,
+          "dispatches": 41,
+          "shortDays": 14,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 27,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_05",
+          "name": "樊城",
+          "force": "cao",
+          "type": "city",
+          "population": 47100,
+          "garrison": 700,
+          "stationed": 42000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 140,
+          "shortDays": 92,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 211,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_09_04",
+          "name": "宜城",
+          "force": "liu",
+          "type": "city",
+          "population": 25200,
+          "garrison": 700,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 137,
+          "shortDays": 115,
+          "maxShortStreak": 12,
+          "shortStreak": 0,
+          "emptyDays": 222,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_14",
+          "name": "陆口",
+          "force": "sun",
+          "type": "city",
+          "population": 22700,
+          "garrison": 700,
+          "stationed": 25000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 122,
+          "shortDays": 415,
+          "maxShortStreak": 59,
+          "shortStreak": 2,
+          "emptyDays": 488,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_111",
+          "name": "陈仓",
+          "force": "cao",
+          "type": "city",
+          "population": 10500,
+          "garrison": 600,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 12,
+          "shortDays": 82,
+          "maxShortStreak": 10,
+          "shortStreak": 0,
+          "emptyDays": 92,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17306152,
+        "armies": 22
+      },
+      "seconds": 62.1,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 219,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "lingling",
+          "name": "零陵",
+          "force": "liu",
+          "type": "city",
+          "food": 168795,
+          "storage": 112000,
+          "excess": 136789
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 219,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_045",
+          "name": "泉陵",
+          "force": "liu",
+          "type": "city",
+          "food": 81338,
+          "storage": 40000,
+          "excess": 89852
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 219,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_03",
+          "name": "营浦",
+          "force": "liu",
+          "type": "city",
+          "food": 54218,
+          "storage": 40000,
+          "excess": 38645
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 219,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_04",
+          "name": "泠道",
+          "force": "liu",
+          "type": "city",
+          "food": 54218,
+          "storage": 40000,
+          "excess": 38645
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 219,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_05",
+          "name": "始安",
+          "force": "liu",
+          "type": "city",
+          "food": 52473,
+          "storage": 40000,
+          "excess": 35154
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 221,
+            "month": 6,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "lingling",
+          "before": [
+            "lingling",
+            241038,
+            112000,
+            84549.8709,
+            0,
+            85500
+          ],
+          "after": [
+            "lingling",
+            112000,
+            112000,
+            84549.8709,
+            0,
+            85500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 221,
+            "month": 6,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_045",
+          "before": [
+            "commandery_city_045",
+            126091,
+            40000,
+            51236.9355,
+            0,
+            17000
+          ],
+          "after": [
+            "commandery_city_045",
+            40000,
+            40000,
+            51236.9355,
+            0,
+            17000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 221,
+            "month": 6,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_03",
+          "before": [
+            "xian_33_03",
+            77769,
+            40000,
+            24138.3429,
+            0,
+            5000
+          ],
+          "after": [
+            "xian_33_03",
+            40000,
+            40000,
+            24138.3429,
+            0,
+            5000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 221,
+            "month": 6,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_04",
+          "before": [
+            "xian_33_04",
+            77769,
+            40000,
+            24138.3429,
+            0,
+            5000
+          ],
+          "after": [
+            "xian_33_04",
+            40000,
+            40000,
+            24138.3429,
+            0,
+            5000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 221,
+            "month": 6,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_33_05",
+          "before": [
+            "xian_33_05",
+            74278,
+            40000,
+            23503.4745,
+            0,
+            5000
+          ],
+          "after": [
+            "xian_33_05",
+            40000,
+            40000,
+            23503.4745,
+            0,
+            5000
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "222_yiling",
+      "name": "夷陵",
+      "player": "liu",
+      "playable": 5,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 6,
+      "bonusFood": 74367,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 1164,
+      "postShortDays": 522,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 399,
+      "dispatchByForce": {
+        "liu": 199,
+        "cao": 98,
+        "sun": 94,
+        "gongsun_gong": 8
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 167200,
+          "garrison": 11700,
+          "stationed": 20000,
+          "initiallyBesieged": false,
+          "opening": 208000,
+          "bonus": 5544,
+          "dispatches": 13,
+          "shortDays": 17,
+          "maxShortStreak": 4,
+          "shortStreak": 0,
+          "emptyDays": 21,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangping",
+          "name": "襄平",
+          "force": "gongsun_gong",
+          "type": "city",
+          "population": 51900,
+          "garrison": 2900,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 8,
+          "shortDays": 225,
+          "maxShortStreak": 157,
+          "shortStreak": 64,
+          "emptyDays": 227,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_125",
+          "name": "夷道",
+          "force": "sun",
+          "type": "city",
+          "population": 24500,
+          "garrison": 700,
+          "stationed": 45000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 685,
+          "maxShortStreak": 356,
+          "shortStreak": 114,
+          "emptyDays": 686,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_08",
+          "name": "公安",
+          "force": "sun",
+          "type": "city",
+          "population": 12300,
+          "garrison": 700,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 23,
+          "shortDays": 192,
+          "maxShortStreak": 12,
+          "shortStreak": 0,
+          "emptyDays": 213,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_10_04",
+          "name": "鄂县",
+          "force": "sun",
+          "type": "city",
+          "population": 12200,
+          "garrison": 700,
+          "stationed": 15000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 29,
+          "shortDays": 17,
+          "maxShortStreak": 4,
+          "shortStreak": 0,
+          "emptyDays": 32,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_109",
+          "name": "房陵",
+          "force": "cao",
+          "type": "city",
+          "population": 11000,
+          "garrison": 500,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 10,
+          "shortDays": 28,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 34,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17279989,
+        "armies": 32
+      },
+      "seconds": 34.7,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "228_tianshui",
+      "name": "天水",
+      "player": "liu",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 3,
+      "bonusFood": 57445,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 2367,
+      "postShortDays": 640,
+      "cityHungryArmyDays": 611,
+      "postHungryArmyDays": 0,
+      "dispatches": 245,
+      "dispatchByForce": {
+        "cao": 176,
+        "sun": 61,
+        "gongsun_yuan": 8
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 170900,
+          "garrison": 10800,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 208000,
+          "bonus": 0,
+          "dispatches": 30,
+          "shortDays": 14,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 24,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jiangzhou",
+          "name": "江州",
+          "force": "liu",
+          "type": "city",
+          "population": 154400,
+          "garrison": 4000,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 112000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 156,
+          "maxShortStreak": 156,
+          "shortStreak": 0,
+          "emptyDays": 156,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "yongan",
+          "name": "永安",
+          "force": "liu",
+          "type": "city",
+          "population": 119100,
+          "garrison": 3100,
+          "stationed": 6000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 214,
+          "maxShortStreak": 214,
+          "shortStreak": 0,
+          "emptyDays": 213,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "liu",
+          "type": "city",
+          "population": 59700,
+          "garrison": 6700,
+          "stationed": 52000,
+          "initiallyBesieged": false,
+          "opening": 112000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 643,
+          "maxShortStreak": 355,
+          "shortStreak": 81,
+          "emptyDays": 644,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangping",
+          "name": "襄平",
+          "force": "gongsun_yuan",
+          "type": "city",
+          "population": 53200,
+          "garrison": 2900,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 8,
+          "shortDays": 225,
+          "maxShortStreak": 188,
+          "shortStreak": 35,
+          "emptyDays": 227,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "shangyong",
+          "name": "上庸",
+          "force": "liu",
+          "type": "city",
+          "population": 39000,
+          "garrison": 2200,
+          "stationed": 5000,
+          "initiallyBesieged": true,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 0,
+          "maxShortStreak": 0,
+          "shortStreak": 0,
+          "emptyDays": 610,
+          "hungryArmyDays": 611
+        },
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 6000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 327,
+          "maxShortStreak": 261,
+          "shortStreak": 66,
+          "emptyDays": 328,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_26_04",
+          "name": "褒中",
+          "force": "liu",
+          "type": "city",
+          "population": 14700,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 610,
+          "maxShortStreak": 438,
+          "shortStreak": 438,
+          "emptyDays": 611,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "cao",
+          "type": "city",
+          "population": 3500,
+          "garrison": 2800,
+          "stationed": 25000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 72,
+          "shortDays": 44,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 110,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_13",
+          "name": "上邽",
+          "force": "cao",
+          "type": "city",
+          "population": 3400,
+          "garrison": 600,
+          "stationed": 6000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 20,
+          "shortDays": 134,
+          "maxShortStreak": 25,
+          "shortStreak": 6,
+          "emptyDays": 150,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17511646,
+        "armies": 29
+      },
+      "seconds": 27.3,
+      "issues": [
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "chengdu",
+          "name": "成都",
+          "force": "liu",
+          "type": "city",
+          "food": 388719,
+          "storage": 208000,
+          "excess": 180719
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "badong",
+          "name": "巴东",
+          "force": "liu",
+          "type": "city",
+          "food": 77003,
+          "storage": 72000,
+          "excess": 5003
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "fuling",
+          "name": "涪陵",
+          "force": "liu",
+          "type": "city",
+          "food": 74893,
+          "storage": 40000,
+          "excess": 34893
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_057",
+          "name": "雒县",
+          "force": "liu",
+          "type": "city",
+          "food": 67342,
+          "storage": 40000,
+          "excess": 27342
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_059",
+          "name": "武阳",
+          "force": "liu",
+          "type": "city",
+          "food": 40370,
+          "storage": 40000,
+          "excess": 6786
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_061",
+          "name": "邛都",
+          "force": "liu",
+          "type": "city",
+          "food": 45538,
+          "storage": 40000,
+          "excess": 17072
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_065",
+          "name": "汉嘉",
+          "force": "liu",
+          "type": "city",
+          "food": 41852,
+          "storage": 40000,
+          "excess": 9734
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_063",
+          "name": "不韦",
+          "force": "liu",
+          "type": "city",
+          "food": 41966,
+          "storage": 40000,
+          "excess": 9971
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_112",
+          "name": "江阳",
+          "force": "liu",
+          "type": "city",
+          "food": 42790,
+          "storage": 40000,
+          "excess": 2790
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "commandery_city_121",
+          "name": "绵虒",
+          "force": "liu",
+          "type": "city",
+          "food": 65713,
+          "storage": 40000,
+          "excess": 25713
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_28_02",
+          "name": "郫县",
+          "force": "liu",
+          "type": "city",
+          "food": 159213,
+          "storage": 40000,
+          "excess": 243971
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_28_03",
+          "name": "江原",
+          "force": "liu",
+          "type": "city",
+          "food": 127715,
+          "storage": 40000,
+          "excess": 181399
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_28_04",
+          "name": "临邛",
+          "force": "liu",
+          "type": "city",
+          "food": 130523,
+          "storage": 40000,
+          "excess": 187003
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_28_05",
+          "name": "繁县",
+          "force": "liu",
+          "type": "city",
+          "food": 135896,
+          "storage": 40000,
+          "excess": 95896
+        },
+        {
+          "kind": "warehouse-overflow",
+          "phase": "static-economy",
+          "date": {
+            "year": 228,
+            "month": 9,
+            "day": 30,
+            "xun": 2
+          },
+          "id": "xian_29_04",
+          "name": "枳县",
+          "force": "liu",
+          "type": "city",
+          "food": 65392,
+          "storage": 40000,
+          "excess": 25392
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "chengdu",
+          "before": [
+            "chengdu",
+            380544,
+            208000,
+            0,
+            0,
+            201500
+          ],
+          "after": [
+            "chengdu",
+            208000,
+            208000,
+            0,
+            0,
+            201500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "fuling",
+          "before": [
+            "fuling",
+            49328,
+            40000,
+            0,
+            0,
+            27500
+          ],
+          "after": [
+            "fuling",
+            40000,
+            40000,
+            0,
+            0,
+            27500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_057",
+          "before": [
+            "commandery_city_057",
+            44317,
+            40000,
+            0,
+            0,
+            20500
+          ],
+          "after": [
+            "commandery_city_057",
+            40000,
+            40000,
+            0,
+            0,
+            20500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_059",
+          "before": [
+            "commandery_city_059",
+            45735,
+            40000,
+            0,
+            0,
+            17000
+          ],
+          "after": [
+            "commandery_city_059",
+            40000,
+            40000,
+            0,
+            0,
+            17000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_061",
+          "before": [
+            "commandery_city_061",
+            56017,
+            40000,
+            0,
+            0,
+            25500
+          ],
+          "after": [
+            "commandery_city_061",
+            40000,
+            40000,
+            0,
+            0,
+            25500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_065",
+          "before": [
+            "commandery_city_065",
+            48683,
+            40000,
+            0,
+            0,
+            19500
+          ],
+          "after": [
+            "commandery_city_065",
+            40000,
+            40000,
+            0,
+            0,
+            19500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "commandery_city_063",
+          "before": [
+            "commandery_city_063",
+            48920,
+            40000,
+            0,
+            0,
+            19000
+          ],
+          "after": [
+            "commandery_city_063",
+            40000,
+            40000,
+            0,
+            0,
+            19000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_28_02",
+          "before": [
+            "xian_28_02",
+            283553,
+            40000,
+            0,
+            0,
+            11000
+          ],
+          "after": [
+            "xian_28_02",
+            40000,
+            40000,
+            0,
+            0,
+            11000
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_28_03",
+          "before": [
+            "xian_28_03",
+            221096,
+            40000,
+            0,
+            0,
+            8500
+          ],
+          "after": [
+            "xian_28_03",
+            40000,
+            40000,
+            0,
+            0,
+            8500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_28_04",
+          "before": [
+            "xian_28_04",
+            226700,
+            40000,
+            0,
+            0,
+            8500
+          ],
+          "after": [
+            "xian_28_04",
+            40000,
+            40000,
+            0,
+            0,
+            8500
+          ]
+        },
+        {
+          "kind": "save-grain-mismatch",
+          "phase": "static-economy",
+          "date": {
+            "year": 229,
+            "month": 12,
+            "day": 31,
+            "xun": 2
+          },
+          "id": "xian_28_05",
+          "before": [
+            "xian_28_05",
+            104551,
+            40000,
+            0,
+            0,
+            8500
+          ],
+          "after": [
+            "xian_28_05",
+            40000,
+            40000,
+            0,
+            0,
+            8500
+          ]
+        }
+      ],
+      "ok": false
+    },
+    {
+      "id": "249_gaopingling",
+      "name": "高平陵",
+      "player": "cao",
+      "playable": 3,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 5,
+      "bonusFood": 84634,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 71,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 115,
+      "dispatchByForce": {
+        "liu": 62,
+        "sun": 40,
+        "cao": 13
+      },
+      "shortCities": [
+        {
+          "id": "jiangling",
+          "name": "江陵",
+          "force": "sun",
+          "type": "city",
+          "population": 154000,
+          "garrison": 9600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 160000,
+          "bonus": 0,
+          "dispatches": 12,
+          "shortDays": 9,
+          "maxShortStreak": 4,
+          "shortStreak": 0,
+          "emptyDays": 11,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "tianshui",
+          "name": "天水",
+          "force": "cao",
+          "type": "city",
+          "population": 44200,
+          "garrison": 3600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 108948,
+          "bonus": 16580,
+          "dispatches": 9,
+          "shortDays": 50,
+          "maxShortStreak": 14,
+          "shortStreak": 6,
+          "emptyDays": 57,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 20,
+          "shortDays": 2,
+          "maxShortStreak": 1,
+          "shortStreak": 0,
+          "emptyDays": 15,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_10_04",
+          "name": "鄂县",
+          "force": "sun",
+          "type": "city",
+          "population": 12900,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 17,
+          "shortDays": 10,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 15,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17527675,
+        "armies": 16
+      },
+      "seconds": 18.2,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "253_hefei",
+      "name": "合肥新城",
+      "player": "sun",
+      "playable": 3,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 7,
+      "bonusFood": 125016,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 83,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 122,
+      "dispatchByForce": {
+        "liu": 52,
+        "sun": 46,
+        "cao": 24
+      },
+      "shortCities": [
+        {
+          "id": "hefei",
+          "name": "合肥",
+          "force": "cao",
+          "type": "city",
+          "population": 78000,
+          "garrison": 11500,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 102366,
+          "bonus": 16580,
+          "dispatches": 4,
+          "shortDays": 2,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 5,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "tianshui",
+          "name": "天水",
+          "force": "cao",
+          "type": "city",
+          "population": 44200,
+          "garrison": 3600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 99480,
+          "bonus": 16580,
+          "dispatches": 8,
+          "shortDays": 76,
+          "maxShortStreak": 25,
+          "shortStreak": 0,
+          "emptyDays": 81,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 20,
+          "shortDays": 5,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 15,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17522969,
+        "armies": 17
+      },
+      "seconds": 16,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "263_jiange",
+      "name": "剑阁",
+      "player": "liu",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 9,
+      "bonusFood": 156820,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 368,
+      "postShortDays": 134,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 236,
+      "dispatchByForce": {
+        "liu": 111,
+        "sun": 72,
+        "cao": 52,
+        "lv_xing": 1
+      },
+      "shortCities": [
+        {
+          "id": "jiangling",
+          "name": "江陵",
+          "force": "sun",
+          "type": "city",
+          "population": 154000,
+          "garrison": 9600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 142080,
+          "bonus": 23680,
+          "dispatches": 12,
+          "shortDays": 7,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 14,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "liu",
+          "type": "city",
+          "population": 59700,
+          "garrison": 6700,
+          "stationed": 11000,
+          "initiallyBesieged": false,
+          "opening": 110160,
+          "bonus": 18360,
+          "dispatches": 12,
+          "shortDays": 8,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 12,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "tianshui",
+          "name": "天水",
+          "force": "cao",
+          "type": "city",
+          "population": 44200,
+          "garrison": 3600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 99480,
+          "bonus": 16580,
+          "dispatches": 8,
+          "shortDays": 69,
+          "maxShortStreak": 24,
+          "shortStreak": 0,
+          "emptyDays": 72,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 70800,
+          "bonus": 11800,
+          "dispatches": 18,
+          "shortDays": 32,
+          "maxShortStreak": 8,
+          "shortStreak": 0,
+          "emptyDays": 38,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "longxi",
+          "name": "陇西",
+          "force": "cao",
+          "type": "city",
+          "population": 24600,
+          "garrison": 2500,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 63960,
+          "bonus": 10660,
+          "dispatches": 12,
+          "shortDays": 200,
+          "maxShortStreak": 38,
+          "shortStreak": 16,
+          "emptyDays": 209,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_069",
+          "name": "下辨",
+          "force": "liu",
+          "type": "city",
+          "population": 2500,
+          "garrison": 2800,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 61,
+          "shortDays": 52,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 72,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17516278,
+        "armies": 18
+      },
+      "seconds": 16.3,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "279_jianye",
+      "name": "建业",
+      "player": "sun",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 3,
+      "bonusFood": 58020,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 996,
+      "postShortDays": 213,
+      "cityHungryArmyDays": 41,
+      "postHungryArmyDays": 0,
+      "dispatches": 421,
+      "dispatchByForce": {
+        "sun": 340,
+        "cao": 67,
+        "guo_ma": 10,
+        "tufa_shujineng": 4
+      },
+      "shortCities": [
+        {
+          "id": "chengdu",
+          "name": "成都",
+          "force": "cao",
+          "type": "city",
+          "population": 355400,
+          "garrison": 13400,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 208000,
+          "bonus": 0,
+          "dispatches": 20,
+          "shortDays": 181,
+          "maxShortStreak": 81,
+          "shortStreak": 0,
+          "emptyDays": 184,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangyang",
+          "name": "襄阳",
+          "force": "cao",
+          "type": "city",
+          "population": 220300,
+          "garrison": 26600,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 208000,
+          "bonus": 0,
+          "dispatches": 14,
+          "shortDays": 11,
+          "maxShortStreak": 4,
+          "shortStreak": 0,
+          "emptyDays": 14,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jiangling",
+          "name": "江陵",
+          "force": "sun",
+          "type": "city",
+          "population": 154000,
+          "garrison": 9600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 160000,
+          "bonus": 0,
+          "dispatches": 16,
+          "shortDays": 39,
+          "maxShortStreak": 13,
+          "shortStreak": 0,
+          "emptyDays": 45,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "yongan",
+          "name": "永安",
+          "force": "cao",
+          "type": "city",
+          "population": 119100,
+          "garrison": 3100,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 7,
+          "shortDays": 109,
+          "maxShortStreak": 45,
+          "shortStreak": 0,
+          "emptyDays": 111,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "panyu",
+          "name": "番禺",
+          "force": "guo_ma",
+          "type": "city",
+          "population": 95500,
+          "garrison": 4700,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 120000,
+          "bonus": 0,
+          "dispatches": 10,
+          "shortDays": 214,
+          "maxShortStreak": 214,
+          "shortStreak": 0,
+          "emptyDays": 214,
+          "hungryArmyDays": 41
+        },
+        {
+          "id": "xiliang",
+          "name": "武威",
+          "force": "tufa_shujineng",
+          "type": "city",
+          "population": 32500,
+          "garrison": 2800,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 72000,
+          "bonus": 0,
+          "dispatches": 4,
+          "shortDays": 224,
+          "maxShortStreak": 202,
+          "shortStreak": 22,
+          "emptyDays": 224,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_125",
+          "name": "夷道",
+          "force": "sun",
+          "type": "city",
+          "population": 26000,
+          "garrison": 600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 122,
+          "shortDays": 94,
+          "maxShortStreak": 12,
+          "shortStreak": 0,
+          "emptyDays": 181,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "cao",
+          "type": "city",
+          "population": 16700,
+          "garrison": 2700,
+          "stationed": 3500,
+          "initiallyBesieged": false,
+          "opening": 63960,
+          "bonus": 10660,
+          "dispatches": 6,
+          "shortDays": 103,
+          "maxShortStreak": 49,
+          "shortStreak": 1,
+          "emptyDays": 106,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_10_04",
+          "name": "鄂县",
+          "force": "sun",
+          "type": "city",
+          "population": 12900,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 40000,
+          "bonus": 0,
+          "dispatches": 17,
+          "shortDays": 21,
+          "maxShortStreak": 4,
+          "shortStreak": 1,
+          "emptyDays": 29,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17520375,
+        "armies": 21
+      },
+      "seconds": 15.4,
+      "issues": [],
+      "ok": true
+    }
+  ],
+  "after": [
+    {
+      "id": "184_yingchuan",
+      "name": "颍川",
+      "player": "han",
+      "playable": 2,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 13,
+      "bonusFood": 222451,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 1496,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 29,
+      "postHungryArmyDays": 0,
+      "dispatches": 114,
+      "dispatchByForce": {
+        "zhang_jiao": 32,
+        "han": 82
+      },
+      "shortCities": [
+        {
+          "id": "puyang",
+          "name": "濮阳",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 146000,
+          "garrison": 4600,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 166680,
+          "bonus": 27780,
+          "dispatches": 0,
+          "shortDays": 156,
+          "maxShortStreak": 110,
+          "shortStreak": 46,
+          "emptyDays": 157,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "ji",
+          "name": "蓟",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 127500,
+          "garrison": 5100,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 166680,
+          "bonus": 27780,
+          "dispatches": 0,
+          "shortDays": 65,
+          "maxShortStreak": 47,
+          "shortStreak": 47,
+          "emptyDays": 66,
+          "hungryArmyDays": 29
+        },
+        {
+          "id": "commandery_city_018",
+          "name": "信都",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 28000,
+          "garrison": 2100,
+          "stationed": 20000,
+          "initiallyBesieged": false,
+          "opening": 163452,
+          "bonus": 9920,
+          "dispatches": 0,
+          "shortDays": 445,
+          "maxShortStreak": 314,
+          "shortStreak": 131,
+          "emptyDays": 446,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_088",
+          "name": "涿县",
+          "force": "han",
+          "type": "city",
+          "population": 27500,
+          "garrison": 2100,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 73232,
+          "bonus": 9920,
+          "dispatches": 8,
+          "shortDays": 117,
+          "maxShortStreak": 33,
+          "shortStreak": 19,
+          "emptyDays": 122,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_015",
+          "name": "瘿陶",
+          "force": "zhang_jiao",
+          "type": "city",
+          "population": 26000,
+          "garrison": 2100,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 239209,
+          "bonus": 9920,
+          "dispatches": 0,
+          "shortDays": 464,
+          "maxShortStreak": 325,
+          "shortStreak": 139,
+          "emptyDays": 465,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_003",
+          "name": "安邑",
+          "force": "han",
+          "type": "city",
+          "population": 25500,
+          "garrison": 2100,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 106290,
+          "bonus": 9920,
+          "dispatches": 9,
+          "shortDays": 118,
+          "maxShortStreak": 15,
+          "shortStreak": 0,
+          "emptyDays": 126,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_021",
+          "name": "邯郸",
+          "force": "han",
+          "type": "city",
+          "population": 8000,
+          "garrison": 2100,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 144619,
+          "bonus": 9920,
+          "dispatches": 14,
+          "shortDays": 131,
+          "maxShortStreak": 22,
+          "shortStreak": 0,
+          "emptyDays": 143,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 18725350,
+        "armies": 19
+      },
+      "seconds": 24.6,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "190_coalition",
+      "name": "洛阳",
+      "player": "cao",
+      "playable": 28,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 27,
+      "bonusFood": 884215,
+      "towns": 335,
+      "posts": 14,
+      "cityShortDays": 36,
+      "postShortDays": 48,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 52,
+      "dispatchByForce": {
+        "dong": 33,
+        "gongsun": 4,
+        "ma_teng": 6,
+        "bao_xin": 4,
+        "han_sui": 3,
+        "liu_yan": 1,
+        "yuan_yi": 1
+      },
+      "shortCities": [
+        {
+          "id": "luoyang",
+          "name": "洛阳",
+          "force": "dong",
+          "type": "city",
+          "population": 305400,
+          "garrison": 16200,
+          "stationed": 21000,
+          "initiallyBesieged": false,
+          "opening": 320000,
+          "bonus": 39622,
+          "dispatches": 3,
+          "shortDays": 36,
+          "maxShortStreak": 36,
+          "shortStreak": 0,
+          "emptyDays": 36,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 20128916,
+        "armies": 54
+      },
+      "seconds": 73.1,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "194_puyang",
+      "name": "濮阳",
+      "player": "cao",
+      "playable": 22,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 34,
+      "bonusFood": 752280,
+      "towns": 324,
+      "posts": 9,
+      "cityShortDays": 2686,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 1992,
+      "postHungryArmyDays": 0,
+      "dispatches": 141,
+      "dispatchByForce": {
+        "tao_qian": 19,
+        "yuan": 26,
+        "zhang_yan": 4,
+        "li_jue": 13,
+        "yuan_shu": 23,
+        "liu_chong": 5,
+        "han_sui": 11,
+        "lu_bu": 12,
+        "gongsun": 9,
+        "gongsun_du": 6,
+        "ma_teng": 5,
+        "liu_biao": 6,
+        "liu_yao": 2
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "li_jue",
+          "type": "city",
+          "population": 149200,
+          "garrison": 11700,
+          "stationed": 17000,
+          "initiallyBesieged": false,
+          "opening": 209640,
+          "bonus": 34940,
+          "dispatches": 4,
+          "shortDays": 229,
+          "maxShortStreak": 173,
+          "shortStreak": 173,
+          "emptyDays": 230,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hongnong",
+          "name": "弘农",
+          "force": "li_jue",
+          "type": "city",
+          "population": 58900,
+          "garrison": 3400,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 72600,
+          "bonus": 12100,
+          "dispatches": 4,
+          "shortDays": 222,
+          "maxShortStreak": 171,
+          "shortStreak": 171,
+          "emptyDays": 223,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_012",
+          "name": "陈县",
+          "force": "liu_chong",
+          "type": "city",
+          "population": 51000,
+          "garrison": 2300,
+          "stationed": 7000,
+          "initiallyBesieged": false,
+          "opening": 40320,
+          "bonus": 6720,
+          "dispatches": 5,
+          "shortDays": 110,
+          "maxShortStreak": 110,
+          "shortStreak": 110,
+          "emptyDays": 111,
+          "hungryArmyDays": 111
+        },
+        {
+          "id": "tianshui",
+          "name": "天水",
+          "force": "ma_teng",
+          "type": "city",
+          "population": 49500,
+          "garrison": 2900,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 129000,
+          "bonus": 21500,
+          "dispatches": 5,
+          "shortDays": 90,
+          "maxShortStreak": 90,
+          "shortStreak": 90,
+          "emptyDays": 91,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_06_04",
+          "name": "东阿",
+          "force": "cao",
+          "type": "city",
+          "population": 25100,
+          "garrison": 500,
+          "stationed": 4000,
+          "initiallyBesieged": false,
+          "opening": 40320,
+          "bonus": 6720,
+          "dispatches": 0,
+          "shortDays": 558,
+          "maxShortStreak": 325,
+          "shortStreak": 204,
+          "emptyDays": 559,
+          "hungryArmyDays": 478
+        },
+        {
+          "id": "jincheng",
+          "name": "金城",
+          "force": "han_sui",
+          "type": "city",
+          "population": 18800,
+          "garrison": 2200,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 82920,
+          "bonus": 13820,
+          "dispatches": 11,
+          "shortDays": 210,
+          "maxShortStreak": 184,
+          "shortStreak": 184,
+          "emptyDays": 216,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_04",
+          "name": "鄄城",
+          "force": "cao",
+          "type": "city",
+          "population": 12800,
+          "garrison": 500,
+          "stationed": 26000,
+          "initiallyBesieged": false,
+          "opening": 40320,
+          "bonus": 6720,
+          "dispatches": 0,
+          "shortDays": 659,
+          "maxShortStreak": 354,
+          "shortStreak": 232,
+          "emptyDays": 660,
+          "hungryArmyDays": 970
+        },
+        {
+          "id": "commandery_city_114",
+          "name": "沾县",
+          "force": "zhang_yan",
+          "type": "city",
+          "population": 5000,
+          "garrison": 500,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 53760,
+          "bonus": 8960,
+          "dispatches": 4,
+          "shortDays": 432,
+          "maxShortStreak": 238,
+          "shortStreak": 238,
+          "emptyDays": 433,
+          "hungryArmyDays": 433
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "li_jue",
+          "type": "city",
+          "population": 3000,
+          "garrison": 2300,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 40320,
+          "bonus": 6720,
+          "dispatches": 5,
+          "shortDays": 176,
+          "maxShortStreak": 127,
+          "shortStreak": 127,
+          "emptyDays": 178,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17013792,
+        "armies": 64
+      },
+      "seconds": 73.2,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "200_guandu",
+      "name": "官渡",
+      "player": "cao",
+      "playable": 15,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 18,
+      "bonusFood": 658360,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 262,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 34,
+      "postHungryArmyDays": 0,
+      "dispatches": 21,
+      "dispatchByForce": {
+        "ma_teng": 5,
+        "handan_shang": 5,
+        "yuan": 6,
+        "han_sui": 3,
+        "gongsun_du": 1,
+        "zhang_meng": 1
+      },
+      "shortCities": [
+        {
+          "id": "anding",
+          "name": "安定",
+          "force": "han_sui",
+          "type": "city",
+          "population": 33100,
+          "garrison": 2600,
+          "stationed": 6500,
+          "initiallyBesieged": false,
+          "opening": 127920,
+          "bonus": 21320,
+          "dispatches": 3,
+          "shortDays": 34,
+          "maxShortStreak": 16,
+          "shortStreak": 11,
+          "emptyDays": 36,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "ma_teng",
+          "type": "city",
+          "population": 3500,
+          "garrison": 2500,
+          "stationed": 8500,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 0,
+          "dispatches": 5,
+          "shortDays": 215,
+          "maxShortStreak": 145,
+          "shortStreak": 66,
+          "emptyDays": 217,
+          "hungryArmyDays": 34
+        },
+        {
+          "id": "commandery_city_074",
+          "name": "觻得",
+          "force": "handan_shang",
+          "type": "city",
+          "population": 1000,
+          "garrison": 2500,
+          "stationed": 4000,
+          "initiallyBesieged": false,
+          "opening": 71040,
+          "bonus": 11840,
+          "dispatches": 5,
+          "shortDays": 13,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 17,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17447756,
+        "armies": 31
+      },
+      "seconds": 32.9,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "208_red_cliffs",
+      "name": "赤壁",
+      "player": "liu",
+      "playable": 16,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 13,
+      "bonusFood": 396260,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 246,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 82,
+      "postHungryArmyDays": 0,
+      "dispatches": 50,
+      "dispatchByForce": {
+        "ma_chao": 4,
+        "cao": 29,
+        "sun": 5,
+        "han_sui": 5,
+        "liu": 4,
+        "zhang_meng": 2,
+        "gongsun_kang": 1
+      },
+      "shortCities": [
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "ma_chao",
+          "type": "city",
+          "population": 3000,
+          "garrison": 2700,
+          "stationed": 9000,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 0,
+          "dispatches": 4,
+          "shortDays": 246,
+          "maxShortStreak": 246,
+          "shortStreak": 246,
+          "emptyDays": 246,
+          "hungryArmyDays": 82
+        }
+      ],
+      "live": {
+        "population": 15483512,
+        "armies": 28
+      },
+      "seconds": 50.3,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "211_tongguan",
+      "name": "潼关",
+      "player": "ma_chao",
+      "playable": 9,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 17,
+      "bonusFood": 559080,
+      "towns": 362,
+      "posts": 14,
+      "cityShortDays": 1009,
+      "postShortDays": 464,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 134,
+      "dispatchByForce": {
+        "ma_chao": 21,
+        "zhang_lu": 11,
+        "cao": 79,
+        "liu": 12,
+        "han_sui": 5,
+        "gongsun_kang": 4,
+        "sun": 2
+      },
+      "shortCities": [
+        {
+          "id": "anding",
+          "name": "安定",
+          "force": "han_sui",
+          "type": "city",
+          "population": 28700,
+          "garrison": 3100,
+          "stationed": 11300,
+          "initiallyBesieged": false,
+          "opening": 120960,
+          "bonus": 20160,
+          "dispatches": 5,
+          "shortDays": 244,
+          "maxShortStreak": 50,
+          "shortStreak": 0,
+          "emptyDays": 249,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_14",
+          "name": "陆口",
+          "force": "sun",
+          "type": "city",
+          "population": 23600,
+          "garrison": 600,
+          "stationed": 14000,
+          "initiallyBesieged": false,
+          "opening": 67200,
+          "bonus": 11200,
+          "dispatches": 0,
+          "shortDays": 523,
+          "maxShortStreak": 274,
+          "shortStreak": 274,
+          "emptyDays": 524,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_006",
+          "name": "高陵",
+          "force": "ma_chao",
+          "type": "city",
+          "population": 5000,
+          "garrison": 2800,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 67200,
+          "bonus": 11200,
+          "dispatches": 1,
+          "shortDays": 242,
+          "maxShortStreak": 210,
+          "shortStreak": 210,
+          "emptyDays": 243,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 16947256,
+        "armies": 34
+      },
+      "seconds": 36.5,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "219_xiangyang",
+      "name": "襄阳",
+      "player": "liu",
+      "playable": 5,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 14,
+      "bonusFood": 447240,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 253,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 287,
+      "dispatchByForce": {
+        "sun": 141,
+        "liu": 44,
+        "cao": 98,
+        "gongsun_kang": 4
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 163600,
+          "garrison": 11700,
+          "stationed": 40000,
+          "initiallyBesieged": false,
+          "opening": 359400,
+          "bonus": 59900,
+          "dispatches": 33,
+          "shortDays": 12,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 23,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_14",
+          "name": "陆口",
+          "force": "sun",
+          "type": "city",
+          "population": 22700,
+          "garrison": 700,
+          "stationed": 25000,
+          "initiallyBesieged": false,
+          "opening": 133997,
+          "bonus": 11520,
+          "dispatches": 126,
+          "shortDays": 188,
+          "maxShortStreak": 36,
+          "shortStreak": 0,
+          "emptyDays": 278,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_111",
+          "name": "陈仓",
+          "force": "cao",
+          "type": "city",
+          "population": 10500,
+          "garrison": 600,
+          "stationed": 10000,
+          "initiallyBesieged": false,
+          "opening": 69120,
+          "bonus": 11520,
+          "dispatches": 12,
+          "shortDays": 53,
+          "maxShortStreak": 7,
+          "shortStreak": 0,
+          "emptyDays": 63,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17306084,
+        "armies": 22
+      },
+      "seconds": 37.4,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "222_yiling",
+      "name": "夷陵",
+      "player": "liu",
+      "playable": 5,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 13,
+      "bonusFood": 375627,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 641,
+      "postShortDays": 434,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 305,
+      "dispatchByForce": {
+        "liu": 186,
+        "sun": 59,
+        "cao": 52,
+        "gongsun_gong": 8
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 167200,
+          "garrison": 11700,
+          "stationed": 20000,
+          "initiallyBesieged": false,
+          "opening": 349440,
+          "bonus": 58240,
+          "dispatches": 5,
+          "shortDays": 3,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 5,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangping",
+          "name": "襄平",
+          "force": "gongsun_gong",
+          "type": "city",
+          "population": 51900,
+          "garrison": 2900,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 136812,
+          "bonus": 20160,
+          "dispatches": 8,
+          "shortDays": 57,
+          "maxShortStreak": 57,
+          "shortStreak": 57,
+          "emptyDays": 58,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_125",
+          "name": "夷道",
+          "force": "sun",
+          "type": "city",
+          "population": 24500,
+          "garrison": 700,
+          "stationed": 45000,
+          "initiallyBesieged": false,
+          "opening": 360000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 470,
+          "maxShortStreak": 355,
+          "shortStreak": 114,
+          "emptyDays": 471,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_08",
+          "name": "公安",
+          "force": "sun",
+          "type": "city",
+          "population": 12300,
+          "garrison": 700,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 3681,
+          "dispatches": 12,
+          "shortDays": 91,
+          "maxShortStreak": 13,
+          "shortStreak": 0,
+          "emptyDays": 100,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_109",
+          "name": "房陵",
+          "force": "cao",
+          "type": "city",
+          "population": 11000,
+          "garrison": 500,
+          "stationed": 5000,
+          "initiallyBesieged": false,
+          "opening": 65280,
+          "bonus": 10880,
+          "dispatches": 7,
+          "shortDays": 20,
+          "maxShortStreak": 5,
+          "shortStreak": 0,
+          "emptyDays": 25,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17287293,
+        "armies": 32
+      },
+      "seconds": 60,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "228_tianshui",
+      "name": "天水",
+      "player": "liu",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 12,
+      "bonusFood": 377007,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 1059,
+      "postShortDays": 527,
+      "cityHungryArmyDays": 460,
+      "postHungryArmyDays": 0,
+      "dispatches": 143,
+      "dispatchByForce": {
+        "sun": 41,
+        "cao": 93,
+        "gongsun_yuan": 9
+      },
+      "shortCities": [
+        {
+          "id": "changan",
+          "name": "长安",
+          "force": "cao",
+          "type": "city",
+          "population": 170900,
+          "garrison": 10800,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 410632,
+          "bonus": 61560,
+          "dispatches": 19,
+          "shortDays": 8,
+          "maxShortStreak": 1,
+          "shortStreak": 0,
+          "emptyDays": 16,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "liu",
+          "type": "city",
+          "population": 59700,
+          "garrison": 6700,
+          "stationed": 52000,
+          "initiallyBesieged": false,
+          "opening": 410000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 466,
+          "maxShortStreak": 354,
+          "shortStreak": 81,
+          "emptyDays": 467,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangping",
+          "name": "襄平",
+          "force": "gongsun_yuan",
+          "type": "city",
+          "population": 53200,
+          "garrison": 2900,
+          "stationed": 12000,
+          "initiallyBesieged": false,
+          "opening": 144000,
+          "bonus": 7616,
+          "dispatches": 9,
+          "shortDays": 40,
+          "maxShortStreak": 28,
+          "shortStreak": 28,
+          "emptyDays": 42,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "shangyong",
+          "name": "上庸",
+          "force": "liu",
+          "type": "city",
+          "population": 39000,
+          "garrison": 2200,
+          "stationed": 5000,
+          "initiallyBesieged": true,
+          "opening": 90000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 0,
+          "maxShortStreak": 0,
+          "shortStreak": 0,
+          "emptyDays": 459,
+          "hungryArmyDays": 460
+        },
+        {
+          "id": "xian_26_04",
+          "name": "褒中",
+          "force": "liu",
+          "type": "city",
+          "population": 14700,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 0,
+          "dispatches": 0,
+          "shortDays": 416,
+          "maxShortStreak": 343,
+          "shortStreak": 73,
+          "emptyDays": 417,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_007",
+          "name": "槐里",
+          "force": "cao",
+          "type": "city",
+          "population": 3500,
+          "garrison": 2800,
+          "stationed": 25000,
+          "initiallyBesieged": false,
+          "opening": 210000,
+          "bonus": 0,
+          "dispatches": 23,
+          "shortDays": 33,
+          "maxShortStreak": 6,
+          "shortStreak": 0,
+          "emptyDays": 45,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_extra_13",
+          "name": "上邽",
+          "force": "cao",
+          "type": "city",
+          "population": 3400,
+          "garrison": 600,
+          "stationed": 6000,
+          "initiallyBesieged": false,
+          "opening": 78557,
+          "bonus": 11840,
+          "dispatches": 14,
+          "shortDays": 96,
+          "maxShortStreak": 23,
+          "shortStreak": 0,
+          "emptyDays": 106,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17511646,
+        "armies": 29
+      },
+      "seconds": 52.2,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "249_gaopingling",
+      "name": "高平陵",
+      "player": "cao",
+      "playable": 3,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 7,
+      "bonusFood": 282960,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 11,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 69,
+      "dispatchByForce": {
+        "sun": 26,
+        "liu": 42,
+        "cao": 1
+      },
+      "shortCities": [
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 141720,
+          "bonus": 23620,
+          "dispatches": 10,
+          "shortDays": 1,
+          "maxShortStreak": 1,
+          "shortStreak": 0,
+          "emptyDays": 6,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_10_04",
+          "name": "鄂县",
+          "force": "sun",
+          "type": "city",
+          "population": 12900,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 0,
+          "dispatches": 12,
+          "shortDays": 10,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 15,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17529673,
+        "armies": 15
+      },
+      "seconds": 35,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "253_hefei",
+      "name": "合肥新城",
+      "player": "sun",
+      "playable": 3,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 9,
+      "bonusFood": 339740,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 3,
+      "postShortDays": 0,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 64,
+      "dispatchByForce": {
+        "sun": 27,
+        "liu": 33,
+        "cao": 4
+      },
+      "shortCities": [
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 141720,
+          "bonus": 23620,
+          "dispatches": 10,
+          "shortDays": 3,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 5,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17522489,
+        "armies": 18
+      },
+      "seconds": 15.7,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "263_jiange",
+      "name": "剑阁",
+      "player": "liu",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 11,
+      "bonusFood": 337380,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 254,
+      "postShortDays": 66,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 138,
+      "dispatchByForce": {
+        "sun": 63,
+        "liu": 47,
+        "cao": 28
+      },
+      "shortCities": [
+        {
+          "id": "jiangling",
+          "name": "江陵",
+          "force": "sun",
+          "type": "city",
+          "population": 154000,
+          "garrison": 9600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 284160,
+          "bonus": 47360,
+          "dispatches": 7,
+          "shortDays": 4,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 7,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "hanzhong",
+          "name": "汉中",
+          "force": "liu",
+          "type": "city",
+          "population": 59700,
+          "garrison": 6700,
+          "stationed": 11000,
+          "initiallyBesieged": false,
+          "opening": 220440,
+          "bonus": 36740,
+          "dispatches": 7,
+          "shortDays": 5,
+          "maxShortStreak": 2,
+          "shortStreak": 0,
+          "emptyDays": 10,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jianing",
+          "name": "建宁",
+          "force": "liu",
+          "type": "city",
+          "population": 36600,
+          "garrison": 2000,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 141720,
+          "bonus": 23620,
+          "dispatches": 9,
+          "shortDays": 20,
+          "maxShortStreak": 8,
+          "shortStreak": 0,
+          "emptyDays": 23,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "longxi",
+          "name": "陇西",
+          "force": "cao",
+          "type": "city",
+          "population": 24600,
+          "garrison": 2500,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 127920,
+          "bonus": 21320,
+          "dispatches": 8,
+          "shortDays": 101,
+          "maxShortStreak": 36,
+          "shortStreak": 0,
+          "emptyDays": 107,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_069",
+          "name": "下辨",
+          "force": "liu",
+          "type": "city",
+          "population": 2500,
+          "garrison": 2800,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 103884,
+          "bonus": 11840,
+          "dispatches": 16,
+          "shortDays": 124,
+          "maxShortStreak": 16,
+          "shortStreak": 0,
+          "emptyDays": 138,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17516278,
+        "armies": 18
+      },
+      "seconds": 17.5,
+      "issues": [],
+      "ok": true
+    },
+    {
+      "id": "279_jianye",
+      "name": "建业",
+      "player": "sun",
+      "playable": 4,
+      "days": 730,
+      "liveDays": 60,
+      "boosted": 10,
+      "bonusFood": 361059,
+      "towns": 365,
+      "posts": 14,
+      "cityShortDays": 317,
+      "postShortDays": 136,
+      "cityHungryArmyDays": 0,
+      "postHungryArmyDays": 0,
+      "dispatches": 234,
+      "dispatchByForce": {
+        "sun": 197,
+        "cao": 26,
+        "guo_ma": 6,
+        "tufa_shujineng": 5
+      },
+      "shortCities": [
+        {
+          "id": "chengdu",
+          "name": "成都",
+          "force": "cao",
+          "type": "city",
+          "population": 355400,
+          "garrison": 13400,
+          "stationed": 30000,
+          "initiallyBesieged": false,
+          "opening": 416000,
+          "bonus": 0,
+          "dispatches": 7,
+          "shortDays": 81,
+          "maxShortStreak": 77,
+          "shortStreak": 0,
+          "emptyDays": 83,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiangyang",
+          "name": "襄阳",
+          "force": "cao",
+          "type": "city",
+          "population": 220300,
+          "garrison": 26600,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 369360,
+          "bonus": 61560,
+          "dispatches": 5,
+          "shortDays": 5,
+          "maxShortStreak": 4,
+          "shortStreak": 0,
+          "emptyDays": 7,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "jiangling",
+          "name": "江陵",
+          "force": "sun",
+          "type": "city",
+          "population": 154000,
+          "garrison": 9600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 284160,
+          "bonus": 47360,
+          "dispatches": 7,
+          "shortDays": 18,
+          "maxShortStreak": 12,
+          "shortStreak": 0,
+          "emptyDays": 20,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "yongan",
+          "name": "永安",
+          "force": "cao",
+          "type": "city",
+          "population": 119100,
+          "garrison": 3100,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 144000,
+          "bonus": 19556,
+          "dispatches": 2,
+          "shortDays": 7,
+          "maxShortStreak": 7,
+          "shortStreak": 0,
+          "emptyDays": 7,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "panyu",
+          "name": "番禺",
+          "force": "guo_ma",
+          "type": "city",
+          "population": 95500,
+          "garrison": 4700,
+          "stationed": 18000,
+          "initiallyBesieged": false,
+          "opening": 240000,
+          "bonus": 0,
+          "dispatches": 6,
+          "shortDays": 125,
+          "maxShortStreak": 125,
+          "shortStreak": 0,
+          "emptyDays": 125,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xiliang",
+          "name": "武威",
+          "force": "tufa_shujineng",
+          "type": "city",
+          "population": 32500,
+          "garrison": 2800,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 133447,
+          "bonus": 21320,
+          "dispatches": 5,
+          "shortDays": 1,
+          "maxShortStreak": 1,
+          "shortStreak": 1,
+          "emptyDays": 2,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "commandery_city_125",
+          "name": "夷道",
+          "force": "sun",
+          "type": "city",
+          "population": 26000,
+          "garrison": 600,
+          "stationed": 16000,
+          "initiallyBesieged": false,
+          "opening": 140000,
+          "bonus": 0,
+          "dispatches": 22,
+          "shortDays": 63,
+          "maxShortStreak": 14,
+          "shortStreak": 0,
+          "emptyDays": 80,
+          "hungryArmyDays": 0
+        },
+        {
+          "id": "xian_10_04",
+          "name": "鄂县",
+          "force": "sun",
+          "type": "city",
+          "population": 12900,
+          "garrison": 600,
+          "stationed": 8000,
+          "initiallyBesieged": false,
+          "opening": 80000,
+          "bonus": 0,
+          "dispatches": 13,
+          "shortDays": 17,
+          "maxShortStreak": 3,
+          "shortStreak": 0,
+          "emptyDays": 23,
+          "hungryArmyDays": 0
+        }
+      ],
+      "live": {
+        "population": 17520214,
+        "armies": 21
+      },
+      "seconds": 34.4,
+      "issues": [],
+      "ok": true
+    }
+  ]
+}

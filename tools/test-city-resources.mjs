@@ -23,6 +23,6 @@ if(!(byId("luoyang","190_coalition").population>byId("luoyang").population&&byId
 if(!(byId("jianye","208_red_cliffs").population>byId("jianye").population&&byId("jianye").population>byId("jianye","190_coalition").population))throw new Error("江东人口没有体现孙氏经营后的增长");
 if(byId("xiangyang","208_red_cliffs").garrison<=byId("xiangyang").garrison||byId("chaisang","208_red_cliffs").garrison<=byId("chaisang").garrison)throw new Error("赤壁前夕荆州和柴桑没有提高战备");
 if(byId("runan").agriculture<=byId("shangdang").agriculture||byId("panyu").commerce<=byId("fuling").commerce)throw new Error("农产大郡与海贸港口的资源特征不明显");
-if(byId("hulao").storage!==28000||byId("baima").storage!==32000||byId("panyu").storage!==120000)throw new Error("关隘、渡口与港口仓储等级不正确");
+if(byId("hulao").storage!==profiles.type_storage.pass||byId("baima").storage!==profiles.type_storage.ford||byId("panyu").storage!==Math.max(profiles.type_storage.port,profiles.storage_by_level[String(byId("panyu").level)]))throw new Error("关隘、渡口与港口仓储等级不正确");
 
 console.log(`城市资源通过：${rawCities.length} 据点 / 105郡国人口依据与缺载标识 / 190·200·208 年人口差异 / 农商治安 / 守军战备 / 地方金粮 / 分级仓储`);

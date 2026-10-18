@@ -50,3 +50,19 @@ const days=(game,e,n,events=[])=>{for(let i=0;i<n;i++){game.turn++;e.advanceConv
 // 9. 长推演：AI 对局不崩，粮队与军仓数值合法
 {const game=new GameState(structuredClone(scenario),{playerForceId:"cao"});game.observerMode=true;for(let i=0;i<120;i++)game.endTurn();let convoys=0;for(const army of game.data.armies){assert(army.stores.food>=0);if(army.convoy){convoys++;assert(army.convoy.food>=0&&army.convoy.path.length>=1)}}console.log(`百二十日推演：在途粮队 ${convoys}`)}
 console.log("W4、W5 野战补给通过：携粮与组织度 / 运粮实走与途损 / 改道追送 / 轻装就食 / 截粮与护送 / 前进粮仓 / AI 袭扰 / 存档与界面");
+
+// 启运后尚未推进、或刚读档就撤销军团，粮队与护送不能失账，也不能重复返还。
+for(const reload of [false,true]){
+ const setupState=setup();let {game,e,army}=setupState;FiscalSystem.consumeArmy(game,army,[]);assert(army.convoy);
+ if(reload){const restored=new GameState(structuredClone(scenario));restored.applySave(restored.migrateSave(JSON.parse(JSON.stringify(game.serialize()))));game=restored;e=game.engine;army=game.data.armies.find(a=>a.id==='F')}
+ const source=game.data.cities.find(c=>c.id===army.convoy.sourceId),before=source.localFood,guards=source.garrison,cargo=Math.floor(army.convoy.food),escort=army.convoy.escort;game.data.armies=game.data.armies.filter(a=>a!==army);days(game,e,1);assert.equal(source.localFood,before+cargo,'粮队在启运和读档时都应有可结清台账');assert.equal(source.garrison,guards+escort);days(game,e,1);assert.equal(source.garrison,guards+escort,'同一护送只返还一次');
+}
+
+// 仍在路段上的军团不能隔空领取后方锚点粮队，粮队须追送到接应节点。
+{const {game,e,army,source}=setup();army.city=source.id;army.route=[game.data.rules.city_graph[source.id][0]];army.legElapsed=1;army.legDays=e.armyLegDays(game,army);army.stores.food=0;army.convoy={sourceId:source.id,path:[source.id],index:0,legLeft:0,food:1000,escort:10,departedTurn:game.turn};game.turn++;e.advanceConvoys(game,[]);assert.equal(army.stores.food,0,'行军军团不得在远处锚点隔空收粮');assert(army.convoy&&army.convoy.path.at(-1)===army.route[0]);}
+// 旧路线中不存在的节点不能导致野外小队距离计算崩溃；失效粮队有明确返还去向。
+{const {game,e,army,source}=setup();army.convoy={sourceId:source.id,path:[source.id,'missing-node'],index:0,legLeft:0,food:1000,escort:10,departedTurn:game.turn};game.data.armies.push({id:'field-watch',force:'yuan',fieldPosition:{x:1,y:1},soldiers:1000,units:{infantry:1000}});const before=source.localFood;game.turn++;assert.doesNotThrow(()=>e.advanceConvoys(game,[]));assert(!army.convoy);assert(source.localFood>=before,'失效路线返还己方来源库');}
+// 行军中切换袭扰不能清空道路进度、跳回后方锚点。
+{const {game,e,army,source}=setup();army.city=source.id;army.route=[game.data.rules.city_graph[source.id][0]];army.legElapsed=1;army.legDays=e.armyLegDays(game,army);const before=JSON.stringify(army);assert.equal(e.setRaiding(game,army,true).ok,false);assert.equal(JSON.stringify(army),before);}
+// v18 以前旧粮食口径：在途粮和台账与军仓同倍率迁移，不能少换或重复换。
+{const {game,e,army}=setup();FiscalSystem.consumeArmy(game,army,[]);const save=JSON.parse(JSON.stringify(game.serialize()));save.version=17;const food=army.convoy.food,migrated=game.migrateSave(save),back=migrated.world.armies.find(a=>a.id===army.id);assert.equal(back.convoy.food,Math.round(food*4));assert.equal(migrated.convoyLedger[army.id].food,Math.round(food*4));assert.equal(game.migrateSave(migrated).world.armies.find(a=>a.id===army.id).convoy.food,Math.round(food*4));}

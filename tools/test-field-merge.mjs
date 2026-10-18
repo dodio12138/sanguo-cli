@@ -47,3 +47,8 @@ for(const afterMission of ['merge','independent']){
  const {g,e,make,field}=fresh(),raider=field(make('阻击队',2000)),target=make('敌军',5000,'yuan',{route:['enemy'],legFrom:'home',legTo:'enemy',legElapsed:4,legDays:11});const speed=e.armyDailyMarch(g,target);e.resolveSkirmish(g,raider,target,[]);assert.equal(target.fieldDisruption.untilTurn,g.turn+2);g.turn+=2;assert(e.armyDailyMarch(g,target)<speed);g.turn++;assert.equal(e.armyDailyMarch(g,target),speed);
 }
 console.log('小队任务期限、自动返军合并、独立留队、手动合队守恒、失败无副作用、存档和持续阻击通过');
+
+// 护驾军并编，天子继续随新的主军，不因旧编号消失而流离。
+{const {g,e,make}=fresh(),parent=make('主军',5000),child=make('护驾军',1000);g.court.escort={armyId:child.id,fromId:'enemy',destinationId:'home',startedTurn:g.turn};assert(e.mergeArmies(g,child,parent,[]).ok);assert.equal(g.court.escort.armyId,parent.id);}
+// 野外合队不能绕过小股部队上限，让主力大军直接走格子。
+{const {g,e,make,field}=fresh(),parent=field(make('大队',2500)),child=field(make('小队',1000)),before=JSON.stringify(g.data.armies);assert(!e.mergeArmies(g,child,parent,[]).ok);assert.equal(JSON.stringify(g.data.armies),before);}

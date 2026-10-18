@@ -11,7 +11,7 @@ function siege(cityName,soldiers,method){
   data.armies=[...data.armies.filter(item=>item.force!=="cao"&&!(item.city===city.id&&item.force===city.force)),army];
   const start=army.soldiers,events=[],outlook=engine.siegeOutlook([army],city);state.date={year:200,month:1,day:10};let xun=0;
   for(;xun<60&&city.force!=="cao"&&army.siegeTarget;xun++){army.supply=100;engine.resolveSieges(state,events);state.turn++}
-  return {days:xun*10,taken:city.force==="cao",loss:start-army.soldiers,outlook,events};
+  return {days:xun*10,taken:city.force==="cao",loss:start-army.soldiers-events.filter(e=>e.occupationGarrison).reduce((n,e)=>n+e.occupationGarrison,0),outlook,events};
 }
 const blockade=siege("邺",60000,"blockade"),assault=siege("邺",60000,"assault"),flood=siege("邺",60000,"flood");
 for(const [name,result] of [["围困",blockade],["强攻",assault],["水攻",flood]])assert.ok(result.taken,`邺城${name}应能攻克`);

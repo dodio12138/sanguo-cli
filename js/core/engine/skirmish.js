@@ -40,6 +40,7 @@ Object.assign(window.RuleEngine.prototype,{
   armyMergeProblem(state,source,target){
     if(!source||!target||source===target||source.force!==target.force)return '须选择两支不同的本方部队';
     if([source,target].some(a=>a.engagementId||a.siegeTarget||a.retreat||a.route?.length||a.convoy||a.lastCombatTurn===state.turn||a.lastSkirmishTurn===state.turn))return '交战、围城、败退、行军或有在途粮队的部队不能立即合队';
+    if(target.fieldPosition&&source.soldiers+target.soldiers>this.skirmishRules().max_soldiers)return '野外合队后不能超过小股部队人数上限，请先撤回据点';
     const a=this.armyWorldPosition(source),b=this.armyWorldPosition(target);if(!a||!b||Math.hypot(a.x-b.x,a.y-b.y)>.1)return '两军须抵达同一地点后才能合队';
     if(source.fieldPosition&&source.fieldOrder?.path?.length||target.fieldPosition&&target.fieldOrder?.path?.length)return '野外行军须先停下才能合队';
     return null;
@@ -56,6 +57,7 @@ Object.assign(window.RuleEngine.prototype,{
     const assigned=new Set([target.commanderOfficerId,target.staffOfficerId,target.quartermasterOfficerId,target.marshalOfficerId,...(target.deputyOfficerIds||[]),...(target.lieutenants||[]).map(row=>row.officerId)]);target.deputyOfficerIds??=[];target.lieutenants??=[];const sourceUnits={...(source.units||{infantry:source.soldiers||0})};for(const id of [source.commanderOfficerId,source.staffOfficerId,source.quartermasterOfficerId,source.marshalOfficerId,...(source.deputyOfficerIds||[]),...(source.lieutenants||[]).map(row=>row.officerId)])if(id&&!assigned.has(id)){target.lieutenants.push({officerId:id,units:id===source.commanderOfficerId?{infantry:sourceUnits.infantry||0,cavalry:sourceUnits.cavalry||0,archers:sourceUnits.archers||0}:{infantry:0,cavalry:0,archers:0}});assigned.add(id)}
     for(const a of this.data.armies)if(a.detachedFrom===source.id){if(a===target)delete a.detachedFrom;else a.detachedFrom=target.id;}
     for(const corps of state.corps||[])if(corps.armyIds)corps.armyIds=corps.armyIds.filter(id=>id!==source.id);
+    if(state.court?.escort?.armyId===source.id)state.court.escort.armyId=target.id;delete target.sortieGarrison;
     this.data.armies=this.data.armies.filter(a=>a!==source);if(state.selected?.type==='army'&&state.selected.value.id===source.id)state.selected.value=target;
     this.syncAllArmyOfficerLocations();events.push({phase:'编制',armyId:target.id,text:`${source.name}并入${target.name}，合计 ${total} 人；伤员、老兵、军资与随军人员一并移交`});return {ok:true,army:target};
   },
@@ -87,11 +89,11 @@ Object.assign(window.RuleEngine.prototype,{
     const preview=this.fieldRoute(army,target,amount||army.soldiers);if(!preview.ok)return fail(preview.error);
     let unit=army;
     if(detach){
-      army.stores??={gold:0,food:0,silk:0};const beforeVeterans=army.veterans||0,ratio=amount/army.soldiers,units={};let left=amount;for(const type of ['cavalry','archers']){units[type]=Math.min(left,Math.floor((army.units?.[type]||0)*ratio));left-=units[type]}units.infantry=left;
+      army.stores??={gold:0,food:0,silk:0};const beforeVeterans=army.veterans||0,ratio=amount/army.soldiers,types=['infantry','cavalry','archers'],shares=this.apportionCombatCount(amount,types.map(type=>army.units?.[type]??(type==='infantry'?army.soldiers:0))),units=Object.fromEntries(types.map((type,i)=>[type,shares[i]]));
       if(shareUnits){units.infantry=shareUnits.infantry||0;units.cavalry=shareUnits.cavalry||0;units.archers=shareUnits.archers||0}if(officer)this.detachOfficerFromArmy(officer);const veterans=Math.floor((army.veterans||0)*ratio),stores=Object.fromEntries(['gold','food','silk'].map(k=>[k,Math.floor((army.stores?.[k]||0)*ratio)]));
       for(const [k,n]of Object.entries(stores))army.stores[k]=Math.max(0,(army.stores[k]||0)-n);
       const beforeUnits=army.units?{...army.units}:{infantry:army.soldiers,cavalry:0,archers:0};this.removeTroops(army,amount);army.units=Object.fromEntries(Object.keys(units).map(k=>[k,(beforeUnits[k]||0)-units[k]]));army.veterans=Math.max(0,beforeVeterans-veterans);
-      unit={id:`field_${forceId}_${state.turn}_${this.data.armies.length+1}`,name:`${army.name}别部`,force:forceId,city:army.city,commander:officer?.name||'别部军吏',commanderOfficerId:officer?.id||null,deputyOfficerIds:[],staffOfficerId:null,soldiers:amount,peakSoldiers:amount,reinforcementTarget:amount,units,veterans,wounded:0,morale:army.morale,training:army.training,supply:army.supply,cohesion:army.cohesion??100,formation:army.formation,tactic:army.tactic,stores,stance:'野外行军',detachedFrom:army.id};this.data.armies.push(unit);
+      unit={id:this.nextArmyId(state,`field_${forceId}`),name:`${army.name}别部`,force:forceId,city:army.city,commander:officer?.name||'别部军吏',commanderOfficerId:officer?.id||null,deputyOfficerIds:[],staffOfficerId:null,soldiers:amount,peakSoldiers:amount,reinforcementTarget:amount,units,veterans,wounded:0,morale:army.morale,training:army.training,supply:army.supply,cohesion:army.cohesion??100,formation:army.formation,tactic:army.tactic,stores,stance:'野外行军',detachedFrom:army.id};this.data.armies.push(unit);
     }if(!army.fieldPosition)FiscalSystem.stockArmy(state,unit);
     this.clearLeg(unit);delete unit.route;delete unit.destination;unit.raiding=options.mission==='harass';unit.fieldPosition=preview.start;
     unit.fieldOrder={mission:options.mission,target:{x:target.x,y:target.y},path:preview.points.slice(1),credit:0,startedTurn:state.turn,originCityId:army.fieldOrder?.originCityId||army.city,afterMission:options.afterMission||army.fieldOrder?.afterMission||'independent',missionDays};unit.stance=preview.points.length>1?'野外行军':this.fieldMissionName(options.mission);
@@ -144,6 +146,7 @@ Object.assign(window.RuleEngine.prototype,{
       if(!active.path?.length){active.credit=0;army.stance=active.blocked?'道路受阻':this.fieldMissionName(active.mission);if(active.mission==='withdraw'){
         const city=this.data.cities.find(c=>c.x===army.fieldPosition.x&&c.y===army.fieldPosition.y&&c.force===army.force&&!this.isCityBesieged(c));
         if(city){army.city=city.id;if(active.afterMission==='merge'&&army.detachedFrom){this.beginFieldMerge(state,army,events);continue}delete army.fieldPosition;delete army.fieldOrder;army.raiding=false;army.stance='驻扎';events.push({phase:'行军',armyId:army.id,cityId:city.id,text:`${army.name}逐格撤回${city.name}，可以就仓整补`});continue}
+        this.beginFieldWithdrawal(state,army,events);continue;
       }}
       if(!active.path?.length&&!active.blocked&&['strike','block','harass'].includes(active.mission)){active.arrivedTurn??=state.turn;if(state.turn-active.arrivedTurn>=Math.max(1,active.missionDays||rules.mission_days)){this.completeFieldMission(state,army,events);continue}}
       this.contactFieldArmy(state,army,events,engaged);

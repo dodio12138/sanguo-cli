@@ -2,6 +2,7 @@
   "slow_seconds": 8,
   "slow": [
     "test-all-commands.mjs",
+    "test-all-scenario-grain.mjs",
     "test-clans.mjs",
     "test-command-hierarchy.mjs",
     "test-court-crisis.mjs",

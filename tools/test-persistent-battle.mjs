@@ -61,3 +61,23 @@ const setup=()=>{const f=fresh();f.game.data.armies=[];f.from.force="yuan";f.sit
  const {game,e,site,from,a,d}=setup();e.startFieldBattle(a,[d],from,site,"road",game,[]);game.data.armies=game.data.armies.filter(v=>v!==a);game.turn++;e.advanceFieldBattles(game,[]);assert(!d.engagementId,"领军被外部系统移除后清理孤立战局引用");
 }
 console.log("持续野战：逐日、增援、战备粮耗、存档、撤退、行军接战通过");
+
+// 日战不再受旧即时模拟的八轮上限影响；仍由士气和命令结束。
+{
+ const {game,e,site,from,a,d}=setup();Object.assign(game.data.rules.battle,{round_loss:.001,morale_per_loss:0,pressure_morale:0});
+ e.startFieldBattle(a,[d],from,site,'road',game,[]);
+ for(let day=1;day<12;day++){game.turn++;e.advanceFieldBattles(game,[])}
+ assert.equal(a.engagement.days,12,'稳定对峙应可超过八日');assert(a.engagementId&&d.engagementId);
+}
+
+// 组织彻底瓦解或仅余最低兵数仍须脱离，不能因最少保留百人而永久交战。
+{
+ const {game,e,site,from,a,d}=setup();a.cohesion=5;d.cohesion=90;a.morale=d.morale=100;
+ e.startFieldBattle(a,[d],from,site,'road',game,[]);assert(!a.engagementId&&!d.engagementId);assert(a.retreat,'组织瓦解应沿真实路线溃退');
+}
+
+// 同一据点附近的道路追截不能误并入城下另一场持续战局。
+{
+ const {game,e,site,from,a,d,make}=setup();e.startFieldBattle(a,[d],from,site,'road',game,[]);const id=a.engagement.id,runner=make('road-defender','cao',10000),pursuer=make('road-attacker','yuan',10000),positions=new Map([[runner,{from:site.id,to:from.id,fraction:.5}],[pursuer,{from:site.id,to:from.id,fraction:.5}]]);
+ e.startFieldBattle(pursuer,[runner],from,site,'road',game,[],{attackers:[pursuer],roadPositions:positions});assert.notEqual(pursuer.engagementId,id);assert(pursuer.engagement.roadPositions,'道路接触点必须独立保存');assert.equal(a.engagement.id,id);
+}
