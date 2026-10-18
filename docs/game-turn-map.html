@@ -1,47 +1,3679 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>&lt;&lt;&lt;三国 · 每日模拟流程图</title>
-  <link rel="stylesheet" href="../css/button-states.css?v=20261009-05">
-  <style>
-    :root{--bg:#09100b;--panel:#111a13;--panel2:#172219;--line:#667353;--dim:#8d967a;--text:#e4dfbc;--gold:#ddc56f;--green:#91b879;--red:#cb7668;--blue:#7fa6a4;--shadow:#020503}
-    *{box-sizing:border-box}html,body{margin:0;min-width:1080px;min-height:100%;background:var(--bg);color:var(--text);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}body{background-image:linear-gradient(90deg,#53604812 1px,transparent 1px),linear-gradient(#5360480e 1px,transparent 1px),radial-gradient(circle at 50% 30%,#263522 0,transparent 58%);background-size:24px 24px,24px 24px,auto;padding:24px}.sheet{position:relative;width:calc(100vw - 48px);max-width:1500px;min-width:1032px;min-height:920px;margin:auto;border:1px solid #84906d;padding:22px 26px 28px;background:#0b120ddd;box-shadow:5px 6px 0 var(--shadow),18px 24px 70px #000c,inset 1px 1px #aeb78a33}.sheet:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,#0002 4px)}header{position:relative;display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #59644c;padding:0 4px 15px}h1{margin:0;color:var(--gold);font:700 27px/1.1 serif;letter-spacing:.12em}header p{margin:6px 0 0;color:var(--dim);font-size:12px}header .seal{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--gold);color:var(--gold);font:28px serif;box-shadow:inset 0 0 13px #c3a84d25}.legend{display:flex;gap:15px;color:var(--dim);font-size:11px}.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;border:1px solid #ffffff44}.loop{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:30px}.node{position:relative;min-height:200px;border:1px solid var(--line);padding:0 12px 12px;background:linear-gradient(145deg,#172119,#0c130e);box-shadow:2px 3px 0 var(--shadow),8px 10px 22px #0008}.node:after{content:"";position:absolute;top:50%;right:-23px;width:22px;border-top:2px solid #78855f}.node:before{content:"▶";position:absolute;z-index:2;top:calc(50% - 8px);right:-27px;color:var(--gold);font-size:13px}.node:last-child:after,.node:last-child:before{display:none}.node-title{display:flex;align-items:center;gap:8px;height:34px;margin:0 -12px 10px;padding:0 9px;background:#46522f;color:#ffe799;font-size:13px;font-weight:700}.node-title b{display:grid;place-items:center;width:20px;height:20px;border:1px solid #d8cc8c;color:#f6e39a;font-size:10px}.node ul{margin:0;padding-left:17px;color:#b9bea2;font-size:11px;line-height:1.65}.node li+li{margin-top:3px}.node strong{color:var(--text)}.plan{border-color:#8d7641}.resolve{border-color:#577a50}.event{border-color:#8b554a}.output{border-color:#597777}.return-arrow{position:absolute;z-index:0;left:8.2%;right:8.2%;top:236px;height:36px;border:2px solid #59644c;border-top:0;border-radius:0 0 22px 22px}.return-arrow:before{content:"▲";position:absolute;left:-7px;top:-8px;color:var(--gold);font-size:13px}.return-arrow span{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:0 8px;background:#0b120d;color:#899478;font-size:10px}.resolution{position:relative;margin:74px auto 0;border:1px solid #526149;padding:13px 13px 12px;background:#0d160f}.resolution h2,.branch h2{display:flex;align-items:center;gap:8px;margin:0 0 12px;color:var(--gold);font-size:13px}.resolution h2:before,.branch h2:before{content:"■";font-size:7px}.phases{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}.phase{position:relative;min-height:92px;border:1px solid #3f4c3a;padding:8px;background:#121c14}.phase:not(:last-child):after{content:"›";position:absolute;right:-7px;top:35px;z-index:2;color:var(--gold);font-size:17px}.phase b{display:block;margin-bottom:5px;color:#d6c36e;font-size:11px}.phase span{color:#9ca58b;font-size:9px;line-height:1.5}.branches{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;margin-top:14px}.branch{border:1px solid #4a5742;padding:12px;background:#0f1811}.branch ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}.branch li{border-left:2px solid #596a4e;padding:5px 7px;background:#151f16;color:#aeb69b;font-size:10px;line-height:1.45}.branch li b{display:block;color:#e0d9aa;font-size:10px}.branch.mode li:nth-child(2){border-left-color:#738e65}.branch.mode li:nth-child(3){border-left-color:#9a8549}.branch.mode li:nth-child(4){border-left-color:#667f80}.branch.event-path li{border-left-color:#8b554a}.branch.persist li{border-left-color:#597777}.foot{display:grid;grid-template-columns:1fr auto;align-items:center;margin-top:14px;border-top:1px dotted #505c48;padding-top:10px;color:#747e6b;font-size:10px}.foot strong{color:#b5bd9d}.badge{border:1px solid #5b674f;padding:5px 8px;color:#aeb799;background:#111912}.tip{color:#ccb863}.node.player .node-title{background:#5b552d}.node.resolve .node-title{background:#354e32}.node.event .node-title{background:#593a32}.node.output .node-title{background:#36504d}@media print{body{padding:0;background:#fff}.sheet{box-shadow:none}}
-  </style>
-  <style>
-    .phase.interactive{width:100%;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:border-color .12s,background .12s,transform .12s}.phase.interactive[aria-expanded="true"]{border-color:var(--gold);background:#1a2519;outline:0;transform:none}.phase.interactive .open-hint{display:block;margin-top:7px;color:var(--gold);font-size:8px}.phase.interactive[aria-expanded="true"] .open-hint:after{content:" · 已展开"}.detail-panel{margin-top:10px;border:1px solid #8d7641;padding:12px;background:#0a110c;box-shadow:inset 1px 1px #a99b5f25}.detail-panel[hidden]{display:none}.detail-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #4f5945;padding-bottom:9px}.detail-head h2{margin:0;color:#f0d477;font-size:15px}.detail-head p{margin:3px 0 0;color:#858e78;font-size:9px}.detail-head button{border:1px solid #677257;padding:4px 9px;background:#172017;color:#c8c2a0;font:9px inherit;cursor:pointer}.formula-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}.formula-card{border:1px solid #3f4b39;padding:9px;background:#111a13}.formula-card h3{margin:0 0 7px;color:#d8c36f;font-size:11px}.formula-card code{display:block;margin:5px 0;border-left:2px solid #647759;padding:5px 7px;background:#09100b;color:#cbd5b6;font:9px/1.55 ui-monospace,"SFMono-Regular",Menlo,monospace;white-space:normal}.formula-card p{margin:5px 0;color:#929b85;font-size:9px;line-height:1.55}.formula-card strong{color:#e1dab1}.modifier-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}.modifier{border-top:2px solid #58694e;padding:7px;background:#141e15;color:#9da68f;font-size:9px;line-height:1.5}.modifier b{display:block;color:#ded7aa;font-size:10px}.formula-card.warning{border-color:#72483f}.formula-card.warning code{border-left-color:#a26154}.source-note{margin:9px 0 0;color:#6f7968;font-size:8px;text-align:right}
-  </style>
-<style>.resolution{margin-top:16px}.daily-loop-back{text-align:center;color:var(--gold);font-size:11px;margin:20px 0}.sheet{min-height:0}html,body{min-width:320px}.sheet{min-width:0}.node{min-height:170px}@media(max-width:1000px){body{padding:12px}.sheet{width:100%;padding:14px}.loop{grid-template-columns:1fr 1fr;gap:10px}.node:before,.node:after{display:none}.phases{grid-template-columns:repeat(4,1fr)}.branches,.formula-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.loop,.branches,.formula-grid{grid-template-columns:1fr}.phases{grid-template-columns:1fr 1fr}h1{font-size:20px}}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23111b14%27/%3E%3Ctext x=%2716%27 y=%2725%27 text-anchor=%27middle%27 font-size=%2726%27 fill=%27%23d9be70%27%3E漢%3C/text%3E%3C/svg%3E">
+<meta name="description" content="三国当前版本的每日结算顺序、52项系统流程、311个细分步骤、条件分支与循环关系。">
+<title>&lt;&lt;&lt;三国 · 运行流程图谱</title>
+<link rel="stylesheet" href="../css/button-states.css?v=6ff4d60971">
+<style>
+:root{color-scheme:dark;--bg:#0a100c;--panel:#111b14;--raised:#1a2419;--line:#4b5841;--text:#dedbbc;--muted:#a0aa8e;--gold:#d9be70;--olive:#65734c;--blue:#91b5b4;--red:#d59a87;--green:#a2c295}*{box-sizing:border-box}html{scroll-padding-top:85px;scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif}button,input,select{font:inherit}a{color:var(--gold);text-underline-offset:4px}button{color:var(--text);background:var(--raised);border:1px solid var(--line);padding:6px 12px;cursor:pointer;position:relative}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}button:disabled{opacity:.4;cursor:default}input,select{min-width:0;color:var(--text);border:1px solid var(--line);background:var(--bg);padding:7px 10px}input::placeholder{color:#89947c}[hidden]{display:none!important}.skip{position:fixed;top:-80px;left:12px;z-index:20;background:var(--panel);padding:8px}.skip:focus{top:8px}.mast{max-width:1512px;margin:auto;padding:28px 32px 22px;display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line)}.mast h1{font:600 28px/1.4 "Songti SC","STSong",serif;letter-spacing:.04em;margin:8px 0;color:var(--gold)}.mast p{margin:4px 0;color:var(--muted);max-width:76ch}.mast .back{font-size:12px}.edition{text-align:right;flex-shrink:0;font-size:12px;color:var(--muted)}.edition .seal{display:grid;place-items:center;width:46px;height:46px;margin:4px 0 10px auto;border:1px solid var(--gold);color:var(--gold);font:29px serif}.layout{max-width:1512px;margin:auto;display:grid;grid-template-columns:248px minmax(0,1fr)}.index{position:sticky;top:0;height:100dvh;overflow:auto;border-right:1px solid var(--line);padding:22px 14px 28px 26px;scrollbar-width:thin}.index-title{color:var(--gold);font-size:13px;margin-bottom:12px}.index .major{display:block;padding:5px 8px;color:var(--text);text-decoration:none;border-left:2px solid transparent}.index .major:hover,.index .major[aria-current="location"]{border-left-color:var(--gold);background:#d9be7009}.index details{margin:12px 0}.index summary{cursor:pointer;color:var(--muted);font-size:12px;padding:4px}.index .module-link{display:block;font-size:12px;text-decoration:none;color:#c1c6a9;padding:4px 6px 4px 15px;line-height:1.6}.index .module-link:hover,.index .module-link[aria-current="location"]{color:var(--gold);text-decoration:underline}.index .count{float:right;color:var(--muted);font-size:11px}.content{min-width:0;padding:0 30px 50px}.section-head{border-bottom:1px solid var(--line);margin:30px 0 18px;padding-bottom:10px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}.section-head h2{font:600 22px/1.4 "Songti SC","STSong",serif;color:var(--gold);margin:0}.section-head small{color:var(--muted);font-size:12px}.lead{max-width:80ch;color:#b8c0a5;margin:12px 0}.notice{padding:10px 14px;border-left:3px solid var(--olive);background:var(--panel);color:#b8c0a5;font-size:13px}.phase-grid{counter-reset:phase;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);margin:20px 0 0}.phase{counter-increment:phase;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 14px 13px;min-height:148px;background:var(--panel);transition:box-shadow .1s}.phase:nth-child(4n){border-right:0}.phase:nth-last-child(-n+4){border-bottom:0}.phase::before{content:counter(phase,decimal-leading-zero);color:var(--muted);font:12px ui-monospace,monospace}.phase h3{font-size:14px;color:var(--gold);margin:7px 0 5px}.phase p{font-size:12px;margin:0;color:#b0baa0}.phase a{display:inline-block;margin-top:9px;font-size:12px}.phase.selected{box-shadow:inset 0 0 0 2px var(--gold);background:#222b1c}.phase .next{position:absolute;right:10px;top:10px;color:#7e9068}.reader{display:flex;align-items:center;flex-wrap:wrap;gap:8px;border:1px solid var(--line);border-top:0;padding:10px 12px;background:var(--panel)}.reader span{font-size:12px;color:var(--muted);flex:1;min-width:200px}.reader button{font-size:12px;padding:3px 10px}.return{display:flex;gap:12px;align-items:center;color:var(--green);font-size:13px;padding:12px 0}.return::before{content:"↶";font-size:24px}.timing-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left;font-size:13px}th,td{padding:12px 14px;border:1px solid var(--line);vertical-align:top}th{background:#25301e;color:var(--gold);font-weight:500}td:first-child{white-space:nowrap;color:var(--gold)}td{background:var(--panel)}td p{margin:0}.table-note{font-size:12px;color:var(--muted)}.cycle-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:18px}.cycle{padding:16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}.cycle h3{margin:0 0 8px;color:var(--gold);font-size:14px}.cycle .chain{color:#c7d1b3;line-height:1.9;font-size:13px}.cycle p{font-size:12px;margin:10px 0 0;color:var(--muted)}.cycle a{font-size:12px;display:inline-block;margin:7px 10px 0 0}.filters{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:end;gap:10px}.filters label{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--muted)}.filters .search{flex:1;min-width:180px}.filters select{max-width:160px}.filters button{font-size:12px;padding:8px 12px}.filter-status{color:var(--muted);font-size:12px;min-height:23px;margin:10px 0}.group-heading{font-size:16px;font-weight:500;color:var(--gold);padding:12px 0 8px;margin:16px 0 0}.system{border:1px solid var(--line);border-bottom:0;background:var(--panel);scroll-margin-top:100px}.system:last-child{border-bottom:1px solid var(--line)}.system>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 16px;position:relative}.system>summary::-webkit-details-marker{display:none}.system>summary::before{content:"＋";font:18px ui-monospace,monospace;color:var(--gold);width:18px;flex-shrink:0}.system[open]>summary::before{content:"−"}.system>summary:hover{outline:1px dashed var(--gold);outline-offset:-5px}.system>summary h3{font-size:15px;font-weight:500;margin:0;flex:1}.system .summary-meta{font-size:11px;color:var(--muted)}.tags{display:flex;gap:5px;flex-wrap:wrap}.tag{font-size:10px;line-height:1.6;color:var(--blue);border:1px solid #4e6561;padding:1px 5px;white-space:nowrap}.system-body{border-top:1px solid var(--line);padding:18px 24px 20px}.system-intro{max-width:82ch;color:#c5ceb3;margin:0 0 10px}.entry{color:var(--muted);font-size:12px;margin:0 0 20px}.entry b{font-weight:500;color:var(--gold)}.command-list{margin:-7px 0 20px;font-size:11px;line-height:2.3;color:var(--muted)}.command-list>span:first-child{margin-right:8px}.command-name{border-bottom:1px dotted var(--olive);color:var(--text);display:inline-block;margin-right:11px}.path{counter-reset:step;list-style:none;margin:0;padding:0 0 0 10px}.step{position:relative;padding:0 0 20px 31px;border-left:1px solid var(--olive);counter-increment:step;max-width:92ch}.step:last-child{border-left-color:transparent;padding-bottom:8px}.step::before{content:counter(step);position:absolute;left:-11px;top:0;width:21px;height:23px;background:#273322;border:1px solid #849266;color:var(--gold);text-align:center;font:12px/21px ui-monospace,monospace}.step:not(:last-child)::after{content:"↓";position:absolute;left:-5px;bottom:2px;background:var(--panel);font-size:12px;color:var(--olive)}.step h4{font-size:14px;margin:0 0 5px;color:var(--text);font-weight:600}.step p{margin:0;color:#b2bea2;font-size:13px}.branch{margin:9px 0 1px;padding:7px 11px;border-left:2px solid #9a6c53;background:#211e15;font-size:12px;color:#d3baa1}.branch b{font-weight:500;color:#e3c696;margin-right:7px}.loop-note{font-size:13px;color:var(--green);border:1px solid #4e6544;padding:10px 13px;margin:12px 0;background:#142014}.loop-note b{color:var(--green);display:block;margin-bottom:3px;font-weight:500}.notes{font-size:12px;color:#c3bda0;margin:10px 0;padding-left:18px}.notes li{margin-top:5px}.formula{display:block;white-space:normal;font:12px/1.8 ui-monospace,"PingFang SC",monospace;background:var(--bg);color:var(--blue);padding:10px 12px;border-left:2px solid #618380;margin:16px 0}.related{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 15px;font-size:12px;margin-top:15px}.related span{color:var(--muted)}.sources{margin-top:13px;font-size:11px;color:var(--muted)}.sources summary{cursor:pointer}.sources a{display:block;overflow-wrap:anywhere;margin:4px 0;color:#a5af92}.empty{border:1px dashed var(--line);padding:28px;color:var(--muted);text-align:center}.faq{border-top:1px solid var(--line);padding:14px 0}.faq summary{color:var(--text);cursor:pointer}.faq p{font-size:13px;color:var(--muted);max-width:80ch}.footer{border-top:1px solid var(--line);margin-top:35px;padding-top:18px;color:var(--muted);font-size:12px}.footer a{display:inline-block;margin-right:15px}.top-link{float:right}.print-only{display:none}noscript{display:block;padding:25px;color:var(--gold)}@media(max-width:1100px){.layout{grid-template-columns:205px minmax(0,1fr)}.index{padding-left:15px}.content{padding:0 20px 40px}.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.phase:nth-child(4n){border-right:1px solid var(--line)}.phase:nth-child(2n){border-right:0}.phase:nth-last-child(-n+4){border-bottom:1px solid var(--line)}.phase:nth-last-child(-n+2){border-bottom:0}.cycle-grid{grid-template-columns:1fr}.system>summary{flex-wrap:wrap}.tags{margin-left:30px}.system>summary h3{min-width:65%}}@media(max-width:760px){.mast{padding:18px 18px}.mast h1{font-size:24px}.edition{font-size:10px}.layout{display:block}.index{position:static;height:auto;max-height:280px;border-right:0;border-bottom:1px solid var(--line);padding:14px 18px}.index-title{margin-bottom:3px}.index .major{display:inline-block;margin-right:6px}.index details{margin:5px 0}.index .module-link{display:inline-block;padding:4px 9px}.index .count{float:none;margin-left:10px}.content{padding:0 16px 30px}.filters{gap:8px;padding:9px 0}.filters label.search{flex-basis:100%}.filters select{max-width:none}.filters button{padding:6px 9px}.system-body{padding:15px 16px}.section-head{display:block}.section-head small{display:block;margin-top:5px}.phase{min-height:154px}.timing-wrap table{min-width:600px}.reader span{flex-basis:100%}.summary-meta{margin-left:30px}.system>summary h3{min-width:60%;font-size:14px}.tags{margin-left:0}}@media(max-width:600px){body{font-size:13px}.mast p{font-size:12px}.edition .seal{width:36px;height:36px;font-size:24px}.edition{max-width:80px}.mast{gap:12px}.mast h1{font-size:22px}.phase{padding:12px 10px}.phase h3{font-size:13px}.phase p{font-size:11px}.cycle{padding:13px}.system>summary{padding:13px 12px;gap:8px}.tags{flex-basis:100%;margin-left:26px}.system .summary-meta{display:none}.filter-status{font-size:11px}.filters button{font-size:11px}.step{padding-left:23px}.step h4{font-size:13px}.step p{font-size:12px}.section-head h2{font-size:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.phase{transition:none}}@media print{html{scroll-behavior:auto}body{background:white;color:#222;font-size:10pt;line-height:1.6}.mast{padding:0 0 12px}.mast h1,.section-head h2,.group-heading{color:#333}.mast p,.edition,.lead,.entry,.table-note,.filter-status,.system-intro,.step p,.related,.notes,.sources,.footer{color:#444}.layout{display:block}.content{padding:0}.index,.filters,.reader,.skip,.top-link,.back{display:none}.print-only{display:block}.system,.phase,.cycle,td,th,.branch,.loop-note,.formula,.notice{background:white!important;color:#222!important;border-color:#888}.system>summary h3,.phase h3,.cycle h3,.loop-note b,.step h4,.tag,.related a{color:#222}.step{break-inside:avoid}.step::before{background:#eee;color:#222}.step::after{background:white}.system-body{padding:12px 18px}.system{break-inside:auto}.system>summary,.group-heading{break-after:avoid}.tag{border-color:#888}a{color:#333}.phase-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.phase{min-height:0}.branch{border-left-color:#888}header,.section-head{break-after:avoid}.cycle-grid{grid-template-columns:1fr 1fr}.faq{break-inside:avoid}.system[hidden],.group-heading[hidden]{display:block!important}}
+</style>
 </head>
 <body>
-  <main class="sheet">
-    <header><div><h1>&lt;&lt;&lt;三国 · 每日模拟</h1><p>运行时连续推进；暂停时规划与下令</p></div><div class="seal">漢</div></header>
-    <section class="branches"><article class="branch mode"><h2>播放／暂停</h2><ul><li><b>运行</b>自动逐日演进，持续运行</li><li><b>暂停</b>查看局势、任命与安排军令</li></ul></article><article class="branch mode"><h2>速度控制</h2><ul><li><b>▶ → ▶▶ → ▶▶▶</b>3 秒／日 → 1 秒／日 → 0.5 秒／日</li><li><b>空格 · [／]</b>暂停／继续 · 减速／加速</li></ul></article><article class="branch event-path"><h2>自动暂停</h2><ul><li><b>事件抉择</b>处理事件后可继续</li><li><b>切换后台</b>停止演进，返回后由玩家继续</li></ul></article></section>
-    <section class="loop" aria-label="每日自动循环">
-      <article class="node resolve"><h2 class="node-title"><b>01</b>财政与天下</h2><ul><li>生产、地方支出、人口</li><li>运输与工程推进</li><li>到期征收与定期天下系统</li></ul></article>
-      <article class="node player plan"><h2 class="node-title"><b>02</b>执行军令</h2><ul><li>按顺序处理待办队列</li><li>验证目标与资源</li><li>记录成功、失败与效果</li></ul></article>
-      <article class="node resolve"><h2 class="node-title"><b>03</b>诸侯与战争</h2><ul><li>诸侯每天概率决策</li><li>行政与围城按十日更新</li><li>军团行军、接战与军需</li></ul></article>
-      <article class="node event"><h2 class="node-title"><b>04</b>事件与终局</h2><ul><li>检查历史与地方事件</li><li>选择事件自动暂停</li><li>检查灭亡、胜利与统一</li></ul></article>
-      <article class="node output"><h2 class="node-title"><b>05</b>日报与保存</h2><ul><li>刷新数据与窗口</li><li>推进一日，保存战局</li><li>继续运行下一日</li></ul></article>
-    </section>
-    <p class="daily-loop-back">↶ 未暂停且无终局：自动进入下一日 ↶</p>
-    <section class="resolution" aria-label="每日更新顺序"><h2>每日更新顺序 · 点击查看细节</h2><div class="phases"><button type="button" class="phase interactive" data-detail-target="economyDetail" aria-expanded="false"><b>① 财政与运输</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="worldDetail" aria-expanded="false"><b>② 天下系统</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="ordersDetail" aria-expanded="false"><b>③ 执行待办军令</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="adminDetail" aria-expanded="false"><b>④ 行政与恢复 · 每十日</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="aiDetail" aria-expanded="false"><b>⑤ 诸侯每日概率决策</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="warDetail" aria-expanded="false"><b>⑥ 行军与接战 · 每日</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="peopleDetail" aria-expanded="false"><b>⑦ 军需与人物 · 每日</b><small class="open-hint">查看细节</small></button><button type="button" class="phase interactive" data-detail-target="eventDetail" aria-expanded="false"><b>⑧ 事件、终局与保存</b><small class="open-hint">查看细节</small></button></div></section>
-    <section id="economyDetail" class="detail-panel" hidden><div class="detail-head"><h2>① 财政与运输</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>田赋与商业税</h3><code>日田赋 = 农村人口 ÷ 1700 × 农业 ÷ 50 × 田赋率 ÷ 10 × 民心 × 状态 × 劳力 × 0.1</code><code>日商税 = (商业 × 1.2 + 农村人口 ÷ 18000 + 市集数 × 40) × 商业 ÷ 50 × 商税率 ÷ 10 × 民心 × 状态 × 劳力 × 0.1</code><p>分别按农村人口、农业、商业和税率累计；民心、占领、围城、徭役影响产出。默认每月征收，税率与周期可分别调整。</p><p>农村人口为辖县人口加城内人口的 15%，无辖县时取城内人口。民心按 0.1～1 比例计；状态为正常 1、占领 0.5、围城 0；劳力为 max(0.1, 1 − 2 × 服役人数 ÷ 农村及服役人口)。</p></article><article class="formula-card"><h3>秋收与布帛</h3><code>日农田产出 = (农村人口 × 0.025 × 农业 ÷ 50 + 农庄数 × 180) × 状态 × 劳力 × (0.7 + 农官能力 ÷ 160) × 0.1</code><code>日布帛 = 农村人口 ÷ 18000 × 0.6 × 帛税率 ÷ 10 × 民心 × 状态 × 劳力 × 0.1</code><p>农田产出每日累计，九月月末收获；布帛默认每季征收。单位：粮食石、钱币贯、布帛品。</p></article><article class="formula-card"><h3>征收与官员</h3><code>征收费用 = ceil(18 + 城乡人口 ÷ 14000)贯；事务负担 +12，每日恢复 0.3</code><p>征收扣除地方费用，增加官员事务负担。治理效率、贪污、地方消费与留用决定可上缴量；同类税目当月不可重复征收。</p></article><article class="formula-card"><h3>三层仓储</h3><p>地方财政、中央府库、军队仓储分别记账。在途数量、目的地、尚需日数和受阻状态可从府库详情查看。</p></article><article class="formula-card"><h3>运输与损耗</h3><p>每日检查路线、推进运输；正常道路每段十日。损耗随距离、资源类别和地方官员能力计算；抵达时入库，目的地失守可能被没收。</p></article><article class="formula-card"><h3>人口与徭役</h3><p>人口每日按治安、占领状态变化；徭役从辖县调出人员并按人日推进工程，降低生产；工程完成或遣散后返回原县。</p></article></div></section>
-    <section id="worldDetail" class="detail-panel" hidden><div class="detail-head"><h2>② 天下系统</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>每日检查</h3><p>条约期限、占领期限、补给线路和决胜阶段每天检查。补给运输受安全路径和可用库存限制。</p></article><article class="formula-card"><h3>每十日</h3><p>每月十日、二十日和月末，更新建筑、科技与势力战略效果。市集和农庄收入计入地方财政。</p></article><article class="formula-card"><h3>每月</h3><p>月末更新诸侯关系、停战结盟、共同敌人关系、委任军团和联盟协同。</p></article><article class="formula-card"><h3>每季</h3><p>季度末评估诸侯附庸与天下形势，记录据点、国力和势力排名。</p></article><article class="formula-card"><h3>征收周期</h3><p>田赋与商税默认月度，布帛默认季度，粮食默认秋收后年度；在命令簿分别调整。</p></article><article class="formula-card"><h3>史官</h3><p>可选连接军师，按月生成本方纪事、按季度生成天下纪事。</p></article></div></section>
-    <section id="ordersDetail" class="detail-panel" hidden><div class="detail-head"><h2>③ 执行待办军令</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>暂停下令</h3><p>播放器暂停键或空格暂停；命令簿和规划操作也会暂停。待办命令在继续后的下一日按队列顺序执行。</p></article><article class="formula-card"><h3>队列限制</h3><p>每日最多八条命令；相同目标与参数的重复命令拒绝入队。同一人物每日只能承担一次个人或关系行动。</p></article><article class="formula-card"><h3>逐条验证</h3><p>检查目标、所属、人物状态、路线、驻地、外交前置条件与所需资源。失败记录原因，后续命令继续执行。</p></article><article class="formula-card"><h3>立即与持续</h3><p>任命在确认时生效；排队命令日终执行。建设和运输形成持续任务，不按点击次数立即完成。</p></article><article class="formula-card"><h3>战争计划</h3><p>集结、进攻和防御计划生成多条军令，仍受队列容量约束。进攻非中立据点前必须宣战。</p></article><article class="formula-card"><h3>执行反馈</h3><p>成功、失败、费用和效果写入日报；窗口和资源显示同步更新。</p></article></div></section>
-    <section id="adminDetail" class="detail-panel" hidden><div class="detail-head"><h2>④ 行政与恢复 · 每十日</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>官署治理</h3><p>城守、郡守和对应官员能力共同决定发展效率；兼任降低有效能力，空缺由普通官员代理。</p></article><article class="formula-card"><h3>辖县发展</h3><p>农业、商业、治安和城防积累进度，达到阈值后增长；围城暂停行政发展。</p></article><article class="formula-card"><h3>征募与补员</h3><p>城市征募受人口、地方钱粮和目标限制；安全驻城军团可从守军补员。</p></article><article class="formula-card"><h3>训练与休整</h3><p>训练积累至设定目标；空闲军团恢复士气，败退军恢复后转入整备。</p></article><article class="formula-card"><h3>围城</h3><p>已有围城每十日结算损兵、城防、城内粮和士气；满足条件时投降、破城或撤围。</p></article><article class="formula-card"><h3>人物变化</h3><p>人物忠诚与叛离在月末检查；伤病到期与军职所在地每日同步。</p></article></div></section>
-    <section id="aiDetail" class="detail-panel" hidden><div class="detail-head"><h2>⑤ 诸侯每日概率决策</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>每天判断</h3><p>每个存活诸侯每天分别评估内政、守备、编军、补员、驰援和进攻。没有固定行动日期或冷却间隔。</p></article><article class="formula-card"><h3>行动分散</h3><p>不同城市和军团独立抽取行动概率，实际行动自然分散在多日；难度影响概率、发展量和战力。</p></article><article class="formula-card"><h3>资源约束</h3><p>内政、编军和补员必须满足资金、粮食、守军、可用人物与军团数量限制。</p></article><article class="formula-card"><h3>威胁优先</h3><p>敌军压力较大的城池优先获得驰援考虑；低士气或低补给军团不主动进攻。</p></article><article class="formula-card"><h3>目标评估</h3><p>综合距离、敌我战力、城市价值、中立据点、飞地和霸主压力选择目标。</p></article><article class="formula-card"><h3>宣战与行军</h3><p>目标确定后处理宣战、路线与行军方式。已在行军或围城的军团继续原任务。</p></article></div></section>
-    <section id="warDetail" class="detail-panel" hidden><div class="detail-head"><h2>⑥ 行军与接战 · 每日</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>行军进度</h3><p>普通行军每十日一段，急行军每五日一段；每天累计进度，抵达节点时检查道路和敌情。</p></article><article class="formula-card"><h3>行军代价</h3><p>补给消耗受道路、渡河和行军方式影响；急行军额外损失士气。</p></article><article class="formula-card"><h3>野战</h3><p>进入有敌军的节点触发野战；兵种、地形、将领、士气、训练、补给和战法共同影响战力。</p></article><article class="formula-card"><h3>建立围城</h3><p>进入敌方据点可能建立围城；持续攻城在行政与战争的十日更新中结算。</p></article><article class="formula-card"><h3>城市易手</h3><p>夺城影响治安、人口、地方储备与所属；占领管制持续三十至六十日。</p></article><article class="formula-card"><h3>人物同步</h3><p>军团移动、战败、伤病或俘虏改变相关人物所在地与状态。</p></article></div></section>
-    <section id="peopleDetail" class="detail-panel" hidden><div class="detail-head"><h2>⑦ 军需与人物 · 每日</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>军队粮需</h3><code>军团每日粮需 = ceil(兵力 ÷ 600)</code><p>日常军团从自身仓储扣粮；安全驻城时可从地方补给。围城军需由攻城结算处理。</p></article><article class="formula-card"><h3>地方支出</h3><p>地方财政每日承担官僚钱粮与守军消耗；不足一单位的差额累计至后续日数。</p></article><article class="formula-card"><h3>缺粮影响</h3><p>缺粮会降低补给和士气；地方供应不足影响治安与民心。</p></article><article class="formula-card"><h3>人物期限</h3><p>每天检查伤病恢复、登场、寿命与军职所在；忠诚变化按月更新。</p></article><article class="formula-card"><h3>俘虏</h3><p>被俘六十日后，诸侯每天按概率考虑登庸；长期未归降者可能获释。</p></article><article class="formula-card"><h3>徭役与工程</h3><p>每天增加已征发人手的工作量；完成后释放劳力，返还原县人口。</p></article></div></section>
-    <section id="eventDetail" class="detail-panel" hidden><div class="detail-head"><h2>⑧ 事件、终局与保存</h2><button type="button" data-close-detail>收起</button></div><div class="formula-grid"><article class="formula-card"><h3>事件抽取</h3><p>每天检查历史和地方事件条件，历史事件优先；概率、月份、资源与冷却共同限制地方事件。</p></article><article class="formula-card"><h3>事件抉择</h3><p>出现选择事件时自动暂停并打开事件窗口；载入存档时保留待决事件，选择后由玩家继续。</p></article><article class="formula-card"><h3>终局检查</h3><p>每天检查势力灭亡、玩家胜负与观察模式统一。终局停止自动演进。</p></article><article class="formula-card"><h3>日报与日期</h3><p>记录军令与事件、清空已执行队列、推进一日并更新人物；不每天自动弹出简报。</p></article><article class="formula-card"><h3>存档</h3><p>日结算和刷新保存当前战局；刷新保持当前日期，不产生额外模拟日。</p></article><article class="formula-card"><h3>速度与后台</h3><p>右侧播放键暂停／继续；速度键按三秒、一秒、半秒每日日模拟循环。切换后台自动暂停，换速不改变暂停状态。</p></article></div></section>
-    <section class="branches"><article class="branch"><h2>每日</h2><ul><li><b>持续模拟</b>财政、运输、徭役、人口、AI、行军、军需</li><li><b>状态检查</b>事件、期限、人物、胜负与存档</li></ul></article><article class="branch"><h2>每十日／每月</h2><ul><li><b>10／20／月末</b>建筑、科技、行政、休整、围城</li><li><b>月末</b>外交、委任、联军、忠诚、默认田赋与商税</li></ul></article><article class="branch"><h2>每季／每年</h2><ul><li><b>季度末</b>附庸、天下评议、默认布帛征收</li><li><b>九月月末</b>农田收获与默认粮食征收</li></ul></article></section>
-  </main>
-  <script>
-    const detailButtons=[...document.querySelectorAll("[data-detail-target]")],detailPanels=[...document.querySelectorAll(".detail-panel")];
-    function setDetail(button,open){const target=document.getElementById(button.dataset.detailTarget);for(const panel of detailPanels)panel.hidden=panel!==target||!open;for(const item of detailButtons)item.setAttribute("aria-expanded",String(item===button&&open));if(open)target.scrollIntoView({behavior:"smooth",block:"nearest"})}
-    for(const button of detailButtons)button.addEventListener("click",()=>setDetail(button,document.getElementById(button.dataset.detailTarget).hidden));
-    for(const button of document.querySelectorAll("[data-close-detail]"))button.addEventListener("click",()=>{const panel=button.closest(".detail-panel"),trigger=detailButtons.find(item=>item.dataset.detailTarget===panel.id);setDetail(trigger,false)});
-  </script>
+<a class="skip" href="#overview">跳到正文</a>
+<header class="mast" id="top"><div><a class="back" href="../index.html">〈 返回三国</a><h1>&lt;&lt;&lt;三国 · 运行流程图谱</h1><p>从一天如何结算，到兵粮、人口、官制和战争如何互相推动。展开节点查看条件、分支、等待原因与循环出口。</p></div><div class="edition"><div class="seal" aria-hidden="true">漢</div>规则核对<br><time datetime="2026-10-18">2026.10.18</time><br><span id="coverage">52 项系统</span></div></header>
+<div class="layout">
+<nav class="index" aria-label="流程目录"><div class="index-title">图谱目录</div><a class="major" href="#overview">一天的执行顺序</a><a class="major" href="#cadence">结算周期与等待时间</a><a class="major" href="#crossloops">系统之间的循环</a><a class="major" href="#systems">逐项展开</a><div id="moduleNav"></div><a class="major" href="#questions">常见疑问</a></nav>
+<main class="content">
+<section id="overview" aria-labelledby="overviewTitle"><div class="section-head"><h2 id="overviewTitle">一天怎样推进</h2><small>按当前代码的实际调用先后排列</small></div><p class="lead">暂停时查看和规划，继续后执行完整一天。日常系统会先检查自己的周期：被调用，不代表当天一定产生变化。下面的“逐步读图”只用于讲解，不运行战局。</p><div class="notice">三种时间要区分：现实播放速度控制等待几秒；模拟日期每天加一；具体系统可能每五日、每十日、每月或到期才结算。</div><div class="phase-grid" id="dailyPhases"></div><div class="reader"><span id="phaseReading" aria-live="polite">按“下一阶段”顺着读一次日循环。</span><button type="button" id="previousPhase" disabled>上一阶段</button><button type="button" id="nextPhase">下一阶段</button><button type="button" id="resetPhase">重置读图</button></div><p class="return">没有暂停、待决抉择或终局，就从下一日的第一个阶段重新开始。</p></section>
+<section id="cadence" aria-labelledby="cadenceTitle"><div class="section-head"><h2 id="cadenceTitle">什么时候才会变化</h2><small>日常逐日模式；参数可被规则配置调整</small></div><div class="timing-wrap"><table><thead><tr><th scope="col">周期</th><th scope="col">处理内容</th><th scope="col">为什么可能还在等待</th></tr></thead><tbody id="cadenceRows"></tbody></table></div><p class="table-note">错峰不会让同一城市每月多结一次。直接调用、旧时间制和专项测试可能使用月末入口；这里说明正常连续游玩的时序。</p></section>
+<section id="crossloops" aria-labelledby="loopsTitle"><div class="section-head"><h2 id="loopsTitle">真正推动局势的循环</h2><small>顺着链条看后果，再进入对应流程</small></div><div class="cycle-grid" id="cycles"></div></section>
+<section id="systems" aria-labelledby="systemsTitle"><div class="section-head"><h2 id="systemsTitle">逐项流程与分支</h2><small id="totalSteps">52 项系统 · 311 个细分步骤</small></div><div class="filters" id="filters"><label class="search">查流程、条件或后果<input id="flowSearch" type="search" placeholder="如：断粮、归降、主脉、修城、读档" autocomplete="off"></label><label>结算周期<select id="paceFilter"><option value="all">全部周期</option><option value="daily">每日</option><option value="tenday">每十日</option><option value="monthly">按月</option><option value="quarterly">按季</option><option value="yearly">按年／秋收</option><option value="due">到期／事件触发</option><option value="manual">主动操作</option><option value="newgame">新局初始化</option></select></label><button type="button" id="expandAll">展开结果</button><button type="button" id="collapseAll">收起结果</button><button type="button" id="clearFilters">清除筛选</button><button type="button" id="printAtlas">打印完整图谱</button></div><p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p><div id="moduleSections"></div><p class="empty" id="noResults" hidden>没有匹配的流程。换一个词，或清除周期筛选后再查。</p></section>
+<section id="questions" aria-labelledby="questionsTitle"><div class="section-head"><h2 id="questionsTitle">常见疑问</h2><small>先区分规则等待、资源不足与真实异常</small></div><div id="faq"></div></section>
+<footer class="footer"><a href="#top" class="top-link">回到页首 ↑</a><p>本页介绍当前版本已经运行的机制，不读取游戏存档、不推进日期、不调用军师。数值为默认配置或游戏抽象，实际战局以当前设置、权限与资源为准。</p><p><a href="https://github.com/dodio12138/sanguo-cli/blob/main/docs/AI_CAMPAIGN_IMPLEMENTATION.md" target="_blank" rel="noopener">战役与外交实现记录</a><a href="https://github.com/dodio12138/sanguo-cli/blob/main/docs/GRAIN_AND_ARMY_FARMING.md" target="_blank" rel="noopener">收成与屯田说明</a><a href="https://github.com/dodio12138/sanguo-cli/blob/main/docs/FAMILY_SYSTEM.md" target="_blank" rel="noopener">家族系统说明</a></p><p>各流程末尾的“代码依据”可展开核对；普通浏览无需阅读源码。打印会暂时展开全部系统，结束后恢复当前筛选与展开状态。</p></footer>
+</main></div>
+<noscript>此图谱需要 JavaScript 展开完整流程。请启用后刷新；此页的脚本仅用于浏览说明，不操作游戏。</noscript>
+<script id="flow-data" type="application/json">[
+  {
+    "id": "startupDetail",
+    "group": "开局与操作",
+    "title": "开局、读档与编辑器隔离",
+    "pace": [
+      "newgame",
+      "manual"
+    ],
+    "intro": "先确定剧本和数据来源，再建立战局；游玩不需要先初始化地图编辑器。",
+    "entry": "主菜单 → 新游戏／继续游戏／地图编辑器",
+    "steps": [
+      {
+        "title": "选择来源",
+        "body": "新局加载所选剧本与其地图；继续游戏按存档记录的剧本恢复。浏览器编辑器草稿、导出地图和战局存档是不同来源。",
+        "branch": "不要把仓库默认地图当成用户最后保存的编辑器定稿。"
+      },
+      {
+        "title": "设置玩法",
+        "body": "选势力或观察者、难度、模拟速度、历史引导或自由演化、整合节奏和胜利目标。",
+        "branch": ""
+      },
+      {
+        "title": "初始化新局",
+        "body": "建立地方官署、人物生命周期、人口与家族、幕府和朝廷；按开局月份建立田间进度，并只为新局补充开局储粮。",
+        "branch": "旧档走迁移与恢复，不再按新局重复补粮。"
+      },
+      {
+        "title": "恢复旧局",
+        "body": "迁移可兼容字段，恢复军队、粮车、待答复提案、战役、随机数及桌面布局。",
+        "branch": "旧档没有战役政治设置时默认沿用旧规则，须主动启用新模式。"
+      },
+      {
+        "title": "按需开编辑器",
+        "body": "只有实际进入编辑器才加载其业务与编辑数据；游玩读取战局需要的地图即可。",
+        "branch": ""
+      }
+    ],
+    "loop": "返回主菜单不会把正在游玩的战局自动变成编辑器草稿；两条业务各自保存。",
+    "links": [
+      "saveDetail",
+      "mapDetail",
+      "grainDetail"
+    ],
+    "sources": [
+      "js/core/data-loader.js",
+      "js/core/game-state.js",
+      "js/ui/app.js",
+      "js/ui/app/start-screen.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "clockDetail",
+    "group": "开局与操作",
+    "title": "播放、暂停与一天的边界",
+    "pace": [
+      "daily",
+      "manual"
+    ],
+    "intro": "运行时连续推进一日，暂停时安排命令；“一日”是模拟步长，不是现实一秒。",
+    "entry": "底部播放控制／空格／速度键",
+    "steps": [
+      {
+        "title": "检查是否可推进",
+        "body": "未终局、页面可见且没有必须处理的抉择，才允许调度下一日。",
+        "branch": "切到后台、打开相关规划操作或出现待决事件时暂停；回来后按界面继续。"
+      },
+      {
+        "title": "确定速度",
+        "body": "3 秒／日、1 秒／日、0.5 秒／日只改变现实等待间隔，不改变每日扣粮或战斗步长。",
+        "branch": ""
+      },
+      {
+        "title": "执行完整一天",
+        "body": "财政先结算，再执行当日队列，再推进诸侯、行军、战斗、人物与政治；不是每点一个命令单独走一天。",
+        "branch": ""
+      },
+      {
+        "title": "生成当日日报",
+        "body": "记录这一日执行的命令、事件与资源差额，清空已执行队列。",
+        "branch": ""
+      },
+      {
+        "title": "跨到下一日",
+        "body": "推进日期、处理人物到期状态，通知界面刷新并安排自动保存。",
+        "branch": "遇到终局或抉择则等待处理；否则继续下一日。"
+      }
+    ],
+    "loop": "检查可推进 → 执行一天 → 日报和跨日 → 再检查。暂停只停止时间，不是撤销已经发生的结果。",
+    "links": [
+      "ordersDetail",
+      "eventDetail",
+      "saveDetail"
+    ],
+    "sources": [
+      "js/core/game-state.js",
+      "js/core/game-clock.js",
+      "js/ui/app.js"
+    ],
+    "notes": [
+      "游戏采用按日递增的简化历法；年月天数由当前日历函数决定，不宣称精确复原汉代农历。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "ordersDetail",
+    "group": "开局与操作",
+    "title": "命令队列、即时操作与失败出口",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "普通命令先排队，再按先后顺序验证和执行；部分任命确认即生效，需要区分。",
+    "entry": "命令簿、人物／军团／城池详情、外交窗口",
+    "steps": [
+      {
+        "title": "选定实际对象",
+        "body": "选择本方城市、军团、人物或合法交涉对象，保留目标 ID 和参数。",
+        "branch": ""
+      },
+      {
+        "title": "入队检查",
+        "body": "检查当日额度、重复签名；同一人物的个人／关系行动不能反复占用。默认额度以规则与当前修正为准。",
+        "branch": "队列满或完全重复会拒绝入队；计划生成的多条命令同样占额度。"
+      },
+      {
+        "title": "下一日按序执行",
+        "body": "前一条改变的资源、归属、驻地会影响后一条。宣战、行军与资源使用的先后次序有实际意义。",
+        "branch": ""
+      },
+      {
+        "title": "重新核验",
+        "body": "执行时再查所属、状态、路线、资源、权限和战争授权，不能沿用打开窗口那一刻的条件。",
+        "branch": "失败写明原因，继续处理后续命令；不会替玩家无限重试。"
+      },
+      {
+        "title": "分流处理",
+        "body": "任免进入官制同步；建设、运输、交涉和行军建立持续任务；普通即时效果在本日结算。",
+        "branch": ""
+      },
+      {
+        "title": "清队列并反馈",
+        "body": "成功与失败均进入日报，界面更新。需要再次尝试时应先处理失败条件，再重新下令。",
+        "branch": ""
+      }
+    ],
+    "loop": "选对象 → 入队 → 按序验证 → 执行或失败 → 日报；持续任务之后由各自日循环接管。",
+    "links": [
+      "officeDetail",
+      "shipmentDetail",
+      "campaignDetail"
+    ],
+    "sources": [
+      "js/core/game-state.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "AI 建议与托管只能提交规则允许的命令；文本建议不等于执行完成。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "economyDetail",
+    "group": "财政与粮运",
+    "title": "地方生产、开支与中央账本",
+    "pace": [
+      "daily"
+    ],
+    "intro": "产出、征收、运输与入库是四个环节。中央府库、县仓、军队仓储、在途货物分别记账。",
+    "entry": "府库 → 财政详情；城市 → 钱粮",
+    "steps": [
+      {
+        "title": "同步地方归属",
+        "body": "按当前据点控制校准县级归属、官署与财政账户；先处理此前已在途货物和徭役工程。",
+        "branch": ""
+      },
+      {
+        "title": "处理应缴欠额",
+        "body": "选择继续补缴或地方留用；只有可上缴余量且路线成立才生成补缴运输。",
+        "branch": "本地粮食留底优先，低于最小批量不会每天发一粒粮。"
+      },
+      {
+        "title": "累计日生产",
+        "body": "人口税基、农业、商业、市集、官员、民心、家族配合和劳力共同影响田赋、商税、布帛及田间进度。",
+        "branch": "围城使普通生产停止，占领降低生产，徭役减少可用劳力。"
+      },
+      {
+        "title": "支付地方日常",
+        "body": "县库支付官僚与正常守军日常开支；独立军团按军队粮需另结。",
+        "branch": "被围地方由围城和军需入口处理，不再叠扣同一笔普通守军粮。"
+      },
+      {
+        "title": "到期征收入县仓",
+        "body": "非粮税在各城分散的征收日检查周期；粮税检查收获和到期条件。",
+        "branch": ""
+      },
+      {
+        "title": "发运与记录",
+        "body": "可上缴余额建立粮车或货运，自动粮线和中央济粮随后检查；中央实际变化记录进财政史。",
+        "branch": ""
+      }
+    ],
+    "loop": "每日积累应征 → 到期征收 → 留地方／上缴在途 → 抵达中央 → 再用于调拨；账面应征不是立即可花的库存。",
+    "links": [
+      "taxDetail",
+      "grainDetail",
+      "shipmentDetail",
+      "supplyLineDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/population.js"
+    ],
+    "notes": [
+      "县报统一合计本县人口与户数，不再给玩家分列城邑和乡里；登记数、估计数与实际模拟人口仍是不同口径。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "set_fiscal_policy",
+        "name": "设置财政方针"
+      },
+      {
+        "id": "set_capital",
+        "name": "设置首都"
+      }
+    ]
+  },
+  {
+    "id": "taxDetail",
+    "group": "财政与粮运",
+    "title": "征收、地方留粮与上缴",
+    "pace": [
+      "daily",
+      "monthly",
+      "yearly"
+    ],
+    "intro": "税率决定形成多少应征，周期决定何时征收；征收之后仍要决定地方留用和运输。",
+    "entry": "府库／命令簿 → 税率、征收周期、欠额处理",
+    "steps": [
+      {
+        "title": "形成累计应征",
+        "body": "每日把田赋、商税、布帛加入应征池，粮食等到收获形成粮税池。",
+        "branch": ""
+      },
+      {
+        "title": "检查是否到期",
+        "body": "田赋与商税默认按月、布帛按季、粮食默认年度秋收。运行时非粮税各城在 1—28 日分散检查。",
+        "branch": "月度不等于所有城市都在月末一起到账。"
+      },
+      {
+        "title": "计算可征净额",
+        "body": "执行费用、事务负担、治理效率、贪污与地方消费影响净额，同类税目有重复征收保护。",
+        "branch": ""
+      },
+      {
+        "title": "本地先保留",
+        "body": "粮食留用兼顾到下次收成的开支、守军、驻军补仓、仓容和玩家配置的粮线目标。",
+        "branch": "季节性留粮天数受上下限约束，不是固定百分比吞掉所有余粮。"
+      },
+      {
+        "title": "上缴或欠额",
+        "body": "可运输且达到批量的部分从县仓扣出，进入在途；路线不通的部分留为待处理欠额。",
+        "branch": ""
+      },
+      {
+        "title": "中央收讫",
+        "body": "粮车抵达本方中央结点才进入中央府库；途中损耗不会在中央凭空补齐。",
+        "branch": ""
+      }
+    ],
+    "loop": "征收日检查 → 支付成本 → 地方留底 → 运输／欠额 → 后续日再次检查欠额。",
+    "links": [
+      "economyDetail",
+      "shipmentDetail",
+      "reliefDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js"
+    ],
+    "notes": [
+      "普通守军驻屯净官粮与野战军粮采用不同规则；不要拿县仓守军开支直接反推独立军团口粮。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "collect_tax",
+        "name": "征税"
+      },
+      {
+        "id": "set_tax_rate",
+        "name": "调整税率"
+      },
+      {
+        "id": "set_collection_policy",
+        "name": "征收制度"
+      }
+    ]
+  },
+  {
+    "id": "grainDetail",
+    "group": "财政与粮运",
+    "title": "作物生长、秋收与开局储备",
+    "pace": [
+      "daily",
+      "yearly",
+      "newgame"
+    ],
+    "intro": "目前统一一年一次九月月末秋收，三月至九月积累田间可征粮；不是每天向县仓直接产粮。",
+    "entry": "城市粮情／府库 → 收成与中央济粮",
+    "steps": [
+      {
+        "title": "新局补田间进度",
+        "body": "按开局所处月份补已形成的作物进度；秋后不会再补一整年收成。",
+        "branch": ""
+      },
+      {
+        "title": "检查生长期",
+        "body": "正常作物在配置的生长期每日累积，产出受人口、农业、官员、占领、围困、劳力与家族条件影响。",
+        "branch": "冬季普通作物不继续增长；当前没有各地不同熟制或第二季作物。"
+      },
+      {
+        "title": "叠加屯田成果",
+        "body": "实际参与屯田的兵员把额外可征粮逐日记到所在地田间池，尚未收获不能拿来吃。",
+        "branch": ""
+      },
+      {
+        "title": "九月月末收获",
+        "body": "将田间作物与屯田积累转入可征粮池，并重置田间积累；有年度去重标记。",
+        "branch": ""
+      },
+      {
+        "title": "征收与分配",
+        "body": "征收耗损、地方开支和留底后，才形成县仓可用粮及可上缴粮。",
+        "branch": ""
+      },
+      {
+        "title": "迎接下一季",
+        "body": "预测下次收获时间，结合当前实粮和可按时抵达的在途粮判断缺口。",
+        "branch": ""
+      }
+    ],
+    "loop": "田间累计 → 年度秋收 → 征收入库 → 日常消耗与运输 → 下一年生长。",
+    "links": [
+      "farmDetail",
+      "taxDetail",
+      "reliefDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "game/data/common/game_rules.json"
+    ],
+    "notes": [
+      "新局储粮初始化只做一次；读档保留当前库存，不重新补粮。",
+      "这是可征官粮的游戏模型，没有把百姓全部私粮、种粮和官粮合成同一库存。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "reclaim_land",
+        "name": "开垦"
+      }
+    ]
+  },
+  {
+    "id": "shipmentDetail",
+    "group": "财政与粮运",
+    "title": "实际运输、受阻、损耗与到达",
+    "pace": [
+      "daily",
+      "due"
+    ],
+    "intro": "每批货物都有真实来源、目的地、路线、数量与剩余路程；图上的线不代表已经送达。",
+    "entry": "府库 → 在途运输；粮食／补给图层 → 运输提示",
+    "steps": [
+      {
+        "title": "核验来源和路线",
+        "body": "上缴、地方调拨与中央济粮检查资金粮食和安全官路／水路。",
+        "branch": ""
+      },
+      {
+        "title": "扣来源并建立货物",
+        "body": "在来源账本扣货，将装载、预期交付、路损、起终点和路径写进在途记录。",
+        "branch": "没有路线则不能发运，不能从中央直接瞬移进军仓。"
+      },
+      {
+        "title": "每日走路段",
+        "body": "按当前路段耗时递减，检查道路安全、控制归属与目标。跨河、水路、距离及路线条件影响运输。",
+        "branch": ""
+      },
+      {
+        "title": "途中分支",
+        "body": "道路受敌阻断时受阻；敌对控制、袭扰或合法截获可能造成损失和没收。",
+        "branch": "受阻货物仍占已派在途，不应重复发同一缺口；预报也不把受阻粮当成必定及时到达。"
+      },
+      {
+        "title": "抵达入正确账本",
+        "body": "上缴入中央、调粮入县仓、特定军需入对应对象；保留交付和损失记录。",
+        "branch": ""
+      },
+      {
+        "title": "存档继续",
+        "body": "读取剩余路程和已扣数量，继续原运输；不会因为读档重新从源头扣粮或再次交付。",
+        "branch": ""
+      }
+    ],
+    "loop": "发运 → 推进／受阻 → 恢复或截获 → 交付归档；每一批货物只有一次有效交付。",
+    "links": [
+      "reliefDetail",
+      "supplyLineDetail",
+      "armySupplyDetail",
+      "saveDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/logistics.js"
+    ],
+    "notes": [
+      "财政货运与军队粮队采用不同记录；二者都属于在途资产，不能在来源和目的地重复计库存。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "transfer_gold",
+        "name": "调拨资金"
+      },
+      {
+        "id": "transfer_food",
+        "name": "调拨粮食"
+      },
+      {
+        "id": "transport",
+        "name": "运输"
+      },
+      {
+        "id": "dispatch_resources",
+        "name": "府库调运"
+      }
+    ]
+  },
+  {
+    "id": "supplyLineDetail",
+    "group": "财政与粮运",
+    "title": "后方粮线、指定前线仓与前进仓",
+    "pace": [
+      "daily",
+      "due",
+      "manual"
+    ],
+    "intro": "配置供粮线是每五日复核的运输计划，实际货物才是执行；县仓和军用前进仓承担不同环节。",
+    "entry": "府库 → 自动供粮线；军团 → 粮道／前进仓",
+    "steps": [
+      {
+        "title": "设定后方与前线",
+        "body": "选择中央或地方来源、目标县仓、目标储量、批量及来源留底，可启用或停用。",
+        "branch": ""
+      },
+      {
+        "title": "计算真实缺口",
+        "body": "目标现粮加同目的地有效在途，低于目标才派新批次；受来源余额与目的地仓容约束。",
+        "branch": ""
+      },
+      {
+        "title": "检查安全路线",
+        "body": "通路成立则转成财政运输；来源失守、断路或无余粮时保留计划并显示原因。",
+        "branch": ""
+      },
+      {
+        "title": "前线县仓接粮",
+        "body": "抵达县仓后才可让驻城军团领取，或继续支持军用粮队。指定粮线管理的仓不会被普通济粮反复叠加派送。",
+        "branch": ""
+      },
+      {
+        "title": "设置前进仓",
+        "body": "军用前进仓是战地后勤节点：按设置组织粮队和周转，受容量、寿命、库存与补给路径约束。",
+        "branch": "设仓本身不免费生成粮，也不会自动替代后方到前线县仓的供粮计划。"
+      },
+      {
+        "title": "显示在地图",
+        "body": "配置计划、上缴、济粮、地方调运、军队粮道及受阻分别显示；断路不画虚假可达直线。",
+        "branch": ""
+      }
+    ],
+    "loop": "仓粮下降 → 计划检查缺口 → 发真实运输 → 入前线仓 → 军队取粮 → 再次出现缺口。",
+    "links": [
+      "shipmentDetail",
+      "reliefDetail",
+      "armySupplyDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/logistics.js",
+      "js/ui/fiscal-ui.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "establish_supply_route",
+        "name": "建立补给路线"
+      },
+      {
+        "id": "set_storage",
+        "name": "设置仓储"
+      },
+      {
+        "id": "build_supply_depot",
+        "name": "修建前进粮仓"
+      },
+      {
+        "id": "set_supply_route",
+        "name": "自动供粮线路"
+      }
+    ]
+  },
+  {
+    "id": "reliefDetail",
+    "group": "财政与粮运",
+    "title": "中央自动济粮",
+    "pace": [
+      "daily",
+      "due"
+    ],
+    "intro": "中央每五日复核一次缺粮县仓，优先救库存可维持天数最少的地方。",
+    "entry": "府库 → 收成与中央济粮 → 开启／暂停",
+    "steps": [
+      {
+        "title": "五日复核",
+        "body": "每个启用自动济粮的势力查首都和中央可支配粮；中央被围或无合法来源时无法派出。",
+        "branch": ""
+      },
+      {
+        "title": "扣除已有在途",
+        "body": "比较县仓现粮、预计交付及日耗；普通触发基准30日，目标90日；高能力度支还可按实际运程提前触发。",
+        "branch": ""
+      },
+      {
+        "title": "排除不能调入者",
+        "body": "指定供粮线接管的前线仓不重复派送；被围、无安全路径的县仓显示无法调入。",
+        "branch": ""
+      },
+      {
+        "title": "保护中央留底",
+        "body": "中央先留首都30日需求及人工中央粮线的底粮；每次派送受最多8批、每批默认2万石和仓容限制。",
+        "branch": ""
+      },
+      {
+        "title": "扣中央，加入运输",
+        "body": "按最紧缺顺序发运，后续沿路推进；不足时显示中央余粮不足而非补出免费粮。",
+        "branch": ""
+      },
+      {
+        "title": "下一轮重算",
+        "body": "到货或地方情况改变后，下一次检查重新计算缺口。",
+        "branch": ""
+      }
+    ],
+    "loop": "定期复核 → 判断缺口 → 来源留底 → 发运 → 到货后重算；远程前线应提前配置粮线，30日基准不能保证长路及时救到。",
+    "links": [
+      "shipmentDetail",
+      "supplyLineDetail",
+      "grainDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/logistics.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "armySupplyDetail",
+    "group": "军队与战场",
+    "title": "日粮、军仓、粮道与缺粮",
+    "pace": [
+      "daily"
+    ],
+    "intro": "“存粮”是数量，“可维持天数”是存粮除以当前日需，“后勤／补给”还包含组织与运输条件，不能互相替代。",
+    "entry": "军团详情 → 军粮／粮道；军事与粮食图层",
+    "steps": [
+      {
+        "title": "判定实际位置",
+        "body": "安全驻城、行军、野外小队、围城、败退分别判断；野外位置不能用后方锚点冒充驻城。",
+        "branch": ""
+      },
+      {
+        "title": "确定口粮模式",
+        "body": "安全驻屯每口基础0.033石／日，野战战备0.066石／日，屯田按实际投入进一步减少官粮净支出。健卒与伤员全份，战俘半份。",
+        "branch": ""
+      },
+      {
+        "title": "驻地就粮和补军仓",
+        "body": "合法驻地可以从县仓实际取粮；出征携粮目标按完整野战日需计算，不能用驻屯低日耗缩小携粮。",
+        "branch": ""
+      },
+      {
+        "title": "野外取粮",
+        "body": "按既有就近、粮道、粮队及可用锚点规则办理，受安全距离、来源余粮、路损和派送限制。",
+        "branch": "中央济粮先运到县仓；单有中央库存不保证野外军队此刻吃得到。"
+      },
+      {
+        "title": "按军队结算一次",
+        "body": "实扣军仓或实际来源并记录本日需求、获得、缺口；缺口影响士气、组织与后续战斗。",
+        "branch": ""
+      },
+      {
+        "title": "反馈后续风险",
+        "body": "随驻屯变野战、伤员增加、粮队受阻或屯田停止，可用天数会改变；预报用当下模式估计。",
+        "branch": ""
+      }
+    ],
+    "loop": "每日定位 → 算需求 → 找实际粮源 → 扣粮 → 缺粮惩罚 → 次日再定位。",
+    "links": [
+      "farmDetail",
+      "warDetail",
+      "siegeDetail",
+      "medicalDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/logistics.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "守军与独立军团分开记粮；围城守军及居民围困需求由围城环节处理，守城军团由军需环节处理。"
+    ],
+    "formula": "军队日需 = ceil((健卒 + 伤员 + 战俘 × 0.5) × 当前模式日粮率 × 军需修正)",
+    "commands": []
+  },
+  {
+    "id": "farmDetail",
+    "group": "财政与粮运",
+    "title": "军团屯田与下一次收成",
+    "pace": [
+      "daily",
+      "manual"
+    ],
+    "intro": "屯田按军团开启，只有实际安全驻屯的兵员产生减耗和田间增收。",
+    "entry": "本方军团详情 → 开始屯田／停止屯田",
+    "steps": [
+      {
+        "title": "命令启停",
+        "body": "设置属于哪个驻地的屯田状态；不是给全国军队统一减耗的开关。",
+        "branch": ""
+      },
+      {
+        "title": "检查有效状态",
+        "body": "须安全驻己方城、无行军、野外、围城、败退或袭扰任务。",
+        "branch": "开拔、驻地改变或被围会停止收益；已有田间成果仍留在当地。"
+      },
+      {
+        "title": "共享土地承载",
+        "body": "默认最多投入一半健卒，同县合计不超过当地人口10%；多军团按稳定顺序共享。",
+        "branch": "拆成很多小队不会突破同县上限。"
+      },
+      {
+        "title": "降低官粮支出",
+        "body": "满额投入时在驻屯口粮基础上再减半；投入不满按比例，训练速度也下降。",
+        "branch": ""
+      },
+      {
+        "title": "积累本地粮",
+        "body": "每名实际参与者按默认全年3石的增量逐日记入屯田积累；收获前不是可用粮。",
+        "branch": ""
+      },
+      {
+        "title": "秋收入账",
+        "body": "与本地年度作物一同收获、征收，再清零累计等待下季。",
+        "branch": ""
+      }
+    ],
+    "loop": "启用 → 每日检查投入 → 当日减耗＋田间累计 → 秋收入仓；离开会中断投入但不带走土地和未收成。",
+    "links": [
+      "grainDetail",
+      "armySupplyDetail",
+      "adminDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "口粮减免代表就地供养，不是士卒真实饮食减半；这是游戏抽象数值。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "army_farming",
+        "name": "屯田"
+      }
+    ]
+  },
+  {
+    "id": "adminDetail",
+    "group": "地方与人口",
+    "title": "地方官署、发展、募兵与修城",
+    "pace": [
+      "daily",
+      "tenday"
+    ],
+    "intro": "地方发展分到十个批次，每日处理一组；每十日再进行行政调度、恢复与汇总；募兵、训练与补员随各城行政批次推进。",
+    "entry": "城市 → 官署／发展；郡 → 总览",
+    "steps": [
+      {
+        "title": "选择当地批次",
+        "body": "根据稳定分组轮到该城才推进这轮发展；不是每天对全图所有城各加一次。",
+        "branch": ""
+      },
+      {
+        "title": "取得真实官员能力",
+        "body": "县官、郡守、对应曹吏、家族代理及兼任负荷共同形成事务效率。",
+        "branch": "普通县不显示不存在的州府／郡府任命；实际太守不重复算一份郡守。"
+      },
+      {
+        "title": "累积农商治安进度",
+        "body": "进度达到阈值才改变数值，督查可临时加速。",
+        "branch": "围城暂停普通行政发展。"
+      },
+      {
+        "title": "有钱才修城",
+        "body": "城防受损且满足条件，消耗地方钱逐点修复并记录；并非无成本自行恢复。",
+        "branch": ""
+      },
+      {
+        "title": "轮转征募与补员",
+        "body": "按兵源、钱粮、守军保留底数和目标征募。军团补员范围取决于县／郡治／州治级别。",
+        "branch": ""
+      },
+      {
+        "title": "休整与训练",
+        "body": "安全驻城恢复、训练和补员有条件；在途、野外、被围或交战部队不能冒充闲置军团。",
+        "branch": ""
+      }
+    ],
+    "loop": "地方资源与官员 → 积累发展／修防 → 人口与产出改变 → 下轮治理；募来的守军再按范围补进军团。",
+    "links": [
+      "officeDetail",
+      "populationDetail",
+      "armySupplyDetail",
+      "projectDetail"
+    ],
+    "sources": [
+      "js/core/engine/administration.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "agriculture",
+        "name": "督查农业"
+      },
+      {
+        "id": "commerce",
+        "name": "督查商业"
+      },
+      {
+        "id": "public_order",
+        "name": "督查治安"
+      },
+      {
+        "id": "city_defense",
+        "name": "督修城防"
+      },
+      {
+        "id": "recruit_troops",
+        "name": "定额征兵"
+      },
+      {
+        "id": "train_troops",
+        "name": "督练军伍"
+      },
+      {
+        "id": "set_development_policy",
+        "name": "制定发展方针"
+      }
+    ]
+  },
+  {
+    "id": "projectDetail",
+    "group": "地方与人口",
+    "title": "建设、徭役、人日与遣返",
+    "pace": [
+      "daily",
+      "due",
+      "manual"
+    ],
+    "intro": "工程需要钱料和真实劳力，进度按人日推进，不能点击一次就凭空建成。",
+    "entry": "城市 → 建设；府库 → 徭役与工程",
+    "steps": [
+      {
+        "title": "申请项目",
+        "body": "校验可建类型、位置、归属、所需费用、已有工程和道路等前置条件。",
+        "branch": ""
+      },
+      {
+        "title": "征发劳力",
+        "body": "从实际人口来源调出服役人员，形成徭役组，记下原籍和计划人日。",
+        "branch": ""
+      },
+      {
+        "title": "每日施工",
+        "body": "现有劳力与剩余工程量决定消耗的人日，生产端同时减少可用劳力。",
+        "branch": "缺劳力、所在地改变或前置条件不成立时等待或中止，具体看工程状态。"
+      },
+      {
+        "title": "完工应用效果",
+        "body": "建筑、仓容或工程功能在完成时生效，不能把所有未完工项目算作已有设施。",
+        "branch": ""
+      },
+      {
+        "title": "遣返或解散",
+        "body": "完工或手动遣散按来源返还剩余劳力，恢复生产条件并保留账目。",
+        "branch": ""
+      }
+    ],
+    "loop": "征发 → 施工 → 完工／中断 → 返籍 → 可参与下一次生产和征发。",
+    "links": [
+      "economyDetail",
+      "populationDetail",
+      "adminDetail"
+    ],
+    "sources": [
+      "js/core/fiscal-system.js",
+      "js/core/engine/projects.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "construct_building",
+        "name": "建筑"
+      },
+      {
+        "id": "repair",
+        "name": "修缮"
+      },
+      {
+        "id": "build_road",
+        "name": "道路"
+      },
+      {
+        "id": "build_warehouse",
+        "name": "仓库"
+      },
+      {
+        "id": "fortify",
+        "name": "城防"
+      },
+      {
+        "id": "waterworks",
+        "name": "水利"
+      },
+      {
+        "id": "requisition_labor",
+        "name": "征用民夫"
+      },
+      {
+        "id": "dismiss_labor",
+        "name": "遣散徭役"
+      },
+      {
+        "id": "relieve_fire",
+        "name": "扑救火灾"
+      }
+    ]
+  },
+  {
+    "id": "populationDetail",
+    "group": "地方与人口",
+    "title": "人口、饥荒、流民与迁徙",
+    "pace": [
+      "daily",
+      "monthly",
+      "quarterly",
+      "yearly"
+    ],
+    "intro": "每天记录粮荒和战争压力，人口本体每处每月只结算一次，按28组分散。",
+    "entry": "城市县报 → 人口／户数／流民；家族 → 依附人口",
+    "steps": [
+      {
+        "title": "每日记压力",
+        "body": "普通居民城市空仓前7日缓冲，持续约60日达到严重饥荒；有粮后压力每日消退。战事、围城、占领积累战争压力。",
+        "branch": "关口／渡口不套用这项居民饥荒压力；军队缺粮仍照军需规则。"
+      },
+      {
+        "title": "轮到该地月结",
+        "body": "按粮情、战乱和健康计算出生与死亡、登记率及健康变化。",
+        "branch": "没有再加一笔重复的逐日人口死亡；攻城直接损失另有来源。"
+      },
+      {
+        "title": "农户逃散",
+        "body": "战乱或饥荒使部分编户、依附户转为流民，减少稳定税基和可征兵人口。",
+        "branch": ""
+      },
+      {
+        "title": "迁往较好邻地",
+        "body": "不安定且有更安全、粮食较好、不过度拥挤的邻地才迁；扣来源后加目的地，并记录途中损失。",
+        "branch": "被围来源不能穿越封锁瞬移；关津和被围地不作安置目的地。"
+      },
+      {
+        "title": "安定后定居",
+        "body": "有粮且战争压力低时，流民逐月转成编户或当地家族依附户。",
+        "branch": ""
+      },
+      {
+        "title": "季与年分支",
+        "body": "季度处理婚户和依附变化，年末月份处理年龄组转移；均在该地自己的月度批次内发生。",
+        "branch": ""
+      },
+      {
+        "title": "统一县报",
+        "body": "本县合计登记人口、登记户数和估计人口；家族依附人口是其中一部分，不能另加一次。",
+        "branch": ""
+      }
+    ],
+    "loop": "缺粮／战争 → 健康下降与逃散 → 迁移或滞留 → 粮情和平恢复 → 安置 → 税基和征募变化。",
+    "links": [
+      "familyDetail",
+      "economyDetail",
+      "siegeDetail"
+    ],
+    "sources": [
+      "js/core/engine/population.js"
+    ],
+    "notes": [
+      "登记人口是行政掌握的口数，估计人口含误差；“口”与“户”不同，分类取整尾差会统一分配。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "population",
+        "name": "清查户籍"
+      },
+      {
+        "id": "settle_refugees",
+        "name": "安置流民"
+      }
+    ]
+  },
+  {
+    "id": "familyDetail",
+    "group": "家族与人物",
+    "title": "家族身份、门生、势力与衰落",
+    "pace": [
+      "monthly",
+      "quarterly",
+      "manual"
+    ],
+    "intro": "世家、普通家族／寒门、皇族后裔共用家族系统；身份、声望、家产和当前实力分别描述。",
+    "entry": "家族窗口 → 族谱、家势、任官、家宅",
+    "steps": [
+      {
+        "title": "识别人员状态",
+        "body": "区分未出生、未登场、在世、死亡、在野、任职与被俘；未知族人和无名属吏仍可查看详情。",
+        "branch": ""
+      },
+      {
+        "title": "25日家族月结",
+        "body": "合计已登记族人、继承后备、门生、依附人口、代表人物影响和家势；按年月键去重。",
+        "branch": ""
+      },
+      {
+        "title": "评估盛衰",
+        "body": "重要人物离世、无可见继承、人口与家产不足会压低家势；有影响人物与任官可提供支撑。",
+        "branch": "史料没写后人不自动等于绝嗣；区分“嗣续未明”和实际游戏家系耗尽。"
+      },
+      {
+        "title": "形成地方属吏",
+        "body": "按本地族产、祖居、家势与家族能力特性填补可用县职；有具名现职不强行覆盖。",
+        "branch": ""
+      },
+      {
+        "title": "征辟与替换",
+        "body": "可征辟某家族门生任职；无名属吏按家族事务特性给能力，具体人物任命可接替代理。",
+        "branch": ""
+      },
+      {
+        "title": "季度招附",
+        "body": "衰落家族的依附户可转附其他家族；重新检查双方关系、权限、家产与承纳能力。",
+        "branch": "原地改依附身份，扣出旧族并加进新族，不额外增加总人口。"
+      }
+    ],
+    "loop": "人物与任官 → 家势 → 门生及地方影响 → 依附人口 → 税基与资源 → 下一次家势评估。",
+    "links": [
+      "familyMigrationDetail",
+      "officeDetail",
+      "populationDetail",
+      "peopleDetail"
+    ],
+    "sources": [
+      "js/core/engine/family-dynamics.js",
+      "js/core/engine/clans.js",
+      "js/core/engine/families.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "familyMigrationDetail",
+    "group": "家族与人物",
+    "title": "主支脉、家眷迁移与控制权限",
+    "pace": [
+      "daily",
+      "due",
+      "manual"
+    ],
+    "intro": "移动的是受控制的家宅人员，庄园、依附人口和在外任职族人不跟着瞬移。",
+    "entry": "家族 → 家宅与家眷 → 迁移／处置",
+    "steps": [
+      {
+        "title": "区分谁有权操作",
+        "body": "本族内务由当前主公所属家族行使；主公对其他家族仅能在既有政治或控制权限范围内操作。",
+        "branch": "同势力仕官、关系好或控制所在地，不等于可以管理所有家族私产。"
+      },
+      {
+        "title": "选择只迁主脉或全迁",
+        "body": "只迁主脉按已知亲属关系与匿名家眷比例留支脉；全迁要逐宅通过控制、道路与费用检查。",
+        "branch": "俘获家眷按势力处置整体转移，不替其自由拆分主支。"
+      },
+      {
+        "title": "扣费并打包人口",
+        "body": "自愿迁移扣本族家财，俘获转移扣府库；从真实家宅人口扣出，保存随行人员和人口包。",
+        "branch": ""
+      },
+      {
+        "title": "每日推进迁程",
+        "body": "只遍历正在迁移的家族索引，保留路段和剩余时间。",
+        "branch": "进入敌方控制结点可能被控制；异常路段等待，不重建地形。"
+      },
+      {
+        "title": "抵达与合宅",
+        "body": "人口包落入新址，更新随迁人员位置；全迁到同址且无俘获、无在途时合并家宅。",
+        "branch": ""
+      },
+      {
+        "title": "处置受控家眷",
+        "body": "控制、释放或杀害只影响实际控制范围；外任与未俘获者不自动遇害。",
+        "branch": "杀害实际扣人员并产生仇怨、信誉和忠诚后果，有重复处置保护。"
+      }
+    ],
+    "loop": "家宅登记 → 主支选择 → 在途人口包 → 抵达／被控 → 合宅或保留支脉 → 下次迁移。",
+    "links": [
+      "familyDetail",
+      "populationDetail",
+      "campaignDetail"
+    ],
+    "sources": [
+      "js/core/engine/family-migration.js",
+      "js/core/engine/families.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "peopleDetail",
+    "group": "家族与人物",
+    "title": "人物登场、负伤、忠诚与继承",
+    "pace": [
+      "daily",
+      "monthly",
+      "yearly"
+    ],
+    "intro": "人物的史籍生卒字段、当前身份、实际驻地和军职分开处理；并非族谱里有名字就可立即任用。",
+    "entry": "人物详情／族谱／军团军职",
+    "steps": [
+      {
+        "title": "当前状态核验",
+        "body": "任命和调动看实际所属、登场、健康、被俘及是否已有军职；同一人不复制到多个军团。",
+        "branch": ""
+      },
+      {
+        "title": "每日同步位置",
+        "body": "主将、副将、军需等随实际军团活动更新，野外和在途保持实际状态。",
+        "branch": ""
+      },
+      {
+        "title": "跨日检查到期",
+        "body": "伤病到期可恢复任用；达到登场年份的人物由未登场转入隐藏候选。",
+        "branch": "登场不等于自动加入玩家；还要探索、招募或符合剧本机制。"
+      },
+      {
+        "title": "生卒与继承",
+        "body": "现有生命周期规则按记录的年份检查死亡，主公变化进入继承逻辑；条件图再读取实际继承危机。",
+        "branch": "不是官渡剧情按某个日期强制杀死某一方。"
+      },
+      {
+        "title": "月末忠诚",
+        "body": "相性、职位待遇、关系等使忠诚漂移；极低忠诚可在野或投奔其他势力。",
+        "branch": ""
+      },
+      {
+        "title": "反映家族与官署",
+        "body": "人物离世、去职、被俘和继任改变家族影响与任职有效性，后续治理与月结随之调整。",
+        "branch": ""
+      }
+    ],
+    "loop": "人员状态 → 可任职与军职 → 行动、伤病和忠诚 → 恢复／死亡／离去／继任 → 再判断状态。",
+    "links": [
+      "officeDetail",
+      "familyDetail",
+      "medicalDetail",
+      "strategyGraphDetail"
+    ],
+    "sources": [
+      "js/core/game-state.js",
+      "js/core/rule-engine.js",
+      "js/core/engine/offices.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "officeDetail",
+    "group": "官制与朝局",
+    "title": "县官、太守、州牧与任命同步",
+    "pace": [
+      "manual",
+      "tenday"
+    ],
+    "intro": "实际太守只有一份；地方任免、汉庭与幕府通过同步入口读取同一实际管辖。",
+    "entry": "城市官署／家族征辟／幕府方面／朝廷任免",
+    "steps": [
+      {
+        "title": "识别官署级别",
+        "body": "只有州治显示州府、郡治显示郡府，县治显示县署；治所所在县仍可有独立县令。",
+        "branch": ""
+      },
+      {
+        "title": "验证任命",
+        "body": "查人物状态、所属、职位条件、现职冲突和治所；家族门生代理也走实际席位。",
+        "branch": ""
+      },
+      {
+        "title": "更新实际地方职",
+        "body": "地方直接任太守或通过朝廷任免，都要更新真实郡务。郡守与太守不是两个平行岗位。",
+        "branch": ""
+      },
+      {
+        "title": "同步名义和实际",
+        "body": "未经朝廷认可的新任以自领或相应状态记载；同步已有民政郡级、州级幕府职位和家族任官。",
+        "branch": "督军等军事方面不冒充实际太守，避免互相覆盖。"
+      },
+      {
+        "title": "重算权限与负荷",
+        "body": "更新兼任、辖区和事务效率，已打开的人物、家族、官署窗口接收任命刷新。",
+        "branch": ""
+      },
+      {
+        "title": "形成上下级",
+        "body": "上级州职可将其辖郡纳入，允许手动改隶与分出；未纳入上级的郡守直接向主公汇报。",
+        "branch": ""
+      }
+    ],
+    "loop": "任免 → 地方实职 → 朝廷名义／幕府 → 家族名录与事务能力 → 下次任免或离任。",
+    "links": [
+      "commandDetail",
+      "courtDetail",
+      "familyDetail",
+      "adminDetail"
+    ],
+    "sources": [
+      "js/core/engine/administration.js",
+      "js/core/engine/command.js",
+      "js/core/engine/court-edicts.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "appoint_office",
+        "name": "任命"
+      },
+      {
+        "id": "dismiss_office",
+        "name": "罢免"
+      },
+      {
+        "id": "promote_office",
+        "name": "升官"
+      },
+      {
+        "id": "demote_office",
+        "name": "降职"
+      },
+      {
+        "id": "designate_heir",
+        "name": "指定继承人"
+      },
+      {
+        "id": "set_advisor",
+        "name": "设置军师"
+      }
+    ]
+  },
+  {
+    "id": "commandDetail",
+    "group": "官制与朝局",
+    "title": "幕府方面、自治执行与汇报",
+    "pace": [
+      "tenday",
+      "monthly",
+      "manual"
+    ],
+    "intro": "官职图展示隶属，方面详情负责管理；设置方针之后由受权大员持续执行。",
+    "entry": "幕府 → 官职图／方面；地图 → 方面图层",
+    "steps": [
+      {
+        "title": "配置组织",
+        "body": "主公设中枢与都督、州职、郡职，指定任职人、辖区、上级和所辖军团。",
+        "branch": ""
+      },
+      {
+        "title": "下达方针或专项",
+        "body": "治理、守备、集结、进取等方针决定方面内部优先级；专项命令仍受资源、实际驻地和范围约束。",
+        "branch": ""
+      },
+      {
+        "title": "十日方面执行",
+        "body": "按官员能力、忠诚与辖区真实资源安排治理、募兵、补员、调动和进攻。",
+        "branch": "缺钱粮、无可用军队、被围或目标改变，会等待、失败或改做防卫，不凭空生成资源。"
+      },
+      {
+        "title": "核验战争权限",
+        "body": "方面进取必须满足中枢战争授权和有效战和，不因邻县好打就自行扩大战争。",
+        "branch": ""
+      },
+      {
+        "title": "月末忠诚与报告",
+        "body": "检查方面服从、产生辖区汇报；玩家从方面详情查看结果并调整。",
+        "branch": ""
+      },
+      {
+        "title": "组织变化同步地图",
+        "body": "官职图点击进入方面详情，图层按划分显示控制结构；改隶后刷新辖区展示。",
+        "branch": ""
+      }
+    ],
+    "loop": "主公授权 → 方面调度 → 地方与军队执行 → 月报和忠诚 → 主公调整。",
+    "links": [
+      "aiDetail",
+      "officeDetail",
+      "warDetail",
+      "armySupplyDetail"
+    ],
+    "sources": [
+      "js/core/engine/command.js",
+      "js/core/engine/ai.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "create_corps",
+        "name": "新建军团"
+      },
+      {
+        "id": "disband_corps",
+        "name": "解散军团"
+      },
+      {
+        "id": "adjust_jurisdiction",
+        "name": "调整辖区"
+      },
+      {
+        "id": "set_authority",
+        "name": "设置授权范围"
+      }
+    ]
+  },
+  {
+    "id": "courtDetail",
+    "group": "官制与朝局",
+    "title": "朝廷诏令、官爵、天子与朝局",
+    "pace": [
+      "daily",
+      "monthly",
+      "due",
+      "manual"
+    ],
+    "intro": "名义官爵与实际领地不同；朝廷诏令有权力、员额、威望、服从与答复条件。",
+    "entry": "汉庭／魏廷 → 官制、诏令、朝局",
+    "steps": [
+      {
+        "title": "同步天子与治所",
+        "body": "每日检查都城、控制者、在途护送及任职持有；月末重算威望、控制、名分与服从。",
+        "branch": ""
+      },
+      {
+        "title": "选择合法诏令",
+        "body": "册封官职爵位、安抚、州郡任免、罢免、征召与上表请封按权限办理。多席军职选择具体号，自定义须满足称号规则。",
+        "branch": ""
+      },
+      {
+        "title": "接受或抗诏",
+        "body": "AI 根据服从、实力、战和及诏令性质回应；给玩家的待奉诏令由玩家处理。",
+        "branch": "空口册封不等于交出城池；地方实际控制不变时保留名义与实控区别。"
+      },
+      {
+        "title": "联军与讨逆",
+        "body": "讨逆诏、集结地和发动日形成后续流程；成员要实际到达，不能只勾选就瞬移参战。",
+        "branch": ""
+      },
+      {
+        "title": "迁都、奉迎与天子护送",
+        "body": "满足条件时行动；城破、突围或护送结果决定天子实际归属。",
+        "branch": ""
+      },
+      {
+        "title": "称王、称帝与受禅",
+        "body": "检查领地、控制、威望、时间限制和忠汉反应；改朝后窗口称谓和可用操作随朝局变化。",
+        "branch": ""
+      }
+    ],
+    "loop": "名分与控制 → 下诏／上表 → 奉诏或抗诏 → 关系、战和与控制改变 → 再评估朝局。",
+    "links": [
+      "officeDetail",
+      "worldDetail",
+      "siegeActionDetail",
+      "eventDetail"
+    ],
+    "sources": [
+      "js/core/engine/court.js",
+      "js/core/engine/court-edicts.js",
+      "js/core/engine/court-crisis.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "aiDetail",
+    "group": "战略与外交",
+    "title": "诸侯概率决策与中央战争授权",
+    "pace": [
+      "daily",
+      "monthly",
+      "due"
+    ],
+    "intro": "日常内政和战术有概率行动；战略有复核期，两者不是同一个循环。",
+    "entry": "外交 → 战役走向／方面开战授权；幕府 → 方面",
+    "steps": [
+      {
+        "title": "复核主攻对手",
+        "body": "中枢按边界、实力、已有战争、威胁和历史加权选主要敌人；通常30日复核，失城、灭亡或停战可使旧计划提前失效。",
+        "branch": ""
+      },
+      {
+        "title": "控制战线数量",
+        "body": "通常一名主攻对手，大势力符合规模与进取条件可有次线；不把所有交战方都当作主动扩张方向。",
+        "branch": ""
+      },
+      {
+        "title": "每日概率决策",
+        "body": "诸侯按性格、难度、钱粮、当地守军和可用人物，分别判断发展、编军、补员、救援及出击。",
+        "branch": "日常战术没有要求全国同一天一起出兵；战略评估仍有周期和外交冷却。"
+      },
+      {
+        "title": "统一核验进攻",
+        "body": "无归属军团、方面进取、协同与自动宣战共用中枢授权。玩家可按对手、郡域、方面和期限授权。",
+        "branch": ""
+      },
+      {
+        "title": "防卫与休整",
+        "body": "自卫不额外消耗新战争名额；休整限制主动进攻，但仍可救援。",
+        "branch": "停战、盟约和集团关系优先，不被授权强行绕过。"
+      },
+      {
+        "title": "执行后回报",
+        "body": "真行动形成军团、路线和外交记录，后续交给行军与政治规则推进。",
+        "branch": ""
+      }
+    ],
+    "loop": "战略复核 → 分配合法主攻 → 每日战术判断 → 行动与战果 → 事件失效或到期再复核。",
+    "links": [
+      "strategyGraphDetail",
+      "commandDetail",
+      "worldDetail",
+      "warDetail"
+    ],
+    "sources": [
+      "js/core/engine/ai.js",
+      "js/core/engine/command.js",
+      "js/core/engine/politics.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "set_military_goal",
+        "name": "设置军事目标"
+      },
+      {
+        "id": "authorize_war",
+        "name": "进攻授权"
+      }
+    ]
+  },
+  {
+    "id": "strategyGraphDetail",
+    "group": "战略与外交",
+    "title": "历史引导、条件图与继承分支",
+    "pace": [
+      "due",
+      "monthly"
+    ],
+    "intro": "历史引导提供合法候选加权，自由演化去掉剧本历史偏好；两者共用战斗和外交规则。",
+    "entry": "新局设置／外交 → 战略倾向",
+    "steps": [
+      {
+        "title": "读取本局配置",
+        "body": "用存档中的规则和剧本快照；外部改配置不会静默改正在进行的战局。",
+        "branch": ""
+      },
+      {
+        "title": "生成局势事实",
+        "body": "读取败战压力、要地损失、战争疲劳、战备、退路和真实继承危机；不直接按历史名字判输赢。",
+        "branch": ""
+      },
+      {
+        "title": "筛选条件",
+        "body": "条件可组合全部／任一／取反及数值或年份比较；目标不存在时不强选。",
+        "branch": ""
+      },
+      {
+        "title": "加权选一项意图",
+        "body": "进攻、休整、求援、求和、请求归降或继承分裂；每次复核至多一次节点转移，保持冷却。",
+        "branch": ""
+      },
+      {
+        "title": "送入规则层",
+        "body": "求降仍查资格、条约、真实实力和资源；求援仍需盟友和合法共同敌人。",
+        "branch": "无可行目标安全回退，不能卡在唯一历史结局。"
+      },
+      {
+        "title": "真实继承危机才分裂",
+        "body": "主公实际更替或死亡且地方反叛条件成立，才从现有领地、人物、军队和资源中拆出集团。",
+        "branch": ""
+      }
+    ],
+    "loop": "事实快照 → 条件筛选 → 选意图 → 合法执行／失败 → 按结果转节点 → 下一次复核。",
+    "links": [
+      "campaignDetail",
+      "aiDetail",
+      "peopleDetail",
+      "receptionDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "game/data/history/scenarios/200_guandu.json"
+    ],
+    "notes": [
+      "官渡配有曹袁对手倾向；不是每个剧本都有专属历史事件链，其他剧本可用通用条件图。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "set_campaign_mode",
+        "name": "战役模式"
+      }
+    ]
+  },
+  {
+    "id": "worldDetail",
+    "group": "战略与外交",
+    "title": "战争、盟约、停战与宗属集团",
+    "pace": [
+      "daily",
+      "monthly",
+      "due"
+    ],
+    "intro": "交战、同盟、停战、臣属分别判断；停战阻止进攻，却不等于有借道和补粮权。",
+    "entry": "外交关系网络／条约明细／朝廷诏令",
+    "steps": [
+      {
+        "title": "每日检查期限",
+        "body": "过期条约清理，占领管制到期解除，审查现有补给和围城是否合法。",
+        "branch": ""
+      },
+      {
+        "title": "15日天下外交",
+        "body": "正常逐日模式把世界外交、共同敌人及联盟等月度判断错峰到15日；不是所有外交都只在这天发生。",
+        "branch": ""
+      },
+      {
+        "title": "中央决定战和",
+        "body": "自动开战走中枢授权；正式诏令和明确事件保留自己的合法入口；议和使用明确天数。",
+        "branch": ""
+      },
+      {
+        "title": "集团归并战争",
+        "body": "宗主与附庸的国家级战争归到宗主；宗主停战后附庸旧记录不能继续制造战争。",
+        "branch": ""
+      },
+      {
+        "title": "行军再次检查",
+        "body": "途中目标易主或新达成和约，抵达前重新核验。",
+        "branch": "无授权或有和约则停止，不能先打一场再发现不该开战。"
+      },
+      {
+        "title": "权限分别使用",
+        "body": "集团允许实际通行与粮食转移；普通停战不会自动提供补给、借道或协同夹击。",
+        "branch": ""
+      }
+    ],
+    "loop": "外交变化 → 失效旧战略 → 校验军团目标与围城 → 下一轮关系、条约和战略判断。",
+    "links": [
+      "aiDetail",
+      "campaignDetail",
+      "vassalDetail",
+      "warDetail"
+    ],
+    "sources": [
+      "js/core/engine/diplomacy.js",
+      "js/core/engine/politics.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "旧规则附庸与新战役附庸是兼容分流；启用新模式后不再依靠旧的随机附庸和后期全面解附庸。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "declare_war",
+        "name": "宣战"
+      },
+      {
+        "id": "truce",
+        "name": "停战"
+      }
+    ]
+  },
+  {
+    "id": "pressureDetail",
+    "group": "战略与外交",
+    "title": "战果压力、恢复与归降意愿",
+    "pace": [
+      "due",
+      "daily"
+    ],
+    "intro": "连续败战、重要城池失陷、军力劣势与合理待遇提高归降意愿；强国稳定时不能靠刷按钮必吞。",
+    "entry": "外交 → 评估条件；战报 → 决战与要地损失",
+    "steps": [
+      {
+        "title": "记录独立战果",
+        "body": "同一持续野战只在最终结果计一次；微小战斗贡献封顶，不把每日攻防当连续大败。",
+        "branch": ""
+      },
+      {
+        "title": "记录失城和被俘",
+        "body": "要地价值按实际城市与政治作用判断，同一失地贡献有上限；重要指挥人物被俘也会产生压力。",
+        "branch": ""
+      },
+      {
+        "title": "随时间与恢复变化",
+        "body": "近期记录按半衰期减弱，过窗不计；胜战、夺回和释放可抵消或撤去相应压力。",
+        "branch": ""
+      },
+      {
+        "title": "先审资格",
+        "body": "双方存续、有联系、有保护或接收能力，无宗属循环和继承战争的和约冲突。",
+        "branch": "不相干的远方势力不能隔空收全国；稳定且势均力敌者缺乏动机时拒绝整体归降。"
+      },
+      {
+        "title": "计算权重",
+        "body": "军力、败战、失地、孤立、疲劳、待遇、信誉、独立意志和援助共同评分；附庸与主动投靠有不同考量。",
+        "branch": ""
+      },
+      {
+        "title": "只读预览",
+        "body": "窗口展示近似接受意愿；查看与刷新不消耗随机数，不产生真实交涉。",
+        "branch": ""
+      }
+    ],
+    "loop": "战斗／失城 → 压力窗口 → 意愿评估 → 拒绝或谈判 → 后续战果／恢复再改变意愿。",
+    "links": [
+      "battleDetail",
+      "campaignDetail",
+      "pacificationDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "js/core/engine/battle.js"
+    ],
+    "notes": [
+      "参数是玩法数值，不是史料统计的投降概率。压力记录每势力有条数上限，不复制整份战报。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "campaignDetail",
+    "group": "战略与外交",
+    "title": "劝降、主动归降、附庸与求和",
+    "pace": [
+      "manual",
+      "due",
+      "daily"
+    ],
+    "intro": "从提出条件到派使、答复、反提案、履约是完整状态机，失败不是悄悄改领土。",
+    "entry": "外交 → 提出交涉／交涉往来",
+    "steps": [
+      {
+        "title": "选择方向与条款",
+        "body": "劝降由接收者提出，请求归降由投靠者提出；可选整体并入、臣属或停战，约定款项、保官、家产保障、自治及贡赋。",
+        "branch": ""
+      },
+      {
+        "title": "校验并冻结款项",
+        "body": "检查资格、可支付资金、正在进行的交涉和实质条款冷却，成功提交才冻结款项并保存随机结果。",
+        "branch": ""
+      },
+      {
+        "title": "等待使者抵达",
+        "body": "快速模式默认5日、标准10日。尚未到答复日不能接受；等待不代表已经交地。",
+        "branch": ""
+      },
+      {
+        "title": "接收方回应",
+        "body": "AI 评估接受、改议自治或拒绝；给玩家的请求必须由玩家明确答复。",
+        "branch": "改议自治会回到原发起方，再等确认，不是一方点了就自动改国体。"
+      },
+      {
+        "title": "到期重新核验",
+        "body": "答复时领土、战争、宗属或对象变化，可能取消；过期、拒绝或目标灭亡退还冻结款项。",
+        "branch": ""
+      },
+      {
+        "title": "分流履约",
+        "body": "整体并入走接收，附庸建立契约，停战可交付合法相邻割地及金钱。已完成提案不重复执行。",
+        "branch": ""
+      }
+    ],
+    "loop": "草拟 → 入队派使 → 等待 → 接受／反提案／拒绝／过期 → 接收或履约；改变实质条件或战局后才能合理重议。",
+    "links": [
+      "pressureDetail",
+      "receptionDetail",
+      "vassalDetail",
+      "worldDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "js/ui/app/campaign-ui.js"
+    ],
+    "notes": [
+      "本轮可选条款没有赔粮、换俘、正式封爵或逐城分期交割；不把设计稿中未实装的条款当作现成功能。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "seek_peace",
+        "name": "求和"
+      },
+      {
+        "id": "demand_surrender",
+        "name": "劝降"
+      },
+      {
+        "id": "offer_submission",
+        "name": "请求归降"
+      },
+      {
+        "id": "respond_diplomacy",
+        "name": "答复交涉"
+      },
+      {
+        "id": "vassalize",
+        "name": "附庸"
+      }
+    ]
+  },
+  {
+    "id": "receptionDetail",
+    "group": "战略与外交",
+    "title": "整体接收与拒降残部",
+    "pace": [
+      "due"
+    ],
+    "intro": "和平接收转移现有资产，不套用攻城伤亡，也不让最后一县并入时把旧军队直接删掉。",
+    "entry": "外交协议达成 → 自动接收；日报 → 接收结果",
+    "steps": [
+      {
+        "title": "建立唯一接收记录",
+        "body": "用事务编号登记旧势力和接收者，已完成则直接返回，防止读档重领。",
+        "branch": ""
+      },
+      {
+        "title": "清理关联待办与战斗",
+        "body": "撤销相关未完成提案并退款；已有交战处理未结兵员后停止，不能停战丢兵。",
+        "branch": ""
+      },
+      {
+        "title": "判断在外拒降",
+        "body": "符合忠诚、野心和实际在外状态的军团可保持抵抗；用原军队和物资形成真实残部。",
+        "branch": ""
+      },
+      {
+        "title": "移交资产与人口",
+        "body": "城市、县、守军、府库、军队仓储、伤员、运输与项目按实际记录转移。",
+        "branch": "不新增粮，不复制人口，不把和平接收守军重置为固定200。"
+      },
+      {
+        "title": "同步人员和组织",
+        "body": "官员、家眷主支脉、俘虏看管、天子控制、汉庭记录和幕府引用更新，按条款保留或重整地方任官。",
+        "branch": ""
+      },
+      {
+        "title": "保留结果并刷新",
+        "body": "完成标记入存档，修复组织上下级引用；有真实拒降军队的无城残部仍可存续。",
+        "branch": ""
+      }
+    ],
+    "loop": "协议确认 → 接收事务 → 资产与组织同步 → 完成归档；拒降残部进入既有战争和补给循环。",
+    "links": [
+      "campaignDetail",
+      "vassalDetail",
+      "familyMigrationDetail",
+      "saveDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "vassalDetail",
+    "group": "战略与外交",
+    "title": "附庸贡赋、保护、整合与独立",
+    "pace": [
+      "monthly",
+      "due",
+      "manual"
+    ],
+    "intro": "附庸保留自己的城市和军队；臣属关系可稳定，也会因失信和失去保护而恶化。",
+    "entry": "外交 → 协议与臣属 → 商议整合／解除臣属",
+    "steps": [
+      {
+        "title": "建立契约",
+        "body": "记录宗主、附庸、贡赋率、保官和家产保障等条款，检查原有战争和宗主和约能否相容。",
+        "branch": ""
+      },
+      {
+        "title": "集团共同战争",
+        "body": "集团通行、实际补给与防卫承诺生效；附庸不能自行另开国家级战争。",
+        "branch": ""
+      },
+      {
+        "title": "月末缴贡",
+        "body": "从附庸真实可支配钱中扣贡，宗主相应增加；按月去重，缺钱不会增发。",
+        "branch": ""
+      },
+      {
+        "title": "评估稳定和履约",
+        "body": "保护能力、承诺任官、名望信誉与待遇影响忠诚及整合进度。",
+        "branch": "杀降、屠害受控家眷或背约会影响信誉和契约稳定。"
+      },
+      {
+        "title": "提出进一步整合",
+        "body": "时间和进度改善兼并条件，仍要走商议与确认；快速模式基期120日不是120日到点必吞。",
+        "branch": ""
+      },
+      {
+        "title": "解除或反叛",
+        "body": "双方可合法解除，移除永久臣属盟约并有一个月交接停战；低忠诚满足条件时可能反叛。",
+        "branch": "不因进入后期就无条件让全部附庸独立。"
+      }
+    ],
+    "loop": "称臣 → 保护与贡赋 → 忠诚／整合 → 保持自治、继续谈判、并入或独立 → 新外交格局。",
+    "links": [
+      "campaignDetail",
+      "receptionDetail",
+      "worldDetail",
+      "victoryDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "negotiate_integration",
+        "name": "商议整合"
+      },
+      {
+        "id": "end_vassalage",
+        "name": "解除臣属"
+      }
+    ]
+  },
+  {
+    "id": "pacificationDetail",
+    "group": "战略与外交",
+    "title": "郡治失陷后的属县招抚",
+    "pace": [
+      "due",
+      "daily"
+    ],
+    "intro": "打下郡治可扩大政治影响，但完整守军和可达援军仍有机会继续守。",
+    "entry": "攻取郡治 → 日报；外交 → 待答复招抚",
+    "steps": [
+      {
+        "title": "郡治发生易主",
+        "body": "只对相关郡县建立招抚记录，不扫描全地图随机吞城，也不直接整州改色。",
+        "branch": ""
+      },
+      {
+        "title": "等待政治响应",
+        "body": "快速模式默认10日，标准20日；原主有增援、救援或改变局势的时间。",
+        "branch": ""
+      },
+      {
+        "title": "重新检查归属",
+        "body": "城池或郡治改主、战争关系消失或条件改变时，不继续套旧提案。",
+        "branch": ""
+      },
+      {
+        "title": "评估抵抗条件",
+        "body": "完整军团、高驻军、援军、县官忠诚、当地家族关系和接收方信誉参与判断。",
+        "branch": ""
+      },
+      {
+        "title": "玩家明确决定",
+        "body": "属于玩家的县产生待答复招抚，玩家可接受归附或命其继续守土。",
+        "branch": ""
+      },
+      {
+        "title": "和平转移或抵抗",
+        "body": "接受保留人口、守军、县库和当地任官；拒绝继续走围城或战斗。",
+        "branch": ""
+      }
+    ],
+    "loop": "关键治所失陷 → 等待 → 属县分别评估 → 归附／观望或抵抗 → 变化后的战线。",
+    "links": [
+      "siegeDetail",
+      "pressureDetail",
+      "officeDetail",
+      "campaignDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "pacify_region",
+        "name": "答复招抚"
+      }
+    ]
+  },
+  {
+    "id": "warDetail",
+    "group": "军队与战场",
+    "title": "官道、水路、行军与接战",
+    "pace": [
+      "daily",
+      "manual"
+    ],
+    "intro": "大军主要按城际路段推进，位置与路段余程可保存；不是下令后直接到目标。",
+    "entry": "军团 → 调动／路线；军事图层",
+    "steps": [
+      {
+        "title": "规划合法路线",
+        "body": "确定终点、途经点、官路或可用水路，校验所属和任务状态；路线只在需要规划或改令时求解。",
+        "branch": ""
+      },
+      {
+        "title": "开拔领携粮",
+        "body": "由实际出发仓取粮，军仓不足则带着实际库存出发，不从全国粮食池凭空装满。",
+        "branch": ""
+      },
+      {
+        "title": "每日增加路程",
+        "body": "路段长度、道路、水流方向、拥塞、兵力规模、组织、负重、急行军及迟滞共同决定耗时。",
+        "branch": "不能简单固定成普通每十日一段、急行每五日一段。"
+      },
+      {
+        "title": "检查途中接敌",
+        "body": "小队、追击和持续战场按实际在途位置处理；到节点前再次检查道路、敌情和战和。",
+        "branch": ""
+      },
+      {
+        "title": "抵达异国再核验",
+        "body": "目标改主、有和约或无中枢授权则止步；集团成员允许实际通行。",
+        "branch": ""
+      },
+      {
+        "title": "抵达分流",
+        "body": "有野外敌军先接战；敌城转入围城；无主据点按规则接收；己方安全据点才恢复驻城相关功能。",
+        "branch": ""
+      }
+    ],
+    "loop": "路线 → 路段进度 → 接敌／受阻／抵达 → 下一路段或新任务；中途撤退沿当前位置折返。",
+    "links": [
+      "battleDetail",
+      "siegeDetail",
+      "skirmishDetail",
+      "retreatDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/engine/movement.js",
+      "js/core/engine/skirmish.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "move",
+        "name": "移动"
+      },
+      {
+        "id": "forced_march",
+        "name": "急行军"
+      },
+      {
+        "id": "camp",
+        "name": "扎营"
+      },
+      {
+        "id": "ambush",
+        "name": "伏击"
+      }
+    ]
+  },
+  {
+    "id": "battleDetail",
+    "group": "军队与战场",
+    "title": "持续野战、增援与胜负",
+    "pace": [
+      "daily",
+      "due"
+    ],
+    "intro": "相遇建立战场，逐日进行战斗轮次；不会把整场大战压成一次瞬间结算。",
+    "entry": "军事图层 → 战场；军团 → 本场战报",
+    "steps": [
+      {
+        "title": "检查合法敌我与实际位置",
+        "body": "战争关系、真实地点、在途与野外状态决定是否能交战；不能隔水或对友好集团误打。",
+        "branch": ""
+      },
+      {
+        "title": "建立持续战场",
+        "body": "保存战场编号、参战军团、角色、位置与开战兵力；被卷入的军队不继续同时走普通行军。",
+        "branch": ""
+      },
+      {
+        "title": "每日交战推进",
+        "body": "战力由健卒、训练、士气、组织、主将、兵种、阵法战术、地形和后勤等共同计算。",
+        "branch": ""
+      },
+      {
+        "title": "记兵员去向",
+        "body": "阵亡、伤员、溃散、俘获和健卒分别记，不将全部损失都当作凭空消失；符合条件的军队可增援。",
+        "branch": ""
+      },
+      {
+        "title": "检查脱离和溃败",
+        "body": "达到撤退线、组织或士气失衡、兵力悬殊等条件时结束或脱离，按实际位置启动退却。",
+        "branch": ""
+      },
+      {
+        "title": "最终结果与政治",
+        "body": "最终胜负生成战果，败战压力只计这一场一次；俘将和指挥替补进入人物处理。",
+        "branch": ""
+      },
+      {
+        "title": "当前与历史分开",
+        "body": "军团和城市显示当前这场战役的连续记录；战报档案保存历史，不把过去所有记录混进当前窗口。",
+        "branch": ""
+      }
+    ],
+    "loop": "建立战场 → 每日交战、补给与增援 → 检查胜负／撤退 → 战果和追击 → 休整或下一战。",
+    "links": [
+      "retreatDetail",
+      "medicalDetail",
+      "pressureDetail",
+      "armySupplyDetail"
+    ],
+    "sources": [
+      "js/core/engine/battle.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "siegeDetail",
+    "group": "军队与战场",
+    "title": "围城、攻具、断粮与破城",
+    "pace": [
+      "daily",
+      "due"
+    ],
+    "intro": "围困本身就是持续行动；强攻、水攻和地道还需工事。每日有进度，不代表每日都弹完整摘要。",
+    "entry": "城下军团 → 围法；城市／军团 → 本次围城",
+    "steps": [
+      {
+        "title": "审查有效围城",
+        "body": "攻方须在相邻有效营地、仍为敌国，且没有被停战或归降关系解除；无效围城及时清理。",
+        "branch": ""
+      },
+      {
+        "title": "算合围与力量",
+        "body": "计算双方实际战力、城防、险固、完整包围程度和守方实际军团。",
+        "branch": ""
+      },
+      {
+        "title": "准备工事",
+        "body": "围困可持续消耗，强攻、水攻、地道按所需工日准备，实际扣营地或军资中的钱、占用攻方兵员施工。",
+        "branch": "钱或施工兵力不足显示工事受阻；水攻还要满足河道等条件。"
+      },
+      {
+        "title": "每日粮耗与压力",
+        "body": "普通守军、居民围困需求和独立守城军团分开扣粮；粮尽会伤士气、守军、治安及居民。",
+        "branch": ""
+      },
+      {
+        "title": "按围法伤亡毁防",
+        "body": "未准备完成的强攻效果受限；水攻可能浸粮，地道成功或失败有各自结果；攻方也消耗粮、兵和士气。",
+        "branch": ""
+      },
+      {
+        "title": "检查城破、降服或撤围",
+        "body": "城防破坏、兵力、士气、断粮和攻方状态决定后续；不是城防归零就必定任意小队拿城。",
+        "branch": ""
+      },
+      {
+        "title": "持续记录摘要",
+        "body": "同次围城保留同一编号，开围、阶段摘要、主动行动、断粮和陷落会记报；日常细进度仍在推进。",
+        "branch": ""
+      }
+    ],
+    "loop": "围城校验 → 工事／消耗 → 士气、城防、粮情变化 → 降服／破城／撤围或下一日围困。",
+    "links": [
+      "siegeActionDetail",
+      "captureDetail",
+      "armySupplyDetail",
+      "populationDetail"
+    ],
+    "sources": [
+      "js/core/engine/siege.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "查看“准备工事”和“受阻原因”可区分真的等待与无行动；地方修城须花钱，围城时普通行政修城停止。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "siegeActionDetail",
+    "group": "军队与战场",
+    "title": "强袭、出击、突围与天子护送",
+    "pace": [
+      "manual",
+      "due",
+      "daily"
+    ],
+    "intro": "主动围城行动需实际军队、驻地、包围状态和成本；不是重复点击即可跳过持续围城。",
+    "entry": "城池／军团 → 围城行动",
+    "steps": [
+      {
+        "title": "选攻方或守方行动",
+        "body": "攻方可按可用围法与强袭选项行动，守方可出击、突围或处理护送。",
+        "branch": ""
+      },
+      {
+        "title": "校验当前围城",
+        "body": "查军队是否确在城内或相邻营地、能否行动、当期冷却和资源；开窗后局势变化会让旧操作失败。",
+        "branch": ""
+      },
+      {
+        "title": "真实出城接战",
+        "body": "出击抽出实际兵力参与战场，不在城内和战场同时算一份守军。",
+        "branch": ""
+      },
+      {
+        "title": "突围按条件结算",
+        "body": "包围程度、兵种、将领及可用退路决定成败；失败有伤亡、俘虏或回城结果。",
+        "branch": ""
+      },
+      {
+        "title": "天子随军实际移动",
+        "body": "护送成功后随实际军队和路线走；城破或护送被截影响实际控制者。",
+        "branch": ""
+      },
+      {
+        "title": "结回原围城",
+        "body": "出击返回或战果结算后恢复守军关系；仍有围城则继续每日消耗。",
+        "branch": ""
+      }
+    ],
+    "loop": "主动行动 → 成败与实际位移 → 回城／撤离／被俘 → 围城继续或结束；不得复制守军或天子。",
+    "links": [
+      "siegeDetail",
+      "battleDetail",
+      "courtDetail",
+      "retreatDetail"
+    ],
+    "sources": [
+      "js/core/engine/siege.js",
+      "js/core/engine/court-crisis.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "siege_action",
+        "name": "攻守城"
+      }
+    ]
+  },
+  {
+    "id": "captureDetail",
+    "group": "军队与战场",
+    "title": "城破、守军处置与占领",
+    "pace": [
+      "due"
+    ],
+    "intro": "守军、守城军团、伤员、俘虏和攻方驻军各有去向；城池易主不等于旧守军消失。",
+    "entry": "本次围城结果／城市 → 占领与资源",
+    "steps": [
+      {
+        "title": "区分破城与投降",
+        "body": "围城破城、开城投降和外交和平接收分别处理，人口和资源损失不能一概套用。",
+        "branch": ""
+      },
+      {
+        "title": "处理守方驻兵",
+        "body": "按战果分为阵亡、伤员、溃散、俘虏或撤出；有退路的败退守军可成为真实在途部队。",
+        "branch": ""
+      },
+      {
+        "title": "处理守城军团和官员",
+        "body": "军团不固定改成200人；在城官员、主将和俘虏按实际状态处理，真正撤离的人不被隔空抓回。",
+        "branch": ""
+      },
+      {
+        "title": "攻方拨人驻防",
+        "body": "从参战攻方真实扣兵组成占领驻军，可解救己方俘虏；不免费新增固定守军。",
+        "branch": ""
+      },
+      {
+        "title": "资源与城防移交",
+        "body": "按攻取规则处理城库、军资、人口冲击和防御破坏，设置占领管制。",
+        "branch": ""
+      },
+      {
+        "title": "同步后续系统",
+        "body": "更新县归属、天子控制、官职和组织；重要据点损失写政治压力，郡治可触发招抚。",
+        "branch": ""
+      }
+    ],
+    "loop": "城破结算 → 有限资源和兵员去向 → 占领治理 → 修城、安民、招抚 → 新的前线与粮运。",
+    "links": [
+      "pacificationDetail",
+      "adminDetail",
+      "receptionDetail",
+      "medicalDetail"
+    ],
+    "sources": [
+      "js/core/engine/siege.js",
+      "js/core/rule-engine.js",
+      "js/core/engine/politics.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "skirmishDetail",
+    "group": "军队与战场",
+    "title": "小队突击、阻击、袭扰与合队",
+    "pace": [
+      "manual",
+      "daily",
+      "due"
+    ],
+    "intro": "小股部队可离开官道逐格行动；仍须实际分兵、耗粮，任务结束后选择独立或归并。",
+    "entry": "军事图层 → 军团 → 分遣／小队行动",
+    "steps": [
+      {
+        "title": "选择任务与结束行为",
+        "body": "突击、阻击、袭扰、隐蔽休整或撤回；选择任务完成后独立留队或返回自动合并。",
+        "branch": ""
+      },
+      {
+        "title": "实际分遣",
+        "body": "按比例从母军扣健卒、兵种、老兵和军资；伤员与俘虏不复制，默认普通军吏可带队。",
+        "branch": "兵力、别部数、距离和路线长度有限制；主力围城、正在城际路上等状态受限。"
+      },
+      {
+        "title": "逐格行进",
+        "body": "沿当前陆地地形四向寻路，林山泽河影响速度，海格不可走；地形变化使下一格不通就停下等待改令。",
+        "branch": ""
+      },
+      {
+        "title": "检查真实接敌",
+        "body": "接近敌军实际野外格或本日经过范围才行动；同方、非交战和隔水目标不误打。",
+        "branch": ""
+      },
+      {
+        "title": "突击或拖延",
+        "body": "突击造成局部接战后脱离，阻击降低组织和速度、持续一定时间，袭扰在真实接近粮道时可截粮。",
+        "branch": "接敌与目标每日限制、冷却和总迟滞上限防止无限锁住大军；改令不清空冷却。"
+      },
+      {
+        "title": "脱离与撤回",
+        "body": "敌强、低士气或低组织时撤离；逐格返回安全据点后才恢复驻城补员和疗伤。",
+        "branch": ""
+      },
+      {
+        "title": "手动或自动合队",
+        "body": "同地且状态允许时合并真实兵力与物资；找不到母军或未满足条件则保留可见部队等待处理。",
+        "branch": ""
+      }
+    ],
+    "loop": "分遣 → 逐格接近 → 突／阻／袭 → 脱离或继续阻击 → 撤回 → 合队／独立。",
+    "links": [
+      "warDetail",
+      "retreatDetail",
+      "armySupplyDetail"
+    ],
+    "sources": [
+      "js/core/engine/skirmish.js",
+      "js/core/engine/movement.js"
+    ],
+    "notes": [
+      "走到城池格不等于自动攻破城池；攻城仍用围城系统。军事图层显示健卒兵力条和组织度条，敌方受情报精度限制。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "field_operation",
+        "name": "小队行动"
+      },
+      {
+        "id": "merge_army",
+        "name": "合队"
+      }
+    ]
+  },
+  {
+    "id": "retreatDetail",
+    "group": "军队与战场",
+    "title": "撤退、溃败与追击",
+    "pace": [
+      "daily",
+      "due",
+      "manual"
+    ],
+    "intro": "败军从实际战场或路段位置退走，逐段或逐格返回，不瞬移进远方城池。",
+    "entry": "战场结果／军团 → 撤退；军事图层 → 溃退部队",
+    "steps": [
+      {
+        "title": "确定撤退起点",
+        "body": "战场溃败、主动撤退、途中折返或城破撤出，记录实际起点及已走路段比例。",
+        "branch": ""
+      },
+      {
+        "title": "寻找合法退路",
+        "body": "优先可达安全己方或规则允许的友军地区；无退路会增加溃散或被俘风险。",
+        "branch": ""
+      },
+      {
+        "title": "沿路实际退却",
+        "body": "保留路线、剩余进度、组织与士气；当日刚败退不又免费跑完整段。",
+        "branch": ""
+      },
+      {
+        "title": "追兵实际追上",
+        "body": "按当前位置、行军速度和接敌条件追击；追兵同样耗粮并受地形与状态限制。",
+        "branch": ""
+      },
+      {
+        "title": "结算追击与掉队",
+        "body": "阵亡、掉队、伤员、俘虏和重整归建分别登记，不能让追击无限刷同批兵。",
+        "branch": ""
+      },
+      {
+        "title": "抵达后恢复",
+        "body": "进入安全地点后休整，达到士气和状态条件再恢复整备；有伤散兵的军团不能随意解散丢账。",
+        "branch": ""
+      }
+    ],
+    "loop": "败退起点 → 退路 → 每日退却／被追击 → 到达 → 收拢与医疗 → 重新整备。",
+    "links": [
+      "battleDetail",
+      "medicalDetail",
+      "warDetail"
+    ],
+    "sources": [
+      "js/core/engine/battle.js",
+      "js/core/engine/movement.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "retreat",
+        "name": "撤退"
+      }
+    ]
+  },
+  {
+    "id": "medicalDetail",
+    "group": "军队与战场",
+    "title": "组织、伤员、溃散与战俘",
+    "pace": [
+      "daily",
+      "manual",
+      "due"
+    ],
+    "intro": "健卒不是部队全部人口；伤兵、掉队与俘虏要跟着位置、军粮和归属继续流转。",
+    "entry": "军团 → 兵员／军粮／俘虏；城市 → 守军与俘虏",
+    "steps": [
+      {
+        "title": "组织度更新",
+        "body": "行军、急行、小队穿行、战斗和缺粮降低组织；休整恢复，携粮负重也限制有效组织。",
+        "branch": ""
+      },
+      {
+        "title": "保留非健卒账",
+        "body": "伤员仍属于军团并耗粮；溃散待归兵员和被俘人员不能同时算在健卒里。",
+        "branch": ""
+      },
+      {
+        "title": "按实际条件疗养",
+        "body": "安全驻地与相应资源决定医疗和归建；野外小队的后方锚点不是医院。",
+        "branch": ""
+      },
+      {
+        "title": "俘虏转移与驻营",
+        "body": "军团携俘、城市收俘和移交都按真实所在地办理；投降和城破分开处理。",
+        "branch": ""
+      },
+      {
+        "title": "处置俘虏",
+        "body": "按可用命令接纳、释放或执行处置，更新人口与政治后果。",
+        "branch": "杀俘会影响接收信誉和臣属稳定；不能用重复操作刷同一批俘虏。"
+      },
+      {
+        "title": "合队与解散检查",
+        "body": "合队合并人员和物资，解散须先处理伤员与待归人员；归还守军支持实际整数，军团至少保留最低健卒。",
+        "branch": ""
+      }
+    ],
+    "loop": "战损 → 伤／散／俘 → 补给和位置检查 → 归建／疗愈／移交或损失 → 再投入战斗。",
+    "links": [
+      "armySupplyDetail",
+      "battleDetail",
+      "captureDetail",
+      "familyDetail"
+    ],
+    "sources": [
+      "js/core/engine/battle.js",
+      "js/core/engine/movement.js",
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "eventDetail",
+    "group": "情报、保存与终局",
+    "title": "天下事件、玩家抉择与日报",
+    "pace": [
+      "daily",
+      "quarterly",
+      "due"
+    ],
+    "intro": "天下事件、玩家选择事件和普通战报不是同一种消息；需要选择时暂停等玩家。",
+    "entry": "消息／日报／事件窗口／战报档案",
+    "steps": [
+      {
+        "title": "季度形势",
+        "body": "季度末汇总据点、国力和排名，形成形势报告，不直接因为排名改变领土。",
+        "branch": ""
+      },
+      {
+        "title": "检查天下事件",
+        "body": "按剧本、日期窗口、人物、领地、朝局和概率筛选，全局事件满足条件可执行一次。",
+        "branch": "参与势力由玩家控制时，部分史事会改为抉择版本或不自动发生。"
+      },
+      {
+        "title": "筛选玩家事件",
+        "body": "未决事件、已发生记录、冷却与前置条件决定候选；历史抉择优先。",
+        "branch": ""
+      },
+      {
+        "title": "形成待决事件",
+        "body": "有选项则记录事件、对象和选项，暂停等待选择；无选项才直接应用规则效果。",
+        "branch": ""
+      },
+      {
+        "title": "选择与反馈",
+        "body": "选择后校验并执行效果，进入事件历史和日报，再按播放器状态继续。",
+        "branch": ""
+      },
+      {
+        "title": "按范围读战报",
+        "body": "当前军团／城市显示当前战役的连续记录，历史记录在档案中查；重大朝廷和外交待办不混作旧战役。",
+        "branch": ""
+      }
+    ],
+    "loop": "条件检查 → 事件或无事件 → 抉择暂停 → 处理效果 → 历史去重与冷却 → 下一次检查。",
+    "links": [
+      "worldDetail",
+      "courtDetail",
+      "victoryDetail",
+      "saveDetail"
+    ],
+    "sources": [
+      "js/core/engine/events.js",
+      "js/core/game-state.js",
+      "js/ui/app.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "intelDetail",
+    "group": "情报、保存与终局",
+    "title": "侦察、迷雾与地图信息",
+    "pace": [
+      "manual",
+      "tenday",
+      "due"
+    ],
+    "intro": "军事、粮食、家族、官制等图层读取同一战局，但敌方数据受情报精度限制。",
+    "entry": "地图图层／悬停提示／侦察调查",
+    "steps": [
+      {
+        "title": "选择视图",
+        "body": "军事看军团和组织，粮食看仓粮、日耗、收成与运输，方面看组织划分，名义与实控分开。",
+        "branch": ""
+      },
+      {
+        "title": "取得情报",
+        "body": "主动侦察、调查和定期边境侦察提升相关城市、军队、路线、人物或地形知识。",
+        "branch": ""
+      },
+      {
+        "title": "按精度显示",
+        "body": "本方与观察者可看精确值；敌军、库存、人口等根据情报隐藏、估计或分档。",
+        "branch": "郡中还有未探明县时不把全郡库存直接精确揭示。"
+      },
+      {
+        "title": "只读悬停",
+        "body": "预报可用天数、下次收获、受阻货物和军队数；读取不扣粮、不消耗随机数。",
+        "branch": ""
+      },
+      {
+        "title": "点击跳转",
+        "body": "城市、郡、军团、人物和家族支持详情跳转，组织图进入对应方面详情。",
+        "branch": ""
+      },
+      {
+        "title": "刷新归属与图例",
+        "body": "换主公、改隶、任命和据点易主后按当前数据生成名称与图例，不使用过期领导人标签。",
+        "branch": ""
+      }
+    ],
+    "loop": "侦察 → 知识状态 → 分层展示和提示 → 据情报下令 → 新变化后再次侦察。",
+    "links": [
+      "warDetail",
+      "armySupplyDetail",
+      "officeDetail",
+      "mapDetail"
+    ],
+    "sources": [
+      "js/ui/map-view.js",
+      "js/core/rule-engine.js",
+      "js/ui/app.js"
+    ],
+    "notes": [
+      "这页是规则说明，不读取当前游戏存档，不会因为打开流程图而揭示玩家战局中的敌军。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "explore",
+        "name": "探索"
+      },
+      {
+        "id": "scout_city",
+        "name": "城市侦察"
+      },
+      {
+        "id": "scout_army",
+        "name": "军队侦察"
+      },
+      {
+        "id": "investigate_person",
+        "name": "人物调查"
+      },
+      {
+        "id": "investigate_route",
+        "name": "路线调查"
+      },
+      {
+        "id": "investigate_terrain",
+        "name": "地形调查"
+      }
+    ]
+  },
+  {
+    "id": "saveDetail",
+    "group": "情报、保存与终局",
+    "title": "自动保存、读档与兼容迁移",
+    "pace": [
+      "due",
+      "manual",
+      "daily"
+    ],
+    "intro": "存档保存任务过程和随机状态；重新打开应继续过程，而不是把未完成任务再做一遍。",
+    "entry": "主菜单／游戏保存／导入导出",
+    "steps": [
+      {
+        "title": "判断保存边界",
+        "body": "可按日、每十日、月、季或年保存；跨日时先按当日边界判断，再安排后台空闲写入。",
+        "branch": ""
+      },
+      {
+        "title": "序列化动态世界",
+        "body": "保存军团与实际位置、伤散俘、县库军仓、在途货物、工程、人口家族、朝局幕府、事件及外交接收状态。",
+        "branch": ""
+      },
+      {
+        "title": "写入持久存储",
+        "body": "按当前静态托管或本地服务条件使用对应保存来源，保留槽位、元数据及适用的恢复记录。",
+        "branch": "保存失败不宣称成功；导入和恢复仍需格式与版本校验。"
+      },
+      {
+        "title": "兼容旧版本",
+        "body": "补可选字段和时间口径；只执行适用的一次性迁移，不按新局标准重建兵粮。",
+        "branch": ""
+      },
+      {
+        "title": "恢复持续任务",
+        "body": "使用运输余程、战场编号、围城起日、迁移人口包、提案随机结果及接收完成标志续算。",
+        "branch": ""
+      },
+      {
+        "title": "恢复界面与随机序列",
+        "body": "还原同一战局和桌面，后续随机使用存档状态；预览和刷新不重掷外交。",
+        "branch": ""
+      }
+    ],
+    "loop": "当前状态 → 保存快照 → 版本迁移与恢复 → 继续原任务 → 下一次保存；完成标记防止重复交粮或接收。",
+    "links": [
+      "startupDetail",
+      "shipmentDetail",
+      "receptionDetail",
+      "familyMigrationDetail"
+    ],
+    "sources": [
+      "js/core/game-state.js",
+      "js/core/game-clock.js",
+      "js/ui/app.js"
+    ],
+    "notes": [
+      "较早存档的主动回滚不等同重放当前快照；此页不声称绝对杜绝所有回档改运。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "mapDetail",
+    "group": "情报、保存与终局",
+    "title": "地图编辑、定稿与游戏边界",
+    "pace": [
+      "manual"
+    ],
+    "intro": "编辑器保持独立业务；行政归属、道路与玩法必须适配用户定稿地形。",
+    "entry": "主菜单 → 地图编辑器；保存／导出／撤销",
+    "steps": [
+      {
+        "title": "主动打开才初始化",
+        "body": "游玩只读取所需战局数据，进入编辑器才初始化编辑能力。",
+        "branch": ""
+      },
+      {
+        "title": "以当前地形判海陆",
+        "body": "编辑中的当前地形是陆海依据；维护流程不从旧图或历史像素掩膜倒灌覆盖。",
+        "branch": ""
+      },
+      {
+        "title": "郡域落在陆地",
+        "body": "行政校验限制郡域在当前陆地格，州域由整郡属州关系自动合成。",
+        "branch": "没有另一套独立手绘州界；不为补区划而填海或修海岸。"
+      },
+      {
+        "title": "编辑道路河流与结点",
+        "body": "用户主动修改保持可编辑和可撤销，校验提示适配定稿地形。",
+        "branch": ""
+      },
+      {
+        "title": "保存与导出",
+        "body": "浏览器保存、草稿和导出有各自版本；战局地图与仓库默认地图不能互相冒充最新定稿。",
+        "branch": ""
+      },
+      {
+        "title": "加载后用于玩法",
+        "body": "玩家选择使用的数据进入新局；正在进行的战局按自身存档恢复，不擅自替换海陆。",
+        "branch": ""
+      }
+    ],
+    "loop": "主动编辑 → 校验 → 撤销或继续 → 保存／导出 → 明确选择后用于新局。",
+    "links": [
+      "startupDetail",
+      "saveDetail",
+      "intelDetail"
+    ],
+    "sources": [
+      "js/ui/map-editor.js",
+      "js/core/data-loader.js",
+      "docs/MAP_EDITOR.md"
+    ],
+    "notes": [
+      "本次流程图更新只改说明页面，不修改地形、海岸线、郡界、道路或用户存档。"
+    ],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "victoryDetail",
+    "group": "情报、保存与终局",
+    "title": "灭亡、区域霸权与政治统一",
+    "pace": [
+      "daily",
+      "monthly",
+      "due"
+    ],
+    "intro": "军事统一、区域霸权和政治统一是不同目标；政治胜利要维持稳定，不只看一次人口占比。",
+    "entry": "开局设置／外交 → 战局目标；终局 → 继续游戏",
+    "steps": [
+      {
+        "title": "每日检查势力存续",
+        "body": "失城后仍有真实拒降部队的集团不直接清空；彻底无立足和军队等灭亡条件按规则处理。",
+        "branch": ""
+      },
+      {
+        "title": "军事统一",
+        "body": "沿用现有军事终局条件，所有主要抵抗被消除后判定；不是强制释放附庸再重打一遍。",
+        "branch": ""
+      },
+      {
+        "title": "月末区域评估",
+        "body": "控制剧本区域足够份额且相比开局有实际增益，记录区域霸权阶段成果。",
+        "branch": "避免开局已有大地盘就当日直接胜利。"
+      },
+      {
+        "title": "月末政治评估",
+        "body": "默认稳定集团人口80%、关键据点60%，其他大集团与其处于有效和平；新附庸至少稳定60日，低忠诚和围城地不直接计入。",
+        "branch": ""
+      },
+      {
+        "title": "持续稳定期",
+        "body": "条件满足后累计180日；条件破坏会取消当前稳定候选，不能攒零碎满足天数取巧。",
+        "branch": ""
+      },
+      {
+        "title": "胜负或继续",
+        "body": "达到选定目标显示结果；阶段目标完成可选择继续，转为军事统一而不重建世界。",
+        "branch": ""
+      }
+    ],
+    "loop": "领土与宗属变化 → 月度评估 → 成果或稳定期 → 条件维持／打断 → 终局或继续征服。",
+    "links": [
+      "vassalDetail",
+      "receptionDetail",
+      "worldDetail",
+      "saveDetail"
+    ],
+    "sources": [
+      "js/core/engine/politics.js",
+      "js/core/rule-engine.js",
+      "js/ui/app.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "talentDetail",
+    "group": "家族与人物",
+    "title": "访才、荐举、登庸、奖惩与宝物",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "先让人才进入可识别名单，再判断能否招募；家族无名门生另有任职入口。",
+    "entry": "人物／命令簿 → 人才任用",
+    "steps": [
+      {
+        "title": "搜索与推荐",
+        "body": "搜索在目标据点寻找隐藏人物，推荐由本方在仕者引荐未仕者；费用、功曹效果、相性和概率影响结果。",
+        "branch": "搜到不等于已经入仕；未出生、死亡或尚未到登场期者不能被直接招出。"
+      },
+      {
+        "title": "形成可登庸候选",
+        "body": "隐藏人物被发现后进入已发现名单；在野及本方控制的俘虏也可成为合法对象。",
+        "branch": ""
+      },
+      {
+        "title": "尝试登庸或挖角",
+        "body": "登庸检查所属状态和费用；俘将有拒降机会。挖角敌方在仕者看忠诚，失败可提高对方警觉。",
+        "branch": ""
+      },
+      {
+        "title": "调任、召回与放逐",
+        "body": "非随军人物按可用目标调任；随军任职者须先解除或换人，不能一边随军一边被调走。",
+        "branch": ""
+      },
+      {
+        "title": "奖惩与授宝",
+        "body": "奖赏、惩罚、授予或没收宝物改变钱财、功绩、忠诚或持有关系，宝物属于具体人物。",
+        "branch": ""
+      },
+      {
+        "title": "进入后续任职",
+        "body": "成功招募者进入可用人物，再安排官职和军职；忠诚月结和家族影响继续跟踪。",
+        "branch": ""
+      }
+    ],
+    "loop": "发现 → 招募 → 任职与待遇 → 忠诚变化 → 留任、离去或重新招揽。",
+    "links": [
+      "peopleDetail",
+      "relationshipDetail",
+      "officeDetail",
+      "familyDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/fiscal-system.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "search_talent",
+        "name": "搜索人才"
+      },
+      {
+        "id": "recruit_officer",
+        "name": "登庸"
+      },
+      {
+        "id": "release_prisoner",
+        "name": "释放俘虏"
+      },
+      {
+        "id": "poach_officer",
+        "name": "挖角"
+      },
+      {
+        "id": "transfer_officer",
+        "name": "调任"
+      },
+      {
+        "id": "recall_officer",
+        "name": "召回"
+      },
+      {
+        "id": "exile_officer",
+        "name": "放逐"
+      },
+      {
+        "id": "reward_officer",
+        "name": "赏赐"
+      },
+      {
+        "id": "punish_officer",
+        "name": "惩罚"
+      },
+      {
+        "id": "grant_item",
+        "name": "授予宝物"
+      },
+      {
+        "id": "confiscate_item",
+        "name": "没收宝物"
+      }
+    ]
+  },
+  {
+    "id": "relationshipDetail",
+    "group": "家族与人物",
+    "title": "拜访、宴请、结义、婚姻与荐举",
+    "pace": [
+      "manual",
+      "monthly"
+    ],
+    "intro": "人物私人关系和势力外交好感分开保存；二者不能互相冒充。",
+    "entry": "命令簿 → 人际；人物详情",
+    "steps": [
+      {
+        "title": "确认双方身份",
+        "body": "普通人际行动需要本方在仕人物；推荐未仕人才是单独分支。",
+        "branch": ""
+      },
+      {
+        "title": "占用当日个人行动",
+        "body": "同一发起人物当天已有关系或个人行动时拒绝重复安排。",
+        "branch": ""
+      },
+      {
+        "title": "检查关系和费用",
+        "body": "拜访、宴请与赠礼有各自成本；结义、婚姻要求已有足够关系。",
+        "branch": "个人婚姻记录双方配偶，势力政治联姻则走另一条外交规则。"
+      },
+      {
+        "title": "根据相性增益",
+        "body": "关系增长受相性影响，保存人物对的关系值；结义和婚姻还保存双方联结。",
+        "branch": ""
+      },
+      {
+        "title": "影响忠诚与举荐",
+        "body": "人际往来可改善忠诚；推荐按相性、魅力和成功判断揭示人才，不直接完成登庸。",
+        "branch": ""
+      },
+      {
+        "title": "月度人物变化",
+        "body": "月末忠诚读取关系和职位等修正，后续继续经营或处理离心。",
+        "branch": ""
+      }
+    ],
+    "loop": "往来 → 关系提高 → 更深联结或推荐 → 忠诚与人才结构改变 → 新的人际行动。",
+    "links": [
+      "talentDetail",
+      "peopleDetail",
+      "classicDiplomacyDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/game-state.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "visit",
+        "name": "拜访"
+      },
+      {
+        "id": "banquet",
+        "name": "宴请"
+      },
+      {
+        "id": "give_gift",
+        "name": "赠礼"
+      },
+      {
+        "id": "sworn_brotherhood",
+        "name": "结义"
+      },
+      {
+        "id": "marriage",
+        "name": "婚姻"
+      },
+      {
+        "id": "recommend",
+        "name": "推荐"
+      }
+    ]
+  },
+  {
+    "id": "personalDetail",
+    "group": "家族与人物",
+    "title": "学习、训练、调查与体力恢复",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "个人行动按当日命令执行，消耗体力；个人旅行当前是简化位置变更，不是家眷或军团的逐日行军。",
+    "entry": "人物／命令簿 → 人物个人",
+    "steps": [
+      {
+        "title": "选择本方在仕者",
+        "body": "非在仕、非本方或被其他规则限制的人物不可发起。",
+        "branch": ""
+      },
+      {
+        "title": "检查体力与行动额度",
+        "body": "学习、训练、旅行和调查需足够体力；当日与人际行动共用发起者限制。",
+        "branch": ""
+      },
+      {
+        "title": "学习或个人训练",
+        "body": "增加对应智力或武力与经验并扣体力，能力受上限约束。",
+        "branch": ""
+      },
+      {
+        "title": "旅行和调查分支",
+        "body": "个人旅行改变所选目标位置，个人调查提高相关城市情报；随军人物不得用旅行脱离实际军职。",
+        "branch": "当前个人旅行未模拟道路时间，不应把它当成军团或家眷的运输流程。"
+      },
+      {
+        "title": "休息恢复",
+        "body": "休息恢复体力，上限封顶；之后才适合安排新的体力行动。",
+        "branch": ""
+      }
+    ],
+    "loop": "体力充足 → 个人行动 → 能力／情报变化并疲劳 → 休息 → 后续行动。",
+    "links": [
+      "relationshipDetail",
+      "talentDetail",
+      "intelDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/game-state.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "study",
+        "name": "学习"
+      },
+      {
+        "id": "personal_training",
+        "name": "训练"
+      },
+      {
+        "id": "travel",
+        "name": "旅行"
+      },
+      {
+        "id": "personal_investigation",
+        "name": "调查"
+      },
+      {
+        "id": "rest",
+        "name": "休息"
+      }
+    ]
+  },
+  {
+    "id": "tradeDetail",
+    "group": "财政与粮运",
+    "title": "买卖粮食、粮价与财政周转",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "买卖是府库交易入口，中央买到粮之后仍要解决前线运输；卖粮有折价。",
+    "entry": "命令簿 → 商业财政 → 买粮／卖粮",
+    "steps": [
+      {
+        "title": "读取当前粮价",
+        "body": "粮价由当前粮食、人口及相关规则计算；不是窗口打开时永远锁死的价格。",
+        "branch": ""
+      },
+      {
+        "title": "选数量并排队",
+        "body": "买卖数量与其他命令共用当日队列，执行时才按当时粮价计算。",
+        "branch": ""
+      },
+      {
+        "title": "买粮支钱入中央",
+        "body": "检查中央钱足够后扣钱、增加中央粮；不足写明失败，不借贷增发。",
+        "branch": ""
+      },
+      {
+        "title": "卖粮扣中央粮",
+        "body": "检查中央库存后扣粮并按折价收入钱；买卖价差避免原价来回交易获利。",
+        "branch": ""
+      },
+      {
+        "title": "转为实际用途",
+        "body": "买到的中央粮可用于财政安排和济运；本地或军队是否能吃到仍看路线与运输。",
+        "branch": ""
+      }
+    ],
+    "loop": "粮食紧缺 → 卖出其他资源或用钱买粮 → 中央持粮 → 实际调运 → 消耗与下一次交易评估。",
+    "links": [
+      "economyDetail",
+      "reliefDetail",
+      "shipmentDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js"
+    ],
+    "notes": [
+      "当前交易是规则化府库增减，不模拟商人队伍从市场逐格运输。"
+    ],
+    "formula": "买粮支出 = ceil(数量 × 当前粮价)；卖粮收入 = floor(数量 × 当前粮价 × 0.75)",
+    "commands": [
+      {
+        "id": "buy_food",
+        "name": "买粮"
+      },
+      {
+        "id": "sell_food",
+        "name": "卖粮"
+      }
+    ]
+  },
+  {
+    "id": "technologyDetail",
+    "group": "地方与人口",
+    "title": "研究、改革、推广与建筑收益",
+    "pace": [
+      "manual",
+      "tenday"
+    ],
+    "intro": "研究先积技术点，改革花点升级分支，推广再作用于具体城市；粮政改革是政策分支。",
+    "entry": "命令簿 → 制度科技；城市 → 建筑",
+    "steps": [
+      {
+        "title": "获取技术点",
+        "body": "研究花中央钱获得技术点，学宫及适用势力特性也在战略效果周期产点。",
+        "branch": ""
+      },
+      {
+        "title": "选择改革分支",
+        "body": "按科技树检查消耗和最高级别，再扣点提升农业、军事、后勤或吏治等分支。",
+        "branch": "已满级或点数不足不会重复升级。"
+      },
+      {
+        "title": "粮政改革分流",
+        "body": "指定就近调运、中央统筹或郡县自给时更新取粮政策；三者仍保留中央济粮的实际运输。",
+        "branch": ""
+      },
+      {
+        "title": "城市技术推广",
+        "body": "选己方城市并花技术点增加本地技术记录，不等于所有分支同时升一级。",
+        "branch": ""
+      },
+      {
+        "title": "十日战略效果",
+        "body": "当前接入的军事战力、后勤及建筑效果按各入口生效；被围城市不照常领取普通建设收益。",
+        "branch": ""
+      },
+      {
+        "title": "长期投资再评估",
+        "body": "建设、学宫产点、改革与实际战备形成循环，效果以当前规则接入项为准。",
+        "branch": ""
+      }
+    ],
+    "loop": "钱财和建筑 → 技术点 → 分支改革／地方推广 → 相关效率与战备 → 更多可用资源。",
+    "links": [
+      "projectDetail",
+      "adminDetail",
+      "armySupplyDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "game/data/common/game_rules.json"
+    ],
+    "notes": [
+      "科技树名称不代表已经实现无限种独立加成；具体效果以现有结算入口为准。"
+    ],
+    "formula": "",
+    "commands": [
+      {
+        "id": "research",
+        "name": "研究"
+      },
+      {
+        "id": "reform",
+        "name": "改革"
+      },
+      {
+        "id": "promote_technology",
+        "name": "技术推广"
+      }
+    ]
+  },
+  {
+    "id": "schemesDetail",
+    "group": "战略与外交",
+    "title": "情报行动、反间谍与谋略",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "先有准确对象和情报，再做离间、煽动或策反；一次潜入成功不代表所有目标条件都已满足。",
+    "entry": "命令簿 → 侦察谋划／治安司法",
+    "steps": [
+      {
+        "title": "侦察具体对象",
+        "body": "花费调查费用，按城市、军队、人物、路线或地形提升对应情报，等级封顶。",
+        "branch": ""
+      },
+      {
+        "title": "设置反间谍",
+        "body": "提高本方反间谍记录等级；这是当前规则字段，具体抵抗效果取决于相应行动是否读取。",
+        "branch": ""
+      },
+      {
+        "title": "选择谋略分支",
+        "body": "离间和收买针对人物忠诚；煽动和谣言针对城市治安；内通提升情报；破坏打击城防与守军。",
+        "branch": ""
+      },
+      {
+        "title": "支付与成功判断",
+        "body": "收买有额外资金条件，谋略成功率读取当前目标情报并有上限。",
+        "branch": "失败记录警觉；潜入成功但无合法目标或不足以策反时仍不改变归属。"
+      },
+      {
+        "title": "策反再查忠诚",
+        "body": "人物须低忠诚等条件才转属；并不是有一次成功骰就必定策反高忠诚大将。",
+        "branch": ""
+      },
+      {
+        "title": "让后续系统读结果",
+        "body": "治安、城防、人物忠诚或所属变化进入下一轮治理、招募与战斗判断。",
+        "branch": ""
+      }
+    ],
+    "loop": "取得情报 → 选谋略并承担失败风险 → 改变局部条件 → 战斗／招募／再次谋划。",
+    "links": [
+      "intelDetail",
+      "talentDetail",
+      "siegeDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "counterintelligence",
+        "name": "反间谍"
+      },
+      {
+        "id": "sow_discord",
+        "name": "离间"
+      },
+      {
+        "id": "bribe",
+        "name": "收买"
+      },
+      {
+        "id": "incite",
+        "name": "煽动"
+      },
+      {
+        "id": "establish_inside_contact",
+        "name": "内通"
+      },
+      {
+        "id": "sabotage",
+        "name": "破坏"
+      },
+      {
+        "id": "spread_rumor",
+        "name": "散布谣言"
+      },
+      {
+        "id": "instigate_defection",
+        "name": "策反"
+      }
+    ]
+  },
+  {
+    "id": "classicDiplomacyDetail",
+    "group": "战略与外交",
+    "title": "亲善、联盟、参战、联姻与交换",
+    "pace": [
+      "manual",
+      "monthly",
+      "due"
+    ],
+    "intro": "普通外交仍存在，与新归降谈判、朝廷诏令和真实军队协同要分清。",
+    "entry": "命令簿 → 外交交涉；外交关系网络",
+    "steps": [
+      {
+        "title": "建立关系",
+        "body": "亲善扣钱提高势力好感，互不侵犯、同盟与联军各有关系门槛和有效期。",
+        "branch": ""
+      },
+      {
+        "title": "明确中央战和",
+        "body": "主动宣战属于中央决定；在新模式中，臣属和有效和约还要经统一战争规则检查。",
+        "branch": ""
+      },
+      {
+        "title": "请求参战与联军",
+        "body": "指定第三方敌国，建立参战支持或联盟记录；真实联军的集结与调动由协同系统继续推进。",
+        "branch": ""
+      },
+      {
+        "title": "区分请求援军",
+        "body": "旧命令“请求援军”当前采用抽象的守军增量及关系代价；它与盟军真实军团行军不是同一种实现。",
+        "branch": ""
+      },
+      {
+        "title": "交换和政治联姻",
+        "body": "土地交换校验双方城池与关系；金粮交换为简化的支出／关系效果；政治联姻形成势力条约。",
+        "branch": "这些旧交换没有统一走新谈判的冻结款项、使者等待和实际粮车，不把它们描述成完全相同的接收事务。"
+      },
+      {
+        "title": "按模式选择求和或归降",
+        "body": "启用战役政治后，相应交涉走新状态机；传统规则保留旧入口。",
+        "branch": ""
+      }
+    ],
+    "loop": "改善关系 → 条约和支援 → 共同敌人或利益变化 → 到期、停战、毁约与重议。",
+    "links": [
+      "worldDetail",
+      "campaignDetail",
+      "courtDetail",
+      "relationshipDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/engine/diplomacy.js",
+      "js/core/engine/politics.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "improve_relations",
+        "name": "亲善"
+      },
+      {
+        "id": "non_aggression",
+        "name": "互不侵犯"
+      },
+      {
+        "id": "alliance",
+        "name": "同盟"
+      },
+      {
+        "id": "coalition",
+        "name": "联军"
+      },
+      {
+        "id": "request_reinforcements",
+        "name": "请求援军"
+      },
+      {
+        "id": "request_war_entry",
+        "name": "请求参战"
+      },
+      {
+        "id": "exchange_land",
+        "name": "土地交换"
+      },
+      {
+        "id": "exchange_gold",
+        "name": "金钱交换"
+      },
+      {
+        "id": "exchange_food",
+        "name": "粮食交换"
+      },
+      {
+        "id": "political_marriage",
+        "name": "联姻"
+      },
+      {
+        "id": "set_diplomatic_policy",
+        "name": "设置外交方针"
+      }
+    ]
+  },
+  {
+    "id": "doctrineDetail",
+    "group": "军队与战场",
+    "title": "兵种、阵法、战术、军职与掠夺",
+    "pace": [
+      "manual",
+      "daily"
+    ],
+    "intro": "配置改变后续战力和行动条件，不能把战术名称当成无代价必胜按钮。",
+    "entry": "军团详情 → 编制／战法／军职；命令簿 → 驻防作战",
+    "steps": [
+      {
+        "title": "校验编制合计",
+        "body": "步骑弩数量须为非负整数且合计等于现有健卒；改编不是凭空增加兵力。",
+        "branch": ""
+      },
+      {
+        "title": "配置阵法与战术",
+        "body": "选择当前已登记的阵法、战术和撤退线；影响接战、战力与脱离判断。",
+        "branch": ""
+      },
+      {
+        "title": "实际军职任人",
+        "body": "主将、副将、军师、军需等须满足同属、状态和实际驻地要求，职务改变影响指挥、粮需与训练。",
+        "branch": ""
+      },
+      {
+        "title": "休整、扎营和伏击",
+        "body": "军团的行军、败退、围城状态限制能否扎营或伏击；相应状态只在真实位置起效。",
+        "branch": ""
+      },
+      {
+        "title": "战法与地形生效",
+        "body": "战斗读取兵种、地形、指挥和战法积累；组织和粮情同时影响表现。",
+        "branch": ""
+      },
+      {
+        "title": "掠夺与探索分支",
+        "body": "探索周边可提升情报并损补给；旧掠夺命令直接从相邻目标县库转移有限钱粮并降治安与自身士气。",
+        "branch": "普通掠夺命令与逐格小队袭扰粮道是不同入口，不能把选中任意远城当成已派出小队。"
+      }
+    ],
+    "loop": "编制与任职 → 行动状态 → 战斗与物资结果 → 士气组织和人员变化 → 调整编制再行动。",
+    "links": [
+      "armyBuildDetail",
+      "battleDetail",
+      "armySupplyDetail",
+      "skirmishDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/engine/battle.js",
+      "js/core/engine/army-offices.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "set_leader",
+        "name": "设置负责人"
+      },
+      {
+        "id": "raid",
+        "name": "掠夺"
+      }
+    ]
+  },
+  {
+    "id": "advisorDetail",
+    "group": "情报、保存与终局",
+    "title": "手动、军师建议、托管与史官",
+    "pace": [
+      "manual",
+      "monthly",
+      "quarterly",
+      "due"
+    ],
+    "intro": "规则AI日常诸侯决策不依赖外部模型；军师连接是可选的建议或托管层。",
+    "entry": "军师窗口／设置 → 模式、连接与史官",
+    "steps": [
+      {
+        "title": "选择控制模式",
+        "body": "纯手动直接用命令簿；建议模式生成提议；托管按许可把提议送进普通队列。",
+        "branch": ""
+      },
+      {
+        "title": "提供受限上下文",
+        "body": "按玩家已有情报给出局势、资源、近期命令及执行结果，不借军师显示全部隐藏数据。",
+        "branch": ""
+      },
+      {
+        "title": "连接并请求建议",
+        "body": "外部服务可用才发起请求；未连接或错误时保留手动玩法。",
+        "branch": "本流程图页面本身不发任何模型请求。"
+      },
+      {
+        "title": "核验生成命令",
+        "body": "识别目录、参数和对象，再交统一规则验证；队列满、权限不足、重复或目标错误都会失败。",
+        "branch": ""
+      },
+      {
+        "title": "按结果调整",
+        "body": "已规划路线不等于军团已抵达，军师需要读取实际日报与失败原因，不能盲目复读旧命令。",
+        "branch": ""
+      },
+      {
+        "title": "可选史官记录",
+        "body": "按月本方、按季度天下整理纪事；文字记录不直接修改战局，连接与开关仍由玩家控制。",
+        "branch": ""
+      }
+    ],
+    "loop": "局势和结果 → 军师提议 → 规则队列 → 真正执行与反馈 → 下次提议；关闭连接仍可手动继续。",
+    "links": [
+      "ordersDetail",
+      "intelDetail",
+      "eventDetail"
+    ],
+    "sources": [
+      "js/core/ai-controller.js",
+      "js/core/ai-bridge.js",
+      "js/core/mcp-adapter.js",
+      "js/ui/app/ai-panel.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "officeLoadDetail",
+    "group": "官制与朝局",
+    "title": "兼任负荷、治理能力与专职效果",
+    "pace": [
+      "manual",
+      "tenday",
+      "due"
+    ],
+    "intro": "官员有能力也有事务容量，兼任过多会降效；郡县、中枢与军职各有不同负担。",
+    "entry": "官署／幕府／人物详情 → 事务与能力",
+    "steps": [
+      {
+        "title": "读取基础能力",
+        "body": "不同事务使用政治、统率、智力、魅力或武力的对应组合；默认及格基准由规则决定。",
+        "branch": ""
+      },
+      {
+        "title": "计算真实任务负荷",
+        "body": "人口、辖县、军团、兵力、兼任、临时督查、围困、灾害和被阻运输等形成负担。",
+        "branch": ""
+      },
+      {
+        "title": "算容量与效率",
+        "body": "容量受人物能力与负伤影响；80%以内通常满效，接近满载下降，超载继续递减但不直接停工。",
+        "branch": ""
+      },
+      {
+        "title": "合成事务分数",
+        "body": "县廷执行、郡府组织、州府和幕府目标按事务权重合成，不能只看一个太守的原始政治。",
+        "branch": ""
+      },
+      {
+        "title": "传递专职效果",
+        "body": "户籍登记、征募、训练、粮运耗时与损耗、济粮提前量等读取相应官员效果。",
+        "branch": "高能力度支可按运程放宽济粮触发，并非所有县都固定30日才发；空缺有默认代理而非全系统停止。"
+      },
+      {
+        "title": "任免或调度后重算",
+        "body": "任免即时失效缓存，行政周期重建必要负荷；拆分辖区或配置佐吏可缓解过劳。",
+        "branch": ""
+      }
+    ],
+    "loop": "职位与任务 → 负荷 → 有效能力 → 地方产出、运输和军务 → 局势改变再调整职位。",
+    "links": [
+      "officeDetail",
+      "commandDetail",
+      "adminDetail",
+      "reliefDetail"
+    ],
+    "sources": [
+      "js/core/engine/offices.js",
+      "js/core/engine/office-effects.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": []
+  },
+  {
+    "id": "armyBuildDetail",
+    "group": "军队与战场",
+    "title": "征募、编军、补员、归还与解散",
+    "pace": [
+      "manual",
+      "daily",
+      "tenday"
+    ],
+    "intro": "民户、守军与独立军团是三个阶段，训练目标也不等于当场增加健卒。",
+    "entry": "城市 → 募兵；军团 → 编制／补员／归还驻军",
+    "steps": [
+      {
+        "title": "设征募目标",
+        "body": "征兵不是点一次全国加一份兵：按本地目标、登记兵源、官员及地方钱粮逐步征募。",
+        "branch": ""
+      },
+      {
+        "title": "从真实兵源编军",
+        "body": "在合法驻地按范围抽守军与可用人物编军，留下守城底数并支付费用。",
+        "branch": ""
+      },
+      {
+        "title": "建立军资与军职",
+        "body": "新军有自己的兵种、训练、士气、军仓与主将，不复制另一军团的所有资源和人物。",
+        "branch": ""
+      },
+      {
+        "title": "设补员和训练目标",
+        "body": "安全驻城后从可用守军抽补；驻地级别决定本地、本郡或本州范围，伤员计入已有编制缺口。",
+        "branch": ""
+      },
+      {
+        "title": "归还驻军或合队",
+        "body": "归还接受实际正整数，军团至少保留100健卒；合队要求位置和状态可兼容，再合并真实兵员军资。",
+        "branch": ""
+      },
+      {
+        "title": "解散移交",
+        "body": "安全驻城且没有伤员、溃散待归等未结人员时解散；健卒进守军，物资与战俘交地方。",
+        "branch": "还在行军、野外、被围或交战时不能靠解散跳过人员去向和军粮结算。"
+      }
+    ],
+    "loop": "民户征募 → 地方守军 → 编成军团 → 训练和补员 → 战损／归还／合队／解散 → 再分配兵源。",
+    "links": [
+      "adminDetail",
+      "populationDetail",
+      "medicalDetail",
+      "doctrineDetail"
+    ],
+    "sources": [
+      "js/core/rule-engine.js",
+      "js/core/engine/administration.js",
+      "js/core/engine/skirmish.js"
+    ],
+    "notes": [],
+    "formula": "",
+    "commands": [
+      {
+        "id": "form_army",
+        "name": "编军"
+      },
+      {
+        "id": "reorganize_army",
+        "name": "改编"
+      },
+      {
+        "id": "return_garrison",
+        "name": "归还驻军"
+      },
+      {
+        "id": "disband_army",
+        "name": "解散"
+      },
+      {
+        "id": "reinforce",
+        "name": "补员"
+      },
+      {
+        "id": "redeploy",
+        "name": "调兵"
+      },
+      {
+        "id": "assemble",
+        "name": "集结"
+      }
+    ]
+  }
+]</script>
+<script>
+(()=>{
+'use strict';
+const modules=JSON.parse(document.getElementById('flow-data').textContent),byId=new Map(modules.map(m=>[m.id,m])),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),paceNames={daily:'每日',tenday:'每十日',monthly:'按月',quarterly:'按季',yearly:'按年／秋收',due:'到期触发',manual:'主动操作',newgame:'新局初始化'},$=id=>document.getElementById(id),jump=(id,label)=>`<a href="#${esc(id)}" data-detail-target="${esc(id)}">${esc(label||byId.get(id)?.title||id)}</a>`;
+const phases=[
+['整理当日状态','同步军职位置，清到期条约，处理占领管制并审查围城。','worldDetail'],
+['财政与运输','先推进已有货物、工程；累积生产、征收和地方开支，再检查粮线、济粮。','economyDetail'],
+['天下与朝局','到相应周期才更新战略效果、边境侦察、外交、联盟及朝廷；每日处理到期事项。','courtDetail'],
+['执行命令队列','按先后顺序验证，记录成功或失败；建立的持续任务由后续阶段接管。','ordersDetail'],
+['地方行政与恢复','每日轮到的一组城市发展；每十日行政调度、休整、围城回应及到期人物动态。','adminDetail'],
+['诸侯与方面决策','小队与诸侯概率行动；每十日方面执行，月内5日中枢AI调度。','aiDetail'],
+['行军与持续野战','先推进已有战场、野外小队和追击，再走大军路段并处理新接战。','warDetail'],
+['粮队与军需','推进军用粮队、处理前进仓、实际扣军粮；来源与在途不能重复记。','armySupplyDetail'],
+['每日围城','工事、粮食、城防与士气逐日变化，检查破城、投降和撤围。','siegeDetail'],
+['组织、医疗与俘虏','恢复或消耗组织，处理伤员、溃散归建和战俘，保留真实兵员去向。','medicalDetail'],
+['人口与家眷','记粮荒战乱压力；当日一组地方人口月结，25日家族月结，在途家眷每日推进。','populationDetail'],
+['事件、政治与终局','季度形势、天下／玩家事件，再处理交涉、招抚、附庸及胜利，最后同步军职位置。','eventDetail'],
+['日报与跨日','存当日报告及资源差额，清已执行命令，日期加一，更新人物生命周期与继承。','peopleDetail'],
+['刷新与保存','通知窗口更新，按已选周期安排自动保存；有抉择或终局则停下等待。','saveDetail'],
+['玩家读取与调整','从当前战报、粮情、组织和外交结果找原因，规划下一批合法命令。','intelDetail'],
+['回到下一日','播放仍在继续就回到整理状态；暂停则保留全部在途和持续任务等待。','clockDetail']
+];
+const schedule=[
+['每日','财政生产与开支、路段行军、持续野战与围城、粮队军需、人口压力、迁移、到期提案。','每天都检查，但有条件才行动；没有摘要不等于没有进度。'],
+['每五日','中央自动济粮复核；普通触发基准30日粮，目标90日，受在途、仓容、留底和道路限制。','粮在途或道路被围，就不会瞬移补入；指定粮线仓由专线优先管理。'],
+['十组轮转','地方行政发展按稳定分组，每日处理一组；不是全城每天都加农商。','一座城市需等自己的批次，发展进度达阈值才涨数值。'],
+['每十日','每月10日、20日及月末：战略效果、边境侦察、方面执行、行政汇总与安全驻军恢复等；募兵训练按各城轮转批次推进。','恢复、征募、补员要有实际驻地、钱粮与兵源，围城不会只等这天才打。'],
+['月内5日','正常逐日运行的中枢AI月度调度。','军团战术和已有行军仍每日推进，不是全国只有每月5日行动。'],
+['月内15日','世界外交、共同敌人关系、联盟等月度判断。','停战期限、手动宣战、正式诏令和战役提案仍可在其他日期处理。'],
+['月内25日','世家／家族月结；季度月份同时处理门生增长、招附和县吏重评。','不是每一天都扫描全部家族；家宅在途仍每日移动。'],
+['各地月度批次','人口每处每月一次，按稳定的1—28日分组；非粮税也有各城自己的征收检查日。','同为“按月”，各城到账和人口变化日期也可能不同。'],
+['月末','朝廷月度重算、方面忠诚与报告、符合条件的人物动态；新附庸贡赋与整合，政治胜利评估。','月末前生效的任命和实际位置仍即时／逐日同步，不用等月末看新太守。'],
+['季度月份／季度末','季度月份的地方人口批次处理婚户与依附；家族25日检查招附；季度末汇总天下形势。','“每季”不代表所有系统同一天；计划招附到实际处理时还要再查资格。'],
+['九月月末／年内','统一九月月末秋收；12月各地人口月结有年龄组转移；人物生卒按现有年份规则检查。','田间累计尚不是县仓可用粮；地区多熟制作物历尚未模拟。'],
+['到期或重大事件','答复默认5／10日，招抚默认10／20日；战略通常30日复核，失城、停战等可提前失效。','守军够强仍会拒降；快速整合缩短响应周期，不保证历史赢家。'],
+['政治稳定期','新附庸默认稳定60日才计入稳定集团；政治统一满足份额和和平条件后还需180日。','条件破坏会打断稳定候选；整合基期不是倒计时到零强制兼并。'],
+['按保存设置','每日、每十日、月、季或年触发自动保存；写入可安排在空闲时段。','按日推进不等于每个存档槽位每天必写；以选择的周期和保存状态为准。']
+];
+const cycles=[
+['农业与战争','人口、农业、劳力 → 田间累计 → 秋收征粮 → 县仓／中央／运输 → 军队作战 → 战乱与劳力损失 → 影响下一季生产','攻城胜利不能替代持续供粮，长期战乱会把生产与兵源一起拖低。',['grainDetail','armySupplyDetail','populationDetail']],
+['前线粮食','县仓消耗 → 查已派在途 → 后方粮线／中央济粮 → 实际运输 → 抵达县仓 → 军仓领取 → 再消耗','在途阻断会形成等待，反复派粮不是无限补充库存。',['supplyLineDetail','reliefDetail','shipmentDetail']],
+['战败与政治整合','决战／要地失陷 → 近期压力 → 劝降或求降 → 反提案／附庸／接收 → 集团战和改变 → 新的主战目标','减轻逐县清盘负担，同时保留拒降、援救与继续抵抗。',['pressureDetail','campaignDetail','receptionDetail']],
+['围城与地方崩溃','合围 → 工事与断粮 → 城防、守军、士气、居民变化 → 破城／投降／撤围 → 占领和招抚 → 修城安民','每日有实质推进；开城投降、战斗破城、外交接收使用不同处理。',['siegeDetail','captureDetail','pacificationDetail']],
+['家族的盛衰','人物与任官 → 家势和门生 → 本地属吏与依附户 → 财富、税基和征募 → 人物离世或新人成长 → 再评家势','家族衰落能导致原地转附人口，不靠凭空增加或删除一批户口。',['familyDetail','officeDetail','populationDetail']],
+['战乱与流民','缺粮／战争持续 → 健康与安定下降 → 农户流散 → 安全邻地迁徙或被围滞留 → 安置 → 恢复生产与登记','围城不能瞬移逃到远方；安定且有粮之后也需逐月恢复。',['populationDetail','siegeDetail','economyDetail']],
+['方面自治','任官与辖区 → 主公方针与战争授权 → 大员调度地方和军团 → 战果及月报 → 忠诚与权限调整','名义官职、真实太守和军事方面不能各造一份互相矛盾的任官。',['officeDetail','commandDetail','aiDetail']],
+['部队战后恢复','健卒作战 → 伤、散、俘与组织损失 → 败退和追击 → 安全驻地医疗、归建、补员 → 重新作战','军队兵力条只看健卒，其他人员仍在后勤与恢复账本中。',['battleDetail','retreatDetail','medicalDetail']],
+['小队任务','实际分遣 → 逐格穿行 → 突击／阻击／袭扰 → 消耗与脱离 → 返营 → 自动合队或保持独立','阻击受冷却与迟滞上限约束，不会用百人队永久冻结万人主力。',['skirmishDetail','warDetail','armySupplyDetail']],
+['附庸到统一','臣属契约 → 保护、贡赋与履约 → 忠诚及整合 → 保持自治／商议并入／独立 → 稳定集团与政治胜利','不是进入后期就自动解散所有附庸，也不是签一次约就全国统一。',['vassalDetail','campaignDetail','victoryDetail']],
+['朝局与战线','实际控制天子 → 名分、威望与服从 → 诏令、讨逆和联军 → 真实赴战或抗诏 → 控制权再变化','封官不等于占城，天子归属依实际护送、突围和战况。',['courtDetail','worldDetail','siegeActionDetail']],
+['保存与任务续算','日结状态 → 存档快照 → 兼容恢复 → 在途、战役和提案接着走 → 事务完成标记 → 下次保存','不会因读档重新发一次开局粮、交付一次粮车或重复接收全势力。',['saveDetail','shipmentDetail','receptionDetail']]
+];
+const faqs=[
+['围着城却没打，是不是卡住了？','先看有效围城、选用围法、工事进度、军资和本场记录。准备未完成、工事缺钱、条件不成立和战报摘要间隔都可能产生等待；当前围城仍逐日结算，不能再用“每十日才打”解释。'],
+['有中央粮，为什么本地或军队还缺粮？','中央、县仓、军仓、在途各是一本账。济粮要有路线并走到地方，野外军队还要接上实际军需。被围、断路、仓容不足、粮车受阻或没有余粮，都可能让账面全国有粮而前线吃不到。'],
+['为什么收成不每天显示为县仓增加？','生长期增加的是未收获的田间可征粮。普通作物统一九月月末收获，再经历征收、留用、上缴和运输；屯田增收同样不能提前吃。'],
+['为什么平时军团耗粮与开战不同？','安全驻屯、行军战备和实际屯田三种口粮模式不同。伤员和战俘也参与需求；开拔携粮按完整野战日需准备，不能用驻屯减耗压低出征储备。'],
+['为什么各城市同一天的人口和税收不一起变？','人口和非粮税有固定分散批次；行政又是十组轮转。这是错峰结算，同一地方仍按自己的周期结算，而不是全图每天重复增长。'],
+['是不是打赢一仗就会让敌国全投降？','败战是归降评估的一部分。还要看要地、实力、退路、援助、待遇、信誉和独立意志；强守县可拒绝招抚，在外军团也可能拒降。'],
+['历史引导会强制复刻官渡结局吗？','不会。官渡的对手偏好写在剧本配置中，通用公式不按人名判胜负。条件图从实际战局选择进攻、休整、求援、议和或归降；继承分裂还需真实危机条件。'],
+['为什么家族里有人却不能任官？','族谱可展示未出生、未登场、死亡、在野和被俘等人；能否任命还要看当前身份、所属、位置、现职和权限。无名门生是代理席位，不代表复制一名完整历史人物。'],
+['迁走主脉后，庄园和依附户为什么还在原地？','迁移对象是已登记家宅与家眷。土地不能随队移动，依附人口仍在当地生产；在外任职者也不会因为族长搬家就离岗瞬移。'],
+['太守、郡守、幕府方面和朝廷官职是什么关系？','太守和郡守对应同一个实际郡级职务；朝廷记录其名义与自领状态，幕府记录其组织隶属。军事都督方面可以统兵，但不必等同地方太守。'],
+['旧存档会自动启用新归降规则吗？','没有战役政治字段的旧档默认沿用旧规则，可从外交窗口主动启用。已有协议会继续履行；关模式不等于删除协议或退回已接收领土。'],
+['流程图会不会占用游戏性能或改存档？','本页只渲染内嵌说明数据，不实例化游戏、不读取存档、不运行地图编辑器、不调用AI。展开、搜索和逐步读图都只改变此页的阅读状态。']
+];
+$('dailyPhases').innerHTML=phases.map(([title,body,id],i)=>`<article class="phase" id="dayPhase${i}"><span class="next" aria-hidden="true">${i===phases.length-1?'↶':'↓'}</span><h3>${esc(title)}</h3><p>${esc(body)}</p>${jump(id,'查看对应流程')}</article>`).join('');
+$('cadenceRows').innerHTML=schedule.map(r=>`<tr>${r.map((v,i)=>i?`<td>${esc(v)}</td>`:`<td>${esc(v)}</td>`).join('')}</tr>`).join('');
+$('cycles').innerHTML=cycles.map(([title,chain,body,links])=>`<article class="cycle"><h3>${esc(title)}</h3><div class="chain">${esc(chain)}</div><p>${esc(body)}</p>${links.map(id=>jump(id)).join('')}</article>`).join('');
+$('faq').innerHTML=faqs.map(([q,a])=>`<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
+const groups=[...new Set(modules.map(m=>m.group))],sourceBase='https://github.com/dodio12138/sanguo-cli/blob/main/';
+$('moduleNav').innerHTML=groups.map(g=>`<details open><summary>${esc(g)}<span class="count">${modules.filter(m=>m.group===g).length}</span></summary>${modules.filter(m=>m.group===g).map(m=>`<a class="module-link" href="#${esc(m.id)}" data-detail-target="${esc(m.id)}">${esc(m.title)}</a>`).join('')}</details>`).join('');
+function renderModule(m){return `<details class="system" id="${esc(m.id)}"><summary><h3>${esc(m.title)}</h3><span class="summary-meta">${m.steps.length}步</span><span class="tags">${m.pace.map(p=>`<span class="tag">${esc(paceNames[p])}</span>`).join('')}</span></summary><div class="system-body"><p class="system-intro">${esc(m.intro)}</p><p class="entry"><b>入口</b> ${esc(m.entry)}</p><div class="command-list">${m.commands.length?`<span>涉及命令</span> ${m.commands.map(c=>`<span class="command-name">${esc(c.name)}</span>`).join(" ")}`:"<span>由系统或专属界面触发</span>"}</div><ol class="path">${m.steps.map(s=>`<li class="step"><h4>${esc(s.title)}</h4><p>${esc(s.body)}</p>${s.branch?`<div class="branch"><b>条件／分支</b>${esc(s.branch)}</div>`:''}</li>`).join('')}</ol>${m.formula?`<code class="formula">${esc(m.formula)}</code>`:''}<div class="loop-note"><b>↶ 循环如何接回</b>${esc(m.loop)}</div>${m.notes.length?`<ul class="notes">${m.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:''}<div class="related"><span>接着看</span>${m.links.map(id=>jump(id)).join('')}</div><details class="sources"><summary>代码依据 · 核对当前规则</summary>${m.sources.map(p=>`<a href="${sourceBase+esc(p)}" target="_blank" rel="noopener">${esc(p)}</a>`).join('')}</details></div></details>`}
+$('moduleSections').innerHTML=groups.map((g,i)=>`<section class="system-group" data-group="${i}"><h3 class="group-heading">${esc(g)}</h3>${modules.filter(m=>m.group===g).map(renderModule).join('')}</section>`).join('');
+$('coverage').textContent=`${modules.length} 项系统`;$('totalSteps').textContent=`${modules.length} 项系统 · ${modules.reduce((n,m)=>n+m.steps.length,0)} 个细分步骤 · ${modules.reduce((n,m)=>n+m.commands.length,0)} 条命令归入相应流程`;
+const dom=new Map(modules.map(m=>[m.id,$(m.id)])),textIndex=new Map(modules.map(m=>[m.id,JSON.stringify(m).toLocaleLowerCase()]));
+function filterModules(){const terms=$('flowSearch').value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean),pace=$('paceFilter').value;let count=0,steps=0;for(const m of modules){const visible=(pace==='all'||m.pace.includes(pace))&&terms.every(t=>textIndex.get(m.id).includes(t));dom.get(m.id).hidden=!visible;if(visible){count++;steps+=m.steps.length;if(terms.length)dom.get(m.id).open=true}}document.querySelectorAll('.system-group').forEach(g=>g.hidden=![...g.querySelectorAll('.system')].some(el=>!el.hidden));$('noResults').hidden=count!==0;$('filterStatus').textContent=`显示 ${count} / ${modules.length} 项系统 · ${steps} 个步骤${terms.length?' · 匹配流程已展开':''}`;document.querySelectorAll('.module-link').forEach(a=>{const d=dom.get(a.dataset.detailTarget);a.hidden=!!d?.hidden});document.querySelectorAll('#moduleNav details').forEach(d=>d.hidden=![...d.querySelectorAll('a')].some(a=>!a.hidden))}
+$('flowSearch').addEventListener('input',filterModules);$('paceFilter').addEventListener('change',filterModules);
+function clear(){ $('flowSearch').value='';$('paceFilter').value='all';filterModules() }
+$('clearFilters').onclick=clear;$('expandAll').onclick=()=>dom.forEach(el=>{if(!el.hidden)el.open=true});$('collapseAll').onclick=()=>dom.forEach(el=>{if(!el.hidden)el.open=false});
+function navigate(id,focus=true){if(!byId.has(id))return;const el=dom.get(id);if(el.hidden)clear();el.open=true;document.querySelectorAll('.index [aria-current]').forEach(a=>a.removeAttribute('aria-current'));document.querySelectorAll('.module-link').forEach(a=>{if(a.dataset.detailTarget===id)a.setAttribute('aria-current','location')});if(focus)el.querySelector('summary').focus({preventScroll:true});requestAnimationFrame(()=>el.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}))}
+document.addEventListener('click',event=>{const link=event.target.closest('a[data-detail-target]');if(!link)return;event.preventDefault();const id=link.dataset.detailTarget;if(location.hash!=='#'+id)history.pushState(null,'','#'+id);navigate(id)});
+function readHash(){try{return decodeURIComponent(location.hash.slice(1))}catch{return ''}}
+window.addEventListener('hashchange',()=>navigate(readHash()));window.addEventListener('popstate',()=>navigate(readHash()));
+let reading=-1;
+function readPhase(){document.querySelectorAll('.phase').forEach((p,i)=>p.classList.toggle('selected',i===reading));$('previousPhase').disabled=reading<=0;$('nextPhase').textContent=reading===phases.length-1?'回到第一阶段':'下一阶段';$('phaseReading').textContent=reading<0?'按“下一阶段”顺着读一次日循环。':`${reading+1} / ${phases.length} · ${phases[reading][0]}：${phases[reading][1]}`}
+$('nextPhase').onclick=()=>{reading=(reading+1)%phases.length;readPhase()};$('previousPhase').onclick=()=>{reading=Math.max(0,reading-1);readPhase()};$('resetPhase').onclick=()=>{reading=-1;readPhase()};
+let printState=null;
+window.addEventListener('beforeprint',()=>{if(printState)return;printState={query:$('flowSearch').value,pace:$('paceFilter').value,open:[...dom].filter(([,el])=>el.open).map(([id])=>id)};clear();dom.forEach(el=>el.open=true)});
+window.addEventListener('afterprint',()=>{if(!printState)return;const previous=printState;printState=null;$('flowSearch').value=previous.query;$('paceFilter').value=previous.pace;filterModules();dom.forEach((el,id)=>el.open=previous.open.includes(id))});$('printAtlas').onclick=()=>window.print();
+filterModules();navigate(readHash(),false);
+})();
+</script>
 </body>
 </html>

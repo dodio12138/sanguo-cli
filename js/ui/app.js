@@ -164,7 +164,7 @@ Object.defineProperty(window,"__jiuzhouBootStage",{configurable:true,get:()=>win
   $("openMapEditor").disabled=!mapEditor;
   $("eventDialog").addEventListener("cancel",event=>event.preventDefault());
   $("closeTurnBriefing").onclick=()=>$("turnBriefingDialog").close();$("ackTurnBriefing").onclick=()=>$("turnBriefingDialog").close();
-  $("helpButton").onclick=()=>$("helpDialog").showModal();$("closeHelp").onclick=()=>$("helpDialog").close();$("openTurnMapButton").onclick=()=>window.open("docs/game-turn-map.html?v=20261009-02","_blank","noopener");document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).close());
+  $("helpButton").onclick=()=>$("helpDialog").showModal();$("closeHelp").onclick=()=>$("helpDialog").close();$("openTurnMapButton").onclick=()=>window.open("docs/game-turn-map.html?v=20261018-03","_blank","noopener");document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).close());
   $("continueCampaignGame").onclick=()=>{const result=state.engine.continueCampaign(state);if(!result.ok){toast(result.error);return}$("gameOverDialog").close();simulation.pause();state.save("manual",state.saveSlot||"1");toast("继续争取军事统一")};
   $("restartGame").onclick=()=>{returningToTitle=true;simulation.pause();clearActive();location.reload()};
   window.addEventListener("keydown",GameShortcuts.createHandler({document,citySelected:()=>state.selected.type==="city",blocked:()=>!!state.policies.pendingEvent||!!state.gameOver||!!document.querySelector("#plannerDialog[open],#commandDialog[open],#saveManagerDialog[open],#gameSettingsDialog[open],#aiDialog[open],#modToolsDialog[open],#mapEditorDialog[open]"),actions:{
