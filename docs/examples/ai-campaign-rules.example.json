@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "usage": "示例文件不自动加载。rules 子树复制到 game_rules.json 的 balance.politics；scenario_ai_campaign 子树复制到剧本的 ai_campaign。实际启用时保存配置快照。",
+  "rules": {
+    "version": 1,
+    "submission_base": 0.08,
+    "submission_min": 0.02,
+    "submission_max": 0.92,
+    "submission_min_ratio": 1.5,
+    "submission_min_pressure": 0.3,
+    "voluntary_base": 0.78,
+    "submission_weights": {
+      "military_disadvantage": 0.2,
+      "recent_defeat_pressure": 0.3,
+      "key_site_loss": 0.26,
+      "isolation": 0.12,
+      "war_exhaustion": 0.1,
+      "credible_terms": 0.16,
+      "receiver_trust": 0.08,
+      "peripheral_dependence": 0.1,
+      "independence_resolve": -0.18,
+      "credible_relief": -0.18,
+      "receiver_abuse": -0.3
+    },
+    "pressure_limit": 64,
+    "pressure_lookback_days": 180,
+    "pressure_half_life_days": 60,
+    "defeat_pressure_scale": 1.4,
+    "major_battle_soldiers": 10000,
+    "minor_defeat_cap": 0.04,
+    "reply_days": 5,
+    "retry_days": 30,
+    "proposal_expiry_days": 90,
+    "proposal_history_limit": 64,
+    "truce_months": 6,
+    "integration_days": 150,
+    "vassal_stable_days": 60,
+    "vassal_gold_reserve": 1000,
+    "vassal_revolt_loyalty": 25,
+    "refusal_chance": 0.15,
+    "pacification_days": 12,
+    "pacification_max_garrison": 2500,
+    "pacification_base": 0.25,
+    "ai_daily_review_chance": 0.25,
+    "ai_review_days": 30,
+    "ai_proposal_min_chance": 0.35,
+    "regroup_days": 15,
+    "succession_window_days": 120,
+    "political_population_share": 0.8,
+    "political_key_share": 0.6,
+    "significant_group_share": 0.12,
+    "political_hold_days": 180,
+    "intent_graph": {
+      "initial": "assess",
+      "nodes": [
+        {
+          "id": "assess",
+          "choices": [
+            {
+              "intent": "regroup",
+              "weight": 0.15,
+              "weight_by_fact": {
+                "war_exhaustion": 0.6
+              },
+              "when": {
+                "fact": "war_exhaustion",
+                "gte": 0.25
+              }
+            },
+            {
+              "intent": "seek_peace",
+              "weight": 0.1,
+              "weight_by_fact": {
+                "recent_defeat_pressure": 0.5,
+                "key_site_loss": 0.2
+              },
+              "when": {
+                "any": [
+                  {
+                    "fact": "recent_defeat_pressure",
+                    "gte": 0.3
+                  },
+                  {
+                    "fact": "key_site_loss",
+                    "gte": 0.4
+                  }
+                ]
+              }
+            },
+            {
+              "intent": "offer_submission",
+              "weight": 0.05,
+              "weight_by_fact": {
+                "recent_defeat_pressure": 0.65,
+                "key_site_loss": 0.5,
+                "military_disadvantage": 0.4
+              },
+              "when": {
+                "any": [
+                  {
+                    "all": [
+                      {
+                        "fact": "recent_defeat_pressure",
+                        "gte": 0.55
+                      },
+                      {
+                        "fact": "key_site_loss",
+                        "gte": 0.35
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "military_disadvantage",
+                    "gte": 0.8
+                  }
+                ]
+              }
+            },
+            {
+              "intent": "seek_relief",
+              "weight": 0.1,
+              "when": {
+                "fact": "war_exhaustion",
+                "gte": 0.2
+              }
+            },
+            {
+              "intent": "split_succession",
+              "weight": 0.5,
+              "when": {
+                "fact": "succession_crisis",
+                "gte": 1
+              }
+            },
+            {
+              "intent": "advance",
+              "weight": 1,
+              "weight_by_fact": {
+                "offensive_readiness": 0.4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "tempo_presets": {
+      "standard": {
+        "reply_days": 10,
+        "pacification_days": 20,
+        "integration_days": 240
+      },
+      "rapid": {
+        "reply_days": 5,
+        "pacification_days": 10,
+        "integration_days": 120
+      }
+    }
+  },
+  "scenario_ai_campaign": {
+    "name": "官渡与中原秩序",
+    "preferences": [
+      {
+        "actor": "cao",
+        "target": "yuan",
+        "weight": 65,
+        "when": {
+          "fact": "target_active",
+          "eq": 1
+        }
+      },
+      {
+        "actor": "cao",
+        "target": "liu",
+        "weight": 35,
+        "when": {
+          "fact": "target_relative_power",
+          "lt": 0.5
+        }
+      },
+      {
+        "actor": "yuan",
+        "target": "cao",
+        "weight": 65,
+        "when": {
+          "fact": "target_active",
+          "eq": 1
+        }
+      },
+      {
+        "actor": "liu_zhang",
+        "target": "zhang_lu",
+        "weight": 35
+      },
+      {
+        "actor": "zhang_lu",
+        "target": "liu_zhang",
+        "weight": 20
+      }
+    ],
+    "regional_goal": {
+      "name": "中原与河北霸权",
+      "provinces": [
+        "冀州",
+        "兖州",
+        "豫州",
+        "青州",
+        "并州"
+      ],
+      "share": 0.7
+    }
+  }
+}

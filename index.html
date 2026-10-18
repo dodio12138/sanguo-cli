@@ -7,7 +7,7 @@
   <title>&lt;&lt;&lt;三国</title>
   <link rel="stylesheet" href="css/style.css?v=d7cbd65d2d">
   <link rel="stylesheet" href="css/observer.css?v=e7c976aad6">
-  <link rel="stylesheet" href="css/ui-polish.css?v=ebaf1588f4">
+  <link rel="stylesheet" href="css/ui-polish.css?v=c43adcc13a">
   <link rel="stylesheet" href="css/chronicle.css?v=95a0670966">
   <link rel="stylesheet" href="css/hierarchy.css?v=d520d9c8ba">
   <link rel="stylesheet" href="css/os-desktop.css?v=5094066e1c">
@@ -27,7 +27,7 @@
         <nav class="campaign-steps" aria-label="开局步骤"><button data-campaign-step="1">一 · 选择剧本</button><button data-campaign-step="2" disabled>二 · 选择势力</button><button data-campaign-step="3" disabled>三 · 开局设置</button></nav>
         <div id="campaignSelect" class="campaign-select"><section id="startScenarioStep" class="campaign-pane"><div class="campaign-heading"><h2 tabindex="-1">选择剧本</h2><p id="scenarioStepHint">选择一段历史，进入天下局势。</p></div><div id="scenarioChoices" class="start-choices"><p class="start-loading">正在载入剧本目录……</p></div></section>
         <section id="startForceStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">选择势力</h2><p id="campaignScenarioName"></p></div><div class="campaign-force-layout"><div id="campaignMinimap" class="campaign-minimap"><canvas id="campaignMinimapCanvas" role="img" aria-label="势力范围小地图"></canvas><div id="campaignMinimapTip" class="campaign-minimap-tip" hidden></div></div><div id="forceChoices" class="force-choices"></div><aside class="campaign-brief" aria-label="势力介绍"><h3 id="startBriefTitle"></h3><p id="startHistoricalBrief" class="start-historical-brief"></p><h4>阶段目标</h4><p id="startForceObjective"></p></aside></div></section></div>
-        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label>自动存档<select id="gameAutosavePeriod"><option value="day">每日</option><option value="xun">每旬</option><option value="month">每月</option><option value="quarter">每季度</option><option value="year">每年</option></select></label></div></div></section>
+        <section id="startSetupStep" class="campaign-pane" hidden><div class="campaign-heading"><h2 tabindex="-1">开局设置</h2><p>确认选择后开始战局。</p></div><div class="campaign-setup-layout"><section class="campaign-confirm"><span id="campaignLaunchDate"></span><h3 id="campaignLaunchTitle"></h3><p id="campaignLaunchStats"></p><p id="campaignLaunchBrief"></p></section><div class="settings-grid"><label>战局难度<select id="campaignDifficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="campaignSpeedChoice"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label>战略倾向<select id="campaignModeChoice"><option value="historical">历史引导</option><option value="free">自由演化</option><option value="off">传统规则</option></select></label><label>整合节奏<select id="campaignTempoChoice"><option value="rapid">快速整合</option><option value="standard">标准整合</option></select></label><label>战局目标<select id="campaignVictoryChoice"><option value="political">政治统一</option><option value="military">军事统一</option><option value="regional">区域霸权</option></select></label><label>自动存档<select id="gameAutosavePeriod"><option value="day">每日</option><option value="xun">每旬</option><option value="month">每月</option><option value="quarter">每季度</option><option value="year">每年</option></select></label></div></div></section>
       </section>
       <section id="startLoadView" class="start-view save-view" hidden><div class="view-heading"><div><h2>载入本地存档</h2></div></div><div id="startSaveSlots" class="save-slots"></div></section>
       <section id="startSettingsView" class="start-view settings-view" hidden><div class="view-heading"><div><h2>游戏设置</h2></div></div><div class="settings-grid"><label>默认难度<select id="difficultyChoice"><option value="easy">宽松</option><option value="normal">标准</option><option value="hard">艰难</option></select></label><label>模拟速度<select id="observerDefaultSpeed"><option value="3000">3 秒/日</option><option value="1000">1 秒/日</option><option value="500">0.5 秒/日</option></select></label><label class="setting-check" hidden><input id="confirmEndTurn" type="checkbox">结束本日前再次确认</label><label class="setting-check setting-feature"><input id="chronicleEnabled" type="checkbox"><span><b>启用本方智能史官</b></span></label><label class="setting-check setting-feature"><input id="globalHistorianEnabled" type="checkbox"><span><b>启用全局智能史官</b></span></label></div></section>
@@ -409,26 +409,26 @@
       <h2 id="gameOverTitle">天下归定</h2>
       <p id="gameOverText"></p>
       <div id="gameOverStats" class="game-over-stats"></div>
-      <button id="restartGame">重新开局</button>
+      <button id="continueCampaignGame" hidden>继续征服</button><button id="restartGame">重新开局</button>
     </div>
   </dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="uiTooltip" class="ui-tooltip" role="tooltip" hidden></div>
 
-  <script src="js/data/command-catalog.js?v=7fd3188eef"></script>
+  <script src="js/data/command-catalog.js?v=885bbd84ee"></script>
   <script src="js/data/game-data.js?v=35f9cdf9c1"></script>
-  <script src="js/data/offline-data.generated.js?v=3a5801dd7a"></script>
-  <script src="js/core/data-loader.js?v=93789828ea"></script>
+  <script src="js/data/offline-data.generated.js?v=9f7436441f"></script>
+  <script src="js/core/data-loader.js?v=eefd4033d3"></script>
   <script src="js/core/game-clock.js?v=320d75a5c4"></script>
   <script src="js/core/simulation-clock.js?v=e1c04e8ed0"></script>
-  <script src="js/core/fiscal-system.js?v=70d0b91041"></script>
-  <script src="js/core/rule-engine.js?v=2881a1d7ab"></script>
-  <script src="js/core/engine/movement.js?v=8cc400905e"></script>
-  <script src="js/core/engine/siege.js?v=3695031c76"></script>
-  <script src="js/core/engine/diplomacy.js?v=f592461d23"></script>
+  <script src="js/core/fiscal-system.js?v=71c70b8c87"></script>
+  <script src="js/core/rule-engine.js?v=c14ea686ad"></script>
+  <script src="js/core/engine/movement.js?v=41cc6e015d"></script>
+  <script src="js/core/engine/siege.js?v=496c6c56a4"></script>
+  <script src="js/core/engine/diplomacy.js?v=f8a94cf20a"></script>
   <script src="js/core/engine/events.js?v=c642bec2a8"></script>
-  <script src="js/core/engine/ai.js?v=591c7835ed"></script>
+  <script src="js/core/engine/ai.js?v=f02dd10178"></script>
   <script src="js/core/engine/administration.js?v=05377aca3a"></script>
   <script src="js/core/engine/projects.js?v=18fe554b4b"></script>
   <script src="js/core/engine/office-effects.js?v=4ac169a452"></script>
@@ -436,21 +436,22 @@
   <script src="js/core/engine/offices.js?v=9a397401af"></script>
   <script src="js/core/engine/court.js?v=f32302e228"></script>
   <script src="js/core/engine/court-edicts.js?v=059f10593e"></script>
-  <script src="js/core/engine/court-crisis.js?v=fa5cdedd82"></script>
-  <script src="js/core/engine/battle.js?v=87f3a5d303"></script>
+  <script src="js/core/engine/court-crisis.js?v=124c997129"></script>
+  <script src="js/core/engine/battle.js?v=941c293f74"></script>
   <script src="js/core/engine/skirmish.js?v=3539d3fc30"></script>
   <script src="js/core/engine/logistics.js?v=c70fba5e06"></script>
   <script src="js/core/engine/population.js?v=92b994e11b"></script>
   <script src="js/core/engine/clans.js?v=8204086353"></script>
   <script src="js/core/engine/family-dynamics.js?v=e2acd93aeb"></script>
-  <script src="js/core/engine/families.js?v=9dfa6c0d40"></script>
+  <script src="js/core/engine/families.js?v=230d8a4fd6"></script>
   <script src="js/core/engine/family-migration.js?v=040f315993"></script>
-  <script src="js/core/engine/command.js?v=f3b6ce0fec"></script>
+  <script src="js/core/engine/command.js?v=4ce7d82604"></script>
+  <script src="js/core/engine/politics.js?v=40575e6871"></script>
   <script src="js/core/ai-bridge.js?v=e49d49e48a"></script>
   <script src="js/core/mcp-adapter.js?v=07c6d784f2"></script>
   <script src="js/core/ai-controller.js?v=0323068a31"></script>
   <script src="js/core/save-library.js?v=8e2b069ba8"></script>
-  <script src="js/core/game-state.js?v=b89c231308"></script>
+  <script src="js/core/game-state.js?v=dfef0189ee"></script>
   <script src="js/core/map-grid.js?v=c7d347eb25"></script>
   <script src="js/core/map-editor-drafts.js?v=66bcee7186"></script>
   <script src="js/core/scenario-map-store.js?v=81629f44d5"></script>
@@ -472,13 +473,14 @@
   <script src="js/ui/simulation-speed-control.js?v=286b6b6e76"></script>
   <script src="js/ui/message-center.js?v=a56caaf5e6"></script>
   <script src="js/ui/app/registry.js?v=3c90df7096"></script>
-  <script src="js/ui/app/start-screen.js?v=350b83502b"></script>
-  <script src="js/ui/app/command-book.js?v=7c3a130a7f"></script>
+  <script src="js/ui/app/start-screen.js?v=7e4d25f07a"></script>
+  <script src="js/ui/app/command-book.js?v=bb295ed8d8"></script>
   <script src="js/ui/app/resources.js?v=cb1b0197a6"></script>
   <script src="js/ui/app/reports.js?v=7095f1dcd9"></script>
   <script src="js/ui/app/court-windows.js?v=504701c167"></script>
   <script src="js/ui/app/force-command-window.js?v=0a262ac903"></script>
-  <script src="js/ui/app/ledgers.js?v=da1061b019"></script>
+  <script src="js/ui/app/campaign-ui.js?v=489b56791e"></script>
+  <script src="js/ui/app/ledgers.js?v=30cfbc2308"></script>
   <script src="js/ui/app/mod-tools.js?v=5b02fa3dce"></script>
   <script src="js/ui/app/field-operations.js?v=01c8961ff0"></script>
   <script src="js/ui/app/planners.js?v=6f6653c0dd"></script>
@@ -489,7 +491,7 @@
   <script src="js/ui/app/officers.js?v=124d8b9e63"></script>
   <script src="js/ui/app/clan-window.js?v=1d391565f0"></script>
   <script src="js/ui/app/ai-panel.js?v=a5838d629e"></script>
-  <script src="js/ui/app.js?v=5d467d8d26"></script>
+  <script src="js/ui/app.js?v=ee3a06cbed"></script>
   <script src="js/ui/desktop-context-menu.js?v=0f1f4d6702"></script>
   <script src="js/ui/os-window-manager.js?v=c6af27fe2e"></script>
 </body>

@@ -7,6 +7,10 @@ globalThis.localStorage=new Proxy(storage,{ownKeys:()=>Object.keys(memory),getOw
 if(typeof CustomEvent==="undefined")globalThis.CustomEvent=class extends Event{constructor(type,options={}){super(type);this.detail=options.detail}};
 for(const file of ["data/offline-data.generated","core/map-grid","core/map-editor-drafts","core/scenario-map-store","ui/map-editor","core/data-loader","core/game-clock","core/fiscal-system","core/rule-engine","core/game-state"])await import(`../js/${file}.js`);
 const loader=new DataLoader(SANGUO_DATA),base=await loader.load({useSavedMap:false}),editor=new MapEditor(base),id=base.scenario.id;
+// 普通游玩读取正式地图，但没有自定义记录时不准备编辑器基线。
+const fingerprint=ScenarioMapStore.fingerprint;let fingerprintCalls=0;
+ScenarioMapStore.fingerprint=function(...args){fingerprintCalls++;return fingerprint.apply(this,args)};
+try{assert.equal((await loader.loadScenario(id)).meta.scenarioMap.status,"original");assert.equal(fingerprintCalls,0,"没有保存地图的开局不应创建编辑模型计算指纹")}finally{ScenarioMapStore.fingerprint=fingerprint}
 editor.setTerrain(0,0,"forest");const city=editor.city("xuchang");editor.setCommandery(city.x,city.y,"测试郡");editor.assignCommanderyProvince("测试郡","测试州");editor.updateCity(city.id,{name:"持久城"});
 editor.clearWaterways();editor.clearRoads();
 const record={version:1,scenarioId:id,savedAt:new Date().toISOString(),baseFingerprint:ScenarioMapStore.fingerprint(base),patch:editor.exportPatch()};

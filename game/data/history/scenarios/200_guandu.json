@@ -31,7 +31,38 @@
     "officers": "game/data/history/officers/200_guandu.json",
     "armies": "game/data/history/armies/200_guandu.json"
   },
-  "treaties": [{"a": "yuan", "b": "cao", "type": "war"}, {"a": "liu", "b": "cao", "type": "war"}, {"a": "yuan", "b": "liu", "type": "alliance"}, {"a": "yuan", "b": "liu_biao", "type": "non_aggression"}, {"a": "zhang_lu", "b": "liu_zhang", "type": "war"}, {"a": "ma_teng", "b": "han_sui", "type": "alliance"}],
+  "treaties": [
+    {
+      "a": "yuan",
+      "b": "cao",
+      "type": "war"
+    },
+    {
+      "a": "liu",
+      "b": "cao",
+      "type": "war"
+    },
+    {
+      "a": "yuan",
+      "b": "liu",
+      "type": "alliance"
+    },
+    {
+      "a": "yuan",
+      "b": "liu_biao",
+      "type": "non_aggression"
+    },
+    {
+      "a": "zhang_lu",
+      "b": "liu_zhang",
+      "type": "war"
+    },
+    {
+      "a": "ma_teng",
+      "b": "han_sui",
+      "type": "alliance"
+    }
+  ],
   "description": "建安五年官渡战争初期；人物势力按公元200年前后校正。",
   "historical_brief": "曹操控制献帝与河南诸郡，袁绍据河北而兵粮占优；刘备、孙策与刘表仍各有立足之地。官渡一线的粮道、用人和决断将改变北方归属。",
   "force_briefs": {
@@ -67,5 +98,58 @@
     "handan_shang": "守护河西交通与郡县，协调地方牧守",
     "zhang_meng": "保全武威与河西通道，维系郡内秩序",
     "wei_duan": "安定陇上郡县，维持州郡与西北部众关系"
+  },
+  "ai_campaign": {
+    "name": "官渡与中原秩序",
+    "preferences": [
+      {
+        "actor": "cao",
+        "target": "yuan",
+        "weight": 65,
+        "when": {
+          "fact": "target_active",
+          "eq": 1
+        }
+      },
+      {
+        "actor": "cao",
+        "target": "liu",
+        "weight": 35,
+        "when": {
+          "fact": "target_relative_power",
+          "lt": 0.5
+        }
+      },
+      {
+        "actor": "yuan",
+        "target": "cao",
+        "weight": 65,
+        "when": {
+          "fact": "target_active",
+          "eq": 1
+        }
+      },
+      {
+        "actor": "liu_zhang",
+        "target": "zhang_lu",
+        "weight": 35
+      },
+      {
+        "actor": "zhang_lu",
+        "target": "liu_zhang",
+        "weight": 20
+      }
+    ],
+    "regional_goal": {
+      "name": "中原与河北霸权",
+      "provinces": [
+        "冀州",
+        "兖州",
+        "豫州",
+        "青州",
+        "并州"
+      ],
+      "share": 0.7
+    }
   }
 }

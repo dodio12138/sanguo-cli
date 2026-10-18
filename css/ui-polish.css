@@ -768,3 +768,6 @@ li.lv-3{color:var(--text)}li.lv-0{opacity:.72}
 .save-slot-actions{display:flex;gap:6px;align-items:center}
 .save-slot .save-delete{color:#c9a08a;border-color:#5a4234}
 .save-slot .save-delete.is-armed{color:#ffd2c2;border-color:#b0503c;background:#2a1210}
+
+/* 战役外交沿用桌面表单与档案表格，窄窗口自动换行。 */
+.campaign-diplomacy .campaign-controls{display:flex;flex-wrap:wrap;align-items:end;gap:8px;margin:8px 0}.campaign-diplomacy label{display:flex;align-items:center;gap:5px;font-size:12px}.campaign-diplomacy select{max-width:190px}.campaign-diplomacy input[type=number]{width:88px}.campaign-diplomacy small{display:block;opacity:.75;margin-top:4px}.campaign-diplomacy td:last-child{white-space:normal}.campaign-diplomacy td button{margin:2px}.campaign-diplomacy .ledger-table{width:100%}

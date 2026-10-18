@@ -1,0 +1,735 @@
+{
+  "date": "2026-10-18",
+  "scope": "最终工作区代码；隔离仓库地图的 Node 观察局，不接触用户地图或存档。两个任务在同机并发，耗时不是独占性能基准。",
+  "quickRegression": {
+    "passed": 101,
+    "total": 101,
+    "finalCode": true
+  },
+  "slowRegression": {
+    "passed": 40,
+    "total": 41,
+    "scope": "最终集团停战与俘虏压力补强前；补强后快速回归全部通过",
+    "existingFailure": {
+      "test": "test-roster-expansion.mjs:71",
+      "baselineCommit": "8bd4cf8",
+      "baselineAndWorkingActualFingerprint": "b7cd0f8b",
+      "expectedCompatibilityCurrent": "387388c2",
+      "terrainEdited": false
+    }
+  },
+  "allScenarios35Days": {
+    "generatedAt": "2026-10-18T05:04:45.661Z",
+    "scope": "隔离仓库地图；不代表用户当前存档；开销为本次Node环境实测",
+    "results": [
+      {
+        "scenario": "184_yingchuan",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 3595,
+        "meanDayMs": 102.7,
+        "maxDayMs": 431,
+        "declarations": 0,
+        "ownershipChanges": 5,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 2,
+        "armies": 17,
+        "plans": {
+          "han": "zhang_jiao",
+          "zhang_jiao": "han"
+        }
+      },
+      {
+        "scenario": "190_coalition",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 4200,
+        "meanDayMs": 119.99,
+        "maxDayMs": 456,
+        "declarations": 9,
+        "ownershipChanges": 18,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "zhou_xin",
+            "strongId": "chen_wen"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "kong_zhou",
+            "strongId": "dong"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "liu_dai",
+            "strongId": "qiao_mao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "liu_chong",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 2,
+        "independentGroups": 24,
+        "armies": 44,
+        "plans": {
+          "dong": "wang_kuang",
+          "cao": "dong",
+          "yuan": "jiao_he",
+          "sun_jian": "liu_biao",
+          "gongsun": "liu_yu",
+          "liu_biao": "sun_jian",
+          "yuan_shu": "liu_biao",
+          "han_fu": "liu_yu",
+          "liu_yu": "gongsun_du",
+          "tao_qian": "kong_rong",
+          "kong_rong": "tao_qian",
+          "liu_yan": "yuan_shu",
+          "liu_dai": "yuan_yi",
+          "ma_teng": "dong",
+          "han_sui": "dong",
+          "gongsun_du": "liu_yu",
+          "wang_kuang": "dong",
+          "kong_zhou": "dong",
+          "zhang_miao": "qiao_mao",
+          "qiao_mao": "bao_xin",
+          "yuan_yi": "qiao_mao",
+          "bao_xin": "qiao_mao",
+          "zhang_chao": "zhou_xin",
+          "chen_wen": "zhang_chao",
+          "zhou_xin": "zhang_chao",
+          "liu_chong": "zhang_miao",
+          "shi_xie": null,
+          "jiao_he": "yuan"
+        }
+      },
+      {
+        "scenario": "194_puyang",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 3445,
+        "meanDayMs": 98.44,
+        "maxDayMs": 272,
+        "declarations": 1,
+        "ownershipChanges": 5,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 22,
+        "armies": 60,
+        "plans": {
+          "cao": "lu_bu",
+          "lu_bu": "cao",
+          "tao_qian": "kong_rong",
+          "liu": "cao",
+          "yuan": "gongsun",
+          "gongsun": "yuan",
+          "yuan_shu": "liu_yao",
+          "liu_biao": "yuan_shu",
+          "liu_zhang": "zhang_lu",
+          "zhang_lu": "liu_zhang",
+          "kong_rong": "tao_qian",
+          "li_jue": "ma_teng",
+          "ma_teng": "li_jue",
+          "han_sui": "li_jue",
+          "gongsun_du": "gongsun",
+          "liu_yao": "yuan_shu",
+          "wang_lang": "liu_yao",
+          "zhang_yang": "yuan",
+          "zhang_yan": "yuan",
+          "liu_chong": "cao",
+          "shi_xie": null,
+          "handan_shang": "han_sui"
+        }
+      },
+      {
+        "scenario": "200_guandu",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 2872,
+        "meanDayMs": 82.06,
+        "maxDayMs": 300,
+        "declarations": 3,
+        "ownershipChanges": 9,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "shi_xie",
+            "strongId": "liu_biao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "liu",
+            "strongId": "cao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "zhang_lu",
+            "strongId": "liu_zhang"
+          }
+        ],
+        "receptions": 1,
+        "independentGroups": 12,
+        "armies": 29,
+        "plans": {
+          "cao": "yuan",
+          "yuan": "cao",
+          "liu": "yuan",
+          "sun": "shi_xie",
+          "liu_biao": "zhang_jin",
+          "liu_zhang": "wei_duan",
+          "zhang_lu": "liu_zhang",
+          "ma_teng": "wei_duan",
+          "han_sui": "zhang_meng",
+          "gongsun_du": "yuan",
+          "shi_xie": "zhang_jin",
+          "zhang_jin": "shi_xie",
+          "handan_shang": "zhang_meng",
+          "zhang_meng": "handan_shang",
+          "wei_duan": "ma_teng"
+        }
+      },
+      {
+        "scenario": "208_red_cliffs",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 2994,
+        "meanDayMs": 85.55,
+        "maxDayMs": 252,
+        "declarations": 2,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "sun",
+            "strongId": "cao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "zhang_lu",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 0,
+        "independentGroups": 14,
+        "armies": 26,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": "liu",
+          "liu_zhang": "zhang_lu",
+          "zhang_lu": "liu_zhang",
+          "gongsun_kang": "cao",
+          "han_xuan": "zhao_fan",
+          "liu_du": "han_xuan",
+          "zhao_fan": "wu_ju",
+          "jin_xuan": "han_xuan",
+          "ma_chao": "zhang_lu",
+          "han_sui": "wei_kang",
+          "zhang_meng": "han_sui",
+          "wei_kang": "ma_chao",
+          "shi_xie": "wu_ju",
+          "wu_ju": "shi_xie"
+        }
+      },
+      {
+        "scenario": "211_tongguan",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 2172,
+        "meanDayMs": 62.07,
+        "maxDayMs": 162,
+        "declarations": 1,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "han_sui",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 0,
+        "independentGroups": 8,
+        "armies": 36,
+        "plans": {
+          "cao": "sun",
+          "ma_chao": "cao",
+          "han_sui": "ma_chao",
+          "liu": "shi_xie",
+          "sun": "cao",
+          "liu_zhang": "zhang_lu",
+          "zhang_lu": "liu_zhang",
+          "shi_xie": "liu",
+          "gongsun_kang": null
+        }
+      },
+      {
+        "scenario": "219_xiangyang",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 2741,
+        "meanDayMs": 78.33,
+        "maxDayMs": 193,
+        "declarations": 0,
+        "ownershipChanges": 10,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "shi_xie",
+            "strongId": "sun"
+          }
+        ],
+        "receptions": 1,
+        "independentGroups": 4,
+        "armies": 19,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": null,
+          "shi_xie": null,
+          "gongsun_kang": null
+        }
+      },
+      {
+        "scenario": "222_yiling",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 1553,
+        "meanDayMs": 44.37,
+        "maxDayMs": 140,
+        "declarations": 0,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 5,
+        "armies": 31,
+        "plans": {
+          "cao": "liu",
+          "liu": "sun",
+          "sun": "liu",
+          "shi_xie": null,
+          "gongsun_gong": null
+        }
+      },
+      {
+        "scenario": "228_tianshui",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 1606,
+        "meanDayMs": 45.9,
+        "maxDayMs": 194,
+        "declarations": 0,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "gongsun_yuan",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 0,
+        "independentGroups": 3,
+        "armies": 30,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": "cao",
+          "gongsun_yuan": null
+        }
+      },
+      {
+        "scenario": "249_gaopingling",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 1231,
+        "meanDayMs": 35.17,
+        "maxDayMs": 133,
+        "declarations": 0,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 3,
+        "armies": 14,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": "cao"
+        }
+      },
+      {
+        "scenario": "253_hefei",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 1131,
+        "meanDayMs": 32.32,
+        "maxDayMs": 107,
+        "declarations": 0,
+        "ownershipChanges": 0,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 3,
+        "armies": 17,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": "cao"
+        }
+      },
+      {
+        "scenario": "263_jiange",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 871,
+        "meanDayMs": 24.87,
+        "maxDayMs": 99,
+        "declarations": 0,
+        "ownershipChanges": 1,
+        "pacified": 0,
+        "agreements": [],
+        "receptions": 0,
+        "independentGroups": 4,
+        "armies": 18,
+        "plans": {
+          "cao": "liu",
+          "liu": "cao",
+          "sun": "cao",
+          "lv_xing": "sun"
+        }
+      },
+      {
+        "scenario": "279_jianye",
+        "seed": 20000101,
+        "days": 35,
+        "mode": "historical",
+        "elapsedMs": 879,
+        "meanDayMs": 25.12,
+        "maxDayMs": 77,
+        "declarations": 0,
+        "ownershipChanges": 1,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "guo_ma",
+            "strongId": "sun"
+          }
+        ],
+        "receptions": 0,
+        "independentGroups": 3,
+        "armies": 22,
+        "plans": {
+          "cao": "sun",
+          "sun": "cao",
+          "guo_ma": null,
+          "tufa_shujineng": "cao"
+        }
+      }
+    ]
+  },
+  "guandu180Days": {
+    "generatedAt": "2026-10-18T05:04:42.522Z",
+    "scope": "隔离仓库地图；不代表用户当前存档；开销为本次Node环境实测",
+    "results": [
+      {
+        "scenario": "200_guandu",
+        "seed": 20000101,
+        "days": 180,
+        "mode": "historical",
+        "elapsedMs": 16729,
+        "meanDayMs": 92.94,
+        "maxDayMs": 500,
+        "declarations": 3,
+        "ownershipChanges": 27,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "shi_xie",
+            "strongId": "liu_biao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "liu",
+            "strongId": "cao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "zhang_lu",
+            "strongId": "liu_zhang"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "wei_duan",
+            "strongId": "liu_zhang"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "handan_shang",
+            "strongId": "zhang_meng"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "ma_teng",
+            "strongId": "cao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "gongsun_du",
+            "strongId": "yuan"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "han_sui",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 3,
+        "independentGroups": 7,
+        "armies": 53,
+        "plans": {
+          "cao": "sun",
+          "yuan": null,
+          "liu": "sun",
+          "sun": "cao",
+          "liu_biao": "zhang_jin",
+          "liu_zhang": "ma_teng",
+          "zhang_lu": "liu_zhang",
+          "ma_teng": "wei_duan",
+          "han_sui": "wei_duan",
+          "gongsun_du": null,
+          "shi_xie": "zhang_jin",
+          "zhang_jin": "shi_xie",
+          "handan_shang": "zhang_meng",
+          "zhang_meng": null,
+          "wei_duan": "ma_teng"
+        }
+      },
+      {
+        "scenario": "200_guandu",
+        "seed": 23,
+        "days": 180,
+        "mode": "historical",
+        "elapsedMs": 13876,
+        "meanDayMs": 77.09,
+        "maxDayMs": 243,
+        "declarations": 7,
+        "ownershipChanges": 124,
+        "pacified": 0,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "gongsun_du",
+            "strongId": "cao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "zhang_jin",
+            "strongId": "liu_biao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "ma_teng",
+            "strongId": "wei_duan"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "shi_xie",
+            "strongId": "sun"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "yuan",
+            "strongId": "cao"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "zhang_lu",
+            "strongId": "liu_zhang"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "wei_duan",
+            "strongId": "liu_zhang"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "han_sui",
+            "strongId": "cao"
+          }
+        ],
+        "receptions": 6,
+        "independentGroups": 7,
+        "armies": 52,
+        "plans": {
+          "cao": "liu",
+          "yuan": "cao",
+          "liu": "cao",
+          "sun": "liu_biao",
+          "liu_biao": "sun",
+          "liu_zhang": "liu_biao",
+          "zhang_lu": "liu_zhang",
+          "ma_teng": "zhang_lu",
+          "han_sui": "zhang_meng",
+          "gongsun_du": null,
+          "shi_xie": "liu_biao",
+          "zhang_jin": "shi_xie",
+          "handan_shang": null,
+          "zhang_meng": "han_sui",
+          "wei_duan": "liu_zhang"
+        }
+      },
+      {
+        "scenario": "200_guandu",
+        "seed": 91,
+        "days": 180,
+        "mode": "historical",
+        "elapsedMs": 11316,
+        "meanDayMs": 62.87,
+        "maxDayMs": 253,
+        "declarations": 5,
+        "ownershipChanges": 10,
+        "pacified": 3,
+        "agreements": [
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "gongsun_du",
+            "strongId": "yuan"
+          },
+          {
+            "kind": "full",
+            "status": "completed",
+            "weakId": "zhang_jin",
+            "strongId": "liu_biao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "ma_teng",
+            "strongId": "cao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "han_sui",
+            "strongId": "cao"
+          },
+          {
+            "kind": "vassal",
+            "status": "active",
+            "weakId": "shi_xie",
+            "strongId": "liu_biao"
+          }
+        ],
+        "receptions": 1,
+        "independentGroups": 10,
+        "armies": 58,
+        "plans": {
+          "cao": "sun",
+          "yuan": null,
+          "liu": "sun",
+          "sun": "cao",
+          "liu_biao": "zhang_lu",
+          "liu_zhang": "zhang_lu",
+          "zhang_lu": "liu_zhang",
+          "ma_teng": "zhang_lu",
+          "han_sui": "zhang_meng",
+          "gongsun_du": null,
+          "shi_xie": null,
+          "zhang_jin": "shi_xie",
+          "handan_shang": null,
+          "zhang_meng": "han_sui",
+          "wei_duan": "ma_teng"
+        }
+      }
+    ]
+  },
+  "browserQA": {
+    "engineBuild": "final",
+    "isolatedChromium": true,
+    "viewports": [
+      [
+        1440,
+        960
+      ],
+      [
+        900,
+        740
+      ]
+    ],
+    "newGameDefaults": {
+      "mode": "historical",
+      "tempo": "rapid",
+      "enabled": true
+    },
+    "preview": {
+      "chance": 0.92,
+      "rngUnchanged": true
+    },
+    "proposal": {
+      "queuedType": "demand_surrender",
+      "status": "waiting",
+      "escrowGold": 300
+    },
+    "playerRejection": {
+      "queuedType": "respond_diplomacy",
+      "status": "rejected",
+      "territoryBefore": 79,
+      "territoryAfter": 79,
+      "playerAlive": true
+    }
+  }
+}
