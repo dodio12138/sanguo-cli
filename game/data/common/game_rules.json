@@ -233,6 +233,21 @@
       "endgame_phase_turn": 360,
       "endgame_attack_ratio": 0.42,
       "min_action_soldiers": 3000,
+      "war_authorization": {
+        "review_days": 30,
+        "max_primary_enemies": 1,
+        "max_secondary_enemies": 1,
+        "secondary_min_sites": 60,
+        "secondary_min_aggression": 1.1,
+        "war_bonus": 80,
+        "continuity_bonus": 25,
+        "border_weight": 4,
+        "hostility_weight": 0.4,
+        "opportunity_weight": 6,
+        "threat_per_soldier": 0.001,
+        "primary_target_bonus": 40,
+        "min_peace_days": 120
+      },
       "late_war_chance": 0.42,
       "max_armies_per_city": 1.5,
       "hegemon_city_share": 0.45,
@@ -853,6 +868,161 @@
       "crop_scale": 1.2,
       "stock_scale": 4,
       "garrison_stationed_factor": 0.08
+    },
+    "politics": {
+      "version": 1,
+      "submission_base": 0.08,
+      "submission_min": 0.02,
+      "submission_max": 0.92,
+      "submission_min_ratio": 1.5,
+      "submission_min_pressure": 0.3,
+      "voluntary_base": 0.78,
+      "submission_weights": {
+        "military_disadvantage": 0.2,
+        "recent_defeat_pressure": 0.3,
+        "key_site_loss": 0.26,
+        "isolation": 0.12,
+        "war_exhaustion": 0.1,
+        "credible_terms": 0.16,
+        "receiver_trust": 0.08,
+        "peripheral_dependence": 0.1,
+        "independence_resolve": -0.18,
+        "credible_relief": -0.18,
+        "receiver_abuse": -0.3
+      },
+      "pressure_limit": 64,
+      "pressure_lookback_days": 180,
+      "pressure_half_life_days": 60,
+      "defeat_pressure_scale": 1.4,
+      "major_battle_soldiers": 10000,
+      "minor_defeat_cap": 0.04,
+      "reply_days": 5,
+      "retry_days": 30,
+      "proposal_expiry_days": 90,
+      "proposal_history_limit": 64,
+      "truce_months": 6,
+      "integration_days": 150,
+      "vassal_stable_days": 60,
+      "vassal_gold_reserve": 1000,
+      "vassal_revolt_loyalty": 25,
+      "refusal_chance": 0.15,
+      "pacification_days": 12,
+      "pacification_max_garrison": 2500,
+      "pacification_base": 0.25,
+      "ai_daily_review_chance": 0.25,
+      "ai_review_days": 30,
+      "ai_proposal_min_chance": 0.35,
+      "regroup_days": 15,
+      "succession_window_days": 120,
+      "political_population_share": 0.8,
+      "political_key_share": 0.6,
+      "significant_group_share": 0.12,
+      "political_hold_days": 180,
+      "intent_graph": {
+        "initial": "assess",
+        "nodes": [
+          {
+            "id": "assess",
+            "choices": [
+              {
+                "intent": "regroup",
+                "weight": 0.15,
+                "weight_by_fact": {
+                  "war_exhaustion": 0.6
+                },
+                "when": {
+                  "fact": "war_exhaustion",
+                  "gte": 0.25
+                }
+              },
+              {
+                "intent": "seek_peace",
+                "weight": 0.1,
+                "weight_by_fact": {
+                  "recent_defeat_pressure": 0.5,
+                  "key_site_loss": 0.2
+                },
+                "when": {
+                  "any": [
+                    {
+                      "fact": "recent_defeat_pressure",
+                      "gte": 0.3
+                    },
+                    {
+                      "fact": "key_site_loss",
+                      "gte": 0.4
+                    }
+                  ]
+                }
+              },
+              {
+                "intent": "offer_submission",
+                "weight": 0.05,
+                "weight_by_fact": {
+                  "recent_defeat_pressure": 0.65,
+                  "key_site_loss": 0.5,
+                  "military_disadvantage": 0.4
+                },
+                "when": {
+                  "any": [
+                    {
+                      "all": [
+                        {
+                          "fact": "recent_defeat_pressure",
+                          "gte": 0.55
+                        },
+                        {
+                          "fact": "key_site_loss",
+                          "gte": 0.35
+                        }
+                      ]
+                    },
+                    {
+                      "fact": "military_disadvantage",
+                      "gte": 0.8
+                    }
+                  ]
+                }
+              },
+              {
+                "intent": "seek_relief",
+                "weight": 0.1,
+                "when": {
+                  "fact": "war_exhaustion",
+                  "gte": 0.2
+                }
+              },
+              {
+                "intent": "split_succession",
+                "weight": 0.5,
+                "when": {
+                  "fact": "succession_crisis",
+                  "gte": 1
+                }
+              },
+              {
+                "intent": "advance",
+                "weight": 1,
+                "weight_by_fact": {
+                  "offensive_readiness": 0.4
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tempo_presets": {
+        "standard": {
+          "reply_days": 10,
+          "pacification_days": 20,
+          "integration_days": 240
+        },
+        "rapid": {
+          "reply_days": 5,
+          "pacification_days": 10,
+          "integration_days": 120
+        }
+      }
     }
   },
   "buildings": {

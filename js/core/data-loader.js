@@ -145,12 +145,12 @@ window.DataLoader = class DataLoader {
   async finishScenarioMap(data,useSavedMap){
     this.validate(data);
     if(!useSavedMap||!this.scenarioMaps)return data;
-    const baseFingerprint=ScenarioMapStore.fingerprint(data);
     try{
       const record=await this.scenarioMaps.get(data.scenario.id);
       if(record){const saved=ScenarioMapStore.prepare(data,record);this.validate(saved);this.sources.push(`saved-map:${data.scenario.id}`);return saved}
-      data.meta={...data.meta,scenarioMap:{status:"original",baseFingerprint}};
-    }catch(error){this.warnings.push(`剧本地图未自动载入：${error.message}`);data.meta={...data.meta,scenarioMap:{status:"unavailable",message:error.message,baseFingerprint}}}
+      // 没有正式保存地图时无需创建编辑器模型计算基线指纹；保存／核对时再算。
+      data.meta={...data.meta,scenarioMap:{status:"original"}};
+    }catch(error){this.warnings.push(`剧本地图未自动载入：${error.message}`);data.meta={...data.meta,scenarioMap:{status:"unavailable",message:error.message}}}
     return this.validate(data);
   }
   async discoverMods(data){

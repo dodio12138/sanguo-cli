@@ -311,13 +311,13 @@ window.FiscalSystem=class FiscalSystem {
   static localGrainReserveDays(state,city){const rules=this.grainRules(state),calendar=this.cropCalendar(state,city),now=this.grainDate(state.date),year=state.date.year+(now>calendar.end||city.fiscal?.lastHarvestYear===state.date.year?1:0),days=Math.max(1,Math.round((Date.UTC(year,calendar.month,0)-now)/86400000)+1);return Math.min(rules.local_reserve_max_days,Math.max(rules.local_reserve_min_days,days+rules.local_harvest_buffer_days))}
   static localFoodReserve(state,city,g,includeDepot=true){const garrisonReserve=Math.floor((g.population||0)*.03+this.garrisonDailyFood(state,city.garrison)*18+g.bureaucracy*6),armyReserve=(this._armiesByCity?this._armiesByCity.get(city.id)||[]:state.data.armies).filter(army=>!army.fieldPosition&&army.force===city.force&&army.city===city.id).reduce((sum,army)=>sum+Math.max(0,this.armyFoodTarget(state,army)-((army.stores&&army.stores.food)||0)),0);const seasonal=Math.ceil(this.localDailyGrain(state,city,g)*this.localGrainReserveDays(state,city));return Math.max(0,Math.min(city.storage||20000,Math.max(garrisonReserve+armyReserve,seasonal)),...(includeDepot?this.supplyRoutes(state,city.force).filter(line=>line.enabled).flatMap(line=>[line.targetCityId===city.id?Math.min(line.targetFood,city.storage||20000):0,line.sourceKind==="local"&&line.sourceCityId===city.id?line.reserveFood:0]):[]))}
   static supplyCity(state,army){
-    if(army.fieldPosition)return null;const city=state.data.cities.find(item=>item.id===army.city&&item.force===army.force);
+    if(army.fieldPosition)return null;const city=state.data.cities.find(item=>item.id===army.city&&(item.force===army.force||state.engine.politicalTransitAllowed?.(army.force,item.force)));
     return city&&!state.engine.isCityBesieged(city)?city:null;
   }
   static stationedCity(state,army){
     if(army.engagementId||army.fieldPosition||army.route?.length||army.siegeTarget)return null;
     // 被围的城内仍能就仓；围困只阻断外调，不使城内现存粮消失。
-    return state.data.cities.find(city=>city.id===army.city&&city.force===army.force)||null;
+    return state.data.cities.find(city=>city.id===army.city&&(city.force===army.force||state.engine.politicalTransitAllowed?.(army.force,city.force)))||null;
   }
   static hasLedger(state){return Boolean(state?.data?.cities&&state.policies)}
   static stockArmy(state,army){
